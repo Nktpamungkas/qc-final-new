@@ -1,6 +1,3 @@
 bower_components
-chosen
 dist
-classes
-PHPMailer
-phpqrcode
+chosen
