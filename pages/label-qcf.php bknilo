@@ -1,0 +1,425 @@
+<?php
+ini_set("error_reporting", 1);
+include "koneksi.php";
+$nodemand=$_GET['nodemand'];
+$sqlDB2="SELECT A.CODE AS DEMANDNO, TRIM(B.PRODUCTIONORDERCODE) AS PRODUCTIONORDERCODE, TRIM(E.LEGALNAME1) AS LEGALNAME1, TRIM(C.ORDERPARTNERBRANDCODE) AS ORDERPARTNERBRANDCODE, TRIM(C.BUYER) AS BUYER,
+TRIM(C.SALESORDERCODE) AS SALESORDERCODE, TRIM(C.ITEMDESCRIPTION) AS ITEMDESCRIPTION, TRIM(C.STATISTICALGROUPCODE) AS SEASON, TRIM(A.SUBCODE05) AS NO_WARNA, TRIM(F.WARNA) AS WARNA, 
+TRIM(A.SUBCODE02) AS SUBCODE02, TRIM(A.SUBCODE03) AS SUBCODE03, TRIM(C.LONGDESCRIPTION) AS NO_ITEM,TRIM(C.PO_NUMBER) AS PO_NUMBER, TRIM(C.INTERNALREFERENCE) AS INTERNALREFERENCE, A.BASEPRIMARYQUANTITY AS QTY_NETTO, TRIM(A.BASEPRIMARYUOMCODE) AS BASEPRIMARYUOMCODE,
+A.BASESECONDARYQUANTITY AS QTY_NETTO_YARD, TRIM(A.BASESECONDARYUOMCODE) AS BASESECONDARYUOMCODE, C.QTY_ORDER, TRIM(C.QTY_ORDER_UOM) AS QTY_ORDER_UOM, C.QTY_PANJANG_ORDER,
+TRIM(C.QTY_PANJANG_ORDER_UOM) AS QTY_PANJANG_ORDER_UOM, G.USEDBASEPRIMARYQUANTITY AS QTY_BAGI_KAIN, C.DELIVERYDATE,D.NAMENAME,D.VALUEDECIMAL, H.TOTAL_ROLL AS TOTAL_ROLL_PACKING, H.TOTAL_KG AS TOTAL_KG_PACKING, H.TOTAL_YARD AS TOTAL_YARD_PACKING FROM PRODUCTIONDEMAND A 
+LEFT JOIN 
+	(SELECT PRODUCTIONDEMANDSTEP.PRODUCTIONORDERCODE, PRODUCTIONDEMANDSTEP.PRODUCTIONDEMANDCODE FROM 
+	PRODUCTIONDEMANDSTEP PRODUCTIONDEMANDSTEP
+	GROUP BY PRODUCTIONDEMANDSTEP.PRODUCTIONORDERCODE,PRODUCTIONDEMANDSTEP.PRODUCTIONDEMANDCODE) B
+ON A.CODE=B.PRODUCTIONDEMANDCODE
+LEFT JOIN 
+	(SELECT SALESORDER.ORDERPARTNERBRANDCODE, SALESORDER.STATISTICALGROUPCODE, SALESORDERLINE.SALESORDERCODE, SALESORDERLINE.ORDERLINE, SALESORDERLINE.ITEMDESCRIPTION, SALESORDERLINE.SUBCODE03, SALESORDERLINE.SUBCODE05, SALESORDERLINE.BASEPRIMARYUOMCODE AS QTY_ORDER_UOM,
+	CASE
+        WHEN SALESORDER.EXTERNALREFERENCE IS NULL THEN SALESORDERLINE.EXTERNALREFERENCE
+        ELSE SALESORDER.EXTERNALREFERENCE
+    END AS PO_NUMBER,
+    SALESORDERLINE.INTERNALREFERENCE, SUM(SALESORDERLINE.BASEPRIMARYQUANTITY) AS QTY_ORDER,SUM(SALESORDERLINE.BASESECONDARYQUANTITY) AS QTY_PANJANG_ORDER, 
+	SALESORDERLINE.BASESECONDARYUOMCODE AS QTY_PANJANG_ORDER_UOM, SALESORDERDELIVERY.DELIVERYDATE,ORDERITEMORDERPARTNERLINK.LONGDESCRIPTION, ORDERPARTNERBRAND.LONGDESCRIPTION AS BUYER
+	FROM SALESORDER SALESORDER
+	LEFT JOIN SALESORDERLINE SALESORDERLINE ON SALESORDER.CODE=SALESORDERLINE.SALESORDERCODE 
+	LEFT JOIN SALESORDERDELIVERY SALESORDERDELIVERY ON SALESORDERLINE.SALESORDERCODE=SALESORDERDELIVERY.SALESORDERLINESALESORDERCODE AND SALESORDERLINE.ORDERLINE=SALESORDERDELIVERY.SALESORDERLINEORDERLINE
+	LEFT JOIN ORDERITEMORDERPARTNERLINK ORDERITEMORDERPARTNERLINK ON SALESORDER.ORDPRNCUSTOMERSUPPLIERCODE = ORDERITEMORDERPARTNERLINK.ORDPRNCUSTOMERSUPPLIERCODE AND SALESORDERLINE.ITEMTYPEAFICODE= ORDERITEMORDERPARTNERLINK.ITEMTYPEAFICODE AND 
+	SALESORDERLINE.SUBCODE01 = ORDERITEMORDERPARTNERLINK.SUBCODE01 AND SALESORDERLINE.SUBCODE02 = ORDERITEMORDERPARTNERLINK.SUBCODE02 AND SALESORDERLINE.SUBCODE03 = ORDERITEMORDERPARTNERLINK.SUBCODE03 AND
+	SALESORDERLINE.SUBCODE04 = ORDERITEMORDERPARTNERLINK.SUBCODE04 AND SALESORDERLINE.SUBCODE05 = ORDERITEMORDERPARTNERLINK.SUBCODE05 AND SALESORDERLINE.SUBCODE06 = ORDERITEMORDERPARTNERLINK.SUBCODE06 AND 
+	SALESORDERLINE.SUBCODE07 = ORDERITEMORDERPARTNERLINK.SUBCODE07 AND SALESORDERLINE.SUBCODE08 = ORDERITEMORDERPARTNERLINK.SUBCODE08 AND SALESORDERLINE.SUBCODE09 = ORDERITEMORDERPARTNERLINK.SUBCODE09 AND 
+	SALESORDERLINE.SUBCODE10 = ORDERITEMORDERPARTNERLINK.SUBCODE10
+	LEFT JOIN ORDERPARTNERBRAND ORDERPARTNERBRAND ON SALESORDER.ORDPRNCUSTOMERSUPPLIERCODE = ORDERPARTNERBRAND.ORDPRNCUSTOMERSUPPLIERCODE AND SALESORDER.ORDERPARTNERBRANDCODE=ORDERPARTNERBRAND.CODE 
+	GROUP BY SALESORDER.ORDERPARTNERBRANDCODE, SALESORDER.STATISTICALGROUPCODE, SALESORDERLINE.SALESORDERCODE, SALESORDERLINE.ORDERLINE, SALESORDERLINE.ITEMDESCRIPTION, SALESORDERLINE.SUBCODE03, SALESORDERLINE.SUBCODE05, SALESORDERLINE.BASEPRIMARYUOMCODE,SALESORDERLINE.BASESECONDARYUOMCODE, 
+	SALESORDER.EXTERNALREFERENCE,SALESORDERLINE.EXTERNALREFERENCE,SALESORDERLINE.INTERNALREFERENCE, SALESORDERDELIVERY.DELIVERYDATE, ORDERITEMORDERPARTNERLINK.LONGDESCRIPTION, ORDERPARTNERBRAND.LONGDESCRIPTION) C
+ON A.ORIGDLVSALORDLINESALORDERCODE = C.SALESORDERCODE AND A.ORIGDLVSALORDERLINEORDERLINE = C.ORDERLINE
+LEFT JOIN
+	(SELECT PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
+	PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10,  
+	LISTAGG(TRIM(ADSTORAGE.NAMENAME),',') WITHIN GROUP(ORDER BY ADSTORAGE.NAMENAME ASC) AS NAMENAME, 
+	LISTAGG(ADSTORAGE.VALUEDECIMAL,',') WITHIN GROUP(ORDER BY ADSTORAGE.NAMENAME ASC) AS VALUEDECIMAL
+	FROM PRODUCT PRODUCT LEFT JOIN ADSTORAGE ADSTORAGE ON PRODUCT.ABSUNIQUEID=ADSTORAGE.UNIQUEID
+	GROUP BY PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
+	PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10) D
+ON A.SUBCODE01=D.SUBCODE01 AND
+A.SUBCODE02=D.SUBCODE02 AND
+A.SUBCODE03=D.SUBCODE03 AND 
+A.SUBCODE04=D.SUBCODE04 AND
+A.SUBCODE05=D.SUBCODE05 AND 
+A.SUBCODE06=D.SUBCODE06 AND 
+A.SUBCODE07=D.SUBCODE07 AND 
+A.SUBCODE08=D.SUBCODE08 AND 
+A.SUBCODE09=D.SUBCODE09 AND 
+A.SUBCODE10=D.SUBCODE10
+LEFT JOIN
+	(SELECT BUSINESSPARTNER.LEGALNAME1,ORDERPARTNER.CUSTOMERSUPPLIERCODE FROM BUSINESSPARTNER BUSINESSPARTNER 
+	LEFT JOIN ORDERPARTNER ORDERPARTNER ON BUSINESSPARTNER.NUMBERID=ORDERPARTNER.ORDERBUSINESSPARTNERNUMBERID) E
+ON A.CUSTOMERCODE=E.CUSTOMERSUPPLIERCODE
+LEFT JOIN (
+    SELECT ITXVIEWCOLOR.ITEMTYPECODE, ITXVIEWCOLOR.SUBCODE01, ITXVIEWCOLOR.SUBCODE02,
+    ITXVIEWCOLOR.SUBCODE03, ITXVIEWCOLOR.SUBCODE04, ITXVIEWCOLOR.SUBCODE05, ITXVIEWCOLOR.SUBCODE06, 
+    ITXVIEWCOLOR.SUBCODE07, ITXVIEWCOLOR.SUBCODE08, ITXVIEWCOLOR.SUBCODE09, ITXVIEWCOLOR.SUBCODE10, 
+    ITXVIEWCOLOR.WARNA FROM ITXVIEWCOLOR ITXVIEWCOLOR) F ON
+    A.ITEMTYPEAFICODE = F.ITEMTYPECODE AND 
+    A.SUBCODE01 = F.SUBCODE01 AND 
+    A.SUBCODE02 = F.SUBCODE02 AND 
+    A.SUBCODE03 = F.SUBCODE03 AND 
+    A.SUBCODE04 = F.SUBCODE04 AND 
+    A.SUBCODE05 = F.SUBCODE05 AND 
+    A.SUBCODE06 = F.SUBCODE06 AND 
+    A.SUBCODE07 = F.SUBCODE07 AND 
+    A.SUBCODE08 = F.SUBCODE08 AND 
+    A.SUBCODE09 = F.SUBCODE09 AND 
+    A.SUBCODE10 = F.SUBCODE10
+LEFT JOIN
+	(SELECT PRODUCTIONRESERVATION.ORDERCODE, PRODUCTIONRESERVATION.ITEMTYPEAFICODE, SUM(PRODUCTIONRESERVATION.USEDBASEPRIMARYQUANTITY) AS USEDBASEPRIMARYQUANTITY FROM PRODUCTIONRESERVATION 
+	PRODUCTIONRESERVATION WHERE PRODUCTIONRESERVATION.ITEMTYPEAFICODE='KGF' GROUP BY PRODUCTIONRESERVATION.ORDERCODE, PRODUCTIONRESERVATION.ITEMTYPEAFICODE) G
+ON A.CODE = G.ORDERCODE
+LEFT JOIN (
+    SELECT
+        ELEMENTSINSPECTION.DEMANDCODE,
+        COUNT(ELEMENTSINSPECTION.ELEMENTCODE) AS TOTAL_ROLL,
+        SUM(ELEMENTSINSPECTION.WEIGHTNET) AS TOTAL_KG,
+        SUM(ELEMENTSINSPECTION.LENGTHGROSS) AS TOTAL_YARD
+    FROM
+        ELEMENTSINSPECTION ELEMENTSINSPECTION
+    WHERE
+        LENGTH(TRIM(ELEMENTSINSPECTION.ELEMENTCODE))= 13
+    GROUP BY
+        ELEMENTSINSPECTION.DEMANDCODE) H ON
+    A.CODE = H.DEMANDCODE
+WHERE A.CODE='$nodemand'";
+$stmt=db2_exec($conn1,$sqlDB2, array('cursor'=>DB2_SCROLLABLE));
+$rowdb2 = db2_fetch_assoc($stmt);
+$ww=explode(",",$rowdb2['NAMENAME']);
+$valueww=explode(",",$rowdb2['VALUEDECIMAL']);
+//GRAMASI
+if($ww[0]=="GSM"){ $gramasi=$valueww[0];}
+else if($ww[1]=="GSM"){ $gramasi=$valueww[1];}
+else if($ww[2]=="GSM"){ $gramasi=$valueww[2];}
+else if($ww[3]=="GSM"){ $gramasi=$valueww[3];}
+$posg=strpos($gramasi,".");
+$valgramasi=substr($gramasi,0,$posg);
+//WIDTH
+if($ww[0]=="Width"){ $lebar=$valueww[0];}
+else if($ww[1]=="Width"){ $lebar=$valueww[1];}
+else if($ww[2]=="Width"){ $lebar=$valueww[2];}
+else if($ww[3]=="Width"){ $lebar=$valueww[3];}
+$posl=strpos($lebar,".");
+$vallebar=substr($lebar,0,$posl);
+
+// $sqlCek=mysqli_query($con,"SELECT * FROM tbl_qcf WHERE nodemand='$nodemand' ORDER BY id DESC LIMIT 1");
+// $cek=mysqli_num_rows($sqlCek);
+// $rcek=mysqli_fetch_array($sqlCek);
+
+$sqlCek1=mysqli_query($con,"SELECT * FROM tbl_lbl_availability WHERE nodemand='$nodemand' ORDER BY id DESC LIMIT 1");
+$cek1=mysqli_num_rows($sqlCek1);
+$rcek1=mysqli_fetch_array($sqlCek1);
+
+?>	
+<form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form1" id="form1" target="_blank">
+ <div class="box box-info">
+   <div class="box-header with-border">
+    <h3 class="box-title">Input Data Kartu Kerja</h3>
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+  </div>
+  <div class="box-body"> 
+	 <div class="col-md-6">		 
+		<div class="form-group">
+					  <label for="nodemand" class="col-sm-3 control-label">No Demand</label>
+					  <div class="col-sm-4">
+					  <input name="nodemand" type="text" class="form-control" id="nodemand" 
+						 onchange="window.location='LabelQCF-'+this.value" value="<?php echo $_GET['nodemand'];?>" placeholder="No Demand" required >
+			  </div>
+					</div>
+		<div class="form-group">
+            <label for="nokk" class="col-sm-3 control-label">No Production Order</label>
+                <div class="col-sm-8">
+                    <input name="nokk" type="text" class="form-control" id="nokk" 
+                    value="<?php if($cek1>0){echo $rcek1['nokk'];}else{echo $rowdb2['PRODUCTIONORDERCODE'];}?>" placeholder="No Production Order">
+                </div>				   
+        </div>
+		<div class="form-group">
+		  <label for="no_order" class="col-sm-3 control-label">No Order</label>
+		  <div class="col-sm-4">
+			<input name="no_order" type="text" class="form-control" id="no_order" 
+			value="<?php if($cek1>0){echo $rcek1['no_order'];}else{echo $rowdb2['SALESORDERCODE'];} ?>" placeholder="No Order" required>
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="pelanggan" class="col-sm-3 control-label">Pelanggan</label>
+		  <div class="col-sm-8">
+			<input name="pelanggan" type="text" class="form-control" id="pelanggan" 
+			value="<?php if($cek1>0){echo $rcek1['pelanggan'];}else{if($rowdb2['BUYER']!=''){echo $rowdb2['LEGALNAME1']."/".$rowdb2['BUYER'];}}?>" placeholder="Pelanggan" >
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="no_po" class="col-sm-3 control-label">PO</label>
+		  <div class="col-sm-5">
+			<input name="no_po" type="text" class="form-control" id="no_po" 
+			value="<?php if($cek1>0){echo $rcek1['no_po'];}else{echo $rowdb2['PO_NUMBER'];} ?>" placeholder="PO" >
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="no_hanger" class="col-sm-3 control-label">No Hanger / No Item</label>
+		  <div class="col-sm-3">
+			<input name="no_hanger" type="text" class="form-control" id="no_hanger" 
+			value="<?php if($cek1>0){echo $rcek1['no_hanger'];}else{if($rowdb2['SUBCODE02']!=""){echo trim($rowdb2['SUBCODE02']).'-'.trim($rowdb2['SUBCODE03']);}}?>" placeholder="No Hanger">  
+		  </div>
+		  <div class="col-sm-3">
+		  <input name="no_item" type="text" class="form-control" id="no_item" 
+			value="<?php if($rcek1['no_item']!=""){echo $rcek1['no_item'];}else if($rowdb2['NO_ITEM']!=""){echo $rowdb2['NO_ITEM'];}?>" placeholder="No Item">
+		  </div>	
+		</div>
+		<div class="form-group">
+		  <label for="jns_kain" class="col-sm-3 control-label">Jenis Kain</label>
+		  <div class="col-sm-8">
+			  <textarea name="jns_kain" class="form-control" id="jns_kain" placeholder="Jenis Kain"><?php if($cek1>0){echo $rcek1['jenis_kain'];}else{if($rowdb2['ITEMDESCRIPTION']!=""){echo $rowdb2['ITEMDESCRIPTION'];} }?></textarea>
+			  </div>
+		  </div>
+		  <div class="form-group">
+                  <label for="qty_yard" class="col-sm-3 control-label">Qty Yard Packing</label>
+                  <div class="col-sm-4">
+					<div class="input-group">  
+                    <input name="qty_yard" type="text" class="form-control" id="qty_yard" 
+                    value="<?php if($cek1>0){echo $rcek1['qty_yard'];}else{echo round($rowdb2['TOTAL_YARD_PACKING'],2);} ?>" placeholder="0.00" required>
+					  <span class="input-group-addon">Yard</span></div>  
+                  </div>
+			</div>	 		
+	  </div>
+	  		<!-- col --> 
+	  <div class="col-md-6">
+	  	<div class="form-group">
+		  <label for="l_g" class="col-sm-3 control-label">Lebar X Gramasi</label>
+		  <div class="col-sm-2">
+			<input name="lebar" type="text" class="form-control" id="lebar" 
+			value="<?php if($cek1>0){echo $rcek1['lebar'];}else{echo $vallebar;} ?>" placeholder="0" required>
+		  </div>
+		  <div class="col-sm-2">
+			<input name="grms" type="text" class="form-control" id="grms" 
+			value="<?php if($cek1>0){echo $rcek1['gramasi'];}else{echo $valgramasi;} ?>" placeholder="0" required>
+		  </div>		
+		</div>		  
+		<div class="form-group">
+		  <label for="warna" class="col-sm-3 control-label">Warna</label>
+		  <div class="col-sm-8">
+			<textarea name="warna" class="form-control" id="warna" placeholder="Warna"><?php if($cek1>0){echo $rcek1['warna'];}else{echo $rowdb2['WARNA'];}?></textarea>
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="no_warna" class="col-sm-3 control-label">No Warna</label>
+		  <div class="col-sm-8">
+			<textarea name="no_warna" class="form-control" id="no_warna" placeholder="No Warna"><?php if($cek>0){echo $rcek1['no_warna'];}else{echo $rowdb2['NO_WARNA'];}?></textarea>
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="season" class="col-sm-3 control-label">Season</label>
+		  <div class="col-sm-5">
+			<input name="season" type="text" class="form-control" id="season" 
+			value="<?php if($cek1>0){echo $rcek1['season'];}else{echo $rowdb2['SEASON'];} ?>" placeholder="Season" >
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="lot" class="col-sm-3 control-label">Lot</label>
+		  <div class="col-sm-4">
+			<input name="lot" type="text" class="form-control" id="lot" 
+			value="<?php if($cek1>0){echo $rcek1['lot'];}else{echo $rowdb2['PRODUCTIONORDERCODE'];} ?>" placeholder="Lot" >
+		  </div>				   
+		</div>
+		<div class="form-group">
+            <label for="availability" class="col-sm-3 control-label">Availability</label>
+			<div class="col-sm-8">
+                <select class="form-control select2" multiple="multiple" data-placeholder="Availability" name="availability[]" id="availability" required>
+					<?php
+					$dtArr=$rcek['availability'];	
+					$data = explode(",",$dtArr);
+					$dtArr1=$rcek1['availability'];	
+					$data1 = explode(",",$dtArr1);
+					?>
+					<option value="DL" <?php if($data[0]=="DL" OR $data[1]=="DL" OR $data[2]=="DL" OR $data1[0]=="DL" OR $data1[1]=="DL" OR $data1[2]=="DL"){echo "SELECTED";} ?>>DL</option>
+					<option value="SP" <?php if($data[0]=="SP" OR $data[1]=="SP" OR $data[2]=="SP" OR $data1[0]=="SP" OR $data1[1]=="SP" OR $data1[2]=="SP"){echo "SELECTED";} ?>>SP</option>
+					<option value="PL" <?php if($data[0]=="PL" OR $data[1]=="PL" OR $data[2]=="PL" OR $data1[0]=="PL" OR $data1[1]=="PL" OR $data1[2]=="PL"){echo "SELECTED";} ?>>PL</option>
+                </select>
+			</div>
+        </div>
+		<div class="form-group">
+		  <label for="nokk_legacy" class="col-sm-3 control-label">No KK Legacy</label>
+		  <div class="col-sm-4">
+			<input name="nokk_legacy" type="text" class="form-control" id="nokk_legacy" 
+			value="<?php if($cek1>0){echo $rcek1['nokk_legacy'];} ?>" placeholder="No KK Legacy" >
+		  </div>				   
+		</div> 
+				
+	 </div>
+	
+</div>	 
+   <div class="box-footer">
+   		<?php if($cek1>0){ ?> 	
+        <button type="submit" class="btn btn-primary pull-left" name="ubah" value="ubah"><i class="fa fa-edit"></i> Ubah</button> 
+		<?php }else if($_GET['nodemand']!="" and $cek1==0){ ?>
+        <button type="submit" class="btn btn-primary pull-left" name="save" value="save"><i class="fa fa-save"></i> Simpan</button> 
+        <?php } ?>
+  
+	<!-- <button type="submit" class="btn btn-primary pull-left" name="save" value="save" <?php if(($cek>0 AND $rcek['availability']!=NULL) OR $cek1>0){echo "disabled";}?>><i class="fa fa-save"></i> Simpan</button>  -->
+	<?php if($_GET['nodemand']!="" and $cek1>0){ ?>
+	<div class="pull-right">
+	<?php if(strpos($rcek1['pelanggan'],'LULU') !== false){ ?>
+	<a href="pages/cetak/cetak_label_qcf_lulu.php?idkk=<?php echo $_GET['nodemand']; ?>" target="_blank" class="btn btn-danger pull-right">Cetak</a> 
+   	<?php }else if(strpos($rcek1['pelanggan'],'lulu') !== false){ ?>
+	<a href="pages/cetak/cetak_label_qcf_lulu.php?idkk=<?php echo $_GET['nodemand']; ?>" target="_blank" class="btn btn-danger pull-right">Cetak</a> 
+	<?php }else if(strpos($rcek1['pelanggan'],'ADIDAS') !== false){ ?>
+	<a href="pages/cetak/cetak_label_qcf_ads.php?idkk=<?php echo $_GET['nodemand']; ?>" target="_blank" class="btn btn-danger pull-right">Cetak</a> 
+	<?php }else if(strpos($rcek1['pelanggan'],'UNDER ARMOUR') !== false){ ?>
+	<a href="pages/cetak/cetak_label_qcf_ua.php?idkk=<?php echo $_GET['nodemand']; ?>" target="_blank" class="btn btn-danger pull-right">Cetak</a> 
+	<?php }else{ ?>
+	<a href="pages/cetak/cetak_label_qcf_new.php?idkk=<?php echo $_GET['nodemand']; ?>" target="_blank" class="btn btn-danger pull-right">Cetak</a> 
+	<?php } }?>
+	</div>
+	<!--<input type="submit" value="Cetak" name="cetak" class="btn btn-danger pull-right">-->   
+   </div>
+    <!-- /.box-footer -->
+</div>
+</form>
+    
+						
+                    </div>
+                </div>
+            </div>
+        </div>
+<?php
+if($_POST['save']=="save" AND $cek>0){	
+	//   $con=mysqli_connect("10.0.0.10","dit","4dm1n");
+    //   $db=mysqli_select_db("db_qc",$con)or die("Gagal Koneksi");		
+	  if(isset($_POST['availability']))  
+        { 
+            // Retrieving each selected option 
+            foreach ($_POST['availability'] as $index => $subject1){
+				   if($index>0){
+					  $av1=$av1.",".$subject1; 
+				   }else{
+					   $av1=$subject1;
+				   }	
+				    
+			}
+        }
+  	  $sqlData=mysqli_query($con,"UPDATE tbl_qcf SET 
+		  `availability`='$av1',
+		  `tgl_update`=now()
+		  WHERE nodemand='$_POST[nodemand]'");	 	  
+	  
+		if($sqlData){
+			
+			echo "<script>swal({
+  title: 'Data Terupdate',   
+  text: 'Klik Ok untuk input data kembali',
+  type: 'success',
+  }).then((result) => {
+  if (result.value) {
+     window.open('pages/cetak/cetak_label_qcf_ads.php?idkk=$_GET[nodemand]','_blank');	
+	 
+	 
+  }
+});</script>";
+		}
+				
+	}else if($_POST['save']=="save" AND $cek1==0){
+		// $con=mysqli_connect("10.0.0.10","dit","4dm1n");
+		// $db=mysqli_select_db("db_qc",$con)or die("Gagal Koneksi");
+		if(isset($_POST['availability']))  
+        { 
+            // Retrieving each selected option 
+            foreach ($_POST['availability'] as $index => $subject2){
+				   if($index>0){
+					  $av2=$av2.",".$subject2; 
+				   }else{
+					   $av2=$subject2;
+				   }	
+				    
+			}
+		}
+		$no_order = mysqli_real_escape_string($con,$_POST['no_order']);
+		$no_po = mysqli_real_escape_string($con,$_POST['no_po']);
+		$no_hanger = mysqli_real_escape_string($con,$_POST['no_hanger']);
+		$no_item = mysqli_real_escape_string($con,$_POST['no_item']);
+		$pelanggan = mysqli_real_escape_string($con,$_POST['pelanggan']);
+		$jenis_kain = mysqli_real_escape_string($con,$_POST['jns_kain']);
+		$warna = mysqli_real_escape_string($con,$_POST['warna']);
+		$no_warna = mysqli_real_escape_string($con,$_POST['no_warna']);
+		$lot = mysqli_real_escape_string($con,$_POST['lot']);
+  	  $sqlData1=mysqli_query($con,"INSERT INTO tbl_lbl_availability SET 
+			`nodemand`='$_POST[nodemand]',
+			`nokk`='$_POST[nokk]',
+			`no_order`='$no_order',
+			`pelanggan`='$pelanggan',
+			`no_po`='$no_po',
+			`no_hanger`='$no_hanger',
+			`no_item`='$no_item',
+			`jenis_kain`='$jenis_kain',
+			`lebar`='$_POST[lebar]',
+			`gramasi`='$_POST[grms]',
+			`warna`='$warna',
+			`no_warna`='$no_warna',
+			`lot`='$lot',
+			`qty_yard`='$_POST[qty_yard]',
+			`season`='$_POST[season]',
+		  	`availability`='$av2',
+			`nokk_legacy`='$_POST[nokk_legacy]',
+		  	`tgl_update`=now()");	 	  
+	  
+		if($sqlData1){
+			
+			echo "<script>swal({
+  title: 'Data Tersimpan',   
+  text: 'Klik Ok untuk input data kembali',
+  type: 'success',
+  }).then((result) => {
+  if (result.value) {
+     window.open('pages/cetak/cetak_label_qcf_ads.php?idkk=$_GET[nodemand]','_blank');	
+	 
+  }
+});</script>";
+		}
+	}else if($_POST['ubah']=="ubah" AND $cek1>0){
+		if(isset($_POST['availability']))  
+        { 
+            // Retrieving each selected option 
+            foreach ($_POST['availability'] as $index => $subject2){
+				   if($index>0){
+					  $av2=$av2.",".$subject2; 
+				   }else{
+					   $av2=$subject2;
+				   }	
+				    
+			}
+		}
+		$ip= $_SERVER['REMOTE_ADDR'];
+		$sqlUpdate1=mysqli_query($con,"UPDATE tbl_lbl_availability SET 
+			`nokk`='$_POST[nokk]',
+			`lot`='$_POST[lot]',
+			`no_hanger`='$_POST[no_hanger]',
+			`no_item`='$_POST[no_item]',
+			`lot`='$_POST[lot]',
+			`season`='$_POST[season]',
+			`nokk_legacy`='$_POST[nokk_legacy]',
+			`availability`='$av2',
+			`ip`= '$ip',
+			`tgl_update`=now()
+			WHERE `nodemand`='$_GET[nodemand]'");	 	  
+	  
+		if($sqlUpdate1){
+			
+			echo "<script>swal({
+  title: 'Data Demand Berhasil Diubah',   
+  text: 'Klik Ok untuk input data kembali',
+  type: 'success',
+  }).then((result) => {
+  if (result.value) {
+	window.open('pages/cetak/cetak_label_qcf_ads.php?idkk=$_GET[nodemand]','_blank');
+	 
+  }
+});</script>";
+		}
+	}
+
+?>

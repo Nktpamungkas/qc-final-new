@@ -1,0 +1,383 @@
+<?php
+include"koneksi.php";
+ini_set("error_reporting", 1);
+$nodemand=$_GET['nodemand'];
+$sqlDB2="SELECT A.CODE AS DEMANDNO, TRIM(B.PRODUCTIONORDERCODE) AS PRODUCTIONORDERCODE, TRIM(E.LEGALNAME1) AS LEGALNAME1, TRIM(C.ORDERPARTNERBRANDCODE) AS ORDERPARTNERBRANDCODE, TRIM(C.BUYER) AS BUYER, 
+TRIM(C.SALESORDERCODE) AS SALESORDERCODE, TRIM(C.ITEMDESCRIPTION) AS ITEMDESCRIPTION, TRIM(A.SUBCODE05) AS NO_WARNA, TRIM(F.LONGDESCRIPTION) AS WARNA, TRIM(A.SUBCODE01) AS SUBCODE01,
+TRIM(A.SUBCODE02) AS SUBCODE02, TRIM(A.SUBCODE03) AS SUBCODE03, TRIM(A.SUBCODE04) AS SUBCODE04, TRIM(C.LONGDESCRIPTION) AS NO_ITEM,
+CASE
+	WHEN C.NO_PO1 IS NULL THEN C.NO_PO2
+	ELSE C.NO_PO1
+END AS PO_NUMBER,
+TRIM(C.INTERNALREFERENCE) AS INTERNALREFERENCE, A.BASEPRIMARYQUANTITY AS QTY_NETTO, TRIM(A.BASEPRIMARYUOMCODE) AS BASEPRIMARYUOMCODE,
+A.BASESECONDARYQUANTITY AS QTY_NETTO_YARD, TRIM(A.BASESECONDARYUOMCODE) AS BASESECONDARYUOMCODE, C.QTY_ORDER, TRIM(C.QTY_ORDER_UOM) AS QTY_ORDER_UOM, C.QTY_PANJANG_ORDER,
+TRIM(C.QTY_PANJANG_ORDER_UOM) AS QTY_PANJANG_ORDER_UOM, G.USEDBASEPRIMARYQUANTITY AS QTY_BAGI_KAIN, C.DELIVERYDATE,D.NAMENAME,D.VALUEDECIMAL, TRIM(H.CODE) AS PO_RAJUT, H.FINALPLANNEDDATE AS TGL_DELIV_GREIGE 
+FROM PRODUCTIONDEMAND A 
+LEFT JOIN 
+	(SELECT PRODUCTIONDEMANDSTEP.PRODUCTIONORDERCODE, PRODUCTIONDEMANDSTEP.PRODUCTIONDEMANDCODE FROM 
+	PRODUCTIONDEMANDSTEP PRODUCTIONDEMANDSTEP
+	GROUP BY PRODUCTIONDEMANDSTEP.PRODUCTIONORDERCODE,PRODUCTIONDEMANDSTEP.PRODUCTIONDEMANDCODE) B
+ON A.CODE=B.PRODUCTIONDEMANDCODE
+LEFT JOIN 
+	(SELECT SALESORDER.ORDERPARTNERBRANDCODE, SALESORDERLINE.SALESORDERCODE, SALESORDERLINE.ITEMDESCRIPTION, SALESORDERLINE.SUBCODE03, SALESORDERLINE.SUBCODE05, SALESORDERLINE.BASEPRIMARYUOMCODE AS QTY_ORDER_UOM,
+	SALESORDER.EXTERNALREFERENCE AS NO_PO1, SALESORDERLINE.EXTERNALREFERENCE AS NO_PO2, SALESORDERLINE.INTERNALREFERENCE, SUM(SALESORDERLINE.BASEPRIMARYQUANTITY) AS QTY_ORDER,SUM(SALESORDERLINE.BASESECONDARYQUANTITY) AS QTY_PANJANG_ORDER, 
+	SALESORDERLINE.BASESECONDARYUOMCODE AS QTY_PANJANG_ORDER_UOM, SALESORDERDELIVERY.DELIVERYDATE,ORDERITEMORDERPARTNERLINK.LONGDESCRIPTION, ORDERPARTNERBRAND.LONGDESCRIPTION AS BUYER
+	FROM SALESORDER SALESORDER
+	LEFT JOIN SALESORDERLINE SALESORDERLINE ON SALESORDER.CODE=SALESORDERLINE.SALESORDERCODE 
+	LEFT JOIN SALESORDERDELIVERY SALESORDERDELIVERY ON SALESORDERLINE.SALESORDERCODE=SALESORDERDELIVERY.SALESORDERLINESALESORDERCODE AND SALESORDERLINE.ORDERLINE=SALESORDERDELIVERY.SALESORDERLINEORDERLINE
+	LEFT JOIN ORDERITEMORDERPARTNERLINK ORDERITEMORDERPARTNERLINK ON SALESORDER.ORDPRNCUSTOMERSUPPLIERCODE = ORDERITEMORDERPARTNERLINK.ORDPRNCUSTOMERSUPPLIERCODE AND SALESORDERLINE.ITEMTYPEAFICODE= ORDERITEMORDERPARTNERLINK.ITEMTYPEAFICODE AND 
+	SALESORDERLINE.SUBCODE01 = ORDERITEMORDERPARTNERLINK.SUBCODE01 AND SALESORDERLINE.SUBCODE02 = ORDERITEMORDERPARTNERLINK.SUBCODE02 AND SALESORDERLINE.SUBCODE03 = ORDERITEMORDERPARTNERLINK.SUBCODE03 AND
+	SALESORDERLINE.SUBCODE04 = ORDERITEMORDERPARTNERLINK.SUBCODE04 AND SALESORDERLINE.SUBCODE05 = ORDERITEMORDERPARTNERLINK.SUBCODE05 AND SALESORDERLINE.SUBCODE06 = ORDERITEMORDERPARTNERLINK.SUBCODE06 AND 
+	SALESORDERLINE.SUBCODE07 = ORDERITEMORDERPARTNERLINK.SUBCODE07 AND SALESORDERLINE.SUBCODE08 = ORDERITEMORDERPARTNERLINK.SUBCODE08 AND SALESORDERLINE.SUBCODE09 = ORDERITEMORDERPARTNERLINK.SUBCODE09 AND 
+	SALESORDERLINE.SUBCODE10 = ORDERITEMORDERPARTNERLINK.SUBCODE10
+	LEFT JOIN ORDERPARTNERBRAND ORDERPARTNERBRAND ON SALESORDER.ORDERPARTNERBRANDCODE = ORDERPARTNERBRAND.CODE 
+	GROUP BY SALESORDER.ORDERPARTNERBRANDCODE, SALESORDERLINE.SALESORDERCODE, SALESORDERLINE.ITEMDESCRIPTION, SALESORDERLINE.SUBCODE03, SALESORDERLINE.SUBCODE05, SALESORDERLINE.BASEPRIMARYUOMCODE,SALESORDERLINE.BASESECONDARYUOMCODE, 
+	SALESORDER.EXTERNALREFERENCE,SALESORDERLINE.EXTERNALREFERENCE,SALESORDERLINE.INTERNALREFERENCE, SALESORDERDELIVERY.DELIVERYDATE, ORDERITEMORDERPARTNERLINK.LONGDESCRIPTION, ORDERPARTNERBRAND.LONGDESCRIPTION) C
+ON A.PROJECTCODE = C.SALESORDERCODE AND A.SUBCODE03 = C.SUBCODE03
+LEFT JOIN
+	(SELECT PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
+	PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10,  
+	LISTAGG(TRIM(ADSTORAGE.NAMENAME),',') WITHIN GROUP(ORDER BY ADSTORAGE.NAMENAME ASC) AS NAMENAME, 
+	LISTAGG(ADSTORAGE.VALUEDECIMAL,',') WITHIN GROUP(ORDER BY ADSTORAGE.NAMENAME ASC) AS VALUEDECIMAL
+	FROM PRODUCT PRODUCT LEFT JOIN ADSTORAGE ADSTORAGE ON PRODUCT.ABSUNIQUEID=ADSTORAGE.UNIQUEID
+	GROUP BY PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
+	PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10) D
+ON A.SUBCODE01=D.SUBCODE01 AND
+A.SUBCODE02=D.SUBCODE02 AND
+A.SUBCODE03=D.SUBCODE03 AND 
+A.SUBCODE04=D.SUBCODE04 AND
+A.SUBCODE05=D.SUBCODE05 AND 
+A.SUBCODE06=D.SUBCODE06 AND 
+A.SUBCODE07=D.SUBCODE07 AND 
+A.SUBCODE08=D.SUBCODE08 AND 
+A.SUBCODE09=D.SUBCODE09 AND 
+A.SUBCODE10=D.SUBCODE10
+LEFT JOIN
+	(SELECT BUSINESSPARTNER.LEGALNAME1,ORDERPARTNER.CUSTOMERSUPPLIERCODE FROM BUSINESSPARTNER BUSINESSPARTNER 
+	LEFT JOIN ORDERPARTNER ORDERPARTNER ON BUSINESSPARTNER.NUMBERID=ORDERPARTNER.ORDERBUSINESSPARTNERNUMBERID) E
+ON A.CUSTOMERCODE=E.CUSTOMERSUPPLIERCODE
+LEFT JOIN 
+	(SELECT USERGENERICGROUP.CODE,USERGENERICGROUP.LONGDESCRIPTION FROM USERGENERICGROUP USERGENERICGROUP) F
+ON A.SUBCODE05=F.CODE
+LEFT JOIN
+	(SELECT PRODUCTIONRESERVATION.ORDERCODE, PRODUCTIONRESERVATION.ITEMTYPEAFICODE, SUM(PRODUCTIONRESERVATION.USEDBASEPRIMARYQUANTITY) AS USEDBASEPRIMARYQUANTITY FROM PRODUCTIONRESERVATION 
+	PRODUCTIONRESERVATION WHERE PRODUCTIONRESERVATION.ITEMTYPEAFICODE='KGF' GROUP BY PRODUCTIONRESERVATION.ORDERCODE, PRODUCTIONRESERVATION.ITEMTYPEAFICODE) G
+ON A.CODE = G.ORDERCODE
+LEFT JOIN 
+	(SELECT PRODUCTIONDEMAND.CODE, PRODUCTIONDEMAND.FINALPLANNEDDATE, PRODUCTIONDEMAND.PROJECTCODE, PRODUCTIONDEMAND.SUBCODE01,
+	PRODUCTIONDEMAND.SUBCODE02, PRODUCTIONDEMAND.SUBCODE03, PRODUCTIONDEMAND.SUBCODE04 FROM PRODUCTIONDEMAND PRODUCTIONDEMAND
+	WHERE PRODUCTIONDEMAND.ITEMTYPEAFICODE ='KGF') H
+ON A.PROJECTCODE = H.PROJECTCODE AND 
+A.SUBCODE01 = H.SUBCODE01 AND 
+A.SUBCODE02 = H.SUBCODE02 AND
+A.SUBCODE03 = H.SUBCODE03 AND
+A.SUBCODE04 = H.SUBCODE04
+WHERE A.CODE='$nodemand'";
+$stmt=db2_exec($conn1,$sqlDB2, array('cursor'=>DB2_SCROLLABLE));
+$rowdb2 = db2_fetch_assoc($stmt);
+
+$ww=explode(",",$rowdb2['NAMENAME']);
+$valueww=explode(",",$rowdb2['VALUEDECIMAL']);
+//GRAMASI
+if($ww[0]=="GSM"){ $gramasi=$valueww[0];}
+else if($ww[1]=="GSM"){ $gramasi=$valueww[1];}
+else if($ww[2]=="GSM"){ $gramasi=$valueww[2];}
+else if($ww[3]=="GSM"){ $gramasi=$valueww[3];}
+$posg=strpos($gramasi,".");
+$valgramasi=substr($gramasi,0,$posg);
+//WIDTH
+if($ww[0]=="Width"){ $lebar=$valueww[0];}
+else if($ww[1]=="Width"){ $lebar=$valueww[1];}
+else if($ww[2]=="Width"){ $lebar=$valueww[2];}
+else if($ww[3]=="Width"){ $lebar=$valueww[3];}
+$posl=strpos($lebar,".");
+$vallebar=substr($lebar,0,$posl);
+
+$sqlCek=mysqli_query($con,"SELECT * FROM tbl_nsp_qcf WHERE nodemand='$nodemand' ORDER BY id DESC LIMIT 1");
+$cek=mysqli_num_rows($sqlCek);
+$rcek=mysqli_fetch_array($sqlCek);
+?>	
+<form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+ <div class="box box-info">
+   <div class="box-header with-border">
+    <h3 class="box-title">Input Data Kartu Kerja</h3>
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+  </div>
+  <div class="box-body"> 
+	 <div class="col-md-6"> 
+		<div class="form-group">
+			<label for="nodemand" class="col-sm-3 control-label">No Demand</label>
+				<div class="col-sm-4">
+					<input name="nokk" type="hidden" class="form-control" id="nokk" 
+					value="<?php if($cek>0){echo $rcek['nokk'];}else{echo $rowdb2['PRODUCTIONORDERCODE'];}?>">
+					<input name="nodemand" type="text" class="form-control" id="nodemand" 
+					onchange="window.location='NSPNew-'+this.value" value="<?php echo $_GET['nodemand'];?>" placeholder="No Demand" required >
+			  	</div>
+		</div>
+		<div class="form-group">
+		  <label for="no_order" class="col-sm-3 control-label">No Order</label>
+		  <div class="col-sm-4">
+			<input name="no_order" type="text" class="form-control" id="no_order" 
+			value="<?php if($cek>0){echo $rcek['no_order'];}else{if($rowdb2['SALESORDERCODE']!=""){echo $rowdb2['SALESORDERCODE'];}} ?>" placeholder="No Order" required>
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="pelanggan" class="col-sm-3 control-label">Pelanggan</label>
+		  <div class="col-sm-8">
+			<input name="pelanggan" type="text" class="form-control" id="no_po" 
+			value="<?php if($cek>0){echo $rcek['langganan'];}else{echo $rowdb2['LEGALNAME1'];}?>" placeholder="Pelanggan" >
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="buyer" class="col-sm-3 control-label">Buyer</label>
+		  <div class="col-sm-8">
+			<input name="buyer" type="text" class="form-control" id="buyer" 
+			value="<?php if($cek>0){echo $rcek['buyer'];}else{echo $rowdb2['BUYER'];}?>" placeholder="Buyer" >
+		  </div>				   
+		</div> 
+		<div class="form-group">
+		  <label for="no_po" class="col-sm-3 control-label">PO</label>
+		  <div class="col-sm-5">
+			<input name="no_po" type="text" class="form-control" id="no_po" 
+			value="<?php if($cek>0){echo $rcek['po'];}else {echo $rowdb2['PO_NUMBER'];} ?>" placeholder="PO" >
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="no_hanger" class="col-sm-3 control-label">No Hanger / No Item</label>
+		  <div class="col-sm-3">
+			<input name="no_hanger" type="text" class="form-control" id="no_hanger" 
+			value="<?php if($cek>0){echo $rcek['no_hanger'];}else{if($rowdb2['SUBCODE02']!=""){echo trim($rowdb2['SUBCODE02']).''.trim($rowdb2['SUBCODE03']);}}?>" placeholder="No Hanger">  
+		  </div>
+		  <div class="col-sm-3">
+		  <input name="no_item" type="text" class="form-control" id="no_item" 
+			value="<?php if($rcek['no_item']!=""){echo $rcek['no_item'];}else if($rowdb2['NO_ITEM']!=""){echo $rowdb2['NO_ITEM'];}?>" placeholder="No Item">
+		  </div>	
+		</div>
+		<div class="form-group">
+		  <label for="jns_kain" class="col-sm-3 control-label">Jenis Kain</label>
+		  <div class="col-sm-8">
+			  <textarea name="jns_kain" class="form-control" id="jns_kain" placeholder="Jenis Kain"><?php if($cek>0){echo $rcek['jenis_kain'];}else{if($rowdb2['ITEMDESCRIPTION']!=""){echo $rowdb2['ITEMDESCRIPTION'];} }?></textarea>
+			  </div>
+		  </div>	 		
+		<div class="form-group">
+		  <label for="l_g" class="col-sm-3 control-label">Lebar X Gramasi</label>
+		  <div class="col-sm-2">
+			<input name="lebar" type="text" class="form-control" id="lebar" 
+			value="<?php if($cek>0){echo $rcek['lebar'];}else{echo $vallebar;} ?>" placeholder="0" required>
+		  </div>
+		  <div class="col-sm-2">
+			<input name="grms" type="text" class="form-control" id="grms" 
+			value="<?php if($cek>0){echo $rcek['gramasi'];}else{echo $valgramasi;} ?>" placeholder="0" required>
+		  </div>		
+		</div>				 
+	  </div>
+	  		<!-- col --> 
+	  <div class="col-md-6">
+		<div class="form-group">
+		  <label for="warna" class="col-sm-3 control-label">Warna</label>
+		  <div class="col-sm-8">
+			<textarea name="warna" class="form-control" id="warna" placeholder="Warna"><?php if($cek>0){echo $rcek['warna'];}else{if($rowdb2['WARNA']!=""){echo $rowdb2['WARNA'];} }?></textarea>
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="no_warna" class="col-sm-3 control-label">No Warna</label>
+		  <div class="col-sm-8">
+			<textarea name="no_warna" class="form-control" id="no_warna" placeholder="No Warna"><?php if($cek>0){echo $rcek['no_warna'];}else{if($rowdb2['NO_WARNA']!=""){echo $rowdb2['NO_WARNA'];}}?></textarea>
+		  </div>				   
+		</div>  
+		<div class="form-group">
+		  <label for="lot" class="col-sm-3 control-label">Lot</label>
+		  <div class="col-sm-3">
+			<input name="lot" type="text" class="form-control" id="lot" 
+			value="<?php if($cek>0){echo $rcek['lot'];}else{echo $rowdb2['PRODUCTIONORDERCODE'];} ?>" placeholder="Lot" >
+		  </div>				   
+		</div>
+		<div class="form-group">
+		  <label for="po_rajut" class="col-sm-3 control-label">PO Rajut</label>
+		  <div class="col-sm-3">
+			<input name="po_rajut" type="text" class="form-control" id="po_rajut" 
+			value="<?php if($cek>0){echo $rcek['po_rajut'];}else{echo $rowdb2['PO_RAJUT'];} ?>" placeholder="PO Rajut" required>
+		  </div>
+		  <div class="col-sm-5">
+			<input name="supp_rajut" type="text" class="form-control" id="supp_rajut" 
+			value="<?php if($cek>0){echo $rcek['supp_rajut'];} ?>" placeholder="Supplier Rajut" >
+		  </div>	
+		</div>
+		  
+		<div class="form-group">
+        <label for="rol" class="col-sm-3 control-label">Rol</label>
+        <div class="col-sm-2">  
+					<input name="rol" type="text" class="form-control" id="rol" value="<?php if($cek>0){echo $rcek['rol'];} ?>" placeholder="0.00" style="text-align: right;" required>			
+        </div>
+	    </div>   
+		<div class="form-group">
+                  <label for="berat" class="col-sm-3 control-label">Berat</label>
+          <div class="col-sm-3">
+                    <div class="input-group">  
+					<input name="berat" type="text" class="form-control" id="berat" value="<?php if($cek>0){echo $rcek['berat'];} ?>" placeholder="0.00" style="text-align: right;" required>
+					<span class="input-group-addon">KGs</span>	
+					</div>
+                  </div>				   
+        </div>		   
+		<div class="form-group">
+		  <label for="dept" class="col-sm-3 control-label">Dept</label>
+		  <div class="col-sm-3">
+			<select class="form-control select2" name="dept" id="dept" required>
+				<option value="">Pilih</option>
+				<option value="MKT" <?php if($rcek['dept']=="MKT"){echo "SELECTED";}?>>MKT</option>
+				<option value="FIN" <?php if($rcek['dept']=="FIN"){echo "SELECTED";}?>>FIN</option>
+				<option value="DYE" <?php if($rcek['dept']=="DYE"){echo "SELECTED";}?>>DYE</option>
+				<option value="KNT" <?php if($rcek['dept']=="KNT"){echo "SELECTED";}?>>KNT</option>
+				<option value="LAB" <?php if($rcek['dept']=="LAB"){echo "SELECTED";}?>>LAB</option>
+				<option value="PPC" <?php if($rcek['dept']=="PPC"){echo "SELECTED";}?>>PPC</option>
+				<option value="QCF" <?php if($rcek['dept']=="QCF"){echo "SELECTED";}?>>QCF</option>
+				<option value="RMP" <?php if($rcek['dept']=="RMP"){echo "SELECTED";}?>>RMP</option>
+				<option value="KNK" <?php if($rcek['dept']=="KNK"){echo "SELECTED";}?>>KNK</option>
+				<option value="GKG" <?php if($rcek['dept']=="GKG"){echo "SELECTED";}?>>GKG</option>
+				<option value="GKJ" <?php if($rcek['dept']=="GKJ"){echo "SELECTED";}?>>GKJ</option>
+				<option value="BRS" <?php if($rcek['dept']=="BRS"){echo "SELECTED";}?>>BRS</option>
+				<option value="PRT" <?php if($rcek['dept']=="PRT"){echo "SELECTED";}?>>PRT</option>
+				<option value="TAS" <?php if($rcek['dept']=="TAS"){echo "SELECTED";}?>>TAS</option>
+				<option value="YND" <?php if($rcek['dept']=="YND"){echo "SELECTED";}?>>YND</option>
+				<option value="PRO" <?php if($rcek['dept']=="PRO"){echo "SELECTED";}?>>PRO</option>
+				<option value="GAS" <?php if($rcek['dept']=="GAS"){echo "SELECTED";}?>>GAS</option>
+			</select>	
+		  </div>
+	    </div> 
+		<div class="form-group">
+		  <label for="ket" class="col-sm-3 control-label">Keterangan</label>
+		  <div class="col-sm-8">
+			<textarea name="ket" rows="3" class="form-control" id="ket" placeholder="Keterangan"><?php if($cek>0){echo $rcek['ket']; }?></textarea>
+		  </div>				   
+		</div>		  
+	 </div>
+	
+</div>	 
+   <div class="box-footer">
+   <?php if($cek>0){ ?>
+  <input type="submit" value="Ubah" name="save" id="save" class="btn btn-primary pull-right" >   
+   <?php }else if($_GET['nodemand']!=""){ ?>
+  <input type="submit" value="Simpan" name="save" id="save" class="btn btn-primary pull-right" >
+   <?php } ?>	   
+   </div>
+    <!-- /.box-footer -->
+</div>
+</form>
+    
+						
+                    </div>
+                </div>
+            </div>
+        </div>
+<?php
+if($_POST['save']=="Simpan"){
+	  $warna=str_replace("'","''",$_POST['warna']);
+	  $nowarna=str_replace("'","''",$_POST['no_warna']);	
+	  $jns=str_replace("'","''",$_POST['jns_kain']);
+	  $po=str_replace("'","''",$_POST['no_po']);
+	  $ket=str_replace("'","''",$_POST['ket']);
+	  $lot=trim($_POST['lot']);
+  	  $sqlData=mysqli_query($con,"INSERT INTO tbl_nsp_qcf SET 
+		  nokk='$_POST[nokk]',
+		  nodemand='$_POST[nodemand]',
+		  langganan='$_POST[pelanggan]',
+		  buyer='$_POST[buyer]',
+		  no_order='$_POST[no_order]',
+		  no_hanger='$_POST[no_hanger]',
+		  no_item='$_POST[no_item]',
+		  po='$po',
+		  po_rajut='$_POST[po_rajut]',
+		  supp_rajut='$_POST[supp_rajut]',
+		  jenis_kain='$jns',
+		  lebar='$_POST[lebar]',
+		  gramasi='$_POST[grms]',
+		  lot='$lot',
+		  rol='$_POST[rol]',
+		  warna='$warna',
+		  no_warna='$nowarna',
+		  berat='$_POST[berat]',
+		  dept='$_POST[dept]',
+		  peninjau_awal='$_POST[peninjau_awal]',
+		  ket='$ket',
+		  tgl_buat=now(),
+		  tgl_update=now()");	 	  
+	  
+		if($sqlData){			
+			echo "<script>swal({
+  title: 'Data Tersimpan',   
+  text: 'Klik Ok untuk input data kembali',
+  type: 'success',
+  }).then((result) => {
+  if (result.value) {
+  	  window.open('pages/cetak/bon_nsp.php?nokk=$_POST[nodemand]','_blank');
+      window.location.href='NSPNew-$_GET[nodemand]';
+	 
+  }
+});</script>";
+		}
+				
+	}
+if($_POST['save']=="Ubah"){
+      $ket=str_replace("'","''",$_POST['ket']);
+	  $po=str_replace("'","''",$_POST['no_po']);
+	  $lot=trim($_POST['lot']);
+	  if(isset($_POST["rmp_benang"]))  
+        { 
+            // Retrieving each selected option 
+            foreach ($_POST['rmp_benang'] as $index => $subject1){
+				   if($index>0){
+					  $kt1=$kt1.",".$subject1; 
+				   }else{
+					   $kt1=$subject1;
+				   }	
+				    
+			}
+        } 
+  	  $sqlData=mysqli_query($con,"UPDATE tbl_nsp_qcf SET 
+		  rol='$_POST[rol]',
+		  berat='$_POST[berat]',
+		  po='$po',
+		  lot='$lot',
+		  peninjau_awal='$_POST[peninjau_awal]',
+		  ket='$ket',
+		  tgl_update=now()
+		  WHERE nodemand='$nodemand'");	 	  
+	  
+		if($sqlData){	
+	echo "<script>swal({
+  title: 'Data Telah diUbah',   
+  text: 'Klik Ok untuk input data kembali',
+  type: 'success',
+  }).then((result) => {
+  if (result.value) {
+      window.location.href='NSPNew-$nodemand';
+	 
+  }
+});</script>";
+		}
+}
+?>
+
+<script language="javascript">
+function rd(){
+	if(document.forms['form1']['no_ncp'].value !=""){
+		//document.forms['form1']['save'].setAttribute("disabled",true);
+		document.forms['form1']['save'].value="Ubah";
+		document.form1.rol.removeAttribute("required");
+		document.form1.berat.removeAttribute("required");
+		document.form1.dept.removeAttribute("required");
+		document.form1.kerusakan.removeAttribute("required");
+	}else{
+		//document.forms['form1']['save'].removeAttribute("disabled");
+		document.forms['form1']['save'].value="Simpan";
+		document.form1.rol.setAttribute("required",true);
+		document.form1.berat.setAttribute("required",true);
+		document.form1.dept.setAttribute("required",true);
+		document.form1.kerusakan.setAttribute("required",true);
+		
+	}						
+					
+}
+</script>
