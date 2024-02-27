@@ -81,7 +81,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 						<label for="nokk" class="col-sm-3 control-label">No Prod Order</label>
 						<div class="col-sm-2">
 							<input name="nokk" type="text" class="form-control" id="nokk" placeholder="No Prod Order" value="<?php if ($cek > 0) {
-								echo $rcek['nokk'];
+								echo $rNoKK['nokk'];
 							} ?>" readonly="readonly">
 						</div>
 					</div>
@@ -3157,7 +3157,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 		<!-- this row will not appear when printing -->
 		<div class="row no-print">
 			<div class="col-xs-12">
-				<a href="pages/cetak/cetak_result.php?idkk=<?php echo $rcek['id']; ?>&noitem=<?php echo $rcek['no_item']; ?>&nohanger=<?php echo $rcek['no_hanger']; ?>"
+				<a href="pages/cetak/cetak_result.php?idkk=<?php echo $rNoKK['id']; ?>&noitem=<?php echo $rNoKK['no_item']; ?>&nohanger=<?php echo $rNoKK['no_hanger']; ?>"
 					target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
 			</div>
 		</div>
