@@ -13058,13 +13058,13 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<!--<td><?php //if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b3'];}else{echo $rcek1['absor_b3'];} ?></td>-->
 
 							<td>
-								<?php if ($$rcek1['absor_b2'] != "") {
+								<?php if ($rcek1['absor_b2'] != "") {
 									echo $rcek1['absor_b2'];
 								} else {
 									echo $rcekR['rabsor_b2'];
 								} ?>
 							</td>
-							<!--<td><?php if ($$rcek1['absor_b3'] != "") {
+							<!--<td><?php if ($rcek1['absor_b3'] != "") {
 								echo $rcek1['absor_b3'];
 							} else {
 								echo $rcekR['rabsor_b3'];
@@ -13077,7 +13077,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<th>Back</th>
 							<!-- <td><?php //if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b1'];}else{echo $rcek1['absor_b1'];} ?></td> -->
 							<td>
-								<?php if ($$rcek1['absor_b1'] != "") {
+								<?php if ($rcek1['absor_b1'] != "") {
 									echo $rcek1['absor_b1'];
 								} else {
 									echo $rcekR['rabsor_b1'];
