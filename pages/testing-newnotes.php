@@ -860,6 +860,22 @@
 			$("#ranned").css("display", "none");  // To hide
 			$("#marned").css("display", "none");  // To hide
 		}
+		if (document.forms['form1']['jns_test'].value == "WRINKLE") {//disini
+			// alert('ya')
+			$("#fc31").css("display", "");  // To unhide
+			$("#stat_wrinkle").css("display", "");  // To unhide
+		} else {
+			$("#fc31").css("display", "none");  // To hide
+			$("#stat_wrinkle").css("display", "none");  // To hide
+		}
+		if (document.forms['form1']['jns_test'].value == "WRINKLE") {//disini
+			// alert('ya')
+			$("#fc32").css("display", "");  // To unhide
+			$("#stat_wrinkle").css("display", "");  // To unhide
+		} else {
+			$("#fc32").css("display", "none");  // To hide
+			$("#stat_wrinkle").css("display", "none");  // To hide
+		}
 	}
 	function tampil1() {
 		if (document.forms['form3']['jns_test1'].value == "WICKING") {
@@ -1633,17 +1649,15 @@ if ($nokk_demand_data > 0) {
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="nodemand" type="text" class="form-control" id="nodemand"
-								onchange="window.location='TestingNew-'+this.value"
-								value="<?php if ($rcek['nodemand_new'] != '') {
+								onchange="window.location='TestingNew-'+this.value" value="<?php if ($rcek['nodemand_new'] != '') {
 									echo $rcek['nodemand_new'];
 								} else if ($rcek['nodemand_new'] == '') {
 									echo $rcek['nodemand'];
 								} else {
 									echo $_GET['nodemand'];
-								} ?>"
-								placeholder="No Demand" required <?php if ($_SESSION['lvl_id'] == "TQ") {
-									echo "readonly";
-								} ?>>
+								} ?>" placeholder="No Demand" required <?php if ($_SESSION['lvl_id'] == "TQ") {
+									 echo "readonly";
+								 } ?>>
 						</div>
 					</div>
 
@@ -1662,17 +1676,15 @@ if ($nokk_demand_data > 0) {
 					</div>
 					<!-- <?php if ($cek > 0) { ?><a href="#" class="btn btn-info btn-xs posisi_kktq" id="<?php echo $rcek['nodemand']; ?>">Posisi Terakhir</a><?php } ?> -->
 				</div>
-				<input name="nokk" type="hidden" class="form-control" id="nokk" placeholder="No Prod Order"
-					value="<?php if ($cek > 0) {
-						echo $rcek['nokk'];
-					} ?>" readonly="readonly">
+				<input name="nokk" type="hidden" class="form-control" id="nokk" placeholder="No Prod Order" value="<?php if ($cek > 0) {
+					echo $rcek['nokk'];
+				} ?>" readonly="readonly">
 				<?php if ($rcek['nodemand_new'] != '') { ?>
 					<div class="form-group">
 						<label for="nodemand_old" class="col-sm-3 control-label">No Demand Old</label>
 						<div class="col-sm-5">
 							<input name="nodemand_old" type="text" class="form-control" id="nodemand_old"
-								placeholder="No Demand Old"
-								value="<?php if ($rcek['nodemand_new'] != '') {
+								placeholder="No Demand Old" value="<?php if ($rcek['nodemand_new'] != '') {
 									echo $rcek['nodemand'];
 								} ?>" readonly="readonly">
 						</div>
@@ -1684,8 +1696,7 @@ if ($nokk_demand_data > 0) {
 						<input name="kk_legacy" type="text" class="form-control" id="kk_legacy"
 							placeholder="No KK Legacy" value="<?php if ($cek > 0) {
 								echo $rcek['kk_legacy'];
-							} ?>"
-							readonly="readonly">
+							} ?>" readonly="readonly">
 					</div>
 					<?php if ($cek > 0) { ?><a href="#" class="btn btn-info btn-xs posisi_kktq"
 							id="<?php echo $rcek['kk_legacy']; ?>">Posisi Terakhir</a>
@@ -1714,8 +1725,7 @@ if ($nokk_demand_data > 0) {
 								echo $rcek['no_order'];
 							} else {
 								echo $r['NoOrder'];
-							} ?>"
-							readonly="readonly">
+							} ?>" readonly="readonly">
 					</div>
 					<div class="col-sm-5">
 						<?php foreach ($array_no_demand_other5_6 as $data_other) { ?>
@@ -1734,20 +1744,17 @@ if ($nokk_demand_data > 0) {
 							} else if ($r1['partnername'] != "") {
 								echo $pelanggan;
 							} else {
-							} ?>"
-							readonly="readonly">
+							} ?>" readonly="readonly">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="no_po" class="col-sm-3 control-label">PO</label>
 					<div class="col-sm-5">
-						<input name="no_po" type="text" class="form-control" id="no_po" placeholder="PO"
-							value="<?php if ($cek > 0) {
-								echo $rcek['no_po'];
-							} else {
-								echo $r['PONumber'];
-							} ?>"
-							readonly="readonly">
+						<input name="no_po" type="text" class="form-control" id="no_po" placeholder="PO" value="<?php if ($cek > 0) {
+							echo $rcek['no_po'];
+						} else {
+							echo $r['PONumber'];
+						} ?>" readonly="readonly">
 					</div>
 				</div>
 				<div class="form-group">
@@ -1758,38 +1765,31 @@ if ($nokk_demand_data > 0) {
 								echo $rcek['no_hanger'];
 							} else {
 								echo $r['HangerNo'];
-							} ?>"
-							readonly="readonly">
+							} ?>" readonly="readonly">
 					</div>
 					<div class="col-sm-3">
-						<input name="no_item" type="text" class="form-control" id="no_item" placeholder="No Item"
-							value="<?php if ($rcek['no_item'] != "") {
-								echo $rcek['no_item'];
-							} else {
-								echo $r['ProductCode'];
-							} ?>"
-							readonly="readonly">
+						<input name="no_item" type="text" class="form-control" id="no_item" placeholder="No Item" value="<?php if ($rcek['no_item'] != "") {
+							echo $rcek['no_item'];
+						} else {
+							echo $r['ProductCode'];
+						} ?>" readonly="readonly">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="l_g" class="col-sm-3 control-label">Lebar X Gramasi</label>
 					<div class="col-sm-2">
-						<input name="lebar" type="text" required class="form-control" id="lebar" placeholder="0"
-							value="<?php if ($cek > 0) {
-								echo $rcek['lebar'];
-							} else {
-								echo round($r['Lebar']);
-							} ?>"
-							readonly="readonly">
+						<input name="lebar" type="text" required class="form-control" id="lebar" placeholder="0" value="<?php if ($cek > 0) {
+							echo $rcek['lebar'];
+						} else {
+							echo round($r['Lebar']);
+						} ?>" readonly="readonly">
 					</div>
 					<div class="col-sm-2">
-						<input name="grms" type="text" required class="form-control" id="grms" placeholder="0"
-							value="<?php if ($cek > 0) {
-								echo $rcek['gramasi'];
-							} else {
-								echo round($r['Gramasi']);
-							} ?>"
-							readonly="readonly">
+						<input name="grms" type="text" required class="form-control" id="grms" placeholder="0" value="<?php if ($cek > 0) {
+							echo $rcek['gramasi'];
+						} else {
+							echo round($r['Gramasi']);
+						} ?>" readonly="readonly">
 					</div>
 				</div>
 			</div>
@@ -1809,12 +1809,11 @@ if ($nokk_demand_data > 0) {
 				<div class="form-group">
 					<label for="warna" class="col-sm-3 control-label">Warna</label>
 					<div class="col-sm-8">
-						<textarea name="warna" readonly="readonly" class="form-control" id="warna"
-							placeholder="Warna"><?php if ($cek > 0) {
-								echo $rcek['warna'];
-							} else {
-								echo $r['Color'];
-							} ?></textarea>
+						<textarea name="warna" readonly="readonly" class="form-control" id="warna" placeholder="Warna"><?php if ($cek > 0) {
+							echo $rcek['warna'];
+						} else {
+							echo $r['Color'];
+						} ?></textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -1831,22 +1830,20 @@ if ($nokk_demand_data > 0) {
 				<div class="form-group">
 					<label for="lot" class="col-sm-3 control-label">Prod. Order/ Lot</label>
 					<div class="col-sm-3">
-						<input name="lot" type="text" class="form-control" id="lot" placeholder="Lot"
-							value="<?php if ($cek > 0) {
-								echo $rcek['lot'];
-							} else {
-								echo $lotno;
-							} ?>" readonly="readonly">
+						<input name="lot" type="text" class="form-control" id="lot" placeholder="Lot" value="<?php if ($cek > 0) {
+							echo $rcek['lot'];
+						} else {
+							echo $lotno;
+						} ?>" readonly="readonly">
 					</div>
 				</div>
 				<?php if ($rcek['lot_new'] != '') { ?>
 					<div class="form-group">
 						<label for="lot_new" class="col-sm-3 control-label">Prod. Order/ Lot New</label>
 						<div class="col-sm-3">
-							<input name="lot_new" type="text" class="form-control" id="lot_new" placeholder="Lot New"
-								value="<?php if ($cek > 0) {
-									echo $rcek['lot_new'];
-								} ?>" readonly="readonly">
+							<input name="lot_new" type="text" class="form-control" id="lot_new" placeholder="Lot New" value="<?php if ($cek > 0) {
+								echo $rcek['lot_new'];
+							} ?>" readonly="readonly">
 						</div>
 					</div>
 				<?php } ?>
@@ -1856,19 +1853,17 @@ if ($nokk_demand_data > 0) {
 						<input name="lot_legacy" type="text" class="form-control" id="lot_legacy"
 							placeholder="No Lot Legacy" value="<?php if ($cek > 0) {
 								echo $rcek['lot_legacy'];
-							} ?>"
-							readonly="readonly">
+							} ?>" readonly="readonly">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="suhu" class="col-sm-3 control-label">Suhu</label>
 					<div class="col-sm-3">
 						<div class="input-group">
-							<input name="suhu" type="text" class="form-control" id="suhu" placeholder="Suhu"
-								value="<?php if ($cek > 0) {
-									echo $rcek['suhu'];
-								} else {
-								} ?>" readonly="readonly">
+							<input name="suhu" type="text" class="form-control" id="suhu" placeholder="Suhu" value="<?php if ($cek > 0) {
+								echo $rcek['suhu'];
+							} else {
+							} ?>" readonly="readonly">
 							<span class="input-group-addon">&deg;C</span>
 						</div>
 					</div>
@@ -1876,11 +1871,10 @@ if ($nokk_demand_data > 0) {
 				<div class="form-group">
 					<label for="buyer" class="col-sm-3 control-label">Buyer</label>
 					<div class="col-sm-5">
-						<input name="buyer" type="text" class="form-control" id="buyer" placeholder="Buyer"
-							value="<?php if ($cek > 0) {
-								echo $rcek['buyer'];
-							} else {
-							} ?>" readonly="readonly">
+						<input name="buyer" type="text" class="form-control" id="buyer" placeholder="Buyer" value="<?php if ($cek > 0) {
+							echo $rcek['buyer'];
+						} else {
+						} ?>" readonly="readonly">
 					</div>
 				</div>
 			</div>
@@ -1892,8 +1886,13 @@ if ($nokk_demand_data > 0) {
 	</div>
 </form>
 <?php
-$sqlCek1 = mysqli_query($con, "SELECT *,
-	CONCAT_WS(' ',fc_note,ph_note, abr_note, bas_note, dry_note, fla_note, fwe_note, fwi_note, burs_note,repp_note,wick_note,wick_note,absor_note,apper_note,fiber_note,pillb_note,pillm_note,pillr_note,thick_note,growth_note,recover_note,stretch_note,sns_note,snab_note,snam_note,snap_note,wash_note,water_note,acid_note,alkaline_note,crock_note,phenolic_note,cm_printing_note,cm_dye_note,light_note,light_pers_note,saliva_note,h_shrinkage_note,fibre_note,pilll_note,soil_note,bleeding_note,chlorin_note,dye_tf_note,humidity_note,odour_note,curling_note,nedle_note) AS note_g FROM tbl_tq_test WHERE id_nokk='$rcek[id]' ORDER BY id DESC LIMIT 1");
+$sqlCek1 = mysqli_query($con, "SELECT a.*, b.*,
+CONCAT_WS(' ',a.fc_note, a.ph_note, a.abr_note, a.bas_note, a.dry_note, a.fla_note, a.fwe_note, a.fwi_note, a.burs_note, a.repp_note, a.wick_note, a.wick_note, a.absor_note, a.apper_note, a.fiber_note, a.pillb_note, a.pillm_note, a.pillr_note, a.thick_note, a.growth_note, a.recover_note, a.stretch_note, a.sns_note, a.snab_note, a.snam_note, a.snap_note, a.wash_note, a.water_note, a.acid_note, a.alkaline_note, a.crock_note, a.phenolic_note, a.cm_printing_note, a.cm_dye_note, a.light_note, a.light_pers_note, a.saliva_note, a.h_shrinkage_note, a.fibre_note, a.pilll_note, a.soil_note, a.bleeding_note, a.chlorin_note, a.dye_tf_note, a.humidity_note, a.odour_note, a.curling_note, a.nedle_note, b.wrinkle_note) AS note_g 
+FROM tbl_tq_test a 
+LEFT JOIN tbl_tq_test_2 b ON a.id_nokk = b.id_nokk
+WHERE a.id_nokk='$rcek[id]' 
+ORDER BY a.id DESC 
+LIMIT 1");
 $cek1 = mysqli_num_rows($sqlCek1);
 $rcek1 = mysqli_fetch_array($sqlCek1);
 $sqlCekR = mysqli_query($con, "SELECT *,
@@ -1915,6 +1914,11 @@ $rcekM = mysqli_fetch_array($sqlCekM);
 $sqlCmt = mysqli_query($con, "SELECT *,
 	CONCAT_WS(' ',apperss_note) AS note_apperss FROM tbl_tq_test WHERE id_nokk='$rcek[id]' ORDER BY id DESC LIMIT 1");
 $rcekcmt = mysqli_fetch_array($sqlCmt);
+
+$id_tq_test_2 = $rcek['id'];
+
+$tq_test_2_sql = mysqli_query($con, "select id_nokk, spirality_status, bleeding_root, wrinkle, wrinkle1, wrinkle2, stat_wrinkle, stat_wrinkle1, wrinkle_note from tbl_tq_test_2 where id_nokk = '$id_tq_test_2'");
+$tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 ?>
 <?php if ($_SESSION['lvl_id'] == "TQ" and $cek > 0) { ?>
 	<div class="row">
@@ -1961,10 +1965,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_fla'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_fla'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_fla'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_fla'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_fla'] == "PASS") { ?> <span class='label bg-green'>
@@ -1996,10 +2002,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_fib'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_fib'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_fib'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_fib'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_fib'] == "PASS") { ?> <span class='label bg-green'>
@@ -2031,10 +2039,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_fc'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_fc'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_fc'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_fc'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_fc'] == "PASS") { ?> <span class='label bg-green'>
@@ -2066,10 +2076,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_bsk'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_bsk'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_bsk'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_bsk'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_bsk'] == "PASS") { ?> <span class='label bg-green'>
@@ -2101,13 +2113,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_pm'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_pm'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_pm'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_pm'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_pm'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_pm'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_pm'] == "DATA") { ?> <span class='label bg-blue'>
@@ -2142,10 +2157,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_pl'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_pl'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_pl'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_pl'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_pl'] == "PASS") { ?> <span class='label bg-green'>
@@ -2177,10 +2194,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_fwss2'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_fwss2'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_fwss2'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_fwss2'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_fwss2'] == "MARGINAL PASS") { ?> <span
@@ -2219,10 +2238,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_fwss3'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_fwss3'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_fwss3'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_fwss3'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_fwss3'] == "MARGINAL PASS") { ?> <span
@@ -2261,13 +2282,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_fwss'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_fwss'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_fwss'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_fwss'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_fwss'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_fwss'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_fwss'] == "DATA") { ?> <span class='label bg-blue'>
@@ -2302,10 +2326,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_pb'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_pb'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_pb'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_pb'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_pb'] == "PASS") { ?> <span class='label bg-green'>
@@ -2337,10 +2363,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_prt'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_prt'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_prt'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_prt'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_prt'] == "PASS") { ?> <span class='label bg-green'>
@@ -2372,10 +2400,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_abr'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_abr'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_abr'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_abr'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_abr'] == "PASS") { ?> <span class='label bg-green'>
@@ -2407,10 +2437,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_sm'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_sm'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_sm'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_sm'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_sm'] == "PASS") { ?> <span class='label bg-green'>
@@ -2442,10 +2474,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_sp'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_sp'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_sp'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_sp'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_sp'] == "PASS") { ?> <span class='label bg-green'>
@@ -2477,10 +2511,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_sb'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_sb'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_sb'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_sb'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_sb'] == "PASS") { ?> <span class='label bg-green'>
@@ -2512,13 +2548,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_bs2'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_bs2'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_bs2'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_bs2'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_bs2'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_bs2'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_bs2'] == "DATA") { ?> <span class='label bg-blue'>
@@ -2553,13 +2592,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_bs3'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_bs3'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_bs3'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_bs3'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_bs3'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_bs3'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_bs3'] == "DATA") { ?> <span class='label bg-blue'>
@@ -2594,13 +2636,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_bs'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_bs'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_bs'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_bs'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_bs'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_bs'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_bs'] == "DATA") { ?> <span class='label bg-blue'>
@@ -2635,10 +2680,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_th'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_th'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_th'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_th'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_th'] == "PASS") { ?> <span class='label bg-green'>
@@ -2670,13 +2717,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_sr'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_sr'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_sr'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_sr'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_sr'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_sr'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_sr'] == "DATA") { ?> <span class='label bg-blue'>
@@ -2711,10 +2761,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_gr'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_gr'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_gr'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_gr'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_gr'] == "PASS") { ?> <span class='label bg-green'>
@@ -2746,13 +2798,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_ap'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_ap'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_ap'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_ap'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_ap'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_ap'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_ap'] == "DATA") { ?> <span class='label bg-blue'>
@@ -2787,10 +2842,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_hs'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_hs'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_hs'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_hs'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_hs'] == "PASS") { ?> <span class='label bg-green'>
@@ -2822,10 +2879,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_ff'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_ff'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_ff'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_ff'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_ff'] == "PASS") { ?> <span class='label bg-green'>
@@ -2857,13 +2916,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_wic'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_wic'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_wic'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_wic'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_wic'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_wic'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_wic'] == "DATA") { ?> <span class='label bg-blue'>
@@ -2898,10 +2960,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_abs'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_abs'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_abs'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_abs'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_abs'] == "PASS") { ?> <span class='label bg-green'>
@@ -2933,13 +2997,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_dry'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_dry'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_dry'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_dry'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_dry'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_dry'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_dry'] == "DATA") { ?> <span class='label bg-blue'>
@@ -2974,10 +3041,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_wp'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_wp'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_wp'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_wp'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_wp'] == "PASS") { ?> <span class='label bg-green'>
@@ -3009,13 +3078,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_ph'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_ph'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_ph'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_ph'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_ph'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_ph'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_ph'] == "DATA") { ?> <span class='label bg-blue'>
@@ -3050,10 +3122,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_sor'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_sor'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_sor'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_sor'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_sor'] == "PASS") { ?> <span class='label bg-green'>
@@ -3085,13 +3159,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_wf'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_wf'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_wf'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_wf'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_wf'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_wf'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_wf'] == "DATA") { ?> <span class='label bg-blue'>
@@ -3126,13 +3203,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_pac'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_pac'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_pac'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_pac'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_pac'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_pac'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_pac'] == "DATA") { ?> <span class='label bg-blue'>
@@ -3167,13 +3247,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_pal'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_pal'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_pal'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_pal'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_pal'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_pal'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_pal'] == "DATA") { ?> <span class='label bg-blue'>
@@ -3208,13 +3291,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_wtr'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_wtr'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_wtr'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_wtr'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_wtr'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_wtr'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_wtr'] == "DATA") { ?> <span class='label bg-blue'>
@@ -3249,13 +3335,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_cr'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_cr'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_cr'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_cr'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_cr'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_cr'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_cr'] == "DATA") { ?> <span class='label bg-blue'>
@@ -3290,13 +3379,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_py'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_py'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_py'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_py'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_py'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_py'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_py'] == "DATA") { ?> <span class='label bg-blue'>
@@ -3331,10 +3423,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_lg'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_lg'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_lg'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_lg'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_lg'] == "PASS") { ?> <span class='label bg-green'>
@@ -3366,10 +3460,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_cmo'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_cmo'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_cmo'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_cmo'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_cmo'] == "PASS") { ?> <span class='label bg-green'>
@@ -3401,10 +3497,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_cm'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_cm'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_cm'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_cm'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_cm'] == "PASS") { ?> <span class='label bg-green'>
@@ -3436,13 +3534,16 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 												} ?>
 											</td>
 											<td align="center">
-												<?php if ($row['stat_lp'] == "DISPOSISI") { ?> <span class='label bg-yellow blink_me'>
+												<?php if ($row['stat_lp'] == "DISPOSISI") { ?> <span
+														class='label bg-yellow blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_lp'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_lp'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_lp'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_lp'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_lp'] == "DATA") { ?> <span class='label bg-blue'>
@@ -3481,7 +3582,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 														class='label label-bg-red blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_slv'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_slv'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_slv'] == "PASS") { ?> <span class='label bg-green'>
@@ -3517,7 +3619,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 														class='label label-bg-red blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_bld'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_bld'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_bld'] == "PASS") { ?> <span class='label bg-green'>
@@ -3553,7 +3656,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 														class='label label-bg-red blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_chl'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_chl'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_chl'] == "PASS") { ?> <span class='label bg-green'>
@@ -3589,7 +3693,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 														class='label label-bg-red blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_nchl'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_nchl'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
 												<?php } else if ($row['stat_nchl'] == "PASS") { ?> <span class='label bg-green'>
@@ -3625,10 +3730,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 														class='label label-bg-red blink_me'>
 														<?php echo "DISPOSISI"; ?>
 													</span>
-												<?php } else if ($row['stat_dye'] == "FAIL") { ?> <span class='label bg-red blink_me'>
+												<?php } else if ($row['stat_dye'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
 														<?php echo "FAIL"; ?>
 														</span>
-												<?php } else if ($row['stat_dye'] == "MARGINAL PASS") { ?> <span class='label bg-purple'>
+												<?php } else if ($row['stat_dye'] == "MARGINAL PASS") { ?> <span
+																class='label bg-purple'>
 														<?php echo "MARGINAL PASS"; ?>
 															</span>
 												<?php } else if ($row['stat_dye'] == "DATA") { ?> <span class='label bg-blue'>
@@ -3885,15 +3992,18 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="">Pilih</option>
 											<option <?php if ($rcek1['fc_elastane1'] == "COTTON") { ?> selected=selected <?php }
 											; ?>value="COTTON">COTTON</option>
-											<option <?php if ($rcek1['fc_elastane1'] == "POLYESTER") { ?> selected=selected <?php }
+											<option <?php if ($rcek1['fc_elastane1'] == "POLYESTER") { ?> selected=selected
+												<?php }
 											; ?>value="POLYESTER">POLYESTER</option>
-											<option <?php if ($rcek1['fc_elastane1'] == "SPANDEX") { ?> selected=selected <?php }
+											<option <?php if ($rcek1['fc_elastane1'] == "SPANDEX") { ?> selected=selected
+												<?php }
 											; ?>value="SPANDEX">SPANDEX</option>
 											<option <?php if ($rcek1['fc_elastane1'] == "RAYON") { ?> selected=selected <?php }
 											; ?>value="RAYON">RAYON</option>
 											<option <?php if ($rcek1['fc_elastane1'] == "NYLON") { ?> selected=selected <?php }
 											; ?>value="NYLON">NYLON</option>
-											<option <?php if ($rcek1['fc_elastane1'] == "ELASTANE") { ?> selected=selected <?php }
+											<option <?php if ($rcek1['fc_elastane1'] == "ELASTANE") { ?> selected=selected
+												<?php }
 											; ?>value="ELASTANE">ELASTANE</option>
 											<option <?php if ($rcek1['fc_elastane1'] == "TENCEL") { ?> selected=selected <?php }
 											; ?>value="TENCEL">TENCEL</option>
@@ -3904,9 +4014,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="rPOLYESTER">rPOLYESTER</option>
 											<option <?php if ($rcek1['fc_elastane1'] == "MODAL") { ?> selected=selected <?php }
 											; ?>value="MODAL">MODAL</option>
-											<option <?php if ($rcek1['fc_elastane1'] == "ACRYLIC") { ?> selected=selected <?php }
+											<option <?php if ($rcek1['fc_elastane1'] == "ACRYLIC") { ?> selected=selected
+												<?php }
 											; ?>value="ACRYLIC">ACRYLIC</option>
-											<option <?php if ($rcek1['fc_elastane1'] == "VISCOSE") { ?> selected=selected <?php }
+											<option <?php if ($rcek1['fc_elastane1'] == "VISCOSE") { ?> selected=selected
+												<?php }
 											; ?>value="VISCOSE">VISCOSE</option>
 										</select>
 									</div>
@@ -4007,7 +4119,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="TENCEL">TENCEL</option>
 											<option <?php if ($rcekD['dfc_cott1'] == "LYCRA") { ?> selected=selected <?php }
 											; ?>value="LYCRA">LYCRA</option>
-											<option <?php if ($rcekD['dfc_cott1'] == "rPOLYESTER") { ?> selected=selected <?php }
+											<option <?php if ($rcekD['dfc_cott1'] == "rPOLYESTER") { ?> selected=selected
+												<?php }
 											; ?>value="rPOLYESTER">rPOLYESTER</option>
 											<option <?php if ($rcekD['dfc_cott1'] == "MODAL") { ?> selected=selected <?php }
 											; ?>value="MODAL">MODAL</option>
@@ -4036,7 +4149,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="TENCEL">TENCEL</option>
 											<option <?php if ($rcekD['dfc_poly1'] == "LYCRA") { ?> selected=selected <?php }
 											; ?>value="LYCRA">LYCRA</option>
-											<option <?php if ($rcekD['dfc_poly1'] == "rPOLYESTER") { ?> selected=selected <?php }
+											<option <?php if ($rcekD['dfc_poly1'] == "rPOLYESTER") { ?> selected=selected
+												<?php }
 											; ?>value="rPOLYESTER">rPOLYESTER</option>
 											<option <?php if ($rcekD['dfc_poly1'] == "MODAL") { ?> selected=selected <?php }
 											; ?>value="MODAL">MODAL</option>
@@ -4049,20 +4163,24 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											style="width: 100%;">
 											<option <?php if ($rcekD['dfc_elastane1'] == "") { ?> selected=selected <?php }
 											; ?>value="">Pilih</option>
-											<option <?php if ($rcekD['dfc_elastane1'] == "COTTON") { ?> selected=selected <?php }
+											<option <?php if ($rcekD['dfc_elastane1'] == "COTTON") { ?> selected=selected
+												<?php }
 											; ?>value="COTTON">COTTON</option>
 											<option <?php if ($rcekD['dfc_elastane1'] == "POLYESTER") { ?> selected=selected
 												<?php }
 											; ?>value="POLYESTER">POLYESTER</option>
-											<option <?php if ($rcekD['dfc_elastane1'] == "SPANDEX") { ?> selected=selected <?php }
+											<option <?php if ($rcekD['dfc_elastane1'] == "SPANDEX") { ?> selected=selected
+												<?php }
 											; ?>value="SPANDEX">SPANDEX</option>
 											<option <?php if ($rcekD['dfc_elastane1'] == "RAYON") { ?> selected=selected <?php }
 											; ?>value="RAYON">RAYON</option>
 											<option <?php if ($rcekD['dfc_elastane1'] == "NYLON") { ?> selected=selected <?php }
 											; ?>value="NYLON">NYLON</option>
-											<option <?php if ($rcekD['dfc_elastane1'] == "ELASTANE") { ?> selected=selected <?php }
+											<option <?php if ($rcekD['dfc_elastane1'] == "ELASTANE") { ?> selected=selected
+												<?php }
 											; ?>value="ELASTANE">ELASTANE</option>
-											<option <?php if ($rcekD['dfc_elastane1'] == "TENCEL") { ?> selected=selected <?php }
+											<option <?php if ($rcekD['dfc_elastane1'] == "TENCEL") { ?> selected=selected
+												<?php }
 											; ?>value="TENCEL">TENCEL</option>
 											<option <?php if ($rcekD['dfc_elastane1'] == "LYCRA") { ?> selected=selected <?php }
 											; ?>value="LYCRA">LYCRA</option>
@@ -4071,9 +4189,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="rPOLYESTER">rPOLYESTER</option>
 											<option <?php if ($rcekD['dfc_elastane1'] == "MODAL") { ?> selected=selected <?php }
 											; ?>value="MODAL">MODAL</option>
-											<option <?php if ($rcekD['dfc_elastane1'] == "ACRYLIC") { ?> selected=selected <?php }
+											<option <?php if ($rcekD['dfc_elastane1'] == "ACRYLIC") { ?> selected=selected
+												<?php }
 											; ?>value="ACRYLIC">ACRYLIC</option>
-											<option <?php if ($rcekD['dfc_elastane1'] == "VISCOSE") { ?> selected=selected <?php }
+											<option <?php if ($rcekD['dfc_elastane1'] == "VISCOSE") { ?> selected=selected
+												<?php }
 											; ?>value="VISCOSE">VISCOSE</option>
 										</select>
 									</div>
@@ -4146,7 +4266,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="TENCEL">TENCEL</option>
 											<option <?php if ($rcekR['rfc_cott1'] == "LYCRA") { ?> selected=selected <?php }
 											; ?>value="LYCRA">LYCRA</option>
-											<option <?php if ($rcekR['rfc_cott1'] == "rPOLYESTER") { ?> selected=selected <?php }
+											<option <?php if ($rcekR['rfc_cott1'] == "rPOLYESTER") { ?> selected=selected
+												<?php }
 											; ?>value="rPOLYESTER">rPOLYESTER</option>
 											<option <?php if ($rcekR['rfc_cott1'] == "MODAL") { ?> selected=selected <?php }
 											; ?>value="MODAL">MODAL</option>
@@ -4175,7 +4296,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="TENCEL">TENCEL</option>
 											<option <?php if ($rcekR['rfc_poly1'] == "LYCRA") { ?> selected=selected <?php }
 											; ?>value="LYCRA">LYCRA</option>
-											<option <?php if ($rcekR['rfc_poly1'] == "rPOLYESTER") { ?> selected=selected <?php }
+											<option <?php if ($rcekR['rfc_poly1'] == "rPOLYESTER") { ?> selected=selected
+												<?php }
 											; ?>value="rPOLYESTER">rPOLYESTER</option>
 											<option <?php if ($rcekR['rfc_poly1'] == "MODAL") { ?> selected=selected <?php }
 											; ?>value="MODAL">MODAL</option>
@@ -4188,20 +4310,24 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											style="width: 100%;">
 											<option <?php if ($rcekR['rfc_elastane1'] == "") { ?> selected=selected <?php }
 											; ?>value="">Pilih</option>
-											<option <?php if ($rcekR['rfc_elastane1'] == "COTTON") { ?> selected=selected <?php }
+											<option <?php if ($rcekR['rfc_elastane1'] == "COTTON") { ?> selected=selected
+												<?php }
 											; ?>value="COTTON">COTTON</option>
 											<option <?php if ($rcekR['rfc_elastane1'] == "POLYESTER") { ?> selected=selected
 												<?php }
 											; ?>value="POLYESTER">POLYESTER</option>
-											<option <?php if ($rcekR['rfc_elastane1'] == "SPANDEX") { ?> selected=selected <?php }
+											<option <?php if ($rcekR['rfc_elastane1'] == "SPANDEX") { ?> selected=selected
+												<?php }
 											; ?>value="SPANDEX">SPANDEX</option>
 											<option <?php if ($rcekR['rfc_elastane1'] == "RAYON") { ?> selected=selected <?php }
 											; ?>value="RAYON">RAYON</option>
 											<option <?php if ($rcekR['rfc_elastane1'] == "NYLON") { ?> selected=selected <?php }
 											; ?>value="NYLON">NYLON</option>
-											<option <?php if ($rcekR['rfc_elastane1'] == "ELASTANE") { ?> selected=selected <?php }
+											<option <?php if ($rcekR['rfc_elastane1'] == "ELASTANE") { ?> selected=selected
+												<?php }
 											; ?>value="ELASTANE">ELASTANE</option>
-											<option <?php if ($rcekR['rfc_elastane1'] == "TENCEL") { ?> selected=selected <?php }
+											<option <?php if ($rcekR['rfc_elastane1'] == "TENCEL") { ?> selected=selected
+												<?php }
 											; ?>value="TENCEL">TENCEL</option>
 											<option <?php if ($rcekR['rfc_elastane1'] == "LYCRA") { ?> selected=selected <?php }
 											; ?>value="LYCRA">LYCRA</option>
@@ -4210,9 +4336,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="rPOLYESTER">rPOLYESTER</option>
 											<option <?php if ($rcekR['rfc_elastane1'] == "MODAL") { ?> selected=selected <?php }
 											; ?>value="MODAL">MODAL</option>
-											<option <?php if ($rcekR['rfc_elastane1'] == "ACRYLIC") { ?> selected=selected <?php }
+											<option <?php if ($rcekR['rfc_elastane1'] == "ACRYLIC") { ?> selected=selected
+												<?php }
 											; ?>value="ACRYLIC">ACRYLIC</option>
-											<option <?php if ($rcekR['rfc_elastane1'] == "VISCOSE") { ?> selected=selected <?php }
+											<option <?php if ($rcekR['rfc_elastane1'] == "VISCOSE") { ?> selected=selected
+												<?php }
 											; ?>value="VISCOSE">VISCOSE</option>
 										</select>
 									</div>
@@ -4314,7 +4442,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											onChange="tampil();" style="width: 100%;">
 											<option <?php if ($rcek1['stat_fwss2'] == "") { ?> selected=selected <?php }
 											; ?>value="">Pilih</option>
-											<option <?php if ($rcek1['stat_fwss2'] == "DISPOSISI") { ?> selected=selected <?php }
+											<option <?php if ($rcek1['stat_fwss2'] == "DISPOSISI") { ?> selected=selected
+												<?php }
 											; ?>value="DISPOSISI">DISPOSISI</option>
 											<option <?php if ($rcek1['stat_fwss2'] == "A") { ?> selected=selected <?php }
 											; ?>value="A">A</option>
@@ -4388,7 +4517,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											onChange="tampil();" style="width: 100%;">
 											<option <?php if ($rcek1['stat_fwss3'] == "") { ?> selected=selected <?php }
 											; ?>value="">Pilih</option>
-											<option <?php if ($rcek1['stat_fwss3'] == "DISPOSISI") { ?> selected=selected <?php }
+											<option <?php if ($rcek1['stat_fwss3'] == "DISPOSISI") { ?> selected=selected
+												<?php }
 											; ?>value="DISPOSISI">DISPOSISI</option>
 											<option <?php if ($rcek1['stat_fwss3'] == "A") { ?> selected=selected <?php }
 											; ?>value="A">A</option>
@@ -4477,7 +4607,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="R">R</option>
 											<option <?php if ($rcek1['stat_bsk'] == "PASS") { ?> selected=selected <?php }
 											; ?>value="PASS">PASS</option>
-											<option <?php if ($rcek1['stat_bsk'] == "MARGINAL PASS") { ?> selected=selected <?php }
+											<option <?php if ($rcek1['stat_bsk'] == "MARGINAL PASS") { ?> selected=selected
+												<?php }
 											; ?>value="MARGINAL PASS">MARGINAL PASS</option>
 											<option <?php if ($rcek1['stat_bsk'] == "DATA") { ?> selected=selected <?php }
 											; ?>value="DATA">DATA</option>
@@ -4545,7 +4676,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										<label><input type="checkbox" name="ss_temp" id="ss_temp" class="minimal" value="30"
 												<?php if ($rcek1['ss_temp'] == '30') {
 													echo "checked";
-												} ?>> 30&deg;C &nbsp; &nbsp;
+												} ?>> 30&deg;C &nbsp;
+											&nbsp;
 											&nbsp; &nbsp;
 										</label>
 										<label><input type="checkbox" name="ss_temp" id="ss_temp" class="minimal" value="40"
@@ -4563,30 +4695,35 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										<label><input type="checkbox" name="ss_washes3" id="ss_washes3" class="minimal"
 												value="3" <?php if ($rcek1['ss_washes3'] == '3') {
 													echo "checked";
-												} ?>> X3 &nbsp;
+												} ?>> X3
+											&nbsp;
 											&nbsp; &nbsp; &nbsp;
 										</label>
 										<label><input type="checkbox" name="ss_washes10" id="ss_washes10" class="minimal"
 												value="10" <?php if ($rcek1['ss_washes10'] == '10') {
 													echo "checked";
-												} ?>> X10
+												} ?>>
+											X10
 										</label>
 										<label><input type="checkbox" name="ss_washes15" id="ss_washes15" class="minimal"
 												value="15" <?php if ($rcek1['ss_washes15'] == '15') {
 													echo "checked";
-												} ?>> X15
+												} ?>>
+											X15
 										</label>
 									</div>
 									<div class="col-sm-1">
 										<label><input type="checkbox" name="ss_linedry" id="ss_linedry" class="minimal"
 												value="1" <?php if ($rcek1['ss_linedry'] == '1') {
 													echo "checked";
-												} ?>> Line Dry
+												} ?>> Line
+											Dry
 										</label>
 										<label><input type="checkbox" name="ss_tumbledry" id="ss_tumbledry" class="minimal"
 												value="1" <?php if ($rcek1['ss_tumbledry'] == '1') {
 													echo "checked";
-												} ?>> Tumble
+												} ?>>
+											Tumble
 											Dry
 										</label>
 									</div>
@@ -4644,11 +4781,6 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											rows="3"><?php echo $rcek1['sns_note']; ?></textarea>
 										<!--spirality_status_view-->
 										<?php
-										$id_tq_test_2 = $rcek['id'];
-
-										$tq_test_2_sql = mysqli_query($con, "select id_nokk, spirality_status, bleeding_root from tbl_tq_test_2 where id_nokk = '$id_tq_test_2'");
-										$tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
-
 										$spirality_status = ['DISPOSISI', 'A', 'R', 'PASS', 'FAIL', 'RANDOM']; ?>
 										<select name="spirality_status" class="form-control select2" id="stat_sparility"
 											onChange="tampil();">
@@ -4794,43 +4926,50 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										<label><input type="checkbox" name="dss_temp" id="dss_temp" class="minimal"
 												value="30" <?php if ($rcekD['dss_temp'] == '30') {
 													echo "checked";
-												} ?>> 30&deg;C
+												} ?>>
+											30&deg;C
 											&nbsp; &nbsp; &nbsp; &nbsp;
 										</label>
 										<label><input type="checkbox" name="dss_temp" id="dss_temp" class="minimal"
 												value="40" <?php if ($rcekD['dss_temp'] == '40') {
 													echo "checked";
-												} ?>> 40&deg;C
+												} ?>>
+											40&deg;C
 										</label>
 										<label><input type="checkbox" name="dss_temp" id="dss_temp" class="minimal"
 												value="60" <?php if ($rcekD['dss_temp'] == '60') {
 													echo "checked";
-												} ?>> 60&deg;C
+												} ?>>
+											60&deg;C
 										</label>
 									</div>
 									<div class="col-sm-1">
 										<label><input type="checkbox" name="dss_washes3" id="dss_washes3" class="minimal"
 												value="3" <?php if ($rcekD['dss_washes3'] == '3') {
 													echo "checked";
-												} ?>> X3 &nbsp;
+												} ?>> X3
+											&nbsp;
 											&nbsp; &nbsp; &nbsp;
 										</label>
 										<label><input type="checkbox" name="dss_washes10" id="dss_washes10" class="minimal"
 												value="10" <?php if ($rcekD['dss_washes10'] == '10') {
 													echo "checked";
-												} ?>> X10
+												} ?>>
+											X10
 										</label>
 										<label><input type="checkbox" name="dss_washes15" id="dss_washes15" class="minimal"
 												value="15" <?php if ($rcekD['dss_washes15'] == '15') {
 													echo "checked";
-												} ?>> X15
+												} ?>>
+											X15
 										</label>
 									</div>
 									<div class="col-sm-1">
 										<label><input type="checkbox" name="dss_linedry" id="dss_linedry" class="minimal"
 												value="1" <?php if ($rcekD['dss_linedry'] == '1') {
 													echo "checked";
-												} ?>> Line Dry
+												} ?>> Line
+											Dry
 										</label>
 										<label><input type="checkbox" name="dss_tumbledry" id="dss_tumbledry"
 												class="minimal" value="1" <?php if ($rcekD['dss_tumbledry'] == '1') {
@@ -4909,43 +5048,50 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										<label><input type="checkbox" name="mss_temp" id="mss_temp" class="minimal"
 												value="30" <?php if ($rcekM['mss_temp'] == '30') {
 													echo "checked";
-												} ?>> 30&deg;C
+												} ?>>
+											30&deg;C
 											&nbsp; &nbsp; &nbsp; &nbsp;
 										</label>
 										<label><input type="checkbox" name="mss_temp" id="mss_temp" class="minimal"
 												value="40" <?php if ($rcekM['mss_temp'] == '40') {
 													echo "checked";
-												} ?>> 40&deg;C
+												} ?>>
+											40&deg;C
 										</label>
 										<label><input type="checkbox" name="mss_temp" id="mss_temp" class="minimal"
 												value="60" <?php if ($rcekM['mss_temp'] == '60') {
 													echo "checked";
-												} ?>> 60&deg;C
+												} ?>>
+											60&deg;C
 										</label>
 									</div>
 									<div class="col-sm-1">
 										<label><input type="checkbox" name="mss_washes3" id="mss_washes3" class="minimal"
 												value="3" <?php if ($rcekM['mss_washes3'] == '3') {
 													echo "checked";
-												} ?>> X3 &nbsp;
+												} ?>> X3
+											&nbsp;
 											&nbsp; &nbsp; &nbsp;
 										</label>
 										<label><input type="checkbox" name="mss_washes10" id="mss_washes10" class="minimal"
 												value="10" <?php if ($rcekM['mss_washes10'] == '10') {
 													echo "checked";
-												} ?>> X10
+												} ?>>
+											X10
 										</label>
 										<label><input type="checkbox" name="mss_washes15" id="mss_washes15" class="minimal"
 												value="15" <?php if ($rcekM['mss_washes15'] == '15') {
 													echo "checked";
-												} ?>> X15
+												} ?>>
+											X15
 										</label>
 									</div>
 									<div class="col-sm-1">
 										<label><input type="checkbox" name="mss_linedry" id="mss_linedry" class="minimal"
 												value="1" <?php if ($rcekM['mss_linedry'] == '1') {
 													echo "checked";
-												} ?>> Line Dry
+												} ?>> Line
+											Dry
 										</label>
 										<label><input type="checkbox" name="mss_tumbledry" id="mss_tumbledry"
 												class="minimal" value="1" <?php if ($rcekM['mss_tumbledry'] == '1') {
@@ -5014,43 +5160,50 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										<label><input type="checkbox" name="rss_temp" id="rss_temp" class="minimal"
 												value="30" <?php if ($rcekR['rss_temp'] == '30') {
 													echo "checked";
-												} ?>> 30&deg;C
+												} ?>>
+											30&deg;C
 											&nbsp; &nbsp; &nbsp; &nbsp;
 										</label>
 										<label><input type="checkbox" name="rss_temp" id="rss_temp" class="minimal"
 												value="40" <?php if ($rcekR['rss_temp'] == '40') {
 													echo "checked";
-												} ?>> 40&deg;C
+												} ?>>
+											40&deg;C
 										</label>
 										<label><input type="checkbox" name="rss_temp" id="rss_temp" class="minimal"
 												value="60" <?php if ($rcekR['rss_temp'] == '60') {
 													echo "checked";
-												} ?>> 60&deg;C
+												} ?>>
+											60&deg;C
 										</label>
 									</div>
 									<div class="col-sm-1">
 										<label><input type="checkbox" name="rss_washes3" id="rss_washes3" class="minimal"
 												value="3" <?php if ($rcekR['rss_washes3'] == '3') {
 													echo "checked";
-												} ?>> X3 &nbsp;
+												} ?>> X3
+											&nbsp;
 											&nbsp; &nbsp; &nbsp;
 										</label>
 										<label><input type="checkbox" name="rss_washes10" id="rss_washes10" class="minimal"
 												value="10" <?php if ($rcekR['rss_washes10'] == '10') {
 													echo "checked";
-												} ?>> X10
+												} ?>>
+											X10
 										</label>
 										<label><input type="checkbox" name="rss_washes15" id="rss_washes15" class="minimal"
 												value="15" <?php if ($rcekR['rss_washes15'] == '15') {
 													echo "checked";
-												} ?>> X15
+												} ?>>
+											X15
 										</label>
 									</div>
 									<div class="col-sm-1">
 										<label><input type="checkbox" name="rss_linedry" id="rss_linedry" class="minimal"
 												value="1" <?php if ($rcekR['rss_linedry'] == '1') {
 													echo "checked";
-												} ?>> Line Dry
+												} ?>> Line
+											Dry
 										</label>
 										<label><input type="checkbox" name="rss_tumbledry" id="rss_tumbledry"
 												class="minimal" value="1" <?php if ($rcekR['rss_tumbledry'] == '1') {
@@ -5268,7 +5421,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											value="<?php echo $rcekR['rapperss_pb1']; ?>" placeholder="PILLING BACK 1"
 											readonly>
 										<input name="rapperss_ch1" type="text" class="form-control" id="rapperss_ch1"
-											value="<?php echo $rcekR['rapperss_ch1']; ?>" placeholder="PASS/FAIL 1" readonly>
+											value="<?php echo $rcekR['rapperss_ch1']; ?>" placeholder="PASS/FAIL 1"
+											readonly>
 										<input name="rapperss_cc1" type="text" class="form-control" id="rapperss_cc1"
 											value="<?php echo $rcekR['rapperss_cc1']; ?>" placeholder="C.CHANGE 1" readonly>
 										<input name="rapperss_sf1" type="text" class="form-control" id="rapperss_sf1"
@@ -5288,7 +5442,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											value="<?php echo $rcekR['rapperss_pb2']; ?>" placeholder="PILLING BACK 2"
 											readonly>
 										<input name="rapperss_ch2" type="text" class="form-control" id="rapperss_ch2"
-											value="<?php echo $rcekR['rapperss_ch2']; ?>" placeholder="PASS/FAIL 2" readonly>
+											value="<?php echo $rcekR['rapperss_ch2']; ?>" placeholder="PASS/FAIL 2"
+											readonly>
 										<input name="rapperss_cc2" type="text" class="form-control" id="rapperss_cc2"
 											value="<?php echo $rcekR['rapperss_cc2']; ?>" placeholder="C.CHANGE 2" readonly>
 										<input name="rapperss_sf2" type="text" class="form-control" id="rapperss_sf2"
@@ -5306,7 +5461,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											value="<?php echo $rcekR['rapperss_pb3']; ?>" placeholder="PILLING BACK 3"
 											readonly>
 										<input name="rapperss_ch3" type="text" class="form-control" id="rapperss_ch3"
-											value="<?php echo $rcekR['rapperss_ch3']; ?>" placeholder="PASS/FAIL 3" readonly>
+											value="<?php echo $rcekR['rapperss_ch3']; ?>" placeholder="PASS/FAIL 3"
+											readonly>
 										<input name="rapperss_cc3" type="text" class="form-control" id="rapperss_cc3"
 											value="<?php echo $rcekR['rapperss_cc3']; ?>" placeholder="C.CHANGE 3" readonly>
 										<input name="rapperss_sf3" type="text" class="form-control" id="rapperss_sf3"
@@ -5324,7 +5480,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											value="<?php echo $rcekR['rapperss_pb4']; ?>" placeholder="PILLING BACK 4"
 											readonly>
 										<input name="rapperss_ch4" type="text" class="form-control" id="rapperss_ch4"
-											value="<?php echo $rcekR['rapperss_ch4']; ?>" placeholder="PASS/FAIL 4" readonly>
+											value="<?php echo $rcekR['rapperss_ch4']; ?>" placeholder="PASS/FAIL 4"
+											readonly>
 										<input name="rapperss_cc4" type="text" class="form-control" id="rapperss_cc4"
 											value="<?php echo $rcekR['rapperss_cc4']; ?>" placeholder="C.CHANGE 4" readonly>
 										<input name="rapperss_sf4" type="text" class="form-control" id="rapperss_sf4"
@@ -5402,7 +5559,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="R">R</option>
 											<option <?php if ($rcek1['stat_pm'] == "PASS") { ?> selected=selected <?php }
 											; ?>value="PASS">PASS</option>
-											<option <?php if ($rcek1['stat_pm'] == "MARGINAL PASS") { ?> selected=selected <?php }
+											<option <?php if ($rcek1['stat_pm'] == "MARGINAL PASS") { ?> selected=selected
+												<?php }
 											; ?>value="MARGINAL PASS">MARGINAL PASS</option>
 											<option <?php if ($rcek1['stat_pm'] == "DATA") { ?> selected=selected <?php }
 											; ?>value="DATA">DATA</option>
@@ -5447,7 +5605,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									</div>
 									<div class="col-sm-2">
 										<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-											name="dpillm_note" maxlength="50"><?php echo $rcekD['dpillm_note']; ?></textarea>
+											name="dpillm_note"
+											maxlength="50"><?php echo $rcekD['dpillm_note']; ?></textarea>
 									</div>
 								</div>
 								<div class="form-group" id="marpm" style="display:none;">
@@ -5484,7 +5643,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									</div>
 									<div class="col-sm-2">
 										<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-											name="mpillm_note" maxlength="50"><?php echo $rcekM['mpillm_note']; ?></textarea>
+											name="mpillm_note"
+											maxlength="50"><?php echo $rcekM['mpillm_note']; ?></textarea>
 									</div>
 								</div>
 								<div class="form-group" id="ranpm" style="display:none;">
@@ -5621,7 +5781,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									</div>
 									<div class="col-sm-2">
 										<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-											name="dpilll_note" maxlength="50"><?php echo $rcekD['dpilll_note']; ?></textarea>
+											name="dpilll_note"
+											maxlength="50"><?php echo $rcekD['dpilll_note']; ?></textarea>
 									</div>
 								</div>
 								<div class="form-group" id="ranpl" style="display:none;">
@@ -5711,7 +5872,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 											; ?>value="R">R</option>
 											<option <?php if ($rcek1['stat_pb'] == "PASS") { ?> selected=selected <?php }
 											; ?>value="PASS">PASS</option>
-											<option <?php if ($rcek1['stat_pb'] == "MARGINAL PASS") { ?> selected=selected <?php }
+											<option <?php if ($rcek1['stat_pb'] == "MARGINAL PASS") { ?> selected=selected
+												<?php }
 											; ?>value="MARGINAL PASS">MARGINAL PASS</option>
 											<option <?php if ($rcek1['stat_pb'] == "DATA") { ?> selected=selected <?php }
 											; ?>value="DATA">DATA</option>
@@ -5750,7 +5912,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								</div> -->
 									<div class="col-sm-2">
 										<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-											name="dpillb_note" maxlength="50"><?php echo $rcekD['dpillb_note']; ?></textarea>
+											name="dpillb_note"
+											maxlength="50"><?php echo $rcekD['dpillb_note']; ?></textarea>
 									</div>
 								</div>
 								<div class="form-group" id="marpb" style="display:none;">
@@ -5912,7 +6075,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									</div>
 									<div class="col-sm-2">
 										<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-											name="dpillr_note" maxlength="50"><?php echo $rcekD['dpillr_note']; ?></textarea>
+											name="dpillr_note"
+											maxlength="50"><?php echo $rcekD['dpillr_note']; ?></textarea>
 									</div>
 								</div>
 								<div class="form-group" id="ranprt" style="display:none;">
@@ -6051,7 +6215,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_sm" class="form-control select2" id="stat_sm" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_sm'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_sm'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -6197,7 +6362,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_sp" class="form-control select2" id="stat_sp" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_sp'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_sp'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -6363,7 +6529,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_sb" class="form-control select2" id="stat_sb" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_sb'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_sb'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -6450,15 +6617,18 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_bs2" class="form-control select2" id="stat_bs2" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_bs2'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_bs2'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
 									<option <?php if ($rcek1['stat_bs2'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
+									; ?>value="A">
+										A
 									</option>
 									<option <?php if ($rcek1['stat_bs2'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
+									; ?>value="R">
+										R
 									</option>
 									<option <?php if ($rcek1['stat_bs2'] == "PASS") { ?> selected=selected <?php }
 									; ?>value="PASS">PASS</option>
@@ -6521,15 +6691,18 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_bs3" class="form-control select2" id="stat_bs3" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_bs3'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_bs3'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
 									<option <?php if ($rcek1['stat_bs3'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
+									; ?>value="A">
+										A
 									</option>
 									<option <?php if ($rcek1['stat_bs3'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
+									; ?>value="R">
+										R
 									</option>
 									<option <?php if ($rcek1['stat_bs3'] == "PASS") { ?> selected=selected <?php }
 									; ?>value="PASS">PASS</option>
@@ -6579,7 +6752,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_bs" class="form-control select2" id="stat_bs" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_bs'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_bs'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -6669,7 +6843,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_th" class="form-control select2" id="stat_th" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_th'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_th'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -6746,7 +6921,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<label><input type="checkbox" name="load_stretch" id="load_stretch" class="minimal"
 										value="60" <?php if ($rcek1['load_stretch'] == '60') {
 											echo "checked";
-										} ?>> 60N &nbsp;
+										} ?>> 60N
+									&nbsp;
 									&nbsp; &nbsp; &nbsp;
 								</label>
 								<label><input type="checkbox" name="load_stretch" id="load_stretch" class="minimal"
@@ -6853,7 +7029,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_sr" class="form-control select2" id="stat_sr" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_sr'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_sr'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -6885,7 +7062,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<label><input type="checkbox" name="dload_stretch" id="dload_stretch" class="minimal"
 										value="60" <?php if ($rcekD['dload_stretch'] == '60') {
 											echo "checked";
-										} ?>> 60N &nbsp;
+										} ?>> 60N
+									&nbsp;
 									&nbsp; &nbsp; &nbsp;
 								</label>
 								<label><input type="checkbox" name="dload_stretch" id="dload_stretch" class="minimal"
@@ -6935,7 +7113,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<label><input type="checkbox" name="mload_stretch" id="mload_stretch" class="minimal"
 										value="60" <?php if ($rcekM['mload_stretch'] == '60') {
 											echo "checked";
-										} ?>> 60N &nbsp;
+										} ?>> 60N
+									&nbsp;
 									&nbsp; &nbsp; &nbsp;
 								</label>
 								<label><input type="checkbox" name="mload_stretch" id="mload_stretch" class="minimal"
@@ -6985,7 +7164,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<label><input type="checkbox" name="rload_stretch" id="rload_stretch" class="minimal"
 										value="60" <?php if ($rcekR['rload_stretch'] == '60') {
 											echo "checked";
-										} ?>> 60N &nbsp;
+										} ?>> 60N
+									&nbsp;
 									&nbsp; &nbsp; &nbsp;
 								</label>
 								<label><input type="checkbox" name="rload_stretch" id="rload_stretch" class="minimal"
@@ -7244,7 +7424,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_gr" class="form-control select2" id="stat_gr" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_gr'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_gr'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -7397,7 +7578,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_ap" class="form-control select2" id="stat_ap" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_ap'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_ap'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -7639,7 +7821,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_hs" class="form-control select2" id="stat_hs" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_hs'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_hs'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -7761,7 +7944,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_ff" class="form-control select2" id="stat_ff" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_ff'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_ff'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -7832,7 +8016,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_odour" class="form-control select2" id="stat_odour" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_odour'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_odour'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -7954,7 +8139,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<select name="stat_nedle" class="form-control select2" id="stat_nedle" onChange="tampil();"
 									style="width: 100%;">
 									<option <?php if ($rcek1['stat_nedle'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih
+									; ?>value="">
+										Pilih
 									</option>
 									<option <?php if ($rcek1['stat_nedle'] == "DISPOSISI") { ?> selected=selected <?php }
 									; ?>value="DISPOSISI">DISPOSISI</option>
@@ -7997,6 +8183,69 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							</div>
 						</div>
 						<!-- NEDLE END-->
+						<!-- WRINKLE BEGIN -->
+						<div class="form-group" id="fc31" style="display:none;">
+							<label for="wrinkle" class="col-sm-2 control-label">WRINKLE ORIGINAL</label>
+							<div class="col-sm-2">
+								<input name="wrinkle" type="text" class="form-control" id="wrinkle"
+									value="<?php echo $tq_test_2_array['wrinkle']; ?>" placeholder="Before Wash">
+							</div>
+							<div class="col-sm-2">
+								<select name="stat_wrinkle" class="form-control select2" id="stat_wrinkle"
+									onChange="tampil();" style="width: 100%;">
+									<option <?php if ($tq_test_2_array['stat_wrinkle'] == "") { ?> selected=selected <?php }
+									; ?>value="">Pilih</option>
+									<!-- <option <?php //if($tq_test_2_array['stat_wrinkle']=="DISPOSISI"){       ?> selected=selected <?php //};       ?>value="DISPOSISI">DISPOSISI</option> -->
+									<option <?php if ($tq_test_2_array['stat_wrinkle'] == "A") { ?> selected=selected <?php }
+									; ?>value="A">A</option>
+									<option <?php if ($tq_test_2_array['stat_wrinkle'] == "R") { ?> selected=selected <?php }
+									; ?>value="R">R</option>
+									<option <?php if ($tq_test_2_array['stat_wrinkle'] == "PASS") { ?> selected=selected <?php }
+									; ?>value="PASS">PASS</option>
+									<option <?php if ($tq_test_2_array['stat_wrinkle'] == "FAIL") { ?> selected=selected <?php }
+									; ?>value="FAIL">FAIL</option>
+									<!-- <option <?php //if($tq_test_2_array['stat_wrinkle']=="RANDOM"){       ?> selected=selected <?php //};       ?>value="RANDOM">RANDOM</option> -->
+								</select>
+							</div>
+							<div class="col-sm-2">
+								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+									name="wrinkle_note" maxlength="50"
+									rows="1"><?php echo $tq_test_2_array['wrinkle_note']; ?></textarea>
+							</div>
+						</div>
+
+						<div class="form-group" id="fc32" style="display:none;">
+							<label for="waterr" class="col-sm-2 control-label">WRINKLE AFTERWASH</label>
+							<div class="col-sm-2">
+								<input name="wrinkle1" type="text" class="form-control" id="wrinkle1"
+									value="<?php echo $tq_test_2_array['wrinkle1']; ?>" placeholder="After Wash">
+							</div>
+							<div class="col-sm-2">
+								<input name="wrinkle2" type="text" class="form-control" id="wrinkle2"
+									value="<?php echo $tq_test_2_array['wrinkle2']; ?>" placeholder="After Wash">
+							</div>
+							<div class="col-sm-2">
+								<select name="stat_wrinkle1" class="form-control select2" id="stat_wrinkle1"
+									onChange="tampil();" style="width: 100%;">
+									<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "") { ?> selected=selected <?php }
+									; ?>value="">Pilih</option>
+									<!-- <option <?php //if($tq_test_2_array['stat_wrinkle1']=="DISPOSISI"){       ?> selected=selected <?php //};       ?>value="DISPOSISI">DISPOSISI</option> -->
+									<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "A") { ?> selected=selected <?php }
+									; ?>value="A">A</option>
+									<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "R") { ?> selected=selected <?php }
+									; ?>value="R">R</option>
+									<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "PASS") { ?> selected=selected
+										<?php }
+									; ?>value="PASS">PASS</option>
+									<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "FAIL") { ?> selected=selected
+										<?php }
+									; ?>value="FAIL">FAIL</option>
+									<!-- <option <?php //if($tq_test_2_array['stat_wrinkle1']=="RANDOM"){       ?> selected=selected <?php //};       ?>value="RANDOM">RANDOM</option> -->
+								</select>
+							</div>
+						</div>
+
+						<!-- WRINKLE END -->
 						<div class="form-group">
 							<?php if ($notes != "") { ?>
 								<button type="submit" class="btn btn-primary pull-right" name="physical_save" value="save"><i
@@ -8034,7 +8283,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									<label><input type="checkbox" name="wash_temp" id="wash_temp" class="minimal" value="30"
 											<?php if ($rcek1['wash_temp'] == '30') {
 												echo "checked";
-											} ?>> 30&deg;C &nbsp; &nbsp;
+											} ?>> 30&deg;C &nbsp;
+										&nbsp;
 										&nbsp; &nbsp;
 									</label>
 									<label><input type="checkbox" name="wash_temp" id="wash_temp" class="minimal" value="40"
@@ -8113,13 +8363,15 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									<label><input type="checkbox" name="dwash_temp" id="dwash_temp" class="minimal"
 											value="30" <?php if ($rcekD['dwash_temp'] == '30') {
 												echo "checked";
-											} ?>> 30&deg;C
+											} ?>>
+										30&deg;C
 										&nbsp; &nbsp; &nbsp; &nbsp;
 									</label>
 									<label><input type="checkbox" name="dwash_temp" id="dwash_temp" class="minimal"
 											value="40" <?php if ($rcekD['dwash_temp'] == '40') {
 												echo "checked";
-											} ?>> 40&deg;C
+											} ?>>
+										40&deg;C
 									</label>
 								</div>
 								<div class="col-sm-2">
@@ -8158,13 +8410,15 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									<label><input type="checkbox" name="mwash_temp" id="mwash_temp" class="minimal"
 											value="30" <?php if ($rcekM['mwash_temp'] == '30') {
 												echo "checked";
-											} ?>> 30&deg;C
+											} ?>>
+										30&deg;C
 										&nbsp; &nbsp; &nbsp; &nbsp;
 									</label>
 									<label><input type="checkbox" name="mwash_temp" id="mwash_temp" class="minimal"
 											value="40" <?php if ($rcekM['mwash_temp'] == '40') {
 												echo "checked";
-											} ?>> 40&deg;C
+											} ?>>
+										40&deg;C
 									</label>
 								</div>
 								<div class="col-sm-2">
@@ -8203,13 +8457,15 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									<label><input type="checkbox" name="rwash_temp" id="rwash_temp" class="minimal"
 											value="30" <?php if ($rcekR['rwash_temp'] == '30') {
 												echo "checked";
-											} ?> readonly>
+											} ?>
+											readonly>
 										30&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
 									</label>
 									<label><input type="checkbox" name="rwash_temp" id="rwash_temp" class="minimal"
 											value="40" <?php if ($rcekR['rwash_temp'] == '40') {
 												echo "checked";
-											} ?> readonly>
+											} ?>
+											readonly>
 										40&deg;C
 									</label>
 								</div>
@@ -8946,8 +9202,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<label for="cm_printing" class="col-sm-2 control-label">COLOR MIGRATION - OVEN TEST</label>
 								<div class="col-sm-2">
 									<input name="cm_printing_colorchange" type="text" class="form-control"
-										id="cm_printing_colorchange" value="<?php echo $rcek1['cm_printing_colorchange']; ?>"
-										placeholder="Grade">
+										id="cm_printing_colorchange"
+										value="<?php echo $rcek1['cm_printing_colorchange']; ?>" placeholder="Grade">
 								</div>
 								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
@@ -9161,13 +9417,15 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									<label><input type="checkbox" name="cm_dye_temp" id="cm_dye_temp" class="minimal"
 											value="90" <?php if ($rcek1['cm_dye_temp'] == '90') {
 												echo "checked";
-											} ?>> 90&deg;C x
+											} ?>>
+										90&deg;C x
 										24h &nbsp; &nbsp; &nbsp; &nbsp;
 									</label>
 									<label><input type="checkbox" name="cm_dye_temp" id="cm_dye_temp" class="minimal"
 											value="70" <?php if ($rcek1['cm_dye_temp'] == '70') {
 												echo "checked";
-											} ?>> 70&deg;C x
+											} ?>>
+										70&deg;C x
 										48h
 									</label>
 								</div>
@@ -9222,13 +9480,15 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									<label><input type="checkbox" name="dcm_dye_temp" id="dcm_dye_temp" class="minimal"
 											value="90" <?php if ($rcekD['dcm_dye_temp'] == '90') {
 												echo "checked";
-											} ?>> 90&deg;C x
+											} ?>>
+										90&deg;C x
 										24h &nbsp; &nbsp; &nbsp; &nbsp;
 									</label>
 									<label><input type="checkbox" name="dcm_dye_temp" id="dcm_dye_temp" class="minimal"
 											value="70" <?php if ($rcekD['dcm_dye_temp'] == '70') {
 												echo "checked";
-											} ?>> 70&deg;C x
+											} ?>>
+										70&deg;C x
 										48h
 									</label>
 								</div>
@@ -9258,13 +9518,15 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									<label><input type="checkbox" name="rcm_dye_temp" id="rcm_dye_temp" class="minimal"
 											value="90" <?php if ($rcekR['rcm_dye_temp'] == '90') {
 												echo "checked";
-											} ?> readonly>
+											} ?>
+											readonly>
 										90&deg;C x 24h &nbsp; &nbsp; &nbsp; &nbsp;
 									</label>
 									<label><input type="checkbox" name="rcm_dye_temp" id="rcm_dye_temp" class="minimal"
 											value="70" <?php if ($rcekR['rcm_dye_temp'] == '70') {
 												echo "checked";
-											} ?> readonly>
+											} ?>
+											readonly>
 										70&deg;C x 48h
 									</label>
 								</div>
@@ -9440,7 +9702,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<label for="dislp" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS (DIS)</label>
 								<div class="col-sm-2">
 									<input name="dlight_pers_colorchange" type="text" class="form-control"
-										id="dlight_pers_colorchange" value="<?php echo $rcekD['dlight_pers_colorchange']; ?>"
+										id="dlight_pers_colorchange"
+										value="<?php echo $rcekD['dlight_pers_colorchange']; ?>"
 										placeholder="3-4 Color Change">
 								</div>
 								<div class="col-sm-2">
@@ -9454,7 +9717,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									(MARGINAL)</label>
 								<div class="col-sm-2">
 									<input name="mlight_pers_colorchange" type="text" class="form-control"
-										id="mlight_pers_colorchange" value="<?php echo $rcekM['mlight_pers_colorchange']; ?>"
+										id="mlight_pers_colorchange"
+										value="<?php echo $rcekM['mlight_pers_colorchange']; ?>"
 										placeholder="3-4 Color Change">
 								</div>
 								<div class="col-sm-2">
@@ -9467,7 +9731,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<label for="ranlp" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS (RAN)</label>
 								<div class="col-sm-2">
 									<input name="rlight_pers_colorchange" type="text" class="form-control"
-										id="rlight_pers_colorchange" value="<?php echo $rcekR['rlight_pers_colorchange']; ?>"
+										id="rlight_pers_colorchange"
+										value="<?php echo $rcekR['rlight_pers_colorchange']; ?>"
 										placeholder="3-4 Color Change" readonly>
 								</div>
 								<div class="col-sm-2">
@@ -11068,7 +11333,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th colspan="2" style="width:50%">Flamability</th>
 								<td colspan="6">
-									<?php //if($rcek1['stat_fla']=="RANDOM"){echo $rcekR['rflamability'];}else{echo $rcek1['flamability'];} ?>
+									<?php //if($rcek1['stat_fla']=="RANDOM"){echo $rcekR['rflamability'];}else{echo $rcek1['flamability'];}  ?>
 									<?php if ($rcek1['flamability'] != "") {
 										echo $rcek1['flamability'];
 									} else {
@@ -11081,7 +11346,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 			  <tr>
 				<th colspan="2">Fiber Content</th>
 				<td colspan="6">
-				<?php //if($rcek1['stat_fib']=="RANDOM"){echo $rcekR['rfibercontent'];}else{echo $rcek1['fibercontent'];} ?>
+				<?php //if($rcek1['stat_fib']=="RANDOM"){echo $rcekR['rfibercontent'];}else{echo $rcek1['fibercontent'];}  ?>
 				<?php if ($rcek1['fibercontent'] != "") {
 					echo $rcek1['fibercontent'];
 				} else {
@@ -11147,14 +11412,14 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<th colspan="2">Fabric Count</th>
 								<td colspan="6">
 									W:
-									<?php //if($rcek1['stat_fc']=="RANDOM"){echo $rcekR['rfc_wpi'];}else{echo $rcek1['fc_wpi'];} ?>
+									<?php //if($rcek1['stat_fc']=="RANDOM"){echo $rcekR['rfc_wpi'];}else{echo $rcek1['fc_wpi'];}  ?>
 									<?php if ($rcek1['fc_wpi'] != "") {
 										echo $rcek1['fc_wpi'];
 									} else {
 										echo $rcekR['rfc_wpi'];
 									} ?>
 									C:
-									<?php //if($rcek1['stat_fc']=="RANDOM"){echo $rcekR['rfc_cpi'];}else{echo $rcek1['fc_cpi'];} ?>
+									<?php //if($rcek1['stat_fc']=="RANDOM"){echo $rcekR['rfc_cpi'];}else{echo $rcek1['fc_cpi'];}  ?>
 									<?php if ($rcek1['fc_cpi'] != "") {
 										echo $rcek1['fc_cpi'];
 									} else {
@@ -11167,7 +11432,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th colspan="2">Fabric Weight</th>
 								<td colspan="6">
-									<?php //if($rcek1['stat_fwss2']=="RANDOM"){echo $rcekR['rf_weight'];}else{echo $rcek1['f_weight'];} ?>
+									<?php //if($rcek1['stat_fwss2']=="RANDOM"){echo $rcekR['rf_weight'];}else{echo $rcek1['f_weight'];}  ?>
 									<?php if ($rcek1['f_weight'] != "") {
 										echo $rcek1['f_weight'];
 									} else {
@@ -11180,7 +11445,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th colspan="2">Fabric Width</th>
 								<td colspan="6">
-									<?php //if($rcek1['stat_fwss3']=="RANDOM"){echo $rcekR['rf_width'];}else{echo $rcek1['f_width'];} ?>
+									<?php //if($rcek1['stat_fwss3']=="RANDOM"){echo $rcekR['rf_width'];}else{echo $rcek1['f_width'];}  ?>
 									<?php if ($rcek1['f_width'] != "") {
 										echo $rcek1['f_width'];
 									} else {
@@ -11198,13 +11463,13 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rbow'];
 									}
-									//if($rcek1['stat_bsk']=="RANDOM"){echo $rcekR['rbow'];}else{echo $rcek1['bow'];} ?> &amp;
+									//if($rcek1['stat_bsk']=="RANDOM"){echo $rcekR['rbow'];}else{echo $rcek1['bow'];}  ?> &amp;
 									<?php if ($rcek1['skew'] != "") {
 										echo $rcek1['skew'];
 									} else {
 										echo $rcekR['rskew'];
 									}
-									//if($rcek1['stat_bsk']=="RANDOM"){echo $rcekR['rskew'];}else{echo $rcek1['skew'];} ?>
+									//if($rcek1['stat_bsk']=="RANDOM"){echo $rcekR['rskew'];}else{echo $rcek1['skew'];}  ?>
 								</td>
 							</tr>
 						<?php } ?>
@@ -11212,7 +11477,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th colspan="2">Suhu Shrinkage Spirality</th>
 								<td colspan="6">
-									<?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rss_temp'];}else{echo $rcek1['ss_temp'];} ?>
+									<?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rss_temp'];}else{echo $rcek1['ss_temp'];}  ?>
 									<?php if ($rcek1['ss_temp'] != "") {
 										echo $rcek1['ss_temp'];
 									} else {
@@ -11225,7 +11490,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th colspan="2">Washes Shrinkage Spirality</th>
 								<td colspan="6">
-									<?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rss_washes'];}else{echo $rcek1['ss_washes'];} ?>
+									<?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rss_washes'];}else{echo $rcek1['ss_washes'];}  ?>
 									<?php if ($rcek1['ss_washes'] != "") {
 										echo $rcek1['ss_washes'];
 									} else {
@@ -11237,7 +11502,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['shrinkage_l1'] != "" or $rcek1['shrinkage_l2'] != "" or $rcek1['shrinkage_l3'] != "" or $rcek1['shrinkage_l4'] != "") { ?>
 							<tr>
 								<th colspan="2">Shrinkage Length</th>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l1'];}else{echo $rcek1['shrinkage_l1'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l1'];}else{echo $rcek1['shrinkage_l1'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['shrinkage_l1'] != "") {
 										echo $rcek1['shrinkage_l1'];
@@ -11245,7 +11510,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										echo $rcekR['rshrinkage_l1'];
 									} ?>
 								</td>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l2'];}else{echo $rcek1['shrinkage_l2'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l2'];}else{echo $rcek1['shrinkage_l2'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['shrinkage_l2'] != "") {
 										echo $rcek1['shrinkage_l2'];
@@ -11253,7 +11518,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										echo $rcekR['rshrinkage_l2'];
 									} ?>
 								</td>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l3'];}else{echo $rcek1['shrinkage_l3'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l3'];}else{echo $rcek1['shrinkage_l3'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['shrinkage_l3'] != "") {
 										echo $rcek1['shrinkage_l3'];
@@ -11261,7 +11526,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										echo $rcekR['rshrinkage_l3'];
 									} ?>
 								</td>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l4'];}else{echo $rcek1['shrinkage_l4'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l4'];}else{echo $rcek1['shrinkage_l4'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['shrinkage_l4'] != "") {
 										echo $rcek1['shrinkage_l4'];
@@ -11269,7 +11534,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										echo $rcekR['rshrinkage_l4'];
 									} ?>
 								</td>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l5'];}else{echo $rcek1['shrinkage_l5'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l5'];}else{echo $rcek1['shrinkage_l5'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['shrinkage_l5'] != "") {
 										echo $rcek1['shrinkage_l5'];
@@ -11277,7 +11542,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										echo $rcekR['rshrinkage_l5'];
 									} ?>
 								</td>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l6'];}else{echo $rcek1['shrinkage_l6'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_l6'];}else{echo $rcek1['shrinkage_l6'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['shrinkage_l6'] != "") {
 										echo $rcek1['shrinkage_l6'];
@@ -11290,12 +11555,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['shrinkage_w1'] != "" or $rcek1['shrinkage_w2'] != "" or $rcek1['shrinkage_w3'] != "" or $rcek1['shrinkage_w4'] != "") { ?>
 							<tr>
 								<th colspan="2">Shrinkage Width</th>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w1'];}else{echo $rcek1['shrinkage_w1'];} ?></td>
-				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w2'];}else{echo $rcek1['shrinkage_w2'];} ?></td>
-				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w3'];}else{echo $rcek1['shrinkage_w3'];} ?></td>
-				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w4'];}else{echo $rcek1['shrinkage_w4'];} ?></td>
-				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w5'];}else{echo $rcek1['shrinkage_w5'];} ?></td>
-				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w6'];}else{echo $rcek1['shrinkage_w6'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w1'];}else{echo $rcek1['shrinkage_w1'];}  ?></td>
+				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w2'];}else{echo $rcek1['shrinkage_w2'];}  ?></td>
+				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w3'];}else{echo $rcek1['shrinkage_w3'];}  ?></td>
+				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w4'];}else{echo $rcek1['shrinkage_w4'];}  ?></td>
+				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w5'];}else{echo $rcek1['shrinkage_w5'];}  ?></td>
+				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rshrinkage_w6'];}else{echo $rcek1['shrinkage_w6'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['shrinkage_w1'] != "") {
@@ -11344,12 +11609,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['spirality1'] != "" or $rcek1['spirality2'] != "" or $rcek1['spirality3'] != "" or $rcek1['spirality4'] != "") { ?>
 							<tr>
 								<th colspan="2">Spirality</th>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality1'];}else{echo $rcek1['spirality1'];} ?></td>
-				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality2'];}else{echo $rcek1['spirality2'];} ?></td>
-				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality3'];}else{echo $rcek1['spirality3'];} ?></td>
-				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality4'];}else{echo $rcek1['spirality4'];} ?></td>
-				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality5'];}else{echo $rcek1['spirality5'];} ?></td>
-				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality6'];}else{echo $rcek1['spirality6'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality1'];}else{echo $rcek1['spirality1'];}  ?></td>
+				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality2'];}else{echo $rcek1['spirality2'];}  ?></td>
+				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality3'];}else{echo $rcek1['spirality3'];}  ?></td>
+				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality4'];}else{echo $rcek1['spirality4'];}  ?></td>
+				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality5'];}else{echo $rcek1['spirality5'];}  ?></td>
+				<td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rspirality6'];}else{echo $rcek1['spirality6'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['spirality1'] != "") {
@@ -11400,7 +11665,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<th>Apperance</th>
 								<th>&nbsp;</th>
 								<td>
-									<?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_ch1'];}else{echo $rcek1['apperss_ch1'];} ?>
+									<?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_ch1'];}else{echo $rcek1['apperss_ch1'];}  ?>
 									<?php if ($rcek1['apperss_ch1'] != "") {
 										echo $rcek1['apperss_ch1'];
 									} else {
@@ -11408,7 +11673,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td>
-									<?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_ch2'];}else{echo $rcek1['apperss_ch2'];} ?>
+									<?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_ch2'];}else{echo $rcek1['apperss_ch2'];}  ?>
 									<?php if ($rcek1['apperss_ch2'] != "") {
 										echo $rcek1['apperss_ch2'];
 									} else {
@@ -11416,7 +11681,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td>
-									<?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_ch3'];}else{echo $rcek1['apperss_ch3'];} ?>
+									<?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_ch3'];}else{echo $rcek1['apperss_ch3'];}  ?>
 									<?php if ($rcek1['apperss_ch3'] != "") {
 										echo $rcek1['apperss_ch3'];
 									} else {
@@ -11434,7 +11699,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th>Colorchange</th>
 								<th>&nbsp;</th>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_cc1'];}else{echo $rcek1['apperss_cc1'];} ?> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_cc1'];}else{echo $rcek1['apperss_cc1'];}  ?> -->
 								<td>
 									<?php if ($rcek1['apperss_cc1'] != "") {
 										echo $rcek1['apperss_cc1'];
@@ -11442,7 +11707,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										echo $rcekR['rapperss_cc1'];
 									} ?>
 								</td>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_cc2'];}else{echo $rcek1['apperss_cc2'];} ?> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_cc2'];}else{echo $rcek1['apperss_cc2'];}  ?> -->
 								<td>
 									<?php if ($rcek1['apperss_cc2'] != "") {
 										echo $rcek1['apperss_cc2'];
@@ -11450,7 +11715,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										echo $rcekR['rapperss_cc2'];
 									} ?>
 								</td>
-								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_cc3'];}else{echo $rcek1['apperss_cc3'];} ?> -->
+								<!-- <td><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_cc3'];}else{echo $rcek1['apperss_cc3'];}  ?> -->
 								<td>
 									<?php if ($rcek1['apperss_cc3'] != "") {
 										echo $rcek1['apperss_cc3'];
@@ -11458,7 +11723,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										echo $rcekR['rapperss_cc3'];
 									} ?>
 								</td>
-								<!-- <td colspan="3"><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_cc4'];}else{echo $rcek1['apperss_cc4'];} ?> -->
+								<!-- <td colspan="3"><?php //if($rcek1['stat_fwss']=="RANDOM"){echo $rcekR['rapperss_cc4'];}else{echo $rcek1['apperss_cc4'];}  ?> -->
 								<td colspan="3">
 									<?php if ($rcek1['apperss_cc4'] != "") {
 										echo $rcek1['apperss_cc4'];
@@ -11472,11 +11737,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th rowspan="2">Pilling Martindle</th>
 								<th>Face</th>
-								<!-- <td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_f1'];}else{echo $rcek1['pm_f1'];} ?></td>
-				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_f2'];}else{echo $rcek1['pm_f2'];} ?></td>
-				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_f3'];}else{echo $rcek1['pm_f3'];} ?></td>
-				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_f4'];}else{echo $rcek1['pm_f4'];} ?></td>
-				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_f5'];}else{echo $rcek1['pm_f5'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_f1'];}else{echo $rcek1['pm_f1'];}  ?></td>
+				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_f2'];}else{echo $rcek1['pm_f2'];}  ?></td>
+				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_f3'];}else{echo $rcek1['pm_f3'];}  ?></td>
+				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_f4'];}else{echo $rcek1['pm_f4'];}  ?></td>
+				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_f5'];}else{echo $rcek1['pm_f5'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['pm_f1'] != "") {
@@ -11519,11 +11784,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['pm_b1'] != "" or $rcek1['pm_b2'] != "" or $rcek1['pm_b3'] != "" or $rcek1['pm_b4'] != "" or $rcek1['pm_b5'] != "" or $rcek1['pm_f1'] != "") { ?>
 							<tr>
 								<th>Back</th>
-								<!-- <td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_b1'];}else{echo $rcek1['pm_b1'];} ?></td>
-				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_b2'];}else{echo $rcek1['pm_b2'];} ?></td>
-				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_b3'];}else{echo $rcek1['pm_b3'];} ?></td>
-				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_b4'];}else{echo $rcek1['pm_b4'];} ?></td>
-				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_b5'];}else{echo $rcek1['pm_b5'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_b1'];}else{echo $rcek1['pm_b1'];}  ?></td>
+				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_b2'];}else{echo $rcek1['pm_b2'];}  ?></td>
+				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_b3'];}else{echo $rcek1['pm_b3'];}  ?></td>
+				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_b4'];}else{echo $rcek1['pm_b4'];}  ?></td>
+				<td><?php //if($rcek1['stat_pm']=="RANDOM"){echo $rcekR['rpm_b5'];}else{echo $rcek1['pm_b5'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['pm_b1'] != "") {
@@ -11567,11 +11832,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th rowspan="2">Pilling Locus</th>
 								<th>Face</th>
-								<!-- <td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_f1'];}else{echo $rcek1['pl_f1'];} ?></td>
-				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_f2'];}else{echo $rcek1['pl_f2'];} ?></td>
-				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_f3'];}else{echo $rcek1['pl_f3'];} ?></td>
-				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_f4'];}else{echo $rcek1['pl_f4'];} ?></td>
-				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_f5'];}else{echo $rcek1['pl_f5'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_f1'];}else{echo $rcek1['pl_f1'];}  ?></td>
+				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_f2'];}else{echo $rcek1['pl_f2'];}  ?></td>
+				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_f3'];}else{echo $rcek1['pl_f3'];}  ?></td>
+				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_f4'];}else{echo $rcek1['pl_f4'];}  ?></td>
+				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_f5'];}else{echo $rcek1['pl_f5'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['pl_f1'] != "") {
@@ -11614,11 +11879,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['pl_b1'] != "" or $rcek1['pl_b2'] != "" or $rcek1['pl_b3'] != "" or $rcek1['pl_b4'] != "" or $rcek1['pl_b5'] != "" or $rcek1['pl_f1'] != "") { ?>
 							<tr>
 								<th>Back</th>
-								<!-- <td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_b1'];}else{echo $rcek1['pl_b1'];} ?></td>
-				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_b2'];}else{echo $rcek1['pl_b2'];} ?></td>
-				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_b3'];}else{echo $rcek1['pl_b3'];} ?></td>
-				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_b4'];}else{echo $rcek1['pl_b4'];} ?></td>
-				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_b5'];}else{echo $rcek1['pl_b5'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_b1'];}else{echo $rcek1['pl_b1'];}  ?></td>
+				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_b2'];}else{echo $rcek1['pl_b2'];}  ?></td>
+				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_b3'];}else{echo $rcek1['pl_b3'];}  ?></td>
+				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_b4'];}else{echo $rcek1['pl_b4'];}  ?></td>
+				<td><?php //if($rcek1['stat_pl']=="RANDOM"){echo $rcekR['rpl_b5'];}else{echo $rcek1['pl_b5'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['pl_b1'] != "") {
@@ -11662,11 +11927,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th rowspan="2">Pilling Box</th>
 								<th>Face</th>
-								<!-- <td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_f1'];}else{echo $rcek1['pb_f1'];} ?></td>
-				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_f2'];}else{echo $rcek1['pb_f2'];} ?></td>
-				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_f3'];}else{echo $rcek1['pb_f3'];} ?></td>
-				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_f4'];}else{echo $rcek1['pb_f4'];} ?></td>
-				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_f5'];}else{echo $rcek1['pb_f5'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_f1'];}else{echo $rcek1['pb_f1'];}  ?></td>
+				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_f2'];}else{echo $rcek1['pb_f2'];}  ?></td>
+				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_f3'];}else{echo $rcek1['pb_f3'];}  ?></td>
+				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_f4'];}else{echo $rcek1['pb_f4'];}  ?></td>
+				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_f5'];}else{echo $rcek1['pb_f5'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['pb_f1'] != "") {
@@ -11709,11 +11974,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['pb_b1'] != "" or $rcek1['pb_b2'] != "" or $rcek1['pb_b3'] != "" or $rcek1['pb_b4'] != "" or $rcek1['pb_b5'] != "") { ?>
 							<tr>
 								<th>Back</th>
-								<!-- <td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_b1'];}else{echo $rcek1['pb_b1'];} ?></td>
-				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_b2'];}else{echo $rcek1['pb_b2'];} ?></td>
-				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_b3'];}else{echo $rcek1['pb_b3'];} ?></td>
-				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_b4'];}else{echo $rcek1['pb_b4'];} ?></td>
-				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_b5'];}else{echo $rcek1['pb_b5'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_b1'];}else{echo $rcek1['pb_b1'];}  ?></td>
+				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_b2'];}else{echo $rcek1['pb_b2'];}  ?></td>
+				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_b3'];}else{echo $rcek1['pb_b3'];}  ?></td>
+				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_b4'];}else{echo $rcek1['pb_b4'];}  ?></td>
+				<td><?php //if($rcek1['stat_pb']=="RANDOM"){echo $rcekR['rpb_b5'];}else{echo $rcek1['pb_b5'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['pb_b1'] != "") {
@@ -11757,11 +12022,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th rowspan="2">Pilling Random Tumbler</th>
 								<th>Face</th>
-								<!-- <td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_f1'];}else{echo $rcek1['prt_f1'];} ?></td>
-				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_f2'];}else{echo $rcek1['prt_f2'];} ?></td>
-				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_f3'];}else{echo $rcek1['prt_f3'];} ?></td>
-				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_f4'];}else{echo $rcek1['prt_f4'];} ?></td>
-				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_f5'];}else{echo $rcek1['prt_f5'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_f1'];}else{echo $rcek1['prt_f1'];}  ?></td>
+				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_f2'];}else{echo $rcek1['prt_f2'];}  ?></td>
+				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_f3'];}else{echo $rcek1['prt_f3'];}  ?></td>
+				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_f4'];}else{echo $rcek1['prt_f4'];}  ?></td>
+				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_f5'];}else{echo $rcek1['prt_f5'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['prt_f1'] != "") {
@@ -11804,11 +12069,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['prt_f1'] != "" or $rcek1['prt_b1'] != "" or $rcek1['prt_b2'] != "" or $rcek1['prt_b3'] != "" or $rcek1['prt_b4'] != "" or $rcek1['prt_b5'] != "") { ?>
 							<tr>
 								<th>Back</th>
-								<!-- <td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_b1'];}else{echo $rcek1['prt_b1'];} ?></td>
-				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_b2'];}else{echo $rcek1['prt_b2'];} ?></td>
-				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_b3'];}else{echo $rcek1['prt_b3'];} ?></td>
-				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_b4'];}else{echo $rcek1['prt_b4'];} ?></td>
-				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_b5'];}else{echo $rcek1['prt_b5'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_b1'];}else{echo $rcek1['prt_b1'];}  ?></td>
+				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_b2'];}else{echo $rcek1['prt_b2'];}  ?></td>
+				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_b3'];}else{echo $rcek1['prt_b3'];}  ?></td>
+				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_b4'];}else{echo $rcek1['prt_b4'];}  ?></td>
+				<td><?php //if($rcek1['stat_prt']=="RANDOM"){echo $rcekR['rprt_b5'];}else{echo $rcek1['prt_b5'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['prt_b1'] != "") {
@@ -11852,7 +12117,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th colspan="2">Abration</th>
 								<td colspan="6">
-									<?php //if($rcek1['stat_abr']=="RANDOM"){echo $rcekR['rabration'];}else{echo $rcek1['abration'];} ?>
+									<?php //if($rcek1['stat_abr']=="RANDOM"){echo $rcekR['rabration'];}else{echo $rcek1['abration'];}  ?>
 									<?php if ($rcek1['abration'] != "RANDOM") {
 										echo $rcek1['abration'];
 									} else {
@@ -11865,10 +12130,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th rowspan="2">Snagging Mace</th>
 								<th>Len</th>
-								<!-- <td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_l1'];}else{echo $rcek1['sm_l1'];} ?></td>
-				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_l2'];}else{echo $rcek1['sm_l2'];} ?></td>
-				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_l3'];}else{echo $rcek1['sm_l3'];} ?></td>
-				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_l4'];}else{echo $rcek1['sm_l4'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_l1'];}else{echo $rcek1['sm_l1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_l2'];}else{echo $rcek1['sm_l2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_l3'];}else{echo $rcek1['sm_l3'];}  ?></td>
+				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_l4'];}else{echo $rcek1['sm_l4'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['sm_l1'] != "") {
@@ -11905,10 +12170,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['sm_w1'] != "" or $rcek1['sm_w2'] != "" or $rcek1['sm_w3'] != "" or $rcek1['sm_w4'] != "") { ?>
 							<tr>
 								<th>Wid</th>
-								<!-- <td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_w1'];}else{echo $rcek1['sm_w1'];} ?></td>
-				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_w2'];}else{echo $rcek1['sm_w2'];} ?></td>
-				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_w3'];}else{echo $rcek1['sm_w3'];} ?></td>
-				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_w4'];}else{echo $rcek1['sm_w4'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_w1'];}else{echo $rcek1['sm_w1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_w2'];}else{echo $rcek1['sm_w2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_w3'];}else{echo $rcek1['sm_w3'];}  ?></td>
+				<td><?php //if($rcek1['stat_sm']=="RANDOM"){echo $rcekR['rsm_w4'];}else{echo $rcek1['sm_w4'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['sm_w1'] != "") {
@@ -11979,11 +12244,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['sp_grdl1'] != "" or $rcek1['sp_clsl1'] != "" or $rcek1['sp_shol1'] != "" or $rcek1['sp_medl1'] != "" or $rcek1['sp_lonl1'] != "") { ?>
 							<tr>
 								<th>L1</th>
-								<!-- <td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_grdl1'];}else{echo $rcek1['sp_grdl1'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_clsl1'];}else{echo $rcek1['sp_clsl1'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_shol1'];}else{echo $rcek1['sp_shol1'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_medl1'];}else{echo $rcek1['sp_medl1'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_lonl1'];}else{echo $rcek1['sp_lonl1'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_grdl1'];}else{echo $rcek1['sp_grdl1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_clsl1'];}else{echo $rcek1['sp_clsl1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_shol1'];}else{echo $rcek1['sp_shol1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_medl1'];}else{echo $rcek1['sp_medl1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_lonl1'];}else{echo $rcek1['sp_lonl1'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['sp_grdl1'] != "") {
@@ -12026,11 +12291,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['sp_grdl2'] != "" or $rcek1['sp_clsl2'] != "" or $rcek1['sp_shol2'] != "" or $rcek1['sp_medl2'] != "" or $rcek1['sp_lonl2'] != "") { ?>
 							<tr>
 								<th>L2</th>
-								<!-- <td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_grdl2'];}else{echo $rcek1['sp_grdl2'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_clsl2'];}else{echo $rcek1['sp_clsl2'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_shol2'];}else{echo $rcek1['sp_shol2'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_medl2'];}else{echo $rcek1['sp_medl2'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_lonl2'];}else{echo $rcek1['sp_lonl2'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_grdl2'];}else{echo $rcek1['sp_grdl2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_clsl2'];}else{echo $rcek1['sp_clsl2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_shol2'];}else{echo $rcek1['sp_shol2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_medl2'];}else{echo $rcek1['sp_medl2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_lonl2'];}else{echo $rcek1['sp_lonl2'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['sp_grdl2'] != "") {
@@ -12073,11 +12338,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['sp_grdw1'] != "" or $rcek1['sp_clsw1'] != "" or $rcek1['sp_show1'] != "" or $rcek1['sp_medw1'] != "" or $rcek1['sp_lonw1'] != "") { ?>
 							<tr>
 								<th>W1</th>
-								<!-- <td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_grdw1'];}else{echo $rcek1['sp_grdw1'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_clsw1'];}else{echo $rcek1['sp_clsw1'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_show1'];}else{echo $rcek1['sp_show1'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_medw1'];}else{echo $rcek1['sp_medw1'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_lonw1'];}else{echo $rcek1['sp_lonw1'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_grdw1'];}else{echo $rcek1['sp_grdw1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_clsw1'];}else{echo $rcek1['sp_clsw1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_show1'];}else{echo $rcek1['sp_show1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_medw1'];}else{echo $rcek1['sp_medw1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_lonw1'];}else{echo $rcek1['sp_lonw1'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['sp_grdw1'] != "") {
@@ -12120,11 +12385,11 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['sp_grdw2'] != "" or $rcek1['sp_clsw2'] != "" or $rcek1['sp_show2'] != "" or $rcek1['sp_medw2'] != "" or $rcek1['sp_lonw2'] != "") { ?>
 							<tr>
 								<th>W2</th>
-								<!-- <td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_grdw2'];}else{echo $rcek1['sp_grdw2'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_clsw2'];}else{echo $rcek1['sp_clsw2'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_show2'];}else{echo $rcek1['sp_show2'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_medw2'];}else{echo $rcek1['sp_medw2'];} ?></td>
-				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_lonw2'];}else{echo $rcek1['sp_lonw2'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_grdw2'];}else{echo $rcek1['sp_grdw2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_clsw2'];}else{echo $rcek1['sp_clsw2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_show2'];}else{echo $rcek1['sp_show2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_medw2'];}else{echo $rcek1['sp_medw2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sp']=="RANDOM"){echo $rcekR['rsp_lonw2'];}else{echo $rcek1['sp_lonw2'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['sp_grdw2'] != "") {
@@ -12168,10 +12433,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th rowspan="2">Bean Bag</th>
 								<th>Len</th>
-								<!-- <td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_l1'];}else{echo $rcek1['sb_l1'];} ?></td>
-				<td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_l2'];}else{echo $rcek1['sb_l2'];} ?></td>
-				<td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_l3'];}else{echo $rcek1['sb_l3'];} ?></td>
-				<td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_l4'];}else{echo $rcek1['sb_l4'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_l1'];}else{echo $rcek1['sb_l1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_l2'];}else{echo $rcek1['sb_l2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_l3'];}else{echo $rcek1['sb_l3'];}  ?></td>
+				<td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_l4'];}else{echo $rcek1['sb_l4'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['sb_l1'] != "") {
@@ -12208,9 +12473,9 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['sb_w1'] != "" or $rcek1['sb_w2'] != "" or $rcek1['sb_w3'] != "" or $rcek1['sb_w4'] != "") { ?>
 							<tr>
 								<th>Wid</th>
-								<!-- <td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_w1'];}else{echo $rcek1['sb_w1'];} ?></td>
-				<td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_w2'];}else{echo $rcek1['sb_w2'];} ?></td>
-				<td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_w3'];}else{echo $rcek1['sb_w3'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_w1'];}else{echo $rcek1['sb_w1'];}  ?></td>
+				<td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_w2'];}else{echo $rcek1['sb_w2'];}  ?></td>
+				<td><?php //if($rcek1['stat_sb']=="RANDOM"){echo $rcekR['rsb_w3'];}else{echo $rcek1['sb_w3'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['sb_w1'] != "") {
@@ -12243,8 +12508,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['bs_instron'] != "" or $rcek1['bs_mullen'] != "" or $rcek1['bs_tru'] != "") { ?>
 							<tr>
 								<th colspan="2">Bursting Strength</th>
-								<!-- <td><?php //if($rcek1['stat_bs2']=="RANDOM"){echo $rcekR['rbs_instron'];}else{echo $rcek1['bs_instron'];} ?></td>
-				<td><?php //if($rcek1['stat_bs3']=="RANDOM"){echo $rcekR['rbs_mullen'];}else{echo $rcek1['bs_mullen'];} ?></td>
+								<!-- <td><?php //if($rcek1['stat_bs2']=="RANDOM"){echo $rcekR['rbs_instron'];}else{echo $rcek1['bs_instron'];}  ?></td>
+				<td><?php //if($rcek1['stat_bs3']=="RANDOM"){echo $rcekR['rbs_mullen'];}else{echo $rcek1['bs_mullen'];}  ?></td>
 				<td colspan="4"><?php if ($rcek1['stat_bs'] == "RANDOM") {
 					echo $rcekR['rbs_tru'];
 				} else {
@@ -12277,10 +12542,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['thick1'] != "" or $rcek1['thick2'] != "" or $rcek1['thick3'] != "" or $rcek1['thickav'] != "") { ?>
 							<tr>
 								<th colspan="2">Thickness</th>
-								<!-- <td><?php //if($rcek1['stat_th']=="RANDOM"){echo $rcekR['rthick1'];}else{echo $rcek1['thick1'];} ?></td>
-				<td><?php //if($rcek1['stat_th']=="RANDOM"){echo $rcekR['rthick2'];}else{echo $rcek1['thick2'];} ?></td>
-				<td><?php //if($rcek1['stat_th']=="RANDOM"){echo $rcekR['rthick3'];}else{echo $rcek1['thick3'];} ?></td>
-				<td><?php //if($rcek1['stat_th']=="RANDOM"){echo $rcekR['rthickav'];}else{echo $rcek1['thickav'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_th']=="RANDOM"){echo $rcekR['rthick1'];}else{echo $rcek1['thick1'];}  ?></td>
+				<td><?php //if($rcek1['stat_th']=="RANDOM"){echo $rcekR['rthick2'];}else{echo $rcek1['thick2'];}  ?></td>
+				<td><?php //if($rcek1['stat_th']=="RANDOM"){echo $rcekR['rthick3'];}else{echo $rcek1['thick3'];}  ?></td>
+				<td><?php //if($rcek1['stat_th']=="RANDOM"){echo $rcekR['rthickav'];}else{echo $rcek1['thickav'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['thick1'] != "") {
@@ -12324,7 +12589,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rload_stretch'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rload_stretch'];}else{echo $rcek1['load_stretch'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rload_stretch'];}else{echo $rcek1['load_stretch'];}  ?>
 								</td>
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
@@ -12340,7 +12605,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rstretch_l1'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_l1'];}else{echo $rcek1['stretch_l1'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_l1'];}else{echo $rcek1['stretch_l1'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['stretch_l2'] != "") {
@@ -12348,7 +12613,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rstretch_l2'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_l2'];}else{echo $rcek1['stretch_l2'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_l2'];}else{echo $rcek1['stretch_l2'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['stretch_l3'] != "") {
@@ -12356,7 +12621,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rstretch_l3'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_l3'];}else{echo $rcek1['stretch_l3'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_l3'];}else{echo $rcek1['stretch_l3'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['stretch_l4'] != "") {
@@ -12364,7 +12629,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rstretch_l4'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_l4'];}else{echo $rcek1['stretch_l4'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_l4'];}else{echo $rcek1['stretch_l4'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['stretch_l5'] != "") {
@@ -12372,7 +12637,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rstretch_l5'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_l5'];}else{echo $rcek1['stretch_l5'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_l5'];}else{echo $rcek1['stretch_l5'];}  ?>
 								</td>
 								<td>&nbsp;</td>
 							</tr>
@@ -12384,7 +12649,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rstretch_w1'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_w1'];}else{echo $rcek1['stretch_w1'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_w1'];}else{echo $rcek1['stretch_w1'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['stretch_w2'] != "") {
@@ -12392,7 +12657,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rstretch_w2'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_w2'];}else{echo $rcek1['stretch_w2'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_w2'];}else{echo $rcek1['stretch_w2'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['stretch_w3'] != "") {
@@ -12400,7 +12665,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rstretch_w3'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_w3'];}else{echo $rcek1['stretch_w3'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_w3'];}else{echo $rcek1['stretch_w3'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['stretch_w4'] != "") {
@@ -12408,7 +12673,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rstretch_w4'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_w4'];}else{echo $rcek1['stretch_w4'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_w4'];}else{echo $rcek1['stretch_w4'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['stretch_w5'] != "") {
@@ -12416,7 +12681,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rstretch_w5'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_w5'];}else{echo $rcek1['stretch_w5'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rstretch_w5'];}else{echo $rcek1['stretch_w5'];}  ?>
 								</td>
 								<td>&nbsp;</td>
 							</tr>
@@ -12431,7 +12696,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rrecover_l1'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_l1'];}else{echo $rcek1['recover_l1'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_l1'];}else{echo $rcek1['recover_l1'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['recover_l2'] != "") {
@@ -12439,7 +12704,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rrecover_l2'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_l11'];}else{echo $rcek1['recover_l11'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_l11'];}else{echo $rcek1['recover_l11'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['recover_l3'] != "") {
@@ -12447,7 +12712,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rrecover_l3'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_l3'];}else{echo $rcek1['recover_l3'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_l3'];}else{echo $rcek1['recover_l3'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['recover_l4'] != "") {
@@ -12455,7 +12720,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rrecover_l4'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_l4'];}else{echo $rcek1['recover_l4'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_l4'];}else{echo $rcek1['recover_l4'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['recover_l5'] != "") {
@@ -12463,7 +12728,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rrecover_l5'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_l5'];}else{echo $rcek1['recover_l5'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_l5'];}else{echo $rcek1['recover_l5'];}  ?>
 								</td>
 								<td>&nbsp;</td>
 							</tr>
@@ -12475,7 +12740,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rrecover_w1'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_w1'];}else{echo $rcek1['recover_w1'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_w1'];}else{echo $rcek1['recover_w1'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['recover_w2'] != "") {
@@ -12483,7 +12748,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rrecover_w2'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_w11'];}else{echo $rcek1['recover_w11'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_w11'];}else{echo $rcek1['recover_w11'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['recover_w3'] != "") {
@@ -12491,7 +12756,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rrecover_w3'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_w3'];}else{echo $rcek1['recover_w3'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_w3'];}else{echo $rcek1['recover_w3'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['recover_w4'] != "") {
@@ -12499,7 +12764,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rrecover_w4'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_w4'];}else{echo $rcek1['recover_w4'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_w4'];}else{echo $rcek1['recover_w4'];}  ?>
 								</td>
 								<td>
 									<?php if ($rcek1['recover_w5'] != "") {
@@ -12507,7 +12772,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} else {
 										echo $rcekR['rrecover_w5'];
 									}
-									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_w5'];}else{echo $rcek1['recover_w5'];} ?>
+									//if($rcek1['stat_sr']=="RANDOM"){echo $rcekR['rrecover_w5'];}else{echo $rcek1['recover_w5'];}  ?>
 								</td>
 								<td>&nbsp;</td>
 							</tr>
@@ -12516,8 +12781,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th rowspan="2">Growth</th>
 								<th>Len</th>
-								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_l1'];}else{echo $rcek1['growth_l1'];} ?></td>
-				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_l2'];}else{echo $rcek1['growth_l2'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_l1'];}else{echo $rcek1['growth_l1'];}  ?></td>
+				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_l2'];}else{echo $rcek1['growth_l2'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['growth_l1'] != "") {
@@ -12537,8 +12802,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							</tr>
 							<tr>
 								<th>Wid</th>
-								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_w1'];}else{echo $rcek1['growth_w1'];} ?></td>
-				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_w2'];}else{echo $rcek1['growth_w2'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_w1'];}else{echo $rcek1['growth_w1'];}  ?></td>
+				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_w2'];}else{echo $rcek1['growth_w2'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['growth_w1'] != "") {
@@ -12561,8 +12826,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th rowspan="2">Recovery Growth</th>
 								<th>Len</th>
-								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_l1'];}else{echo $rcek1['rec_growth_l1'];} ?></td>
-				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_l1'];}else{echo $rcek1['rec_growth_l1'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_l1'];}else{echo $rcek1['rec_growth_l1'];}  ?></td>
+				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_l1'];}else{echo $rcek1['rec_growth_l1'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['rec_growth_l2'] != "") {
@@ -12582,8 +12847,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							</tr>
 							<tr>
 								<th>Wid</th>
-								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_w1'];}else{echo $rcek1['rec_growth_w1'];} ?></td>
-				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_w2'];}else{echo $rcek1['rec_growth_w2'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_w1'];}else{echo $rcek1['rec_growth_w1'];}  ?></td>
+				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_w2'];}else{echo $rcek1['rec_growth_w2'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['rec_growth_w1'] != "") {
@@ -12607,7 +12872,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 								<th rowspan="7">Apperance</th>
 								<th>&nbsp;</th>
 								<td>
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_ch1'];}else{echo $rcek1['apper_ch1'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_ch1'];}else{echo $rcek1['apper_ch1'];}  ?>
 									<?php if ($rcek1['apper_ch1'] != "") {
 										echo $rcek1['apper_ch1'];
 									} else {
@@ -12615,7 +12880,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td>
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_ch2'];}else{echo $rcek1['apper_ch2'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_ch2'];}else{echo $rcek1['apper_ch2'];}  ?>
 									<?php if ($rcek1['apper_ch2'] != "") {
 										echo $rcek1['apper_ch2'];
 									} else {
@@ -12623,7 +12888,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td colspan="4">
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_ch3'];}else{echo $rcek1['apper_ch3'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_ch3'];}else{echo $rcek1['apper_ch3'];}  ?>
 									<?php if ($rcek1['apper_ch3'] != "") {
 										echo $rcek1['apper_ch3'];
 									} else {
@@ -12634,7 +12899,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th>&nbsp;</th>
 								<td>
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_cc1'];}else{echo $rcek1['apper_cc1'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_cc1'];}else{echo $rcek1['apper_cc1'];}  ?>
 									<?php if ($rcek1['apper_cc1'] != "") {
 										echo $rcek1['apper_cc1'];
 									} else {
@@ -12642,7 +12907,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td>
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_cc2'];}else{echo $rcek1['apper_cc2'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_cc2'];}else{echo $rcek1['apper_cc2'];}  ?>
 									<?php if ($rcek1['apper_cc2'] != "") {
 										echo $rcek1['apper_cc2'];
 									} else {
@@ -12650,7 +12915,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td colspan="4">
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_cc3'];}else{echo $rcek1['apper_cc3'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_cc3'];}else{echo $rcek1['apper_cc3'];}  ?>
 									<?php if ($rcek1['apper_cc3'] != "") {
 										echo $rcek1['apper_cc3'];
 									} else {
@@ -12661,7 +12926,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th>&nbsp;</th>
 								<td>
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_st'];}else{echo $rcek1['apper_st'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_st'];}else{echo $rcek1['apper_st'];}  ?>
 									<?php if ($rcek1['apper_st'] != "") {
 										echo $rcek1['apper_st'];
 									} else {
@@ -12669,7 +12934,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td>
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_st2'];}else{echo $rcek1['apper_st2'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_st2'];}else{echo $rcek1['apper_st2'];}  ?>
 									<?php if ($rcek1['apper_st2'] != "") {
 										echo $rcek1['apper_st2'];
 									} else {
@@ -12677,7 +12942,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td colspan="4">
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_st3'];}else{echo $rcek1['apper_st3'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_st3'];}else{echo $rcek1['apper_st3'];}  ?>
 									<?php if ($rcek1['apper_st3'] != "") {
 										echo $rcek1['apper_st3'];
 									} else {
@@ -12688,7 +12953,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th>Face</th>
 								<td>
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pf1'];}else{echo $rcek1['apper_pf1'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pf1'];}else{echo $rcek1['apper_pf1'];}  ?>
 									<?php if ($rcek1['apper_pf1'] != "") {
 										echo $rcek1['apper_pf1'];
 									} else {
@@ -12696,7 +12961,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td>
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pf2'];}else{echo $rcek1['apper_pf2'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pf2'];}else{echo $rcek1['apper_pf2'];}  ?>
 									<?php if ($rcek1['apper_pf2'] != "") {
 										echo $rcek1['apper_pf2'];
 									} else {
@@ -12704,7 +12969,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td colspan="4">
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pf3'];}else{echo $rcek1['apper_pf3'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pf3'];}else{echo $rcek1['apper_pf3'];}  ?>
 									<?php if ($rcek1['apper_pf3'] != "") {
 										echo $rcek1['apper_pf3'];
 									} else {
@@ -12715,7 +12980,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th>Back</th>
 								<td>
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pb1'];}else{echo $rcek1['apper_pb1'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pb1'];}else{echo $rcek1['apper_pb1'];}  ?>
 									<?php if ($rcek1['apper_pb1'] != "") {
 										echo $rcek1['apper_pb1'];
 									} else {
@@ -12723,7 +12988,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td>
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pb2'];}else{echo $rcek1['apper_pb2'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pb2'];}else{echo $rcek1['apper_pb2'];}  ?>
 									<?php if ($rcek1['apper_pb2'] != "") {
 										echo $rcek1['apper_pb2'];
 									} else {
@@ -12731,7 +12996,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 									} ?>
 								</td>
 								<td colspan="4">
-									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pb3'];}else{echo $rcek1['apper_pb3'];} ?>
+									<?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_pb3'];}else{echo $rcek1['apper_pb3'];}  ?>
 									<?php if ($rcek1['apper_pb3'] != "") {
 										echo $rcek1['apper_pb3'];
 									} else {
@@ -12750,12 +13015,12 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							</tr>
 							<tr>
 								<th>&nbsp;</th>
-								<!-- <td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_acetate'];}else{echo $rcek1['apper_acetate'];} ?></td>
-				<td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_cotton'];}else{echo $rcek1['apper_cotton'];} ?></td>
-				<td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_nylon'];}else{echo $rcek1['apper_nylon'];} ?></td>
-				<td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_poly'];}else{echo $rcek1['apper_poly'];} ?></td>
-				<td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_acrylic'];}else{echo $rcek1['apper_acrylic'];} ?></td>
-				<td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_wool'];}else{echo $rcek1['apper_wool'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_acetate'];}else{echo $rcek1['apper_acetate'];}  ?></td>
+				<td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_cotton'];}else{echo $rcek1['apper_cotton'];}  ?></td>
+				<td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_nylon'];}else{echo $rcek1['apper_nylon'];}  ?></td>
+				<td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_poly'];}else{echo $rcek1['apper_poly'];}  ?></td>
+				<td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_acrylic'];}else{echo $rcek1['apper_acrylic'];}  ?></td>
+				<td><?php //if($rcek1['stat_ap']=="RANDOM"){echo $rcekR['rapper_wool'];}else{echo $rcek1['apper_wool'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['apper_acetate'] != "") {
@@ -12805,7 +13070,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<tr>
 								<th rowspan="5">Heat Shrinkage</th>
 								<th>Suhu</th>
-								<!-- <td><?php //if($rcek1['stat_hs']=="RANDOM"){echo $rcekR['rh_shrinkage_temp'];}else{echo $rcek1['h_shrinkage_temp'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_hs']=="RANDOM"){echo $rcekR['rh_shrinkage_temp'];}else{echo $rcek1['h_shrinkage_temp'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['h_shrinkage_temp'] != "") {
 										echo $rcek1['h_shrinkage_temp'];
@@ -12818,7 +13083,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							</tr>
 							<tr>
 								<th>Len</th>
-								<!-- <td><?php //if($rcek1['stat_hs']=="RANDOM"){echo $rcekR['rh_shrinkage_l1'];}else{echo $rcek1['h_shrinkage_l1'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_hs']=="RANDOM"){echo $rcekR['rh_shrinkage_l1'];}else{echo $rcek1['h_shrinkage_l1'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['h_shrinkage_l1'] != "") {
 										echo $rcek1['h_shrinkage_l1'];
@@ -12831,7 +13096,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							</tr>
 							<tr>
 								<th>Wid</th>
-								<!-- <td><?php //if($rcek1['stat_hs']=="RANDOM"){echo $rcekR['rh_shrinkage_w1'];}else{echo $rcek1['h_shrinkage_w1'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_hs']=="RANDOM"){echo $rcekR['rh_shrinkage_w1'];}else{echo $rcek1['h_shrinkage_w1'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['h_shrinkage_w1'] != "") {
 										echo $rcek1['h_shrinkage_w1'];
@@ -12844,7 +13109,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							</tr>
 							<tr>
 								<th>Grade</th>
-								<!-- <td><?php //if($rcek1['stat_hs']=="RANDOM"){echo $rcekR['rh_shrinkage_grd'];}else{echo $rcek1['h_shrinkage_grd'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_hs']=="RANDOM"){echo $rcekR['rh_shrinkage_grd'];}else{echo $rcek1['h_shrinkage_grd'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['h_shrinkage_grd'] != "") {
 										echo $rcek1['h_shrinkage_grd'];
@@ -12857,7 +13122,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							</tr>
 							<tr>
 								<th>Appearance</th>
-								<!-- <td><?php //if($rcek1['stat_hs']=="RANDOM"){echo $rcekR['rh_shrinkage_app'];}else{echo $rcek1['h_shrinkage_app'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_hs']=="RANDOM"){echo $rcekR['rh_shrinkage_app'];}else{echo $rcek1['h_shrinkage_app'];}  ?></td> -->
 								<td>
 									<?php if ($rcek1['h_shrinkage_app'] != "") {
 										echo $rcek1['h_shrinkage_app'];
@@ -12872,8 +13137,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['fibre_transfer'] != "" or $rcek1['fibre_grade'] != "") { ?>
 							<tr>
 								<th colspan="2">Fibre/Fuzz</th>
-								<!-- <td><?php //if($rcek1['stat_ff']=="RANDOM"){echo $rcekR['rfibre_transfer'];}else{echo $rcek1['fibre_transfer'];} ?></td> -->
-								<!-- <td><?php //if($rcek1['stat_ff']=="RANDOM"){echo $rcekR['rfibre_grade'];}else{echo $rcek1['fibre_grade'];} ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_ff']=="RANDOM"){echo $rcekR['rfibre_transfer'];}else{echo $rcek1['fibre_transfer'];}  ?></td> -->
+								<!-- <td><?php //if($rcek1['stat_ff']=="RANDOM"){echo $rcekR['rfibre_grade'];}else{echo $rcek1['fibre_grade'];}  ?></td> -->
 
 								<td>
 									<?php if ($rcek1['fibre_transfer'] != "") {
@@ -12896,7 +13161,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['odour'] != "") { ?>
 							<tr>
 								<th colspan="2">Odour</th>
-								<!-- <td colspan="4"><?php //if($rcek1['stat_odour']=="RANDOM"){echo $rcekR['rodour'];}else{echo $rcek1['odour'];} ?></td> -->
+								<!-- <td colspan="4"><?php //if($rcek1['stat_odour']=="RANDOM"){echo $rcekR['rodour'];}else{echo $rcek1['odour'];}  ?></td> -->
 								<td colspan="4">
 									<?php if ($rcek1['odour'] != "") {
 										echo $rcek1['odour'];
@@ -12910,7 +13175,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['curling'] != "") { ?>
 							<tr>
 								<th colspan="2">Curling</th>
-								<!-- <td colspan="4"><?php //if($rcek1['stat_curling']=="RANDOM"){echo $rcekR['rcurling'];}else{echo $rcek1['curling'];} ?></td> -->
+								<!-- <td colspan="4"><?php //if($rcek1['stat_curling']=="RANDOM"){echo $rcekR['rcurling'];}else{echo $rcek1['curling'];}  ?></td> -->
 								<td colspan="4">
 									<?php if ($rcek1['curling'] != "") {
 										echo $rcek1['curling'];
@@ -12924,7 +13189,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<?php if ($rcek1['nedle'] != "") { ?>
 							<tr>
 								<th colspan="2">Nedle</th>
-								<!-- <td colspan="4"><?php //if($rcek1['stat_nedle']=="RANDOM"){echo $rcekR['rnedle'];}else{echo $rcek1['nedle'];} ?></td> -->
+								<!-- <td colspan="4"><?php //if($rcek1['stat_nedle']=="RANDOM"){echo $rcekR['rnedle'];}else{echo $rcek1['nedle'];}  ?></td> -->
 								<td colspan="4">
 									<?php if ($rcek1['nedle'] != "") {
 										echo $rcek1['nedle'];
@@ -12932,6 +13197,35 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 										echo $rcekR['rnedle'];
 									} ?>
 								</td>
+								<td>&nbsp;</td>
+							</tr>
+						<?php } ?>
+						<?php if ($rcek1['wrinkle'] != "" || $rcek1['wrinkle1'] != "" || $rcek1['wrinkle2'] != "") { ?>
+							<tr>
+								<th colspan="1">Wrinkle</th>
+								<th>Original</th>
+								<td>
+									<?= $rcek1['wrinkle']; ?>
+								</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<th colspan="1">&nbsp;</th>
+								<th>Afterwash</th>
+								<td>
+									<?= $rcek1['wrinkle1']; ?>
+								</td> <!-- disiniya -->
+								<td>
+									<?= $rcek1['wrinkle2']; ?>
+								</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 							</tr>
 						<?php } ?>
@@ -12948,9 +13242,9 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<th rowspan="4" style="width:50%">Wicking</th>
 							<th>Length</th>
 							<th>Beforewash</th>
-							<!-- <td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l1'];}else{echo $rcek1['wick_l1'];} ?></td>
-				<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l2'];}else{echo $rcek1['wick_l2'];} ?></td>
-				<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l3'];}else{echo $rcek1['wick_l3'];} ?></td>-->
+							<!-- <td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l1'];}else{echo $rcek1['wick_l1'];}  ?></td>
+				<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l2'];}else{echo $rcek1['wick_l2'];}  ?></td>
+				<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l3'];}else{echo $rcek1['wick_l3'];}  ?></td>-->
 
 							<td>
 								<?php if ($rcek1['wick_l1'] != "") {
@@ -12965,9 +13259,9 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>&nbsp;</th>
 							<th>Afterwash</th>
-							<!--<td><?php //if($rcek1['stat_wic2']=="RANDOM"){echo $rcekR['rwick_l2'];}else{echo $rcek1['wick_l2'];} ?></td>
-				<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_w2'];}else{echo $rcek1['wick_w2'];} ?></td>
-				<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_w3'];}else{echo $rcek1['wick_w3'];} ?></td>-->
+							<!--<td><?php //if($rcek1['stat_wic2']=="RANDOM"){echo $rcekR['rwick_l2'];}else{echo $rcek1['wick_l2'];}  ?></td>
+				<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_w2'];}else{echo $rcek1['wick_w2'];}  ?></td>
+				<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_w3'];}else{echo $rcek1['wick_w3'];}  ?></td>-->
 
 							<td>
 								<?php if ($rcek1['wick_l2'] != "") {
@@ -12982,9 +13276,9 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>Width</th>
 							<th>Beforewash</th>
-							<!--<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l1'];}else{echo $rcek1['wick_l1'];} ?></td>-->
-							<!-- <td><?php //if($rcek1['stat_wic1']=="RANDOM"){echo $rcekR['rwick_w1'];}else{echo $rcek1['wick_w1'];} ?></td> -->
-							<!--<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l3'];}else{echo $rcek1['wick_l3'];} ?></td>-->
+							<!--<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l1'];}else{echo $rcek1['wick_l1'];}  ?></td>-->
+							<!-- <td><?php //if($rcek1['stat_wic1']=="RANDOM"){echo $rcekR['rwick_w1'];}else{echo $rcek1['wick_w1'];}  ?></td> -->
+							<!--<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l3'];}else{echo $rcek1['wick_l3'];}  ?></td>-->
 
 							<td>
 								<?php if ($rcek1['wick_w1'] != "") {
@@ -12999,9 +13293,9 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>&nbsp;</th>
 							<th>Afterwash</th>
-							<!--<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_w1'];}else{echo $rcek1['wick_w1'];} ?></td>-->
-							<!-- <td><?php //if($rcek1['stat_wic3']=="RANDOM"){echo $rcekR['rwick_w2'];}else{echo $rcek1['wick_w2'];} ?></td> -->
-							<!--<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_w3'];}else{echo $rcek1['wick_w3'];} ?></td>-->
+							<!--<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_w1'];}else{echo $rcek1['wick_w1'];}  ?></td>-->
+							<!-- <td><?php //if($rcek1['stat_wic3']=="RANDOM"){echo $rcekR['rwick_w2'];}else{echo $rcek1['wick_w2'];}  ?></td> -->
+							<!--<td><?php //if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_w3'];}else{echo $rcek1['wick_w3'];}  ?></td>-->
 
 							<td>
 								<?php if ($rcek1['wick_w2'] != "") {
@@ -13019,8 +13313,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<th rowspan="4">Absorbency</th>
 							<th>Original</th>
 							<th>Face</th>
-							<!-- <td><?php //if($rcek1['stat_abs']=="RANDOM"){echo $rcekR['rabsor_f2'];}else{echo $rcek1['absor_f2'];} ?></td> -->
-							<!--<td><?php //if($rcek1['stat_abs']=="RANDOM"){echo $rcekR['rabsor_f3'];}else{echo $rcek1['absor_f3'];} ?></td>-->
+							<!-- <td><?php //if($rcek1['stat_abs']=="RANDOM"){echo $rcekR['rabsor_f2'];}else{echo $rcek1['absor_f2'];}  ?></td> -->
+							<!--<td><?php //if($rcek1['stat_abs']=="RANDOM"){echo $rcekR['rabsor_f3'];}else{echo $rcek1['absor_f3'];}  ?></td>-->
 
 							<td>
 								<?php if ($rcek1['absor_f2'] != "") {
@@ -13040,7 +13334,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>&nbsp;</th>
 							<th>Back</th>
-							<!-- <td><?php //if($rcek1['stat_abs']=="RANDOM"){echo $rcekR['rabsor_f1'];}else{echo $rcek1['absor_f1'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_abs']=="RANDOM"){echo $rcekR['rabsor_f1'];}else{echo $rcek1['absor_f1'];}  ?></td> -->
 							<td>
 								<?php if ($rcek1['absor_f1'] != "") {
 									echo $rcek1['absor_f1'];
@@ -13054,17 +13348,17 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>Afterwash</th>
 							<th>Face</th>
-							<!-- <td><?php //if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b2'];}else{echo $rcek1['absor_b2'];} ?></td> -->
-							<!--<td><?php //if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b3'];}else{echo $rcek1['absor_b3'];} ?></td>-->
+							<!-- <td><?php //if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b2'];}else{echo $rcek1['absor_b2'];}  ?></td> -->
+							<!--<td><?php //if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b3'];}else{echo $rcek1['absor_b3'];}  ?></td>-->
 
 							<td>
-								<?php if ($rcek1['absor_b2'] != "") {
+								<?php if ($$rcek1['absor_b2'] != "") {
 									echo $rcek1['absor_b2'];
 								} else {
 									echo $rcekR['rabsor_b2'];
 								} ?>
 							</td>
-							<!--<td><?php if ($rcek1['absor_b3'] != "") {
+							<!--<td><?php if ($$rcek1['absor_b3'] != "") {
 								echo $rcek1['absor_b3'];
 							} else {
 								echo $rcekR['rabsor_b3'];
@@ -13075,9 +13369,9 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>&nbsp;</th>
 							<th>Back</th>
-							<!-- <td><?php //if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b1'];}else{echo $rcek1['absor_b1'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b1'];}else{echo $rcek1['absor_b1'];}  ?></td> -->
 							<td>
-								<?php if ($rcek1['absor_b1'] != "") {
+								<?php if ($$rcek1['absor_b1'] != "") {
 									echo $rcek1['absor_b1'];
 								} else {
 									echo $rcekR['rabsor_b1'];
@@ -13091,9 +13385,9 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th rowspan="2">Drying Time</th>
 							<th>Original</th>
-							<!-- <td><?php //if($rcek1['stat_dry']=="RANDOM"){echo $rcekR['rdry1'];}else{echo $rcek1['dry1'];} ?></td>
-				<td><?php //if($rcek1['stat_dry']=="RANDOM"){echo $rcekR['rdry2'];}else{echo $rcek1['dry2'];} ?></td>
-				<td><?php //if($rcek1['stat_dry']=="RANDOM"){echo $rcekR['rdry3'];}else{echo $rcek1['dry3'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_dry']=="RANDOM"){echo $rcekR['rdry1'];}else{echo $rcek1['dry1'];}  ?></td>
+				<td><?php //if($rcek1['stat_dry']=="RANDOM"){echo $rcekR['rdry2'];}else{echo $rcek1['dry2'];}  ?></td>
+				<td><?php //if($rcek1['stat_dry']=="RANDOM"){echo $rcekR['rdry3'];}else{echo $rcek1['dry3'];}  ?></td> -->
 							<td>
 								<?php if ($rcek1['dry1'] != "") {
 									echo $rcek1['dry1'];
@@ -13120,9 +13414,9 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						</tr>
 						<tr>
 							<th>Afterwash</th>
-							<!-- <td><?php //if($rcek1['stat_dry1']=="RANDOM"){echo $rcekR['rdryaf1'];}else{echo $rcek1['dryaf1'];} ?></td>
-				<td><?php //if($rcek1['stat_dry1']=="RANDOM"){echo $rcekR['rdryaf2'];}else{echo $rcek1['dryaf2'];} ?></td>
-				<td><?php //if($rcek1['stat_dry1']=="RANDOM"){echo $rcekR['rdryaf3'];}else{echo $rcek1['dryaf3'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_dry1']=="RANDOM"){echo $rcekR['rdryaf1'];}else{echo $rcek1['dryaf1'];}  ?></td>
+				<td><?php //if($rcek1['stat_dry1']=="RANDOM"){echo $rcekR['rdryaf2'];}else{echo $rcek1['dryaf2'];}  ?></td>
+				<td><?php //if($rcek1['stat_dry1']=="RANDOM"){echo $rcekR['rdryaf3'];}else{echo $rcek1['dryaf3'];}  ?></td> -->
 
 							<td>
 								<?php if ($rcek1['dryaf1'] != "") {
@@ -13153,10 +13447,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th rowspan="2">Water Reppelent</th>
 							<th>Original</th>
-							<!--<td><?php //if($rcek1['stat_wp']=="RANDOM"){echo $rcekR['rrepp1'];}else{echo $rcek1['repp1'];} ?></td>
-				<td><?php //if($rcek1['stat_wp']=="RANDOM"){echo $rcekR['rrepp2'];}else{echo $rcek1['repp2'];} ?></td>
-				<td><?php //if($rcek1['stat_wp']=="RANDOM"){echo $rcekR['rrepp3'];}else{echo $rcek1['repp3'];} ?></td>
-				<td><?php //if($rcek1['stat_wp']=="RANDOM"){echo $rcekR['rrepp4'];}else{echo $rcek1['repp4'];} ?></td>-->
+							<!--<td><?php //if($rcek1['stat_wp']=="RANDOM"){echo $rcekR['rrepp1'];}else{echo $rcek1['repp1'];}  ?></td>
+				<td><?php //if($rcek1['stat_wp']=="RANDOM"){echo $rcekR['rrepp2'];}else{echo $rcek1['repp2'];}  ?></td>
+				<td><?php //if($rcek1['stat_wp']=="RANDOM"){echo $rcekR['rrepp3'];}else{echo $rcek1['repp3'];}  ?></td>
+				<td><?php //if($rcek1['stat_wp']=="RANDOM"){echo $rcekR['rrepp4'];}else{echo $rcek1['repp4'];}  ?></td>-->
 
 							<td>
 								<?php if ($rcek1['repp1'] != "") {
@@ -13184,7 +13478,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						</tr>
 						<tr>
 							<th>Afterwash</th>
-							<!-- <td><?php //if($rcek1['stat_wp1']=="RANDOM"){echo $rcekR['rrepp2'];}else{echo $rcek1['repp2'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_wp1']=="RANDOM"){echo $rcekR['rrepp2'];}else{echo $rcek1['repp2'];}  ?></td> -->
 							<td>
 								<?php if ($rcek1['repp2'] != "") {
 									echo $rcek1['repp2'];
@@ -13198,7 +13492,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 					<?php if ($rcek1['ph'] != "") { ?>
 						<tr>
 							<th colspan="2">Ph</th>
-							<!-- <td colspan="4"><?php //if($rcek1['stat_ph']=="RANDOM"){echo $rcekR['rph'];}else{echo $rcek1['ph'];} ?></td> -->
+							<!-- <td colspan="4"><?php //if($rcek1['stat_ph']=="RANDOM"){echo $rcekR['rph'];}else{echo $rcek1['ph'];}  ?></td> -->
 							<td colspan="4">
 								<?php if ($rcek1['ph'] != "") {
 									echo $rcek1['ph'];
@@ -13212,7 +13506,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 					<?php if ($rcek1['soil'] != "") { ?>
 						<tr>
 							<th colspan="2">Soil</th>
-							<!-- <td colspan="4"><?php //if($rcek1['stat_sor']=="RANDOM"){echo $rcekR['rsoil'];}else{echo $rcek1['soil'];} ?></td> -->
+							<!-- <td colspan="4"><?php //if($rcek1['stat_sor']=="RANDOM"){echo $rcekR['rsoil'];}else{echo $rcek1['soil'];}  ?></td> -->
 							<td colspan="4">
 								<?php if ($rcek1['soil'] != "") {
 									echo $rcek1['soil'];
@@ -13226,7 +13520,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 					<?php if ($rcek1['humidity'] != "") { ?>
 						<tr>
 							<th colspan="2">Humidity</th>
-							<!-- <td colspan="4"><?php //if($rcek1['stat_hum']=="RANDOM"){echo $rcekR['rhumidity'];}else{echo $rcek1['humidity'];} ?></td> -->
+							<!-- <td colspan="4"><?php //if($rcek1['stat_hum']=="RANDOM"){echo $rcekR['rhumidity'];}else{echo $rcek1['humidity'];}  ?></td> -->
 							<td colspan="4">
 								<?php if ($rcek1['humidity'] != "") {
 									echo $rcek1['humidity'];
@@ -13251,7 +13545,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th rowspan="5">Washing</th>
 							<th>Suhu</th>
-							<!-- <td colspan="4"><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_temp'];}else{echo $rcek1['wash_temp'];} ?>&deg;</td> -->
+							<!-- <td colspan="4"><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_temp'];}else{echo $rcek1['wash_temp'];}  ?>&deg;</td> -->
 							<td colspan="4">
 								<?php if ($rcek1['wash_temp'] != "") {
 									echo $rcek1['wash_temp'];
@@ -13271,10 +13565,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						</tr>
 						<tr>
 							<th>&nbsp;</th>
-							<!-- <td><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_colorchange'];}else{echo $rcek1['wash_colorchange'];} ?></td>
-				  <td colspan="2"><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_acetate'];}else{echo $rcek1['wash_acetate'];} ?></td>
-				<td><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_cotton'];}else{echo $rcek1['wash_cotton'];} ?></td>
-				  <td colspan="2"><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_nylon'];}else{echo $rcek1['wash_nylon'];} ?></td>
+							<!-- <td><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_colorchange'];}else{echo $rcek1['wash_colorchange'];}  ?></td>
+				  <td colspan="2"><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_acetate'];}else{echo $rcek1['wash_acetate'];}  ?></td>
+				<td><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_cotton'];}else{echo $rcek1['wash_cotton'];}  ?></td>
+				  <td colspan="2"><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_nylon'];}else{echo $rcek1['wash_nylon'];}  ?></td>
 				  <td>&nbsp;</td> -->
 							<td>
 								<?php if ($rcek1['wash_colorchange'] != "") {
@@ -13316,10 +13610,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						</tr>
 						<tr>
 							<th>&nbsp;</th>
-							<!-- <td><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_poly'];}else{echo $rcek1['wash_poly'];} ?></td>
-				  <td colspan="2"><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_acrylic'];}else{echo $rcek1['wash_acrylic'];} ?></td>
-				<td><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_wool'];}else{echo $rcek1['wash_wool'];} ?></td>
-				  <td colspan="2"><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_staining'];}else{echo $rcek1['wash_staining'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_poly'];}else{echo $rcek1['wash_poly'];}  ?></td>
+				  <td colspan="2"><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_acrylic'];}else{echo $rcek1['wash_acrylic'];}  ?></td>
+				<td><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_wool'];}else{echo $rcek1['wash_wool'];}  ?></td>
+				  <td colspan="2"><?php //if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_staining'];}else{echo $rcek1['wash_staining'];}  ?></td> -->
 
 							<td>
 								<?php if ($rcek1['wash_poly'] != "") {
@@ -13362,10 +13656,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<!-- <td ><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_colorchange'];}else{echo $rcek1['acid_colorchange'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_acetate'];}else{echo $rcek1['acid_acetate'];} ?></td>
-			<td><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_cotton'];}else{echo $rcek1['acid_cotton'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_nylon'];}else{echo $rcek1['acid_nylon'];} ?></td>
+							<!-- <td ><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_colorchange'];}else{echo $rcek1['acid_colorchange'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_acetate'];}else{echo $rcek1['acid_acetate'];}  ?></td>
+			<td><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_cotton'];}else{echo $rcek1['acid_cotton'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_nylon'];}else{echo $rcek1['acid_nylon'];}  ?></td>
 			  <td>&nbsp;</td> -->
 							<td>
 								<?php if ($rcek1['acid_colorchange'] != "") {
@@ -13405,10 +13699,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<!-- <td><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_poly'];}else{echo $rcek1['acid_poly'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_acrylic'];}else{echo $rcek1['acid_acrylic'];} ?></td>
-			<td><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_wool'];}else{echo $rcek1['acid_wool'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_staining'];}else{echo $rcek1['acid_staining'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_poly'];}else{echo $rcek1['acid_poly'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_acrylic'];}else{echo $rcek1['acid_acrylic'];}  ?></td>
+			<td><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_wool'];}else{echo $rcek1['acid_wool'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_staining'];}else{echo $rcek1['acid_staining'];}  ?></td> -->
 
 							<td>
 								<?php if ($rcek1['acid_poly'] != "") {
@@ -13452,10 +13746,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<!-- <td><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_colorchange'];}else{echo $rcek1['alkaline_colorchange'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_acetate'];}else{echo $rcek1['alkaline_acetate'];} ?></td>
-			<td><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_cotton'];}else{echo $rcek1['alkaline_cotton'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_nylon'];}else{echo $rcek1['alkaline_nylon'];} ?></td>
+							<!-- <td><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_colorchange'];}else{echo $rcek1['alkaline_colorchange'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_acetate'];}else{echo $rcek1['alkaline_acetate'];}  ?></td>
+			<td><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_cotton'];}else{echo $rcek1['alkaline_cotton'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_nylon'];}else{echo $rcek1['alkaline_nylon'];}  ?></td>
 			  <td>&nbsp;</td> -->
 							<td>
 								<?php if ($rcek1['alkaline_colorchange'] != "") {
@@ -13495,10 +13789,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<!-- <td><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_poly'];}else{echo $rcek1['alkaline_poly'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_acrylic'];}else{echo $rcek1['alkaline_acrylic'];} ?></td>
-			<td><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_wool'];}else{echo $rcek1['alkaline_wool'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_staining'];}else{echo $rcek1['alkaline_staining'];} ?></td>
+							<!-- <td><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_poly'];}else{echo $rcek1['alkaline_poly'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_acrylic'];}else{echo $rcek1['alkaline_acrylic'];}  ?></td>
+			<td><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_wool'];}else{echo $rcek1['alkaline_wool'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_staining'];}else{echo $rcek1['alkaline_staining'];}  ?></td>
 			  <td>&nbsp;</td> -->
 							<td>
 								<?php if ($rcek1['alkaline_poly'] != "") {
@@ -13542,10 +13836,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<!-- <td><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_colorchange'];}else{echo $rcek1['water_colorchange'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_acetate'];}else{echo $rcek1['water_acetate'];} ?></td>
-			<td><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_cotton'];}else{echo $rcek1['water_cotton'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_nylon'];}else{echo $rcek1['water_nylon'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_colorchange'];}else{echo $rcek1['water_colorchange'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_acetate'];}else{echo $rcek1['water_acetate'];}  ?></td>
+			<td><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_cotton'];}else{echo $rcek1['water_cotton'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_nylon'];}else{echo $rcek1['water_nylon'];}  ?></td> -->
 
 							<td>
 								<?php if ($rcek1['water_colorchange'] != "") {
@@ -13585,10 +13879,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<!-- <td><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_poly'];}else{echo $rcek1['water_poly'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_acrylic'];}else{echo $rcek1['water_acrylic'];} ?></td>
-			<td><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_wool'];}else{echo $rcek1['water_wool'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_staining'];}else{echo $rcek1['water_staining'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_poly'];}else{echo $rcek1['water_poly'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_acrylic'];}else{echo $rcek1['water_acrylic'];}  ?></td>
+			<td><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_wool'];}else{echo $rcek1['water_wool'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_staining'];}else{echo $rcek1['water_staining'];}  ?></td> -->
 
 							<td>
 								<?php if ($rcek1['water_poly'] != "") {
@@ -13631,8 +13925,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						</tr>
 						<tr>
 							<th>Len</th>
-							<!-- <td><?php //if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_len1'];}else{echo $rcek1['crock_len1'];} ?></td>
-				  <td colspan="2"><?php //if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_len2'];}else{echo $rcek1['crock_len2'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_len1'];}else{echo $rcek1['crock_len1'];}  ?></td>
+				  <td colspan="2"><?php //if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_len2'];}else{echo $rcek1['crock_len2'];}  ?></td> -->
 							<td>
 								<?php if ($rcek1['crock_len1'] != "") {
 									echo $rcek1['crock_len1'];
@@ -13650,8 +13944,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						</tr>
 						<tr>
 							<th>Wid</th>
-							<!-- <td><?php //if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_wid1'];}else{echo $rcek1['crock_wid1'];} ?></td>
-				<td colspan="3"><?php //if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_wid2'];}else{echo $rcek1['crock_wid2'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_wid1'];}else{echo $rcek1['crock_wid1'];}  ?></td>
+				<td colspan="3"><?php //if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_wid2'];}else{echo $rcek1['crock_wid2'];}  ?></td> -->
 							<td>
 								<?php if ($rcek1['crock_wid1'] != "") {
 									echo $rcek1['crock_wid1'];
@@ -13672,7 +13966,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>Phenolic Yellowing</th>
 							<th><strong>CC</strong></th>
-							<!-- <td colspan="4"><?php //if($rcek1['stat_py']=="RANDOM"){echo $rcekR['rphenolic_colorchange'];}else{echo $rcek1['phenolic_colorchange'];} ?></td> -->
+							<!-- <td colspan="4"><?php //if($rcek1['stat_py']=="RANDOM"){echo $rcekR['rphenolic_colorchange'];}else{echo $rcek1['phenolic_colorchange'];}  ?></td> -->
 							<td colspan="4">
 								<?php if ($rcek1['phenolic_colorchange'] != "") {
 									echo $rcek1['phenolic_colorchange'];
@@ -13686,8 +13980,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>Light</th>
 							<th>&nbsp;</th>
-							<!-- <td><?php //if($rcek1['stat_lg']=="RANDOM"){echo $rcekR['rlight_rating1'];}else{echo $rcek1['light_rating1'];} ?></td>
-				 <td colspan="2"><?php //if($rcek1['stat_lg']=="RANDOM"){echo $rcekR['rlight_rating2'];}else{echo $rcek1['light_rating2'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_lg']=="RANDOM"){echo $rcekR['rlight_rating1'];}else{echo $rcek1['light_rating1'];}  ?></td>
+				 <td colspan="2"><?php //if($rcek1['stat_lg']=="RANDOM"){echo $rcekR['rlight_rating2'];}else{echo $rcek1['light_rating2'];}  ?></td> -->
 							<td>
 								<?php if ($rcek1['light_rating1'] != "") {
 									echo $rcek1['light_rating1'];
@@ -13708,8 +14002,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>Color Migration Oven</th>
 							<th>&nbsp;</th>
-							<!-- <td colspan="3"><?php //if($rcek1['stat_cmo']=="RANDOM"){echo $rcekR['rcm_printing_colorchange'];}else{echo $rcek1['cm_printing_colorchange'];} ?></td>
-				  <td><?php //if($rcek1['stat_cmo']=="RANDOM"){echo $rcekR['rcm_printing_staining'];}else{echo $rcek1['cm_printing_staining'];} ?></td> -->
+							<!-- <td colspan="3"><?php //if($rcek1['stat_cmo']=="RANDOM"){echo $rcekR['rcm_printing_colorchange'];}else{echo $rcek1['cm_printing_colorchange'];}  ?></td>
+				  <td><?php //if($rcek1['stat_cmo']=="RANDOM"){echo $rcekR['rcm_printing_staining'];}else{echo $rcek1['cm_printing_staining'];}  ?></td> -->
 							<td colspan="3">
 								<?php if ($rcek1['cm_printing_colorchange'] != "") {
 									echo $rcek1['cm_printing_colorchange'];
@@ -13730,7 +14024,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th rowspan="3">Color Migration</th>
 							<th>Suhu</th>
-							<!-- <td colspan="4"><?php //if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_temp'];}else{echo $rcek1['cm_dye_temp'];} ?>&deg;</td> -->
+							<!-- <td colspan="4"><?php //if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_temp'];}else{echo $rcek1['cm_dye_temp'];}  ?>&deg;</td> -->
 							<td colspan="4">
 								<?php if ($rcek1['cm_dye_temp'] != "") {
 									echo $rcek1['cm_dye_temp'];
@@ -13746,8 +14040,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						</tr>
 						<tr>
 							<th>&nbsp;</th>
-							<!-- <td><?php //if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_colorchange'];}else{echo $rcek1['cm_dye_colorchange'];} ?></td>
-				  <td colspan="4"><?php //if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_stainingface'];}else{echo $rcek1['cm_dye_stainingface'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_colorchange'];}else{echo $rcek1['cm_dye_colorchange'];}  ?></td>
+				  <td colspan="4"><?php //if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_stainingface'];}else{echo $rcek1['cm_dye_stainingface'];}  ?></td> -->
 							<td>
 								<?php if ($rcek1['cm_dye_colorchange'] != "") {
 									echo $rcek1['cm_dye_colorchange'];
@@ -13769,7 +14063,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>Light Perspiration</th>
 							<th><strong>CC</strong></th>
-							<!-- <td colspan="4"><?php //if($rcek1['stat_lp']=="RANDOM"){echo $rcekR['rlight_pers_colorchange'];}else{echo $rcek1['light_pers_colorchange'];} ?></td> -->
+							<!-- <td colspan="4"><?php //if($rcek1['stat_lp']=="RANDOM"){echo $rcekR['rlight_pers_colorchange'];}else{echo $rcek1['light_pers_colorchange'];}  ?></td> -->
 							<td colspan="4">
 								<?php if ($rcek1['light_pers_colorchange'] != "") {
 									echo $rcek1['light_pers_colorchange'];
@@ -13783,7 +14077,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>Saliva</th>
 							<th>&nbsp;</th>
-							<!-- <td colspan="2"><?php //if($rcek1['stat_slv']=="RANDOM"){echo $rcekR['rsaliva_staining'];}else{echo $rcek1['saliva_staining'];} ?></td> -->
+							<!-- <td colspan="2"><?php //if($rcek1['stat_slv']=="RANDOM"){echo $rcekR['rsaliva_staining'];}else{echo $rcek1['saliva_staining'];}  ?></td> -->
 							<td colspan="2">
 								<?php if ($rcek1['saliva_staining'] != "") {
 									echo $rcek1['saliva_staining'];
@@ -13797,7 +14091,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>Bleeding</th>
 							<th>&nbsp;</th>
-							<!-- <td colspan="2"><?php //if($rcek1['stat_bld']=="RANDOM"){echo $rcekR['rbleeding'];}else{echo $rcek1['bleeding'];} ?></td> -->
+							<!-- <td colspan="2"><?php //if($rcek1['stat_bld']=="RANDOM"){echo $rcekR['rbleeding'];}else{echo $rcek1['bleeding'];}  ?></td> -->
 							<td colspan="2">
 								<?php if ($rcek1['bleeding'] != "") {
 									echo $rcek1['bleeding'];
@@ -13811,8 +14105,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>Chlorin</th>
 							<th>&nbsp;</th>
-							<!-- <td colspan="2"><?php //if($rcek1['stat_chl']=="RANDOM"){echo $rcekR['rchlorin'];}else{echo $rcek1['chlorin'];} ?></td> -->
-							<!-- <td colspan="2"><?php //if($rcek1['stat_chl']=="RANDOM"){echo $rcekR['rchlorin'];}else{echo $rcek1['chlorin'];} ?></td> -->
+							<!-- <td colspan="2"><?php //if($rcek1['stat_chl']=="RANDOM"){echo $rcekR['rchlorin'];}else{echo $rcek1['chlorin'];}  ?></td> -->
+							<!-- <td colspan="2"><?php //if($rcek1['stat_chl']=="RANDOM"){echo $rcekR['rchlorin'];}else{echo $rcek1['chlorin'];}  ?></td> -->
 
 							<!-- <td colspan="2"><?php if ($rcek1['chlorin'] != "") {
 								echo $rcek1['chlorin'];
@@ -13831,8 +14125,8 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						<tr>
 							<th>Non-Chlorin</th>
 							<th>&nbsp;</th>
-							<!-- <td colspan="2"><?php //if($rcek1['stat_nchl']=="RANDOM"){echo $rcekR['rnchlorin1'];}else{echo $rcek1['nchlorin1'];} ?></td>
-				<td colspan="2"><?php //if($rcek1['stat_nchl']=="RANDOM"){echo $rcekR['rnchlorin2'];}else{echo $rcek1['nchlorin2'];} ?></td> -->
+							<!-- <td colspan="2"><?php //if($rcek1['stat_nchl']=="RANDOM"){echo $rcekR['rnchlorin1'];}else{echo $rcek1['nchlorin1'];}  ?></td>
+				<td colspan="2"><?php //if($rcek1['stat_nchl']=="RANDOM"){echo $rcekR['rnchlorin2'];}else{echo $rcek1['nchlorin2'];}  ?></td> -->
 
 							<td colspan="2">
 								<?php if ($rcek1['nchlorin1'] != "") {
@@ -13862,10 +14156,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						</tr>
 						<tr>
 							<th>&nbsp;</th>
-							<!-- <td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acetate'];}else{echo $rcek1['dye_tf_acetate'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cotton'];}else{echo $rcek1['dye_tf_cotton'];} ?></td>
-			<td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_nylon'];}else{echo $rcek1['dye_tf_nylon'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_poly'];}else{echo $rcek1['dye_tf_poly'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acetate'];}else{echo $rcek1['dye_tf_acetate'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cotton'];}else{echo $rcek1['dye_tf_cotton'];}  ?></td>
+			<td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_nylon'];}else{echo $rcek1['dye_tf_nylon'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_poly'];}else{echo $rcek1['dye_tf_poly'];}  ?></td> -->
 
 							<td>
 								<?php if ($rcek1['dye_tf_acetate'] != "") {
@@ -13907,10 +14201,10 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 						</tr>
 						<tr>
 							<th>&nbsp;</th>
-							<!-- <td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acrylic'];}else{echo $rcek1['dye_tf_acrylic'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_wool'];}else{echo $rcek1['dye_tf_wool'];} ?></td>
-			<td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cstaining'];}else{echo $rcek1['dye_tf_cstaining'];} ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_sstaining'];}else{echo $rcek1['dye_tf_sstaining'];} ?></td> -->
+							<!-- <td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acrylic'];}else{echo $rcek1['dye_tf_acrylic'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_wool'];}else{echo $rcek1['dye_tf_wool'];}  ?></td>
+			<td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cstaining'];}else{echo $rcek1['dye_tf_cstaining'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_sstaining'];}else{echo $rcek1['dye_tf_sstaining'];}  ?></td> -->
 
 							<td>
 								<?php if ($rcek1['dye_tf_acrylic'] != "") {
@@ -14019,7 +14313,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 							<td colspan="2"></td>
 							<td>&nbsp;</td>
 						</tr>
-					<?php
+						<?php
 						//SWEAT CONCEAL RESULT END
 					}
 					?>
@@ -14114,6 +14408,71 @@ if ($_POST['colorfastness_save'] == "save") {  // bleeding_root save
 }
 
 ?>
+
+<?php
+
+if ($_POST['physical_save'] == "save") {  // wrinkle save
+	$wrinkle = trim($_POST['wrinkle']);
+	$wrinkle1 = trim($_POST['wrinkle1']);
+	$wrinkle2 = trim($_POST['wrinkle2']);
+	$stat_wrinkle = trim($_POST['stat_wrinkle']);
+	$stat_wrinkle1 = trim($_POST['stat_wrinkle1']);
+	$wrinkle_note = trim($_POST['wrinkle_note']);
+
+	if ($tq_test_2_array) {
+		if ($wrinkle != "0" && $wrinkle != "") { //update
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle = '$wrinkle' WHERE id_nokk = '$id_tq_test_2'");
+		} else {
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle = null  WHERE id_nokk = '$id_tq_test_2'");
+		}
+		if ($wrinkle1 != "0" && $wrinkle1 != "") { //update
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle1 = '$wrinkle1' WHERE id_nokk = '$id_tq_test_2'");
+		} else {
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle1 = null  WHERE id_nokk = '$id_tq_test_2'");
+		}
+		if ($wrinkle2 != "0" && $wrinkle2 != "") { //update
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle2 = '$wrinkle2' WHERE id_nokk = '$id_tq_test_2'");
+		} else {
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle2 = null  WHERE id_nokk = '$id_tq_test_2'");
+		}
+		if ($stat_wrinkle != "0" && $stat_wrinkle != "") { //update
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET stat_wrinkle = '$stat_wrinkle' WHERE id_nokk = '$id_tq_test_2'");
+		} else {
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET stat_wrinkle = null  WHERE id_nokk = '$id_tq_test_2'");
+		}
+		if ($stat_wrinkle1 != "0" && $stat_wrinkle1 != "") { //update
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET stat_wrinkle1 = '$stat_wrinkle1' WHERE id_nokk = '$id_tq_test_2'");
+		} else {
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET stat_wrinkle1 = null  WHERE id_nokk = '$id_tq_test_2'");
+		}
+		if ($wrinkle_note != "0" && $wrinkle_note != "") { //update
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle_note = '$wrinkle_note' WHERE id_nokk = '$id_tq_test_2'");
+		} else {
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle_note = null  WHERE id_nokk = '$id_tq_test_2'");
+		}
+	} else {
+		if ($wrinkle != "0" && $wrinkle != "") { //insert 
+			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, wrinkle) VALUES ('$id_tq_test_2','$wrinkle')");
+		}
+		if ($wrinkle1 != "0" && $wrinkle1 != "") { //insert 
+			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, wrinkle1) VALUES ('$id_tq_test_2','$wrinkle1')");
+		}
+		if ($wrinkle2 != "0" && $wrinkle2 != "") { //insert 
+			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, wrinkle2) VALUES ('$id_tq_test_2','$wrinkle2')");
+		}
+		if ($stat_wrinkle != "0" && $stat_wrinkle != "") { //insert 
+			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, stat_wrinkle) VALUES ('$id_tq_test_2','$stat_wrinkle')");
+		}
+		if ($stat_wrinkle1 != "0" && $stat_wrinkle1 != "") { //insert 
+			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, stat_wrinkle1) VALUES ('$id_tq_test_2','$stat_wrinkle1')");
+		}
+		if ($wrinkle_note != "0" && $wrinkle_note != "") { //insert 
+			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, wrinkle_note) VALUES ('$id_tq_test_2','$wrinkle_note')");
+		}
+	}
+}
+?>
+
 <?php
 if ($_POST['physical_save'] == "save" and $cek1 > 0) {
 	$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test SET

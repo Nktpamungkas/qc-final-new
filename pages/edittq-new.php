@@ -386,7 +386,9 @@ echo '</pre>';
 			<div class="form-group">
 				<label><input type="checkbox" class="minimal" name="physical[]" value="CURLING" <?php if(in_array("CURLING",$detail)){echo "checked";} ?>> Curling &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 				</label>
-				<label><input type="checkbox" class="minimal" name="physical[]" value="NEDLE" <?php if(in_array("NEDLE",$detail)){echo "checked";} ?>> Nedle Holes & Cracking &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				<label><input type="checkbox" class="minimal" name="physical[]" value="NEDLE" <?php if(in_array("NEDLE",$detail)){echo "checked";} ?>> Nedle Holes & Cracking &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+				</label>
+				<label><input type="checkbox" class="minimal" name="physical[]" value="WRINKLE" <?php if(in_array("WRINKLE",$detail)){echo "checked";} ?>> Wrinkle &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 				</label>
 			</div>
             <div class="form-group">
@@ -523,6 +525,8 @@ echo '</pre>';
 				<label><input type="checkbox" class="minimal" name="physical[]" value="CURLING"> Curling &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 				</label>
 				<label><input type="checkbox" class="minimal" name="physical[]" value="NEDLE"> Nedle Holes & Cracking &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				</label>
+				<label><input type="checkbox" class="minimal" name="physical[]" value="WRINKLE"> Wrinkle &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 				</label>
 			</div>
             <div class="form-group">
