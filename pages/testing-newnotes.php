@@ -13352,17 +13352,12 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							<!--<td><?php //if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b3'];}else{echo $rcek1['absor_b3'];}  ?></td>-->
 
 							<td>
-								<?php if ($$rcek1['absor_b2'] != "") {
+								<?php if ($rcek1['absor_b2'] != "") {
 									echo $rcek1['absor_b2'];
 								} else {
 									echo $rcekR['rabsor_b2'];
 								} ?>
 							</td>
-							<!--<td><?php if ($$rcek1['absor_b3'] != "") {
-								echo $rcek1['absor_b3'];
-							} else {
-								echo $rcekR['rabsor_b3'];
-							} ?></td>-->
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 						</tr>
@@ -13371,7 +13366,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							<th>Back</th>
 							<!-- <td><?php //if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b1'];}else{echo $rcek1['absor_b1'];}  ?></td> -->
 							<td>
-								<?php if ($$rcek1['absor_b1'] != "") {
+								<?php if ($rcek1['absor_b1'] != "") {
 									echo $rcek1['absor_b1'];
 								} else {
 									echo $rcekR['rabsor_b1'];
