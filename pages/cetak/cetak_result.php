@@ -12,8 +12,13 @@ $idkk = $_REQUEST['idkk'];
 $noitem = $_REQUEST['noitem'];
 $nohanger = $_REQUEST['nohanger'];
 $act = $_GET['g'];
-$data = mysqli_query($con, "SELECT *,
-    CONCAT_WS(' ',fc_note,ph_note, abr_note, bas_note, dry_note, fla_note, fwe_note, fwi_note, burs_note,repp_note,wick_note,absor_note,apper_note,fiber_note,pillb_note,pillm_note,pillr_note,thick_note,growth_note,recover_note,stretch_note,sns_note,snab_note,snam_note,snap_note,wash_note,water_note,acid_note,alkaline_note,crock_note,phenolic_note,cm_printing_note,cm_dye_note,light_note,light_pers_note,saliva_note,h_shrinkage_note,fibre_note,pilll_note,soil_note,apperss_note,bleeding_note,chlorin_note,dye_tf_note,humidity_note,odour_note) AS note_g FROM tbl_tq_test WHERE id_nokk='$idkk' ORDER BY id DESC LIMIT 1");
+$data = mysqli_query($con, "SELECT a.*, b.*,
+    CONCAT_WS(' ',a.fc_note, a.ph_note, a.abr_note, a.bas_note, a.dry_note, a.fla_note, a.fwe_note, a.fwi_note, a.burs_note, a.repp_note, a.wick_note, a.wick_note, a.absor_note, a.apper_note, a.fiber_note, a.pillb_note, a.pillm_note, a.pillr_note, a.thick_note, a.growth_note, a.recover_note, a.stretch_note, a.sns_note, a.snab_note, a.snam_note, a.snap_note, a.wash_note, a.water_note, a.acid_note, a.alkaline_note, a.crock_note, a.phenolic_note, a.cm_printing_note, a.cm_dye_note, a.light_note, a.light_pers_note, a.saliva_note, a.h_shrinkage_note, a.fibre_note, a.pilll_note, a.soil_note, a.bleeding_note, a.chlorin_note, a.dye_tf_note, a.humidity_note, a.odour_note, a.curling_note, a.nedle_note, b.wrinkle_note) AS note_g 
+    FROM tbl_tq_test a
+    LEFT JOIN tbl_tq_test_2 b ON a.id_nokk = b.id_nokk
+    WHERE a.id_nokk='$idkk' 
+    ORDER BY a.id DESC 
+    LIMIT 1");
 $rcek1 = mysqli_fetch_array($data);
 $sqlCekR = mysqli_query($con, "SELECT *,
     CONCAT_WS(' ',rfc_note,rph_note, rabr_note, rbas_note, rdry_note, rfla_note, rfwe_note, rfwi_note, rburs_note,rrepp_note,rwick_note,rabsor_note,rapper_note,rfiber_note,rpillb_note,rpillm_note,rpillr_note,rthick_note,rgrowth_note,rrecover_note,rstretch_note,rsns_note,rsnab_note,rsnam_note,rsnap_note,rwash_note,rwater_note,racid_note,ralkaline_note,rcrock_note,rphenolic_note,rcm_printing_note,rcm_dye_note,rlight_note,rlight_pers_note,rsaliva_note,rh_shrinkage_note,rfibre_note,rpilll_note,rsoil_note,rapperss_note,rbleeding_note,rchlorin_note,rdye_tf_note,rhumidity_note,rodour_note) AS rnote_g FROM tbl_tq_randomtest WHERE no_item='$noitem' OR no_hanger='$nohanger'");
@@ -1564,6 +1569,17 @@ $rd = mysqli_fetch_array($data1);
                   } else {
                     echo $rcek1['nedle'];
                   } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['wrinkle'] != "" || $rcek1['wrinkle1'] != "" || $rcek1['wrinkle2'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Wrinkle</th>
+                <td colspan="6" style="font-size: 7px; <?= $rcek1['stat_wrinkle'] == "FAIL" ? 'color: red;' : '' ?>">
+                  <?= $rcek1['wrinkle']; ?>
+                </td>
+                <td colspan="6" style="font-size: 7px; <?= $rcek1['stat_wrinkle1'] == "FAIL" ? 'color: red;' : '' ?>">
+                  <?= $rcek1['wrinkle2'] ?? $rcek1['wrinkle1'] ?>
                 </td>
               </tr>
             <?php } ?>
