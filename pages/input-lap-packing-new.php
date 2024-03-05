@@ -92,6 +92,8 @@ if ($_POST['simpan'] == "simpan") {
 	`bruto`='$_POST[bruto]',
 	`jml_netto`='$_POST[rol_netto]',
 	`netto`='$_POST[netto]',
+    `mutasi`='$_POST[mutasi]',
+	`jml_mutasi`='$_POST[rol_mutasi]',
 	`kg_bs`='$_POST[kg_bs]',
 	`jml_bs`='$_POST[rol_bs]',
 	`kg_th`='$_POST[kg_th]',
@@ -163,6 +165,8 @@ if ($_POST['simpan'] == "simpan") {
 	`bruto`='$_POST[bruto]',
 	`netto`='$_POST[netto]',
 	`jml_netto`='$_POST[rol_netto]',
+    `mutasi`='$_POST[mutasi]',
+	`jml_mutasi`='$_POST[rol_mutasi]',
 	`kg_bs`='$_POST[kg_bs]',
 	`jml_bs`='$_POST[rol_bs]',
 	`kg_th`='$_POST[kg_th]',
@@ -1025,6 +1029,29 @@ $rowtoBS = db2_fetch_assoc($stmt2BS);
                             } else {
                                 echo $rowtoTH['TH_KG'];
                             } ?>" placeholder="0.00">
+                            <span class="input-group-addon">KGs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="qty_mutasi" class="col-sm-3 control-label">Qty Mutasi</label>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <input name="rol_mutasi" type="text" class="form-control" id="rol_mutasi" value="<?php if ($crow > 0) {
+                                echo $row['jml_mutasi'];
+                            } else {
+                                echo $rowto['TOTAL_ROLL']-($rowtoBS['BS_ROLL']+$rowtoTH['TH_ROLL']);
+                            } ?>" placeholder="0" required>
+                            <span class="input-group-addon">Roll</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <input name="mutasi" type="text" class="form-control" id="mutasi" value="<?php if ($crow > 0) {
+                                echo $row['mutasi'];
+                            } else {
+                                echo $rowto['TOTAL_KG']-($rowtoBS['BS_KG']+$rowtoTH['TH_KG']);
+                            } ?>" placeholder="0.00" required>
                             <span class="input-group-addon">KGs</span>
                         </div>
                     </div>
