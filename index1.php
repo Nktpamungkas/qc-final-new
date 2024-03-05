@@ -95,6 +95,11 @@
             margin: 0px 0 0px 0;
             font-size: 28px;
         }
+
+        .cetak{
+            font-family: 'Times New Roman', Times, serif;
+   
+        }
     </style>
     <!-- Google Font -->
     <!--
@@ -216,9 +221,9 @@
                             </ul>
                         </li>
                         <?php $qryNCP2 = mysqli_query($con, "SELECT
-                                                                    * 
-                                                                FROM
-                                                                    `user_login` SELECT
+                                                                --     * 
+                                                                -- FROM
+                                                                --     `user_login` SELECT
                                                                     COUNT(*) AS jml 
                                                                 FROM
                                                                     tbl_ncp_qcf 
@@ -230,6 +235,7 @@
                                                                     OR ISNULL( penyelesaian ))");
                         $rNCP2 = mysqli_fetch_array($qryNCP2);
                         ?>
+                        
                         <!-- Tasks Menu -->
                         <li class="dropdown tasks-menu">
                             <!-- Menu Toggle Button -->

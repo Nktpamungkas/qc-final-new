@@ -378,9 +378,9 @@ $r1=mysqli_fetch_array($qryr1);
     	<div class="box">
         <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form2">
 			<div class="box-header with-border">
-                    <div class="pull-right">
+                    <div class="pull-right" >
                         <input type="submit" value="Pilih Cetak" name="cari" id="cari" class="btn btn-primary pull-left"/>
-                        <a href="pages/cetak/cetak_bon_ganti.php?no_bon=<?php echo $r['no_bon'] ?>&id_nsp=<?php echo $_GET['id']; ?>&no_order=<?php echo $rCek['no_order'];?>&po=<?php echo $rCek['po'];?>&id_cek=<?php echo $_POST['cek'][0];?>&id_cek1=<?php echo $_POST['cek'][1];?>&id_cek2=<?php echo $_POST['cek'][2];?>" class="btn btn-info <?php if($_POST['cek'][0]=="") { echo "disabled"; }?>" target="_blank">Cetak Bon </a>
+                        <a href="pages/cetak/cetak_bon_ganti.php?no_bon=<?php echo $r['no_bon'] ?>&id_nsp=<?php echo $_GET['id']; ?>&no_order=<?php echo $rCek['no_order'];?>&po=<?php echo $rCek['po'];?>&id_cek=<?php echo $_POST['cek'][0];?>&id_cek1=<?php echo $_POST['cek'][1];?>&id_cek2=<?php echo $_POST['cek'][2];?>" class="btn btn-info cetak <?php if($_POST['cek'][0]=="") { echo "disabled"; }?>" target="_blank" >Cetak Bon </a>
 					</div>
 			</div>    
 			<div class="box-body">		

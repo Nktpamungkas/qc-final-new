@@ -5,7 +5,8 @@ $username="ditprogram";
 $password="Xou@RUnivV!6";
 $db_name="TM";
 $connInfo = array( "Database"=>$db_name, "UID"=>$username, "PWD"=>$password);
-$conn     = sqlsrv_connect( $host, $connInfo);
+// $conn     = sqlsrv_connect( $host, $connInfo);
+
 
 $hostname="10.0.0.21";
 $database = "NOWPRD";
@@ -19,7 +20,7 @@ if($conn1) {
 }
 else{
     exit("DB2 Connection failed");
-    }
+}
 
 $con=mysqli_connect("10.0.0.10","dit","4dm1n","db_qc");
 $condye=mysqli_connect("10.0.0.10","dit","4dm1n","db_dying");

@@ -86,4 +86,17 @@
     <td>%Dept. Tanggung Jawab</td>
     <td><input type="text" name="penghubung_dep_persen" placeholder="Contoh: 50,30,20,...(Pemisah Koma dan Tanpa %)" value="<?=$rcek['penghubung_dep_persen']?>"></td>
   </tr>
+  <tr>
+    <td>FOC</td>
+    <td>
+      <input type="text" name="penghubung_foc1" placeholder="0" style="width:50px" value="<?=$rcek['penghubung_foc1']?>">
+      <input type="text" name="penghubung_foc2" placeholder="KG" style="width:50px" value="<?=$rcek['penghubung_foc2']?>">
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" name="penghubung_foc3" placeholder="0.00" style="width:50px" value="<?=$rcek['penghubung_foc3']?>">
+    
+	 <select class="form-control select2" name="penghubung_foc4"  style="width:80px">
+			<option value="">Yard</option>
+	 </select>
+    </td>
+  </tr> 
 </table>

@@ -295,6 +295,7 @@ $page = strtolower($page);
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
+        
       <?php } ?>
       <?php if ($_SESSION['lvl_id'] != "DMF" and $_SESSION['lvl_id'] != "TQ" and $_SESSION['lvl_id'] != "SPVQC" and $_SESSION['lvl_id'] != "AFTERSALES") { ?>
 

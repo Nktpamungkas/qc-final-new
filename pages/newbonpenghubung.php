@@ -152,11 +152,14 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			   <th  rowspan=2><div align="center" valign="middle">ITEM</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">COLOR</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">LOT</div></th>
+         <th  rowspan=2><div align="center" valign="middle">DEMAND</div></th>
 			   
 			   <th colspan=3 ><div align="center" valign="middle">QTY</div></th>
+         <th colspan=3 ><div align="center" valign="middle">QTY FOC</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">RESPONBILITY</div></th>
+         
 			   
 			 
 			   
@@ -165,6 +168,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			<tr>  
               
 			    <th><div align="center" valign="middle">ROLL</div></th>
+				<th><div align="center" valign="middle">KG</div></th>
+				<th><div align="center" valign="middle">YARD</div></th>
+
+        <th><div align="center" valign="middle">ROLL</div></th>
 				<th><div align="center" valign="middle">KG</div></th>
 				<th><div align="center" valign="middle">YARD</div></th>
 				
@@ -231,9 +238,16 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <td align="center"><?php echo $row1['no_item'];?></td>
 			  <td align="center"><?php echo $row1['warna'];?></td>
 			  <td align="center"><?php echo $row1['lot'];?></td>
+        <td align="center"><?php echo $row1['nodemand'];?></td>
 			  <td align="center"><?php echo $row1['penghubung_roll1'];?></td>
 			  <td align="center"><?php echo $row1['penghubung_roll2'];?></td>
 			  <td align="center"><?php echo $row1['penghubung_roll3'];?></td>
+
+        <!-- Tambahan -->
+        <td align="center"><?php echo $row1['penghubung_foc1'];?></td>
+			  <td align="center"><?php echo $row1['penghubung_foc2'];?></td>
+			  <td align="center"><?php echo $row1['penghubung_foc3'];?></td>
+
 			   <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
 				<td align="center">
@@ -274,9 +288,16 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <td align="center"><?php echo $row1['no_item'];?></td>
 			  <td align="center"><?php echo $row1['warna'];?></td>
 			  <td align="center"><?php echo $row1['lot'];?></td>
+        <td align="center"><?php echo $row1['nodemand'];?></td>
 			  <td align="center"><?php echo $row1['penghubung2_roll1'];?></td>
 			  <td align="center"><?php echo $row1['penghubung2_roll2'];?></td>
 			  <td align="center"><?php echo $row1['penghubung2_roll3'];?></td>
+
+         <!-- Tambahan -->
+         <td align="center"><?php echo $row1['penghubung_foc1'];?></td>
+			  <td align="center"><?php echo $row1['penghubung_foc2'];?></td>
+			  <td align="center"><?php echo $row1['penghubung_foc3'];?></td>
+
 			   <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
 				<td align="center">
@@ -321,9 +342,15 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <td align="center"><?php echo $row1['no_item'];?></td>
 			  <td align="center"><?php echo $row1['warna'];?></td>
 			  <td align="center"><?php echo $row1['lot'];?></td>
+			  <td align="center"><?php echo $row1['nodemand'];?></td>
 			  <td align="center"><?php echo $row1['penghubung3_roll1'];?></td>
 			  <td align="center"><?php echo $row1['penghubung3_roll2'];?></td>
 			  <td align="center"><?php echo $row1['penghubung3_roll3'];?></td>
+         <!-- Tambahan -->
+         <td align="center"><?php echo $row1['penghubung_foc1'];?></td>
+			  <td align="center"><?php echo $row1['penghubung_foc2'];?></td>
+			  <td align="center"><?php echo $row1['penghubung_foc3'];?></td>
+        
 			   <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>
 				<td align="center">
