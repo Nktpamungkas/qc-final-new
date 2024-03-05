@@ -624,6 +624,7 @@ B.TGL_AKHIR_INSPEK,
 B.JAM_AKHIR_INSPEK";
 $stmt2BS = db2_exec($conn1, $sqltoBS, array('cursor' => DB2_SCROLLABLE));
 $rowtoBS = db2_fetch_assoc($stmt2BS);
+
 ?>
 
 <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
