@@ -611,7 +611,6 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
     $query = mysqli_query($con, $sql);
 
 
-
     while ($r = mysqli_fetch_array($query)) {
       $sqlR = mysqli_query($con, "SELECT * FROM tbl_qcf WHERE nodemand='" . $r['nodemand'] . "'");
       $rR = mysqli_fetch_array($sqlR);
@@ -2100,6 +2099,18 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
             </td>
             <td>
               <?php echo $r['nedle_note'] ?>
+            </td>
+            <td>
+              <?php echo $r['wrinkle'] ?>
+            </td>
+            <td>
+              <?php echo $r['wrinkle1'] ?>
+            </td>
+            <td>
+              <?php echo $r['wrinkle2'] ?>
+            </td>
+            <td>
+              <?php echo $r['wrinkle_note'] ?>
             </td>
             <td>
               <?php echo $r['wick_l1']; ?>
