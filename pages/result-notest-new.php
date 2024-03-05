@@ -30,8 +30,13 @@ $NoKKcek = mysqli_num_rows($qryNoKK);
 $rNoKK = mysqli_fetch_array($qryNoKK);
 ?>
 <?php
-$sqlCek1 = mysqli_query($con, "SELECT *,
-	CONCAT_WS(' ',fc_note,ph_note, abr_note, bas_note, dry_note, fla_note, fwe_note, fwi_note, burs_note,repp_note,wick_note,absor_note,apper_note,fiber_note,pillb_note,pillm_note,pillr_note,thick_note,growth_note,recover_note,stretch_note,sns_note,snab_note,snam_note,snap_note,wash_note,water_note,acid_note,alkaline_note,crock_note,phenolic_note,cm_printing_note,cm_dye_note,light_note,light_pers_note,saliva_note,h_shrinkage_note,fibre_note,pilll_note,soil_note,apperss_note,bleeding_note,chlorin_note,dye_tf_note) AS note_g FROM tbl_tq_test WHERE id_nokk='$rNoKK[id]' ORDER BY id DESC LIMIT 1");
+$sqlCek1 = mysqli_query($con, "SELECT a.*, b.*,
+	CONCAT_WS(' ',a.fc_note, a.ph_note, a.abr_note, a.bas_note, a.dry_note, a.fla_note, a.fwe_note, a.fwi_note, a.burs_note, a.repp_note, a.wick_note, a.wick_note, a.absor_note, a.apper_note, a.fiber_note, a.pillb_note, a.pillm_note, a.pillr_note, a.thick_note, a.growth_note, a.recover_note, a.stretch_note, a.sns_note, a.snab_note, a.snam_note, a.snap_note, a.wash_note, a.water_note, a.acid_note, a.alkaline_note, a.crock_note, a.phenolic_note, a.cm_printing_note, a.cm_dye_note, a.light_note, a.light_pers_note, a.saliva_note, a.h_shrinkage_note, a.fibre_note, a.pilll_note, a.soil_note, a.bleeding_note, a.chlorin_note, a.dye_tf_note, a.humidity_note, a.odour_note, a.curling_note, a.nedle_note, b.wrinkle_note) AS note_g 
+	FROM tbl_tq_test a 
+	LEFT JOIN tbl_tq_test_2 b ON a.id_nokk = b.id_nokk
+	WHERE a.id_nokk='$rNoKK[id]' 
+	ORDER BY a.id DESC 
+	LIMIT 1");
 $cek1 = mysqli_num_rows($sqlCek1);
 $rcek1 = mysqli_fetch_array($sqlCek1);
 $sqlCekR = mysqli_query($con, "SELECT *,
@@ -2037,6 +2042,29 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 										echo $rcekR['rnedle'];
 									} ?>
 								</td>
+								<td>&nbsp;</td>
+							</tr>
+						<?php } ?>
+						<?php if ($rcek1['wrinkle'] != "" || $rcek1['wrinkle1'] != "" || $rcek1['wrinkle2'] != "") { ?>
+							<tr>
+								<th colspan="1">Wrinkle</th>
+								<th>Original</th>
+								<td><?= $rcek1['wrinkle']; ?></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<th colspan="1">&nbsp;</th>
+								<th>Afterwash</th>
+								<td><?= $rcek1['wrinkle1']; ?></td> <!-- disiniya -->
+								<td><?= $rcek1['wrinkle2']; ?></td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 							</tr>
 						<?php } ?>

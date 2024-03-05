@@ -14406,66 +14406,31 @@ if ($_POST['colorfastness_save'] == "save") {  // bleeding_root save
 
 <?php
 
-if ($_POST['physical_save'] == "save") {  // wrinkle save
-	$wrinkle = trim($_POST['wrinkle']);
-	$wrinkle1 = trim($_POST['wrinkle1']);
-	$wrinkle2 = trim($_POST['wrinkle2']);
-	$stat_wrinkle = trim($_POST['stat_wrinkle']);
-	$stat_wrinkle1 = trim($_POST['stat_wrinkle1']);
-	$wrinkle_note = trim($_POST['wrinkle_note']);
+if ($_POST['physical_save'] == "save") {
+    $fields = array('wrinkle', 'wrinkle1', 'wrinkle2', 'stat_wrinkle', 'stat_wrinkle1', 'wrinkle_note');
+    
+    foreach ($fields as $field) {
+        $value = trim($_POST[$field]);
+        
+        if ($value != "0" && $value != "") {
+            $selectSql = "SELECT * FROM tbl_tq_test_2 WHERE id_nokk = '$id_tq_test_2'";
+            $result = mysqli_query($con, $selectSql);
 
-	if ($tq_test_2_array) {
-		if ($wrinkle != "0" && $wrinkle != "") { //update
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle = '$wrinkle' WHERE id_nokk = '$id_tq_test_2'");
-		} else {
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle = null  WHERE id_nokk = '$id_tq_test_2'");
-		}
-		if ($wrinkle1 != "0" && $wrinkle1 != "") { //update
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle1 = '$wrinkle1' WHERE id_nokk = '$id_tq_test_2'");
-		} else {
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle1 = null  WHERE id_nokk = '$id_tq_test_2'");
-		}
-		if ($wrinkle2 != "0" && $wrinkle2 != "") { //update
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle2 = '$wrinkle2' WHERE id_nokk = '$id_tq_test_2'");
-		} else {
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle2 = null  WHERE id_nokk = '$id_tq_test_2'");
-		}
-		if ($stat_wrinkle != "0" && $stat_wrinkle != "") { //update
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET stat_wrinkle = '$stat_wrinkle' WHERE id_nokk = '$id_tq_test_2'");
-		} else {
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET stat_wrinkle = null  WHERE id_nokk = '$id_tq_test_2'");
-		}
-		if ($stat_wrinkle1 != "0" && $stat_wrinkle1 != "") { //update
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET stat_wrinkle1 = '$stat_wrinkle1' WHERE id_nokk = '$id_tq_test_2'");
-		} else {
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET stat_wrinkle1 = null  WHERE id_nokk = '$id_tq_test_2'");
-		}
-		if ($wrinkle_note != "0" && $wrinkle_note != "") { //update
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle_note = '$wrinkle_note' WHERE id_nokk = '$id_tq_test_2'");
-		} else {
-			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET wrinkle_note = null  WHERE id_nokk = '$id_tq_test_2'");
-		}
-	} else {
-		if ($wrinkle != "0" && $wrinkle != "") { //insert 
-			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, wrinkle) VALUES ('$id_tq_test_2','$wrinkle')");
-		}
-		if ($wrinkle1 != "0" && $wrinkle1 != "") { //insert 
-			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, wrinkle1) VALUES ('$id_tq_test_2','$wrinkle1')");
-		}
-		if ($wrinkle2 != "0" && $wrinkle2 != "") { //insert 
-			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, wrinkle2) VALUES ('$id_tq_test_2','$wrinkle2')");
-		}
-		if ($stat_wrinkle != "0" && $stat_wrinkle != "") { //insert 
-			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, stat_wrinkle) VALUES ('$id_tq_test_2','$stat_wrinkle')");
-		}
-		if ($stat_wrinkle1 != "0" && $stat_wrinkle1 != "") { //insert 
-			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, stat_wrinkle1) VALUES ('$id_tq_test_2','$stat_wrinkle1')");
-		}
-		if ($wrinkle_note != "0" && $wrinkle_note != "") { //insert 
-			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk, wrinkle_note) VALUES ('$id_tq_test_2','$wrinkle_note')");
-		}
-	}
+            if (mysqli_num_rows($result) > 0) {
+                // Data sudah ada, lakukan UPDATE
+                $updateSql = "UPDATE tbl_tq_test_2 SET $field = '$value' WHERE id_nokk = '$id_tq_test_2'";
+                $sqlPHY = mysqli_query($con, $updateSql);
+            } else {
+                // Data belum ada, lakukan INSERT
+                $insertSql = "INSERT INTO tbl_tq_test_2 (id_nokk, $field) VALUES ('$id_tq_test_2','$value')";
+                $sqlPHY = mysqli_query($con, $insertSql);
+            }
+        } else {
+            $sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET $field = null WHERE id_nokk = '$id_tq_test_2'");
+        }
+    }
 }
+
 ?>
 
 <?php
