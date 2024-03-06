@@ -42,7 +42,7 @@ $pelanggan=substr($r1['langganan'],0,$pos);
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="styles_cetak.css" rel="stylesheet" type="text/css">
+<!-- <link href="styles_cetak.css" rel="stylesheet" type="text/css"> -->
 <title>Cetak Bon Ganti Kain</title>
 <script>
 
@@ -88,6 +88,87 @@ window.addEventListener('load', function () {
 
 </script>
 <style>
+body,
+td,
+th {
+    /*font-family: Courier New, Courier, monospace; */
+    /* font-family: sans-serif, Roman, serif; */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+pre {
+    font-family: 'Times New Roman', Times, serif;
+    clear: both;
+    margin: 0px auto 0px;
+    padding: 0px;
+    white-space: pre-wrap;
+    /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;
+    /* Mozilla, since 1999 */
+    white-space: -pre-wrap;
+    /* Opera 4-6 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-word;
+}
+
+body {
+    margin: 0px auto 0px;
+    padding: 2px;
+    font-size: 8px;
+    color: #000;
+    width: 98%;
+    background-position: top;
+    background-color: #fff;
+}
+
+.table-list {
+    clear: both;
+    text-align: left;
+    border-collapse: collapse;
+    margin: 0px 0px 10px 0px;
+    background: #fff;
+}
+
+.table-list td {
+    color: #333;
+    font-size: 12px;
+    border-color: #fff;
+    border-collapse: collapse;
+    vertical-align: center;
+    padding: 3px 5px;
+    border-bottom: 1px #000000 solid;
+    border-left: 1px #000000 solid;
+    border-right: 1px #000000 solid;
+}
+
+.table-list1 {
+    clear: both;
+    text-align: left;
+    border-collapse: collapse;
+    margin: 0px 0px 5px 0px;
+    background: #fff;
+}
+
+.table-list1 td {
+    color: #333;
+    font-size: 11px;
+    border-color: #fff;
+    border-collapse: collapse;
+    vertical-align: center;
+    padding: 1px 3px;
+    border-bottom: 1px #000000 solid;
+    border-top: 1px #000000 solid;
+    border-left: 1px #000000 solid;
+    border-right: 1px #000000 solid;
+}
+
+#nocetak {
+    display: none;
+}
+
+/* --> */
+
 .hurufvertical {
  writing-mode:tb-rl;
     -webkit-transform:rotate(-90deg);

@@ -96,10 +96,7 @@
             font-size: 28px;
         }
 
-        .cetak{
-            font-family: 'Times New Roman', Times, serif;
-   
-        }
+        
     </style>
     <!-- Google Font -->
     <!--

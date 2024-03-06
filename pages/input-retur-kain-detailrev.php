@@ -334,7 +334,7 @@ $rb=mysqli_fetch_array($qryb);
             <div class="box-header with-border">
 					<div class="pull-right">
 						<input type="submit" value="Pilih Cetak" name="save" id="save" class="btn btn-primary pull-left"/>
-						<a href="pages/cetak/cetak_suratretur.php?no_order=<?php echo $rCek['no_order'];?>&po=<?php echo $rCek['po'];?>&id_nsp=<?php echo $_GET['id'];?>&id_cek=<?php echo $_POST['cek'][0];?>&id_cek1=<?php echo $_POST['cek'][1];?>&id_cek2=<?php echo $_POST['cek'][2];?>" class="btn btn-danger cetak <?php if($_POST['cek'][0]=="") { echo "disabled"; }?>" target="_blank" >Cetak Surat Barang Retur</a>
+						<a href="pages/cetak/cetak_suratretur.php?no_order=<?php echo $rCek['no_order'];?>&po=<?php echo $rCek['po'];?>&id_nsp=<?php echo $_GET['id'];?>&id_cek=<?php echo $_POST['cek'][0];?>&id_cek1=<?php echo $_POST['cek'][1];?>&id_cek2=<?php echo $_POST['cek'][2];?>" class="btn btn-danger  <?php if($_POST['cek'][0]=="") { echo "disabled"; }?>" target="_blank" >Cetak Surat Barang Retur</a>
 						<!--<a href="pages/cetak/cetak_suratretur_pdf.php?no_order=<?php echo $rCek['no_order'];?>&po=<?php echo $rCek['po'];?>&id_nsp=<?php echo $_GET['id'];?>" class="btn btn-danger" target="_blank">Cetak Surat Barang Retur PDF</a>-->
 					</div>
 	                </div>    
