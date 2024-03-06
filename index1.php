@@ -221,12 +221,6 @@
                             </ul>
                         </li>
                         <?php $qryNCP2 = mysqli_query($con, "SELECT
-<<<<<<< HEAD
-                                                                --     * 
-                                                                -- FROM
-                                                                --     `user_login` SELECT
-=======
->>>>>>> 28c0f30f3077405f8682490873d5c6597891ccea
                                                                     COUNT(*) AS jml 
                                                                 FROM
                                                                     tbl_ncp_qcf 
