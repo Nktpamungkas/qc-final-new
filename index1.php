@@ -221,12 +221,7 @@
                             </ul>
                         </li>
                         <?php $qryNCP2 = mysqli_query($con, "SELECT
-<<<<<<< HEAD
-                                                                --     * 
-                                                                -- FROM
-                                                                --     `user_login` SELECT
-=======
->>>>>>> 28c0f30f3077405f8682490873d5c6597891ccea
+                                                           
                                                                     COUNT(*) AS jml 
                                                                 FROM
                                                                     tbl_ncp_qcf 
@@ -430,7 +425,7 @@
                     <li class="<?php if ($_GET['p'] == "Home" or $_GET['p'] == "") {
                                     echo "active";
                                 } ?>"><a href="Home"><i class="fa fa-dashboard text-gray"></i> <span>DashBoard</span></a></li>
-                    <?php if ($_SESSION['lvl_id'] == "PACKING" or $_SESSION['lvl_id'] == "MKT") {  ?>
+                    <?php if ($_SESSION['lvl_id'] == "PACKING" or $_SESSION['lvl_id'] == "MKT" or $_SESSION['lvl_id'] == "AFTERSALES") {  ?>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Data-New" or $_GET['p'] == "Input-Data-KJ-New" or $_GET['p'] == "Detail-Data" or $_GET['p'] == "Label-QCF" or $_GET['p'] == "Detail-Data-KJ" or $_GET['p'] == "Rekap-Data" or $_GET['p'] == "Rekap-Email" or $_GET['p'] == "Rekap-Bon" or $_GET['p'] == "Grafik") {
                                                 echo "active";
                                             } ?>">
@@ -683,6 +678,8 @@
                         <?php } ?>
                     <?php } ?>
                     <?php if ($_SESSION['lvl_id'] == "AFTERSALES") {  ?>
+                    
+                
                         <li class="treeview <?php if ($_GET['p'] == "Input-KPE-New") {
                                                 echo "active";
                                             } ?>">
