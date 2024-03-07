@@ -37,7 +37,7 @@ $Akhir	= isset($_POST['akhir']) ? $_POST['akhir'] : '';
             <div class="col-sm-3">
                 <div class="input-group date">
                     <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                    <input name="awal" type="text" class="form-control pull-right" id="datepicker" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" autocomplete="off"/>
+                    <input name="awal" type="date" class="form-control pull-right" id="" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" autocomplete="off"/>
                 </div>
             </div>
             <!-- /.input group -->
@@ -46,7 +46,7 @@ $Akhir	= isset($_POST['akhir']) ? $_POST['akhir'] : '';
             <div class="col-sm-3">
                 <div class="input-group date">
                     <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                    <input name="akhir" type="text" class="form-control pull-right" id="datepicker1" placeholder="Tanggal Akhir" value="<?php echo $Akhir;  ?>" autocomplete="off"/>
+                    <input name="akhir" type="date" class="form-control pull-right" id="" placeholder="Tanggal Akhir" value="<?php echo $Akhir;  ?>" autocomplete="off"/>
                 </div>
             </div>
             <!-- /.input group -->
