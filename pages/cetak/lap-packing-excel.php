@@ -95,6 +95,7 @@ No MC :
     <th colspan="2" valign="middle" bgcolor="#006699">
       <font color="#FFFFFF"><strong>Qty BS</strong></font>
     </th>
+    <th colspan="2" valign="middle" bgcolor="#006699"> <font color="#FFFFFF"><strong>Loss</strong></font> </th>
     <th rowspan="2" valign="middle" bgcolor="#006699"><strong>
         <font color="#FFFFFF">Proses</font>
       </strong></th>
@@ -145,6 +146,8 @@ No MC :
         <font color="#FFFFFF">Kg</font>
       </strong>
     </th>
+    <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Kg</font></strong></th>
+    <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Note</font> </strong> </th>
   </tr>
   <?php
   if ($shift != "ALL") {
@@ -225,6 +228,8 @@ No MC :
       <td>
         <?= $row['kg_bs'] ?>
       </td>
+      <td><?= $row['qty_loss'] ?></td>
+      <td><?= $row['note_loss'] ?></td>
       <td>
         <?php echo $row['proses']; ?>
       </td>
@@ -267,6 +272,8 @@ No MC :
   for ($ri = 0; $ri < 5; $ri++) {
     ?>
     <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
