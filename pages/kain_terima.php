@@ -28,9 +28,36 @@ include("../koneksi.php");
 				   </select>	   
                   </div>
                 </div> 
-				 
+				  <?php if($r['sts_qc']=="Belum Terima Kain") { ?>
+				  <div class="form-group">
+                  <label for="diterima_oleh" class="col-sm-3 control-label">DiTerima Oleh</label>
+                  <div class="col-sm-6">
+				  <input type="text" class="form-control" value="" name="diterima_oleh" maxlength="30" required>		   
+                  </div>
+                  </div>
+				  <div class="form-group">
+                  <label for="nama_penerima" class="col-sm-3 control-label">Nama Penerima</label>
+                  <div class="col-sm-6">
+				  <input type="text" class="form-control" value="" name="nama_penerima" maxlength="30" required>		   
+                  </div>
+                  </div>
+				  <?php } ?>
+				  <?php if($r['sts_qc']=="Kain Sudah diTes") { ?>
+				  <div class="form-group">
+                  <label for="approved1" class="col-sm-3 control-label">Approved 1</label>
+                  <div class="col-sm-6">
+				  <input type="text" class="form-control" value="" name="approved1" maxlength="30" required>		   
+                  </div>
+                  </div>
+				  <div class="form-group">
+                  <label for="approved2" class="col-sm-3 control-label">Approved 2</label>
+                  <div class="col-sm-6">
+				  <input type="text" class="form-control" value="" name="approved2" maxlength="30">		   
+                  </div>
+                  </div>
+				  <?php } ?>
 				<input type="hidden" id="id" name="id" value="<?php echo $modal_id;?>"> 
-				  
+				<em>Note: Jika kain diambil parsial harap nama Approved 2 diisikan </em> 
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
