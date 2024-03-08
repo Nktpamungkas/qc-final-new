@@ -128,8 +128,8 @@ border:hidden;
           <td colspan="4" bgcolor="#D7D5D5">Sopian S.</td>
         </tr>
         <tr align="center">
-          <td rowspan="3"><font size="-2"><strong>NO MESIN</strong></font></td>
           <td rowspan="3"><font size="-2"><strong>OPERATOR</strong></font></td>
+          <td rowspan="3"><font size="-2"><strong>NO MESIN</strong></font></td>
           <td colspan="4"><font size="-2"><strong>GRAND TOTAL</strong></font></td>
         </tr>
         <tr align="center">
@@ -168,14 +168,25 @@ border:hidden;
                     $qryBesar=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
                     WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING A' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
                     $rowBesar=mysqli_fetch_array($qryBesar);
+					// QTY LOSS
+					$qryLossA=mysqli_query($con,"select
+						SUM(qty_loss) as kg_loss
+					from
+						tbl_lap_inspeksi
+					where
+						tgl_update between '$Awal' AND '$Akhir'
+						and `inspektor` = 'PACKING A'
+						and `dept` = 'PACKING'");
+                    $rowLossA=mysqli_fetch_array($qryLossA);
+					
 					$sqlop="SELECT x.LONGDESCRIPTION FROM DB2ADMIN.INITIALS x
 							WHERE CODE ='".$row['operator']."'"; 
                     $stmt1=db2_exec($conn1,$sqlop, array('cursor'=>DB2_SCROLLABLE));
                     $rowop = db2_fetch_assoc($stmt1);
             ?>
         <tr>
-          <td align="center"><?php echo $row['no_mc'];?></td>
           <td align="center"><?php echo $rowop['LONGDESCRIPTION'];?></td>
+          <td align="center"><?php echo $row['no_mc'];?></td>
           <td align="center"><?php echo $rowKecil['roll']+$rowBesar['roll'];?></td>
           <td align="center"><?php echo $rowKecil['netto']+$rowBesar['netto'];?></td>
           <td align="center"><?php echo $rowKecil['panjang']+$rowBesar['panjang'];?></td>
@@ -192,11 +203,17 @@ border:hidden;
                 $t_panjangB=$t_panjangB+$rowBesar['panjang'];
                 } ?>
         <tr>
-          <td align="center">&nbsp;</td>
-          <td align="center"><font size="-2"><strong>TOTAL</strong></font></td>
+          <td colspan="2" align="center"><font size="-2"><strong>TOTAL</strong></font></td>
           <td align="center"><font size="-2"><strong><?php echo $t_rollK+$t_rollB;?></strong></font></td>
           <td align="center"><font size="-2"><strong><?php echo number_format($t_nettoK+$t_nettoB,2);?></strong></font></td>
           <td align="center"><font size="-2"><strong><?php echo number_format($t_panjangK+$t_panjangB,2);?></strong></font></td>
+          <td align="center">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center"><font size="-2"><strong>TOTAL LOSS</strong></font></td>
+          <td align="center">&nbsp;</td>
+          <td align="center"><font size="-2"><strong><?php echo number_format($rowLossA['kg_loss'],2);?></strong></font></td>
+          <td align="center">&nbsp;</td>
           <td align="center">&nbsp;</td>
         </tr>
       </tbody>
@@ -251,6 +268,16 @@ border:hidden;
                     $qryBesar=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
                     WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING B' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
                     $rowBesar=mysqli_fetch_array($qryBesar);
+					// QTY LOSS
+					$qryLossB=mysqli_query($con,"select
+						SUM(qty_loss) as kg_loss
+					from
+						tbl_lap_inspeksi
+					where
+						tgl_update between '$Awal' AND '$Akhir'
+						and `inspektor` = 'PACKING B'
+						and `dept` = 'PACKING'");
+                    $rowLossB=mysqli_fetch_array($qryLossB);
 					$sqlop="SELECT x.LONGDESCRIPTION FROM DB2ADMIN.INITIALS x
 							WHERE CODE ='".$row['operator']."'"; 
                     $stmt1=db2_exec($conn1,$sqlop, array('cursor'=>DB2_SCROLLABLE));
@@ -279,6 +306,13 @@ border:hidden;
           <td align="center"><font size="-2"><strong><?php echo $t_rollK+$t_rollB;?></strong></font></td>
           <td align="center"><font size="-2"><strong><?php echo number_format($t_nettoK+$t_nettoB,2);?></strong></font></td>
           <td align="center"><font size="-2"><strong><?php echo number_format($t_panjangK+$t_panjangB,2);?></strong></font></td>
+          <td align="center">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center"><font size="-2"><strong>TOTAL LOSS</strong></font></td>
+          <td align="center">&nbsp;</td>
+          <td align="center"><font size="-2"><strong><?php echo number_format($rowLossB['kg_loss'],2);?></strong></font></td>
+          <td align="center">&nbsp;</td>
           <td align="center">&nbsp;</td>
         </tr>
       </tbody>
@@ -333,6 +367,16 @@ border:hidden;
                     $qryBesar=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
                     WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING C' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
                     $rowBesar=mysqli_fetch_array($qryBesar);
+					// QTY LOSS
+					$qryLossC=mysqli_query($con,"select
+						SUM(qty_loss) as kg_loss
+					from
+						tbl_lap_inspeksi
+					where
+						tgl_update between '$Awal' AND '$Akhir'
+						and `inspektor` = 'PACKING C'
+						and `dept` = 'PACKING'");
+                    $rowLossC=mysqli_fetch_array($qryLossC);
 					$sqlop="SELECT x.LONGDESCRIPTION FROM DB2ADMIN.INITIALS x
 							WHERE CODE ='".$row['operator']."'"; 
                     $stmt1=db2_exec($conn1,$sqlop, array('cursor'=>DB2_SCROLLABLE));
@@ -361,6 +405,13 @@ border:hidden;
           <td align="center"><font size="-2"><strong><?php echo $t_rollK+$t_rollB;?></strong></font></td>
           <td align="center"><font size="-2"><strong><?php echo number_format($t_nettoK+$t_nettoB,2);?></strong></font></td>
           <td align="center"><font size="-2"><strong><?php echo number_format($t_panjangK+$t_panjangB,2);?></strong></font></td>
+          <td align="center">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center"><font size="-2"><strong>TOTAL LOSS</strong></font></td>
+          <td align="center">&nbsp;</td>
+          <td align="center"><font size="-2"><strong><?php echo number_format($rowLossC['kg_loss'],2);?></strong></font></td>
+          <td align="center">&nbsp;</td>
           <td align="center">&nbsp;</td>
         </tr>
       </tbody>
