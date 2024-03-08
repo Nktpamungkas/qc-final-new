@@ -506,4 +506,7 @@ RewriteRule ^Newbonpenghubung$ ./index1.php?p=Newbonpenghubung [L]
 RewriteRule ^Newbonpenghubung-$ ./index1.php?p=Newbonpenghubung [L]
 RewriteRule ^Newbonpenghubung-([a-zA-Z0-9_-]+)$ ./index1.php?p=Newbonpenghubung=$1 [L]
 
+
+RewriteRule ^InputDataTPUKPE$ ./index1.php?p=input-data-tpu-kpe [L]
+
 Options All -Indexes

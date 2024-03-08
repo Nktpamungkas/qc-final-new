@@ -307,8 +307,8 @@ $Akhir	= isset($_POST['akhir']) ? $_POST['akhir'] : '';
                     <?php } ?>
                 </td>
                 <td align="center">
-                    <?php if($r['rstretch_11']!=""){ ?>
-                    <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rstretch_11'] ?>" class="rstretch_11" href="javascript:void(0)"><?php echo $r['rstretch_11'] ?></a>
+                    <?php if($r['rstretch_l1']!=""){ ?>
+                    <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rstretch_l1'] ?>" class="rstretch_l1" href="javascript:void(0)"><?php echo $r['rstretch_l1'] ?></a>
                     <?php } ?>
                 </td>
                 <td align="center">
@@ -317,8 +317,8 @@ $Akhir	= isset($_POST['akhir']) ? $_POST['akhir'] : '';
                     <?php } ?>
                 </td>
                 <td align="center">
-                    <?php if($r['rrecover_11']!=""){ ?>
-                    <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rrecover_11'] ?>" class="rrecover_11" href="javascript:void(0)"><?php echo $r['rrecover_11'] ?></a>
+                    <?php if($r['rrecover_l1']!=""){ ?>
+                    <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rrecover_l1'] ?>" class="rrecover_l1" href="javascript:void(0)"><?php echo $r['rrecover_l1'] ?></a>
                     <?php } ?>
                 </td>
                 <td align="center">
