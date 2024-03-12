@@ -66,5 +66,5 @@ $nocounter=$_GET['nocount'];
             </div>
         </div>
     </div>
-<div id="KainApproved" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="TerimaKain" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 </div>
