@@ -33,7 +33,7 @@ $nocounter=$_GET['nocount'];
                             <tbody>
                                 <?php
 								$no=1;
-                                $sql = mysqli_query($conlab,"SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' and sts_laborat <> 'Open' and sts_qc <> 'Tunggu Kain'");
+                                $sql = mysqli_query($conlab,"SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' and sts_qc <> 'Kain OK'");
                                 while ($r = mysqli_fetch_array($sql)) {                                    
                                     $bgcolor = ($col++ & 1) ? 'gainsboro' : 'antiquewhite';
 									$detail2=explode(",",$r['permintaan_testing']);
@@ -66,5 +66,5 @@ $nocounter=$_GET['nocount'];
             </div>
         </div>
     </div>
-<div id="TerimaKain" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="KainApproved" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 </div>
