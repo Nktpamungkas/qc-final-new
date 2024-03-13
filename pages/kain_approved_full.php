@@ -6,37 +6,25 @@ include("../koneksi.php");
 	?>
           <div class="modal-dialog ">
             <div class="modal-content">
-            <form class="form-horizontal" name="modal_popup" data-toggle="validator" method="post" action="UbahKainTerima" enctype="multipart/form-data">
+            <form class="form-horizontal" name="modal_popup" data-toggle="validator" method="post" action="UbahKainApprovedFull" enctype="multipart/form-data">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Terima Kain dari Dept. LAB</h4>
+                <h4 class="modal-title">Approved Kain Test Dept. LAB Full</h4>
               </div>
-              <div class="modal-body">
-                  <div class="form-group">
-                  <label for="sts" class="col-sm-3 control-label">Status</label>
-                  <div class="col-sm-4">
-                   <select name="sts" class="form-control" id="sts" required>
-					   <?php if($r['sts_qc']=="Belum Terima Kain") { ?>
-					   <option value="Sudah Terima Kain" <?php if($r['sts_qc']=="Sudah Terima Kain"){ echo "SELECTED"; } ?>>Sudah Terima Kain</option>
-					   <?php } ?>
-				   </select>	   
-                  </div>
-                </div> 
-				  <?php if($r['sts_qc']=="Belum Terima Kain") { ?>
+              <div class="modal-body">                  
 				  <div class="form-group">
-                  <label for="diterima_oleh" class="col-sm-3 control-label">DiTerima Oleh</label>
+                  <label for="approved1" class="col-sm-3 control-label">Approved 1</label>
                   <div class="col-sm-6">
-				  <input type="text" class="form-control" value="" name="diterima_oleh" maxlength="30" required>		   
+				  <input type="text" class="form-control" value="<?php echo $r['approved_qc1'];?>" name="approved1" maxlength="30" required>		   
                   </div>
                   </div>
 				  <div class="form-group">
-                  <label for="nama_penerima" class="col-sm-3 control-label">Nama Penerima</label>
+                  <label for="approved2" class="col-sm-3 control-label">Approved 2</label>
                   <div class="col-sm-6">
-				  <input type="text" class="form-control" value="" name="nama_penerima" maxlength="30" required>		   
+				  <input type="text" class="form-control" value="<?php echo $r['approved_qc2'];?>" name="approved2" maxlength="30">		   
                   </div>
                   </div>
-				  <?php } ?>				 
 				<input type="hidden" id="id" name="id" value="<?php echo $modal_id;?>"> 
               </div>
               <div class="modal-footer">

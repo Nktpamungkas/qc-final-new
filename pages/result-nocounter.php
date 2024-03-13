@@ -22,7 +22,7 @@ include "koneksi.php";
 
 $no_counter = $_GET['no_counter'];
 
-$qryNoKK = mysqli_query($conlab, "SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' and sts_laborat <> 'Open' and sts_qc <> 'Belum Terima Kain' and no_counter='$no_counter'");
+$qryNoKK = mysqli_query($conlab, "SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' and sts_qc <> 'Belum Terima Kain' and no_counter='$no_counter'");
 $NoKKcek = mysqli_num_rows($qryNoKK);
 $rNoKK = mysqli_fetch_array($qryNoKK);
 
@@ -775,6 +775,11 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 			<div class="col-xs-12">
 				<a href="pages/cetak/cetak_result_lab.php?idkk=<?php echo $rNoKK['id']; ?>&noitem=<?php echo $rNoKK['no_item']; ?>&nohanger=<?php echo $rNoKK['no_hanger']; ?>"
 					target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+				<div class="btn-group pull-right">
+				<a href="#" class="btn btn-info kain_approved_parsial" id="<?php echo $rNoKK['id']; ?>"><i class="fa fa-check"></i> Approved Parsial</a>
+				<a href="#" class="btn btn-danger kain_approved_full" id="<?php echo $rNoKK['id']; ?>"><i class="fa fa-check"></i> Approved Full</a>
+				</div>
+
 			</div>
 		</div>
 	</section>
@@ -782,4 +787,8 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 </div>
 </div>
 </div>
+</div>
+<div id="KainApprovedParsial" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+<div id="KainApprovedFull" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 </div>

@@ -1581,7 +1581,7 @@ if (!isset($nocounter)) { ?>
 <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form0" id="form0">
 <div class="box box-info">
    	<div class="box-header with-border">
-    	<h3 class="box-title">Testing Counter</h3>
+    	<h3 class="box-title">Testing Counter1</h3>
 		<div class="box-tools pull-right">
 			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 		</div>
@@ -1643,7 +1643,12 @@ if (!isset($nocounter)) { ?>
 	 	</div>
 	</div>	 
    <div class="box-footer"> 
-
+						<?php if($nocounter!=""){ ?>
+	   <a href="#" class="btn btn-info kain_approved_parsial" id="<?php echo $r['id']; ?>"> Approved Parsial</a>						
+	   <a href="#" class="btn btn-danger kain_approved_full" id="<?php echo $r['id']; ?>"> Approved Full</a>
+						<?php } ?>
+	   <a href="#" class="btn btn-info kain_approved_parsial" id="<?php echo $r['id']; ?>"> Approved Parsial</a>						
+	   <a href="#" class="btn btn-danger kain_approved_full" id="<?php echo $r['id']; ?>"> Approved Full</a>
    </div>
     <!-- /.box-footer -->
 </div>
@@ -1659,7 +1664,7 @@ if (!isset($nocounter)) { ?>
 
 // exit ; 
 
-$sqlCek=mysqli_query($conlab,"SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' and sts_laborat <> 'Open' and sts_qc <> 'Belum Terima Kain' and no_counter='$nocounter' ");
+$sqlCek=mysqli_query($conlab,"SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' and sts_qc <> 'Belum Terima Kain' and no_counter='$nocounter' ");
 $cek=mysqli_num_rows($sqlCek);
 
 
@@ -1803,7 +1808,7 @@ $rcekcmt=mysqli_fetch_array($sqlCmt);
 									<select name="jns_test2" class="form-control select2" id="jns_test2" onChange="tampil2();" style="width: 100%;">
 									<option value="">Pilih</option>	  
 									<?php
-										$sql = "SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' and sts_laborat='Waiting' and no_counter='$nocounter'";
+										$sql = "SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' and no_counter='$nocounter'";
 										$result=mysqli_query($conlab,$sql);
 										while($row=mysqli_fetch_array($result)){ 
 										$detail=explode(",",$row['permintaan_testing']);?>
@@ -3848,7 +3853,7 @@ $sqlCLRMI=mysqli_query($conlab,"INSERT INTO tbl_tq_marginal SET
 `mdye_tf_note`='$_POST[mdye_tf_note]',
 `tgl_update`=now()");
 		
-$sqlSts=mysqli_query($conlab,"UPDATE tbl_test_qc SET sts_qc='Kain Sudah diTes', sts_laborat='In Progress' WHERE no_counter = '$nocounter'");
+//$sqlSts=mysqli_query($conlab,"UPDATE tbl_test_qc SET sts_qc='Kain Sudah diTes', sts_laborat='In Progress' WHERE no_counter = '$nocounter'");
 		
 		echo "<script>swal({
 	title: 'Colorfastness save',   
@@ -3966,7 +3971,7 @@ $sqlSts=mysqli_query($conlab,"UPDATE tbl_test_qc SET sts_qc='Kain Sudah diTes', 
 	`sc_note` =  '$_POST[sc_note]'
 	");
 	
-	$sqlSts=mysqli_query($conlab,"UPDATE tbl_test_qc SET sts_qc='Kain Sudah diTes', sts_laborat='In Progress' WHERE no_counter = '$nocounter'");
+//	$sqlSts=mysqli_query($conlab,"UPDATE tbl_test_qc SET sts_qc='Kain Sudah diTes', sts_laborat='In Progress' WHERE no_counter = '$nocounter'");
 	
 		if($sqlCLR){
 			echo "<script>swal({
