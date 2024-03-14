@@ -622,6 +622,9 @@
                                 <li class="<?php if ($_GET['p'] == "Master-Data-Lab") {
                                                 echo "active";
                                             } ?>"><a href="MasterDataLab"><i class="fa fa-database text-aqua"></i> <span>Master Data</span></a></li>
+								<li class="<?php if ($_GET['p'] == "Master-Test-Lab") {
+                                                echo "active";
+                                            } ?>"><a href="MasterTestLab"><i class="fa fa-database text-aqua"></i> <span>Master Test</span></a></li>
                             </ul>
                         </li>
                         <!-- jika user marketing hidden -->
