@@ -449,24 +449,24 @@ if ($Awal != "") {
             <td>
                 <table width="100%" border="1" class="table-list1">
                     <tr>
-                        <td align="center">Dibuat Oleh:</td>
-                        <td align="center" colspan="4">Diperiksa Oleh:</td>
-                        <td align="center" colspan="2">Mengetahui:</td>
+                        <th align="center" colspan="5">Dibuat Oleh:</th>
+                        <th align="center" colspan="16">Diperiksa Oleh:</th>
+                        <th align="center" colspan="12">Mengetahui:</th>
                     </tr>
                     <tr>
-                        <td align="center">OPERATOR</td>
-                        <td align="center" colspan="4">LEADER</td>
-                        <td align="center">AST. SPV</td>
-                        <td align="center">AST. MANAGER</td>
+                        <th align="center" colspan="5">OPERATOR</th>
+                        <th align="center" colspan="16">LEADER</th>
+                        <th align="center" colspan="6">AST. SPV</th>
+                        <th align="center" colspan="6">AST. MANAGER</th>
                     </tr>
                     <tr>
-                        <td height="60" width="14%" valign="bottom" align="center">&nbsp;</td>
-                        <td height="60" width="14%" valign="bottom" align="center">EDWIN I.</td>
-                        <td height="60" width="14%" valign="bottom" align="center">T. RESTIARDI</td>
-                        <td height="60" width="14%" valign="bottom" align="center">JANU D.L</td>
-                        <td height="60" width="14%" valign="bottom" align="center">TRI S.</td>
-                        <td height="60" width="14%" valign="bottom" align="center">VIVIK K.</td>
-                        <td height="60" width="14%" valign="bottom" align="center">FERRY W.</td>
+                        <td colspan="5" height="60" valign="bottom" align="center">&nbsp;</td>
+                        <td colspan="4" height="60" valign="bottom" align="center">EDWIN I.</td>
+                        <td colspan="4" height="60" valign="bottom" align="center">T. RESTIARDI</td>
+                        <td colspan="4" height="60" valign="bottom" align="center">JANU D.L</td>
+                        <td colspan="4" height="60" valign="bottom" align="center">TRI S.</td>
+                        <td colspan="6" height="60" valign="bottom" align="center">VIVIK K.</td>
+                        <td colspan="6" height="60" valign="bottom" align="center">FERRY W.</td>
                     </tr>
                 </table>
             </td>
