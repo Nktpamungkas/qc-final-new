@@ -1,5 +1,5 @@
 <?php
-    // ini_set("error_reporting", 1);
+    ini_set("error_reporting", 1);
     session_start();
     //include config
     include("koneksi.php");
@@ -727,6 +727,9 @@
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-KPE") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarKPE"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar KPE</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "detail-tpukpe") {
+                                                echo "active";
+                                            } ?>"><a href="DetailTPUKPE"><i class="fa fa-bar-chart"></i> <span>Detail TPUKPE</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-TPUKPE") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarTPUKPE"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar TPUKPE</span></a></li>

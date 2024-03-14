@@ -146,7 +146,11 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
             <?php if($row1['status2']!=""){ echo"<br><span class='label label-warning'>".$row1['status2']."</span>";}?>
             <?php if($row1['status3']!=""){ echo"<br><span class='label label-danger'>".$row1['status3']."</span>";}?>
             </td>-->
-            <td align="center"><?php echo $row1['no_tpukpe'];?></td>
+            <td align="center">
+              <a href="EditKPENew-<?php echo $row1['id_nsp']; ?>" target="_blank">
+                <?php echo $row1['no_tpukpe'];?>
+              </a>
+            </td>
             <td align="left"><?php echo $row1['langganan'];?></td>
             <td align="center"><?php echo $row1['no_order'];?></td>
             <td><?php echo $row1['jenis_kain'];?></td>
