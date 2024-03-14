@@ -145,7 +145,7 @@ $cek=mysqli_fetch_array($qcek);
 					<?php } ?>
 				</div>
 				<?php } ?>
-				</div> 				
+				</div> 			 
 				<div class="box-footer">
 					<?php if($_POST['buyer']==""){?>
 					<button type="submit" class="btn btn-primary" name="cari" value="cari"><i class="fa fa-search"></i> Cari Data</button>
