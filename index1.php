@@ -3159,7 +3159,39 @@
                 }
             });
         });
-        $(document).on('click', '.kain_terima', function(e) {
+        $(document).on('click', '.kain_approved_full', function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/kain_approved_full.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function(ajaxData) {
+                    $("#KainApprovedFull").html(ajaxData);
+                    $("#KainApprovedFull").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+		$(document).on('click', '.kain_approved_parsial', function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/kain_approved_parsial.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function(ajaxData) {
+                    $("#KainApprovedParsial").html(ajaxData);
+                    $("#KainApprovedParsial").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+		$(document).on('click', '.kain_terima', function(e) {
             var m = $(this).attr("id");
             $.ajax({
                 url: "pages/kain_terima.php",
