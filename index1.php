@@ -586,7 +586,7 @@
                                             } ?>"><a href="MasterDataNew"><i class="fa fa-database text-aqua"></i> <span>Master Data</span></a></li>
                             </ul>
                         </li>
-                        <li class="treeview <?php if ($_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "Testing-Lab" or $_GET['p'] == "Result-Lab" or $_GET['p'] == "EditTQ-Lab" or $_GET['p'] == "Master-Data-Lab") {
+                        <li class="treeview <?php if ($_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "Testing-Lab" or $_GET['p'] == "Result-Lab" or $_GET['p'] == "EditTQ-Lab" or $_GET['p'] == "Master-Data-Lab" or $_GET['p'] == "Master-Test-Lab") {
                                                 echo "active";
                                             } ?>">
                             <a href="#"><i class="fa fa-cube"></i> <span>Test Quality LAB</span>
@@ -624,7 +624,7 @@
                                             } ?>"><a href="MasterDataLab"><i class="fa fa-database text-aqua"></i> <span>Master Data</span></a></li>
 								<li class="<?php if ($_GET['p'] == "Master-Test-Lab") {
                                                 echo "active";
-                                            } ?>"><a href="MasterTestLab"><i class="fa fa-database text-aqua"></i> <span>Master Test</span></a></li>
+                                            } ?>"><a href="MasterTestLab"><i class="fa fa-cube text-aqua"></i> <span>Master Test</span></a></li>
                             </ul>
                         </li>
                         <!-- jika user marketing hidden -->
