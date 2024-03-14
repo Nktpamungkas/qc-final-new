@@ -168,7 +168,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<?php
 						if ($cek > 0) {
 							// echo "Sudah Input Pada Tgl: " . $rcek['tgl_buat'] . " | ";
-							echo "Sudah Input : (" . $rcek['masalah_dominan'] . ") | ";
+							echo "Sudah Input : (" . $rcek['masalah_dominan'] . ', ' . $rcek['masalah_dominan1'] . ', ' . $rcek['masalah_dominan2'] . ") | ";
 						}
 						if (!empty($rcek['no_ncp'])) {
 							echo $rcek['no_ncp'];
@@ -244,7 +244,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 						//echo $rcek['jenis_kain'];
 						//} else {
 						//echo stripslashes($rowdb2['JENIS_KAIN']);
-						//}    ?>" placeholder="Jenis Kain">
+						//}      ?>" placeholder="Jenis Kain">
 					</div>
 				</div>
 				<div class="form-group">
@@ -254,7 +254,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 						//echo $rcek['styl'];
 						//} else {
 						//echo $rowdb2['DATA_STYLE'];
-						//}    ?>" placeholder="Style">
+						//}      ?>" placeholder="Style">
 					</div>
 				</div> -->
 				<div class="form-group">
@@ -610,19 +610,27 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="masalah_dominan" class="col-sm-3 control-label">Masalah Dominan / Solusi</label>
 					<div class="col-sm-4">
 						<div class="input-group">
-							<input type="hidden" name="masalah_dominan_before" value="<?= $rcek['masalah_dominan'] ?>">
+							<input type="hidden" name="tmp_masalah_dominan" value="<?= $rcek['masalah_dominan'] ?>">
+							<input type="hidden" name="tmp_masalah_dominan1" value="<?= $rcek['masalah_dominan1'] ?>">
+							<input type="hidden" name="tmp_masalah_dominan2" value="<?= $rcek['masalah_dominan2'] ?>">
 							<select class="form-control select2" name="masalah_dominan" id="masalah_dominan"
 								onchange="masalah_dominan_solusi()">
 								<option value="">Pilih</option>
 								<?php
 								$qrym = mysqli_query($con, "SELECT masalah FROM tbl_masalah_aftersales ORDER BY masalah ASC");
-								$selectedValues = array_map('trim', explode(",", $rcek['masalah_dominan']));
 								while ($rm = mysqli_fetch_array($qrym)) {
-									$isLastMasalah = end($selectedValues) == trim($rm['masalah']);
+									if ($rcek['masalah_dominan2'] == $rm['masalah']) {
+										$selected = "selected disabled";
+									} else if ($rcek['masalah_dominan1'] == $rm['masalah']) {
+										$selected = "selected disabled";
+									} else if ($rcek['masalah_dominan'] == $rm['masalah']) {
+										$selected = "selected disabled";
+									} else {
+										$selected = "";
+									}
 									?>
-									<option value="<?= $rm['masalah']; ?>" <?= $isLastMasalah ? "selected" : ""; ?>
-										<?= (in_array(trim($rm['masalah']), $selectedValues)) ? "disabled" : ""; ?>>
-										<?= $rm['masalah']; ?>
+									<option value="<?= $rm['masalah']; ?>" <?= $selected ?>>
+										<?php echo $rm['masalah']; ?>
 									</option>
 								<?php } ?>
 							</select>
@@ -1224,9 +1232,9 @@ if ($_POST['save'] == "save") {
 		$sts_nego = "0";
 	}
 
-	$masalah_dominan = explode(",", $_POST['masalah_dominan_before']);
-	array_push($masalah_dominan, $_POST['masalah_dominan']);
-	$masalah_dominan = implode(', ', $masalah_dominan);
+	$masalah_dominan = $_POST['tmp_masalah_dominan'] == "" ? $_POST['masalah_dominan'] : $_POST['tmp_masalah_dominan'];
+	$masalah_dominan1 = $_POST['tmp_masalah_dominan'] != "" && $_POST['tmp_masalah_dominan1'] == "" ? $_POST['masalah_dominan'] : $_POST['tmp_masalah_dominan1'];
+	$masalah_dominan2 = $_POST['tmp_masalah_dominan'] != "" && $_POST['tmp_masalah_dominan1'] != "" && $_POST['tmp_masalah_dominan2'] == "" ? $_POST['masalah_dominan'] : $_POST['tmp_masalah_dominan2'];
 
 	if ($cek > 0) {
 		$sqlDataUpdate = mysqli_query($con, "UPDATE tbl_aftersales_now SET 
@@ -1247,6 +1255,8 @@ if ($_POST['save'] == "save") {
 		  no_warna='$nowarna',
 		  masalah='$masalah',
 		  masalah_dominan='$masalah_dominan',
+		  masalah_dominan1='$masalah_dominan1',
+		  masalah_dominan2='$masalah_dominan2',
 		  qty_order='$qty_order',
 		  qty_kirim='$_POST[qty_kirim]',
 		  qty_claim='$_POST[qty_claim]',
