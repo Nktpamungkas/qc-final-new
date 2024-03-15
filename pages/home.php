@@ -87,6 +87,7 @@ $page = strtolower($page);
         <!-- /.col -->
       <?php } ?>
       <?php if ($_SESSION['lvl_id'] == "AFTERSALES") { ?>
+        <?php if(@strtoupper($_SESSION['usrid']) != "KPE"){ ?>
         <div class="col-md-3 col-sm-6 col-xs-12">
           <a href="KPENew">
             <div class="info-box">
@@ -309,9 +310,25 @@ $page = strtolower($page);
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
-         
+        <?php } ?>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="InputDataAPTPUKPE">
+            <div class="info-box">
+              <span class="info-box-icon bg-green"><i class="fa fa-pencil-square-o"></i></span>
+              
+              <div class="info-box-content">
+                <span class="info-box-text">INPUT DATA TPU KPE</span>
+                <span class="info-box-number">&nbsp;</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <?php } ?>
         
-      <?php } ?>
       <?php if ($_SESSION['lvl_id'] != "DMF" and $_SESSION['lvl_id'] != "TQ" and $_SESSION['lvl_id'] != "SPVQC" and $_SESSION['lvl_id'] != "AFTERSALES") { ?>
 
 
@@ -598,6 +615,7 @@ $page = strtolower($page);
           </a>
         <?php } ?>
 
+        <?php if(@strtoupper($_SESSION['usrid']) != "KPE"){ ?>
         <a href="StikerCustomNew">
             <div class="info-box">
               <span class="info-box-icon bg-red"><i class="fa fa-file-text"></i></span>
@@ -609,7 +627,7 @@ $page = strtolower($page);
               <!-- /.info-box-content -->
             </div>
           </a>
-
+        <?php } ?>
         <!-- /.info-box -->
       </div>
 

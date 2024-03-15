@@ -586,7 +586,7 @@
                                             } ?>"><a href="MasterDataNew"><i class="fa fa-database text-aqua"></i> <span>Master Data</span></a></li>
                             </ul>
                         </li>
-                        <li class="treeview <?php if ($_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "Testing-Lab" or $_GET['p'] == "Result-Lab" or $_GET['p'] == "EditTQ-Lab" or $_GET['p'] == "Master-Data-Lab") {
+                        <li class="treeview <?php if ($_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "Testing-Lab" or $_GET['p'] == "Result-Lab" or $_GET['p'] == "EditTQ-Lab" or $_GET['p'] == "Master-Data-Lab" or $_GET['p'] == "Master-Test-Lab") {
                                                 echo "active";
                                             } ?>">
                             <a href="#"><i class="fa fa-cube"></i> <span>Test Quality LAB</span>
@@ -622,6 +622,9 @@
                                 <li class="<?php if ($_GET['p'] == "Master-Data-Lab") {
                                                 echo "active";
                                             } ?>"><a href="MasterDataLab"><i class="fa fa-database text-aqua"></i> <span>Master Data</span></a></li>
+								<li class="<?php if ($_GET['p'] == "Master-Test-Lab") {
+                                                echo "active";
+                                            } ?>"><a href="MasterTestLab"><i class="fa fa-cube text-aqua"></i> <span>Master Test</span></a></li>
                             </ul>
                         </li>
                         <!-- jika user marketing hidden -->
@@ -730,6 +733,9 @@
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-Ganti-Kain") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarGantiKain"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar Ganti Kain</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "detail-tpukpe") {
+                                                echo "active";
+                                            } ?>"><a href="DetailTPUKPE"><i class="fa fa-bar-chart"></i> <span>Detail TPUKPE</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-TPUKPE") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarTPUKPE"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar TPUKPE</span></a></li>
@@ -3188,7 +3194,39 @@
                 }
             });
         });
-        $(document).on('click', '.kain_terima', function(e) {
+        $(document).on('click', '.kain_approved_full', function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/kain_approved_full.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function(ajaxData) {
+                    $("#KainApprovedFull").html(ajaxData);
+                    $("#KainApprovedFull").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+		$(document).on('click', '.kain_approved_parsial', function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/kain_approved_parsial.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function(ajaxData) {
+                    $("#KainApprovedParsial").html(ajaxData);
+                    $("#KainApprovedParsial").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+		$(document).on('click', '.kain_terima', function(e) {
             var m = $(this).attr("id");
             $.ajax({
                 url: "pages/kain_terima.php",

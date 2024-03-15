@@ -131,7 +131,7 @@ $MC = isset($_POST['nomc']) ? $_POST['nomc'] : '';
   <div class="col-xs-8">
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title"> Mutasi GKJ </h3>
+        <h3 class="box-title"> Packing Netto</h3>
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
         </div>
@@ -383,6 +383,216 @@ where
     </div>
   </div>
 </div>
+<div class="row">
+<div class="col-xs-12">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title"> Mutasi GKJ </h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <table class="table table-bordered table-striped" style="width: 100%;">
+          <thead class="bg-blue">
+            <tr>
+              <th width="7%" rowspan="2"><div align="center">SHIFT</div></th>
+              <th colspan="2"><div align="center">ADIDAS</div></th>
+              <th colspan="2"><div align="center">LULULEMON</div></th>
+              <th colspan="2"><div align="center">DLL</div></th>
+              <th colspan="2"><div align="center">TOTAL</div></th>
+            </tr>
+            <tr>
+              <th width="6%"><div align="center">ROLL</div></th>
+              <th width="9%"><div align="center">KG</div></th>
+              <th width="8%"><div align="center">ROLL</div></th>
+              <th width="8%"><div align="center">KG</div></th>
+              <th width="9%"><div align="center">ROLL</div></th>
+              <th width="7%"><div align="center">KG</div></th>
+              <th width="8%"><div align="center">ROLL</div></th>
+              <th width="8%"><div align="center">KG</div></th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php
+          $t_rollR = 0;
+          $t_kgR = 0;
+          $t_yardR = 0;
+          $total_rluluR = $total_kgluluR = $total_yluluR = $total_radiR = $total_kgadiR = $total_yadiR = $total_rdllR = $total_kgdllR = $total_ydllR = 0;
+          $persen_kgluluR = $persen_yluluR = $persen_kgadiR = $persen_yadiR = $persen_kgdllR = $persen_ydllR = 0;
+          ?>
+      <?php
+      $qryPAR1 = mysqli_query($con, " 
+select
+	SUM(if(pelanggan like '%ADIDAS%',mutasi,0)) as adidas_kg,
+	SUM(if(pelanggan like '%ADIDAS%',jml_mutasi,0)) as adidas_roll,
+	SUM(if(pelanggan like '%LULU%',mutasi,0)) as lulu_kg,
+	SUM(if(pelanggan like '%LULU%',jml_mutasi,0)) as lulu_roll,
+	SUM(if(pelanggan NOT LIKE '%ADIDAS%' AND pelanggan NOT LIKE '%LULU%',mutasi,0)) as lain_kg,
+	SUM(if(pelanggan NOT LIKE '%ADIDAS%' AND pelanggan NOT LIKE '%LULU%',jml_mutasi,0)) as lain_roll,
+	SUM(mutasi) as tot_kg,
+	SUM(jml_mutasi) as tot_roll	
+from
+	tbl_lap_inspeksi
+where
+	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	and `dept` = 'PACKING'
+	and `sts_gkg` = '0'
+	and inspektor = 'PACKING A'");
+      $rowPAR1 = mysqli_fetch_array($qryPAR1);
+      ?>      
+          <tr>
+            <td align="center">PACKING A</td>
+            <td align="center"><?php echo round($rowPAR1['adidas_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPAR1['adidas_kg'], 2), 2); ?></td>
+            <td align="center"><?php echo round($rowPAR1['lulu_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPAR1['lulu_kg'], 2), 2); ?></td>
+            <td align="center"><?php echo round($rowPAR1['lain_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPAR1['lain_kg'], 2), 2); ?></td>
+            <td align="center"><?php echo round($rowPAR1['tot_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPAR1['tot_kg'], 2), 2); ?></td>
+            </tr>
+    <?php
+    $qryPBR1 = mysqli_query($con, " 
+select
+	SUM(if(pelanggan like '%ADIDAS%',mutasi,0)) as adidas_kg,
+	SUM(if(pelanggan like '%ADIDAS%',jml_mutasi,0)) as adidas_roll,
+	SUM(if(pelanggan like '%LULU%',mutasi,0)) as lulu_kg,
+	SUM(if(pelanggan like '%LULU%',jml_mutasi,0)) as lulu_roll,
+	SUM(if(pelanggan NOT LIKE '%ADIDAS%' AND pelanggan NOT LIKE '%LULU%',mutasi,0)) as lain_kg,
+	SUM(if(pelanggan NOT LIKE '%ADIDAS%' AND pelanggan NOT LIKE '%LULU%',jml_mutasi,0)) as lain_roll,
+	SUM(mutasi) as tot_kg,
+	SUM(jml_mutasi) as tot_roll	
+from
+	tbl_lap_inspeksi
+where
+	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	and `dept` = 'PACKING'
+	and `sts_gkg` = '0'
+	and inspektor = 'PACKING B'");
+    $rowPBR1 = mysqli_fetch_array($qryPBR1);
+    ?>    
+          <tr>
+            <td align="center">PACKING B</td>
+            <td align="center"><?php echo round($rowPBR1['adidas_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPBR1['adidas_kg'], 2), 2); ?></td>
+            <td align="center"><?php echo round($rowPBR1['lulu_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPBR1['lulu_kg'], 2), 2); ?></td>
+            <td align="center"><?php echo round($rowPBR1['lain_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPBR1['lain_kg'], 2), 2); ?></td>
+            <td align="center"><?php echo round($rowPBR1['tot_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPBR1['tot_kg'], 2), 2); ?></td>
+            </tr>
+    <?php
+    $qryPCR1 = mysqli_query($con, " 
+select
+	SUM(if(pelanggan like '%ADIDAS%',mutasi,0)) as adidas_kg,
+	SUM(if(pelanggan like '%ADIDAS%',jml_mutasi,0)) as adidas_roll,
+	SUM(if(pelanggan like '%LULU%',mutasi,0)) as lulu_kg,
+	SUM(if(pelanggan like '%LULU%',jml_mutasi,0)) as lulu_roll,
+	SUM(if(pelanggan NOT LIKE '%ADIDAS%' AND pelanggan NOT LIKE '%LULU%',mutasi,0)) as lain_kg,
+	SUM(if(pelanggan NOT LIKE '%ADIDAS%' AND pelanggan NOT LIKE '%LULU%',jml_mutasi,0)) as lain_roll,
+	SUM(mutasi) as tot_kg,
+	SUM(jml_mutasi) as tot_roll	
+from
+	tbl_lap_inspeksi
+where
+	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	and `dept` = 'PACKING'
+	and `sts_gkg` = '0'
+	and inspektor = 'PACKING C'");
+    $rowPCR1 = mysqli_fetch_array($qryPCR1);
+    ?>    
+          <tr>
+            <td align="center">PACKING C</td>
+            <td align="center"><?php echo round($rowPCR1['adidas_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPCR1['adidas_kg'], 2), 2); ?></td>
+            <td align="center"><?php echo round($rowPCR1['lulu_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPCR1['lulu_kg'], 2), 2); ?></td>
+            <td align="center"><?php echo round($rowPCR1['lain_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPCR1['lain_kg'], 2), 2); ?></td>
+            <td align="center"><?php echo round($rowPCR1['tot_roll']); ?></td>
+            <td align="center"><?php echo number_format(round($rowPCR1['tot_kg'], 2), 2); ?></td>
+            </tr>
+          <?php
+          $total_radiR1 = round($rowPAR1['adidas_roll']) + round($rowPBR1['adidas_roll']) + round($rowPCR1['adidas_roll']);
+          $total_kgadiR1 = round($rowPAR1['adidas_kg'], 2) + round($rowPBR1['adidas_kg'], 2) + round($rowPCR1['adidas_kg'], 2);
+          $total_rluluR1 = round($rowPAR1['lulu_roll']) + round($rowPBR1['lulu_roll']) + round($rowPCR1['lulu_roll']);
+          $total_kgluluR1 = round($rowPAR1['lulu_kg'], 2) + round($rowPBR1['lulu_kg'], 2) + round($rowPCR1['lulu_kg'], 2);
+          $total_rdllR1 = round($rowPAR1['lain_roll']) + round($rowPBR1['lain_roll']) + round($rowPCR1['lain_roll']);
+          $total_kgdllR1 = round($rowPAR1['lain_kg'], 2) + round($rowPBR1['lain_kg'], 2) + round($rowPCR1['lain_kg'], 2);
+          $t_rollR1 = round($rowPAR1['tot_roll']) + round($rowPBR1['tot_roll']) + round($rowPCR1['tot_roll']);
+          $t_kgR1 = round($rowPAR1['tot_kg'], 2) + round($rowPBR1['tot_kg'], 2) + round($rowPCR1['tot_kg'], 2);
+
+          if ($Awal != "") {
+            if ($total_kgluluR1 != 0) {
+              $persen_kgluluR1 = number_format(($total_kgluluR1 / ($total_kgluluR1 + $total_kgadiR1 + $total_kgdllR1)) * 100, 2);
+            } else {
+              $persen_kgluluR1 = 0;
+            }
+            if ($total_yluluR1 != 0) {
+              $persen_yluluR1 = number_format(($total_yluluR1 / ($total_yluluR1 + $total_yadiR1 + $total_ydllR1)) * 100, 2);
+            } else {
+              $persen_yluluR1 = 0;
+            }
+            if ($total_kgadiR1 != 0) {
+              $persen_kgadiR1 = number_format(($total_kgadiR1 / ($total_kgluluR1 + $total_kgadiR1 + $total_kgdllR1)) * 100, 2);
+            } else {
+              $persen_kgadiR1 = 0;
+            }
+            if ($total_yadiR1 != 0) {
+              $persen_yadiR1 = number_format(($total_yadiR1 / ($total_yluluR1 + $total_yadiR1 + $total_ydllR1)) * 100, 2);
+            } else {
+              $persen_yadiR1 = 0;
+            }
+            if ($total_kgdllR1 != 0) {
+              $persen_kgdllR1 = number_format(($total_kgdllR1 / ($total_kgluluR1 + $total_kgadiR1 + $total_kgdllR1)) * 100, 2);
+            } else {
+              $persen_kgdllR1 = 0;
+            }
+          }
+          ?>
+          <tr>
+            <td align="center"><strong>TOTAL</strong></td>
+            <td align="center"><strong><?php echo $total_radiR1; ?></strong></td>
+            <td align="center"><strong><?php echo $total_kgadiR1; ?></strong></td>
+            <td align="center"><strong><?php echo $total_rluluR1; ?></strong></td>
+            <td align="center"><strong><?php echo $total_kgluluR1; ?></strong></td>
+            <td align="center"><strong><?php echo $total_rdllR1; ?></strong></td>
+            <td align="center"><strong><?php echo $total_kgdllR1; ?></strong></td>
+            <td align="center"><strong><?php echo $t_rollR1; ?></strong></td>
+            <td align="center"><strong><?php echo $t_kgR1; ?></strong></td>
+            </tr> 
+          <tr>
+            <td align="center">%</td>
+            <td align="center">&nbsp;</td>
+            <td align="center"><?php echo $persen_kgadiR1; ?></td>
+            <td align="center">&nbsp;</td>
+            <td align="center"><?php echo $persen_kgluluR1; ?></td>
+            <td align="center">&nbsp;</td>
+            <td align="center"><?php echo $persen_kgdllR1; ?></td>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            </tr>
+          <?php
+          $qrysisa = mysqli_query($con, "SELECT * FROM tbl_sisa_packing WHERE tgl_sisa='$Awal'");
+          $rowsisa = mysqli_fetch_array($qrysisa);
+          ?>
+          <tr>
+            <td colspan="2" align="center" valign="middle">SISA SIAP PACKING</td>
+            <td colspan="7" align="left"><?php if ($rowsisa['sisa_packing'] != "") {
+              echo $rowsisa['sisa_packing'];
+            } else {
+              echo "0";
+            } ?></td>
+            </tr> 
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>	
+	</div>	
 <div class="row">
 <div class="col-xs-6">
 <div class="box">

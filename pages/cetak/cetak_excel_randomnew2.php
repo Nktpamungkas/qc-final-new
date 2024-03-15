@@ -1,4 +1,9 @@
 <?php
+header("Content-type: application/octet-stream");
+header("Content-Disposition: attachment; filename=Random-".substr($_GET['awal'],0,10).".xls");//ganti nama sesuai keperluan
+header("Pragma: no-cache");
+header("Expires: 0");
+
 ini_set("error_reporting", 1);
 session_start();
 //$con=mysqli_connect("10.0.1.91","dit","4dm1n","db_qc");
@@ -22,123 +27,11 @@ if ($Awal != "") {
     $jam = $rTgl['jam_skrg'];
 }
 ?>
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="styles_cetak.css" rel="stylesheet" type="text/css">
-    <title>Cetak Random</title>
-    <script>
-
-        // set portrait orientation
-
-        jsPrintSetup.setOption('orientation', jsPrintSetup.kPortraitOrientation);
-
-        // set top margins in millimeters
-        jsPrintSetup.setOption('marginTop', 0);
-        jsPrintSetup.setOption('marginBottom', 0);
-        jsPrintSetup.setOption('marginLeft', 0);
-        jsPrintSetup.setOption('marginRight', 0);
-
-        // set page header
-        jsPrintSetup.setOption('headerStrLeft', '');
-        jsPrintSetup.setOption('headerStrCenter', '');
-        jsPrintSetup.setOption('headerStrRight', '');
-
-        // set empty page footer
-        jsPrintSetup.setOption('footerStrLeft', '');
-        jsPrintSetup.setOption('footerStrCenter', '');
-        jsPrintSetup.setOption('footerStrRight', '');
-
-        // clears user preferences always silent print value
-        // to enable using 'printSilent' option
-        jsPrintSetup.clearSilentPrint();
-
-        // Suppress print dialog (for this context only)
-        jsPrintSetup.setOption('printSilent', 1);
-
-        // Do Print 
-        // When print is submitted it is executed asynchronous and
-        // script flow continues after print independently of completetion of print process! 
-        jsPrintSetup.print();
-
-        window.addEventListener('load', function () {
-            var rotates = document.getElementsByClassName('rotate');
-            for (var i = 0; i < rotates.length; i++) {
-                rotates[i].style.height = rotates[i].offsetWidth + 'px';
-            }
-        });
-        // next commands
-
-    </script>
-    <style>
-        .hurufvertical {
-            writing-mode: tb-rl;
-            -webkit-transform: rotate(-90deg);
-            -moz-transform: rotate(-90deg);
-            -o-transform: rotate(-90deg);
-            -ms-transform: rotate(-90deg);
-            transform: rotate(180deg);
-            white-space: nowrap;
-            float: left;
-        }
-
-        input {
-            text-align: center;
-            border: hidden;
-        }
-
-        @media print {
-            ::-webkit-input-placeholder {
-                /* WebKit browsers */
-                color: transparent;
-            }
-
-            :-moz-placeholder {
-                /* Mozilla Firefox 4 to 18 */
-                color: transparent;
-            }
-
-            ::-moz-placeholder {
-                /* Mozilla Firefox 19+ */
-                color: transparent;
-            }
-
-            :-ms-input-placeholder {
-                /* Internet Explorer 10+ */
-                color: transparent;
-            }
-
-            .pagebreak {
-                page-break-before: always;
-            }
-
-            .header {
-                display: block
-            }
-
-            table thead {
-                display: table-header-group;
-            }
-
-            body {
-                -webkit-print-color-adjust: exact !important;
-                /* Chrome, Safari */
-                color-adjust: exact !important;
-                /*Firefox*/
-            }
-        }
-    </style>
-</head>
-
-<body>
     <table width="100%" border="1" class="table-list1">
         <thead>
             <tr>
-                <th rowspan="2" colspan="8" align="center"><input style="font-size: 10px; font-weight: bold;"
-                        name="operator" type="text" placeholder="Ketik Disini" size="20" /></th>
+                <th rowspan="2" colspan="8" align="center">&nbsp;</th>
                 <th colspan="10" align="center">SNAG POD (FACE)</th>
                 <th colspan="2" align="center">SNAG POD (BACK)</th>
                 <th rowspan="4" align="center">SNAG MACE</th>
@@ -556,28 +449,26 @@ if ($Awal != "") {
             <td>
                 <table width="100%" border="1" class="table-list1">
                     <tr>
-                        <td align="center">Dibuat Oleh:</td>
-                        <td align="center" colspan="4">Diperiksa Oleh:</td>
-                        <td align="center" colspan="2">Mengetahui:</td>
+                        <th align="center" colspan="5">Dibuat Oleh:</th>
+                        <th align="center" colspan="16">Diperiksa Oleh:</th>
+                        <th align="center" colspan="12">Mengetahui:</th>
                     </tr>
                     <tr>
-                        <td align="center">OPERATOR</td>
-                        <td align="center" colspan="4">LEADER</td>
-                        <td align="center">AST. SPV</td>
-                        <td align="center">AST. MANAGER</td>
+                        <th align="center" colspan="5">OPERATOR</th>
+                        <th align="center" colspan="16">LEADER</th>
+                        <th align="center" colspan="6">AST. SPV</th>
+                        <th align="center" colspan="6">AST. MANAGER</th>
                     </tr>
                     <tr>
-                        <td height="60" width="14%" valign="bottom" align="center"><input style="font-size: 11px;"
-                                name="operator" type="text" placeholder="Ketik Disini" size="20" /></td>
-                        <td height="60" width="14%" valign="bottom" align="center">EDWIN I.</td>
-                        <td height="60" width="14%" valign="bottom" align="center">T. RESTIARDI</td>
-                        <td height="60" width="14%" valign="bottom" align="center">JANU D.L</td>
-                        <td height="60" width="14%" valign="bottom" align="center">TRI S.</td>
-                        <td height="60" width="14%" valign="bottom" align="center">VIVIK K.</td>
-                        <td height="60" width="14%" valign="bottom" align="center">FERRY W.</td>
+                        <td colspan="5" height="60" valign="bottom" align="center">&nbsp;</td>
+                        <td colspan="4" height="60" valign="bottom" align="center">EDWIN I.</td>
+                        <td colspan="4" height="60" valign="bottom" align="center">T. RESTIARDI</td>
+                        <td colspan="4" height="60" valign="bottom" align="center">JANU D.L</td>
+                        <td colspan="4" height="60" valign="bottom" align="center">TRI S.</td>
+                        <td colspan="6" height="60" valign="bottom" align="center">VIVIK K.</td>
+                        <td colspan="6" height="60" valign="bottom" align="center">FERRY W.</td>
                     </tr>
                 </table>
             </td>
         </tr>
     </table>
-</body>

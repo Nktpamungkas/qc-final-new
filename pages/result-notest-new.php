@@ -1675,10 +1675,10 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_l1'];}else{echo $rcek1['rec_growth_l1'];}  ?></td> -->
 
 								<td>
-									<?php if ($rcek1['rec_growth_l2'] != "") {
-										echo $rcek1['rec_growth_l2'];
+									<?php if ($rcek1['rec_growth_l1'] != "") {
+										echo $rcek1['rec_growth_l1'];
 									} else {
-										echo $rcekR['rrec_growth_l2'];
+										echo $rcekR['rrec_growth_l1'];
 									} ?>
 								</td>
 								<td>

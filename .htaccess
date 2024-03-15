@@ -152,6 +152,8 @@ RewriteRule ^EditNews$ ./index1.php?p=Edit_News [L]
 RewriteRule ^EditMesinMulai$ ./index1.php?p=Edit_Mesin_Mulai [L]
 RewriteRule ^EditMesinBerhenti$ ./index1.php?p=Edit_Mesin_Berhenti [L]
 RewriteRule ^UbahKainTerima$ ./index1.php?p=Edit_Kain_Terima [L]
+RewriteRule ^UbahKainApprovedParsial$ ./index1.php?p=Edit_Kain_Approved_Parsial [L]
+RewriteRule ^UbahKainApprovedFull$ ./index1.php?p=Edit_Kain_Approved_Full [L]
 RewriteRule ^HapusData-([a-zA-Z0-9_-]+)$ ./index1.php?p=HapusData&id=$1 [L]
 RewriteRule ^HapusDataM-([a-zA-Z0-9_-]+)$ ./index1.php?p=HapusDataMasalah&id=$1 [L]
 RewriteRule ^HapusDataD-([a-zA-Z0-9_-]+)$ ./index1.php?p=HapusDataDept&id=$1 [L]
@@ -249,6 +251,9 @@ RewriteRule ^MasterDataNew$ ./index1.php?p=Master-Data-New [L]
 RewriteRule ^MasterTestNew$ ./index1.php?p=MasterTest-New [L]
 RewriteRule ^MasterTestNew-$ ./index1.php?p=MasterTest-New [L]
 RewriteRule ^MasterTestNew-([a-zA-Z0-9#%@\+\&\s\(\)\[\]\ -]+)$ ./index1.php?p=MasterTest-New&buyer=$1 [L]
+RewriteRule ^MasterTestLab$ ./index1.php?p=Master-Test-Lab [L]
+RewriteRule ^MasterTestLab-$ ./index1.php?p=Master-Test-Lab [L]
+RewriteRule ^MasterTestLab-([a-zA-Z0-9#%@\+\&\s\(\)\[\]\ -]+)$ ./index1.php?p=Master-Test-Lab&buyer=$1 [L]
 RewriteRule ^UpdateGK$ ./index1.php?p=UpdateGK [L]
 RewriteRule ^CWarnaFinNew$ ./index1.php?p=Input-Lap-Cwarna-Fin-New [L]
 RewriteRule ^CWarnaFinNew-$ ./index1.php?p=Input-Lap-Cwarna-Fin-New [L]
@@ -506,5 +511,9 @@ RewriteRule ^EditKPENewBon-([0-9]+)-([a-zA-Z0-9-]+)$ ./index1.php?p=Edit-KPE-New
 RewriteRule ^Newbonpenghubung$ ./index1.php?p=Newbonpenghubung [L]
 RewriteRule ^Newbonpenghubung-$ ./index1.php?p=Newbonpenghubung [L]
 RewriteRule ^Newbonpenghubung-([a-zA-Z0-9_-]+)$ ./index1.php?p=Newbonpenghubung=$1 [L]
+
+
+RewriteRule ^InputDataAPTPUKPE$ ./index1.php?p=input-data-analisa-pencegahan-tpu-kpe [L]
+RewriteRule ^DetailTPUKPE$ ./index1.php?p=detail-tpukpe [L]
 
 Options All -Indexes
