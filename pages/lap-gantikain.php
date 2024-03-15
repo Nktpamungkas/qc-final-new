@@ -24,7 +24,7 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
 ?>
 <div class="box">
   <div class="box-header with-border">
-    <h3 class="box-title"> Filter Laporan Ganti Kain</h3>
+    <h3 class="box-title"> Filter Laporan Ganti Kai asdasdn</h3>
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
     </div>
@@ -129,9 +129,9 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
               <th rowspan="2"><div align="center">PO</div></th>
               <th rowspan="2"><div align="center">Order</div></th>
               <th rowspan="2"><div align="center">Order Baru</div></th>
-              <th rowspan="2"><div align="center">Status 1</div></th>
+              <!-- <th rowspan="2"><div align="center">Status 1</div></th>
               <th rowspan="2"><div align="center">Status 2</div></th>
-              <th rowspan="2"><div align="center">Status 3</div></th>
+              <th rowspan="2"><div align="center">Status 3</div></th> -->
               <th rowspan="2"><div align="center">Jenis Kain</div></th>
               <th rowspan="2"><div align="center">No Item</div></th>
               <th rowspan="2"><div align="center">No Hanger</div></th>
@@ -140,7 +140,9 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
               <th rowspan="2"><div align="center">Qty Order</div></th>
               <th rowspan="2"><div align="center">Qty Kirim</div></th>
               <th rowspan="2"><div align="center">Qty Extra</div></th>
-              <th colspan="2"><div align="center">Qty Replace.</div></th>
+              <th colspan="2"><div align="center">Request Qty.</div></th>
+              <th colspan="2"><div align="center">Replace Qty.</div></th>
+              <th colspan="2"><div align="center">Reduce Qty.</div></th>
               <th rowspan="2"><div align="center">Masalah</div></th>
 			   <th rowspan="2"><div align="center">Analisa</div></th>
 			  <th rowspan="2"><div align="center">Pencegahan</div></th>
@@ -150,6 +152,10 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
 			  
             </tr>
             <tr>
+              <th><div align="center">Kg</div></th>
+              <th><div align="center">Satuan</div></th>
+              <th><div align="center">Kg</div></th>
+              <th><div align="center">Satuan</div></th>
               <th><div align="center">Kg</div></th>
               <th><div align="center">Satuan</div></th>
             </tr>
@@ -189,6 +195,9 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
                     }else if($row1['t_jawab']=="" and $row1['t_jawab1']=="" and $row1['t_jawab2']==""){
                     $tjawab="";	
                     }
+
+                    $qty_red = $row1['qty_email'] - $row1['qty_claim'];
+                    $satuan_red = $row1['pjg_email']-$row1['pjg1'];
               ?>
           <tr bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $no; ?></td>
@@ -206,10 +215,55 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
             <td><?php echo $row1['langganan'];?></td>
             <td align="center"><?php echo $row1['no_po'];?></td>
             <td align="center"><?php echo $row1['no_order'];?></td>
-            <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" href="javascipt:void(0)"><?php echo $row1['no_ordernew'] ?></a></td>
-            <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['status1'] ?>" class="status1" href="javascipt:void(0)"><?php echo $row1['status1'] ?></a></td>
+            <!-- <td align="center"><a data-pk="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" href="javascipt:void(0)"><?php echo $row1['no_ordernew'] ?></a></td> -->
+            
+            <!-- <?php if ($row1['no_ordernew'] != '') { ?>
+                 <td align="center">
+                     <a target="_blank" href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['no_ordernew'] ?>"><?php echo $row1['no_ordernew']; ?></a>
+                     <a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" href="javascript:void(0)">Edit</a>
+                    </td>
+            <?php } else { ?>
+                <td align="center">
+                    <a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" href="javascript:void(0)"><?php echo $row1['no_ordernew']; ?></a>
+                </td>
+            <?php } ?> -->
+
+            <?php 
+              $q_order_new = db2_exec($conn1, "SELECT DISTINCT
+              NO_ORDER
+            FROM
+              ITXVIEW_MEMOPENTINGPPC
+            WHERE
+              NO_PO LIKE '%$row1[no_po]%' 
+              AND SUBCODE02 = '$row1[prefix]'
+              AND SUBCODE03 = '$row1[subprefix]' 
+              AND WARNA LIKE '%$row1[warna]%'
+              AND (SUBSTR(NO_ORDER, 1, 3) = 'RFD'
+                OR SUBSTR(NO_ORDER, 1, 3) = 'RFE'
+                OR SUBSTR(NO_ORDER, 1, 3) = 'RPE'
+                OR SUBSTR(NO_ORDER, 1, 3) = 'REP')
+              ");
+            $d_order_new = db2_fetch_assoc($q_order_new);
+            
+            echo $d_order_new['NO_ORDER'];
+
+            ?>
+
+            <td align="center">
+
+
+           
+            <a target="_blank" href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['no_ordernew'] ?>"><?php echo $d_order_new['NO_ORDER']; ?></a>
+          </td>
+
+
+            <!-- <td align="center">
+    <a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" <?php if(empty($row1['bonorder'])) { ?> href="javascript:void(0)" <?php } else { ?> href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['bonorder'] ?>" <?php } ?> target="_blank"><?php echo $row1['no_ordernew'] ?></a>
+</td> -->
+            
+            <!-- <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['status1'] ?>" class="status1" href="javascipt:void(0)"><?php echo $row1['status1'] ?></a></td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['status2'] ?>" class="status2" href="javascipt:void(0)"><?php echo $row1['status2'] ?></a></td>
-            <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['status3'] ?>" class="status3" href="javascipt:void(0)"><?php echo $row1['status3'] ?></a></td>
+            <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['status3'] ?>" class="status3" href="javascipt:void(0)"><?php echo $row1['status3'] ?></a></td> -->
             <td><?php echo substr($row1['jenis_kain'],0,50);?></td>
             <td align="center"><?php echo $row1['no_item'];?></td>
             <td align="center"><?php echo $row1['no_hanger'];?></td>
@@ -218,8 +272,19 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
             <td align="right"><?php echo $row1['qty_order'];?></td>
             <td align="right"><?php echo $row1['qty_kirim'];?></td>
             <td align="right"><?php echo $row1['qty_foc'];?></td>
-            <td align="right"><?php echo $row1['kg1'];?></td>
+
+            <!-- <td align="right"><?php echo $row1['kg1'];?></td>
+            <td align="center"><?php echo $row1['pjg1']." ".$row1['satuan1'];?></td> -->
+
+            <td align="right"><?php echo $row1['qty_email'];?></td>
+            <td align="center"><?php echo $row1['pjg_email']." ".$row1['satuan1'];?></td>
+
+            <td align="right"><?php echo $row1['qty_claim'];?></td>
             <td align="center"><?php echo $row1['pjg1']." ".$row1['satuan1'];?></td>
+
+            <td align="right"><?php echo   $qty_red;?></td>
+            <td align="center"><?php echo $satuan_red." ".$row1['satuan1'];?></td>
+
             <td><?php echo $row1['masalah'];?></td>
 			<td><?php echo $row1['analisa'];?></td>
 			<td><?php echo $row1['pencegahan'];?></td>
@@ -260,6 +325,7 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
 <script>
 		$(document).ready(function() {
 			$('[data-toggle="tooltip"]').tooltip();
+
 		});
 
 	</script>

@@ -36,9 +36,17 @@ body, table {
 .table-report th {
 	text-align:center
 }
+
+.centered-text {
+        /* text-align: center; Mengatur teks secara horizontal di tengah */
+        vertical-align: middle; /* Mengatur teks secara vertikal di tengah */
+        /* height: 100%; Memberikan tinggi 100% untuk memastikan vertikal tengah */
+}
+
 </style>
 <body>
-<center><b>PRESALE REPLACEMENT REPORT</b> </center>
+<!-- <center><b>PRESALE REPLACEMENT REPORT</b> </center> -->
+<center><b>LAPORAN GANTI KAIN (BON PENGHUBUNG)</b> </center>
 <br>														
 
 <table class="table-report">
@@ -49,7 +57,7 @@ body, table {
       <th>PO</th>
       <th>Order</th>
 	  <th>Hanger/Item</th>
-	  <th>Description</th>
+	  <!-- <th>Description</th> -->
       <th>Width & Weight</th>
       <th>Color</th>
 	  <th  style="text-align:center">Order Qty</th>
@@ -81,7 +89,7 @@ body, table {
 			if($r['no_item']) { echo $r['no_item']; } else if($r['no_hanger']) {echo $r['no_hanger']; }else  {echo $r['article_group'].$r['article_code'];}
 		?>
 	  </td>
-	  <td><?php echo $r['jenis_kain'];?></td>
+	  <!-- <td><?php echo $r['jenis_kain'];?></td> -->
       <td><?php echo $r['lebar']."x".$r['gramasi'];?></td>
       <td><?php echo $r['warna'];?></td>
 	  <td style="text-align:right">
@@ -111,7 +119,7 @@ body, table {
   </tr>
     <?php $no++;} ?>
 	<tr>
-		<td colspan=9 style="text-align:center">Total</td>
+		<td colspan=8 style="text-align:center">Total</td>
 		<td style="text-align:right" ><?= $x = number_format($sum_order_qty, 2, '.', '');?></td>
 		<td style="text-align:right"><?=number_format($sum_kirim_qty, 2, '.', '');?></td>
 		<td style="text-align:right"><?= $y = number_format($sum_replacement, 2, '.', '') ?></td>
@@ -119,5 +127,41 @@ body, table {
 		<td colspan=2></td>
 		
 	</tr>
+	<tr style="height:25px">
+		<td colspan=14></td>
+	</tr>
+
+	<tr>
+		<td colspan= 2></td>
+		<td colspan= 4 style="text-align:center">Dibuat Oleh</td>
+		<td colspan= 4 style="text-align:center">Diperiksa Oleh</td>
+		<td colspan= 4 style="text-align:center">Diketahui Oleh</td>
+	</tr>
+	<tr>
+	<td colspan= 2 height="30" valign="top" style="text-align:center;" class="centered-text">Nama</td>
+		<td colspan= 4 ></td>
+		<td colspan= 4 ></td>
+		<td colspan= 4 ></td>
+	</tr>
+	<tr>
+	<td colspan= 2 height="30" valign="top" style="text-align:center;" class="centered-text">Jabatan</td>
+		<td colspan= 4 ></td>
+		<td colspan= 4 ></td>
+		<td colspan= 4 ></td>
+	</tr>
+	<tr>
+		<td colspan= 2 height="30"  style="text-align:center;"  valign="top" class="centered-text">Tanggal</td>
+		<td colspan= 4 ></td>
+		<td colspan= 4 ></td>
+		<td colspan= 4 ></td>
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align:center" height="60" valign="top">Tanda Tangan</td>
+		<td colspan= 4 ></td>
+		<td colspan= 4 style="text-align:center"></td>
+		<td colspan= 4 style="text-align:center"></td>
+	</tr>
+
+	
 </table>
 </body>

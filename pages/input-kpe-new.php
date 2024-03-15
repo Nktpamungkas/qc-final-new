@@ -148,7 +148,7 @@ $rcek=mysqli_fetch_array($sqlCek);
 <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
 	<div class="box box-info">
 		<div class="box-header with-border">
-			<h3 class="box-title">Input Data Kartu Kerja</h3>
+			<h3 class="box-title">Input Data Kartu </h3>
 			<div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 			</div>

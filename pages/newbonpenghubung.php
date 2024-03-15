@@ -46,6 +46,15 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <input name="awal" type="date" class="form-control pull-right" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" autocomplete="off"/>
           </div>
         </div>
+        <div class="col-sm-3">
+            <input name="order" type="text" class="form-control pull-right" id="order" placeholder="No Order" value="<?php echo $Order;  ?>" autocomplete="off"/>
+          </div>
+        <div class="col-sm-3">
+            <input name="hanger" type="text" class="form-control pull-right" id="hanger" placeholder="No Hanger" value="<?php echo $Hanger;  ?>" autocomplete="off"/>
+          </div>
+          <div class="col-sm-3">
+            <input name="warna" type="text" class="form-control pull-right" id="warna" placeholder="Warna" value="<?php echo $Warna;  ?>" autocomplete="off"/>
+          </div>
         <!-- /.input group -->
       </div>
       <div class="form-group">
@@ -55,28 +64,25 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <input name="akhir" type="date" class="form-control pull-right" placeholder="Tanggal Akhir" value="<?php echo $Akhir;  ?>" autocomplete="off"/>
           </div>
         </div>
+        <div class="col-sm-3">
+            <input name="po" type="text" class="form-control pull-right" id="po" placeholder="No PO" value="<?php echo $PO;  ?>" autocomplete="off"/>
+          </div>
+       
+        <div class="col-sm-3">
+            <input name="item" type="text" class="form-control pull-right" id="item" placeholder="No Item" value="<?php echo $Item;  ?>" autocomplete="off"/>
+          </div>
+          <div class="col-sm-3">
+            <input name="pelanggan" type="text" class="form-control pull-right" id="pelanggan" placeholder="Pelanggan" value="<?php echo $Pelanggan;  ?>" autocomplete="off"/>
+          </div>
         <!-- /.input group -->
       </div>
 	  <div class="form-group">
-        <div class="col-sm-2">
-            <input name="order" type="text" class="form-control pull-right" id="order" placeholder="No Order" value="<?php echo $Order;  ?>" autocomplete="off"/>
-          </div>
-        <div class="col-sm-2">
-            <input name="hanger" type="text" class="form-control pull-right" id="hanger" placeholder="No Hanger" value="<?php echo $Hanger;  ?>" autocomplete="off"/>
-          </div>
-        <div class="col-sm-2">
-            <input name="po" type="text" class="form-control pull-right" id="po" placeholder="No PO" value="<?php echo $PO;  ?>" autocomplete="off"/>
-          </div>
-        <div class="col-sm-2">
-            <input name="warna" type="text" class="form-control pull-right" id="warna" placeholder="Warna" value="<?php echo $Warna;  ?>" autocomplete="off"/>
-          </div>
-        <div class="col-sm-2">
-            <input name="item" type="text" class="form-control pull-right" id="item" placeholder="No Item" value="<?php echo $Item;  ?>" autocomplete="off"/>
-          </div>
+       
+        
         <!--<div class="col-sm-2">
             <input name="langganan" type="text" class="form-control pull-right" id="langganan" placeholder="Langganan/Buyer" value="<?php echo $Langganan;  ?>" autocomplete="off"/>
           </div>-->
-        <div class="col-sm-2">
+        <!-- <div class="col-sm-2">
             <select name="langganan" class="form-control select2">
             <option value="">Pilih</option> 
             <?php  /*
@@ -86,10 +92,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               <option value="<?php echo $r['partnername'];?>" <?php if($Langganan==$r['partnername']){ echo "SELECTED";}?>><?php echo $r['partnername'];?></option>
             <?php }  */ ?> 
             </select>
-        </div>
+        </div> -->
         <!-- /.input group -->
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
             <div class="col-sm-2">
                 <select name="prosesmkt" class="form-control select2">
                   <option value="">Pilih</option> 
@@ -106,7 +112,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               <input type="checkbox" name="sts_tembakdok" id="sts_tembakdok" value="1" <?php  if($sts_tembakdok=="1"){ echo "checked";} ?>>  
               <label> Tembak Dokumen</label>
             </div>		  	
-		  </div>
+		  </div> -->
     <!--<div class="form-group">
 		  <label for="sts_pbon" class="col-sm-0 control-label"></label>		  
         <div class="col-sm-3">
@@ -155,10 +161,13 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
          <th  rowspan=2><div align="center" valign="middle">DEMAND</div></th>
 			   
 			   <th colspan=3 ><div align="center" valign="middle">QTY</div></th>
-         <th colspan=3 ><div align="center" valign="middle">QTY FOC</div></th>
+         <th colspan=2 ><div align="center" valign="middle">QTY FOC</div></th>
+         <th colspan=2 ><div align="center" valign="middle">QTY SISA</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">RESPONBILITY</div></th>
+
+         <th colspan=3 ><div align="center" valign="middle">QTY KIRIM</div></th>
          
 			   
 			 
@@ -169,6 +178,13 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               
 			    <th><div align="center" valign="middle">ROLL</div></th>
 				<th><div align="center" valign="middle">KG</div></th>
+				<th><div align="center" valign="middle">YARD</div></th>
+
+        <!-- <th><div align="center" valign="middle">ROLL</div></th> -->
+				<th><div align="center" valign="middle">KG</div></th>
+				<th><div align="center" valign="middle">YARD</div></th>
+
+        <th><div align="center" valign="middle">KG</div></th>
 				<th><div align="center" valign="middle">YARD</div></th>
 
         <th><div align="center" valign="middle">ROLL</div></th>
@@ -187,10 +203,14 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             if($sts_tembakdok=="1"){ $Sts =" AND sts_tembakdok='1' "; }
             if($Proses!=""){ $prs=" AND sts_aksi='$Proses' ";}else{$prs=" ";}
             if($Awal!="" or $Order!="" or $Warna!="" or $Hanger!="" or $Item!="" or $PO!="" or $Langganan!=""){
-				$sql_code = "SELECT * FROM tbl_qcf WHERE sts_pbon!='10' AND no_order LIKE '%$Order%' AND no_po LIKE '%$PO%' AND no_hanger LIKE '%$Hanger%' AND no_item LIKE '%$Item%' AND warna LIKE '%$Warna%' AND pelanggan LIKE '%$Langganan%' $Where $prs $Sts AND (penghubung_masalah !='' or penghubung_keterangan !='' or penghubung_roll1 !='' or penghubung_roll2 !='' or penghubung_roll3 !=''  or penghubung_dep !='' or penghubung_dep_persen !='') ";
+				$sql_code = "SELECT tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
+                      LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order 
+                      WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '%$Order%' AND tq.no_po LIKE '%$PO%' AND tq.no_hanger LIKE '%$Hanger%' AND tq.no_item LIKE '%$Item%' AND tq.warna LIKE '%$Warna%' AND tq.pelanggan LIKE '%$Langganan%' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='') ";
                 $sql=mysqli_query($con,$sql_code);
             }else{
-				$sql_code = "SELECT * FROM tbl_qcf WHERE sts_pbon!='10' AND no_order LIKE '$Order' AND no_po LIKE '$PO' AND no_hanger LIKE '$Hanger%' AND no_item LIKE '$Item' AND warna LIKE '$Warna' AND pelanggan LIKE '$Langganan' $Where $prs $Sts AND (penghubung_masalah !='' or penghubung_keterangan !='' or penghubung_roll1 !='' or penghubung_roll2 !='' or penghubung_roll3 !=''  or penghubung_dep !='' or penghubung_dep_persen !='')  ";
+				$sql_code = "SELECT tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
+                    LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order 
+                    WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '$Order' AND tq.no_po LIKE '$PO' AND tq.no_hanger LIKE '$Hanger%' AND tq.no_item LIKE '$Item' AND tq.warna LIKE '$Warna' AND tq.pelanggan LIKE '$Langganan' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='')  ";
                 $sql=mysqli_query($con,$sql_code);
             }
 			/*
@@ -219,8 +239,15 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 							 $array_persen[] = $element ;
 						}
 				  }
+
+          // $query_sisa = "SELECT tli.qty_loss FROM tbl_lap_inspeksi tli
+          //                 LEFT JOIN tbl_qcf tq ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order";
 				  
-				  
+          // $sql_sisa=mysqli_query($con,$query_sisa);
+
+          // while($row2=mysqli_fetch_array($sql_sisa)){
+
+        
 				  
 				  
 				  
@@ -244,9 +271,13 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <td align="center"><?php echo $row1['penghubung_roll3'];?></td>
 
         <!-- Tambahan -->
-        <td align="center"><?php echo $row1['penghubung_foc1'];?></td>
-			  <td align="center"><?php echo $row1['penghubung_foc2'];?></td>
-			  <td align="center"><?php echo $row1['penghubung_foc3'];?></td>
+        <td align="center"><?php echo $row1['berat_extra'];?></td>
+			  <td align="center"><?php echo $row1['panjang_extra'];?></td>
+			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
+
+        <!-- Nanti ganti -->
+        <td align="center"><?php echo $row1['qty_sisa'];?></td>
+			  <td align="center"><?php echo $row1['satuan_sisa'];?></td>
 
 			   <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
@@ -267,11 +298,78 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 								
 								echo ' ';
 								
-							}
+							}  
 						$no_depp++;
 						}
 				  }   ?>
-				</td>	 												 
+				</td>	 
+                <!-- // QTY KIRIM UNTUK YANG FOC -->
+        <?php
+            $q_ket_foc  = db2_exec($conn1, "SELECT 
+                                                COUNT(QUALITYREASONCODE) AS ROLL,
+                                                SUM(FOC_KG) AS KG,
+                                                SUM(FOC_YARDMETER) AS YARD_MTR,
+                                                KET_YARDMETER
+                                            FROM
+                                                ITXVIEW_SURATJALAN_EXIM2A
+                                            WHERE 
+                                                QUALITYREASONCODE = 'FOC'
+                                                AND PROVISIONALCODE = '$rowdb2[PROVISIONALCODE]'
+                                            GROUP BY 
+                                                KET_YARDMETER");
+            $d_ket_foc  = db2_fetch_assoc($q_ket_foc);
+        ?>
+        <td><?= number_format($d_ket_foc['KG'], 2); ?></td> 
+        <td><?= number_format($d_ket_foc['YARD_MTR'], 2); ?></td> 
+
+
+
+        <!-- // QTY KIRIM UNTUK YANG BUKAN FOC -->
+        <?php
+            if($rowdb2['CODE'] == 'EXPORT'){
+                // <!-- UNTUK YANG EXPORT -->
+                $q_roll     = db2_exec($conn1, "SELECT
+                                                    ise.ITEMTYPEAFICODE,
+                                                    COUNT(ise.COUNTROLL) AS ROLL,
+                                                    SUM(ise.QTY_KG) AS QTY_SJ_KG,
+                                                    SUM(ise.QTY_YARDMETER) AS QTY_SJ_YARD,
+                                                    inpe.PROJECT,
+                                                    ise.ADDRESSEE,
+                                                    ise.BRAND_NM
+                                                FROM
+                                                    ITXVIEW_SURATJALAN_EXIM2A ise 
+                                                LEFT JOIN ITXVIEW_NO_PROJECTS_EXIM inpe ON inpe.PROVISIONALCODE = ise.PROVISIONALCODE 
+                                                WHERE 
+                                                    ise.PROVISIONALCODE = '$rowdb2[PROVISIONALCODE]' AND ise.ITEMTYPEAFICODE = '$rowdb2[ITEMTYPEAFICODE]'
+                                                GROUP BY 
+                                                    ise.ITEMTYPEAFICODE,
+                                                    inpe.PROJECT,
+                                                    ise.ADDRESSEE,
+                                                    ise.BRAND_NM");
+                $d_roll     = db2_fetch_assoc($q_roll);
+                if($d_ket_foc['ROLL'] > 0 AND $d_ket_foc['KG'] > 0 AND $d_ket_foc['YARD_MTR'] > 0) { // MENGHITUNG JIKA FOC SEBAGIAN, MAKA ROLL UNTUK FOC DIPISAH DARI KESELURUHAN
+                    echo $d_roll['ROLL'] - $d_ket_foc['ROLL'];
+                }else{
+                    echo $d_roll['ROLL'];
+                }
+            }else{
+                // <!-- UNTUK YANG LOCAL -->
+                $q_roll     = db2_exec($conn1, "SELECT COUNT(CODE) AS ROLL,
+                                                        SUM(BASEPRIMARYQUANTITY) AS QTY_SJ_KG,
+                                                        SUM(BASESECONDARYQUANTITY) AS QTY_SJ_YARD,
+                                                        LOTCODE
+                                                FROM 
+                                                    ITXVIEWALLOCATION0 
+                                                WHERE 
+                                                    CODE = '$rowdb2[CODE]' AND LOTCODE = '$rowdb2[LOTCODE]'
+                                                GROUP BY 
+                                                    LOTCODE");
+                $d_roll     = db2_fetch_assoc($q_roll);
+                echo $d_roll['ROLL'];
+            }
+        ?>
+        <td><?= number_format($d_roll['QTY_SJ_KG'], 2); ?></td>
+
           </tr>
 		  
 		  <?php if($row1['penghubung2_roll1'] and  $row1['penghubung2_roll1'] !='')  
@@ -293,10 +391,14 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <td align="center"><?php echo $row1['penghubung2_roll2'];?></td>
 			  <td align="center"><?php echo $row1['penghubung2_roll3'];?></td>
 
-         <!-- Tambahan -->
-         <td align="center"><?php echo $row1['penghubung_foc1'];?></td>
-			  <td align="center"><?php echo $row1['penghubung_foc2'];?></td>
-			  <td align="center"><?php echo $row1['penghubung_foc3'];?></td>
+     <!-- Tambahan -->
+     <td align="center"><?php echo $row1['berat_extra'];?></td>
+			  <td align="center"><?php echo $row1['panjang_extra'];?></td>
+			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
+
+        <!-- Nanti ganti -->
+        <td align="center"><?php echo $row1['qty_sisa'];?></td>
+			  <td align="center"><?php echo $row1['satuan_sisa'];?></td>
 
 			   <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
@@ -321,7 +423,74 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 						$no_depp++;
 						}
 				  }   ?>
-				</td>	 												 
+				</td>	
+        
+                   <!-- // QTY KIRIM UNTUK YANG FOC -->
+                   <?php
+            $q_ket_foc  = db2_exec($conn1, "SELECT 
+                                                COUNT(QUALITYREASONCODE) AS ROLL,
+                                                SUM(FOC_KG) AS KG,
+                                                SUM(FOC_YARDMETER) AS YARD_MTR,
+                                                KET_YARDMETER
+                                            FROM
+                                                ITXVIEW_SURATJALAN_EXIM2A
+                                            WHERE 
+                                                QUALITYREASONCODE = 'FOC'
+                                                AND PROVISIONALCODE = '$rowdb2[PROVISIONALCODE]'
+                                            GROUP BY 
+                                                KET_YARDMETER");
+            $d_ket_foc  = db2_fetch_assoc($q_ket_foc);
+        ?>
+        <td><?= number_format($d_ket_foc['KG'], 2); ?></td> 
+        <td><?= number_format($d_ket_foc['YARD_MTR'], 2); ?></td> 
+                
+                
+                
+        <!-- // QTY KIRIM UNTUK YANG BUKAN FOC -->
+        <?php
+            if($rowdb2['CODE'] == 'EXPORT'){
+                // <!-- UNTUK YANG EXPORT -->
+                $q_roll     = db2_exec($conn1, "SELECT
+                                                    ise.ITEMTYPEAFICODE,
+                                                    COUNT(ise.COUNTROLL) AS ROLL,
+                                                    SUM(ise.QTY_KG) AS QTY_SJ_KG,
+                                                    SUM(ise.QTY_YARDMETER) AS QTY_SJ_YARD,
+                                                    inpe.PROJECT,
+                                                    ise.ADDRESSEE,
+                                                    ise.BRAND_NM
+                                                FROM
+                                                    ITXVIEW_SURATJALAN_EXIM2A ise 
+                                                LEFT JOIN ITXVIEW_NO_PROJECTS_EXIM inpe ON inpe.PROVISIONALCODE = ise.PROVISIONALCODE 
+                                                WHERE 
+                                                    ise.PROVISIONALCODE = '$rowdb2[PROVISIONALCODE]' AND ise.ITEMTYPEAFICODE = '$rowdb2[ITEMTYPEAFICODE]'
+                                                GROUP BY 
+                                                    ise.ITEMTYPEAFICODE,
+                                                    inpe.PROJECT,
+                                                    ise.ADDRESSEE,
+                                                    ise.BRAND_NM");
+                $d_roll     = db2_fetch_assoc($q_roll);
+                if($d_ket_foc['ROLL'] > 0 AND $d_ket_foc['KG'] > 0 AND $d_ket_foc['YARD_MTR'] > 0) { // MENGHITUNG JIKA FOC SEBAGIAN, MAKA ROLL UNTUK FOC DIPISAH DARI KESELURUHAN
+                    echo $d_roll['ROLL'] - $d_ket_foc['ROLL'];
+                }else{
+                    echo $d_roll['ROLL'];
+                }
+            }else{
+                // <!-- UNTUK YANG LOCAL -->
+                $q_roll     = db2_exec($conn1, "SELECT COUNT(CODE) AS ROLL,
+                                                        SUM(BASEPRIMARYQUANTITY) AS QTY_SJ_KG,
+                                                        SUM(BASESECONDARYQUANTITY) AS QTY_SJ_YARD,
+                                                        LOTCODE
+                                                FROM 
+                                                    ITXVIEWALLOCATION0 
+                                                WHERE 
+                                                    CODE = '$rowdb2[CODE]' AND LOTCODE = '$rowdb2[LOTCODE]'
+                                                GROUP BY 
+                                                    LOTCODE");
+                $d_roll     = db2_fetch_assoc($q_roll);
+                echo $d_roll['ROLL'];
+            }
+        ?>
+        <td><?= number_format($d_roll['QTY_SJ_KG'], 2); ?></td>
           </tr>
 		  
 		  
@@ -346,10 +515,14 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <td align="center"><?php echo $row1['penghubung3_roll1'];?></td>
 			  <td align="center"><?php echo $row1['penghubung3_roll2'];?></td>
 			  <td align="center"><?php echo $row1['penghubung3_roll3'];?></td>
-         <!-- Tambahan -->
-         <td align="center"><?php echo $row1['penghubung_foc1'];?></td>
-			  <td align="center"><?php echo $row1['penghubung_foc2'];?></td>
-			  <td align="center"><?php echo $row1['penghubung_foc3'];?></td>
+       <!-- Tambahan -->
+       <td align="center"><?php echo $row1['berat_extra'];?></td>
+			  <td align="center"><?php echo $row1['panjang_extra'];?></td>
+			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
+
+        <!-- Nanti ganti -->
+        <td align="center"><?php echo $row1['qty_sisa'];?></td>
+			  <td align="center"><?php echo $row1['satuan_sisa'];?></td>
         
 			   <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>
@@ -374,7 +547,74 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 						$no_depp++;
 						}
 				  }   ?>
-				</td>	 												 
+				</td>	 	
+        
+                   <!-- // QTY KIRIM UNTUK YANG FOC -->
+                   <?php
+            $q_ket_foc  = db2_exec($conn1, "SELECT 
+                                                COUNT(QUALITYREASONCODE) AS ROLL,
+                                                SUM(FOC_KG) AS KG,
+                                                SUM(FOC_YARDMETER) AS YARD_MTR,
+                                                KET_YARDMETER
+                                            FROM
+                                                ITXVIEW_SURATJALAN_EXIM2A
+                                            WHERE 
+                                                QUALITYREASONCODE = 'FOC'
+                                                AND PROVISIONALCODE = '$rowdb2[PROVISIONALCODE]'
+                                            GROUP BY 
+                                                KET_YARDMETER");
+            $d_ket_foc  = db2_fetch_assoc($q_ket_foc);
+        ?>
+        <td><?= number_format($d_ket_foc['KG'], 2); ?></td> 
+        <td><?= number_format($d_ket_foc['YARD_MTR'], 2); ?></td> 
+                
+                
+                
+        <!-- // QTY KIRIM UNTUK YANG BUKAN FOC -->
+        <?php
+            if($rowdb2['CODE'] == 'EXPORT'){
+                // <!-- UNTUK YANG EXPORT -->
+                $q_roll     = db2_exec($conn1, "SELECT
+                                                    ise.ITEMTYPEAFICODE,
+                                                    COUNT(ise.COUNTROLL) AS ROLL,
+                                                    SUM(ise.QTY_KG) AS QTY_SJ_KG,
+                                                    SUM(ise.QTY_YARDMETER) AS QTY_SJ_YARD,
+                                                    inpe.PROJECT,
+                                                    ise.ADDRESSEE,
+                                                    ise.BRAND_NM
+                                                FROM
+                                                    ITXVIEW_SURATJALAN_EXIM2A ise 
+                                                LEFT JOIN ITXVIEW_NO_PROJECTS_EXIM inpe ON inpe.PROVISIONALCODE = ise.PROVISIONALCODE 
+                                                WHERE 
+                                                    ise.PROVISIONALCODE = '$rowdb2[PROVISIONALCODE]' AND ise.ITEMTYPEAFICODE = '$rowdb2[ITEMTYPEAFICODE]'
+                                                GROUP BY 
+                                                    ise.ITEMTYPEAFICODE,
+                                                    inpe.PROJECT,
+                                                    ise.ADDRESSEE,
+                                                    ise.BRAND_NM");
+                $d_roll     = db2_fetch_assoc($q_roll);
+                if($d_ket_foc['ROLL'] > 0 AND $d_ket_foc['KG'] > 0 AND $d_ket_foc['YARD_MTR'] > 0) { // MENGHITUNG JIKA FOC SEBAGIAN, MAKA ROLL UNTUK FOC DIPISAH DARI KESELURUHAN
+                    echo $d_roll['ROLL'] - $d_ket_foc['ROLL'];
+                }else{
+                    echo $d_roll['ROLL'];
+                }
+            }else{
+                // <!-- UNTUK YANG LOCAL -->
+                $q_roll     = db2_exec($conn1, "SELECT COUNT(CODE) AS ROLL,
+                                                        SUM(BASEPRIMARYQUANTITY) AS QTY_SJ_KG,
+                                                        SUM(BASESECONDARYQUANTITY) AS QTY_SJ_YARD,
+                                                        LOTCODE
+                                                FROM 
+                                                    ITXVIEWALLOCATION0 
+                                                WHERE 
+                                                    CODE = '$rowdb2[CODE]' AND LOTCODE = '$rowdb2[LOTCODE]'
+                                                GROUP BY 
+                                                    LOTCODE");
+                $d_roll     = db2_fetch_assoc($q_roll);
+                echo $d_roll['ROLL'];
+            }
+        ?>
+        <td><?= number_format($d_roll['QTY_SJ_KG'], 2); ?></td>
           </tr>
 		  
 		  <?php  } ?>

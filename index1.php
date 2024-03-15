@@ -422,7 +422,7 @@
                     <li class="<?php if ($_GET['p'] == "Home" or $_GET['p'] == "") {
                                     echo "active";
                                 } ?>"><a href="Home"><i class="fa fa-dashboard text-gray"></i> <span>DashBoard</span></a></li>
-                    <?php if ($_SESSION['lvl_id'] == "PACKING" or $_SESSION['lvl_id'] == "MKT" or $_SESSION['lvl_id'] == "AFTERSALES") {  ?>
+                    <?php if ($_SESSION['lvl_id'] == "PACKING" or $_SESSION['lvl_id'] == "MKT") {  ?>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Data-New" or $_GET['p'] == "Input-Data-KJ-New" or $_GET['p'] == "Detail-Data" or $_GET['p'] == "Label-QCF" or $_GET['p'] == "Detail-Data-KJ" or $_GET['p'] == "Rekap-Data" or $_GET['p'] == "Rekap-Email" or $_GET['p'] == "Rekap-Bon" or $_GET['p'] == "Grafik") {
                                                 echo "active";
                                             } ?>">
@@ -727,6 +727,9 @@
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-KPE") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarKPE"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar KPE</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "Lap-5Besar-Ganti-Kain") {
+                                                echo "active";
+                                            } ?>"><a href="Lap5BesarGantiKain"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar Ganti Kain</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-TPUKPE") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarTPUKPE"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar TPUKPE</span></a></li>
@@ -2528,6 +2531,38 @@
                 success: function(ajaxData) {
                     $("#DetailPersediaanKain").html(ajaxData);
                     $("#DetailPersediaanKain").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+        $(document).on('click', '.detail_solusi_perbaikan_garment', function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/detail_solusi_perbaikan_garment.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function(ajaxData) {
+                    $("#DataSolusiPerbaikanGarment").html(ajaxData);
+                    $("#DataSolusiPerbaikanGarment").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+        $(document).on('click', '.detail_solusi_debit_note', function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/detail_solusi_debit_note.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function(ajaxData) {
+                    $("#DataSolusiDebitNote").html(ajaxData);
+                    $("#DataSolusiDebitNote").modal('show', {
                         backdrop: 'true'
                     });
                 }

@@ -156,10 +156,12 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
             if($Awal!=""){ $Where =" AND DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
             if($Status!=""){ $sts=" AND `status`='$Status' ";}else{$sts=" ";}
             if($Awal!="" or $Order!="" or $Langganan!="" or $PO!="" or $Bon!=""){
-			  $sql_qry1 = "SELECT * FROM tbl_ganti_kain_now WHERE id_disposisi is not null  and no_order LIKE '$Order%' AND no_po LIKE '$PO%' AND langganan LIKE '%$Langganan%' AND no_bon LIKE '%$Bon%' $Where $sts ORDER BY tgl_buat ASC";
+			  $sql_qry1 = "SELECT *,substr(no_hanger, 1,3) as prefix,
+        substr(no_hanger, 4) as subprefix FROM tbl_ganti_kain_now WHERE id_disposisi is not null  and no_order LIKE '$Order%' AND no_po LIKE '$PO%' AND langganan LIKE '%$Langganan%' AND no_bon LIKE '%$Bon%' $Where $sts ORDER BY tgl_buat ASC";
               $qry1=mysqli_query($con,$sql_qry1);
             }else{
-			   $sql_qry1 = "SELECT * FROM tbl_ganti_kain_now WHERE id_disposisi is not null and no_order LIKE '$Order' AND no_po LIKE '$PO' AND langganan LIKE '%$Langganan%' AND no_bon LIKE '%$Bon%' $Where $sts ORDER BY tgl_buat ASC" ; 
+			   $sql_qry1 = "SELECT *,substr(no_hanger, 1,3) as prefix,
+         substr(no_hanger, 4) as subprefix FROM tbl_ganti_kain_now WHERE id_disposisi is not null and no_order LIKE '$Order' AND no_po LIKE '$PO' AND langganan LIKE '%$Langganan%' AND no_bon LIKE '%$Bon%' $Where $sts ORDER BY tgl_buat ASC" ; 
               $qry1=mysqli_query($con,$sql_qry1);
             }
 			/*
@@ -195,8 +197,60 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
             <td><?php echo $row1['langganan'];?></td>
             <td align="center"><?php echo $row1['no_po'];?></td>
             <td align="center"><?php echo $row1['no_order'];?></td>
-            <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" href="javascipt:void(0)"><?php echo $row1['no_ordernew'] ?></a></td>
+            
+            <!-- <td align="center">
+              <a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" <?php if(empty($row1['bonorder'])) { ?> href="javascript:void(0)" <?php } else { ?> href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['bonorder'] ?>" <?php } ?>><?php echo $row1['no_ordernew'] ?></a>
+            </td> -->
+            <?php 
+              $q_order_new = db2_exec($conn1, "SELECT DISTINCT
+              NO_ORDER
+            FROM
+              ITXVIEW_MEMOPENTINGPPC
+            WHERE
+              NO_PO LIKE '%$row1[no_po]%' 
+              AND SUBCODE02 = '$row1[prefix]'
+              AND SUBCODE03 = '$row1[subprefix]' 
+              AND WARNA LIKE '%$row1[warna]%'
+              AND (SUBSTR(NO_ORDER, 1, 3) = 'RFD'
+                OR SUBSTR(NO_ORDER, 1, 3) = 'RFE'
+                OR SUBSTR(NO_ORDER, 1, 3) = 'RPE'
+                OR SUBSTR(NO_ORDER, 1, 3) = 'REP')
+              ");
+            $d_order_new = db2_fetch_assoc($q_order_new);
+
+            ?>
+
+            <td align="center">
+
+
+           
+            <a target="_blank" href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['NO_ORDER'] ?>"><?php echo $d_order_new['d_order_new']; ?></a>
+          </td>
+            
           
+          
+          
+          
+           <!-- <a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" href="javascipt:void(0)"><?php echo $row1['no_ordernew'] ?></a> -->
+          <!-- <?php if ($row1['no_ordernew'] != '') { ?>
+           
+            <td align="center">
+                     <a target="_blank" href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['no_ordernew'] ?>"><?php echo $row1['no_ordernew']; ?></a>
+                     <a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" href="javascript:void(0)">Edit</a>
+                 </td>
+            <?php } else { ?>
+                <td align="center">
+                    <a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" href="javascript:void(0)"><?php echo $row1['no_ordernew']; ?></a>
+                </td>
+            <?php } ?> -->
+
+
+            
+            <!-- <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" href="javascipt:void(0)"><?php echo $row1['no_ordernew'] ?></a></td> -->
+            <!-- <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['bonorder'] ?>"><?php echo $row1['no_ordernew'] ?></a></td> -->
+            <!-- <td align="center">
+    <a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['no_ordernew'] ?>" class="newordergk" <?php if(empty($row1['bonorder'])) { ?> href="javascript:void(0)" <?php } else { ?> href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['bonorder'] ?>" <?php } ?> target="_blank"><?php echo $row1['no_ordernew'] ?></a>
+</td> -->
 		  <!--
 			<td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['status1'] ?>" class="status1" href="javascipt:void(0)"><?php echo $row1['status1'] ?></a></td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['status2'] ?>" class="status2" href="javascipt:void(0)"><?php echo $row1['status2'] ?></a></td>
@@ -257,5 +311,7 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
 		});
 
 	</script>
+
+
 </body>
 </html>

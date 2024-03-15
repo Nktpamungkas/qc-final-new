@@ -114,7 +114,7 @@ border:hidden;
   <tr>
         <td align="center"><strong><font size="+1">LAPORAN GANTI KAIN</font>
           <br />
-		<font size="-1">FW-14-QCF-27/03</font></strong></td>
+		<font size="-1">FW-14-QCF-27/04</font></strong></td>
     </tr>
   </table>
 
@@ -125,24 +125,49 @@ border:hidden;
       <td><table width="100%" border="1" class="table-list1">
         <thead>
           <tr align="center">
-			      <td width="5%"><font size="-2">No</font></td>
-            <td width="5%"><font size="-2">Date Replacement Open</font></td>
-            <td width="8%"><font size="-2">Gmt Fcty</font></td>
-            <td width="8%"><font size="-2">Ftcy Ord Nbr</font></td>
-            <td width="7%"><font size="-2">Vend Ord Nbr</font></td>
-            <td width="3%"><font size="-2">G. No.</font></td>
-            <td width="3%"><font size="-2">No Item</font></td>
-            <td width="12%"><font size="-2">Description</font></td>
-            <td width="5%"><font size="-2">Width & Weight</font></td>
-            <td width="5%"><font size="-2">Color</font></td>
-            <td width="5%"><font size="-2">Total Order Qty</font></td>
-            <td width="5%"><font size="-2">Delivery Qty</font></td>
-            <td width="5%"><font size="-2">Extra Qty</font></td>
-            <td width="5%"><font size="-2">Replacement Qty</font></td>
-            <td width="5%"><font size="-2">Percent</font></td>
-            <td width="10%"><font size="-2">Defect</font></td>
-            <td width="10%"><font size="-2">Dept. Penanggung Jawab</font></td>
+			      <td width="5%" rowspan="2"><font size="-2">No</font></td>
+            <td width="5%" rowspan="2"><font size="-2">Date Replacement Open</font></td>
+            <!-- <td width="8%"><font size="-2">Gmt Fcty</font></td> -->
+            <td width="8%" rowspan="2"><font size="-2">Garment Factory</font></td>
+            <!-- <td width="8%"><font size="-2">Ftcy Ord Nbr</font></td> -->
+            <td width="8%" rowspan="2"><font size="-2">PO</font></td>
+            <!-- <td width="7%"><font size="-2">Vend Ord Nbr</font></td> -->
+            <td width="7%" rowspan="2"><font size="-2">Order Number</font></td>
+            <!-- <td width="3%"><font size="-2">G. No.</font></td> -->
+            <td width="3%" rowspan="2"><font size="-2">Hanger</font></td>
+            <!-- <td width="12%"><font size="-2">Description</font></td> -->
+            <td width="5%" rowspan="2"><font size="-2">Width & Weight</font></td>
+            <td width="5%" rowspan="2"><font size="-2">Color</font></td>
+            <td width="5%" rowspan="2"><font size="-2">Total Order Qty</font></td>
+            <td width="5%" rowspan="2"><font size="-2">Delivery Qty</font></td>
+            <td width="5%" rowspan="2"><font size="-2">Extra Qty</font></td>
+            
+            <td width="5%" colspan="3"><font size="-2">Request Qty</font></td>
+            <td width="5%" colspan="3"><font size="-2">Replacement Qty</font></td>
+            <td width="5%" colspan="3"><font size="-2">Reduced Qty</font></td>
+            <td width="10%" rowspan="2"><font size="-2">Defect</font></td>
+            <td width="10%" rowspan="2"><font size="-2">Responsibility Dept</font></td>
           </tr>
+          <tr>  
+              
+			        <!-- <th><div align="center" valign="middle">ROLL</div></th> -->
+				    <th><div align="center" valign="middle">KG </div></th>
+				    <th><div align="center" valign="middle">YARD </div></th>
+				    <th><div align="center" valign="middle">% </div></th>
+
+            <!-- <th><div align="center" valign="middle">ROLL</div></th> -->
+				    <th><div align="center" valign="middle">KG</div></th>
+				    <th><div align="center" valign="middle">YARD</div></th>
+				    <th><div align="center" valign="middle">%</div></th>
+
+            <th><div align="center" valign="middle">KG</div></th>
+				    <th><div align="center" valign="middle">YARD</div></th>
+				    <th><div align="center" valign="middle">%</div></th>
+				
+				
+				
+            </tr>
+         
 		</thead>
 		<tbody> 
     <tr>
@@ -152,7 +177,7 @@ border:hidden;
 	$no=1;
 	$Awal=$_GET['awal'];
 	$Akhir=$_GET['akhir'];		
-  $qry1=mysqli_query($con,"SELECT *, SUM(qty_order) as qty_order_lgn, SUM(qty_kirim) as qty_kirim_lgn, SUM(qty_foc) as qty_foc_lgn, SUM(qty_claim) as qty_claim_lgn, SUM(kg1) as kg1_lgn 
+  $qry1=mysqli_query($con,"SELECT *, SUM(qty_order) as qty_order_lgn, SUM(qty_kirim) as qty_kirim_lgn, SUM(qty_foc) as qty_foc_lgn, SUM(qty_claim) as qty_claim_lgn, SUM(kg1) as kg1_lgn, SUM(qty_email) as qty_req, SUM(pjg_email) as pjg_req, SUM(qty_claim) as qty_rep, SUM(pjg1) as pjg_rep
   FROM tbl_ganti_kain_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' GROUP BY langganan, id WITH ROLLUP");
   //$qrygk=mysqli_query("");
   $torder=0;
@@ -185,6 +210,9 @@ border:hidden;
         }else if($row1['t_jawab']=="" and $row1['persen']=="0" and $row1['t_jawab1']=="" and $row1['persen1']=="0" and $row1['t_jawab2']=="" and $row1['persen2']=="0"){
         $tjawab="";	
         }
+
+        $qty_red = $row1['qty_email'] - $row1['qty_claim'];
+        $satuan_red = $row1['pjg_email']-$row1['pjg1'];
 		 ?>
          <?php if(!empty($row1['id'])){ ?>
           <tr valign="top">
@@ -193,24 +221,40 @@ border:hidden;
             <td align="left" valign="middle"><font size="-2"><?php echo strtoupper($row1['langganan']);?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php echo strtoupper($row1['no_po']);?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php echo strtoupper($row1['no_order']);?></font></td>
-            <td align="center" valign="middle"><font size="-2"><?php echo strtoupper($row1['kd_ganti']);?></font></td>
-            <td align="left" valign="middle"><font size="-2"><?php echo strtoupper($row1['no_item']);?></font></td>
-            <td align="left" style="font-size: 8px;"><?php echo substr(strtoupper($row1['jenis_kain']),0,45);?></td>
+            <!-- <td align="center" valign="middle"><font size="-2"><?php echo strtoupper($row1['kd_ganti']);?></font></td> -->
+            <td align="left" valign="middle"><font size="-2"><?php echo strtoupper($row1['no_hanger']);?></font></td>
+            <!-- <td align="left" style="font-size: 8px;"><?php echo substr(strtoupper($row1['jenis_kain']),0,45);?></td> -->
             <td align="center" valign="middle"><font size="-2"><?php echo $row1['lebar']."X".$row1['gramasi'];?></font></td>
             <td align="left" valign="middle" style="font-size: 8px;"><?php echo substr($row1['warna1'],0,40);?></td>
             <td align="center" valign="middle"><font size="-2"><?php echo $row1['qty_order'];?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php echo $row1['qty_kirim'];?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php if($row1['qty_foc']=="0.00" OR $row1['qty_foc']==NULL){echo "-";}else {echo $row1['qty_foc'];}?></font></td>
-            <td align="center" valign="middle"><font size="-2"><?php echo $row1['kg1'];?></font></td>
+            
+            <td align="center" valign="middle"><font size="-2"><?php echo $row1['qty_email'];?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['pjg_email']));?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['qty_email']/$row1['qty_order'])*100,2)."%";?></font></td>
+
+            <td align="center" valign="middle"><font size="-2"><?php echo $row1['qty_claim'];?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['pjg1']));?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['qty_claim']/$row1['qty_order'])*100,2)."%";?></font></td>
+            
+
+            <td align="center" valign="middle"><font size="-2"><?php echo number_format(($qty_red), 2); ?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php echo round(($satuan_red));?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php echo round(($qty_red/$row1['qty_order'])*100,2)."%";?></font></td>
+            
+
+            <!-- <td align="center" valign="middle"><font size="-2"><?php echo $row1['kg1'];?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['kg1']/$row1['qty_order']));?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['kg1']/$row1['qty_order'])*100,2)."%";?></font></td>
+             -->
             <td align="left" valign="middle"><font size="-2"><?php echo $row1['masalah'];?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php echo $tjawab; ?></font></td>
           </tr>
           <?php } ?>
           <?php if(empty($row1['id'])){ ?>
+            
           <tr valign="top">
-              <td></td>
-              <td></td>
               <td></td>
               <td></td>
               <td></td>
@@ -222,39 +266,66 @@ border:hidden;
               <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_order_lgn']; ?></strong></font></td>
               <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_kirim_lgn']; ?></strong></font></td>
               <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_foc_lgn']; ?></strong></font></td>
-              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['kg1_lgn']; ?></strong></font></td>
-              <td align="center" valign="middle"><font size="-2"><strong><?php echo round(($row1['kg1_lgn']/$row1['qty_order_lgn'])*100,2)."%";?></strong></font></td>
+
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_req']; ?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['pjg_req']; ?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo round(($row1['qty_req']/$row1['qty_order'])*100,2)."%";?></strong></font></td>
+              
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_rep']; ?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['pjg_rep']; ?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo round(($row1['qty_rep']/$row1['qty_order'])*100,2)."%";?></strong></font></td>
+              
+              <td align="center" valign="middle"><font size="-2"><?php echo number_format(($row1['qty_req'] - $row1['qty_rep']), 2); ?></font></td>
+              <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['pjg_req']-$row1['pjg_rep']));?></font></td>
+              <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['qty_req']-$row1['qty_rep']/$row1['qty_order'])*100,2)."%";?></font></td>
+            
               <td></td>
               <td></td>
             </tr>
           <?php }?>
-          <!--<?php if(empty($row1['id']) AND empty($row1['langganan'])){ ?>
+          
+          <?php if(empty($row1['id']) AND empty($row1['langganan'])){ ?>
           <tr valign="top">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td align="right"><strong>GRAND TOTAL</strong></td>
-              <td align="center" valign="middle"><strong><?php echo $row1['qty_order_lgn']; ?></strong></td>
-              <td align="center" valign="middle"><strong><?php echo $row1['qty_kirim_lgn']; ?></strong></td>
-              <td align="center" valign="middle"><strong><?php echo $row1['qty_foc_lgn']; ?></strong></td>
-              <td align="center" valign="middle"><strong><?php echo $row1['qty_claim_lgn']; ?></strong></td>
-              <td align="center" valign="middle"><strong><?php echo round(($row1['qty_claim_lgn']/$row1['qty_order_lgn'])*100,2)."%";?></strong></td>
+              
+              
+              <td align="right" colspan="8"><strong>GRAND TOTAL</strong></td>
+             <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_order_lgn']; ?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_kirim_lgn']; ?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_foc_lgn']; ?></strong></font></td>
+
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_req']; ?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['pjg_req']; ?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo round(($row1['qty_req']/$row1['qty_order'])*100,2)."%";?></strong></font></td>
+              
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_rep']; ?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['pjg_rep']; ?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo round(($row1['qty_rep']/$row1['qty_order'])*100,2)."%";?></strong></font></td>
+              
+              <td align="center" valign="middle"><font size="-2"><?php echo number_format(($row1['qty_req'] - $row1['qty_rep']), 2); ?></font></td>
+              <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['pjg_req']-$row1['pjg_rep']));?></font></td>
+              <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['qty_req']-$row1['qty_rep']/$row1['qty_order'])*100,2)."%";?></font></td>
+            
               <td></td>
               <td></td>
             </tr>
-          <?php }?>-->
+          <?php }?>
         <?php $no++;
         $torder=$row1['qty_order_lgn'];
         $tkirim=$row1['qty_kirim_lgn'];
         $tfoc=$row1['qty_foc_lgn'];
-        $tclaim=$row1['kg1_lgn'];
-        $tpersen=round(($row1['kg1_lgn']/$row1['qty_order_lgn'])*100,2);
+
+        $tclaim1=$row1['qty_req'];
+        $tclaim2=$row1['qty_rep'];
+        $tclaim3=$row1['qty_req']-$row1['qty_rep'];
+
+        $tclaim=$tclaim1+$tclaim2+$tclaim3; 
+
+        $tpersen1=round(($row1['qty_req']/$row1['qty_order_lgn'])*100,2);
+        $tpersen2=round(($row1['qty_rep']/$row1['qty_order_lgn'])*100,2);
+        $tpersen3=round(($row1['qty_req']-$row1['qty_rep']/$row1['qty_order_lgn'])*100,2);
+
+        $tpersen= $tpersen1+$tpersen2+$tpersen3;
+
         } ?>
         <!--$torder=round($torder+$row1['qty_order'],2);
         $tkirim=round($tkirim+$row1['qty_kirim'],2);

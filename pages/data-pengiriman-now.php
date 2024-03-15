@@ -16,6 +16,7 @@ include"koneksi.php";
 $Order	= isset($_POST['order']) ? $_POST['order'] : '';
 $PO	= isset($_POST['po']) ? $_POST['po'] : '';	
 $ArticleGrup	= isset($_POST['ag']) ? $_POST['ag'] : '';	
+$Pelanggan	= isset($_POST['pelanggan']) ? $_POST['pelanggan'] : '';	
 $ArticleCode	= isset($_POST['ac']) ? $_POST['ac'] : '';	
 $Warna	= isset($_POST['warna']) ? $_POST['warna'] : '';	
 $Prodorder	= isset($_POST['prodorder']) ? $_POST['prodorder'] : '';
@@ -55,12 +56,16 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
           <div class="col-sm-2">
             <input name="ag" type="text" class="form-control pull-right" id="ag" placeholder="Article Group" value="<?php echo $ArticleGrup;  ?>" />
           </div>
+          <div class="col-sm-2">
+            <input name="pelanggan" type="text" class="form-control pull-right" id="pelanggan" placeholder="Pelanggan" value="<?php echo $Pelanggan;  ?>" />
+          </div>
         <!-- /.input group -->
       </div>
       <div class="form-group">
         <div class="col-sm-2">
             <input name="ac" type="text" class="form-control pull-right" id="ac" placeholder="Article Code" value="<?php echo $ArticleCode;  ?>" />
           </div>
+          
         <div class="col-sm-3">
             <input name="warna" type="text" class="form-control pull-right" id="warna" placeholder="Warna" value="<?php echo $Warna;  ?>"/>
           </div>
@@ -119,7 +124,8 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
 				WHEN SALESDOCUMENT.GOODSISSUEDATE IS NOT NULL THEN SALESDOCUMENT.GOODSISSUEDATE
 				ELSE SALESDOCUMENT.PROVISIONALDOCUMENTDATE
 				END) BETWEEN '$tgl_awal' AND '$tgl_akhir' AND "; }
-            if($tgl_awal!="" or $Order!="" or $PO!="" or $ArticleGrup!="" or $ArticleCode!="" or $Warna!="" or $Prodorder!=""){
+
+            if($tgl_awal!="" or $Order!="" or $PO!="" or $ArticleGrup!="" or $ArticleCode!="" or $Warna!="" or $Prodorder!="" or $Pelanggan!=""){
               $sqlDB2="SELECT 
               SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
               SALESDOCUMENTLINE.ORDERLINE,
@@ -146,7 +152,8 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               CASE 
                   WHEN SALESDOCUMENT.PAYMENTMETHODCODE ='FOC' THEN 'FOC' 
                   ELSE ''
-              END AS NOTE 
+              END AS NOTE,
+              ITXVIEW_PELANGGAN.LANGGANAN  
               FROM 
               SALESDOCUMENTLINE SALESDOCUMENTLINE
               LEFT JOIN ALLOCATION ALLOCATION ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = ALLOCATION.ORDERCODE AND 
@@ -183,10 +190,11 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               SALESDOCUMENTLINE.SUBCODE08 = ITXVIEWCOLOR.SUBCODE08 AND
               SALESDOCUMENTLINE.SUBCODE09 = ITXVIEWCOLOR.SUBCODE09 AND
               SALESDOCUMENTLINE.SUBCODE10 = ITXVIEWCOLOR.SUBCODE10
+              LEFT JOIN ITXVIEW_PELANGGAN ON ITXVIEW_PELANGGAN.CODE = SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE
               WHERE 
 			  $Where
 			  SALESDOCUMENT.DOCUMENTTYPETYPE ='05'
-              AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL AND SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE LIKE '%$Order%' AND (SALESORDER.EXTERNALREFERENCE LIKE '%$PO%' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '%$PO%') AND SALESDOCUMENTLINE.SUBCODE02 LIKE '%$ArticleGrup%' AND SALESDOCUMENTLINE.SUBCODE03 LIKE '%$ArticleCode%' AND ITXVIEWCOLOR.WARNA LIKE '%$Warna%' AND A.LOTCODE LIKE '%$Prodorder%'
+              AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL AND SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE LIKE '%$Order%' AND (SALESORDER.EXTERNALREFERENCE LIKE '%$PO%' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '%$PO%') AND SALESDOCUMENTLINE.SUBCODE02 LIKE '%$ArticleGrup%' AND SALESDOCUMENTLINE.SUBCODE03 LIKE '%$ArticleCode%' AND ITXVIEWCOLOR.WARNA LIKE '%$Warna%' AND A.LOTCODE LIKE '%$Prodorder%' AND ITXVIEW_PELANGGAN.LANGGANAN LIKE '%$Pelanggan%'
               GROUP BY 
               SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
               SALESDOCUMENTLINE.ORDERLINE,
@@ -203,7 +211,8 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               A.USERSECONDARYUOMCODE,
               ITXVIEWCOLOR.WARNA,
               A.LOTCODE,
-              SALESDOCUMENT.PAYMENTMETHODCODE";
+              SALESDOCUMENT.PAYMENTMETHODCODE,
+              ITXVIEW_PELANGGAN.LANGGANAN ";
             }else{
               $sqlDB2="SELECT 
               SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
@@ -231,7 +240,8 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               CASE 
                   WHEN SALESDOCUMENT.PAYMENTMETHODCODE ='FOC' THEN 'FOC' 
                   ELSE ''
-              END AS NOTE
+              END AS NOTE,
+              ITXVIEW_PELANGGAN.LANGGANAN 
               FROM 
               SALESDOCUMENTLINE SALESDOCUMENTLINE
               LEFT JOIN ALLOCATION ALLOCATION ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = ALLOCATION.ORDERCODE AND 
@@ -268,13 +278,14 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               SALESDOCUMENTLINE.SUBCODE08 = ITXVIEWCOLOR.SUBCODE08 AND
               SALESDOCUMENTLINE.SUBCODE09 = ITXVIEWCOLOR.SUBCODE09 AND
               SALESDOCUMENTLINE.SUBCODE10 = ITXVIEWCOLOR.SUBCODE10
+              LEFT JOIN ITXVIEW_PELANGGAN ON ITXVIEW_PELANGGAN.CODE = SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE
               WHERE 
 			  (CASE
 				WHEN SALESDOCUMENT.GOODSISSUEDATE IS NOT NULL THEN SALESDOCUMENT.GOODSISSUEDATE
 				ELSE SALESDOCUMENT.PROVISIONALDOCUMENTDATE
 				END) BETWEEN '$tgl_awal' AND '$tgl_akhir' AND
 			  SALESDOCUMENT.DOCUMENTTYPETYPE ='05'
-              AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL AND SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE LIKE '$Order' AND (SALESORDER.EXTERNALREFERENCE LIKE '$PO' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '$PO') AND TRIM(SALESDOCUMENTLINE.SUBCODE02) LIKE '$ArticleGrup' AND TRIM(SALESDOCUMENTLINE.SUBCODE03) LIKE '$ArticleCode' AND ITXVIEWCOLOR.WARNA LIKE '$Warna' AND A.LOTCODE LIKE '$Prodorder'
+              AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL AND SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE LIKE '$Order' AND (SALESORDER.EXTERNALREFERENCE LIKE '$PO' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '$PO') AND TRIM(SALESDOCUMENTLINE.SUBCODE02) LIKE '$ArticleGrup' AND TRIM(SALESDOCUMENTLINE.SUBCODE03) LIKE '$ArticleCode' AND ITXVIEWCOLOR.WARNA LIKE '$Warna' AND A.LOTCODE LIKE '$Prodorder' AND ITXVIEW_PELANGGAN.LANGGANAN LIKE '$Pelanggan'
               GROUP BY 
               SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
               SALESDOCUMENTLINE.ORDERLINE,
@@ -291,7 +302,8 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               A.USERSECONDARYUOMCODE,
               ITXVIEWCOLOR.WARNA,
               A.LOTCODE,
-              SALESDOCUMENT.PAYMENTMETHODCODE";
+              SALESDOCUMENT.PAYMENTMETHODCODE,
+              ITXVIEW_PELANGGAN.LANGGANAN ";
             }
                 $stmt=db2_exec($conn1,$sqlDB2, array('cursor'=>DB2_SCROLLABLE));
                 while($row1=db2_fetch_assoc($stmt)){
