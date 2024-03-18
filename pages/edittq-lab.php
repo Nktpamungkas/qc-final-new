@@ -2,8 +2,7 @@
 ini_set("error_reporting", 1);
 session_start();
 include("../koneksi.php");
-
-$nocounter = $_GET['no_counter'] ?? '';
+$nocounter	= isset($_GET['no_counter']) ? $_GET['no_counter'] : '';
 
 
 $sqlCek = mysqli_query($conlab, "SELECT * FROM tbl_test_qc WHERE no_counter='$nocounter' ORDER BY id DESC LIMIT 1");
@@ -292,7 +291,12 @@ $rcek = mysqli_fetch_array($sqlCek);
 										value="CHLORIN & NON-CHLORIN"> Chlorin &amp; Non-Chlorin &nbsp; &nbsp; &nbsp; &nbsp;
 								</label>
 								<label><input type="checkbox" class="minimal" name="colorfastness[]" value="DYE TRANSFER"> Dye
-									Transfer &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+									Transfer &nbsp;
+									&nbsp;
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+									&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+								</label>
+								<label><input type="checkbox" class="minimal" name="colorfastness[]" value="SWEAT CONCEAL"> Sweat Conceal
 								</label>
 							</div>
 						</form>
@@ -342,7 +346,7 @@ if ($_POST['save'] == "save") {
 														no_item = '$noitem', 
 														permintaan_testing = '$chkc', 
 														tgl_update = now()
-													WHERE id = '$id_test_qc';
+													WHERE no_counter='$nocounter' ;
 	");
 	
 	if ($sqlData) {
