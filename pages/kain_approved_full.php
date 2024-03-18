@@ -16,13 +16,29 @@ include("../koneksi.php");
 				  <div class="form-group">
                   <label for="approved1" class="col-sm-3 control-label">Approved 1</label>
                   <div class="col-sm-6">
-				  <input type="text" class="form-control" value="<?php echo $r['approved_qc1'];?>" name="approved1" maxlength="30" required>		   
+				  <select name="approved1" class="form-control select2"> 
+						<option value="" <?php if($r['approved_qc1']==""){ echo "SELECTED";}?>>Pilih</option>
+						<option value="Edwin Ismunandar" <?php if($r['approved_qc1']=="Edwin Ismunandar"){ echo "SELECTED";}?>>Edwin Ismunandar</option>
+						<option value="Ferry Wibowo" <?php if($r['approved_qc1']=="Ferry Wibowo"){ echo "SELECTED";}?>>Ferry Wibowo</option>
+						<option value="Janu Dwi Laksono" <?php if($r['approved_qc1']=="Janu Dwi Laksono"){ echo "SELECTED";}?>>Janu Dwi Laksono</option>
+						<option value="Taufik Restiardi" <?php if($r['approved_qc1']=="Taufik Restiardi"){ echo "SELECTED";}?>>Taufik Restiardi</option>
+						<option value="Tri Setiawan" <?php if($r['approved_qc1']=="Tri Setiawan"){ echo "SELECTED";}?>>Tri Setiawan</option>
+						<option value="Vivik Kurniawati" <?php if($r['approved_qc1']=="Vivik Kurniawati"){ echo "SELECTED";}?>>Vivik Kurniawati</option>
+					</select>		   
                   </div>
                   </div>
 				  <div class="form-group">
                   <label for="approved2" class="col-sm-3 control-label">Approved 2</label>
                   <div class="col-sm-6">
-				  <input type="text" class="form-control" value="<?php echo $r['approved_qc2'];?>" name="approved2" maxlength="30">		   
+				  <select name="approved2" class="form-control select2"> 
+						<option value="" <?php if($r['approved_qc2']==""){ echo "SELECTED";}?>>Pilih</option>
+						<option value="Edwin Ismunandar" <?php if($r['approved_qc2']=="Edwin Ismunandar"){ echo "SELECTED";}?>>Edwin Ismunandar</option>
+						<option value="Ferry Wibowo" <?php if($r['approved_qc2']=="Ferry Wibowo"){ echo "SELECTED";}?>>Ferry Wibowo</option>
+						<option value="Janu Dwi Laksono" <?php if($r['approved_qc2']=="Janu Dwi Laksono"){ echo "SELECTED";}?>>Janu Dwi Laksono</option>
+						<option value="Taufik Restiardi" <?php if($r['approved_qc2']=="Taufik Restiardi"){ echo "SELECTED";}?>>Taufik Restiardi</option>
+						<option value="Tri Setiawan" <?php if($r['approved_qc2']=="Tri Setiawan"){ echo "SELECTED";}?>>Tri Setiawan</option>
+						<option value="Vivik Kurniawati" <?php if($r['approved_qc2']=="Vivik Kurniawati"){ echo "SELECTED";}?>>Vivik Kurniawati</option>
+					</select>		   
                   </div>
                   </div>
 				<input type="hidden" id="id" name="id" value="<?php echo $modal_id;?>"> 

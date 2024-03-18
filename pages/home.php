@@ -237,6 +237,20 @@ $page = strtolower($page);
         </div>
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="Newbonpenghubung">
+            <div class="info-box">
+              <span class="info-box-icon bg-pink"><i class="fa fa-truck"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">New Bon Penghubung</span>
+                <span class="info-box-number">&nbsp;</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+          <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
           <a href="DataPengirimanNOW">
             <div class="info-box">
               <span class="info-box-icon bg-pink"><i class="fa fa-truck"></i></span>

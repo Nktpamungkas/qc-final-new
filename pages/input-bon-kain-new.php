@@ -292,8 +292,13 @@ $r1=mysqli_fetch_array($qryr1);
 					<label for="qty_email" class="col-sm-2 control-label">Qty Permintaan Sesuai Email </label>
 					<div class="col-sm-2">
                     	<div class="input-group">
-							<input name="qty_email" type="text" class="form-control" id="qty_email" value="<?php if($qty_email!=""){echo $qty_email;}else{echo $rcek['qty_email'];} ?>" placeholder="0.00" style="text-align: right;" required>
+								<?php $qryw1=mysqli_query($con,"SELECT qty_claim,nodemand FROM tbl_aftersales_now WHERE warna='$WN1' and lot='$L1' and no_order='$rCek[no_order]' and no_hanger='$rCek[no_hanger]' and po='$rCek[po]'");
+									$rowW1=mysqli_fetch_array($qryw1);
+									?>  
+									<input name="qty_email" type="text" class="form-control" id="qty_email" value="<?php echo $rowW1['qty_claim']; ?>" placeholder="0.00" style="text-align: right;">
 							<span class="input-group-addon">Kg</span>
+							<!-- <input name="qty_email" type="text" class="form-control" id="qty_email" value="<?php if($qty_email!=""){echo $qty_email;}else{echo $rcek['qty_email'];} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">Kg</span> -->
 							
 						</div>
                   	</div>
@@ -325,11 +330,17 @@ $r1=mysqli_fetch_array($qryr1);
                   	</div>
 					<label for="warna1" class="col-sm-2 control-label">Qty Setelah Negosiasi </label>
 				  	<div class="col-sm-2">
+
+					
                     	<div class="input-group">
-							<?php $qryw1=mysqli_query($con,"SELECT qty_claim,nodemand FROM tbl_aftersales_now WHERE warna='$WN1' and lot='$L1' and no_order='$rCek[no_order]' and no_hanger='$rCek[no_hanger]' and po='$rCek[po]'");
+							<!-- <?php $qryw1=mysqli_query($con,"SELECT qty_claim,nodemand FROM tbl_aftersales_now WHERE warna='$WN1' and lot='$L1' and no_order='$rCek[no_order]' and no_hanger='$rCek[no_hanger]' and po='$rCek[po]'");
 							$rowW1=mysqli_fetch_array($qryw1);
-							?>  
-							<input name="kg1" type="text" class="form-control" id="kg1" value="<?php echo $rowW1['qty_claim']; ?>" placeholder="0.00" style="text-align: right;" readonly>
+							?>   -->
+
+							<!-- <input name="kg1" type="text" class="form-control" id="kg1" value="<?php echo $rowW1['qty_claim']; ?>" placeholder="0.00" style="text-align: right;">
+							<span class="input-group-addon">Kg</span> -->
+
+							<input name="kg1" type="text" class="form-control" id="kg1" value="" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">Kg</span>
 							
 						</div>

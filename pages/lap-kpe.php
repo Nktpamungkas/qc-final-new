@@ -27,6 +27,7 @@ $Langganan	= isset($_POST['langganan']) ? $_POST['langganan'] : '';
 $Demand	= isset($_POST['demand']) ? $_POST['demand'] : '';
 $Prodorder	= isset($_POST['prodorder']) ? $_POST['prodorder'] : '';
 $Pejabat	= isset($_POST['pejabat']) ? $_POST['pejabat'] : '';
+$Solusi	= isset($_POST['solusi']) ? $_POST['solusi'] : '';
 	
 if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";}	
 ?>
@@ -86,6 +87,17 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
                 <?php }?>
             </select>
         </div>
+        <div class="col-sm-3">
+        <select class="form-control select2" name="solusi" id="solusi">
+							<option value="">Solusi</option>
+							<?php 
+							$qryp=mysqli_query($con,"SELECT solusi FROM tbl_solusi ORDER BY solusi ASC");
+							while($rp=mysqli_fetch_array($qryp)){
+							?>
+							<option value="<?php echo $rp['solusi'];?>" <?php if($Solusi==$rp['solusi']){echo "SELECTED";}?>><?php echo $rp['solusi'];?></option>	
+							<?php }?>
+						</select>
+        </div>
       </div>
     <div class="form-group">
 		  <label for="status_red" class="col-sm-0 control-label"></label>		  
@@ -122,6 +134,13 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         <?php if($_POST['awal']!="") { ?><b>Periode: <?php echo $_POST['awal']." to ".$_POST['akhir']; ?></b>
           <?php } ?>
           <div class="pull-right">
+
+          <?php if($_POST['solusi'] == 'PERBAIKAN GARMENT'){ ?>
+            <a href="pages/cetak/cetak_perbaikan_garment.php" class="btn btn-primary" target="_blank">Cetak Perbaikan Garment</a>
+          <?php }elseif($_POST['solusi'] == 'DEBIT NOTE') {?>
+            <a href="pages/cetak/cetak_debit_note.php" class="btn btn-success" target="_blank">Cetak Debit Note</a>
+            <?php }?>
+            
             <a href="pages/cetak/cetak_kpe.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>" class="btn btn-danger <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank">Cetak KPE</a>
 			 
 			 
@@ -150,6 +169,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               <th><div align="center">No Demand</div></th>
               <th><div align="center">No Prod Order</div></th>
               <th><div align="center">PO</div></th>
+              <!-- <th><div align="center">NO ITEM</div></th> -->
               <th><div align="center">Order</div></th>
               <th><div align="center">Hanger</div></th>
               <th><div align="center">Jenis Kain</div></th>
@@ -180,12 +200,12 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             if($sts_red=="1"){ $stsred =" AND a.sts_red='1' "; }else{$stsred = " ";}
             if($sts_claim=="1"){ $stsclaim =" AND a.sts_claim='1' "; }else{$stsclaim =" ";}
             if($Awal!=""){ $Where =" AND DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
-            if($Awal!="" or $sts_red=="1" or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!=""){
+            if($Awal!="" or $sts_red=="1" or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
               $qry1=mysqli_query($con,"SELECT a.*,
               GROUP_CONCAT( DISTINCT b.no_ncp SEPARATOR ', ' ) AS no_ncp,
               GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
               FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
-              WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' $Where $stsred $stsclaim 
+              WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $stsred $stsclaim 
               GROUP BY a.nodemand
               ORDER BY a.id ASC");
             }else{
@@ -193,7 +213,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               GROUP_CONCAT( DISTINCT b.no_ncp SEPARATOR ', ' ) AS no_ncp,
               GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
               FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
-              WHERE a.no_order LIKE '$Order' AND a.po LIKE '$PO' AND a.no_hanger LIKE '$Hanger' AND a.langganan LIKE '$Langganan' AND a.nodemand LIKE '$Demand' AND a.nokk LIKE '$Prodorder' AND a.pejabat LIKE '$Pejabat' $Where $stsred $stsclaim 
+              WHERE a.no_order LIKE '$Order' AND a.po LIKE '$PO' AND a.no_hanger LIKE '$Hanger' AND a.langganan LIKE '$Langganan' AND a.nodemand LIKE '$Demand' AND a.nokk LIKE '$Prodorder' AND a.pejabat LIKE '$Pejabat'  $Where $stsred $stsclaim 
               GROUP BY a.nodemand
               ORDER BY a.id ASC");
             }
@@ -231,6 +251,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td align="center"><?php echo $row1['nodemand'];?></td>
             <td align="center"><?php echo $row1['nokk'];?></td>
             <td align="center"><?php echo $row1['po'];?></td>
+            <!-- <td align="center"><?php echo $row1['no_item'];?></td> -->
             <td align="center"><?php echo $row1['no_order'];?></td>
             <td align="center" valign="top"><?php echo $row1['no_hanger'];?></td>
             <td><?php echo $row1['jenis_kain'];?></td>
@@ -244,7 +265,20 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td><?php echo $row1['masalah_dominan'];?></td>
             <td><?php echo $row1['masalah'];?></td>
             <td><?php echo $row1['penyebab'];?></td>
-            <td><?php echo $row1['solusi'];?></td>
+            <td>
+                 <?php if($row1['solusi'] == "PERBAIKAN GARMENT") { ?>
+
+                  <a href="#" id='<?php echo $row1['no_item']; ?>' class="detail_solusi_perbaikan_garment"><?php echo $row1['solusi'];?></a>
+                  <!-- <a href="#" id='' class="detail_solusi_perbaikan_garment" data-toggle="modal" data-target="#DataSolusi" data-no_item="<?php echo $row1['no_item']; ?>"><?php echo $row1['solusi'];?></a> -->
+                
+                <?php }elseif($row1['solusi'] == "DEBIT NOTE"){?>
+                  <a href="#" id='<?php echo $row1['no_item']; ?>' class="detail_solusi_debit_note"><?php echo $row1['solusi'];?></a>
+                  <?php }else{?>
+                    <?php echo $row1['solusi'];?>
+                  <?php }?>
+            </td>
+            
+                  <!-- <td><?php echo $row1['solusi'];?></td> -->
             <td><?php if($row1['personil2']!=""){echo $row1['personil'].",".$row1['personil2'];}else{echo $row1['personil'];}?></td>
             <td><?php echo $row1['pejabat'];?></td>
             <td><?php if($row1['sts']=="1"){echo "Lolos QC";}else if($row1['sts_disposisiqc']=="1"){echo "Disposisi QC";}else if($row1['sts_disposisipro']=="1"){echo "Disposisi Produksi";}?><?php if($row1['sts_nego']=="1"){echo ", Negosiasi Aftersales";}?></td>
@@ -274,6 +308,128 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
     </div>
   </div>
 </div>	
+
+<div id="DataSolusiPerbaikanGarment" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>	
+<div id="DataSolusiDebitNote" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>	
+
+
+
+
+
+<div class="modal fade" id="DataSolusiDN">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <form class="form-horizontal" name="modal_popup" data-toggle="validator" method="post" action="" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Debit Note</h4>
+                </div>
+                <div class="modal-body">
+                <input type="text" id="dn_no_item" name="dn_no_item" value="<?php echo $row1['no_item'];?>">
+                    <div class="form-group">
+                        <label for="dn_kg" class="col-md-4 control-label">KG</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="dn_kg" placeholder="0.0" name="dn_kg" required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dn_yd" class="col-md-4 control-label">YD</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="dn_satuan" name="dn_satuan" value="YARD" required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dn_amount" class="col-md-4 control-label">AMOUNT</label>
+                        <div class="col-md-3" >
+                            <select name="currency" id="currency" class="form-control">
+                              <option value="IDR">IDR</option>
+                              <option value="USD">USD</option>
+                            </select>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="dn_amount" placeholder="Rp. 1.000" name="dn_amount" required onkeyup="formatRupiah(this)">
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                   
+                    <input type="submit" value="Simpan" name="simpan_solusi_db" id="simpan_solusi" class="btn btn-primary pull-right" >  
+                    <!-- <input type="submit" value="cetak" name="simpan_solusi_db" id="simpan_solusi" class="btn btn-primary pull-right" >   -->
+                  
+                </div>
+
+                </div>
+                <?php  ?>
+            
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<?php 
+if($_POST['simpan_solusi_pg']=="Simpan"){
+
+	$no_item=strtoupper($_POST['no_item']);
+	$pcs=strtoupper($_POST['pg_pcs']);
+
+  $format_amount = str_replace(['.', ','], '', $_POST['pg_amount']);
+	$amount=strtoupper($format_amount);
+
+  $currency=strtoupper($_POST['currency']);
+  
+	$sqlData1=mysqli_query($con,"INSERT INTO tbl_perbaikan_garment SET 
+		  no_item='$no_item', pcs='$pcs', amount='$amount', currency='$currency'");
+	if($sqlData1){	
+	echo "<script>swal({
+  title: 'Data Telah Tersimpan',   
+  text: 'Klik Ok untuk input data kembali',
+  type: 'success',
+  }).then((result) => {
+  if (result.value) {
+         window.location.href='LapKPE';
+	 
+  }
+});</script>";
+}else {
+      // Tampilkan pesan kesalahan jika perintah SQL gagal
+      echo "Error: " . mysqli_error($con);
+  }
+}
+
+if($_POST['simpan_solusi_db']=="Simpan"){
+	$no_item=strtoupper($_POST['no_item']);
+	$dn_kg=strtoupper($_POST['dn_kg']);
+	$dn_satuan=strtoupper($_POST['dn_satuan']);
+  $format_amount = str_replace(['.', ','], '', $_POST['dn_amount']);
+	$amount=strtoupper($format_amount);
+  $currency=strtoupper($_POST['currency']);
+	$sqlData1=mysqli_query($con,"INSERT INTO tbl_debit_note SET 
+		  no_item='$no_item', kg='$dn_kg', satuan='$dn_satuan', amount='$amount', currency='$currency'");
+	if($sqlData1){	
+	echo "<script>swal({
+  title: 'Data Telah Tersimpan',   
+  text: 'Klik Ok untuk input data kembali',
+  type: 'success',
+  }).then((result) => {
+  if (result.value) {
+    window.location.href='LapKPE';
+	 
+  }
+});</script>";
+}else {
+  // Tampilkan pesan kesalahan jika perintah SQL gagal
+  echo "Error: " . mysqli_error($con);
+}
+}
+?>
 <script type="text/javascript">
     function confirm_delete(delete_url)
     {
@@ -287,5 +443,31 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 		});
 
 	</script>
+
+<script>
+function formatRupiah(input) {
+    // Menghilangkan tanda titik dan koma
+    var value = input.value.replace(/[^\d]/g, '');
+
+    // Mengonversi nilai menjadi angka
+    var amount = parseInt(value);
+
+    // Mengonversi angka menjadi format rupiah
+    var formattedValue = amount.toLocaleString('id-ID');
+
+    // Memasukkan nilai yang sudah diformat kembali ke dalam input field
+    input.value = formattedValue;
+}
+</script>
+<script>
+$(document).ready(function(){
+    $('.detail_solusi_perbaikan_garment').click(function(e){
+        e.preventDefault(); // Menghentikan perilaku default dari link
+        var no_item = $(this).data('no_item'); // Mengambil nilai no_item dari atribut data
+        $('#no_item').val(no_item); // Memasukkan nilai no_item ke dalam input dengan id no_item di dalam modal
+        $('#DataSolusi').modal('show'); // Menampilkan modal
+    });
+});
+</script>
 </body>
 </html>
