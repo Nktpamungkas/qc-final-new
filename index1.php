@@ -2401,6 +2401,13 @@
                     },
                 ]
             })
+            $('#table-lap-5besar-kpe').DataTable({
+                "lengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, 'All']
+                ],
+                "pageLength": 5
+            });
             $('#tblr1').DataTable()
             $('#tblr2').DataTable()
             $('#tblr3').DataTable()

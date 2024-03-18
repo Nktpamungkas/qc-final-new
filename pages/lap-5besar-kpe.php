@@ -121,7 +121,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
             <div class="col-xs-6">	
                 <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> 5 Langganan Terbesar KPE</h3>
+                    <h3 class="box-title"> 5 Langganan Terbesar KPE</h3> <!-- disini 4 -->
                     <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
@@ -132,7 +132,9 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             <tr>
                             <th width="5%"><div align="center">No</div></th>
                             <th width="25%"><div align="center">Langganan</div></th>
+                            <th width="10%"><div align="center">Jumlah Kasus</div></th>
                             <th width="10%"><div align="center">Qty Keluhan (KG)</div></th>
+                            <th width="10%"><div align="center">% Dibandingkan total keluhan</div></th>
                             <th width="15%"><div align="center">% Dibandingkan Total Kirim</div></th>
                             </tr>
                         </thead>
@@ -141,9 +143,23 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         $no1=1;
                         $total1=0;
                         $totaldll=0;
+                        // $totalLot=0;
                         $qryAll=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'");
                         $rAll=mysqli_fetch_array($qryAll);
-                        $qrylgn=mysqli_query($con,"SELECT SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(pelanggan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir')*100,1) AS persen,
+// x1
+                        $qrylgnTotal = mysqli_query($con, "select
+                                                                sum(a.qty_claim_lgn) as total_qty_keluhan
+                                                            from (
+                                                                SELECT 
+                                                                    SUM(qty_claim) AS qty_claim_lgn
+                                                                FROM
+                                                                `tbl_aftersales_now`
+                                                                WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                                                                GROUP BY pelanggan
+                                                                ORDER BY qty_claim_lgn DESC LIMIT 5) a");
+                        $rTotal = mysqli_fetch_array($qrylgnTotal);
+
+                        $qrylgn=mysqli_query($con,"SELECT COUNT(*) AS jml, SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(pelanggan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir')*100,1) AS persen,
                         pelanggan
                         FROM
                         `tbl_aftersales_now`
@@ -158,22 +174,28 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         <tr valign="top">
                             <td align="center"><?php echo $no1; ?></td>
                             <td align="left"><?php echo $r['pelanggan'];?></td>
+                            <td align="right"><?php echo $r['jml'] ; ?></td>
                             <td align="right"><?php echo $r['qty_claim_lgn'];?></td>
+                            <td align="right"><?php if($TotalKirim!=""){echo number_format(($r['qty_claim_lgn']/(int)$rTotal['total_qty_keluhan'])*100,2)." %";}else{echo "0 %";}?></td>
                             <td align="right"><?php if($TotalKirim!=""){echo number_format(($r['qty_claim_lgn']/(int)$TotalKirim)*100,2)." %";}else{echo "0 %";}?></td>
                         </tr>
                         <?php	$no1++;  
                         $total1=$total1+$r['qty_claim_lgn'];
+                        // $totalLot += $r['jml'];
                         }
                         $totaldll=$rAll['qty_claim_all']-$total1; ?>
                         </tbody>
                         <tfoot>
                             <tr valign="top">
                             <td align="center" colspan="2"><strong>DLL</strong></td>
+                            <td align="right"><strong><?= ''//$totalLot ?></strong></td>
                             <td align="right"><strong><?php echo number_format($totaldll,2); ?></strong></td>
+                            <td align="right"><strong></strong></td>
                             <td align="right"><strong><?php if($TotalKirim!=""){echo number_format(($totaldll/(int)$TotalKirim)*100,2)." %";}else{echo "0 %";} ?></strong></td>
                             </tr>
                             <tr valign="top">
-                            <td align="center" colspan="2"><strong>TOTAL KIRIM</td>
+                            <td align="center" colspan="2"><strong>TOTAL KIRIM</strong></td>
+                            <td align="center"></td>
                             <td align="right"><strong><?php if($TotalKirim!=""){echo number_format($TotalKirim,2);}else{echo "0";} ?></strong></td>
                             <td align="right">&nbsp;</td>
                             </tr>
@@ -188,7 +210,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
             <div class="col-xs-6">	
                 <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> 5 Masalah Terbesar KPE</h3>
+                    <h3 class="box-title"> 5 Masalah Terbesar KPE</h3> <!-- disini 3 -->
                     <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
@@ -199,7 +221,9 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             <tr>
                             <th width="5%"><div align="center">No</div></th>
                             <th width="25%"><div align="center">Defect</div></th>
+                            <th width="14%"><div align="center">Jumlah Kasus</div></th>
                             <th width="14%"><div align="center">Qty Keluhan (KG)</div></th>
+                            <th width="15%"><div align="center">% Dibandingkan Total Keluhan</div></th>
                             <th width="15%"><div align="center">% Dibandingkan Total Kirim</div></th>
                             </tr>
                         </thead>
@@ -210,7 +234,19 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         $totaldll2=0;
                         $qryAll2=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL)");
                         $rAll2=mysqli_fetch_array($qryAll2);
-                        $qrydef=mysqli_query($con,"SELECT SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
+
+                        $qrydefTotal = mysqli_query($con, "select 
+                                                                sum(a.qty_claim_lgn) as total_qty_claim
+                                                            from (
+                                                                SELECT 
+                                                                    SUM(qty_claim) AS qty_claim_lgn
+                                                                FROM
+                                                                `tbl_aftersales_now`
+                                                                WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '2024-02-01' AND '2024-03-01' AND (masalah_dominan!='' OR masalah_dominan!=NULL)
+                                                                GROUP BY masalah_dominan
+                                                                ORDER BY qty_claim_lgn DESC LIMIT 5) a");
+                        $rdTotal=mysqli_fetch_array($qrydefTotal);
+                        $qrydef=mysqli_query($con,"SELECT COUNT(*) AS jumlah_kasus, SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
                         AND (masalah_dominan!='' OR masalah_dominan!=NULL))*100,1) AS persen,
                         masalah_dominan
                         FROM
@@ -224,9 +260,11 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         //$r2=mysqli_fetch_array($qrycased);
                         ?>
                         <tr valign="top">
-                            <td align="center"><?php echo $no2; ?></td>
+                            <td align="center"><?php echo $no2.' '.$rAll2['qty_claim_all']; ?></td>
                             <td align="left"><?php echo $rd['masalah_dominan'];?></td>
+                            <td align="right"><?php echo $rd['jumlah_kasus'];?></td>
                             <td align="right"><?php echo $rd['qty_claim_lgn'];?></td>
+                            <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$rdTotal['total_qty_claim'])*100,2)." %";?></td>
                             <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$TotalKirim)*100,2)." %";?></td>
                         </tr>
                         <?php	$no2++;  
@@ -237,11 +275,14 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         <tfoot>
                             <tr valign="top">
                             <td align="center" colspan="2"><strong>DLL</strong></td>
+                            <td align="center"></td>
                             <td align="right"><strong><?php echo number_format($totaldll2,2); ?></strong></td>
+                            <td align="center"></td>
                             <td align="right"><strong><?php if($TotalKirim!=""){echo number_format(($totaldll2/$TotalKirim)*100,2)." %";}else{echo "0 %";} ?></strong></td>
                             </tr>
                             <tr valign="top">
                             <td align="center" colspan="2"><strong>TOTAL KIRIM</strong></td>
+                            <td align="center"></td>
                             <td align="right"><strong><?php if($TotalKirim!=""){echo number_format($TotalKirim,2);}else{echo "0";} ?></strong></td>
                             <td align="right">&nbsp;</td>
                             </tr>
@@ -463,23 +504,26 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
         <div class="col-xs-6">	
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> 5 Dept Terbesar KPE</h3>
+                    <h3 class="box-title"> Dept Penyebab KPE</h3> <!-- disini 1 -->
                     <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
-                <table class="table table-bordered table-striped" style="width: 100%;">
+                <table class="table table-bordered table-striped" id="table-lap-5besar-kpe" style="width: 100%;">
                         <thead class="bg-blue">
                             <tr>
                             <th width="5%"><div align="center">No</div></th>
                             <th width="25%"><div align="center">Dept</div></th>
+                            <th width="14%"><div align="center">Jumlah Kasus</div></th>
                             <th width="14%"><div align="center">Qty Keluhan (KG)</div></th>
+                            <th width="15%"><div align="center">% Dibandingkan Total Keluhan</div></th>
                             <th width="15%"><div align="center">% Dibandingkan Total Kirim</div></th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
+                         
                         $no6=1;
                         $totald6=0;
                         $totaldll6=0;
@@ -512,13 +556,15 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab2!='' OR t_jawab2!=NULL)
                         GROUP BY t_jawab2) a
                         group by a.t_jawab
-                        ORDER BY qty_claim_dept DESC LIMIT 5");
+                        ORDER BY qty_claim_dept DESC");
                         while($rd6=mysqli_fetch_array($qrydef6)){
                         ?>
                         <tr valign="top">
                             <td align="center"><?php echo $no6; ?></td>
                             <td align="left"><?php echo $rd6['t_jawab'];?></td>
-                            <td align="right"><?php echo $rd6['qty_claim_dept'];?></td>
+                            <td align="right"><?php echo $rd6['jml_tjawab'];?></td>
+                            <td align="right"><?php echo number_format($rd6['qty_claim_dept'], 2);?></td>
+                            <td align="right"><?php if($TotalKirim!=""){echo number_format(($rd6['qty_claim_dept']/$rAll6['qty_claim_all'])*100,2)." %";}else{echo "0 %";}?></td>
                             <td align="right"><?php if($TotalKirim!=""){echo number_format(($rd6['qty_claim_dept']/$TotalKirim)*100,2)." %";}else{echo "0 %";}?></td>
                         </tr>
                         <?php	$no6++;  
@@ -527,14 +573,16 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         $totaldll6=$rAll6['qty_claim_all']-$totald6; ?>
                         </tbody>
                         <tfoot>
-                            <tr valign="top">
+                            <!-- <tr valign="top">
                             <td align="center" colspan="2"><strong>DLL</strong></td>
                             <td align="right"><strong><?php echo number_format($totaldll6,2); ?></strong></td>
                             <td align="right"><strong><?php if($TotalKirim!=""){echo number_format(($totaldll6/$TotalKirim)*100,2)." %";}else{echo "0 %";} ?></strong></td>
-                            </tr>
+                            </tr> -->
                             <tr valign="top">
                             <td align="center" colspan="2"><strong>TOTAL KIRIM</strong></td>
+                            <td align="right"><strong></strong></td>
                             <td align="right"><strong><?php if($TotalKirim!=""){echo number_format($TotalKirim,2);}else{echo "0";} ?></strong></td>
+                            <td align="right"><strong></strong></td>
                             <td align="right">&nbsp;</td>
                             </tr>
                         </tfoot>
@@ -548,7 +596,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
         <div class="col-xs-6">	
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> 3 Terbesar Masalah Per Hanger : <?php echo $Awal." s/d ".$Akhir;?></h3>
+                    <h3 class="box-title"> 5 Terbesar Masalah Per Hanger : <?php echo $Awal." s/d ".$Akhir;?></h3> <!-- disini 2 -->
                     <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
@@ -559,26 +607,38 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             <tr>
                             <th width="15%"><div align="center">Hanger</div></th>
                             <th width="20%"><div align="center">Masalah</div></th>
+                            <th width="20%"><div align="center">Jumlah Kasus</div></th>
                             <th width="14%"><div align="center">KG</div></th>
-                            <th width="14%"><div align="center">Total Kirim</div></th>
+                            <th width="15%"><div align="center">% Dibandingkan Total Keluhan</div></th>
                             <th width="15%"><div align="center">% Dibandingkan Total Kirim</div></th>
                             <th width="15%"><div align="center">% Masalah Per Hanger</div></th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php 
-                        $tkirim=0;
                         if($Langganan!=''){$lgn=" AND langganan LIKE '%$Langganan%' ";}else{$lgn="";}
+                        $qry7Total = mysqli_query($con, "select
+                                                                sum(a.qty_keluhan) as total_qty_keluhan
+                                                            from (
+                                                                SELECT 
+                                                                    SUM(qty_claim) AS qty_keluhan 
+                                                                FROM tbl_aftersales_now 
+                                                                WHERE 
+                                                                    DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '2024-02-01' AND '2024-03-01'
+                                                                GROUP BY no_hanger
+                                                                ORDER BY qty_keluhan DESC
+                                                                LIMIT 5) a");
+                        $ri7Total = mysqli_fetch_array($qry7Total);
                         $qry7=mysqli_query($con,"SELECT no_item, no_hanger, SUM(qty_claim) AS qty_keluhan FROM tbl_aftersales_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
                         GROUP BY no_hanger
                         ORDER BY qty_keluhan DESC
-                        LIMIT 3");
+                        LIMIT 5");
                         while($ri7=mysqli_fetch_array($qry7)){
-                            $qryd7=mysqli_query($con,"SELECT masalah_dominan, SUM(qty_claim) AS qty_keluhan FROM tbl_aftersales_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
+                            $qryd7=mysqli_query($con,"SELECT count(*) as jumlah_kasus, group_concat(distinct masalah_dominan SEPARATOR ' + ') as masalah_dominan, SUM(qty_claim) AS qty_keluhan FROM tbl_aftersales_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
                             AND no_hanger='$ri7[no_hanger]' 
-                            GROUP BY masalah_dominan
-                            ORDER BY qty_keluhan DESC
-                            LIMIT 3");
+                            -- GROUP BY masalah_dominan
+                            -- ORDER BY qty_keluhan DESC
+                            LIMIT 5");
                             $qrykirim=mysqli_query($con,"SELECT SUM(qty) AS qty_kirim FROM tbl_pengiriman WHERE DATE_FORMAT(tgl_kirim, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND no_item='$ri7[no_item]' AND tmp_hapus='0'");
                             $rkirim=mysqli_fetch_array($qrykirim);
                             $qrytitem=mysqli_query($con,"SELECT SUM(a.qty_keluhan) AS total_keluhan FROM
@@ -586,28 +646,95 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             AND no_hanger='$ri7[no_hanger]' 
                             GROUP BY masalah_dominan
                             ORDER BY qty_keluhan DESC
-                            LIMIT 3) a");
+                            LIMIT 5) a");
                             $ritem=mysqli_fetch_array($qrytitem);
-                            while($rdi7=mysqli_fetch_array($qryd7)){
+                            $rdi7=mysqli_fetch_array($qryd7);
                         ?>
                         <tr valign="top">
                             <td align="center"><?php echo $ri7['no_hanger'];?></td>  
                             <td align="right"><?php echo $rdi7['masalah_dominan'];?></td>
+                            <td align="right"><?php echo $rdi7['jumlah_kasus'];?></td>
                             <td align="right"><?php echo $rdi7['qty_keluhan'];?></td>
-                            <td align="right"><?php echo $TotalKirim;?></td>
+                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_keluhan']/$ri7Total['total_qty_keluhan'])*100,2)." %";}else{echo "0";}?></td>
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($ritem['total_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
                         </tr>
                         <?php  
-                        $tkirim=$tkirim+$TotalKirim;} } 
+                        } 
                         ?>
                         </tbody>
-                        <!-- <tfoot>
+                        <tfoot>
                             <tr valign="top">
-                                <td align="center" colspan="2"><strong>TOTAL KIRIM</strong></td>
-                                <td align="right" colspan="4"><strong><?php if($tkirim!=""){echo number_format($tkirim,2);}else{echo "0";} ?></strong></td>
+                                <td align="center" colspan="1"><strong>TOTAL KIRIM</strong></td>
+                                <td align="right" colspan="1"><strong><?php if($TotalKirim!=""){echo number_format($TotalKirim,2);}else{echo "0";} ?></strong></td>
                             </tr>
-                        </tfoot> -->
+                        </tfoot>
+                </table>
+                <div class="box-footer">
+                        <a href="pages/cetak/excel_3besar_masalah_item.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">	
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> 5 Buyer Terbesar KPE : <?php echo $Awal." s/d ".$Akhir;?></h3> <!-- disini 2 -->
+                    <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                <table class="table table-bordered table-striped" style="width: 100%;">
+                        <thead class="bg-blue">
+                            <tr>
+                            <th width="15%"><div align="center">No</div></th>
+                            <th width="20%"><div align="center">Brand/Buyer</div></th>
+                            <th width="14%"><div align="center">Jumlah Kasus</div></th>
+                            <th width="14%"><div align="center">Qty Keluhan (KG)</div></th>
+                            <th width="15%"><div align="center">% Dibandingkan Total Keluhan</div></th>
+                            <th width="15%"><div align="center">% Dibandingkan Total Kirim</div></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php 
+                        $qry8Total = mysqli_query($con, "select
+                                                            sum(qty_claim) as total_qty_keluhan
+                                                        from tbl_aftersales_now
+                                                        where date_format(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                                                        order by total_qty_keluhan desc
+                                                        limit 5");
+                        $ri8Total=mysqli_fetch_array($qry8Total);
+                        $qry8=mysqli_query($con,"select
+                                                    buyer,
+                                                    count(*) as jumlah_kasus,
+                                                    sum(qty_claim) as qty_keluhan
+                                                from tbl_aftersales_now
+                                                where date_format(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                                                group by substring(buyer, 1, 3)
+                                                order by qty_keluhan desc
+                                                limit 5");
+                        $no=1;
+                        while($ri8=mysqli_fetch_array($qry8)){
+                        ?>
+                        <tr valign="top">
+                            <td align="center"><?= $no++ ?></td>  
+                            <td align="right"><?= $ri8['buyer'] ?></td>
+                            <td align="right"><?= $ri8['jumlah_kasus'] ?></td>
+                            <td align="right"><?= $ri8['qty_keluhan'] ?></td>
+                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($ri8['qty_keluhan'] / $ri8Total['total_qty_keluhan']) * 100, 2). " %";}else{echo "0";} ?></td>
+                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($ri8['qty_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";} ?></td>
+                        </tr>
+                        <?php  
+                        } 
+                        ?>
+                        </tbody>
+                        <tfoot>
+                            <tr valign="top">
+                                <td align="right" colspan="2"><strong>TOTAL KIRIM</strong></td>
+                                <td align="right" colspan="1"><strong><?php if($TotalKirim!=""){echo number_format($TotalKirim,2);}else{echo "0";} ?></strong></td>
+                            </tr>
+                        </tfoot>
                 </table>
                 <div class="box-footer">
                         <a href="pages/cetak/excel_3besar_masalah_item.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
