@@ -270,7 +270,11 @@ $r1=mysqli_fetch_array($qryr1);
 		}
 	}
 ?>	
-
+<!-- <p>Ini adalah WARNA : <?php echo $rCek['warna']?></p>
+					<p>Ini adalah LOT : <?php echo $rCek['lot']?></p>
+					<p>Ini adalah NO ORDER : <?php echo $rCek['no_order']?></p>
+					<p>Ini adalah NO HANGER : <?php echo $rCek['no_hanger']?></p>
+					<p>Ini adalah NO PO : <?php echo $rCek['po']?></p> -->
 <div class="box box-info">
  	<form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form1">
 		<div class="box-header with-border">
@@ -292,7 +296,7 @@ $r1=mysqli_fetch_array($qryr1);
 					<label for="qty_email" class="col-sm-2 control-label">Qty Permintaan Sesuai Email </label>
 					<div class="col-sm-2">
                     	<div class="input-group">
-								<?php $qryw1=mysqli_query($con,"SELECT qty_claim,nodemand FROM tbl_aftersales_now WHERE warna='$WN1' and lot='$L1' and no_order='$rCek[no_order]' and no_hanger='$rCek[no_hanger]' and po='$rCek[po]'");
+								<?php $qryw1=mysqli_query($con,"SELECT qty_claim,nodemand FROM tbl_aftersales_now WHERE no_order='$rCek[no_order]' and no_hanger='$rCek[no_hanger]' and po='$rCek[po]'");
 									$rowW1=mysqli_fetch_array($qryw1);
 									?>  
 									<input name="qty_email" type="text" class="form-control" id="qty_email" value="<?php echo $rowW1['qty_claim']; ?>" placeholder="0.00" style="text-align: right;">
@@ -321,7 +325,7 @@ $r1=mysqli_fetch_array($qryr1);
                   	<div class="col-sm-3">
                     	<select class="form-control select2" name="warna1" required>
 							<option value="">Pilih</option>
-							<?php $sqlw1=mysqli_query($con,"SELECT warna,lot FROM tbl_aftersales_now WHERE no_order='$rCek[no_order]' and no_hanger='$rCek[no_hanger]' and po='$rCek[po]' ORDER BY warna");
+							<?php $sqlw1=mysqli_query($con,"SELECT warna,lot FROM tbl_aftersales_now WHERE warna='$rCek[warna]' and lot='$rCek[lot]' and no_order='$rCek[no_order]' and no_hanger='$rCek[no_hanger]' and po='$rCek[po]' ORDER BY warna");
 							while ($rwarna=mysqli_fetch_array($sqlw1)){ ?>
 							<option value="<?php echo $rwarna['warna'].",".$rwarna['lot'];?>"><?php echo $rwarna['warna']." / ".$rwarna['lot'];?></option>
 							<?php } ?>

@@ -24,7 +24,7 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
 ?>
 <div class="box">
   <div class="box-header with-border">
-    <h3 class="box-title"> Filter Laporan Ganti Kai asdasdn</h3>
+    <h3 class="box-title"> Filter Laporan Ganti Kain</h3>
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
     </div>
@@ -166,10 +166,12 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
             if($Awal!=""){ $Where =" AND DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
             if($Status!=""){ $sts=" AND `status`='$Status' ";}else{$sts=" ";}
             if($Awal!="" or $Order!="" or $Langganan!="" or $PO!="" or $Bon!=""){
-			  $sql_qry1 = "SELECT * FROM tbl_ganti_kain_now WHERE id_disposisi is null and  no_order LIKE '$Order%' AND no_po LIKE '$PO%' AND langganan LIKE '%$Langganan%' AND no_bon LIKE '%$Bon%' $Where $sts ORDER BY tgl_buat ASC";
+			  $sql_qry1 = "SELECT *,substr(no_hanger, 1,3) as prefix,
+        substr(no_hanger, 4) as subprefix FROM tbl_ganti_kain_now WHERE id_disposisi is null and  no_order LIKE '$Order%' AND no_po LIKE '$PO%' AND langganan LIKE '%$Langganan%' AND no_bon LIKE '%$Bon%' $Where $sts ORDER BY tgl_buat ASC";
               $qry1=mysqli_query($con,$sql_qry1);
             }else{
-			   $sql_qry1 = "SELECT * FROM tbl_ganti_kain_now WHERE id_disposisi is null and  no_order LIKE '$Order' AND no_po LIKE '$PO' AND langganan LIKE '%$Langganan%' AND no_bon LIKE '%$Bon%' $Where $sts ORDER BY tgl_buat ASC" ; 
+			   $sql_qry1 = "SELECT *,substr(no_hanger, 1,3) as prefix,
+         substr(no_hanger, 4) as subprefix FROM tbl_ganti_kain_now WHERE id_disposisi is null and  no_order LIKE '$Order' AND no_po LIKE '$PO' AND langganan LIKE '%$Langganan%' AND no_bon LIKE '%$Bon%' $Where $sts ORDER BY tgl_buat ASC" ; 
               $qry1=mysqli_query($con,$sql_qry1);
             }
 			/*
@@ -245,7 +247,7 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
               ");
             $d_order_new = db2_fetch_assoc($q_order_new);
             
-            echo $d_order_new['NO_ORDER'];
+            // echo $d_order_new['NO_ORDER'];
 
             ?>
 
@@ -253,7 +255,7 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
 
 
            
-            <a target="_blank" href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['no_ordernew'] ?>"><?php echo $d_order_new['NO_ORDER']; ?></a>
+            <a target="_blank" href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $d_order_new['NO_ORDER'] ?>"><?php echo $d_order_new['NO_ORDER']; ?></a>
           </td>
 
 
