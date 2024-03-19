@@ -22,6 +22,7 @@ Shift 	: <?php echo $shift;?>
     <td><h4>Tgl Fin</h4></td>
     <td><h4>No Demand</h4></td>
     <td><h4>Pelanggan</h4></td>
+    <td><h4>Buyer</h4></td>
     <td><h4>PO</h4></td>
     <td><h4>Order</h4></td>
     <td><h4>Item</h4></td>
@@ -55,13 +56,21 @@ $roll=0;$bruto=0;
  
   $sql=mysqli_query($con,"SELECT * FROM tbl_lap_inspeksi WHERE `tgl_update` BETWEEN '$tgl' AND '$tgl1' ".$shft." AND `dept`='QCF' ORDER BY id ASC");
   while($row=mysqli_fetch_array($sql)){
-	  
+	$pos = strpos($row['pelanggan'], "/");
+                if ($pos > 0) {
+                  $lgg1 = substr($row['pelanggan'], 0, $pos);
+                  $byr1 = substr($row['pelanggan'], $pos + 1, 100);
+                } else {
+                  $lgg1 = $row['pelanggan'];
+                  $byr1 = substr($row['pelanggan'], $pos, 100);
+                }  
   ?>
   <tr>
     <td><?php echo $no;?></td>
     <td><?php echo $row['tgl_update'];?></td>
     <td>'<?php echo $row['nodemand'];?></td>
-    <td><?php echo $row['pelanggan'];?></td>
+    <td><?php echo $lgg1;?></td>
+    <td><?php echo $byr1;?></td>
     <td><?php echo $row['no_po'];?></td>
     <td><?php echo $row['no_order'];?></td>
     <td><?php echo $row['no_item'];?></td>
@@ -174,8 +183,10 @@ $roll=0;$bruto=0;
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
   </tr>
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -206,6 +217,7 @@ $roll=0;$bruto=0;
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1"><strong>TBD</strong></td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1"><strong><?php echo number_format($lotTBD);?></strong></td>
@@ -220,6 +232,7 @@ $roll=0;$bruto=0;
     <td align="right" bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
   </tr>
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -250,6 +263,7 @@ $roll=0;$bruto=0;
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1">Team Dye B</td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1"><strong>BW</strong></td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1"><strong><?php echo number_format($lotBWB);?></strong></td>
@@ -264,6 +278,7 @@ $roll=0;$bruto=0;
     <td align="right" bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
   </tr>
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -294,6 +309,7 @@ $roll=0;$bruto=0;
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
     <td bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
@@ -308,6 +324,7 @@ $roll=0;$bruto=0;
     <td align="right" bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
   </tr>
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -338,6 +355,7 @@ $roll=0;$bruto=0;
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
     <td bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
     <td bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
@@ -352,6 +370,7 @@ $roll=0;$bruto=0;
     <td align="right" bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
   </tr>
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
