@@ -24,6 +24,18 @@ include "koneksi.php";
     $GShift1 = isset($_GET['shift']) ? $_GET['shift'] : '';
     $Order = isset($_POST['no_order']) ? $_POST['no_order'] : '';
     $PO = isset($_POST['po']) ? $_POST['po'] : '';
+	$jamA = isset($_POST['jam_awal']) ? $_POST['jam_awal'] : '';
+    $jamAr = isset($_POST['jam_akhir']) ? $_POST['jam_akhir'] : '';
+	if (strlen($jamA) == 5) {
+    $start_date = $Awal . " " . $jamA;
+  } else {
+    $start_date = $Awal . " 0" . $jamA;
+  }
+  if (strlen($jamAr) == 5) {
+    $stop_date = $Akhir . " " . $jamAr;
+  } else {
+    $stop_date = $Akhir . " 0" . $jamAr;
+  }
   ?>
   <div class="row">
     <div class="col-xs-2">
@@ -39,7 +51,7 @@ include "koneksi.php";
         <form method="post" enctype="multipart/form-data" name="form1" class="form-horizontal" id="form1">
           <div class="box-body">
             <div class="form-group">
-              <div class="col-md-12">
+              <div class="col-md-8">
                 <div class="input-group date">
                   <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
                   <input name="awal" type="date" class="form-control pull-right" placeholder="Tanggal Awal" value="<?php if ($Awal1 != "") {
@@ -49,10 +61,13 @@ include "koneksi.php";
                   } ?>" autocomplete="off" />
                 </div>
               </div>
+			  <div class="col-sm-4">
+                <input type="text" class="form-control timepicker" name="jam_awal" placeholder="00:00" value="<?php echo $jamA; ?>" autocomplete="off">
+              </div>
               <!-- /.input group -->
             </div>
             <div class="form-group">
-              <div class="col-md-12">
+              <div class="col-md-8">
                 <div class="input-group date">
                   <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
                   <input name="akhir" type="date" class="form-control pull-right" placeholder="Tanggal Akhir" value="<?php if ($Akhir1 != "") {
@@ -62,6 +77,9 @@ include "koneksi.php";
                   } ?>" autocomplete="off" />
                 </div>
               </div>
+			  <div class="col-sm-4">
+                <input type="text" class="form-control timepicker" name="jam_akhir" placeholder="00:00" value="<?php echo $jamAr; ?>" autocomplete="off">
+              </div>	
               <!-- /.input group -->
             </div>
             <div class="form-group">
