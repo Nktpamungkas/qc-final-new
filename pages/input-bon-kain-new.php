@@ -198,6 +198,7 @@ $r1=mysqli_fetch_array($qryr1);
 		$pjg_email=str_replace("'","''",$_POST['pjg_email']);		
 		$satuan_email=str_replace("'","''",$_POST['satuan_email']);
 		$sub_defect=str_replace("'","''",$_POST['sub_defect']);
+		$solusi=str_replace("'","''",$_POST['solusi']);
 		$qry1=mysqli_query($con,"INSERT INTO tbl_ganti_kain_now SET
 		`id_nsp`='$_GET[id]',
 		`buyer`='$buyer',
@@ -254,6 +255,7 @@ $r1=mysqli_fetch_array($qryr1);
 		`pjg_email`='$pjg_email',
 		`satuan_email`='$satuan_email',
 		`sub_defect`='$sub_defect',
+		`solusi`='$solusi',
 		`tgl_buat`=now(),
 		`tgl_update`=now()
 		");	
@@ -377,6 +379,24 @@ $r1=mysqli_fetch_array($qryr1);
 							?>
 							<option value="<?php echo $rm['masalah'];?>" <?php if($rcek['sub_defect']==$rm['masalah']){echo "SELECTED";}?>><?php echo $rm['masalah'];?></option>	
 							<?php }?>
+						</select>
+		 	 		</div>
+		  	</div> 
+			<div class="form-group">
+		  		<label for="sub_defect" class="col-sm-2 control-label">Solusi</label>
+		 			<div class="col-sm-3">
+						<select class="form-control select2" name="solusi" id="solusi">
+							<option value="">Pilih</option>
+							<?php
+							$qrys = mysqli_query($con, "SELECT solusi FROM tbl_solusi ORDER BY solusi ASC");
+							while ($rs = mysqli_fetch_array($qrys)) {
+								?>
+								<option value="<?php echo $rs['solusi']; ?>" <?php if ($rCek['solusi'] == $rs['solusi']) {
+										echo "SELECTED";
+									} ?>>
+									<?php echo $rs['solusi']; ?>
+								</option>
+							<?php } ?>
 						</select>
 		 	 		</div>
 		  	</div> 
