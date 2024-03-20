@@ -394,8 +394,11 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <td align="center"><?php echo $row1['penghubung2_roll3'];?></td>
 
      <!-- Tambahan -->
-     <td align="center"><?php echo $row1['berat_extra'];?></td>
-			  <td align="center"><?php echo $row1['panjang_extra'];?></td>
+     <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> -->
+     <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> -->
+     <td align="center"></td>
+     <td align="center"></td>
+			  
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
         <!-- Nanti ganti -->
@@ -518,8 +521,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <td align="center"><?php echo $row1['penghubung3_roll2'];?></td>
 			  <td align="center"><?php echo $row1['penghubung3_roll3'];?></td>
        <!-- Tambahan -->
-       <td align="center"><?php echo $row1['berat_extra'];?></td>
-			  <td align="center"><?php echo $row1['panjang_extra'];?></td>
+       <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> -->
+     <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> -->
+     <td align="center"></td>
+     <td align="center"></td>
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
         <!-- Nanti ganti -->
