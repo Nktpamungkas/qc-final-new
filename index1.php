@@ -2581,6 +2581,38 @@
                 }
             });
         });
+        $(document).on('click', '.edit_detail_solusi_perbaikan_garment', function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/edit_detail_solusi_perbaikan_garment.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function(ajaxData) {
+                    $("#EditDataSolusiPerbaikanGarment").html(ajaxData);
+                    $("#EditDataSolusiPerbaikanGarment").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+        $(document).on('click', '.edit_detail_solusi_debit_note', function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/edit_detail_solusi_debit_note.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function(ajaxData) {
+                    $("#EditDataSolusiDebitNote").html(ajaxData);
+                    $("#EditDataSolusiDebitNote").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
         $(document).on('click', '.detail_roll_shading', function(e) {
             var m = $(this).attr("id");
             $.ajax({
