@@ -168,7 +168,10 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<?php
 						if ($cek > 0) {
 							// echo "Sudah Input Pada Tgl: " . $rcek['tgl_buat'] . " | ";
-							echo "Sudah Input : (" . $rcek['masalah_dominan'] . ', ' . $rcek['masalah_dominan1'] . ', ' . $rcek['masalah_dominan2'] . ") | ";
+							$rcek_masalah_dominan  = $rcek['masalah_dominan']  != "" ? $rcek['masalah_dominan'] : '';
+							$rcek_masalah_dominan1 = $rcek['masalah_dominan1'] != "" ? ', ' . $rcek['masalah_dominan1'] : '';
+							$rcek_masalah_dominan2 = $rcek['masalah_dominan2'] != "" ? ', ' . $rcek['masalah_dominan2'] : '';
+							echo "Sudah Input : (" . $rcek_masalah_dominan . $rcek_masalah_dominan1 . $rcek_masalah_dominan2 . ") | ";
 						}
 						if (!empty($rcek['no_ncp'])) {
 							echo $rcek['no_ncp'];
@@ -239,23 +242,23 @@ $rcek = mysqli_fetch_array($sqlCek);
 				</div>
 				<!-- <div class="form-group">
 					<label for="jns_kain" class="col-sm-3 control-label">Jenis Kain</label>
-					<div class="col-sm-8">
-						<input name="jns_kain" type="text" class="form-control" id="jns_kain" value="<?php //if ($cek > 0) {
-						//echo $rcek['jenis_kain'];
-						//} else {
-						//echo stripslashes($rowdb2['JENIS_KAIN']);
-						//}      ?>" placeholder="Jenis Kain">
-					</div>
+					<div class="col-sm-8"> -->
+						<input name="jns_kain" type="hidden" class="form-control" id="jns_kain" value="<?php if ($cek > 0 && $rcek['jenis_kain'] != "") {
+						echo $rcek['jenis_kain'];
+						} else {
+						echo stripslashes($rowdb2['JENIS_KAIN']);
+						}      ?>" placeholder="Jenis Kain">
+					<!-- </div>
 				</div>
 				<div class="form-group">
 					<label for="styl" class="col-sm-3 control-label">Style</label>
-					<div class="col-sm-8">
-						<input name="styl" type="text" class="form-control" id="styl" value="<?php //if ($cek > 0) {
-						//echo $rcek['styl'];
-						//} else {
-						//echo $rowdb2['DATA_STYLE'];
-						//}      ?>" placeholder="Style">
-					</div>
+					<div class="col-sm-8"> -->
+						<input name="styl" type="hidden" class="form-control" id="styl" value="<?php if ($cek > 0 && $rcek['styl'] != "") {
+						echo $rcek['styl'];
+						} else {
+						echo $rowdb2['DATA_STYLE'];
+						}      ?>" placeholder="Style">
+					<!-- </div>
 				</div> -->
 				<div class="form-group">
 					<label for="l_g" class="col-sm-3 control-label">Lebar X Gramasi</label>
