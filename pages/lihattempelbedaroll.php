@@ -185,6 +185,7 @@ if(strlen($jamAr)==5){
               <th><div align="center">No Prod. Order</div></th>
               <th><div align="center">No Demand</div></th>
               <th><div align="center">Comment</div></th>
+              <th><div align="center">Keterangan</div></th>
             </tr>
           </thead>
           <tbody>
@@ -231,6 +232,10 @@ if(strlen($jamAr)==5){
               <td align="center"><?php echo $row1['prod_order'] ?></td>
               <td align="center"><?php echo $row1['demand'] ?></td>
               <td align="center"><?php echo $row1['comment'] ?></td>
+              <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['catatan'] ?>"
+                      class="ket_tbrol" href="javascipt:void(0)">
+                      <?php echo $row1['catatan'] ?>
+                    </a></td>
             </tr>
           <?php	$no++;  } ?>
           </tbody>
