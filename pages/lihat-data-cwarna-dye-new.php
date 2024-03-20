@@ -15,7 +15,19 @@ include"koneksi.php";
 <?php
 $Awal	= isset($_POST['awal']) ? $_POST['awal'] : '';
 $Akhir	= isset($_POST['akhir']) ? $_POST['akhir'] : '';
-$GShift	= isset($_POST['gshift']) ? $_POST['gshift'] : '';	
+$GShift	= isset($_POST['gshift']) ? $_POST['gshift'] : '';
+$jamA 	= isset($_POST['jam_awal']) ? $_POST['jam_awal'] : '';
+$jamAr 	= isset($_POST['jam_akhir']) ? $_POST['jam_akhir'] : '';	
+if (strlen($jamA) == 5) {
+    $start_date = $Awal . " " . $jamA;
+  } else {
+    $start_date = $Awal . " 0" . $jamA;
+  }
+  if (strlen($jamAr) == 5) {
+    $stop_date = $Akhir . " " . $jamAr;
+  } else {
+    $stop_date = $Akhir . " 0" . $jamAr;
+  }	
 ?>
 <div class="box">
   <div class="box-header with-border">
@@ -35,6 +47,9 @@ $GShift	= isset($_POST['gshift']) ? $_POST['gshift'] : '';
             <input name="awal" type="date" class="form-control pull-right" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" autocomplete="off"/>
           </div>
         </div>
+		<div class="col-sm-1">
+                <input type="text" class="form-control timepicker" name="jam_awal" placeholder="00:00" value="<?php echo $jamA; ?>" autocomplete="off">
+              </div>
         <!-- /.input group -->
       </div>
       <div class="form-group">
@@ -44,6 +59,9 @@ $GShift	= isset($_POST['gshift']) ? $_POST['gshift'] : '';
             <input name="akhir" type="date" class="form-control pull-right" placeholder="Tanggal Akhir" value="<?php echo $Akhir;  ?>" autocomplete="off"/>
           </div>
         </div>
+		<div class="col-sm-1">
+                <input type="text" class="form-control timepicker" name="jam_akhir" placeholder="00:00" value="<?php echo $jamAr; ?>" autocomplete="off">
+              </div>   
         <!-- /.input group -->
       </div>
 	  <div class="form-group">

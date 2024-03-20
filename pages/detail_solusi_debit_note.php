@@ -15,7 +15,7 @@ include("../koneksi.php");
                         <h4 class="modal-title">Debit Note</h4>
                 </div>
                 <div class="modal-body">
-                <input type="hidden" id="no_item" name="no_item" value="<?php echo $modal_id?>">
+                <input type="text" id="no_item" name="no_item" value="<?php echo $modal_id?>">
                     <div class="form-group">
                         <label for="dn_kg" class="col-md-4 control-label">KG</label>
                         <div class="col-md-6">

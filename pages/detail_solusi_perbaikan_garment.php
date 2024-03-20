@@ -15,7 +15,7 @@ include("../koneksi.php");
                         <h4 class="modal-title">PERBAIKAN GARMENT</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="no_item" name="no_item" value="<?php echo $modal_id?>">
+                    <input type="text" id="no_item" name="no_item" value="<?php echo $modal_id?>">
                     <div class="form-group">
                         <label for="pg_pcs" class="col-md-3 control-label">PCS</label>
                         <div class="col-md-6">

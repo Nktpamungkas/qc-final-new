@@ -33,7 +33,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 ?>
 <div class="box">
   <div class="box-header with-border">
-    <h3 class="box-title"> Filter Laporan KPE</h3>
+    <h3 class="box-title"> Filter Laporan KPE asdasdsa </h3>
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
     </div>
@@ -268,11 +268,11 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td>
                  <?php if($row1['solusi'] == "PERBAIKAN GARMENT") { ?>
 
-                  <a href="#" id='<?php echo $row1['no_item']; ?>' class="detail_solusi_perbaikan_garment"><?php echo $row1['solusi'];?></a>
+                  <a href="#" id='<?php echo $row1['no_item']; ?> / <?php echo $row1['no_hanger']; ?>' class="detail_solusi_perbaikan_garment"><?php echo $row1['solusi'];?></a>
                   <!-- <a href="#" id='' class="detail_solusi_perbaikan_garment" data-toggle="modal" data-target="#DataSolusi" data-no_item="<?php echo $row1['no_item']; ?>"><?php echo $row1['solusi'];?></a> -->
                 
                 <?php }elseif($row1['solusi'] == "DEBIT NOTE"){?>
-                  <a href="#" id='<?php echo $row1['no_item']; ?>' class="detail_solusi_debit_note"><?php echo $row1['solusi'];?></a>
+                  <a href="#" id='<?php echo $row1['no_item']; ?> / <?php echo $row1['no_hanger']; ?>' class="detail_solusi_debit_note"><?php echo $row1['solusi'];?></a>
                   <?php }else{?>
                     <?php echo $row1['solusi'];?>
                   <?php }?>

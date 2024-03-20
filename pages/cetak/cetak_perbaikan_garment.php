@@ -129,6 +129,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <td><font size="-2">NO</font></td>
             <td><font size="-2">ITEM</font></td>
             <td><font size="-2">PCS</font></td>
+            <td><font size="-2">CURRENCY</font></td>
             <td><font size="-2">AMOUNT</font></td>
           </tr>
 		  </thead>	  
@@ -168,14 +169,33 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
 // 				$tjawab="";	
 // 				}
 
-        $qry1=mysqli_query($con,"SELECT * FROM tbl_perbaikan_garment");
+        $qry1=mysqli_query($con,"SELECT
+                            no_item,
+                            sum(pcs) as total_pcs,
+                            sum(amount) as total_amount,
+                            currency
+                          from
+                            tbl_perbaikan_garment
+
+                            group by no_item, currency");
         while($row1=mysqli_fetch_array($qry1)){
 		 ?>
           <tr valign="top">
             <td align="center"><font size="-2"><?php echo $no; ?></font></td>
             <td valign="top" align="center"><font size="-2"><?php echo $row1['no_item'];?></font></td>
-            <td valign="top" align="center"><font size="-2"><?php echo $row1['pcs'];?></font></td>
-            <td valign="top" align="center"><font size="-2"><?php echo $row1['amount'];?></font></td>
+            <td valign="top" align="center"><font size="-2"><?php echo $row1['total_pcs'];?></font></td>
+            <td valign="top" align="center"><font size="-2"><?php echo $row1['currency'];?></font></td>
+            <td valign="top" align="center"><font size="-2">
+                <?php 
+                    if($row1['currency'] == 'IDR') {
+                        echo 'Rp. ' . number_format($row1['total_amount'], 0, ',', '.');
+                    } else if ($row1['currency'] == 'USD') {
+                        echo '$' . number_format($row1['total_amount'], 2);
+                    } else {
+                        echo $row1['total_amount']; // Jika nilai currency tidak sesuai dengan IDR atau USD
+                    }
+                ?>
+            </font></td>
           </tr>
 		<?php	$no++;  
 		
