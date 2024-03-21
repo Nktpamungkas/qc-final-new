@@ -767,13 +767,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         </thead>
                         <tbody>
                         <?php 
-                        // $qry9Total = mysqli_query($con, "select
-                        //                                     sum(qty_claim) as total_qty_keluhan
-                        //                                 from tbl_aftersales_now
-                        //                                 where date_format(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-                        //                                 order by total_qty_keluhan desc
-                        //                                 limit 5");
-                        // $ri9Total=mysqli_fetch_array($qry8Total);
+                        if($Awal!=""){
                         $qry9Repeat = mysqli_query($con,"select 
                                                             a.masalah_dominan,
                                                             count(*) as jumlah_kasus,
@@ -853,6 +847,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($ri9General['qty_claim']/$totalQty)*100, 2). " %";}else{echo "0";} ?></td>
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($ri9General['qty_claim']/$TotalKirim)*100,2)." %";}else{echo "0";} ?></td>
                         </tr>
+                        <?php } ?>
                         </tbody>
                         <tfoot>
                             <tr valign="top">
@@ -895,8 +890,9 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                 </thead>
                 <tbody>
                 <?php
-                    if($Awal!=""){ $Where2 =" WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
-                    if($Awal!=""){ $Where21 =" AND DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
+                    if($Awal!=""){ 
+                    $Where2 =" WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' ";
+                    $Where21 =" AND DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; 
 
                     $qry2Total = mysqli_query($con, "select 
                                                         sum(a.qty_claim) as total_qty_claim
@@ -959,14 +955,15 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     $total_qty_claim_kg += $row2KG['qty_claim'];
                     $total_qty_claim_kg += $row2YD['qty_claim'];
                     }
+                }
                 ?>
                 </tbody>
                 <tfoot>
                 <tr valign="top">
                     <td align="right" colspan="2"><strong>Total</strong></td>
-                    <td align="center"><?= number_format($total_jumlah_kasus, 2) ?></td>
-                    <td align="center"><?= number_format($total_qty_claim_kg, 2) ?></td>
-                    <td align="center"><?= number_format($total_qty_claim_yd, 2) ?></td>
+                    <td align="center"><strong><?= !empty($Awal) ? number_format($total_jumlah_kasus, 2) : '' ?></strong></td>
+                    <td align="center"><strong><?= !empty($Awal) ? number_format($total_qty_claim_kg, 2) : '' ?></strong></td>
+                    <td align="center"><strong><?= !empty($Awal) ? number_format($total_qty_claim_yd, 2) : '' ?></strong></td>
                     <td align="center"></td>
                     <td align="center"></td>
                     <td align="center"></td>
