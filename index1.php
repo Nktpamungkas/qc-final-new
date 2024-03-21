@@ -2416,6 +2416,15 @@
                 ],
                 "pageLength": 5
             });
+            $('#table-solusi-kpe').DataTable({
+                "lengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, 'All']
+                ],
+                "pageLength": 5,
+                'scrollX': true,
+                'paging': true,
+            });
             $('#tblr1').DataTable()
             $('#tblr2').DataTable()
             $('#tblr3').DataTable()
