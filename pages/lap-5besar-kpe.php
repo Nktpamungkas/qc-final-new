@@ -634,11 +634,11 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         ORDER BY qty_keluhan DESC
                         LIMIT 5");
                         while($ri7=mysqli_fetch_array($qry7)){
-                            $qryd7=mysqli_query($con,"SELECT count(*) as jumlah_kasus, group_concat(distinct masalah_dominan SEPARATOR ' + ') as masalah_dominan, SUM(qty_claim) AS qty_keluhan FROM tbl_aftersales_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
+                            $qryd7=mysqli_query($con,"SELECT count(*) as jumlah_kasus, masalah_dominan, SUM(qty_claim) AS qty_keluhan FROM tbl_aftersales_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
                             AND no_hanger='$ri7[no_hanger]' 
-                            -- GROUP BY masalah_dominan
-                            -- ORDER BY qty_keluhan DESC
-                            LIMIT 5");
+                            GROUP BY masalah_dominan
+                            ORDER BY qty_keluhan DESC
+                            LIMIT 3");
                             $qrykirim=mysqli_query($con,"SELECT SUM(qty) AS qty_kirim FROM tbl_pengiriman WHERE DATE_FORMAT(tgl_kirim, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND no_item='$ri7[no_item]' AND tmp_hapus='0'");
                             $rkirim=mysqli_fetch_array($qrykirim);
                             $qrytitem=mysqli_query($con,"SELECT SUM(a.qty_keluhan) AS total_keluhan FROM
@@ -646,9 +646,9 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             AND no_hanger='$ri7[no_hanger]' 
                             GROUP BY masalah_dominan
                             ORDER BY qty_keluhan DESC
-                            LIMIT 5) a");
+                            LIMIT 3) a");
                             $ritem=mysqli_fetch_array($qrytitem);
-                            $rdi7=mysqli_fetch_array($qryd7);
+                            while($rdi7=mysqli_fetch_array($qryd7)){
                         ?>
                         <tr valign="top">
                             <td align="center"><?php echo $ri7['no_hanger'];?></td>  
@@ -660,6 +660,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($ritem['total_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
                         </tr>
                         <?php  
+                            }
                         } 
                         ?>
                         </tbody>
