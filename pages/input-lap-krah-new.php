@@ -87,6 +87,7 @@ if($_POST['simpan']=="Simpan")
 	`catatan`='$catatan',
 	`dept`='KRAH',
     `no_order_legacy`='$_POST[no_order_legacy]',
+	`jam_update`=now(),
     `tgl_update`=now()");
     if($cekkite>0){
         $qry=mysqli_query($con,"UPDATE `tbl_kite` SET

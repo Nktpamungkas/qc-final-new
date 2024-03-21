@@ -130,6 +130,7 @@ if ($_POST['simpan'] == "simpan") {
 	`dept`='QCF',
     `disposisi`='$_POST[disposisi]',
     `colorist_qcf`='$colorist_qcf',
+	`jam_update`=now(),
 	`tgl_update`='$_POST[tgl]'");
         if ($sql) {
             //echo " <script>alert('Data has been saved!');</script>";
