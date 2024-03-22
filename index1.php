@@ -1144,7 +1144,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="treeview <?php if ($_GET['p'] == "Input-Lap-Packing-New" or $_GET['p'] == "Lihat-Data-Lap-Packing" or $_GET['p'] == "Input-Sisa-Lap-Packing") {
+                        <li class="treeview <?php if ($_GET['p'] == "Input-Lap-Packing-New" or $_GET['p'] == "Lihat-Data-Lap-Packing" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Input-Add-NOW") {
                                                 echo "active";
                                             } ?>">
                             <a href="#"><i class="fa fa-gear"></i> <span>Packing</span>
