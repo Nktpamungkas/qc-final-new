@@ -94,7 +94,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                 </div>
                 </div>
                 <div class="col-sm-2">
-                <div class="input-group date">
+                <!-- <div class="input-group date">
                     <div class="input-group-addon"> Total Lot Kirim</div>
                     <input name="totallot" type="text" class="form-control pull-right" placeholder="0" value="<?php echo $TotalLot; ?>" />
                 </div>
@@ -104,7 +104,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         <div class="input-group-addon"> Langganan</div>
                         <input name="langganan" type="text" class="form-control pull-right" placeholder="Langganan" value="<?php echo $Langganan; ?>" />
                     </div>
-                </div>
+                </div> -->
                 <button type="submit" class="btn btn-success " name="cari"><i class="fa fa-search"></i> Cari Data</button>
                 <!-- /.input group -->
             </div>
@@ -148,15 +148,15 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         $total2=0;
                         if($Langganan!=''){$lgn=" AND langganan LIKE '%$Langganan%' ";}else{$lgn="";}
                         
-                        // $qryAll=mysqli_query($con, "SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_keluhan_all FROM tbl_ganti_kain_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
+                        // $qryAll=mysqli_query($con, "SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_ganti_kain_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
                         // GROUP BY no_hanger
-                        // ORDER BY qty_keluhan DESC
+                        // ORDER BY qty_claim DESC
                         // LIMIT 5");
                         // $rAll=mysqli_fetch_array($qryAll);
                        
-                       $qry7=mysqli_query($con,"SELECT no_item, no_hanger, SUM(qty_claim) AS qty_keluhan FROM tbl_ganti_kain_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
+                       $qry7=mysqli_query($con,"SELECT no_item, no_hanger, SUM(qty_claim) AS qty_claim FROM tbl_ganti_kain_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
                         GROUP BY no_hanger
-                        ORDER BY qty_keluhan DESC
+                        ORDER BY qty_claim DESC
                         LIMIT 5");
 
                
@@ -165,18 +165,18 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
 
                         while($ri7=mysqli_fetch_array($qry7)){
                             // $no_hanger = $ri7['no_hanger'];
-                            $qryd7=mysqli_query($con,"SELECT  sub_defect, SUM(qty_claim) AS qty_keluhan FROM tbl_ganti_kain_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
+                            $qryd7=mysqli_query($con,"SELECT  sub_defect, SUM(qty_claim) AS qty_claim FROM tbl_ganti_kain_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
                             AND no_hanger='$ri7[no_hanger]' 
                             GROUP BY sub_defect
-                            ORDER BY qty_keluhan DESC
+                            ORDER BY qty_claim DESC
                             LIMIT 3");
                             $qrykirim=mysqli_query($con,"SELECT SUM(qty) AS qty_kirim FROM tbl_pengiriman WHERE DATE_FORMAT(tgl_kirim, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND no_item='$ri7[no_item]' AND tmp_hapus='0'");
                             $rkirim=mysqli_fetch_array($qrykirim);
-                            $qrytitem=mysqli_query($con,"SELECT SUM(a.qty_keluhan) AS total_keluhan FROM
-                            (SELECT SUM(qty_claim) AS qty_keluhan FROM tbl_ganti_kain_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                            $qrytitem=mysqli_query($con,"SELECT SUM(a.qty_claim) AS total_claim FROM
+                            (SELECT SUM(qty_claim) AS qty_claim FROM tbl_ganti_kain_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
                             AND no_hanger='$ri7[no_hanger]' 
                             GROUP BY sub_defect
-                            ORDER BY qty_keluhan DESC
+                            ORDER BY qty_claim DESC
                             LIMIT 5) a");
                                     
                             $ritem=mysqli_fetch_array($qrytitem);
@@ -186,20 +186,20 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         <tr valign="top">
                             <td align="center"><?php echo $ri7['no_hanger'];?></td>  
                             <td align="right"><?php echo $rdi7['sub_defect'];?></td>
-                            <td align="right"><?php echo $rdi7['qty_keluhan'];?></td>
+                            <td align="right"><?php echo $rdi7['qty_claim'];?></td>
                             <td align="right"><?php echo $TotalKirim;?></td>
-                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
-                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($ritem['total_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
+                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_claim']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
+                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($ritem['total_claim']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
                         </tr>
                         <?php  
                         $no1++;
-                        $total1 = $total1+$rdi7['qty_keluhan'];
-                        $total2 = $total2+$ritem['total_keluhan'];
+                        $total1 = $total1+$rdi7['qty_claim'];
+                        $total2 = $total2+$ritem['total_claim'];
                         $tkirim=$tkirim+$TotalKirim;} 
                         
     
                         } 
-                        $totaldll=$rAll['qty_keluhan'] - $total1;    
+                        $totaldll=$rAll['qty_claim'] - $total1;    
                         $totalmasalah=$total2;    
                         ?>
                         </tbody>
@@ -267,29 +267,29 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
 
                         $tkirim=0;
                         if($Langganan!=''){$lgn=" AND langganan LIKE '%$Langganan%' ";}else{$lgn="";}
-                        $qry7=mysqli_query($con,"SELECT no_item, warna,no_hanger, SUM(qty_claim) AS qty_keluhan FROM tbl_ganti_kain_now WHERE 
+                        $qry7=mysqli_query($con,"SELECT no_item, warna,no_hanger, SUM(qty_claim) AS qty_claim FROM tbl_ganti_kain_now WHERE 
                         DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND no_hanger in($hanger) $lgn
                         AND sub_defect = 'Beda Warna'                     
                         GROUP BY no_hanger
-                        ORDER BY qty_keluhan DESC
+                        ORDER BY qty_claim DESC
                         LIMIT 3");
                         while($ri7=mysqli_fetch_array($qry7)){
-                            $qryd7=mysqli_query($con,"SELECT sub_defect, warna,SUM(qty_claim) AS qty_keluhan FROM tbl_ganti_kain_now 
+                            $qryd7=mysqli_query($con,"SELECT sub_defect, warna,SUM(qty_claim) AS qty_claim FROM tbl_ganti_kain_now 
                             WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
                             -- AND sub_defect = 'Beda Warna'
                             AND no_hanger='$ri7[no_hanger]' 
                             GROUP BY sub_defect
-                            ORDER BY qty_keluhan DESC
+                            ORDER BY qty_claim DESC
                             LIMIT 3");
                             $qrykirim=mysqli_query($con,"SELECT SUM(qty) AS qty_kirim FROM tbl_pengiriman 
                             WHERE DATE_FORMAT(tgl_kirim, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND no_item='$ri7[no_item]'AND tmp_hapus='0'");
                             $rkirim=mysqli_fetch_array($qrykirim);
-                            $qrytitem=mysqli_query($con,"SELECT SUM(a.qty_keluhan) AS total_keluhan FROM
-                            (SELECT SUM(qty_claim) AS qty_keluhan FROM tbl_ganti_kain_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                            $qrytitem=mysqli_query($con,"SELECT SUM(a.qty_claim) AS total_claim FROM
+                            (SELECT SUM(qty_claim) AS qty_claim FROM tbl_ganti_kain_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
                             AND no_hanger='$ri7[no_hanger]' 
                             AND sub_defect = 'Beda Warna'
                             GROUP BY sub_defect
-                            ORDER BY qty_keluhan DESC
+                            ORDER BY qty_claim DESC
                             LIMIT 3) a");
                             $ritem=mysqli_fetch_array($qrytitem);
                             while($rdi7=mysqli_fetch_array($qryd7)){
@@ -297,9 +297,9 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         <tr valign="top">
                             <td align="center"><?php echo $ri7['no_hanger'];?></td>  
                             <td align="right"><?php echo $rdi7['warna'];?></td>
-                            <td align="right"><?php echo $rdi7['qty_keluhan'];?></td>
+                            <td align="right"><?php echo $rdi7['qty_claim'];?></td>
                             <td align="right"><?php echo $TotalKirim;?></td>
-                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
+                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_claim']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
                           
                         </tr>
                         <?php  
