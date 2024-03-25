@@ -573,10 +573,16 @@ $rcek = mysqli_fetch_array($sqlCek);
 								onchange="masalah_dominan_solusi(this)">
 								<option value="">Pilih</option>
 								<?php
+								$qryma = mysqli_query($con, "select
+																	group_concat(masalah_dominan) as masalah_dominan
+																from tbl_aftersales_now
+																where nodemand = '$_GET[nodemand]'
+																group by nodemand");
+								$riQryma = mysqli_fetch_array($qryma);
 								$qrym = mysqli_query($con, "SELECT masalah FROM tbl_masalah_aftersales ORDER BY masalah ASC");
 								while ($rm = mysqli_fetch_array($qrym)) {
 									
-									$disabled = $rcek['masalah_dominan'] == $rm['masalah'] ? "disabled" : '';
+									$disabled = in_array($rm['masalah'], explode(',', $riQryma['masalah_dominan'])) ? "disabled" : '';
 									?>
 									<option value="<?= $rm['masalah']; ?>" <?= $disabled ?>>
 										<?php echo $rm['masalah']; ?>
@@ -1244,8 +1250,12 @@ if ($_POST['save'] == "save") {
 		kategori='$_POST[kategori]',
 		addpersonil='$addpersonil',
 		checknego='$_POST[checknego]',
-		tgl_buat=now(),
 		hod='$_POST[hod]',
+		qty_kirim_yd = $_POST[qty_kirim_yd],
+		qty_claim_yd = $_POST[qty_claim_yd],
+		qty_order_yd = $_POST[qty_order_yd],
+		qty_foc_yd = $_POST[qty_foc_yd],
+		tgl_buat=now(),
 		tgl_update=now()");
 
 	if ($sqlData) {
