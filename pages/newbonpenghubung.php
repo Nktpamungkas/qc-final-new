@@ -402,8 +402,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
         <!-- Nanti ganti -->
-        <td align="center"><?php echo $row1['qty_sisa'];?></td>
-			  <td align="center"><?php echo $row1['satuan_sisa'];?></td>
+        <!-- <td align="center"><?php echo $row1['qty_sisa'];?></td>
+			  <td align="center"><?php echo $row1['satuan_sisa'];?></td> -->
+        <td align="center"></td>
+        <td align="center"></td>
 
 			   <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
@@ -528,8 +530,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
         <!-- Nanti ganti -->
-        <td align="center"><?php echo $row1['qty_sisa'];?></td>
-			  <td align="center"><?php echo $row1['satuan_sisa'];?></td>
+        <!-- <td align="center"><?php echo $row1['qty_sisa'];?></td>
+			  <td align="center"><?php echo $row1['satuan_sisa'];?></td> -->
+        <td align="center"></td>
+        <td align="center"></td>
         
 			   <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>

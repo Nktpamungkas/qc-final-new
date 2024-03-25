@@ -33,7 +33,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 ?>
 <div class="box">
   <div class="box-header with-border">
-    <h3 class="box-title"> Filter Laporan KPE asdasdsa </h3>
+    <h3 class="box-title"> Filter Laporan KPE </h3>
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
     </div>
@@ -367,6 +367,67 @@ if($_POST['simpan_solusi_db']=="Simpan"){
   $currency=strtoupper($_POST['currency']);
 	$sqlData1=mysqli_query($con,"INSERT INTO tbl_debit_note SET 
 		  no_item='$no_item', kg='$dn_kg', satuan='$dn_satuan', amount='$amount', currency='$currency'");
+	if($sqlData1){	
+	echo "<script>swal({
+  title: 'Data Telah Tersimpan',   
+  text: 'Klik Ok untuk input data kembali',
+  type: 'success',
+  }).then((result) => {
+  if (result.value) {
+    window.location.href='LapKPE';
+	 
+  }
+});</script>";
+}else {
+  // Tampilkan pesan kesalahan jika perintah SQL gagal
+  echo "Error: " . mysqli_error($con);
+}
+}
+
+// Edit Debit Note
+if($_POST['edit_solusi_pg']=="Simpan"){
+
+	$no_item=strtoupper($_POST['no_item']);
+	$pcs=strtoupper($_POST['pg_pcs']);
+
+  $format_amount = str_replace(['.', ','], '', $_POST['pg_amount']);
+	$amount=strtoupper($format_amount);
+
+  $currency=strtoupper($_POST['currency']);
+  
+	$sqlData1=mysqli_query($con,"UPDATE tbl_perbaikan_garment SET 
+		  no_item='$no_item', pcs='$pcs', amount='$amount', currency='$currency' WHERE id='$id'");
+	if($sqlData1){	
+	echo "<script>swal({
+  title: 'Data Telah Tersimpan',   
+  text: 'Klik Ok untuk input data kembali',
+  type: 'success',
+  }).then((result) => {
+  if (result.value) {
+         window.location.href='LapKPE';
+	 
+  }
+});</script>";
+}else {
+      // Tampilkan pesan kesalahan jika perintah SQL gagal
+      echo "Error: " . mysqli_error($con);
+  }
+}
+
+
+if($_POST['edit_solusi_db']=="Simpan"){
+  $id=strtoupper($_POST['id']);
+	$no_item=strtoupper($_POST['no_item']);
+	$dn_kg=strtoupper($_POST['dn_kg']);
+	$dn_satuan=strtoupper($_POST['dn_satuan']);
+  $format_amount = str_replace(['.', ','], '', $_POST['dn_amount']);
+	$amount=strtoupper($format_amount);
+  $currency=strtoupper($_POST['currency']);
+	$sqlData1=mysqli_query($con,"UPDATE tbl_debit_note SET no_item='$no_item', kg='$dn_kg', satuan='$dn_satuan', amount='$amount', currency='$currency' WHERE id='$id'
+  
+  -- INSERT INTO tbl_debit_note SET 
+		  -- no_item='$no_item', kg='$dn_kg', satuan='$dn_satuan', amount='$amount', currency='$currency'
+      ");
 	if($sqlData1){	
 	echo "<script>swal({
   title: 'Data Telah Tersimpan',   
