@@ -208,9 +208,9 @@ $valgramasi=substr($rowdb2['GRAMASI'],0,$posg);
 $posl=strpos($rowdb2['LEBAR'],".");
 $vallebar=substr($rowdb2['LEBAR'],0,$posl);
 
-$sqlCek=mysqli_query($con,"SELECT * FROM tbl_ncp_qcf WHERE nodemand='$nodemand' and no_ncp='$NCPNO' ORDER BY id DESC LIMIT 1");
-$cek=mysqli_num_rows($sqlCek);
-$rcek=mysqli_fetch_array($sqlCek);
+//$sqlCek=mysqli_query($con,"SELECT * FROM tbl_ncp_qcf WHERE nodemand='$nodemand' and no_ncp='$NCPNO' ORDER BY id DESC LIMIT 1");
+//$cek=mysqli_num_rows($sqlCek);
+//$rcek=mysqli_fetch_array($sqlCek);
 
 ?>
 <div class="row">
