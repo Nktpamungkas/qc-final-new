@@ -9,8 +9,12 @@ $act=$_GET['g'];
 //-
 $Awal=$_GET['awal'];
 $Akhir=$_GET['akhir'];
+$jam1=$_GET['jam1'];
+$jam2=$_GET['jam2'];
 $Shift=$_GET['shift'];
 $MC=$_GET['nomc'];
+$start_date= $Awal." ".$jam1;
+$stop_date= $Akhir." ".$jam2;
 $qTgl=mysqli_query($con,"SELECT DATE_FORMAT(now(),'%d-%b-%y') as tgl_skrg,DATE_FORMAT(now(),'%H:%i:%s') as jam_skrg");
 $rTgl=mysqli_fetch_array($qTgl);
 if($Awal!=""){$tgl=substr($Awal,0,10); $jam=$Awal;}else{$tgl=$rTgl['tgl_skrg']; $jam=$rTgl['jam_skrg'];}
@@ -112,7 +116,7 @@ border:hidden;
       <td><table width="100%" border="1" class="table-list1"> 
   <tr>
         <td colspan="3" align="center"><strong><font size="+1">LAPORAN HASIL PACKING SHIFT <?php echo $Shift; ?></font><br />
-		<font size="-1">TANGGAL: <?php echo strtoupper(date("d/m/Y", strtotime($Awal)));?> S/D <?php echo strtoupper(date("d/m/Y", strtotime($Akhir)));?></font>
+		<font size="-1">TANGGAL: <?php echo strtoupper(date("d/m/Y", strtotime($Awal)))." ".$_GET['jam1'];?> S/D <?php echo strtoupper(date("d/m/Y", strtotime($Akhir)))." ".$_GET['jam2'];?></font>
     </tr>
   <tr>
     <td colspan="3" align="center">  
@@ -154,19 +158,23 @@ border:hidden;
             $t_panjangK=0;
             $Awal=$_GET['awal'];
             $Akhir=$_GET['akhir'];
+		  	$jam1=$_GET['jam1'];
+		  	$jam2=$_GET['jam2'];
+		    $start_date= $Awal." ".$jam1;
+            $stop_date= $Akhir." ".$jam2;
             //if($_GET['shift']!="ALL"){$shft=" AND `shift`='$_GET[shift]' "; }else{$shft=" ";}
             if($_GET['nomc']!="ALL"){ $nomc=" AND `no_mc` LIKE '%$_GET[nomc]' ";}else{$nomc=" ";}	
             //if($_GET['group']!="ALL"){ $grp=" AND `inspektor` LIKE '%$_GET[group]' ";}else{$grp=" ";}		
             $qry1=mysqli_query($con,"SELECT operator,no_mc FROM tbl_lap_inspeksi
-            WHERE tgl_update BETWEEN '$Awal' AND '$Akhir'  AND `inspektor`='PACKING A' $nomc $grp AND `dept`='PACKING' GROUP BY operator,no_mc");
+            WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING A' $nomc $grp AND `dept`='PACKING' GROUP BY operator,no_mc");
                 while($row=mysqli_fetch_array($qry1)){
                     //QTY KECIL
                     $qryKecil=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
-                    WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING A' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Kecil'");
+                    WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING A' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Kecil'");
                     $rowKecil=mysqli_fetch_array($qryKecil);
                     //QTY BESAR
                     $qryBesar=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
-                    WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING A' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
+                    WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING A' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
                     $rowBesar=mysqli_fetch_array($qryBesar);
 					// QTY LOSS
 					$qryLossA=mysqli_query($con,"select
@@ -174,7 +182,7 @@ border:hidden;
 					from
 						tbl_lap_inspeksi
 					where
-						tgl_update between '$Awal' AND '$Akhir'
+						DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 						and `inspektor` = 'PACKING A'
 						and `dept` = 'PACKING'");
                     $rowLossA=mysqli_fetch_array($qryLossA);
@@ -254,19 +262,21 @@ border:hidden;
             $t_panjangK=0;
             $Awal=$_GET['awal'];
             $Akhir=$_GET['akhir'];
+		  	$start_date= $Awal." ".$jam1;
+		  	$stop_date= $Akhir." ".$jam2;
 //            if($_GET['shift']!="ALL"){$shft=" AND `shift`='$_GET[shift]' "; }else{$shft=" ";}
             if($_GET['nomc']!="ALL"){ $nomc=" AND `no_mc` LIKE '%$_GET[nomc]' ";}else{$nomc=" ";}	
             // if($_GET['group']!="ALL"){ $grp=" AND `inspektor` LIKE '%$_GET[group]' ";}else{$grp=" ";}		
             $qry1=mysqli_query($con,"SELECT operator,no_mc FROM tbl_lap_inspeksi
-            WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING B' $nomc $grp AND `dept`='PACKING' GROUP BY operator,no_mc");
+            WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING B' $nomc $grp AND `dept`='PACKING' GROUP BY operator,no_mc");
                 while($row=mysqli_fetch_array($qry1)){
                     //QTY KECIL
                     $qryKecil=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
-                    WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING B' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Kecil'");
+                    WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING B' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Kecil'");
                     $rowKecil=mysqli_fetch_array($qryKecil);
                     //QTY BESAR
                     $qryBesar=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
-                    WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING B' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
+                    WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING B' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
                     $rowBesar=mysqli_fetch_array($qryBesar);
 					// QTY LOSS
 					$qryLossB=mysqli_query($con,"select
@@ -274,7 +284,7 @@ border:hidden;
 					from
 						tbl_lap_inspeksi
 					where
-						tgl_update between '$Awal' AND '$Akhir'
+						DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 						and `inspektor` = 'PACKING B'
 						and `dept` = 'PACKING'");
                     $rowLossB=mysqli_fetch_array($qryLossB);
@@ -353,19 +363,21 @@ border:hidden;
             $t_panjangK=0;
             $Awal=$_GET['awal'];
             $Akhir=$_GET['akhir'];
+		  	$start_date= $Awal." ".$jam1;
+		  	$stop_date= $Akhir." ".$jam2;
 //            if($_GET['shift']!="ALL"){$shft=" AND `shift`='$_GET[shift]' "; }else{$shft=" ";}
             if($_GET['nomc']!="ALL"){ $nomc=" AND `no_mc` LIKE '%$_GET[nomc]' ";}else{$nomc=" ";}	
             //if($_GET['group']!="ALL"){ $grp=" AND `inspektor` LIKE '%$_GET[group]' ";}else{$grp=" ";}		
             $qry1=mysqli_query($con,"SELECT operator,no_mc FROM tbl_lap_inspeksi
-            WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING C' $nomc $grp AND `dept`='PACKING' GROUP BY operator,no_mc");
+            WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING C' $nomc $grp AND `dept`='PACKING' GROUP BY operator,no_mc");
                 while($row=mysqli_fetch_array($qry1)){
                     //QTY KECIL
                     $qryKecil=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
-                    WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING C' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Kecil'");
+                    WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING C' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Kecil'");
                     $rowKecil=mysqli_fetch_array($qryKecil);
                     //QTY BESAR
                     $qryBesar=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
-                    WHERE tgl_update BETWEEN '$Awal' AND '$Akhir' AND `inspektor`='PACKING C' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
+                    WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING C' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
                     $rowBesar=mysqli_fetch_array($qryBesar);
 					// QTY LOSS
 					$qryLossC=mysqli_query($con,"select
@@ -373,7 +385,7 @@ border:hidden;
 					from
 						tbl_lap_inspeksi
 					where
-						tgl_update between '$Awal' AND '$Akhir'
+						DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 						and `inspektor` = 'PACKING C'
 						and `dept` = 'PACKING'");
                     $rowLossC=mysqli_fetch_array($qryLossC);
