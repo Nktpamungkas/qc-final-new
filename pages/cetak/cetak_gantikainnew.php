@@ -213,6 +213,12 @@ border:hidden;
 
         $qty_red = $row1['qty_email'] - $row1['qty_claim'];
         $satuan_red = $row1['pjg_email']-$row1['pjg1'];
+        $total_red = $row1['qty_email'] - $row1['qty_claim'];
+
+        $total_qty_red = $row1['qty_req'] - $row1['qty_rep'];
+        $total_satuan_red = $row1['pjg_req'] - $row1['pjg_rep'];
+        // $total_satuan_red = $row1['pjg_req'] - $row1['pjg_rep'];
+
 		 ?>
          <?php if(!empty($row1['id'])){ ?>
           <tr valign="top">
@@ -241,7 +247,7 @@ border:hidden;
 
             <td align="center" valign="middle"><font size="-2"><?php echo number_format(($qty_red), 2); ?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php echo round(($satuan_red));?></font></td>
-            <td align="center" valign="middle"><font size="-2"><?php echo round(($qty_red/$row1['qty_order'])*100,2)."%";?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php echo round(($qty_red/$row1['qty_email'])*100,2)."%";?></font></td>
             
 
             <!-- <td align="center" valign="middle"><font size="-2"><?php echo $row1['kg1'];?></font></td>
@@ -269,15 +275,15 @@ border:hidden;
 
               <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_req']; ?></strong></font></td>
               <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['pjg_req']; ?></strong></font></td>
-              <td align="center" valign="middle"><font size="-2"><strong><?php echo round(($row1['qty_req']/$row1['qty_order'])*100,2)."%";?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo round(($row1['qty_req']/$row1['qty_order_lgn'])*100,2)."%";?></strong></font></td>
               
               <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['qty_rep']; ?></strong></font></td>
               <td align="center" valign="middle"><font size="-2"><strong><?php echo $row1['pjg_rep']; ?></strong></font></td>
-              <td align="center" valign="middle"><font size="-2"><strong><?php echo round(($row1['qty_rep']/$row1['qty_order'])*100,2)."%";?></strong></font></td>
+              <td align="center" valign="middle"><font size="-2"><strong><?php echo round(($row1['qty_rep']/$row1['qty_order_lgn'])*100,2)."%";?></strong></font></td>
               
-              <td align="center" valign="middle"><font size="-2"><?php echo number_format(($row1['qty_req'] - $row1['qty_rep']), 2); ?></font></td>
-              <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['pjg_req']-$row1['pjg_rep']));?></font></td>
-              <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['qty_req']-$row1['qty_rep']/$row1['qty_order'])*100,2)."%";?></font></td>
+              <td align="center" valign="middle"><font size="-2"><?php echo number_format(($total_qty_red), 2); ?></font></td>
+              <td align="center" valign="middle"><font size="-2"><?php echo round(($total_satuan_red));?></font></td>
+              <td align="center" valign="middle"><font size="-2"><?php echo round(($total_qty_red/$row1['qty_req'])*100,2)."%";?></font></td>
             
               <td></td>
               <td></td>

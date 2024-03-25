@@ -154,7 +154,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             AND no_hanger='$ri7[no_hanger]' 
                             GROUP BY sub_defect
                             ORDER BY qty_keluhan DESC
-                            LIMIT 1");
+                            LIMIT 5");
                             $qrykirim=mysqli_query($con,"SELECT SUM(qty) AS qty_kirim FROM tbl_pengiriman WHERE DATE_FORMAT(tgl_kirim, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND no_item='$ri7[no_item]' AND tmp_hapus='0'");
                             $rkirim=mysqli_fetch_array($qrykirim);
                             $qrytitem=mysqli_query($con,"SELECT SUM(a.qty_keluhan) AS total_keluhan FROM
@@ -231,7 +231,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         AND sub_defect = 'Beda Warna'
                         GROUP BY no_hanger
                         ORDER BY qty_keluhan DESC
-                        LIMIT 3");
+                        LIMIT 5");
                         while($ri7=mysqli_fetch_array($qry7)){
                             $qryd7=mysqli_query($con,"SELECT sub_defect, warna,SUM(qty_claim) AS qty_keluhan FROM tbl_ganti_kain_now 
                             WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
@@ -239,7 +239,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             AND no_hanger='$ri7[no_hanger]' 
                             GROUP BY sub_defect
                             ORDER BY qty_keluhan DESC
-                            LIMIT 3");
+                            LIMIT 5");
                             $qrykirim=mysqli_query($con,"SELECT SUM(qty) AS qty_kirim FROM tbl_pengiriman 
                             WHERE DATE_FORMAT(tgl_kirim, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND no_item='$ri7[no_item]'AND tmp_hapus='0'");
                             $rkirim=mysqli_fetch_array($qrykirim);
@@ -249,7 +249,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             AND sub_defect = 'Beda Warna'
                             GROUP BY sub_defect
                             ORDER BY qty_keluhan DESC
-                            LIMIT 3) a");
+                            LIMIT 5) a");
                             $ritem=mysqli_fetch_array($qrytitem);
                             while($rdi7=mysqli_fetch_array($qryd7)){
                         ?>
