@@ -94,7 +94,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                 </div>
                 </div>
                 <div class="col-sm-2">
-                <div class="input-group date">
+                <!-- <div class="input-group date">
                     <div class="input-group-addon"> Total Lot Kirim</div>
                     <input name="totallot" type="text" class="form-control pull-right" placeholder="0" value="<?php echo $TotalLot; ?>" />
                 </div>
@@ -104,7 +104,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         <div class="input-group-addon"> Langganan</div>
                         <input name="langganan" type="text" class="form-control pull-right" placeholder="Langganan" value="<?php echo $Langganan; ?>" />
                     </div>
-                </div>
+                </div> -->
                 <button type="submit" class="btn btn-success " name="cari"><i class="fa fa-search"></i> Cari Data</button>
                 <!-- /.input group -->
             </div>
