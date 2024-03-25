@@ -186,6 +186,7 @@ if ($_POST['simpan'] == "simpan") {
 	`jam_mutasi`='$_POST[jam]',
 	`sts_gkg`='$stKG',
 	`tgl_update`='$_POST[tgl]',
+	`jam_update`=now(),
     `operator`='$_POST[operator]',
     `lebar`='$_POST[lebar]',
     `gramasi`='$_POST[gramasi]',

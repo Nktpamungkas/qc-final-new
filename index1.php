@@ -1144,7 +1144,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="treeview <?php if ($_GET['p'] == "Input-Lap-Packing-New" or $_GET['p'] == "Lihat-Data-Lap-Packing" or $_GET['p'] == "Input-Sisa-Lap-Packing") {
+                        <li class="treeview <?php if ($_GET['p'] == "Input-Lap-Packing-New" or $_GET['p'] == "Lihat-Data-Lap-Packing" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Input-Add-NOW") {
                                                 echo "active";
                                             } ?>">
                             <a href="#"><i class="fa fa-gear"></i> <span>Packing</span>
@@ -1163,6 +1163,11 @@
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
                             echo "hidden";
                         } ?>"><a href="SisaSiapPacking"><i class="fa fa-file-text"></i> <span>Sisa Siap Packing</span></a></li>
+								<li class="<?php if ($_GET['p'] == "Input-Add-NOW") {
+                                                echo "active";
+                                            } ?> <?php if ($_SESSION['akses'] == "biasa") {
+                            echo "hidden";
+                        } ?>"><a href="InputAddNOW"><i class="fa fa-file-text"></i> <span>Input Add NOW</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Lap-InspekMeja-New" or $_GET['p'] == "Lihat-Data-InspekMeja") {
@@ -2415,6 +2420,15 @@
                     [5, 10, 25, 50, 'All']
                 ],
                 "pageLength": 5
+            });
+            $('#table-solusi-kpe').DataTable({
+                "lengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, 'All']
+                ],
+                "pageLength": 5,
+                'scrollX': true,
+                'paging': true,
             });
             $('#tblr1').DataTable()
             $('#tblr2').DataTable()

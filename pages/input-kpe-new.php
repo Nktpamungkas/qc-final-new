@@ -168,10 +168,13 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<?php
 						if ($cek > 0) {
 							// echo "Sudah Input Pada Tgl: " . $rcek['tgl_buat'] . " | ";
-							$rcek_masalah_dominan  = $rcek['masalah_dominan']  != "" ? $rcek['masalah_dominan'] : '';
-							$rcek_masalah_dominan1 = $rcek['masalah_dominan1'] != "" ? ', ' . $rcek['masalah_dominan1'] : '';
-							$rcek_masalah_dominan2 = $rcek['masalah_dominan2'] != "" ? ', ' . $rcek['masalah_dominan2'] : '';
-							echo "Sudah Input : (" . $rcek_masalah_dominan . $rcek_masalah_dominan1 . $rcek_masalah_dominan2 . ") | ";
+							$qm = mysqli_query($con, "select 
+															group_concat(masalah_dominan) as masalah_dominan
+														from tbl_aftersales_now
+														where nodemand = '$_GET[nodemand]'
+														group by nodemand");
+							$riqm = mysqli_fetch_array($qm);
+							echo "Sudah Input : (" . $riqm['masalah_dominan'] . ") | ";
 						}
 						if (!empty($rcek['no_ncp'])) {
 							echo $rcek['no_ncp'];
@@ -313,14 +316,14 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="qty_order" type="text" class="form-control" id="qty_order" value="<?php if ($cek > 0) {
-								echo $rcek['qty_order'];
+								echo $rcek['satuan_o'] == "KG" ? $rcek['qty_order'] : '';
 							} else {
-								echo number_format($rowdb2['QTY_ORDER'], 2);
+								echo strtoupper($rowdb2['QTY_PANJANG_ORDER_UOM']) == "KG" ? number_format($rowdb2['QTY_ORDER'], 2) : '';
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_o" style="font-size: 12px;" id="satuan1">
 									<?php
-									$units_o = ['KG', 'PCS', 'YD']; // Define the units you want to check for
+									$units_o = ['KG', 'PCS']; // Define the units you want to check for
 									
 									foreach ($units_o as $unit_o) {
 										$isSelected_o = ($rcek['satuan_o'] == $unit_o) || (strtolower($rowdb2['QTY_PANJANG_ORDER_UOM']) == strtolower($unit_o));
@@ -335,12 +338,12 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="qty_kirim" type="text" class="form-control" id="qty_kirim" value="<?php if ($cek > 0) {
-								echo $rcek['qty_kirim'];
+								//echo $rcek['qty_kirim'];
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_k" style="font-size: 12px;" id="satuan_k">
 									<?php
-									$units_k = ['KG', 'PCS', 'YD']; // Define the units you want to check for
+									$units_k = ['KG', 'PCS']; // Define the units you want to check for
 									
 									foreach ($units_k as $unit_k) {
 										$isSelected_k = ($rcek['satuan_k'] == $unit_k);
@@ -358,12 +361,12 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="qty_claim" type="text" class="form-control" id="qty_claim" value="<?php if ($cek > 0) {
-								echo $rcek['qty_claim'];
+								//echo $rcek['qty_claim'];
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_c" style="font-size: 12px;" id="satuan_c">
 									<?php
-									$units_c = ['KG', 'PCS', 'YD']; // Define the units you want to check for
+									$units_c = ['KG', 'PCS']; // Define the units you want to check for
 									
 									foreach ($units_c as $unit_c) {
 										$isSelected_c = ($rcek['satuan_c'] == $unit_c);
@@ -378,12 +381,12 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="qty_foc" type="text" class="form-control" id="qty_foc" value="<?php if ($cek > 0) {
-								echo $rcek['qty_foc'];
+								//echo $rcek['qty_foc'];
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_f" style="font-size: 12px;" id="satuan_f">
 									<?php
-									$units_f = ['KG', 'PCS', 'YD']; // Define the units you want to check for
+									$units_f = ['KG', 'PCS']; // Define the units you want to check for
 									
 									foreach ($units_f as $unit_f) {
 										$isSelected_f = ($rcek['satuan_f'] == $unit_f);
@@ -396,6 +399,97 @@ $rcek = mysqli_fetch_array($sqlCek);
 						</div>
 					</div>
 				</div>
+
+				<!-- YD -->
+				<div class="form-group">
+					<label for="proses" class="col-sm-3 control-label">Qty Order / Kirim</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input name="qty_order_yd" type="text" class="form-control" id="qty_order_yd" value="<?php if ($cek > 0) {
+								echo $rcek['qty_order_yd'];
+							} else {//kesiniya
+								echo strtoupper($rowdb2['QTY_PANJANG_ORDER_UOM']) == "YD" ? number_format($rowdb2['QTY_ORDER'], 2) : '';
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_o_yd" style="font-size: 12px;" id="satuan1">
+									<?php
+									$units_o = ['YD']; // Define the units you want to check for
+									
+									foreach ($units_o as $unit_o) {
+										$isSelected_o = ($rcek['satuan_o'] == $unit_o) || (strtolower($rowdb2['QTY_PANJANG_ORDER_UOM']) == strtolower($unit_o));
+										$selectedAttribute_o = $isSelected_o ? 'selected' : '';
+										echo "<option value=\"$unit_o\" $selectedAttribute_o>$unit_o</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input name="qty_kirim_yd" type="text" class="form-control" id="qty_kirim_yd" value="<?php if ($cek > 0) {
+								//echo $rcek['qty_kirim'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_k_yd" style="font-size: 12px;" id="satuan_k_yd">
+									<?php
+									$units_k = ['YD']; // Define the units you want to check for
+									
+									foreach ($units_k as $unit_k) {
+										$isSelected_k = ($rcek['satuan_k'] == $unit_k);
+										$selectedAttribute_k = $isSelected_k ? 'selected' : '';
+										echo "<option value=\"$unit_k\" $selectedAttribute_k>$unit_k</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="tgl_finishing" class="col-sm-3 control-label">Qty Claim / FOC</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input name="qty_claim_yd" type="text" class="form-control" id="qty_claim_yd" value="<?php if ($cek > 0) {
+								//echo $rcek['qty_claim'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_c_yd" style="font-size: 12px;" id="satuan_c_yd">
+									<?php
+									$units_c = ['YD']; // Define the units you want to check for
+									
+									foreach ($units_c as $unit_c) {
+										$isSelected_c = ($rcek['satuan_c'] == $unit_c);
+										$selectedAttribute_c = $isSelected_c ? 'selected' : '';
+										echo "<option value=\"$unit_c\" $selectedAttribute_c>$unit_c</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input name="qty_foc_yd" type="text" class="form-control" id="qty_foc_yd" value="<?php if ($cek > 0) {
+								//echo $rcek['qty_foc'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_f_yd" style="font-size: 12px;" id="satuan_f_yd">
+									<?php
+									$units_f = ['YD']; // Define the units you want to check for
+									
+									foreach ($units_f as $unit_f) {
+										$isSelected_f = ($rcek['satuan_f'] == $unit_f);
+										$selectedAttribute_f = $isSelected_f ? 'selected' : '';
+										echo "<option value=\"$unit_f\" $selectedAttribute_f>$unit_f</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+				</div>
+				<!-- END OF YD -->
 			</div>
 			<!-- col -->
 			<div class="col-md-6">
@@ -404,60 +498,14 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-2">
 						<select class="form-control select2" name="t_jawab">
 							<option value="">Pilih</option>
-							<option value="MKT" <?php if ($rcek['t_jawab'] == "MKT") {
-								echo "SELECTED";
-							} ?>>MKT</option>
-							<option value="FIN" <?php if ($rcek['t_jawab'] == "FIN") {
-								echo "SELECTED";
-							} ?>>FIN</option>
-							<option value="DYE" <?php if ($rcek['t_jawab'] == "DYE") {
-								echo "SELECTED";
-							} ?>>DYE</option>
-							<option value="KNT" <?php if ($rcek['t_jawab'] == "KNT") {
-								echo "SELECTED";
-							} ?>>KNT</option>
-							<option value="LAB" <?php if ($rcek['t_jawab'] == "LAB") {
-								echo "SELECTED";
-							} ?>>LAB</option>
-							<option value="PRT" <?php if ($rcek['t_jawab'] == "PRT") {
-								echo "SELECTED";
-							} ?>>PRT</option>
-							<option value="KNK" <?php if ($rcek['t_jawab'] == "KNK") {
-								echo "SELECTED";
-							} ?>>KNK</option>
-							<option value="QCF" <?php if ($rcek['t_jawab'] == "QCF") {
-								echo "SELECTED";
-							} ?>>QCF</option>
-							<option value="GKG" <?php if ($rcek['t_jawab'] == "GKG") {
-								echo "SELECTED";
-							} ?>>GKG</option>
-							<option value="PRO" <?php if ($rcek['t_jawab'] == "PRO") {
-								echo "SELECTED";
-							} ?>>PRO</option>
-							<option value="RMP" <?php if ($rcek['t_jawab'] == "RMP") {
-								echo "SELECTED";
-							} ?>>RMP</option>
-							<option value="PPC" <?php if ($rcek['t_jawab'] == "PPC") {
-								echo "SELECTED";
-							} ?>>PPC</option>
-							<option value="TAS" <?php if ($rcek['t_jawab'] == "TAS") {
-								echo "SELECTED";
-							} ?>>TAS</option>
-							<option value="GKJ" <?php if ($rcek['t_jawab'] == "GKJ") {
-								echo "SELECTED";
-							} ?>>GKJ</option>
-							<option value="BRS" <?php if ($rcek['t_jawab'] == "BRS") {
-								echo "SELECTED";
-							} ?>>BRS</option>
-							<option value="CST" <?php if ($rcek['t_jawab'] == "CST") {
-								echo "SELECTED";
-							} ?>>CST</option>
-							<option value="GAS" <?php if ($rcek['t_jawab'] == "GAS") {
-								echo "SELECTED";
-							} ?>>GAS</option>
-							<option value="YND" <?php if ($rcek['t_jawab'] == "YND") {
-								echo "SELECTED";
-							} ?>>YND</option>
+
+							<?php
+								$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
+								foreach ($depts as $dept) {
+									echo "<option value=\"$dept\">$dept</option>";
+								}
+							?>
+							
 						</select>
 					</div>
 					<div class="col-sm-3">
@@ -474,60 +522,14 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-2">
 						<select class="form-control select2" name="t_jawab1">
 							<option value="">Pilih</option>
-							<option value="MKT" <?php if ($rcek['t_jawab1'] == "MKT") {
-								echo "SELECTED";
-							} ?>>MKT</option>
-							<option value="FIN" <?php if ($rcek['t_jawab1'] == "FIN") {
-								echo "SELECTED";
-							} ?>>FIN</option>
-							<option value="DYE" <?php if ($rcek['t_jawab1'] == "DYE") {
-								echo "SELECTED";
-							} ?>>DYE</option>
-							<option value="KNT" <?php if ($rcek['t_jawab1'] == "KNT") {
-								echo "SELECTED";
-							} ?>>KNT</option>
-							<option value="LAB" <?php if ($rcek['t_jawab1'] == "LAB") {
-								echo "SELECTED";
-							} ?>>LAB</option>
-							<option value="PRT" <?php if ($rcek['t_jawab1'] == "PRT") {
-								echo "SELECTED";
-							} ?>>PRT</option>
-							<option value="KNK" <?php if ($rcek['t_jawab1'] == "KNK") {
-								echo "SELECTED";
-							} ?>>KNK</option>
-							<option value="QCF" <?php if ($rcek['t_jawab1'] == "QCF") {
-								echo "SELECTED";
-							} ?>>QCF</option>
-							<option value="GKG" <?php if ($rcek['t_jawab1'] == "GKG") {
-								echo "SELECTED";
-							} ?>>GKG</option>
-							<option value="PRO" <?php if ($rcek['t_jawab1'] == "PRO") {
-								echo "SELECTED";
-							} ?>>PRO</option>
-							<option value="RMP" <?php if ($rcek['t_jawab1'] == "RMP") {
-								echo "SELECTED";
-							} ?>>RMP</option>
-							<option value="PPC" <?php if ($rcek['t_jawab1'] == "PPC") {
-								echo "SELECTED";
-							} ?>>PPC</option>
-							<option value="TAS" <?php if ($rcek['t_jawab1'] == "TAS") {
-								echo "SELECTED";
-							} ?>>TAS</option>
-							<option value="GKJ" <?php if ($rcek['t_jawab1'] == "GKJ") {
-								echo "SELECTED";
-							} ?>>GKJ</option>
-							<option value="BRS" <?php if ($rcek['t_jawab1'] == "BRS") {
-								echo "SELECTED";
-							} ?>>BRS</option>
-							<option value="CST" <?php if ($rcek['t_jawab1'] == "CST") {
-								echo "SELECTED";
-							} ?>>CST</option>
-							<option value="GAS" <?php if ($rcek['t_jawab1'] == "GAS") {
-								echo "SELECTED";
-							} ?>>GAS</option>
-							<option value="YND" <?php if ($rcek['t_jawab1'] == "YND") {
-								echo "SELECTED";
-							} ?>>YND</option>
+
+							<?php
+								$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
+								foreach ($depts as $dept) {
+									echo "<option value=\"$dept\">$dept</option>";
+								}
+							?>
+
 						</select>
 					</div>
 					<div class="col-sm-3">
@@ -544,66 +546,20 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-2">
 						<select class="form-control select2" name="t_jawab2">
 							<option value="">Pilih</option>
-							<option value="MKT" <?php if ($rcek['t_jawab2'] == "MKT") {
-								echo "SELECTED";
-							} ?>>MKT</option>
-							<option value="FIN" <?php if ($rcek['t_jawab2'] == "FIN") {
-								echo "SELECTED";
-							} ?>>FIN</option>
-							<option value="DYE" <?php if ($rcek['t_jawab2'] == "DYE") {
-								echo "SELECTED";
-							} ?>>DYE</option>
-							<option value="KNT" <?php if ($rcek['t_jawab2'] == "KNT") {
-								echo "SELECTED";
-							} ?>>KNT</option>
-							<option value="LAB" <?php if ($rcek['t_jawab2'] == "LAB") {
-								echo "SELECTED";
-							} ?>>LAB</option>
-							<option value="PRT" <?php if ($rcek['t_jawab2'] == "PRT") {
-								echo "SELECTED";
-							} ?>>PRT</option>
-							<option value="KNK" <?php if ($rcek['t_jawab2'] == "KNK") {
-								echo "SELECTED";
-							} ?>>KNK</option>
-							<option value="QCF" <?php if ($rcek['t_jawab2'] == "QCF") {
-								echo "SELECTED";
-							} ?>>QCF</option>
-							<option value="GKG" <?php if ($rcek['t_jawab2'] == "GKG") {
-								echo "SELECTED";
-							} ?>>GKG</option>
-							<option value="PRO" <?php if ($rcek['t_jawab2'] == "PRO") {
-								echo "SELECTED";
-							} ?>>PRO</option>
-							<option value="RMP" <?php if ($rcek['t_jawab2'] == "RMP") {
-								echo "SELECTED";
-							} ?>>RMP</option>
-							<option value="PPC" <?php if ($rcek['t_jawab2'] == "PPC") {
-								echo "SELECTED";
-							} ?>>PPC</option>
-							<option value="TAS" <?php if ($rcek['t_jawab2'] == "TAS") {
-								echo "SELECTED";
-							} ?>>TAS</option>
-							<option value="GKJ" <?php if ($rcek['t_jawab2'] == "GKJ") {
-								echo "SELECTED";
-							} ?>>GKJ</option>
-							<option value="BRS" <?php if ($rcek['t_jawab2'] == "BRS") {
-								echo "SELECTED";
-							} ?>>BRS</option>
-							<option value="CST" <?php if ($rcek['t_jawab2'] == "CST") {
-								echo "SELECTED";
-							} ?>>CST</option>
-							<option value="GAS" <?php if ($rcek['t_jawab2'] == "GAS") {
-								echo "SELECTED";
-							} ?>>GAS</option>
-							<option value="YND" <?php if ($rcek['t_jawab2'] == "YND") {
-								echo "SELECTED";
-							} ?>>YND</option>
+							
+							<?php
+								$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
+								foreach ($depts as $dept) {
+									echo "<option value=\"$dept\">$dept</option>";
+								}
+							?>
+
 						</select>
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input name="persen2" type="text" class="form-control" id="persen2" value="<?php if ($cek > 0) {
-								echo $rcek['persen2'];
+								// echo $rcek['persen2'];
 							} ?>" placeholder="0.00" style="text-align: right;">
 							<span class="input-group-addon">%</span>
 						</div>
@@ -613,26 +569,22 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="masalah_dominan" class="col-sm-3 control-label">Masalah Dominan / Solusi</label>
 					<div class="col-sm-4">
 						<div class="input-group">
-							<input type="hidden" name="tmp_masalah_dominan" value="<?= $rcek['masalah_dominan'] ?>">
-							<input type="hidden" name="tmp_masalah_dominan1" value="<?= $rcek['masalah_dominan1'] ?>">
-							<input type="hidden" name="tmp_masalah_dominan2" value="<?= $rcek['masalah_dominan2'] ?>">
 							<select class="form-control select2" name="masalah_dominan" id="masalah_dominan"
-								onchange="masalah_dominan_solusi()">
+								onchange="masalah_dominan_solusi(this)">
 								<option value="">Pilih</option>
 								<?php
+								$qryma = mysqli_query($con, "select
+																	group_concat(masalah_dominan) as masalah_dominan
+																from tbl_aftersales_now
+																where nodemand = '$_GET[nodemand]'
+																group by nodemand");
+								$riQryma = mysqli_fetch_array($qryma);
 								$qrym = mysqli_query($con, "SELECT masalah FROM tbl_masalah_aftersales ORDER BY masalah ASC");
 								while ($rm = mysqli_fetch_array($qrym)) {
-									if ($rcek['masalah_dominan2'] == $rm['masalah']) {
-										$selected = "selected disabled";
-									} else if ($rcek['masalah_dominan1'] == $rm['masalah']) {
-										$selected = "selected disabled";
-									} else if ($rcek['masalah_dominan'] == $rm['masalah']) {
-										$selected = "selected disabled";
-									} else {
-										$selected = "";
-									}
+									
+									$disabled = in_array($rm['masalah'], explode(',', $riQryma['masalah_dominan'])) ? "disabled" : '';
 									?>
-									<option value="<?= $rm['masalah']; ?>" <?= $selected ?>>
+									<option value="<?= $rm['masalah']; ?>" <?= $disabled ?>>
 										<?php echo $rm['masalah']; ?>
 									</option>
 								<?php } ?>
@@ -650,7 +602,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rs = mysqli_fetch_array($qrys)) {
 									?>
 									<option value="<?php echo $rs['solusi']; ?>" <?php if ($rcek['solusi'] == $rs['solusi']) {
-										   echo "SELECTED";
+										   //echo "SELECTED";
 									   } ?>>
 										<?php echo $rs['solusi']; ?>
 									</option>
@@ -665,17 +617,17 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="masalah" class="col-sm-3 control-label">Masalah / Keterangan</label>
 					<div class="col-sm-3">
 						<input name="masalah" type="text" class="form-control" id="masalah" value="<?php if ($cek > 0) {
-							echo $rcek['masalah'];
+							//echo $rcek['masalah'];
 						} ?>" placeholder="Masalah">
 					</div>
 					<div class="col-sm-3">
 						<input name="ket" type="text" class="form-control" id="ket" value="<?php if ($cek > 0) {
-							echo $rcek['ket'];
+							//echo $rcek['ket'];
 						} ?>" placeholder="Keterangan">
 					</div>
 					<div class="col-sm-2">
 						<input type="checkbox" name="sts_claim" id="sts_claim" value="1" <?php if ($rcek['sts_claim'] == "1") {
-							echo "checked";
+							//echo "checked";
 						} ?>>
 						<label> Claim</label>
 					</div>
@@ -683,35 +635,35 @@ $rcek = mysqli_fetch_array($sqlCek);
 				<div class="form-group">
 					<div class="col-sm-3">
 						<input type="checkbox" name="sts_red" id="sts_red" value="1" onClick="aktif1();" <?php if ($rcek['sts_red'] == "1") {
-							echo "checked";
+							//echo "checked";
 						} ?>>
 						<label> Red Category Email</label>
 					</div>
 					<label for="leadtime_email" class="col-sm-2 control-label">Leadtime Email</label>
 					<div class="col-sm-3">
 						<select class="form-control select2" name="leadtime_email" <?php if ($rcek['sts_red'] != "1") {
-							echo "disabled";
+							//echo "disabled";
 						} else {
-							echo "enabled";
+							//echo "enabled";
 						} ?>>
 							<option value="">Pilih</option>
 							<option value="1 Hari Kerja" <?php if ($rcek['leadtime_email'] == "1 Hari Kerja") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>1 Hari Kerja</option>
 							<option value="2 Hari Kerja" <?php if ($rcek['leadtime_email'] == "2 Hari Kerja") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>2 Hari Kerja</option>
 							<option value="3 Hari Kerja" <?php if ($rcek['leadtime_email'] == "3 Hari Kerja") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>3 Hari Kerja</option>
 							<option value="4 Hari Kerja" <?php if ($rcek['leadtime_email'] == "4 Hari Kerja") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>4 Hari Kerja</option>
 							<option value="5 Hari Kerja" <?php if ($rcek['leadtime_email'] == "5 Hari Kerja") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>5 Hari Kerja</option>
 							<option value="6 Hari Kerja" <?php if ($rcek['leadtime_email'] == "6 Hari Kerja") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>6 Hari Kerja</option>
 						</select>
 					</div>
@@ -727,7 +679,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 							<input name="hod" type="text" class="form-control pull-right" id="datepicker4"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
-									echo $rcek['hod'];
+									//echo $rcek['hod'];
 								} ?>" />
 						</div>
 					</div>
@@ -737,11 +689,11 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 							<input name="tgl_solusi_akhir" type="text" class="form-control pull-right" id="datepicker2"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
-									echo $rcek['tgl_solusi_akhir'];
+									//echo $rcek['tgl_solusi_akhir'];
 								} ?>" <?php if ($rcek['sts_red'] != "1") {
-									 echo "";
+									 //echo "";
 								 } else {
-									 echo "";
+									 //echo "";
 								 } ?> />
 						</div>
 					</div>
@@ -754,11 +706,11 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 							<input name="tgl_email" type="text" class="form-control pull-right" id="datepicker"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
-									echo $rcek['tgl_email'];
+									//echo $rcek['tgl_email'];
 								} ?>" <?php if ($rcek['sts_red'] != "1") {
-									 echo "";
+									 //echo "";
 								 } else {
-									 echo "";
+									 //echo "";
 								 } ?> />
 						</div>
 					</div>
@@ -767,11 +719,11 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 							<input name="tgl_jawab" type="text" class="form-control pull-right" id="datepicker1"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
-									echo $rcek['tgl_jawab'];
+									//echo $rcek['tgl_jawab'];
 								} ?>" <?php if ($rcek['sts_red'] != "1") {
-									 echo "";
+									 //echo "";
 								 } else {
-									 echo "";
+									 //echo "";
 								 } ?> />
 						</div>
 					</div>
@@ -781,27 +733,27 @@ $rcek = mysqli_fetch_array($sqlCek);
 				<div class="form-group">
 					<div class="col-sm-3">
 						<input type="checkbox" name="sts" id="sts" value="1" onClick="aktif();" <?php if ($rcek['sts'] == "1") {
-							echo "checked";
+							//echo "checked";
 						} ?> required>
 						<label> Lolos QC</label>
 					</div>
 					<div class="col-sm-3">
 						<input type="checkbox" name="sts_disposisiqc" id="sts_disposisiqc" onClick="aktif2();" value="1"
 							<?php if ($rcek['sts_disposisiqc'] == "1") {
-								echo "checked";
+								//echo "checked";
 							} ?> required>
 						<label> Disposisi QC</label>
 					</div>
 					<div class="col-sm-3">
 						<input type="checkbox" name="sts_disposisipro" id="sts_disposisipro" onClick="aktif3();"
 							value="1" <?php if ($rcek['sts_disposisipro'] == "1") {
-								echo "checked";
+								//echo "checked";
 							} ?> required>
 						<label> Disposisi Produksi</label>
 					</div>
 					<div class="col-sm-3">
 						<input type="checkbox" name="sts_nego" id="sts_nego" onClick="aktif5();" value="1" <?php if ($rcek['sts_nego'] == "1") {
-							echo "checked";
+							//echo "checked";
 						} ?>>
 						<label> Nego Aftersales</label>
 					</div>
@@ -817,7 +769,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rk = mysqli_fetch_array($qryk)) {
 									?>
 									<option value="<?php echo $rk['kategori']; ?>" <?php if ($rcek['kategori'] == $rk['kategori']) {
-										   echo "SELECTED";
+										   //echo "SELECTED";
 									   } ?>>
 										<?php echo $rk['kategori']; ?>
 									</option>
@@ -829,7 +781,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<div class="col-sm-3">
 						<input type="checkbox" name="addpersonil" id="addpersonil" value="1" onClick="aktif6();" <?php if ($rcek['addpersonil'] == "1") {
-							echo "checked";
+							//echo "checked";
 						} ?>>
 						<label> > 2 Personil</label>
 					</div>
@@ -845,7 +797,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rp = mysqli_fetch_array($qryp)) {
 									?>
 									<option value="<?php echo $rp['nama']; ?>" <?php if ($rcek['personil'] == $rp['nama']) {
-										   echo "SELECTED";
+										   //echo "SELECTED";
 									   } ?>>
 										<?php echo $rp['nama']; ?>
 									</option>
@@ -864,7 +816,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rp = mysqli_fetch_array($qryp)) {
 									?>
 									<option value="<?php echo $rp['nama']; ?>" <?php if ($rcek['personil2'] == $rp['nama']) {
-										   echo "SELECTED";
+										  // echo "SELECTED";
 									   } ?>>
 										<?php echo $rp['nama']; ?>
 									</option>
@@ -881,23 +833,23 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<select class="form-control select2" name="shift" id="shift">
 							<option value="">Pilih</option>
 							<option value="A" <?php if ($rcek['shift'] == "A") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>A</option>
 							<option value="B" <?php if ($rcek['shift'] == "B") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>B</option>
 							<option value="C" <?php if ($rcek['shift'] == "C") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>C</option>
 							<option value="Non-Shift" <?php if ($rcek['shift'] == "Non-Shift") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								Non-Shift</option>
 							<option value="QC2" <?php if ($rcek['shift'] == "QC2") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>QC2</option>
 							<option value="Test Quality" <?php if ($rcek['shift'] == "Test Quality") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								Test Quality</option>
 						</select>
@@ -906,23 +858,23 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<select class="form-control select2" name="shift2" id="shift2">
 							<option value="">Pilih</option>
 							<option value="A" <?php if ($rcek['shift2'] == "A") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>A</option>
 							<option value="B" <?php if ($rcek['shift2'] == "B") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>B</option>
 							<option value="C" <?php if ($rcek['shift2'] == "C") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>C</option>
 							<option value="Non-Shift" <?php if ($rcek['shift2'] == "Non-Shift") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								Non-Shift</option>
 							<option value="QC2" <?php if ($rcek['shift2'] == "QC2") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>QC2</option>
 							<option value="Test Quality" <?php if ($rcek['shift2'] == "Test Quality") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								Test Quality</option>
 						</select>
@@ -939,7 +891,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rp = mysqli_fetch_array($qryp)) {
 									?>
 									<option value="<?php echo $rp['nama']; ?>" <?php if ($rcek['personil3'] == $rp['nama']) {
-										   echo "SELECTED";
+										   //echo "SELECTED";
 									   } ?>>
 										<?php echo $rp['nama']; ?>
 									</option>
@@ -958,7 +910,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rp = mysqli_fetch_array($qryp)) {
 									?>
 									<option value="<?php echo $rp['nama']; ?>" <?php if ($rcek['personil4'] == $rp['nama']) {
-										   echo "SELECTED";
+										   //echo "SELECTED";
 									   } ?>>
 										<?php echo $rp['nama']; ?>
 									</option>
@@ -975,23 +927,23 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<select class="form-control select2" name="shift3" id="shift3">
 							<option value="">Pilih</option>
 							<option value="A" <?php if ($rcek['shift3'] == "A") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>A</option>
 							<option value="B" <?php if ($rcek['shift3'] == "B") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>B</option>
 							<option value="C" <?php if ($rcek['shift3'] == "C") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>C</option>
 							<option value="Non-Shift" <?php if ($rcek['shift3'] == "Non-Shift") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								Non-Shift</option>
 							<option value="QC2" <?php if ($rcek['shift3'] == "QC2") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>QC2</option>
 							<option value="Test Quality" <?php if ($rcek['shift3'] == "Test Quality") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								Test Quality</option>
 						</select>
@@ -1000,23 +952,23 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<select class="form-control select2" name="shift4" id="shift4">
 							<option value="">Pilih</option>
 							<option value="A" <?php if ($rcek['shift4'] == "A") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>A</option>
 							<option value="B" <?php if ($rcek['shift4'] == "B") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>B</option>
 							<option value="C" <?php if ($rcek['shift4'] == "C") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>C</option>
 							<option value="Non-Shift" <?php if ($rcek['shift4'] == "Non-Shift") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								Non-Shift</option>
 							<option value="QC2" <?php if ($rcek['shift4'] == "QC2") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>QC2</option>
 							<option value="Test Quality" <?php if ($rcek['shift4'] == "Test Quality") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								Test Quality</option>
 						</select>
@@ -1026,46 +978,46 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="subdept" class="col-sm-3 control-label">Sub Dept / Pejabat</label>
 					<div class="col-sm-4">
 						<select class="form-control select2" name="subdept" id="subdept" onChange="aktif4();" <?php if ($rcek['sts'] != "1" or $rcek['sts_disposisiqc'] != "1") {
-							echo "disabled";
+							//echo "disabled";
 						} else {
-							echo "enabled";
+							//echo "enabled";
 						} ?>>
 							<option value="">Pilih</option>
 							<option value="ADM" <?php if ($rcek['subdept'] == "ADM") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>ADM</option>
 							<option value="AFTERSALES" <?php if ($rcek['subdept'] == "AFTERSALES") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								AFTERSALES</option>
 							<option value="COLORIST" <?php if ($rcek['subdept'] == "COLORIST") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>COLORIST
 							</option>
 							<option value="INSPECTION" <?php if ($rcek['subdept'] == "INSPECTION") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								INSPECTION</option>
 							<option value="KRAGH" <?php if ($rcek['subdept'] == "KRAGH") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>KRAGH
 							</option>
 							<option value="LEADER" <?php if ($rcek['subdept'] == "LEADER") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>LEADER
 							</option>
 							<option value="MANAGER/ASST.MANAGER" <?php if ($rcek['subdept'] == "MANAGER/ASST.MANAGER") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>MANAGER/ASST.MANAGER</option>
 							<option value="PACKING" <?php if ($rcek['subdept'] == "PACKING") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>PACKING
 							</option>
 							<option value="SPV" <?php if ($rcek['subdept'] == "SPV") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>SPV</option>
 							<option value="TEST QUALITY" <?php if ($rcek['subdept'] == "TEST QUALITY") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>
 								TEST QUALITY</option>
 						</select>
@@ -1073,9 +1025,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-4">
 						<div class="input-group">
 							<select class="form-control select2" name="pejabat" id="pejabat" <?php if ($rcek['sts_disposisiqc'] != "1") {
-								echo "disabled";
+								//echo "disabled";
 							} else {
-								echo "enabled";
+								//echo "enabled";
 							} ?>>
 								<option value="">Pilih</option>
 								<?php
@@ -1083,7 +1035,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rp = mysqli_fetch_array($qryp)) {
 									?>
 									<option value="<?php echo $rp['nama']; ?>" <?php if ($rcek['personil'] == $rp['nama']) {
-										   echo "SELECTED";
+										   //echo "SELECTED";
 									   } ?>>
 										<?php echo $rp['nama']; ?>
 									</option>
@@ -1098,26 +1050,26 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="penyebab" class="col-sm-3 control-label">Penyebab</label>
 					<div class="col-sm-6">
 						<input name="penyebab" type="text" class="form-control" id="penyebab" value="<?php if ($cek > 0) {
-							echo $rcek['penyebab'];
+							//echo $rcek['penyebab'];
 						} ?>" placeholder="Penyebab" <?php if ($rcek['sts'] != "1" or $rcek['sts_disposisiqc'] != "1" or $rcek['sts_disposisipro'] != "1") {
-							 echo "disabled";
+							 //echo "disabled";
 						 } else {
-							 echo "enabled";
+							 //echo "enabled";
 						 } ?>>
 					</div>
 					<div class="col-sm-2">
 						<select class="form-control select2" name="sts_check" <?php if ($rcek['sts'] != "1" or $rcek['sts_disposisiqc'] != "1") {
-							echo "disabled";
+							//echo "disabled";
 						} else {
-							echo "enabled";
+							//echo "enabled";
 						} ?>>
 							<option value="">Pilih</option>
 							<option value="Ceklis" <?php if ($rcek['sts_check'] == "Ceklis") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>&#10004;
 							</option>
 							<option value="Silang" <?php if ($rcek['sts_check'] == "Silang") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>X</option>
 						</select>
 					</div>
@@ -1133,7 +1085,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rnm = mysqli_fetch_array($qrynm)) {
 									?>
 									<option value="<?php echo $rnm['nama']; ?>" <?php if ($rcek['nama_nego'] == $rnm['nama']) {
-										   echo "SELECTED";
+										   //echo "SELECTED";
 									   } ?>>
 										<?php echo $rnm['nama']; ?>
 									</option>
@@ -1147,11 +1099,11 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<select class="form-control select2" name="checknego">
 							<option value="">Pilih</option>
 							<option value="Ceklis" <?php if ($rcek['checknego'] == "Ceklis") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>&#10004;
 							</option>
 							<option value="Silang" <?php if ($rcek['checknego'] == "Silang") {
-								echo "SELECTED";
+								//echo "SELECTED";
 							} ?>>X</option>
 						</select>
 					</div>
@@ -1160,7 +1112,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="hasil_nego" class="col-sm-3 control-label">Hasil Negosiasi</label>
 					<div class="col-sm-8">
 						<input name="hasil_nego" type="text" class="form-control" id="hasil_nego" value="<?php if ($cek > 0) {
-							echo $rcek['hasil_nego'];
+							//echo $rcek['hasil_nego'];
 						} ?>" placeholder="Hasil Negosiasi">
 					</div>
 				</div>
@@ -1169,7 +1121,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 		</div>
 		<div class="box-footer">
 			<?php if ($_GET['nodemand'] != "") { ?>
-				<button type="submit" class="btn btn-primary pull-right" name="save" value="save"><i class="fa fa-save"></i>
+				<button type="submit" class="btn btn-primary pull-right" name="save" value="save" id="save" style="display: none"><i class="fa fa-save"></i>
 					Simpan</button>
 			<?php } ?>
 		</div>
@@ -1183,6 +1135,11 @@ $rcek = mysqli_fetch_array($sqlCek);
 </div>
 </div>
 <?php
+
+// echo '<div style="padding-left:20em"><pre>';
+// print_r($_POST);
+// echo '</pre></div>';
+
 if ($_POST['save'] == "save") {
 	$warna = str_replace("'", "''", $_POST['warna']);
 	$nowarna = str_replace("'", "''", $_POST['no_warna']);
@@ -1235,164 +1192,84 @@ if ($_POST['save'] == "save") {
 		$sts_nego = "0";
 	}
 
-	$masalah_dominan = $_POST['tmp_masalah_dominan'] == "" ? $_POST['masalah_dominan'] : $_POST['tmp_masalah_dominan'];
-	$masalah_dominan1 = $_POST['tmp_masalah_dominan'] != "" && $_POST['tmp_masalah_dominan1'] == "" ? $_POST['masalah_dominan'] : $_POST['tmp_masalah_dominan1'];
-	$masalah_dominan2 = $_POST['tmp_masalah_dominan'] != "" && $_POST['tmp_masalah_dominan1'] != "" && $_POST['tmp_masalah_dominan2'] == "" ? $_POST['masalah_dominan'] : $_POST['tmp_masalah_dominan2'];
+	$sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET 
+		nokk='$_POST[nokk]',
+		nodemand='$_POST[nodemand]',
+		langganan='$_POST[pelanggan]',
+		pelanggan='$_POST[pelanggan1]',
+		buyer='$buyer',
+		no_order='$_POST[no_order]',
+		no_hanger='$_POST[no_hanger]',
+		no_item='$_POST[no_item]',
+		po='$po',
+		jenis_kain='$jns',
+		styl='$styl',
+		lebar='$_POST[lebar]',
+		gramasi='$_POST[grms]',
+		lot='$lot',
+		warna='$warna',
+		no_warna='$nowarna',
+		masalah='$masalah',
+		masalah_dominan='$_POST[masalah_dominan]',
+		qty_order='$qty_order',
+		qty_kirim='$_POST[qty_kirim]',
+		qty_claim='$_POST[qty_claim]',
+		qty_foc='$_POST[qty_foc]',
+		t_jawab='$_POST[t_jawab]',
+		t_jawab1='$_POST[t_jawab1]',
+		t_jawab2='$_POST[t_jawab2]',
+		persen='$_POST[persen]',
+		persen1='$_POST[persen1]',
+		persen2='$_POST[persen2]',
+		satuan_o='$_POST[satuan_o]',
+		satuan_k='$_POST[satuan_k]',
+		satuan_c='$_POST[satuan_c]',
+		satuan_f='$_POST[satuan_f]',
+		personil='$_POST[personil]',
+		shift='$shift',
+		shift2='$_POST[shift2]',
+		penyebab='$_POST[penyebab]',
+		subdept='$_POST[subdept]',
+		sts='$sts',
+		sts_red='$sts_red',
+		sts_claim='$sts_claim',
+		ket='$ket',
+		tgl_email='$tgl_email',
+		tgl_jawab='$tgl_jawab',
+		tgl_solusi_akhir='$_POST[tgl_solusi_akhir]',
+		leadtime_email='$_POST[leadtime_email]',
+		solusi='$_POST[solusi]',
+		sts_disposisiqc='$sts_disposisiqc',
+		sts_disposisipro='$sts_disposisipro',
+		sts_nego='$sts_nego',
+		sts_check='$_POST[sts_check]',
+		personil2='$_POST[personil2]',
+		pejabat='$_POST[pejabat]',
+		nama_nego='$_POST[nama_nego]',
+		hasil_nego='$_POST[hasil_nego]',
+		kategori='$_POST[kategori]',
+		addpersonil='$addpersonil',
+		checknego='$_POST[checknego]',
+		hod='$_POST[hod]',
+		qty_kirim_yd = $_POST[qty_kirim_yd],
+		qty_claim_yd = $_POST[qty_claim_yd],
+		qty_order_yd = $_POST[qty_order_yd],
+		qty_foc_yd = $_POST[qty_foc_yd],
+		tgl_buat=now(),
+		tgl_update=now()");
 
-	if ($cek > 0) {
-		$sqlDataUpdate = mysqli_query($con, "UPDATE tbl_aftersales_now SET 
-		  nokk='$_POST[nokk]',
-		  langganan='$_POST[pelanggan]',
-		  pelanggan='$_POST[pelanggan1]',
-		  buyer='$buyer',
-		  no_order='$_POST[no_order]',
-		  no_hanger='$_POST[no_hanger]',
-		  no_item='$_POST[no_item]',
-		  po='$po',
-		  jenis_kain='$jns',
-		  styl='$styl',
-		  lebar='$_POST[lebar]',
-		  gramasi='$_POST[grms]',
-		  lot='$lot',
-		  warna='$warna',
-		  no_warna='$nowarna',
-		  masalah='$masalah',
-		  masalah_dominan='$masalah_dominan',
-		  masalah_dominan1='$masalah_dominan1',
-		  masalah_dominan2='$masalah_dominan2',
-		  qty_order='$qty_order',
-		  qty_kirim='$_POST[qty_kirim]',
-		  qty_claim='$_POST[qty_claim]',
-		  qty_foc='$_POST[qty_foc]',
-		  t_jawab='$_POST[t_jawab]',
-		  t_jawab1='$_POST[t_jawab1]',
-		  t_jawab2='$_POST[t_jawab2]',
-		  persen='$_POST[persen]',
-		  persen1='$_POST[persen1]',
-		  persen2='$_POST[persen2]',
-		  satuan_o='$_POST[satuan_o]',
-		  satuan_k='$_POST[satuan_k]',
-		  satuan_c='$_POST[satuan_c]',
-		  satuan_f='$_POST[satuan_f]',
-		  personil='$_POST[personil]',
-		  shift='$shift',
-		  shift2='$_POST[shift2]',
-		  penyebab='$_POST[penyebab]',
-		  subdept='$_POST[subdept]',
-		  sts='$sts',
-		  sts_red='$sts_red',
-		  sts_claim='$sts_claim',
-		  ket='$ket',
-		  tgl_email='$tgl_email',
-		  tgl_jawab='$tgl_jawab',
-		  tgl_solusi_akhir='$_POST[tgl_solusi_akhir]',
-		  leadtime_email='$_POST[leadtime_email]',
-		  solusi='$_POST[solusi]',
-		  sts_disposisiqc='$sts_disposisiqc',
-		  sts_disposisipro='$sts_disposisipro',
-		  sts_nego='$sts_nego',
-		  sts_check='$_POST[sts_check]',
-		  personil2='$_POST[personil2]',
-		  pejabat='$_POST[pejabat]',
-		  nama_nego='$_POST[nama_nego]',
-		  hasil_nego='$_POST[hasil_nego]',
-		  kategori='$_POST[kategori]',
-		  addpersonil='$addpersonil',
-		  checknego='$_POST[checknego]',
-		  tgl_buat=now(),
-		  hod='$_POST[hod]',
-		  tgl_update=now()
-		  WHERE nodemand='$_POST[nodemand]'");
+	if ($sqlData) {
 
-		if ($sqlDataUpdate) {
-
-			echo "<script>swal({
-		title: 'Data Terupdate',   
-		text: 'Klik Ok untuk input data kembali',
-		type: 'success',
-		}).then((result) => {
-		if (result.value) {
-		window.location.href='KPENew';
-
-		}
-		});</script>";
-		}
-	} else {
-		$sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET 
-		  nokk='$_POST[nokk]',
-		  nodemand='$_POST[nodemand]',
-		  langganan='$_POST[pelanggan]',
-		  pelanggan='$_POST[pelanggan1]',
-		  buyer='$buyer',
-		  no_order='$_POST[no_order]',
-		  no_hanger='$_POST[no_hanger]',
-		  no_item='$_POST[no_item]',
-		  po='$po',
-		  jenis_kain='$jns',
-		  styl='$styl',
-		  lebar='$_POST[lebar]',
-		  gramasi='$_POST[grms]',
-		  lot='$lot',
-		  warna='$warna',
-		  no_warna='$nowarna',
-		  masalah='$masalah',
-		  masalah_dominan='$_POST[masalah_dominan]',
-		  qty_order='$qty_order',
-		  qty_kirim='$_POST[qty_kirim]',
-		  qty_claim='$_POST[qty_claim]',
-		  qty_foc='$_POST[qty_foc]',
-		  t_jawab='$_POST[t_jawab]',
-		  t_jawab1='$_POST[t_jawab1]',
-		  t_jawab2='$_POST[t_jawab2]',
-		  persen='$_POST[persen]',
-		  persen1='$_POST[persen1]',
-		  persen2='$_POST[persen2]',
-		  satuan_o='$_POST[satuan_o]',
-		  satuan_k='$_POST[satuan_k]',
-		  satuan_c='$_POST[satuan_c]',
-		  satuan_f='$_POST[satuan_f]',
-		  personil='$_POST[personil]',
-		  shift='$shift',
-		  shift2='$_POST[shift2]',
-		  penyebab='$_POST[penyebab]',
-		  subdept='$_POST[subdept]',
-		  sts='$sts',
-		  sts_red='$sts_red',
-		  sts_claim='$sts_claim',
-		  ket='$ket',
-		  tgl_email='$tgl_email',
-		  tgl_jawab='$tgl_jawab',
-		  tgl_solusi_akhir='$_POST[tgl_solusi_akhir]',
-		  leadtime_email='$_POST[leadtime_email]',
-		  solusi='$_POST[solusi]',
-		  sts_disposisiqc='$sts_disposisiqc',
-		  sts_disposisipro='$sts_disposisipro',
-		  sts_nego='$sts_nego',
-		  sts_check='$_POST[sts_check]',
-		  personil2='$_POST[personil2]',
-		  pejabat='$_POST[pejabat]',
-		  nama_nego='$_POST[nama_nego]',
-		  hasil_nego='$_POST[hasil_nego]',
-		  kategori='$_POST[kategori]',
-		  addpersonil='$addpersonil',
-		  checknego='$_POST[checknego]',
-		  tgl_buat=now(),
-		  hod='$_POST[hod]',
-		  tgl_update=now()");
-
-		if ($sqlData) {
-
-			echo "<script>swal({
-		title: 'Data Tersimpan',   
-		text: 'Klik Ok untuk input data kembali',
-		type: 'success',
-		}).then((result) => {
-		if (result.value) {
-		window.location.href='KPENew';
-		
-		}
-		});</script>";
-		}
+		echo "<script>swal({
+	title: 'Data Tersimpan',   
+	text: 'Klik Ok untuk input data kembali',
+	type: 'success',
+	}).then((result) => {
+	if (result.value) {
+	window.location.href='KPENew';
+	
+	}
+	});</script>";
 	}
 
 
@@ -1550,14 +1427,11 @@ if ($_POST['save'] == "save") {
 		}
 	}
 
-	function masalah_dominan_solusi() {
-		let qtyClaim = document.getElementById("qty_claim")
-		let qtyKirim = document.getElementById("qty_kirim")
-		let qtyFoc = document.getElementById("qty_foc")
-
-		qtyClaim.value = "";
-		qtyKirim.value = "";
-		qtyFoc.value = "";
+	function masalah_dominan_solusi(e) {
+		if(e.value != "")
+			document.getElementById('save').style.display = 'block';
+		else
+			document.getElementById('save').style.display = 'none';
 	}
 </script>
 <div class="modal fade" id="DataMasalah">

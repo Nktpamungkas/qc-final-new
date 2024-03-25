@@ -295,6 +295,8 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
       </div>
     </div>
   </div>
+  <!-- end of data kpe -->
+
 </div>
 <div class="modal fade" id="modal_del" tabindex="-1" >
   <div class="modal-dialog modal-sm" >

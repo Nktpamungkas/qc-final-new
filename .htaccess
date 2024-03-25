@@ -255,6 +255,7 @@ RewriteRule ^MasterTestLab$ ./index1.php?p=Master-Test-Lab [L]
 RewriteRule ^MasterTestLab-$ ./index1.php?p=Master-Test-Lab [L]
 RewriteRule ^MasterTestLab-([a-zA-Z0-9#%@\+\&\s\(\)\[\]\ -]+)$ ./index1.php?p=Master-Test-Lab&buyer=$1 [L]
 RewriteRule ^UpdateGK$ ./index1.php?p=UpdateGK [L]
+RewriteRule ^UpdateAdditional$ ./index1.php?p=UpdateAdditional [L]
 RewriteRule ^CWarnaFinNew$ ./index1.php?p=Input-Lap-Cwarna-Fin-New [L]
 RewriteRule ^CWarnaFinNew-$ ./index1.php?p=Input-Lap-Cwarna-Fin-New [L]
 RewriteRule ^CWarnaFinNew-([a-zA-Z0-9_-]+)$ ./index1.php?p=Input-Lap-Cwarna-Fin-New&nodemand=$1 [L]
@@ -440,6 +441,10 @@ RewriteRule ^HapusTempelBedaRoll-([a-zA-Z0-9_-]+)$ ./index1.php?p=HapusTempelBed
 RewriteRule ^LihatDataJahitShading$ ./index1.php?p=LihatDataJahitShading [L]
 RewriteRule ^EditJahitShading$ ./index1.php?p=Edit_JahitShading [L]
 RewriteRule ^HapusDataJahitShading-([a-zA-Z0-9_-]+)$ ./index1.php?p=HapusDataJahitShading&id=$1 [L]
+
+RewriteRule ^InputAddNOW$ ./index1.php?p=Input-Add-NOW [L]
+RewriteRule ^InputAddNOW-$ ./index1.php?p=Input-Add-NOW [L]
+RewriteRule ^InputAddNOW-([a-zA-Z0-9_-]+)$ ./index1.php?p=Input-Add-NOW&demandno=$1 [L]
 
 RewriteRule ^KainInNewFL$ ./index1.php?p=Kain-Masuk-New-FL [L]
 RewriteRule ^TestingNewFL$ ./index1.php?p=Testing-New-FL [L]

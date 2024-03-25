@@ -145,6 +145,7 @@ if($_POST['simpan']=="simpan")
 	`dept`='INSPEK MEJA',
 	`jam_mutasi`='$_POST[jam]',
 	`tgl_update`='$_POST[tgl]',
+	`jam_update`=now(),
     `operator`='$_POST[operator]',
     `lebar`='$_POST[lebar]',
     `gramasi`='$_POST[gramasi]',
