@@ -10,6 +10,19 @@ include "koneksi.php";
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Laporan Harian QCF</title>
+<script>
+	function aktif() {
+		if (document.forms['form1']['tampiltgl'].checked == false) {
+			document.form1.jam_awal.setAttribute("disabled", true);
+			document.form1.jam_awal.value = "";
+			document.form1.jam_akhir.setAttribute("disabled", true);
+			document.form1.jam_akhir.value = "";
+		} else {
+			document.form1.jam_awal.removeAttribute("disabled");
+			document.form1.jam_akhir.removeAttribute("disabled");
+		}
+	}
+	</script>	
 </head>
 <body>
 <?php
@@ -32,16 +45,31 @@ $MC = isset($_POST['nomc']) ? $_POST['nomc'] : '';
       <!-- form start -->
       <form method="post" enctype="multipart/form-data" name="form1" class="form-horizontal" id="form1">
         <div class="box-body">
+		  <div class="form-group">
+            <label for="awal" class="col-sm-3 control-label"></label>
+            <div class="col-sm-4">
+              <label><input type="checkbox" name="tampiltgl" id="tampiltgl" onClick="aktif();"> Aktifkan Jam</label>		  	
+            </div>
+			   
+            <!-- /.input group -->
+          </div>	
           <div class="form-group">
             <label for="awal" class="col-sm-3 control-label">Tanggal Awal</label>
             <div class="col-sm-2">
               <div class="input-group date">
                 <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
                 <input name="awal" type="date" class="form-control pull-right" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" autocomplete="off"/>
-              </div>
-            </div>
+              </div>			  	
+            </div>  			 
             <!-- /.input group -->
           </div>
+		  <div class="form-group">
+            <label for="awal" class="col-sm-3 control-label">Jam Awal</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control timepicker" name="jam_awal" id="jam_awal" placeholder="00:00" value="<?php echo $jamA; ?>" autocomplete="off" disabled>
+            </div>
+            <!-- /.input group -->
+          </div>	
           <div class="form-group">
             <label for="akhir" class="col-sm-3 control-label">Tanggal Akhir</label>
             <div class="col-sm-2">
@@ -50,8 +78,17 @@ $MC = isset($_POST['nomc']) ? $_POST['nomc'] : '';
                 <input name="akhir" type="date" class="form-control pull-right" placeholder="Tanggal Akhir" value="<?php echo $Akhir; ?>" autocomplete="off"/>
               </div>
             </div>
+			    
             <!-- /.input group -->
           </div>
+	      <div class="form-group">
+            <label for="akhir" class="col-sm-3 control-label">Jam Akhir</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control timepicker" name="jam_akhir" id="jam_akhir" placeholder="00:00" value="<?php echo $jamAr; ?>" autocomplete="off" disabled>
+            </div>
+			    
+            <!-- /.input group -->
+          </div>		
           <div class="form-group">
             <label for="gshift" class="col-sm-3 control-label">Shift</label>
             <div class="col-sm-3">

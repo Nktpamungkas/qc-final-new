@@ -24,8 +24,8 @@ $Order	= isset($_POST['no_order']) ? $_POST['no_order'] : '';
 $Item	= isset($_POST['no_item']) ? $_POST['no_item'] : '';	
 $Hanger	= isset($_POST['no_hanger']) ? $_POST['no_hanger'] : '';
 $GShift1= isset($_POST['gshift']) ? $_POST['gshift'] : '';	
-$start_date = $Awal;
-$stop_date  = $Akhir;
+$start_date = $Awal." ".$jamA;
+$stop_date  = $Akhir." ".$jamAr;
 ?>
 <div class="row">
   <div class="col-xs-12">
@@ -48,14 +48,14 @@ $stop_date  = $Akhir;
                   <input name="awal" type="date" class="form-control pull-right" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" autocomplete="off"/>
                 </div>
               </div>
-              <!--<div class="col-sm-1">
+              <div class="col-sm-1">
                 <div class="input-group">
                   <input type="text" class="form-control timepicker" name="jam_awal" placeholder="00:00" value="<?php echo $jamA;?>" autocomplete="off">
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
                     </div>
                 </div>
-              </div>-->
+              </div>
             <!-- /.input group -->
           </div>
           <div class="form-group">
@@ -66,14 +66,14 @@ $stop_date  = $Akhir;
                 <input name="akhir" type="date" class="form-control pull-right" placeholder="Tanggal Akhir" value="<?php echo $Akhir;  ?>" autocomplete="off"/>
               </div>
             </div>
-            <!--<div class="col-sm-1">
+            <div class="col-sm-1">
                 <div class="input-group">
                   <input type="text" class="form-control timepicker" name="jam_akhir" placeholder="00:00" value="<?php echo $jamAr;?>" autocomplete="off">
                     <div class="input-group-addon">
                       <i class="fa fa-clock-o"></i>
                     </div>
                 </div>
-              </div>-->
+              </div>
             <!-- /.input group -->
           </div>
           <!--<div class="form-group">
@@ -143,7 +143,7 @@ $stop_date  = $Akhir;
     <div class="box">
       <div class="box-header with-border">
         <h3 class="box-title">Data Laporan Beda Roll</h3><br>
-        <?php if($_POST['awal']!="") { ?><b>Periode: <?php echo $_POST['awal']." to ".$_POST['akhir']; ?></b>
+        <?php if($_POST['awal']!="") { ?><b>Periode: <?php echo $_POST['awal']." ".$_POST['jam_awal']." to ".$_POST['akhir']." ".$_POST['jam_akhir']; ?></b>
         <?php } ?>
         <div class="pull-right">
           <a href="pages/cetak/cetak-reports-beda-roll.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&jam_awal=<?php echo $_POST['jam_awal']; ?>&jam_akhir=<?php echo $_POST['jam_akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&no_po=<?php echo $_POST['no_po']; ?>&no_order=<?php echo $_POST['no_order']; ?>&warna=<?php echo $_POST['warna']; ?>&no_item=<?php echo $_POST['no_item']; ?>&no_hanger=<?php echo $_POST['no_hanger']; ?>&shift=<?php echo  $GShift1; ?>" class="btn btn-primary <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank">Cetak</a> 
@@ -195,9 +195,9 @@ $stop_date  = $Akhir;
             if($Order!=""){ $noorder=" AND `no_order` LIKE '%$Order%' ";}else{$noorder=" ";}
 			if($GShift1!="ALL"){ $shft=" AND `groupshift`='$GShift1' ";}else{$shft=" ";}  
             if($Awal!="" or $Langganan!="" or $Item!="" or $Hanger!="" or $Warna!="" or $PO!="" or $Order!=""){
-              $qry1=mysqli_query($con,"SELECT *,DATE_FORMAT( tgl_update, '%Y-%m-%d' ) as tglp FROM tbl_lap_beda_roll WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$start_date' AND '$stop_date' $lgn $noitem $nohanger $wn $nopo $noorder $shft ORDER BY id ASC");
+              $qry1=mysqli_query($con,"SELECT *,DATE_FORMAT( tgl_update, '%Y-%m-%d' ) as tglp FROM tbl_lap_beda_roll WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' $lgn $noitem $nohanger $wn $nopo $noorder $shft ORDER BY id ASC");
             }else{
-              $qry1=mysqli_query($con,"SELECT *,DATE_FORMAT( tgl_update, '%Y-%m-%d' ) as tglp FROM tbl_lap_beda_roll WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$start_date' AND '$stop_date' $lgn $noitem $nohanger $wn $nopo $noorder $shft ORDER BY id ASC");
+              $qry1=mysqli_query($con,"SELECT *,DATE_FORMAT( tgl_update, '%Y-%m-%d' ) as tglp FROM tbl_lap_beda_roll WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' $lgn $noitem $nohanger $wn $nopo $noorder $shft ORDER BY id ASC");
             }
             while($row1=mysqli_fetch_array($qry1)){
           ?>

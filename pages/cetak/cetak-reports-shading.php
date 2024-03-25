@@ -9,8 +9,8 @@ include "../../koneksi.php";
   $qTgl		= mysqli_query($con,"SELECT DATE_FORMAT(now(),'%Y-%m-%d') as tgl_skrg,DATE_FORMAT(now(),'%H:%i:%s') as jam_skrg");
   $rTgl		= mysqli_fetch_array($qTgl);
   if($Awal!=""){$tgl=substr($Awal,0,10); $jam=$Awal;}else{$tgl=$rTgl['tgl_skrg']; $jam=$rTgl['jam_skrg'];}
-  $start_date = $Awal;
-  $stop_date  = $Akhir;
+  $start_date = $Awal." ".$jamA;
+  $stop_date  = $Akhir." ".$jamAr;
   $GShift1	= $_GET['shift'];
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -172,9 +172,9 @@ border:hidden;
             if($Order!=""){ $noorder=" AND `no_order` LIKE '%$Order%' ";}else{$noorder=" ";}
 			if($GShift1!="ALL"){ $shft=" AND `groupshift`='$GShift1' ";}else{$shft=" ";} 	
             if($Awal!="" or $Langganan!="" or $Item!="" or $Hanger!="" or $Warna!="" or $PO!="" or $Order!=""){
-              $qry1=mysqli_query($con,"SELECT * FROM tbl_lap_shading WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$start_date' AND '$stop_date' $lgn $noitem $nohanger $wn $nopo $noorder $shft ORDER BY id ASC");
+              $qry1=mysqli_query($con,"SELECT * FROM tbl_lap_shading WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' $lgn $noitem $nohanger $wn $nopo $noorder $shft ORDER BY id ASC");
             }else{
-              $qry1=mysqli_query($con,"SELECT * FROM tbl_lap_shading WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$start_date' AND '$stop_date' $lgn $noitem $nohanger $wn $nopo $noorder $shft ORDER BY id ASC");
+              $qry1=mysqli_query($con,"SELECT * FROM tbl_lap_shading WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' $lgn $noitem $nohanger $wn $nopo $noorder $shft ORDER BY id ASC");
             }
             while($row1=mysqli_fetch_array($qry1)){
           ?>
