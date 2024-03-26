@@ -1,6 +1,6 @@
 <?php
 include "koneksi.php";
-ini_set("error_reporting", 1);
+// ini_set("error_reporting", 1);
 $nodemand = $_GET['nodemand'];
 $sqlDB2 = "SELECT 
 A.CODE AS DEMANDNO, 
@@ -312,13 +312,13 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="proses" class="col-sm-3 control-label">Qty Order / Kirim</label>
+					<label for="proses" class="col-sm-3 control-label">Qty Order</label>
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="qty_order" type="text" class="form-control" id="qty_order" value="<?php if ($cek > 0) {
-								echo $rcek['satuan_o'] == "KG" ? $rcek['qty_order'] : '';
+								echo $rcek['qty_order'];
 							} else {
-								echo strtoupper($rowdb2['QTY_PANJANG_ORDER_UOM']) == "KG" ? number_format($rowdb2['QTY_ORDER'], 2) : '';
+								echo number_format($rowdb2['QTY_ORDER'], 2);
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_o" style="font-size: 12px;" id="satuan1">
@@ -337,7 +337,32 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<div class="col-sm-4">
 						<div class="input-group">
-							<input name="qty_kirim" type="text" class="form-control" id="qty_kirim" value="<?php if ($cek > 0) {
+						<input name="qty_order2" type="text" class="form-control" id="qty_order2" value="<?php if ($cek > 0) {
+								echo $rcek['qty_order2'];
+							} else {//kesiniya
+								echo strtoupper($rowdb2['QTY_PANJANG_ORDER_UOM']) == "YD" ? number_format($rowdb2['QTY_ORDER'], 2) : '';
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_o2" style="font-size: 12px;" id="satuan1">
+									<?php
+									$units_o = ['YD', 'MTR']; // Define the units you want to check for
+									
+									foreach ($units_o as $unit_o) {
+										$isSelected_o = ($rcek['satuan_o2'] == $unit_o) || (strtolower($rowdb2['QTY_PANJANG_ORDER_UOM']) == strtolower($unit_o));
+										$selectedAttribute_o = $isSelected_o ? 'selected' : '';
+										echo "<option value=\"$unit_o\" $selectedAttribute_o>$unit_o</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="tgl_finishing" class="col-sm-3 control-label">Qty Kirim</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+						<input name="qty_kirim" type="text" class="form-control" id="qty_kirim" value="<?php if ($cek > 0) {
 								//echo $rcek['qty_kirim'];
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
@@ -355,12 +380,34 @@ $rcek = mysqli_fetch_array($sqlCek);
 							</span>
 						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="tgl_finishing" class="col-sm-3 control-label">Qty Claim / FOC</label>
 					<div class="col-sm-4">
 						<div class="input-group">
-							<input name="qty_claim" type="text" class="form-control" id="qty_claim" value="<?php if ($cek > 0) {
+						<input name="qty_kirim2" type="text" class="form-control" id="qty_kirim2" value="<?php if ($cek > 0) {
+								//echo $rcek['qty_kirim'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_k2" style="font-size: 12px;" id="satuan_k2">
+									<?php
+									$units_k = ['YD', 'MTR']; // Define the units you want to check for
+									
+									foreach ($units_k as $unit_k) {
+										$isSelected_k = ($rcek['satuan_k2'] == $unit_k);
+										$selectedAttribute_k = $isSelected_k ? 'selected' : '';
+										echo "<option value=\"$unit_k\" $selectedAttribute_k>$unit_k</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- YD -->
+				<div class="form-group">
+					<label for="proses" class="col-sm-3 control-label">Qty Claim</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+						<input name="qty_claim" type="text" class="form-control" id="qty_claim" value="<?php if ($cek > 0) {
 								//echo $rcek['qty_claim'];
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
@@ -380,7 +427,30 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<div class="col-sm-4">
 						<div class="input-group">
-							<input name="qty_foc" type="text" class="form-control" id="qty_foc" value="<?php if ($cek > 0) {
+						<input name="qty_claim2" type="text" class="form-control" id="qty_claim2" value="<?php if ($cek > 0) {
+								//echo $rcek['qty_claim'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_c2" style="font-size: 12px;" id="satuan_c2">
+									<?php
+									$units_c = ['YD', 'MTR']; // Define the units you want to check for
+									
+									foreach ($units_c as $unit_c) {
+										$isSelected_c = ($rcek['satuan_c2'] == $unit_c);
+										$selectedAttribute_c = $isSelected_c ? 'selected' : '';
+										echo "<option value=\"$unit_c\" $selectedAttribute_c>$unit_c</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="tgl_finishing" class="col-sm-3 control-label">Qty FOC</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+						<input name="qty_foc" type="text" class="form-control" id="qty_foc" value="<?php if ($cek > 0) {
 								//echo $rcek['qty_foc'];
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
@@ -398,88 +468,18 @@ $rcek = mysqli_fetch_array($sqlCek);
 							</span>
 						</div>
 					</div>
-				</div>
-
-				<!-- YD -->
-				<div class="form-group">
-					<label for="proses" class="col-sm-3 control-label">Qty Order / Kirim</label>
 					<div class="col-sm-4">
 						<div class="input-group">
-							<input name="qty_order_yd" type="text" class="form-control" id="qty_order_yd" value="<?php if ($cek > 0) {
-								echo $rcek['qty_order_yd'];
-							} else {//kesiniya
-								echo strtoupper($rowdb2['QTY_PANJANG_ORDER_UOM']) == "YD" ? number_format($rowdb2['QTY_ORDER'], 2) : '';
-							} ?>" placeholder="0.00" style="text-align: right;" required>
-							<span class="input-group-addon">
-								<select name="satuan_o_yd" style="font-size: 12px;" id="satuan1">
-									<?php
-									$units_o = ['YD']; // Define the units you want to check for
-									
-									foreach ($units_o as $unit_o) {
-										$isSelected_o = ($rcek['satuan_o'] == $unit_o) || (strtolower($rowdb2['QTY_PANJANG_ORDER_UOM']) == strtolower($unit_o));
-										$selectedAttribute_o = $isSelected_o ? 'selected' : '';
-										echo "<option value=\"$unit_o\" $selectedAttribute_o>$unit_o</option>";
-									}
-									?>
-								</select>
-							</span>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="input-group">
-							<input name="qty_kirim_yd" type="text" class="form-control" id="qty_kirim_yd" value="<?php if ($cek > 0) {
-								//echo $rcek['qty_kirim'];
-							} ?>" placeholder="0.00" style="text-align: right;" required>
-							<span class="input-group-addon">
-								<select name="satuan_k_yd" style="font-size: 12px;" id="satuan_k_yd">
-									<?php
-									$units_k = ['YD']; // Define the units you want to check for
-									
-									foreach ($units_k as $unit_k) {
-										$isSelected_k = ($rcek['satuan_k'] == $unit_k);
-										$selectedAttribute_k = $isSelected_k ? 'selected' : '';
-										echo "<option value=\"$unit_k\" $selectedAttribute_k>$unit_k</option>";
-									}
-									?>
-								</select>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="tgl_finishing" class="col-sm-3 control-label">Qty Claim / FOC</label>
-					<div class="col-sm-4">
-						<div class="input-group">
-							<input name="qty_claim_yd" type="text" class="form-control" id="qty_claim_yd" value="<?php if ($cek > 0) {
-								//echo $rcek['qty_claim'];
-							} ?>" placeholder="0.00" style="text-align: right;" required>
-							<span class="input-group-addon">
-								<select name="satuan_c_yd" style="font-size: 12px;" id="satuan_c_yd">
-									<?php
-									$units_c = ['YD']; // Define the units you want to check for
-									
-									foreach ($units_c as $unit_c) {
-										$isSelected_c = ($rcek['satuan_c'] == $unit_c);
-										$selectedAttribute_c = $isSelected_c ? 'selected' : '';
-										echo "<option value=\"$unit_c\" $selectedAttribute_c>$unit_c</option>";
-									}
-									?>
-								</select>
-							</span>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="input-group">
-							<input name="qty_foc_yd" type="text" class="form-control" id="qty_foc_yd" value="<?php if ($cek > 0) {
+							<input name="qty_foc2" type="text" class="form-control" id="qty_foc2" value="<?php if ($cek > 0) {
 								//echo $rcek['qty_foc'];
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
-								<select name="satuan_f_yd" style="font-size: 12px;" id="satuan_f_yd">
+								<select name="satuan_f2" style="font-size: 12px;" id="satuan_f2">
 									<?php
-									$units_f = ['YD']; // Define the units you want to check for
+									$units_f = ['YD', 'MTR']; // Define the units you want to check for
 									
 									foreach ($units_f as $unit_f) {
-										$isSelected_f = ($rcek['satuan_f'] == $unit_f);
+										$isSelected_f = ($rcek['satuan_f2'] == $unit_f);
 										$selectedAttribute_f = $isSelected_f ? 'selected' : '';
 										echo "<option value=\"$unit_f\" $selectedAttribute_f>$unit_f</option>";
 									}
@@ -1251,10 +1251,14 @@ if ($_POST['save'] == "save") {
 		addpersonil='$addpersonil',
 		checknego='$_POST[checknego]',
 		hod='$_POST[hod]',
-		qty_kirim_yd = $_POST[qty_kirim_yd],
-		qty_claim_yd = $_POST[qty_claim_yd],
-		qty_order_yd = $_POST[qty_order_yd],
-		qty_foc_yd = $_POST[qty_foc_yd],
+		qty_kirim2 = '$_POST[qty_kirim2]',
+		qty_claim2 = '$_POST[qty_claim2]',
+		qty_order2 = '$_POST[qty_order2]',
+		qty_foc2 = '$_POST[qty_foc2]',
+		satuan_k2 = '$_POST[satuan_k2]',
+		satuan_c2 = '$_POST[satuan_c2]',
+		satuan_o2 = '$_POST[satuan_o2]',
+		satuan_f2 = '$_POST[satuan_f2]',
 		tgl_buat=now(),
 		tgl_update=now()");
 

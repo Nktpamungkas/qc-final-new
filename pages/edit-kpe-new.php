@@ -81,20 +81,20 @@ $rcek=mysqli_fetch_array($sqlCek);
 			value="<?php if($rcek['no_item']!=""){echo $rcek['no_item'];}?>" placeholder="No Item">
 		  </div>	
 		</div>
-		<div class="form-group">
+		<!-- <div class="form-group">
 		  <label for="jns_kain" class="col-sm-3 control-label">Jenis Kain</label>
-		  <div class="col-sm-8">
-		  		<input name="jns_kain" type="text" class="form-control" id="jns_kain" 
+		  <div class="col-sm-8"> -->
+		  		<input name="jns_kain" type="hidden" class="form-control" id="jns_kain" 
 				value="<?php if($cek>0){echo $rcek['jenis_kain'];}?>" placeholder="Jenis Kain">
-			  </div>
-		  </div>
-		<div class="form-group">
+			  <!-- </div>
+		  </div> -->
+		<!-- <div class="form-group">
                   <label for="styl" class="col-sm-3 control-label">Style</label>
-                  <div class="col-sm-8">
-                    <input name="styl" type="text" class="form-control" id="styl" 
+                  <div class="col-sm-8"> -->
+                    <input name="styl" type="hidden" class="form-control" id="styl" 
                     value="<?php if($cek>0){echo $rcek['styl'];} ?>" placeholder="Style">
-                  </div>				   
-                </div> 
+                  <!-- </div>				   
+                </div>  -->
 		<div class="form-group">
 		  <label for="l_g" class="col-sm-3 control-label">Lebar X Gramasi</label>
 		  <div class="col-sm-2">
@@ -124,48 +124,182 @@ $rcek=mysqli_fetch_array($sqlCek);
 			value="<?php if($cek>0){echo $rcek['lot'];} ?>" placeholder="Lot" >
 		  </div>				   
 		</div>
+
 		<div class="form-group">
-            <label for="proses" class="col-sm-3 control-label">Qty Order / Kirim</label>
-          		<div class="col-sm-4">
-                    <div class="input-group">  
-						<input name="qty_order" type="text" class="form-control" id="qty_order" value="<?php if($cek>0){echo $rcek['qty_order'];} ?>" placeholder="0.00" style="text-align: right;" required>
-						<span class="input-group-addon"><select name="satuan_o" style="font-size: 12px;" id="satuan1">
-						<option value="KG" <?php if($rcek['satuan_o']=="KG"){ echo "SELECTED"; }?>>KG</option>
-						<option value="PCS" <?php if($rcek['satuan_o']=="PCS"){ echo "SELECTED"; }?>>PCS</option>
-						</select></span>	
+					<label for="proses" class="col-sm-3 control-label">Qty Order</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input name="qty_order" type="text" class="form-control" id="qty_order" value="<?php if ($cek > 0) {
+								echo $rcek['qty_order'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_o" style="font-size: 12px;" id="satuan1">
+									<?php
+									$units_o = ['KG', 'PCS']; // Define the units you want to check for
+									
+									foreach ($units_o as $unit_o) {
+										$isSelected_o = $rcek['satuan_o'] == $unit_o;
+										$selectedAttribute_o = $isSelected_o ? 'selected' : '';
+										echo "<option value=\"$unit_o\" $selectedAttribute_o>$unit_o</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
 					</div>
-                </div>				   
-          		<div class="col-sm-4">
-					<div class="input-group">  
-						<input name="qty_kirim" type="text" class="form-control" id="qty_kirim" value="<?php if($cek>0){echo $rcek['qty_kirim'];} ?>" placeholder="0.00" style="text-align: right;" required>
-						<span class="input-group-addon"><select name="satuan_k" style="font-size: 12px;" id="satuan_k">
-						<option value="KG" <?php if($rcek['satuan_k']=="KG"){ echo "SELECTED"; }?>>KG</option>
-						<option value="PCS" <?php if($rcek['satuan_k']=="PCS"){ echo "SELECTED"; }?>>PCS</option>
-						</select></span>	
+					<div class="col-sm-4">
+						<div class="input-group">
+						<input name="qty_order2" type="text" class="form-control" id="qty_order2" value="<?php if ($cek > 0) {
+								echo $rcek['qty_order2'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_o2" style="font-size: 12px;" id="satuan1">
+									<?php
+									$units_o = ['YD', 'MTR']; // Define the units you want to check for
+									
+									foreach ($units_o as $unit_o) {
+										$isSelected_o = $rcek['satuan_o2'] == $unit_o;
+										$selectedAttribute_o = $isSelected_o ? 'selected' : '';
+										echo "<option value=\"$unit_o\" $selectedAttribute_o>$unit_o</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
 					</div>
-				</div>				   
-        </div>
-		<div class="form-group">
-			<label for="tgl_finishing" class="col-sm-3 control-label">Qty Claim / FOC</label>
-				<div class="col-sm-4">
-					<div class="input-group">  
-						<input name="qty_claim" type="text" class="form-control" id="qty_claim" value="<?php if($cek>0){echo $rcek['qty_claim'];} ?>" placeholder="0.00" style="text-align: right;" required>
-						<span class="input-group-addon"><select name="satuan_c" style="font-size: 12px;" id="satuan_c">
-						<option value="KG" <?php if($rcek['satuan_c']=="KG"){ echo "SELECTED"; }?>>KG</option>
-						<option value="PCS" <?php if($rcek['satuan_c']=="PCS"){ echo "SELECTED"; }?>>PCS</option>
-						</select></span>	
-		  			</div>
-        		</div>
-        		<div class="col-sm-4">
-          			<div class="input-group">  
-						<input name="qty_foc" type="text" class="form-control" id="qty_foc" value="<?php if($cek>0){echo $rcek['qty_foc'];} ?>" placeholder="0.00" style="text-align: right;" required>
-						<span class="input-group-addon"><select name="satuan_f" style="font-size: 12px;" id="satuan_f">
-						<option value="KG" <?php if($rcek['satuan_f']=="KG"){ echo "SELECTED"; }?>>KG</option>
-						<option value="PCS" <?php if($rcek['satuan_f']=="PCS"){ echo "SELECTED"; }?>>PCS</option>
-						</select></span>	
-		  			</div>
-        		</div>
-	  	</div>     
+				</div>
+				<div class="form-group">
+					<label for="tgl_finishing" class="col-sm-3 control-label">Qty Kirim</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+						<input name="qty_kirim" type="text" class="form-control" id="qty_kirim" value="<?php if ($cek > 0) {
+								echo $rcek['qty_kirim'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_k" style="font-size: 12px;" id="satuan_k">
+									<?php
+									$units_k = ['KG', 'PCS']; // Define the units you want to check for
+									
+									foreach ($units_k as $unit_k) {
+										$isSelected_k = $rcek['satuan_k'] == $unit_k;
+										$selectedAttribute_k = $isSelected_k ? 'selected' : '';
+										echo "<option value=\"$unit_k\" $selectedAttribute_k>$unit_k</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-group">
+						<input name="qty_kirim2" type="text" class="form-control" id="qty_kirim2" value="<?php if ($cek > 0) {
+								echo $rcek['qty_kirim2'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_k2" style="font-size: 12px;" id="satuan_k2">
+									<?php
+									$units_k = ['YD', 'MTR']; // Define the units you want to check for
+									
+									foreach ($units_k as $unit_k) {
+										$isSelected_k = $rcek['satuan_k2'] == $unit_k;
+										$selectedAttribute_k = $isSelected_k ? 'selected' : '';
+										echo "<option value=\"$unit_k\" $selectedAttribute_k>$unit_k</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- YD -->
+				<div class="form-group">
+					<label for="proses" class="col-sm-3 control-label">Qty Claim</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+						<input name="qty_claim" type="text" class="form-control" id="qty_claim" value="<?php if ($cek > 0) {
+								echo $rcek['qty_claim'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_c" style="font-size: 12px;" id="satuan_c">
+									<?php
+									$units_c = ['KG', 'PCS']; // Define the units you want to check for
+									
+									foreach ($units_c as $unit_c) {
+										$isSelected_c = $rcek['satuan_c'] == $unit_c;
+										$selectedAttribute_c = $isSelected_c ? 'selected' : '';
+										echo "<option value=\"$unit_c\" $selectedAttribute_c>$unit_c</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-group">
+						<input name="qty_claim2" type="text" class="form-control" id="qty_claim2" value="<?php if ($cek > 0) {
+								echo $rcek['qty_claim2'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_c2" style="font-size: 12px;" id="satuan_c2">
+									<?php
+									$units_c = ['YD', 'MTR']; // Define the units you want to check for
+									
+									foreach ($units_c as $unit_c) {
+										$isSelected_c = $rcek['satuan_c2'] == $unit_c;
+										$selectedAttribute_c = $isSelected_c ? 'selected' : '';
+										echo "<option value=\"$unit_c\" $selectedAttribute_c>$unit_c</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="tgl_finishing" class="col-sm-3 control-label">Qty FOC</label>
+					<div class="col-sm-4">
+						<div class="input-group">
+						<input name="qty_foc" type="text" class="form-control" id="qty_foc" value="<?php if ($cek > 0) {
+								echo $rcek['qty_foc'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_f" style="font-size: 12px;" id="satuan_f">
+									<?php
+									$units_f = ['KG', 'PCS']; // Define the units you want to check for
+									
+									foreach ($units_f as $unit_f) {
+										$isSelected_f = $rcek['satuan_f'] == $unit_f;
+										$selectedAttribute_f = $isSelected_f ? 'selected' : '';
+										echo "<option value=\"$unit_f\" $selectedAttribute_f>$unit_f</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input name="qty_foc2" type="text" class="form-control" id="qty_foc2" value="<?php if ($cek > 0) {
+								echo $rcek['qty_foc2'];
+							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<span class="input-group-addon">
+								<select name="satuan_f2" style="font-size: 12px;" id="satuan_f2">
+									<?php
+									$units_f = ['YD', 'MTR']; // Define the units you want to check for
+									
+									foreach ($units_f as $unit_f) {
+										$isSelected_f = $rcek['satuan_f2'] == $unit_f;
+										$selectedAttribute_f = $isSelected_f ? 'selected' : '';
+										echo "<option value=\"$unit_f\" $selectedAttribute_f>$unit_f</option>";
+									}
+									?>
+								</select>
+							</span>
+						</div>
+					</div>
+				</div>
+				<!-- END OF YD -->
 	  </div>
 	  		<!-- col --> 
 	  <div class="col-md-6">
@@ -699,6 +833,14 @@ if($_POST['save']=="save"){
 		  checknego='$_POST[checknego]',
 		  tgl_update=now(),
 		  hod='$_POST[hod]'
+		  qty_kirim2 = '$_POST[qty_kirim2]',
+		qty_claim2 = '$_POST[qty_claim2]',
+		qty_order2 = '$_POST[qty_order2]',
+		qty_foc2 = '$_POST[qty_foc2]',
+		satuan_k2 = '$_POST[satuan_k2]',
+		satuan_c2 = '$_POST[satuan_c2]',
+		satuan_o2 = '$_POST[satuan_o2]',
+		satuan_f2 = '$_POST[satuan_f2]'
 		  WHERE id='$id'");	 
 		
 			
