@@ -177,7 +177,7 @@ border:hidden;
 	$no=1;
 	$Awal=$_GET['awal'];
 	$Akhir=$_GET['akhir'];		
-  $qry1=mysqli_query($con,"SELECT *, SUM(qty_order) as qty_order_lgn, SUM(qty_kirim) as qty_kirim_lgn, SUM(qty_foc) as qty_foc_lgn, SUM(qty_claim) as qty_claim_lgn, SUM(kg1) as kg1_lgn, SUM(qty_email) as qty_req, SUM(pjg_email) as pjg_req, SUM(qty_claim) as qty_rep, SUM(pjg1) as pjg_rep
+  $qry1=mysqli_query($con,"SELECT *, SUM(qty_order) as qty_order_lgn, SUM(qty_kirim) as qty_kirim_lgn, SUM(qty_foc) as qty_foc_lgn, SUM(kg1) as qty_claim_lgn, SUM(kg1) as kg1_lgn, SUM(qty_email) as qty_req, SUM(pjg_email) as pjg_req, SUM(kg1) as qty_rep, SUM(pjg1) as pjg_rep
   FROM tbl_ganti_kain_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' GROUP BY langganan, id WITH ROLLUP");
   //$qrygk=mysqli_query("");
   $torder=0;
@@ -211,9 +211,9 @@ border:hidden;
         $tjawab="";	
         }
 
-        $qty_red = $row1['qty_email'] - $row1['qty_claim'];
+        $qty_red = $row1['qty_email'] - $row1['kg1'];
         $satuan_red = $row1['pjg_email']-$row1['pjg1'];
-        $total_red = $row1['qty_email'] - $row1['qty_claim'];
+        $total_red = $row1['qty_email'] - $row1['kg1'];
 
         $total_qty_red = $row1['qty_req'] - $row1['qty_rep'];
         $total_satuan_red = $row1['pjg_req'] - $row1['pjg_rep'];
@@ -240,14 +240,14 @@ border:hidden;
             <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['pjg_email']));?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['qty_email']/$row1['qty_order'])*100,2)."%";?></font></td>
 
-            <td align="center" valign="middle"><font size="-2"><?php echo $row1['qty_claim'];?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php echo $row1['kg1'];?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['pjg1']));?></font></td>
-            <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['qty_claim']/$row1['qty_order'])*100,2)."%";?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php echo round(($row1['kg1']/$row1['qty_order'])*100,2)."%";?></font></td>
             
 
             <td align="center" valign="middle"><font size="-2"><?php echo number_format(($qty_red), 2); ?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php echo round(($satuan_red));?></font></td>
-            <td align="center" valign="middle"><font size="-2"><?php echo round(($qty_red/$row1['qty_email'])*100,2)."%";?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php if($row1['qty_email'] == 0){ echo "0 %";}else{ echo  round(($qty_red/$row1['qty_email'])*100,2)."%";}?></font></td>
             
 
             <!-- <td align="center" valign="middle"><font size="-2"><?php echo $row1['kg1'];?></font></td>
@@ -285,7 +285,7 @@ border:hidden;
               <td align="center" valign="middle"><font size="-2"><?php echo number_format(($total_qty_red), 2); ?></font></td>
               <td align="center" valign="middle"><font size="-2"><?php echo round(($total_satuan_red));?></font></td>
               
-              <td align="center" valign="middle"><font size="-2"><?php echo round(($total_qty_red/$row1['qty_req'])*100,2)."%";?></font></td>
+              <td align="center" valign="middle"><font size="-2"><?php if($row1['qty_email'] == 0){ echo "0 %";}else{  round(($total_qty_red/$row1['qty_req'])*100,2)."%";}?></font></td>
             
               <td></td>
               <td></td>
@@ -416,7 +416,7 @@ border:hidden;
         $Awal=$_GET['awal'];
         $Akhir=$_GET['akhir'];
         if($Awal !="" AND $Akhir !=""){ $Where=" DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' ";} 
-        $qryQC=mysqli_query($con,"SELECT SUM(qty_claim) AS qty_claim_qc FROM tbl_ganti_kain_now WHERE $Where AND (t_jawab='QCF' OR `t_jawab1`='QCF' OR `t_jawab2`='QCF')");
+        $qryQC=mysqli_query($con,"SELECT SUM(kg1) AS qty_claim_qc FROM tbl_ganti_kain_now WHERE $Where AND (t_jawab='QCF' OR `t_jawab1`='QCF' OR `t_jawab2`='QCF')");
         $rowQC=mysqli_fetch_array($qryQC);
         ?>
         <?php echo $rowQC['qty_claim_qc'];?>
