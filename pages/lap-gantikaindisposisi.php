@@ -224,7 +224,7 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
 
 
            
-            <a target="_blank" href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $row1['NO_ORDER'] ?>"><?php echo $d_order_new['d_order_new']; ?></a>
+            <a target="_blank" href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $d_order_new['NO_ORDER'] ?>"><?php echo $d_order_new['NO_ORDER']; ?></a>
           </td>
             
           
