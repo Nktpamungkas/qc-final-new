@@ -147,7 +147,7 @@ $rcek=mysqli_fetch_array($sqlCek);
       				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
     			</div>
   			</div>
-			<form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
+			<form class="form-horizontal" action="pages/cetak/cetak-stiker-custom-full.php" method="post" enctype="multipart/form-data" name="form1" id="form1" target="_blank">
 				<div class="box-body"> 
 					<div class="col-md-12"> 
 						<div class="form-group">
@@ -156,10 +156,11 @@ $rcek=mysqli_fetch_array($sqlCek);
 								<input name="demand" type="text" class="form-control" id="demand" 
 								onchange="window.location='StikerCustomNew-'+this.value" value="<?php echo $_GET['demand'];?>" placeholder="No Demand" required>
 							</div>
-							<label for="lotcode" class="col-sm-2 control-label">No KK ERP</label>
-							<div class="col-sm-2">
+							<label for="lotcode" class="col-sm-2 control-label">No KK ERP (LOT)</label>
+							
+<div class="col-sm-2">
 								<input name="lotcode" type="text" class="form-control" id="lotcode" 
-								 value="<?php if($cekdb2>0){echo $rowdb2['PRODUCTIONORDERCODE'];}else{} ?>" placeholder="No KK ERP" readonly>
+								 value="<?php if($cekdb2>0){echo $rowdb2['PRODUCTIONORDERCODE'];}else{} ?>" placeholder="No KK ERP">
 							</div>
 						</div>
 						<div class="form-group">
@@ -222,12 +223,43 @@ $rcek=mysqli_fetch_array($sqlCek);
 							<div class="col-sm-5">
 								<textarea name="no_warna" class="form-control" id="no_warna" placeholder="No Warna"><?php if($cekdb2>0){echo $rowdb2['NO_WARNA'];}else{}?></textarea>
 							</div>				   
-						</div>		 
+						</div>
+						<div class="form-group">
+							<label for="no_element" class="col-sm-2 control-label">No Element</label>
+								<div class="col-sm-2">
+								<input name="no_element" type="text" class="form-control" id="no_element" 
+								value="" placeholder="No Element" required>
+							</div>				   
+						</div>
+						<div class="form-group">
+							<label for="grade" class="col-sm-2 control-label">Grade</label>
+								<div class="col-sm-2">
+								<input name="grade" type="text" class="form-control" id="grade" 
+								value="" placeholder="Grade" required>
+							</div>				   
+						</div>
+						<div class="form-group">
+							<label for="pjng" class="col-sm-2 control-label">Length</label>
+								<div class="col-sm-2">
+								<input name="pjng" type="text" class="form-control" id="pjng" 
+								value="" placeholder="Length" required>
+							</div>				   
+						</div>
+						<div class="form-group">
+							<label for="kg" class="col-sm-2 control-label">Weight</label>
+								<div class="col-sm-2">
+								<input name="kg" type="text" class="form-control" id="kg" 
+								value="" placeholder="Weight" required>
+							</div>				   
+						</div>
 					</div>
 				</div>
 				<div class="box-footer">
 				<?php if($_GET['demand']!=""){ ?> 	
 					<a href="pages/cetak/cetak-stiker-custom3.php?demand=<?php echo $_GET['demand']; ?>" class="btn btn-success <?php if($_GET['demand']=="") { echo "disabled"; }?>" target="_blank">Cetak Stiker</a>
+					<div class="col-sm-1 pull-right">
+					<button type="submit" class="form-control btn btn-danger ">Cetak Stiker Full</button>
+					</div>	
 				<?php } ?>	   
 				</div>
 					<!-- /.box-footer -->
