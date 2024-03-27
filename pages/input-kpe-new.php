@@ -337,10 +337,10 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<div class="col-sm-4">
 						<div class="input-group">
-						<input name="qty_order2" type="text" class="form-control" id="qty_order2" value="<?php if ($cek > 0) {
+						<input name="qty_order2" type="text" class="form-control" id="qty_order2" value="<?php if ($cek > 0 && $rcek['qty_order2'] != "") {
 								echo $rcek['qty_order2'];
-							} else {//kesiniya
-								echo strtoupper($rowdb2['QTY_PANJANG_ORDER_UOM']) == "YD" ? number_format($rowdb2['QTY_ORDER'], 2) : '';
+							} else {
+								echo number_format($rowdb2['QTY_PANJANG_ORDER'], 2);
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_o2" style="font-size: 12px;" id="satuan1">
