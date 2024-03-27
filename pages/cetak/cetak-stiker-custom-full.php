@@ -191,7 +191,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
         <td width="15%" align="center" valign="bottom" style="border-top:0px #000000 solid; 
                 border-bottom:0px #000000 solid;
                 border-left:0px #000000 solid; 
-                border-right:0px #000000 solid; font-size:8px;">NOWQCF</td>
+                border-right:0px #000000 solid; font-size:8px;">&nbsp;</td>
     </tr>
   </table></td>
   </tr>
@@ -271,10 +271,10 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
                 border-right:0px #000000 solid;">&nbsp;</td>
             </tr>
             <tr>
-                 <td align="right" colspan="4" style="border-top:0px #000000 solid; 
+                 <td align="left" colspan="4" style="border-top:0px #000000 solid; 
                 border-bottom:0px #000000 solid;
                 border-left:0px #000000 solid; 
-                border-right:0px #000000 solid;"><input style="text-align:right; font-size: 12px; font-weight:bold;" name="ket" type="text" placeholder="ketik" size="15" /></td>
+                border-right:0px #000000 solid;"><input style="text-align:left; font-size: 12px; font-weight:bold;" name="ket" type="text" placeholder="ketik" size="25" /></td>
                 <td style="border-top:0px #000000 solid; 
                 border-bottom:0px #000000 solid;
                 border-left:0px #000000 solid; 
