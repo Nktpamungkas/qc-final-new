@@ -281,7 +281,8 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
             <td align="right"><?php echo $row1['qty_email'];?></td>
             <td align="center"><?php echo $row1['pjg_email']." ".$row1['satuan1'];?></td>
 
-            <td align="right"><?php echo $row1['qty_claim'];?></td>
+            <td align="right"><?php echo $row1['kg1'];?></td>
+            <!-- <td align="center"><?php echo $row1['pjg1']." yd"?></td> -->
             <td align="center"><?php echo $row1['pjg1']." ".$row1['satuan1'];?></td>
 
             <td align="right"><?php echo   $qty_red;?></td>
