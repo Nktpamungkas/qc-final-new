@@ -832,7 +832,7 @@ if($_POST['save']=="save"){
 		  addpersonil='$addpersonil',
 		  checknego='$_POST[checknego]',
 		  tgl_update=now(),
-		  hod='$_POST[hod]'
+		  hod='$_POST[hod]',
 		  qty_kirim2 = '$_POST[qty_kirim2]',
 		qty_claim2 = '$_POST[qty_claim2]',
 		qty_order2 = '$_POST[qty_order2]',
