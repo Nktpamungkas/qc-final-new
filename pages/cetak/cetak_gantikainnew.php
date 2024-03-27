@@ -247,7 +247,7 @@ border:hidden;
 
             <td align="center" valign="middle"><font size="-2"><?php echo number_format(($qty_red), 2); ?></font></td>
             <td align="center" valign="middle"><font size="-2"><?php echo round(($satuan_red));?></font></td>
-            <td align="center" valign="middle"><font size="-2"><?php echo round(($qty_red/$row1['qty_email'])*100,2)."%";?></font></td>
+            <td align="center" valign="middle"><font size="-2"><?php if($row1['qty_email'] == 0){ echo "0 %";}else{ echo  round(($qty_red/$row1['qty_email'])*100,2)."%";}?></font></td>
             
 
             <!-- <td align="center" valign="middle"><font size="-2"><?php echo $row1['kg1'];?></font></td>
@@ -285,7 +285,7 @@ border:hidden;
               <td align="center" valign="middle"><font size="-2"><?php echo number_format(($total_qty_red), 2); ?></font></td>
               <td align="center" valign="middle"><font size="-2"><?php echo round(($total_satuan_red));?></font></td>
               
-              <td align="center" valign="middle"><font size="-2"><?php echo round(($total_qty_red/$row1['qty_req'])*100,2)."%";?></font></td>
+              <td align="center" valign="middle"><font size="-2"><?php if($row1['qty_email'] == 0){ echo "0 %";}else{  round(($total_qty_red/$row1['qty_req'])*100,2)."%";}?></font></td>
             
               <td></td>
               <td></td>
