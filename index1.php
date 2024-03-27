@@ -924,11 +924,6 @@
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
                             echo "hidden";
                         } ?>"><a href="StikerCustomNew"><i class="fa fa-file-text"></i> <span>Stiker Custom</span></a></li>
-                                <li class="<?php if ($_GET['p'] == "Stiker-Custom-New2") {
-                                                echo "active";
-                                            } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="StikerCustomNew2"><i class="fa fa-file-text"></i> <span>Stiker Custom 2</span></a></li>
                             </ul>
                         </li>
                     <?php } ?>
