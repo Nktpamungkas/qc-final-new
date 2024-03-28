@@ -897,6 +897,8 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     $total_jumlah_kasus = 0;
                     $total_qty_claim_kg = 0;
                     $total_qty_claim_yd = 0;
+                    $total_qty_replacement_kg = 0;
+                    $total_qty_replacement_yd = 0;
                     while($row2 = mysqli_fetch_array($query2)){
                     $query2KG = mysqli_query($con, "select 
                                                         sum(qty_claim) as qty_claim
@@ -950,7 +952,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         // } else if($row2YD['qty_claim'] != "") {
                         //   echo number_format(($row2YD['qty_claim'] / $row2Total['total_qty_claim']) * 100, 2) . ' %';
                         // }
-                        echo number_format((($row2KG['qty_claim'] + $row2YD['qty_claim']) / $row2Total['total_qty_claim']) * 100, 2) . ' %';
+                        echo number_format((($row2KG['qty_claim'] + $row2YD['qty_claim2']) / $row2Total['total_qty_claim']) * 100, 2) . ' %';
                     ?>
                     </td>
                 </tr>
@@ -958,7 +960,9 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     $no++;
                     $total_jumlah_kasus += $row2['jumlah_kasus'];
                     $total_qty_claim_kg += $row2KG['qty_claim'];
-                    $total_qty_claim_kg += $row2YD['qty_claim'];
+                    $total_qty_claim_yd += $row2YD['qty_claim2'];
+                    $total_qty_replacement_kg += $row2ReplacementKG['qty_kg'];
+                    $total_qty_replacement_yd += $row2ReplacementYD['qty_yard'];
                     }
                 }
                 ?>
@@ -969,8 +973,8 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     <td align="center"><strong><?= !empty($Awal) ? number_format($total_jumlah_kasus, 2) : '' ?></strong></td>
                     <td align="center"><strong><?= !empty($Awal) ? number_format($total_qty_claim_kg, 2) : '' ?></strong></td>
                     <td align="center"><strong><?= !empty($Awal) ? number_format($total_qty_claim_yd, 2) : '' ?></strong></td>
-                    <td align="center"></td>
-                    <td align="center"></td>
+                    <td align="center"><strong><?= !empty($Awal) ? number_format($total_qty_replacement_kg, 2) : '' ?></strong></td>
+                    <td align="center"><strong><?= !empty($Awal) ? number_format($total_qty_replacement_yd, 2) : '' ?></strong></td>
                     <td align="center"></td>
                 </tr>
                 </tfoot>
