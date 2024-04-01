@@ -135,6 +135,24 @@ while($r=mysqli_fetch_array($modal)){
 						</select>
 		 	 		</div>
 		  	</div>
+        <div class="form-group">
+		  		<label for="sub_defect" class="col-sm-3 control-label">Solusi</label>
+		 			<div class="col-sm-5">
+						<select class="form-control select2" name="solusi" id="solusi">
+							<option value="">Pilih</option>
+							<?php
+							$qrys = mysqli_query($con, "SELECT solusi FROM tbl_solusi ORDER BY solusi ASC");
+							while ($rs = mysqli_fetch_array($qrys)) {
+								?>
+								<option value="<?php echo $rs['solusi']; ?>" <?php if ($r['solusi'] == $rs['solusi']) {
+										echo "SELECTED";
+									} ?>>
+									<?php echo $rs['solusi']; ?>
+								</option>
+							<?php } ?>
+						</select>
+		 	 		</div>
+		  	</div>
       <div class="form-group">
 		  <label for="tangggung_jawab" class="col-sm-3 control-label">Tanggung Jawab 1</label>
         <div class="col-sm-4">
@@ -310,6 +328,7 @@ extract($_POST);
   $satuan_email =mysqli_real_escape_string($con,$_POST['satuan_email']);
   $masalah= mysqli_real_escape_string($con,$_POST['masalah']);
   $sub_defect= mysqli_real_escape_string($con,$_POST['sub_defect']);
+  $solusi= mysqli_real_escape_string($con,$_POST['solusi']);
   $checkbox1=$_POST['penyebab'];
   $chkp="";
     foreach($checkbox1 as $chk1)  
@@ -339,6 +358,7 @@ extract($_POST);
         `satuan_email`='$satuan_email',
         `masalah`='$masalah',
         `sub_defect`='$sub_defect',
+        solusi = '$solusi',
         `sebab`='$chkp'
 				WHERE `id`='$id' LIMIT 1");	
 
