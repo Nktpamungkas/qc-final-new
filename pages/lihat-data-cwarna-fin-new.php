@@ -596,7 +596,7 @@ include "koneksi.php";
               }
               if ($Awal != "") {
 //                $Where = " AND DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' ";
-				  $Where = "AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date'";
+				  $Where = " AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date' ";
               }
               if ($Awal != "" or $Akhir != "" or $Order or $PO) {
                 $qry1 = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE `dept`='QCF' AND no_order LIKE '%$Order%' AND no_po LIKE '%$PO%' $shft $Where ORDER BY id ASC");
