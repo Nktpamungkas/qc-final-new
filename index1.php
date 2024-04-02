@@ -1667,6 +1667,15 @@
                 }, {
                     value: "RUDI",
                     text: "RUDI"
+				}, {
+                    value: "TRI",
+                    text: "TRI"
+                }, {
+                    value: "WAWAN",
+                    text: "WAWAN"
+                }, {
+                    value: "UJUK",
+                    text: "UJUK"	
                 }]
             });
             $('.review_qcf_dye').editable({
@@ -1886,6 +1895,15 @@
                 }, {
                     value: "RUDI",
                     text: "RUDI"
+				}, {
+                    value: "TRI",
+                    text: "TRI"
+                }, {
+                    value: "WAWAN",
+                    text: "WAWAN"
+                }, {
+                    value: "UJUK",
+                    text: "UJUK"	
                 }]
             });
             $('.disposisi_fin').editable({
