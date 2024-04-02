@@ -68,7 +68,8 @@ $Status	= isset($_POST['sts']) ? $_POST['sts'] : '';
                   <option value="Ferry Wibowo" <?php if($Leader=="Ferry Wibowo"){ echo "SELECTED";}?>>Ferry Wibowo</option>
                 	<option value="Janu Dwi Laksono" <?php if($Leader=="Janu Dwi Laksono"){ echo "SELECTED";}?>>Janu Dwi Laksono</option>
 					        <option value="Taufik Restiardi" <?php if($Leader=="Taufik Restiardi"){ echo "SELECTED";}?>>Taufik Restiardi</option>
-                  <option value="Tri Setiawan" <?php if($Leader=="Tri Setiawan"){ echo "SELECTED";}?>>Tri Setiawan</option>
+                  <!-- <option value="Tri Setiawan" <?php //if($Leader=="Tri Setiawan"){ echo "SELECTED";}?>>Tri Setiawan</option> -->
+                  <option value="Dixih Wahyudin" <?php if($Leader=="Dixih Wahyudin"){ echo "SELECTED";}?>>Dixih Wahyudin</option>
                   <option value="Vivik Kurniawati" <?php if($Leader=="Vivik Kurniawati"){ echo "SELECTED";}?>>Vivik Kurniawati</option>
                 </select>
             </div>			 
@@ -174,10 +175,15 @@ $Status	= isset($_POST['sts']) ? $_POST['sts'] : '';
               WHERE DATE_FORMAT( tgl_approve, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND approve LIKE '%Taufik%' AND `status`!=''");
               $taufik1=mysqli_fetch_array($jumlah_taufik1);
           //Tri
-              $jumlah_tri1 = mysqli_query($con,"SELECT COUNT(*) as jml_tri FROM tbl_tq_nokk a
+              // $jumlah_tri1 = mysqli_query($con,"SELECT COUNT(*) as jml_tri FROM tbl_tq_nokk a
+              // LEFT JOIN tbl_tq_test b ON a.id=b.id_nokk 
+              // WHERE DATE_FORMAT( tgl_approve, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND approve LIKE '%Tri%' AND `status`!=''");
+              // $tri1=mysqli_fetch_array($jumlah_tri1);
+          //Dix
+              $jumlah_dix1 = mysqli_query($con,"SELECT COUNT(*) as jml_dix FROM tbl_tq_nokk a
               LEFT JOIN tbl_tq_test b ON a.id=b.id_nokk 
-              WHERE DATE_FORMAT( tgl_approve, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND approve LIKE '%Tri%' AND `status`!=''");
-              $tri1=mysqli_fetch_array($jumlah_tri1);
+              WHERE DATE_FORMAT( tgl_approve, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND approve LIKE '%Dix%' AND `status`!=''");
+              $dix1=mysqli_fetch_array($jumlah_dix1);
           //Vivik
               $jumlah_vivik1 = mysqli_query($con,"SELECT COUNT(*) as jml_vivik FROM tbl_tq_nokk a
               LEFT JOIN tbl_tq_test b ON a.id=b.id_nokk 
@@ -209,10 +215,15 @@ $Status	= isset($_POST['sts']) ? $_POST['sts'] : '';
             <td align="center"><?php echo $taufik1['jml_taufik'];?></td>
             <td align="center"><?php if($total['jml']!=0){echo number_format(($taufik1['jml_taufik']/$total['jml'])*100,0)." %";}else{echo "0 %";}?></td>
           </tr>
-          <tr valign="top">
+          <!-- <tr valign="top">
             <td align="center">Tri Setiawan</td>
-            <td align="center"><?php echo $tri1['jml_tri'];?></td>
-            <td align="center"><?php if($total['jml']!=0){echo number_format(($tri1['jml_tri']/$total['jml'])*100,0)." %";}else{echo "0 %";}?></td>
+            <td align="center"><?php //echo $tri1['jml_tri'];?></td>
+            <td align="center"><?php //if($total['jml']!=0){echo number_format(($tri1['jml_tri']/$total['jml'])*100,0)." %";}else{echo "0 %";}?></td>
+          </tr> -->
+          <tr valign="top">
+            <td align="center">Dixih Wahyudin</td>
+            <td align="center"><?php echo $dix1['jml_dix'];?></td>
+            <td align="center"><?php if($total['jml']!=0){echo number_format(($dix1['jml_dix']/$total['jml'])*100,0)." %";}else{echo "0 %";}?></td>
           </tr>
           <tr valign="top">
             <td align="center">Vivik Kurniawati</td>
@@ -342,7 +353,15 @@ Highcharts.chart('container', {
         }
     },
     xAxis: {
-		categories: ["Edwin I.", "Ferry W.", "Janu D.L.", "Taufik R.", "Tri S.", "Vivik K."],
+		categories: [
+      "Edwin I.", 
+      "Ferry W.", 
+      "Janu D.L.", 
+      "Taufik R.", 
+      // "Tri S.", 
+      "Dixih W.", 
+      "Vivik K."
+    ],
         labels: {
             skew3d: true,
             style: {
@@ -385,12 +404,19 @@ Highcharts.chart('container', {
                     $taufik=mysqli_fetch_array($jumlah_taufik);
 					echo $taufik['jml_taufik'];
 					?>,
+          //           <?php 
+					// $jumlah_tri = mysqli_query($con,"SELECT COUNT(*) as jml_tri FROM tbl_tq_nokk a
+          //           LEFT JOIN tbl_tq_test b ON a.id=b.id_nokk 
+          //           WHERE DATE_FORMAT( tgl_approve, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND approve LIKE '%Tri%' AND `status`!=''");
+          //           $tri=mysqli_fetch_array($jumlah_tri);
+					// echo $tri['jml_tri'];
+					// ?>,
                     <?php 
-					$jumlah_tri = mysqli_query($con,"SELECT COUNT(*) as jml_tri FROM tbl_tq_nokk a
+					$jumlah_dix = mysqli_query($con,"SELECT COUNT(*) as jml_dix FROM tbl_tq_nokk a
                     LEFT JOIN tbl_tq_test b ON a.id=b.id_nokk 
-                    WHERE DATE_FORMAT( tgl_approve, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND approve LIKE '%Tri%' AND `status`!=''");
-                    $tri=mysqli_fetch_array($jumlah_tri);
-					echo $tri['jml_tri'];
+                    WHERE DATE_FORMAT( tgl_approve, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND approve LIKE '%Dix%' AND `status`!=''");
+                    $dix=mysqli_fetch_array($jumlah_dix);
+					echo $dix['jml_dix'];
 					?>,
           <?php 
 					$jumlah_vivik = mysqli_query($con,"SELECT COUNT(*) as jml_vivik FROM tbl_tq_nokk a
@@ -414,7 +440,15 @@ Highcharts.chart('container', {
 		var myChart = new Chart(ctx, {
 			type: 'bar',
 			data: {
-				labels: ["Edwin I.", "Ferry W.", "Janu D.L.", "Taufik R.", "Tri S.", "Vivik K."],
+				labels: [
+          "Edwin I.", 
+          "Ferry W.", 
+          "Janu D.L.", 
+          "Taufik R.", 
+          // "Tri S.", 
+          "Dixih W.", 
+          "Vivik K."
+        ],
 				datasets: [
                     {
 					label: '',
@@ -442,11 +476,17 @@ Highcharts.chart('container', {
                     $taufik=mysqli_fetch_array($jumlah_taufik);
 					echo $taufik['jml_taufik'];
 					?>,
+          //           <?php 
+					// $jumlah_tri = mysqli_query($con,"SELECT COUNT(*) as jml_tri FROM tbl_tq_test 
+          // WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND approve LIKE '%Tri%'");
+          //           $tri=mysqli_fetch_array($jumlah_tri);
+					// echo $tri['jml_tri'];
+					// ?>,
                     <?php 
-					$jumlah_tri = mysqli_query($con,"SELECT COUNT(*) as jml_tri FROM tbl_tq_test 
-          WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND approve LIKE '%Tri%'");
-                    $tri=mysqli_fetch_array($jumlah_tri);
-					echo $tri['jml_tri'];
+					$jumlah_dix = mysqli_query($con,"SELECT COUNT(*) as jml_dix FROM tbl_tq_test 
+          WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND approve LIKE '%Dix%'");
+                    $dix=mysqli_fetch_array($jumlah_dix);
+					echo $dix['jml_dix'];
 					?>,
           <?php 
 					$jumlah_vivik = mysqli_query($con,"SELECT COUNT(*) as jml_vivik FROM tbl_tq_test 

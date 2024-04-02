@@ -931,7 +931,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                                     tbl_ganti_kain_now tgkn 
                                                                 where
                                                                     solusi = '$row2[solusi]'
-                                                                    and satuan1 = 'yard'
+                                                                    and satuan1 in ('yard', 'meter')
                                                                     $Where21
                                                                 group by
                                                                     solusi");
