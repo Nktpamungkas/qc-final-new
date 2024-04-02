@@ -200,7 +200,7 @@ include "koneksi.php";
                                                 from 
                                                 db_qc.tbl_lap_inspeksi a
                                                 where (a.proses !='Oven' or a.proses !='Fin 1X') and a.dept ='QCF'
-                                                AND DATE_FORMAT( a.tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
+                                                AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date' 
                                                 group by 
                                                 substring_index(a.pelanggan,'/',-1)
                                                 order by jml_kk desc limit 5");
@@ -212,7 +212,7 @@ include "koneksi.php";
                                                 from 
                                                 db_qc.tbl_lap_inspeksi a
                                                 where (a.proses !='Oven' or a.proses !='Fin 1X') and a.dept ='QCF'
-                                                AND DATE_FORMAT( a.tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
+                                                AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date' 
                                                 and a.`grouping` = 'A' and SUBSTRING_INDEX(a.pelanggan,'/',-1) ='$rby[buyer]'");
                                                       $rga = mysqli_fetch_array($sqlga);
                                                       //GROUP B
@@ -222,7 +222,7 @@ include "koneksi.php";
                                                 from 
                                                 db_qc.tbl_lap_inspeksi a
                                                 where (a.proses !='Oven' or a.proses !='Fin 1X') and a.dept ='QCF'
-                                                AND DATE_FORMAT( a.tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
+                                                AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date' 
                                                 and a.`grouping` = 'B' and SUBSTRING_INDEX(a.pelanggan,'/',-1) ='$rby[buyer]'");
                                                       $rgb = mysqli_fetch_array($sqlgb);
                                                       //GROUP C
@@ -232,7 +232,7 @@ include "koneksi.php";
                                                 from 
                                                 db_qc.tbl_lap_inspeksi a
                                                 where (a.proses !='Oven' or a.proses !='Fin 1X') and a.dept ='QCF'
-                                                AND DATE_FORMAT( a.tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
+                                                AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date'
                                                 and a.`grouping` = 'C' and SUBSTRING_INDEX(a.pelanggan,'/',-1) ='$rby[buyer]'");
                                                       $rgc = mysqli_fetch_array($sqlgc);
                                                       //GROUP D
@@ -242,7 +242,7 @@ include "koneksi.php";
                                                 from 
                                                 db_qc.tbl_lap_inspeksi a
                                                 where (a.proses !='Oven' or a.proses !='Fin 1X') and a.dept ='QCF'
-                                                AND DATE_FORMAT( a.tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
+                                                AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date'
                                                 and a.`grouping` = 'D' and SUBSTRING_INDEX(a.pelanggan,'/',-1) ='$rby[buyer]'");
                                                       $rgd = mysqli_fetch_array($sqlgd);
                                                       //NULL
@@ -252,7 +252,7 @@ include "koneksi.php";
                                                 from 
                                                 db_qc.tbl_lap_inspeksi a
                                                 where (a.proses !='Oven' or a.proses !='Fin 1X') and a.dept ='QCF'
-                                                AND DATE_FORMAT( a.tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
+                                                AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date'
                                                 and (a.`grouping` = '' or a.`grouping` is null ) and SUBSTRING_INDEX(a.pelanggan,'/',-1) ='$rby[buyer]'");
                   $rgn = mysqli_fetch_array($sqlgn);
                   ?>
@@ -482,11 +482,11 @@ include "koneksi.php";
               </b>
           <?php } ?>
           <div class="pull-right">
-            <a href="pages/cetak/cetak-reports-cocok-warna.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>"
+            <a href="pages/cetak/cetak-reports-cocok-warna.php?awal=<?php echo $_POST['awal']; ?>&jam_awal=<?php echo $_POST['jam_awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&jam_akhir=<?php echo $_POST['jam_akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>"
               class="btn btn-primary <?php if ($_POST['awal'] == "") {
                 echo "disabled";
               } ?>" target="_blank">Cetak</a>
-            <a href="pages/cetak/lap-cocok-warna-excel.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>"
+            <a href="pages/cetak/lap-cocok-warna-excel.php?awal=<?php echo $_POST['awal']; ?>&jam_awal=<?php echo $_POST['jam_awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&jam_akhir=<?php echo $_POST['jam_akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>"
               class="btn btn-primary <?php if ($_POST['awal'] == "") {
                 echo "disabled";
               } ?>" target="_blank">Cetak
@@ -595,7 +595,8 @@ include "koneksi.php";
                 $shft = " ";
               }
               if ($Awal != "") {
-                $Where = " AND DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' ";
+//                $Where = " AND DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' ";
+				  $Where = "AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date'";
               }
               if ($Awal != "" or $Akhir != "" or $Order or $PO) {
                 $qry1 = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE `dept`='QCF' AND no_order LIKE '%$Order%' AND no_po LIKE '%$PO%' $shft $Where ORDER BY id ASC");
