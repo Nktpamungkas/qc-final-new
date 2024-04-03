@@ -239,7 +239,7 @@ if ($Awal != "") {
                 $update_temp1 = new DateTime($tgl_update_temp1);
                 $selisih_temp1 = $today->diff($update_temp1);
 
-                $qrwarna = mysqli_query($con, "SELECT * FROM tbl_tq_random_warna WHERE no_item='$r[no_item]' OR no_hanger='$r[no_hanger]'");
+                $qrwarna = mysqli_query($con, "SELECT * FROM tbl_tq_random_warna WHERE no_item='$r[no_item]' and no_hanger='$r[no_hanger]'");
                 $rwarna = mysqli_fetch_array($qrwarna);
                 //$cekwarna=mysqli_num_rows($qwarna);
                 ?>
@@ -400,8 +400,8 @@ if ($Awal != "") {
                             echo "W= " . $r['rsm_w1'];
                         } ?>
                     </td>
-                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbsw'] != "" and $r['rbs_instron'] != "") { ?>
-                            bgcolor="<?php echo $rwarna['rbsw']; ?>" <?php } else {
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbswinstron'] != "" and $r['rbs_instron'] != "") { ?>
+                            bgcolor="<?php echo $rwarna['rbswinstron']; ?>" <?php } else {
                         if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and $r['rbs_instron'] != "") { ?>
                                 bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and $r['rbs_instron'] != $rtemp['temp_rbs_instron']) { ?>
                                     bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp1->m >= 1) and $rtemp1['sts'] == "1" and $r['tgl_update'] != $rtemp1['tgl_update'] and $r['rbs_instron'] != $rtemp1['temp_rbs_instron']) { ?>
@@ -409,8 +409,8 @@ if ($Awal != "") {
                     } ?>>
                         <?php echo $r['rbs_instron']; ?>
                     </td>
-                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbsw'] != "" and $r['rbs_tru'] != "") { ?>
-                            bgcolor="<?php echo $rwarna['rbsw']; ?>" <?php } else {
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbswtru_burst'] != "" and $r['rbs_tru'] != "") { ?>
+                            bgcolor="<?php echo $rwarna['rbswtru_burst']; ?>" <?php } else {
                         if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and $r['rbs_tru'] != "") { ?>
                                 bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and $r['rbs_tru'] != $rtemp['temp_rbs_tru']) { ?>
                                     bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp1->m >= 1) and $rtemp1['sts'] == "1" and $r['tgl_update'] != $rtemp1['tgl_update'] and $r['rbs_tru'] != $rtemp1['temp_rbs_tru']) { ?>
@@ -418,8 +418,8 @@ if ($Awal != "") {
                     } ?>>
                         <?php echo $r['rbs_tru']; ?>
                     </td>
-                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbsw'] != "" and $r['rbs_mullen'] != "") { ?>
-                            bgcolor="<?php echo $rwarna['rbsw']; ?>" <?php } else {
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbswmullen'] != "" and $r['rbs_mullen'] != "") { ?>
+                            bgcolor="<?php echo $rwarna['rbswmullen']; ?>" <?php } else {
                         if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and $r['rbs_mullen'] != "") { ?>
                                 bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and $r['rbs_mullen'] != $rtemp['temp_rbs_mullen']) { ?>
                                     bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp1->m >= 1) and $rtemp1['sts'] == "1" and $r['tgl_update'] != $rtemp1['tgl_update'] and $r['rbs_mullen'] != $rtemp1['temp_rbs_mullen']) { ?>
