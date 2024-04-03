@@ -175,7 +175,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
               FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
               WHERE a.solusi = '' and a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' $Where $stsred $stsclaim 
-              GROUP BY a.nodemand
+              GROUP BY a.nodemand, a.masalah_dominan
               ORDER BY a.tgl_email ASC";
 			  $qry1=mysqli_query($con,$sql);
             }else{
