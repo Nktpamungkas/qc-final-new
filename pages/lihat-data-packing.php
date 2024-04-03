@@ -28,9 +28,23 @@ include "koneksi.php";
 <?php
 $Awal = isset($_POST['awal']) ? $_POST['awal'] : '';
 $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
+$jamA = isset($_POST['jam_awal']) ? $_POST['jam_awal'] : '';
+$jamAr = isset($_POST['jam_akhir']) ? $_POST['jam_akhir'] : '';	
 $GShift = isset($_POST['gshift']) ? $_POST['gshift'] : '';
 $Group = isset($_POST['group']) ? $_POST['group'] : '';
 $MC = isset($_POST['nomc']) ? $_POST['nomc'] : '';
+if (strlen($jamA) == 5) {
+    $start_date = $Awal . " " . $jamA;
+  } else {
+    $start_date = $Awal . " 0" . $jamA;
+  }
+  if (strlen($jamAr) == 5) {
+    $stop_date = $Akhir . " " . $jamAr;
+  } else {
+    $stop_date = $Akhir . " 0" . $jamAr;
+  }		
+//$start_date= $Awal." ".$jamA;
+//$stop_date= $Akhir." ".$jamAr;	
 ?>
 <div class="row">
   <div class="col-xs-4">
@@ -225,7 +239,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING A'");
@@ -264,7 +278,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING B'");
@@ -303,7 +317,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING C'");
@@ -473,7 +487,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING A'");
@@ -504,7 +518,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING B'");
@@ -535,7 +549,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING C'");
@@ -683,7 +697,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and inspektor = 'PACKING A'");
     $rowPAB = mysqli_fetch_array($qryPAB);
@@ -717,7 +731,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and inspektor = 'PACKING B'");
       $rowPBB = mysqli_fetch_array($qryPBB);
@@ -751,7 +765,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and inspektor = 'PACKING C'");
     $rowPCB = mysqli_fetch_array($qryPCB);
@@ -905,7 +919,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and inspektor = 'PACKING A'");
       $rowPAT = mysqli_fetch_array($qryPAT);
@@ -939,7 +953,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and inspektor = 'PACKING B'");
     $rowPBT = mysqli_fetch_array($qryPBT);
@@ -973,7 +987,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and inspektor = 'PACKING C'");
     $rowPCT = mysqli_fetch_array($qryPCT);
@@ -1137,7 +1151,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '1'
 	and inspektor = 'PACKING A'");
@@ -1176,7 +1190,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '1'
 	and inspektor = 'PACKING B'");
@@ -1215,7 +1229,7 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '1'
 	and inspektor = 'PACKING C'");
@@ -1361,7 +1375,7 @@ round(sum(netto),2) as TOTAL
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '0'");
      $rowOK = mysqli_fetch_array($qryOK);
@@ -1382,7 +1396,7 @@ round(sum(kg_th),2) as TOTAL
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'");
       $rowTH = mysqli_fetch_array($qryTH);
       ?>      
@@ -1402,7 +1416,7 @@ round(sum(kg_bs),2) as TOTAL
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'");
       $rowBS = mysqli_fetch_array($qryBS);
       ?>    
@@ -1422,7 +1436,7 @@ round(sum(netto),2) as TOTAL
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( tgl_update, '%Y-%m-%d' ) between '$Awal' and '$Akhir'
+	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
 	and `dept` = 'PACKING'
 	and `sts_gkg` = '1'");
 $rowPST = mysqli_fetch_array($qryPST);
@@ -1459,7 +1473,7 @@ $rowPST = mysqli_fetch_array($qryPST);
     <div class="box">
       <div class="box-header with-border">
         <h3 class="box-title">Data Laporan Packing</h3><br>
-        <?php if ($_POST['awal'] != "") { ?><b>Periode: <?php echo $_POST['awal'] . " to " . $_POST['akhir']; ?></b>
+        <?php if ($_POST['awal'] != "") { ?><b>Periode: <?php echo $_POST['awal']." ".$_POST['jam_awal'] . " to " . $_POST['akhir']." ".$_POST['jam_akhir']; ?></b>
         <?php } ?><br>
         <?php if ($_POST['gshift'] != "") { ?><b>Shift: <?php echo $_POST['gshift']; ?></b>
         <?php } ?><br>
@@ -1468,28 +1482,28 @@ $rowPST = mysqli_fetch_array($qryPST);
         <?php if ($_POST['nomc'] != "") { ?><b>No MC: <?php echo $_POST['nomc']; ?></b>
         <?php } ?>
         <div class="pull-right">
-		  <a href="pages/cetak/cetak-hasil-packing-shift-personil.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
+		  <a href="pages/cetak/cetak-hasil-packing-shift-personil.php?awal=<?php echo $_POST['awal']; ?>&jam1=<?php echo $_POST['jam_awal'];?>&akhir=<?php echo $_POST['akhir']; ?>&jam2=<?php echo $_POST['jam_akhir'];?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
                            echo "disabled";
                          } ?>" target="_blank">Cetak Hasil Packing Shift Personil</a>	
-		  <a href="pages/cetak/cetak-hasil-packing-shift.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
+		  <a href="pages/cetak/cetak-hasil-packing-shift.php?awal=<?php echo $_POST['awal']; ?>&jam1=<?php echo $_POST['jam_awal'];?>&akhir=<?php echo $_POST['akhir']; ?>&jam2=<?php echo $_POST['jam_akhir'];?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
                            echo "disabled";
                          } ?>" target="_blank">Cetak Hasil Packing Shift</a>
-		  <a href="pages/cetak/cetak-hasil-packing-shift-excel.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
+		  <a href="pages/cetak/cetak-hasil-packing-shift-excel.php?awal=<?php echo $_POST['awal']; ?>&jam1=<?php echo $_POST['jam_awal'];?>&akhir=<?php echo $_POST['akhir']; ?>&jam2=<?php echo $_POST['jam_akhir'];?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
                            echo "disabled";
                          } ?>" target="_blank">Cetak Hasil Packing Shift xls</a>	
-          <a href="pages/cetak/cetak-hasil-packing.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
+          <a href="pages/cetak/cetak-hasil-packing.php?awal=<?php echo $_POST['awal']; ?>&jam1=<?php echo $_POST['jam_awal'];?>&akhir=<?php echo $_POST['akhir']; ?>&jam2=<?php echo $_POST['jam_akhir'];?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
                            echo "disabled";
                          } ?>" target="_blank">Cetak Hasil Packing</a> 
-          <a href="pages/cetak/cetak-reports-packing.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
+          <a href="pages/cetak/cetak-reports-packing.php?awal=<?php echo $_POST['awal']; ?>&jam1=<?php echo $_POST['jam_awal'];?>&akhir=<?php echo $_POST['akhir']; ?>&jam2=<?php echo $_POST['jam_akhir'];?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
                            echo "disabled";
                          } ?>" target="_blank">Cetak</a> 
-          <a href="pages/cetak/lap-packing-excel.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
+          <a href="pages/cetak/lap-packing-excel.php?awal=<?php echo $_POST['awal']; ?>&jam1=<?php echo $_POST['jam_awal'];?>&akhir=<?php echo $_POST['akhir']; ?>&jam2=<?php echo $_POST['jam_akhir'];?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
                            echo "disabled";
                          } ?>" target="_blank">Cetak Excel</a>
-          <a href="pages/cetak/cetak_excel_lap_packing.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
+          <a href="pages/cetak/cetak_excel_lap_packing.php?awal=<?php echo $_POST['awal']; ?>&jam1=<?php echo $_POST['jam_awal'];?>&akhir=<?php echo $_POST['akhir']; ?>&jam2=<?php echo $_POST['jam_akhir'];?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
                            echo "disabled";
                          } ?>" target="_blank">Lap Packing Harian</a> 
-          <a href="pages/cetak/cetak_excel_stock_paper_tube.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
+          <a href="pages/cetak/cetak_excel_stock_paper_tube.php?awal=<?php echo $_POST['awal']; ?>&jam1=<?php echo $_POST['jam_awal'];?>&akhir=<?php echo $_POST['akhir']; ?>&jam2=<?php echo $_POST['jam_akhir'];?>&shift=<?php echo $_POST['gshift']; ?>&nomc=<?php echo $_POST['nomc']; ?>&group=<?php echo $_POST['group']; ?>" class="btn btn-primary <?php if ($_POST['awal'] == "") {
                            echo "disabled";
                          } ?>" target="_blank">Stock Paper Tube</a> 
         </div>
@@ -1566,9 +1580,9 @@ $rowPST = mysqli_fetch_array($qryPST);
             $grp = " ";
           }
           if ($Awal != "" and $Akhir != "") {
-            $qry1 = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND `dept`='PACKING' $shft $nomc $grp ORDER BY id ASC");
+            $qry1 = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `dept`='PACKING' $shft $nomc $grp ORDER BY id ASC");
           } else {
-            $qry1 = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND `dept`='PACKING' $shft $nomc $grp ORDER BY id ASC");
+            $qry1 = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `dept`='PACKING' $shft $nomc $grp ORDER BY id ASC");
           }
           while ($row1 = mysqli_fetch_array($qry1)) {
             ?>
