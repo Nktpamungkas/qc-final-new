@@ -178,7 +178,7 @@ border:hidden;
 	$Awal=$_GET['awal'];
 	$Akhir=$_GET['akhir'];		
   $qry1=mysqli_query($con,"SELECT *, SUM(qty_order) as qty_order_lgn, SUM(qty_kirim) as qty_kirim_lgn, SUM(qty_foc) as qty_foc_lgn, SUM(kg1) as qty_claim_lgn, SUM(kg1) as kg1_lgn, SUM(qty_email) as qty_req, SUM(pjg_email) as pjg_req, SUM(kg1) as qty_rep, SUM(pjg1) as pjg_rep
-  FROM tbl_ganti_kain_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' GROUP BY langganan, id WITH ROLLUP");
+  FROM tbl_ganti_kain_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' and id_disposisi is null GROUP BY langganan, id WITH ROLLUP");
   //$qrygk=mysqli_query("");
   $torder=0;
   $tkirim=0;
