@@ -6,7 +6,25 @@ include "../../koneksi.php";
   $Akhir=$_GET['akhir'];
   $qTgl=mysqli_query($con,"SELECT DATE_FORMAT(now(),'%Y-%m-%d') as tgl_skrg,DATE_FORMAT(now(),'%H:%i:%s') as jam_skrg");
   $rTgl=mysqli_fetch_array($qTgl);
-  if($Awal!=""){$tgl=substr($Awal,0,10); $jam=$Awal;}else{$tgl=$rTgl['tgl_skrg']; $jam=$rTgl['jam_skrg'];}
+  if($Awal!=""){
+	  $tgl=substr($Awal,0,10); 
+	  $jam=$Awal;
+  }else{
+	  $tgl=$rTgl['tgl_skrg']; 
+	  $jam=$rTgl['jam_skrg'];
+  }
+  $jamA = isset($_GET['jam_awal']) ? $_GET['jam_awal'] : '';
+  $jamAr = isset($_GET['jam_akhir']) ? $_GET['jam_akhir'] : '';
+  if (strlen($jamA) == 5) {
+    $start_date = $Awal . " " . $jamA;
+  } else {
+    $start_date = $Awal . " 0" . $jamA;
+  }
+  if (strlen($jamAr) == 5) {
+    $stop_date = $Akhir . " " . $jamAr;
+  } else {
+    $stop_date = $Akhir . " 0" . $jamAr;
+  }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -121,7 +139,7 @@ border:hidden;
       <tr>
         <td><table width="100%" border="1" class="table-list1"> 
           <tr>
-            <td align="left" valign="bottom"><strong><font size="-1">Tanggal : <?php echo date("d F Y",strtotime($_GET['awal']));?></font><br />
+            <td align="left" valign="bottom"><strong><font size="-1">Tanggal : <?php echo date("d F Y",strtotime($_GET['awal']))." ".$jamA ;?></font><br />
             <font size="-1">Shift : <?php echo $_GET['shift'];?></font>
           </tr>
         </table></td>
@@ -161,7 +179,7 @@ border:hidden;
       $Awal=$_GET['awal'];
       $Akhir=$_GET['akhir'];
       if($_GET['shift']!="ALL"){$shft=" AND `shift`='$_GET[shift]' "; }else{$shft=" ";}		
-      $qry1=mysqli_query($con,"SELECT * FROM tbl_lap_inspeksi WHERE DATE_FORMAT(tgl_update, '%Y-%m-%d') BETWEEN '$Awal' AND '$Akhir' AND `dept`='QCF' $shft ORDER BY id ASC");
+      $qry1=mysqli_query($con,"SELECT * FROM tbl_lap_inspeksi WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') BETWEEN '$start_date' AND '$stop_date' AND `dept`='QCF' $shft ORDER BY id ASC");
       $lotOK=0;$lotBWA=0;$lotBWB=0;$lotBWC=0;$lotTBD=0;$lot=0;
       $lotFin=0;$lotFin1x=0;$lotPdr=0;$lotOven=0;$lotComp=0;
       $lotSt=0;$lotAP=0;$lotPB=0;

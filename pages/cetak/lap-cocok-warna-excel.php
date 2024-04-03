@@ -12,9 +12,31 @@ include "../../koneksi.php";
            <div align="center"> <h1>LAPORAN HARIAN COCOK WARNA DEPT. QCF</h1></div>
 <!--script disini -->
 <?php 
-if($_GET['awal']!=""){$tgl=$_GET['awal'];$tgl1=$_GET['akhir'];$shift=$_GET['shift'];}else{$tgl=$_GET['awal'];$tgl1=$_GET['akhir'];$shift=$_GET['shift'];}
+if($_GET['awal']!=""){
+	$tgl=$_GET['awal'];
+	$tgl1=$_GET['akhir'];
+	$shift=$_GET['shift'];
+	$jamA = isset($_GET['jam_awal']) ? $_GET['jam_awal'] : '';
+    $jamAr = isset($_GET['jam_akhir']) ? $_GET['jam_akhir'] : '';
+}else{
+	$tgl=$_GET['awal'];
+	$tgl1=$_GET['akhir'];
+	$shift=$_GET['shift'];
+	$jamA = isset($_GET['jam_awal']) ? $_GET['jam_awal'] : '';
+    $jamAr = isset($_GET['jam_akhir']) ? $_GET['jam_akhir'] : '';
+}
+  if (strlen($jamA) == 5) {
+    $start_date = $tgl . " " . $jamA;
+  } else {
+    $start_date = $tgl . " 0" . $jamA;
+  }
+  if (strlen($jamAr) == 5) {
+    $stop_date = $tgl1 . " " . $jamAr;
+  } else {
+    $stop_date = $tgl1 . " 0" . $jamAr;
+  }
 ?>
-Tanggal : <?php echo $tgl." s/d ".$tgl1;?><br>
+Tanggal : <?php echo $start_date." s/d ".$stop_date;?><br>
 Shift 	: <?php echo $shift;?>
 <table width="100%" border="1">
   <tr>
@@ -54,7 +76,7 @@ $roll=0;$bruto=0;
  if($_GET['shift']!="ALL"){
  $shft=" AND `shift`='$_GET[shift]' "; }else{$shft=" ";}
  
-  $sql=mysqli_query($con,"SELECT * FROM tbl_lap_inspeksi WHERE `tgl_update` BETWEEN '$tgl' AND '$tgl1' ".$shft." AND `dept`='QCF' ORDER BY id ASC");
+  $sql=mysqli_query($con,"SELECT * FROM tbl_lap_inspeksi WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date' ".$shft." AND `dept`='QCF' ORDER BY id ASC");
   while($row=mysqli_fetch_array($sql)){
 	$pos = strpos($row['pelanggan'], "/");
                 if ($pos > 0) {
