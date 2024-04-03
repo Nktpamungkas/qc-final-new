@@ -910,7 +910,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     $query2YD = mysqli_query($con, "select 
                                                         sum(qty_claim2) as qty_claim2
                                                     from tbl_aftersales_now
-                                                    where solusi = '$row2[solusi]' and satuan_c2 = 'YD' $Where21 
+                                                    where solusi = '$row2[solusi]' and satuan_c2 in ('YD', 'MTR') $Where21 
                                                     group by solusi");
                     $row2YD = mysqli_fetch_array($query2YD);
 
