@@ -418,7 +418,7 @@ border:hidden;
       </tr>
       <tr>
         <td>PERSENTASE</td>
-        <td align="center"><?php echo round(($rowQC['qty_claim_qc']/$torder)*100,5)."%";?></td>//ini
+        <td align="center"><?php echo round(($rowQC['qty_claim_qc']/$torder)*100,5)."%";?></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
