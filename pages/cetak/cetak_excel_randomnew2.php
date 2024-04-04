@@ -112,7 +112,7 @@ if ($Awal != "") {
             date_default_timezone_set("Asia/Jakarta");
             $query = mysqli_query($con, "SELECT * FROM tbl_tq_randomtest WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' GROUP BY no_item ");
             while ($r = mysqli_fetch_array($query)) {
-                $q1 = mysqli_query($con, "SELECT * FROM tbl_tq_nokk WHERE no_item='$r[no_item]' OR no_hanger='$r[no_hanger]'");
+                $q1 = mysqli_query($con, "SELECT * FROM tbl_tq_nokk WHERE no_item='$r[no_item]' AND no_hanger='$r[no_hanger]'");
                 $r1 = mysqli_fetch_array($q1);
                 $pos = strpos($r1['pelanggan'], "/");
                 $posbuyer = substr($r1['pelanggan'], $pos + 1, 50);
@@ -121,12 +121,12 @@ if ($Awal != "") {
                 $tgl_update = date("Y-m-d", strtotime($r['tgl_update']));
                 $update = new DateTime($tgl_update);
                 $selisih = $today->diff($update);
-                $qtemp = mysqli_query($con, "SELECT * FROM tbl_tq_temp_random WHERE no_item='$r[no_item]' OR no_hanger='$r[no_hanger]'");
+                $qtemp = mysqli_query($con, "SELECT * FROM tbl_tq_temp_random WHERE no_item='$r[no_item]' AND no_hanger='$r[no_hanger]'");
                 $rtemp = mysqli_fetch_array($qtemp);
                 $tgl_update_temp = date("Y-m-d", strtotime($rtemp['tgl_update']));
                 $update_temp = new DateTime($tgl_update_temp);
                 $selisih_temp = $today->diff($update_temp);
-                $qtemp1 = mysqli_query($con, "SELECT * FROM tbl_tq_temp_random2 WHERE no_item='$r[no_item]' OR no_hanger='$r[no_hanger]'");
+                $qtemp1 = mysqli_query($con, "SELECT * FROM tbl_tq_temp_random2 WHERE no_item='$r[no_item]' AND no_hanger='$r[no_hanger]'");
                 $rtemp1 = mysqli_fetch_array($qtemp1);
                 $tgl_update_temp1 = date("Y-m-d", strtotime($rtemp1['tgl_update']));
                 $update_temp1 = new DateTime($tgl_update_temp1);
