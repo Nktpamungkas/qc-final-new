@@ -178,7 +178,7 @@ border:hidden;
 	$Awal=$_GET['awal'];
 	$Akhir=$_GET['akhir'];		
   $qry1=mysqli_query($con,"SELECT *, SUM(qty_order) as qty_order_lgn, SUM(qty_kirim) as qty_kirim_lgn, SUM(qty_foc) as qty_foc_lgn, SUM(kg1) as qty_claim_lgn, SUM(kg1) as kg1_lgn, SUM(qty_email) as qty_req, SUM(pjg_email) as pjg_req, SUM(kg1) as qty_rep, SUM(pjg1) as pjg_rep
-  FROM tbl_ganti_kain_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' GROUP BY langganan, id WITH ROLLUP");
+  FROM tbl_ganti_kain_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' and id_disposisi is null GROUP BY langganan, id WITH ROLLUP");
   //$qrygk=mysqli_query("");
   $torder=0;
   $tkirim=0;
@@ -339,17 +339,7 @@ border:hidden;
         $tkirim=$row1['qty_kirim_lgn'];
         $tfoc=$row1['qty_foc_lgn'];
 
-        $tclaim1=$row1['qty_req'];
-        $tclaim2=$row1['qty_rep'];
-        $tclaim3=$row1['qty_req']-$row1['qty_rep'];
-
-        $tclaim=$tclaim1+$tclaim2+$tclaim3; 
-
-        $tpersen1=round(($row1['qty_req']/$row1['qty_order_lgn'])*100,2);
-        $tpersen2=round(($row1['qty_rep']/$row1['qty_order_lgn'])*100,2);
-        $tpersen3=round(($row1['qty_req']-$row1['qty_rep']/$row1['qty_order_lgn'])*100,2);
-
-        $tpersen= $tpersen1+$tpersen2+$tpersen3;
+        $tclaim=$row1['qty_rep']; 
 
         } ?>
         <!--$torder=round($torder+$row1['qty_order'],2);
@@ -383,11 +373,11 @@ border:hidden;
     </tr>
     <tr>
       <td>TOTAL QTY ORDER (REPLACEMENT)</td>
-      <td align="center"><?php echo $rJML['jml_qty_order'];?></td>
+      <td align="center"><?php echo $torder;?></td>
     </tr>
     <tr>
       <td>PERSENTASE</td>
-      <td align="center"><strong><?php echo $tpersen." %";?></strong></td>
+      <td align="center"><strong><?php echo number_format(($tclaim / $torder) * 100, 2) ." %";?></strong></td>
     </tr>
     <tr>
       <td>&nbsp;</td>
@@ -424,11 +414,11 @@ border:hidden;
       </tr>
       <tr>
         <td>TOTAL QTY ORDER (REPLACEMENT)</td>
-        <td align="center"><?php echo $rJML['jml_qty_order'];?></td>
+        <td align="center"><?php echo $torder;?></td>
       </tr>
       <tr>
         <td>PERSENTASE</td>
-        <td align="center"><?php echo round(($rowQC['qty_claim_qc']/$rJML['jml_qty_order'])*100,5)."%";?></td>
+        <td align="center"><?php echo round(($rowQC['qty_claim_qc']/$torder)*100,5)."%";?></td>
       </tr>
       <tr>
         <td>&nbsp;</td>

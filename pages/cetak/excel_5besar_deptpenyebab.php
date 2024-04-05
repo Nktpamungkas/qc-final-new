@@ -20,7 +20,9 @@ $TotalKirim=$_GET['total'];
     <tr>
       <th bgcolor="#12C9F0">NO.</th>
       <th bgcolor="#12C9F0">DEPT</th>
+      <th bgcolor="#12C9F0">JUMLAH KASUS</th>
       <th bgcolor="#12C9F0">QTY KELUHAN (KG)</th>
+      <th bgcolor="#12C9F0">% DIBANDINGKAN TOTAL KELUHAN</th>
       <th bgcolor="#12C9F0">% DIBANDINGKAN TOTAL KIRIM</th>
     </tr>
 	<?php 
@@ -56,26 +58,29 @@ $TotalKirim=$_GET['total'];
     WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab2!='' OR t_jawab2!=NULL)
     GROUP BY t_jawab2) a
     group by a.t_jawab
-    ORDER BY qty_claim_dept DESC LIMIT 5");
+    ORDER BY qty_claim_dept DESC");
     while($rd=mysqli_fetch_array($qrydef)){
     ?>
     <tr valign="top">
         <td align="center"><?php echo $no2; ?></td>
         <td align="left"><?php echo $rd['t_jawab'];?></td>
-        <td align="right"><?php echo $rd['qty_claim_dept']; ?></td>
+        <td align="right"><?php echo $rd['jml_tjawab']; ?></td>
+        <td align="right"><?php echo number_format($rd['qty_claim_dept'], 2); ?></td>
+        <td align="right"><?php echo number_format(($rd['qty_claim_dept']/$rAll['qty_claim_all'])*100,2)." %";?></td>
         <td align="right"><?php echo number_format(($rd['qty_claim_dept']/$TotalKirim)*100,2)." %";?></td>
     </tr>
     <?php	$no2++;  
     $total=$total+$rd['qty_claim_dept'];
     } 
     $totaldll=$rAll['qty_claim_all']-$total;?>
-    <tr valign="top">
+    <!-- <tr valign="top">
         <td align="center" colspan="2"><strong>DLL</strong></td>
-        <td align="right"><strong><?php echo number_format($totaldll,2); ?></strong></td>
-        <td align="right"><strong><?php echo number_format(($totaldll/$TotalKirim)*100,2)." %"; ?></strong></td>
-    </tr>
+        <td align="right"><strong><?php //echo number_format($totaldll,2); ?></strong></td>
+        <td align="right"><strong><?php //echo number_format(($totaldll/$TotalKirim)*100,2)." %"; ?></strong></td>
+    </tr> -->
     <tr valign="top">
         <td align="center" colspan="2"><strong>TOTAL KIRIM</td>
+        <td></td>
         <td align="right"><strong><?php echo number_format($TotalKirim,2); ?></strong></td>
         <td align="right">&nbsp;</td>
     </tr>

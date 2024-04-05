@@ -19,8 +19,10 @@ $TotalKirim=$_GET['total'];
 <table width="100%" border="1">
     <tr>
       <th bgcolor="#12C9F0">NO.</th>
-      <th bgcolor="#12C9F0">MASALAH DOMINAN</th>
+      <th bgcolor="#12C9F0">DEFECT</th>
+      <th bgcolor="#12C9F0">JUMLAH KASUS</th>
       <th bgcolor="#12C9F0">QTY KELUHAN (KG)</th>
+      <th bgcolor="#12C9F0">% DIBANDINGKAN TOTAL KELUHAN</th>
       <th bgcolor="#12C9F0">% DIBANDINGKAN TOTAL KIRIM</th>
     </tr>
 	<?php 
@@ -29,7 +31,7 @@ $TotalKirim=$_GET['total'];
     $totaldll=0;
     $qryAll=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL)");
     $rAll=mysqli_fetch_array($qryAll);
-    $qrydef=mysqli_query($con,"SELECT SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE tgl_buat BETWEEN '$Awal' AND '$Akhir' 
+    $qrydef=mysqli_query($con,"SELECT COUNT(*) AS jumlah_kasus, SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE tgl_buat BETWEEN '$Awal' AND '$Akhir' 
     AND (masalah_dominan!='' OR masalah_dominan!=NULL))*100,1) AS persen,
     masalah_dominan
     FROM
@@ -42,7 +44,9 @@ $TotalKirim=$_GET['total'];
     <tr valign="top">
         <td align="center"><?php echo $no2; ?></td>
         <td align="left"><?php echo $rd['masalah_dominan'];?></td>
+        <td align="right"><?php echo $rd['jumlah_kasus']; ?></td>
         <td align="right"><?php echo $rd['qty_claim_lgn']; ?></td>
+        <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$rAll['qty_claim_all'])*100,2)." %";?></td>
         <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$TotalKirim)*100,2)." %";?></td>
     </tr>
     <?php	$no2++;  
@@ -51,11 +55,14 @@ $TotalKirim=$_GET['total'];
     $totaldll=$rAll['qty_claim_all']-$total;?>
     <tr valign="top">
         <td align="center" colspan="2"><strong>DLL</strong></td>
+        <td align="right"><strong></strong></td>
         <td align="right"><strong><?php echo number_format($totaldll,2); ?></strong></td>
+        <td align="right"><strong><?php echo number_format(($totaldll/$rAll['qty_claim_all'])*100,2)." %"; ?></strong></td>
         <td align="right"><strong><?php echo number_format(($totaldll/$TotalKirim)*100,2)." %"; ?></strong></td>
     </tr>
     <tr valign="top">
         <td align="center" colspan="2"><strong>TOTAL KIRIM</td>
+        <td align="right"><strong></strong></td>
         <td align="right"><strong><?php echo number_format($TotalKirim,2); ?></strong></td>
         <td align="right">&nbsp;</td>
     </tr>

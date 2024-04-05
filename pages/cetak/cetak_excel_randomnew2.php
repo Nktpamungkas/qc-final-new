@@ -112,7 +112,7 @@ if ($Awal != "") {
             date_default_timezone_set("Asia/Jakarta");
             $query = mysqli_query($con, "SELECT * FROM tbl_tq_randomtest WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' GROUP BY no_item ");
             while ($r = mysqli_fetch_array($query)) {
-                $q1 = mysqli_query($con, "SELECT * FROM tbl_tq_nokk WHERE no_item='$r[no_item]' OR no_hanger='$r[no_hanger]'");
+                $q1 = mysqli_query($con, "SELECT * FROM tbl_tq_nokk WHERE no_item='$r[no_item]' AND no_hanger='$r[no_hanger]'");
                 $r1 = mysqli_fetch_array($q1);
                 $pos = strpos($r1['pelanggan'], "/");
                 $posbuyer = substr($r1['pelanggan'], $pos + 1, 50);
@@ -121,18 +121,18 @@ if ($Awal != "") {
                 $tgl_update = date("Y-m-d", strtotime($r['tgl_update']));
                 $update = new DateTime($tgl_update);
                 $selisih = $today->diff($update);
-                $qtemp = mysqli_query($con, "SELECT * FROM tbl_tq_temp_random WHERE no_item='$r[no_item]' OR no_hanger='$r[no_hanger]'");
+                $qtemp = mysqli_query($con, "SELECT * FROM tbl_tq_temp_random WHERE no_item='$r[no_item]' AND no_hanger='$r[no_hanger]'");
                 $rtemp = mysqli_fetch_array($qtemp);
                 $tgl_update_temp = date("Y-m-d", strtotime($rtemp['tgl_update']));
                 $update_temp = new DateTime($tgl_update_temp);
                 $selisih_temp = $today->diff($update_temp);
-                $qtemp1 = mysqli_query($con, "SELECT * FROM tbl_tq_temp_random2 WHERE no_item='$r[no_item]' OR no_hanger='$r[no_hanger]'");
+                $qtemp1 = mysqli_query($con, "SELECT * FROM tbl_tq_temp_random2 WHERE no_item='$r[no_item]' AND no_hanger='$r[no_hanger]'");
                 $rtemp1 = mysqli_fetch_array($qtemp1);
                 $tgl_update_temp1 = date("Y-m-d", strtotime($rtemp1['tgl_update']));
                 $update_temp1 = new DateTime($tgl_update_temp1);
                 $selisih_temp1 = $today->diff($update_temp1);
 
-                $qrwarna = mysqli_query($con, "SELECT * FROM tbl_tq_random_warna WHERE no_item='$r[no_item]' OR no_hanger='$r[no_hanger]'");
+                $qrwarna = mysqli_query($con, "SELECT * FROM tbl_tq_random_warna WHERE no_item='$r[no_item]' AND no_hanger='$r[no_hanger]'");
                 $rwarna = mysqli_fetch_array($qrwarna);
                 //$cekwarna=mysqli_num_rows($qwarna);
                 ?>
@@ -293,8 +293,8 @@ if ($Awal != "") {
                             echo "W= " . $r['rsm_w1'];
                         } ?>
                     </td>
-                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbsw'] != "" and $r['rbs_instron'] != "") { ?>
-                            bgcolor="<?php echo $rwarna['rbsw']; ?>" <?php } else {
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbswinstron'] != "" and $r['rbs_instron'] != "") { ?>
+                            bgcolor="<?php echo $rwarna['rbswinstron']; ?>" <?php } else {
                         if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and $r['rbs_instron'] != "") { ?>
                                 bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and $r['rbs_instron'] != $rtemp['temp_rbs_instron']) { ?>
                                     bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp1->m >= 1) and $rtemp1['sts'] == "1" and $r['tgl_update'] != $rtemp1['tgl_update'] and $r['rbs_instron'] != $rtemp1['temp_rbs_instron']) { ?>
@@ -302,8 +302,8 @@ if ($Awal != "") {
                     } ?>>
                         <?php echo $r['rbs_instron']; ?>
                     </td>
-                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbsw'] != "" and $r['rbs_tru'] != "") { ?>
-                            bgcolor="<?php echo $rwarna['rbsw']; ?>" <?php } else {
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbswtru_burst'] != "" and $r['rbs_tru'] != "") { ?>
+                            bgcolor="<?php echo $rwarna['rbswtru_burst']; ?>" <?php } else {
                         if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and $r['rbs_tru'] != "") { ?>
                                 bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and $r['rbs_tru'] != $rtemp['temp_rbs_tru']) { ?>
                                     bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp1->m >= 1) and $rtemp1['sts'] == "1" and $r['tgl_update'] != $rtemp1['tgl_update'] and $r['rbs_tru'] != $rtemp1['temp_rbs_tru']) { ?>
@@ -311,8 +311,8 @@ if ($Awal != "") {
                     } ?>>
                         <?php echo $r['rbs_tru']; ?>
                     </td>
-                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbsw'] != "" and $r['rbs_mullen'] != "") { ?>
-                            bgcolor="<?php echo $rwarna['rbsw']; ?>" <?php } else {
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbswmullen'] != "" and $r['rbs_mullen'] != "") { ?>
+                            bgcolor="<?php echo $rwarna['rbswmullen']; ?>" <?php } else {
                         if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and $r['rbs_mullen'] != "") { ?>
                                 bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and $r['rbs_mullen'] != $rtemp['temp_rbs_mullen']) { ?>
                                     bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp1->m >= 1) and $rtemp1['sts'] == "1" and $r['tgl_update'] != $rtemp1['tgl_update'] and $r['rbs_mullen'] != $rtemp1['temp_rbs_mullen']) { ?>

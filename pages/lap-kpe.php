@@ -28,6 +28,7 @@ $Demand	= isset($_POST['demand']) ? $_POST['demand'] : '';
 $Prodorder	= isset($_POST['prodorder']) ? $_POST['prodorder'] : '';
 $Pejabat	= isset($_POST['pejabat']) ? $_POST['pejabat'] : '';
 $Solusi	= isset($_POST['solusi']) ? $_POST['solusi'] : '';
+$Kategori	= isset($_POST['kategori']) ? $_POST['kategori'] : '';
 	
 if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";}	
 ?>
@@ -76,7 +77,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         <div class="col-sm-2">
           <input name="prodorder" type="text" class="form-control pull-right" id="prodorder" placeholder="Prod. Order" value="<?php echo $Prodorder;  ?>" />
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <select class="form-control select2" name="pejabat" id="pejabat">
               <option value="">Pilih Pejabat</option>
                 <?php 
@@ -87,7 +88,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
                 <?php }?>
             </select>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
         <select class="form-control select2" name="solusi" id="solusi">
 							<option value="">Solusi</option>
 							<?php 
@@ -95,6 +96,17 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 							while($rp=mysqli_fetch_array($qryp)){
 							?>
 							<option value="<?php echo $rp['solusi'];?>" <?php if($Solusi==$rp['solusi']){echo "SELECTED";}?>><?php echo $rp['solusi'];?></option>	
+							<?php }?>
+						</select>
+        </div>
+        <div class="col-sm-2">
+        <select class="form-control select2" name="kategori" id="kategori">
+							<option value="">Kategori</option>
+							<?php 
+							$categories = ["REPEAT", "MAJOR", "GENERAL", "SAMPLE"];
+							foreach($categories as $category){
+							?>
+							<option value="<?=$category?>" <?=$Kategori==$category?'selected':''?>><?=$category?></option>	
 							<?php }?>
 						</select>
         </div>
@@ -200,14 +212,28 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             if($sts_red=="1"){ $stsred =" AND a.sts_red='1' "; }else{$stsred = " ";}
             if($sts_claim=="1"){ $stsclaim =" AND a.sts_claim='1' "; }else{$stsclaim =" ";}
             if($Awal!=""){ $Where =" AND DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
+            
+            if($Kategori=="MAJOR") {
+              $Where2 = " AND a.qty_claim2 > 500";
+            } else if($Kategori=="GENERAL") {
+              $Where2 = " AND a.qty_claim2 < 500";
+            } else if($Kategori=="SAMPLE") {
+              $Where2 = " AND substring(a.no_order, 1, 3) IN ('SAM', 'SME')";
+            }
+
+            if($Kategori=="REPEAT"){
+              $Group = "a.no_hanger, a.masalah_dominan HAVING COUNT(*) > 1";
+            } else {
+              $Group = "a.nodemand, a.masalah_dominan";
+            }
+
             if($Awal!="" or $sts_red=="1" or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
               $qry1=mysqli_query($con,"SELECT a.*,
               GROUP_CONCAT( DISTINCT b.no_ncp SEPARATOR ', ' ) AS no_ncp,
               GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
               FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
-              WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $stsred $stsclaim 
-              GROUP BY a.nodemand, a.masalah_dominan
-              -- GROUP BY a.masalah_dominan
+              WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $Where2 $stsred $stsclaim 
+              GROUP BY $Group
               ORDER BY a.id ASC");
             }else{
               $qry1=mysqli_query($con,"SELECT a.*,

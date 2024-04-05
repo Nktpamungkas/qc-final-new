@@ -19,7 +19,7 @@ $TotalLot=$_GET['totallot'];
 <table width="100%" border="1">
     <tr>
       <th bgcolor="#12C9F0">NO.</th>
-      <th bgcolor="#12C9F0">MASALAH DOMINAN</th>
+      <th bgcolor="#12C9F0">DEFECT</th>
       <th bgcolor="#12C9F0">JUMLAH KASUS</th>
       <th bgcolor="#12C9F0">% DIBANDINGKAN TOTAL KASUS</th>
     </tr>

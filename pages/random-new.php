@@ -141,10 +141,12 @@ function hitung(){
 	if(document.forms['form1']['jns_test'].value=="BURSTING STRENGTH"){
 		$("#fc15").css("display", "");  // To unhide
 		$("#fc15a").css("display", "");  // To unhide
+		$("#fc15b").css("display", "");  // To unhide
 		$("#stat_bs").css("display", "");  // To unhide
 	}else{
 		$("#fc15").css("display", "none");  // To hide
 		$("#fc15a").css("display", "none");  // To hide
+		$("#fc15b").css("display", "none");  // To hide
 		$("#stat_bs").css("display", "none");  // To hide
 	}
 	if(document.forms['form1']['jns_test'].value=="THICKNESS"){
@@ -1185,17 +1187,52 @@ $rcekRW=mysqli_fetch_array($sqlRW);
 								<div class="col-sm-2">
 									<input name="rtru_burst2" type="text" class="form-control" id="rtru_burst2" value="<?php echo $rcekR['rbs_tru2'];?>" placeholder="TRU BURST 2">
 								</div>
-								<div class="col-sm-2">
+								<!-- <div class="col-sm-2">
 									<select name="rbsw" class="form-control select2" id="rbsw" style="width: 100%;">
 										<option selected="selected" value="">Pilih Warna</option>
- 										<option <?php if($rcekRW['rbsw']=="#FFE54E"){?>selected="selected" <?php }?> value="#FFE54E">Kuning</option>
-										<option <?php if($rcekRW['rbsw']=="#FF6F30"){?>selected="selected" <?php }?> value="#FF6F30">Orange</option>
-										<option <?php if($rcekRW['rbsw']=="#FFFFFF"){?>selected="selected" <?php }?> value="#FFFFFF">Putih</option>
+ 										<option <?php //if($rcekRW['rbsw']=="#FFE54E"){?>selected="selected" <?php //}?> value="#FFE54E">Kuning</option>
+										<option <?php //if($rcekRW['rbsw']=="#FF6F30"){?>selected="selected" <?php //}?> value="#FF6F30">Orange</option>
+										<option <?php //if($rcekRW['rbsw']=="#FFFFFF"){?>selected="selected" <?php //}?> value="#FFFFFF">Putih</option>
+									</select>
+								</div> -->
+							</div>
+							<div class="form-group" id="fc15b" style="display:none;">
+								<label for="" class="col-sm-2 control-label">WARNA</label>
+								<div class="col-sm-2">
+									<select name="rbswinstron" class="form-control select2" id="rbswwinstron" style="width: 100%;">
+										<option selected="selected" value="">Pilih Warna</option>
+ 										<option <?php if($rcekRW['rbswinstron']=="#FFE54E"){?>selected="selected" <?php }?> value="#FFE54E">Kuning</option>
+										<option <?php if($rcekRW['rbswinstron']=="#FF6F30"){?>selected="selected" <?php }?> value="#FF6F30">Orange</option>
+										<option <?php if($rcekRW['rbswinstron']=="#FFFFFF"){?>selected="selected" <?php }?> value="#FFFFFF">Putih</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<select name="rbswmullen" class="form-control select2" id="rbswmullen" style="width: 100%;">
+										<option selected="selected" value="">Pilih Warna</option>
+ 										<option <?php if($rcekRW['rbswmullen']=="#FFE54E"){?>selected="selected" <?php }?> value="#FFE54E">Kuning</option>
+										<option <?php if($rcekRW['rbswmullen']=="#FF6F30"){?>selected="selected" <?php }?> value="#FF6F30">Orange</option>
+										<option <?php if($rcekRW['rbswmullen']=="#FFFFFF"){?>selected="selected" <?php }?> value="#FFFFFF">Putih</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<select name="rbswtru_burst" class="form-control select2" id="rbswtru_burst" style="width: 100%;">
+										<option selected="selected" value="">Pilih Warna</option>
+ 										<option <?php if($rcekRW['rbswtru_burst']=="#FFE54E"){?>selected="selected" <?php }?> value="#FFE54E">Kuning</option>
+										<option <?php if($rcekRW['rbswtru_burst']=="#FF6F30"){?>selected="selected" <?php }?> value="#FF6F30">Orange</option>
+										<option <?php if($rcekRW['rbswtru_burst']=="#FFFFFF"){?>selected="selected" <?php }?> value="#FFFFFF">Putih</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<select name="rbswtru_burst2" class="form-control select2" id="rbswtru_burst2" style="width: 100%;">
+										<option selected="selected" value="">Pilih Warna</option>
+ 										<option <?php if($rcekRW['rbswtru_burst2']=="#FFE54E"){?>selected="selected" <?php }?> value="#FFE54E">Kuning</option>
+										<option <?php if($rcekRW['rbswtru_burst2']=="#FF6F30"){?>selected="selected" <?php }?> value="#FF6F30">Orange</option>
+										<option <?php if($rcekRW['rbswtru_burst2']=="#FFFFFF"){?>selected="selected" <?php }?> value="#FFFFFF">Putih</option>
 									</select>
 								</div>
 							</div>
 							<div class="form-group" id="fc15a" style="display:none;">
-							<label for="rburs_str" class="col-sm-2 control-label">&nbsp;</label>
+								<label for="rburs_str" class="col-sm-2 control-label">&nbsp;</label>
 								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rburs_note" maxlength="50" rows="1"><?php echo $rcekR['rburs_note'];?></textarea>
 								</div>
@@ -3513,6 +3550,10 @@ if($_POST['physical_save']=="save" and $cekR>0 and $cekTR>0 and $cekTR2>0 and $c
 			`rspw`='$_POST[rspw]',
 			`rsbw`='$_POST[rsbw]',
 			`rbsw`='$_POST[rbsw]',
+			`rbswinstron`='$_POST[rbswinstron]',
+			`rbswmullen`='$_POST[rbswmullen]',
+			`rbswtru_burst`='$_POST[rbswtru_burst]',
+			`rbswtru_burst2`='$_POST[rbswtru_burst2]',
 			`rthickw`='$_POST[rthickw]',
 			`rstretchw`='$_POST[rstretchw]',
 			`rrecoverw`='$_POST[rrecoverw]',
@@ -3877,6 +3918,10 @@ if($_POST['physical_save']=="save" and $cekR>0 and $cekTR>0 and $cekTR2>0 and $c
 				`rspw`='$_POST[rspw]',
 				`rsbw`='$_POST[rsbw]',
 				`rbsw`='$_POST[rbsw]',
+				`rbswinstron`='$_POST[rbswinstron]',
+				`rbswmullen`='$_POST[rbswmullen]',
+				`rbswtru_burst`='$_POST[rbswtru_burst]',
+				`rbswtru_burst2`='$_POST[rbswtru_burst2]',
 				`rthickw`='$_POST[rthickw]',
 				`rstretchw`='$_POST[rstretchw]',
 				`rrecoverw`='$_POST[rrecoverw]',
@@ -4321,6 +4366,10 @@ if($_POST['physical_save']=="save" and $cekR>0 and $cekTR>0 and $cekTR2>0 and $c
 				`rspw`='$_POST[rspw]',
 				`rsbw`='$_POST[rsbw]',
 				`rbsw`='$_POST[rbsw]',
+				`rbswinstron`='$_POST[rbswinstron]',
+				`rbswmullen`='$_POST[rbswmullen]',
+				`rbswtru_burst`='$_POST[rbswtru_burst]',
+				`rbswtru_burst2`='$_POST[rbswtru_burst2]',
 				`rthickw`='$_POST[rthickw]',
 				`rstretchw`='$_POST[rstretchw]',
 				`rrecoverw`='$_POST[rrecoverw]',
@@ -4711,6 +4760,10 @@ if($_POST['physical_save']=="save" and $cekR>0 and $cekTR>0 and $cekTR2>0 and $c
 				`rspw`='$_POST[rspw]',
 				`rsbw`='$_POST[rsbw]',
 				`rbsw`='$_POST[rbsw]',
+				`rbswinstron`='$_POST[rbswinstron]',
+				`rbswmullen`='$_POST[rbswmullen]',
+				`rbswtru_burst`='$_POST[rbswtru_burst]',
+				`rbswtru_burst2`='$_POST[rbswtru_burst2]',
 				`rthickw`='$_POST[rthickw]',
 				`rstretchw`='$_POST[rstretchw]',
 				`rrecoverw`='$_POST[rrecoverw]',
