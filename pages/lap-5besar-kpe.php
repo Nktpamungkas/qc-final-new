@@ -96,7 +96,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                 <div class="col-sm-2">
                 <div class="input-group date">
                     <div class="input-group-addon"> Total Lot Kirim</div>
-                    <input name="totallot" type="text" class="form-control pull-right" placeholder="0" value="<?php echo $TotalLot; ?>" />
+                    <input name="totallot" type="text" class="form-control pull-right" id="totallot" placeholder="0" value="<?php echo $TotalLot; ?>" />
                 </div>
                 </div>
                 <div class="col-sm-2">
@@ -335,7 +335,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     </tfoot>
             </table>
             <div class="box-footer">
-                    <a href="pages/cetak/excel_5besar_langganan.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&totallot=<?php echo $_POST['totallot']; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
+                    <a href="pages/cetak/excel_5besar_langganan.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&totallot=<?php echo $_POST['totallot']; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank" onclick="return cekLot();"><i class="fa fa-file-excel-o"></i></a>
                 </div>
             </div>
             </div>
@@ -403,7 +403,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     </tfoot>
             </table>
             <div class="box-footer">
-                    <a href="pages/cetak/excel_5besar_defect.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&totallot=<?php echo $_POST['totallot']; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
+                    <a href="pages/cetak/excel_5besar_defect.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&totallot=<?php echo $_POST['totallot']; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank" onclick="return cekLot();"><i class="fa fa-file-excel-o"></i></a>
                 </div>
             </div>
             </div>
@@ -479,7 +479,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
         <div class="col-xs-6">	
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> Dept Penyebab KPE</h3> <!-- disini 1 -->
+                    <h3 class="box-title"> Dept Penyebab KPE</h3>
                     <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
@@ -653,7 +653,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         </tfoot>
                 </table>
                 <div class="box-footer">
-                        <a href="pages/cetak/excel_3besar_masalah_item.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
+                        <a href="pages/cetak/excel_3besar_masalah_item.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>&totalk=<?=$ri7Total?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
                     </div>
                 </div>
             </div>
@@ -661,7 +661,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
         <div class="col-xs-6">	
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> 5 Buyer Terbesar KPE : <?php echo $Awal." s/d ".$Akhir;?></h3> <!-- disini 2 -->
+                    <h3 class="box-title"> 5 Buyer Terbesar KPE : <?php echo $Awal." s/d ".$Akhir;?></h3>
                     <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
@@ -719,7 +719,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         </tfoot>
                 </table>
                 <div class="box-footer">
-                        <a href="pages/cetak/excel_3besar_masalah_item.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
+                        <a href="pages/cetak/excel_5besar_buyer.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&total=<?php echo $TotalKirim; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
                     </div>
                 </div>
             </div>
@@ -898,7 +898,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         </tfoot>
                 </table>
                 <div class="box-footer">
-                    <a href="pages/cetak/belumada.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>" class="btn btn-success <?php if(true) { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
+                    <a href="pages/cetak/excel_4kategori.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&total=<?php echo $TotalKirim; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
                 </div>
                 </div>
             </div>
@@ -1034,7 +1034,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
             </table>
             </div>
             <div class="box-footer">
-                <a href="pages/cetak/belumada.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" class="btn btn-success <?php if(true) { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
+                <a href="pages/cetak/excel_solusi_kpe.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
             </div>
             </div>
         </div>
@@ -1445,3 +1445,14 @@ Highcharts.chart('container5', {
     }]
 });
 		</script>
+<script>
+    function cekLot() {
+        let lot = document.getElementById('totallot');
+        if(lot.value == "" || lot.value < 0) {
+            alert('Total LOT Kirim belum diisi');
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
