@@ -33,6 +33,8 @@ $jamAr = isset($_POST['jam_akhir']) ? $_POST['jam_akhir'] : '';
 $GShift = isset($_POST['gshift']) ? $_POST['gshift'] : '';
 $Group = isset($_POST['group']) ? $_POST['group'] : '';
 $MC = isset($_POST['nomc']) ? $_POST['nomc'] : '';
+
+	
 if (strlen($jamA) == 5) {
     $start_date = $Awal . " " . $jamA;
   } else {
@@ -42,7 +44,14 @@ if (strlen($jamA) == 5) {
     $stop_date = $Akhir . " " . $jamAr;
   } else {
     $stop_date = $Akhir . " 0" . $jamAr;
-  }		
+  }	
+if ($jamA!="" or $jamAr!=""){ 
+	$Where = " DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' and ";
+}else{
+	$start_date = $Awal;
+	$stop_date = $Akhir;
+	$Where = " DATE_FORMAT( tgl_update , '%Y-%m-%d') between '$start_date' and '$stop_date' and ";
+}
 //$start_date= $Awal." ".$jamA;
 //$stop_date= $Akhir." ".$jamAr;	
 ?>
@@ -239,10 +248,10 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
-	and `sts_gkg` = '0'
-	and inspektor = 'PACKING A'");
+	$Where
+	`dept` = 'PACKING' and
+	`sts_gkg` = '0' and
+	inspektor = 'PACKING A'");
       $rowPAR = mysqli_fetch_array($qryPAR);
       ?>      
           <tr>
@@ -278,8 +287,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+   `dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING B'");
     $rowPBR = mysqli_fetch_array($qryPBR);
@@ -317,8 +326,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING C'");
     $rowPCR = mysqli_fetch_array($qryPCR);
@@ -487,8 +496,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING A'");
       $rowPAR1 = mysqli_fetch_array($qryPAR1);
@@ -518,8 +527,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING B'");
     $rowPBR1 = mysqli_fetch_array($qryPBR1);
@@ -549,8 +558,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and `sts_gkg` = '0'
 	and inspektor = 'PACKING C'");
     $rowPCR1 = mysqli_fetch_array($qryPCR1);
@@ -697,8 +706,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and inspektor = 'PACKING A'");
     $rowPAB = mysqli_fetch_array($qryPAB);
     ?>      
@@ -731,8 +740,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and inspektor = 'PACKING B'");
       $rowPBB = mysqli_fetch_array($qryPBB);
       ?>    
@@ -765,8 +774,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and inspektor = 'PACKING C'");
     $rowPCB = mysqli_fetch_array($qryPCB);
     ?>      
@@ -919,8 +928,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and inspektor = 'PACKING A'");
       $rowPAT = mysqli_fetch_array($qryPAT);
       ?>      
@@ -987,8 +996,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and inspektor = 'PACKING C'");
     $rowPCT = mysqli_fetch_array($qryPCT);
     ?>    
@@ -1151,8 +1160,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and `sts_gkg` = '1'
 	and inspektor = 'PACKING A'");
       $rowPAG = mysqli_fetch_array($qryPAG);
@@ -1190,8 +1199,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+   $Where
+   `dept` = 'PACKING'
 	and `sts_gkg` = '1'
 	and inspektor = 'PACKING B'");
     $rowPBG = mysqli_fetch_array($qryPBG);
@@ -1229,8 +1238,8 @@ select
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and `sts_gkg` = '1'
 	and inspektor = 'PACKING C'");
     $rowPCG = mysqli_fetch_array($qryPCG);
@@ -1375,8 +1384,8 @@ round(sum(netto),2) as TOTAL
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where
+	`dept` = 'PACKING'
 	and `sts_gkg` = '0'");
      $rowOK = mysqli_fetch_array($qryOK);
      ?>    
@@ -1396,8 +1405,7 @@ round(sum(kg_th),2) as TOTAL
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'");
+	$Where `dept` = 'PACKING'");
       $rowTH = mysqli_fetch_array($qryTH);
       ?>      
             <tr>
@@ -1416,8 +1424,7 @@ round(sum(kg_bs),2) as TOTAL
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'");
+	$Where `dept` = 'PACKING'");
       $rowBS = mysqli_fetch_array($qryBS);
       ?>    
             <tr>
@@ -1436,8 +1443,7 @@ round(sum(netto),2) as TOTAL
 from
 	tbl_lap_inspeksi
 where
-	DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date'
-	and `dept` = 'PACKING'
+	$Where `dept` = 'PACKING'
 	and `sts_gkg` = '1'");
 $rowPST = mysqli_fetch_array($qryPST);
 ?>          
@@ -1580,9 +1586,9 @@ $rowPST = mysqli_fetch_array($qryPST);
             $grp = " ";
           }
           if ($Awal != "" and $Akhir != "") {
-            $qry1 = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `dept`='PACKING' $shft $nomc $grp ORDER BY id ASC");
+            $qry1 = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE $Where `dept`='PACKING' $shft $nomc $grp ORDER BY id ASC");
           } else {
-            $qry1 = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `dept`='PACKING' $shft $nomc $grp ORDER BY id ASC");
+            $qry1 = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE $Where `dept`='PACKING' $shft $nomc $grp ORDER BY id ASC");
           }
           while ($row1 = mysqli_fetch_array($qry1)) {
             ?>
