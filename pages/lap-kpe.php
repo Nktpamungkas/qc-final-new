@@ -189,8 +189,11 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               <th><div align="center">Lot</div></th>
               <th><div align="center">Warna</div></th>
               <th><div align="center">Qty Order</div></th>
+              <th><div align="center">Qty Order (yd)</div></th>
               <th><div align="center">Qty Kirim</div></th>
+              <th><div align="center">Qty Kirim (yd)</div></th>
               <th><div align="center">Qty Claim</div></th>
+              <th><div align="center">Qty Claim (yd)</div></th>
               <th><div>
                 <div align="center">T Jawab</div>
               </div></th>
@@ -286,8 +289,11 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td align="center"><?php echo $row1['lot'];?></td>
             <td align="center"><?php echo $row1['warna'];?></td>
             <td align="right"><?php echo $row1['qty_order'];?></td>
+            <td align="right"><?php echo $row1['qty_order2'];?></td>
             <td align="right"><?php echo $row1['qty_kirim'];?></td>
+            <td align="right"><?php echo $row1['qty_kirim2'];?></td>
             <td align="right"><?php echo $row1['qty_claim'];?></td>
+            <td align="right"><?php echo $row1['qty_claim2'];?></td>
             <td align="center"><?php echo $tjawab;?></td>
             <td><?php echo $row1['masalah_dominan'];?></td>
             <td><?php echo $row1['masalah'];?></td>
