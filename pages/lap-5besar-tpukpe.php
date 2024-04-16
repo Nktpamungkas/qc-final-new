@@ -3,16 +3,8 @@ ini_set("error_reporting", 1);
 session_start();
 include "koneksi.php";
 
-?>
-<?php
 $Awal = isset($_POST['awal']) ? $_POST['awal'] : '';
 $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
-$Bulanm = isset($_POST['bulan']) ? date('m', strtotime($_POST['bulan'])) : ''; // output: 03
-$BulanM = isset($_POST['bulan']) ? date('M', strtotime($_POST['bulan'])) : ''; // output: Mar
-$TahunY = isset($_POST['bulan']) ? date('Y', strtotime($_POST['bulan'])) : ''; // output: 2024
-$TanggalAwal = isset($_POST['bulan']) ? date('01', strtotime($_POST['bulan'])) : ''; // output: 01
-$TanggalAkhir = isset($_POST['bulan']) ? date('t', strtotime($_POST['bulan'])) : ''; // output: 30
-
 
 ?>
 <!DOCTYPE html
@@ -70,7 +62,13 @@ $TanggalAkhir = isset($_POST['bulan']) ? date('t', strtotime($_POST['bulan'])) :
                     <div class="col-sm-2">
                         <div class="input-group date">
                             <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                            <input name="bulan" type="month" class="form-control pull-right" />
+                            <input name="awal" type="text" class="form-control pull-right" id="datepicker" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" />
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="input-group date">
+                            <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+                            <input name="akhir" type="text" class="form-control pull-right" id="datepicker1" placeholder="Tanggal Akhir" value="<?php echo $Akhir; ?>" />
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success " name="cari"><i class="fa fa-search"></i> Cari
@@ -92,10 +90,7 @@ $TanggalAkhir = isset($_POST['bulan']) ? date('t', strtotime($_POST['bulan'])) :
         <div class="col-xs-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> 5 ITEM TERBESAR TPUKPE
-                        <?= strtoupper($BulanM) . ' ' . $TahunY ?> PERIODE
-                        <?= $TanggalAwal ?: '...' ?> S/D
-                        <?= $TanggalAkhir ?: '...' ?>
+                    <h3 class="box-title"> 5 ITEM TERBESAR TPUKPE PERIODE <?= $Awal ?> S/D <?= $Akhir ?>
                     </h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -133,7 +128,7 @@ $TanggalAkhir = isset($_POST['bulan']) ? date('t', strtotime($_POST['bulan'])) :
                                                         from tbl_tpukpe_now a
                                                         left join tbl_aftersales_now b
                                                         on a.id_nsp = b.id
-                                                        where year(a.tgl_buat) = '$TahunY' and month(a.tgl_buat) = '$Bulanm'
+                                                        where DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
                                                         group by b.no_hanger
                                                         order by a.qty desc 
                                                         limit 5");
@@ -223,10 +218,7 @@ $TanggalAkhir = isset($_POST['bulan']) ? date('t', strtotime($_POST['bulan'])) :
         <div class="col-xs-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> 3 PELANGGAN TERBESAR TPUKPE
-                        <?= strtoupper($BulanM) . ' ' . $TahunY ?> PERIODE
-                        <?= $TanggalAwal ?: '...' ?> S/D
-                        <?= $TanggalAkhir ?: '...' ?>
+                    <h3 class="box-title"> 3 PELANGGAN TERBESAR TPUKPE PERIODE <?= $Awal ?> S/D <?= $Akhir ?>
                     </h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -264,7 +256,7 @@ $TanggalAkhir = isset($_POST['bulan']) ? date('t', strtotime($_POST['bulan'])) :
                                                         from tbl_tpukpe_now a
                                                         left join tbl_aftersales_now b
                                                         on a.id_nsp = b.id
-                                                        where year(a.tgl_buat) = '$TahunY' and month(a.tgl_buat) = '$Bulanm'
+                                                        where DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
                                                         group by b.no_hanger
                                                         order by a.qty desc 
                                                         limit 3");
@@ -275,7 +267,7 @@ $TanggalAkhir = isset($_POST['bulan']) ? date('t', strtotime($_POST['bulan'])) :
                                                                     a.masalah_dominan,
                                                                     sum(a.qty) as kg,
                                                                     b.qty_kirim,
-                                                                    b.buyer
+                                                                    b.pelanggan
                                                                 from tbl_tpukpe_now a
                                                                 left join tbl_aftersales_now b
                                                                 on a.id_nsp = b.id
@@ -309,7 +301,7 @@ $TanggalAkhir = isset($_POST['bulan']) ? date('t', strtotime($_POST['bulan'])) :
                                         if ($count < 1) {
                                             ?>
                                             <td align="center" rowspan="<?= $rowspan ?>">
-                                                <?= $row2['buyer'] ?>
+                                                <?= $row2['pelanggan'] ?>
                                             </td>
                                         <?php } ?>
                                         <td align="left">
@@ -359,10 +351,7 @@ $TanggalAkhir = isset($_POST['bulan']) ? date('t', strtotime($_POST['bulan'])) :
         <div class="col-xs-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> 3 DEPT TERBESAR TPUKPE
-                        <?= strtoupper($BulanM) . ' ' . $TahunY ?> PERIODE
-                        <?= $TanggalAwal ?: '...' ?> S/D
-                        <?= $TanggalAkhir ?: '...' ?>
+                    <h3 class="box-title"> 3 DEPT TERBESAR TPUKPE PERIODE <?= $Awal ?> S/D <?= $Akhir ?>
                     </h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -400,7 +389,7 @@ $TanggalAkhir = isset($_POST['bulan']) ? date('t', strtotime($_POST['bulan'])) :
                                                         from tbl_tpukpe_now a
                                                         left join tbl_aftersales_now b
                                                         on a.id_nsp = b.id
-                                                        where year(a.tgl_buat) = '$TahunY' and month(a.tgl_buat) = '$Bulanm'
+                                                        where DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
                                                         group by b.no_hanger
                                                         order by a.qty desc 
                                                         limit 3");
