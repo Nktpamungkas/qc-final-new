@@ -13,7 +13,12 @@ $act=$_GET['g'];
 //-
 $Awal=$_GET['awal'];
 $Akhir=$_GET['akhir'];
-$TotalKirim=$_GET['total'];
+if($_GET['total']!=""){
+$TotalKirim = $_GET['total'];	
+}else{
+$TotalKirim = "0";	
+}
+
 //$Dept=$_GET['dept'];
 //$Cancel=$_GET['cancel'];
 $qTgl=mysqli_query($con,"SELECT DATE_FORMAT(now(),'%d-%b-%y') as tgl_skrg,DATE_FORMAT(now(),'%H:%i:%s') as jam_skrg");
@@ -187,7 +192,7 @@ border:hidden;
             </tr>
             <tr>
                 <td align="left" width="60%"><strong>Persentase</strong></td>
-                <td align="center" width="40%"><strong><?php echo number_format(($tclaim/$torder)*100,2)." %";?></strong></td>
+                <td align="center" width="40%"><strong><?php if($torder != "0"){ echo number_format(($tclaim/$torder)*100,2)." %"; }else{ echo "0.00"; } ?></strong></td>
             </tr>
         </table></td>
     </tr>
@@ -203,7 +208,7 @@ border:hidden;
             </tr>
             <tr>
                 <td align="left" width="60%"><strong>Persentase</strong></td>
-                <td align="center" width="40%"><strong><?php echo number_format(($tclaim/$TotalKirim)*100,2)." %";?></strong></td>
+                <td align="center" width="40%"><strong><?php if($TotalKirim != "0"){ echo number_format(($tclaim/$TotalKirim)*100,2)." %";}else { echo "0.00 %";}?></strong></td>
             </tr>
         </table></td>
     </tr>
@@ -226,7 +231,7 @@ border:hidden;
             </tr>
             <tr>
                 <td align="left" width="60%"><strong>Persentase</strong></td>
-                <td align="center" width="40%"><strong><?php echo number_format(($rowQC['qty_claim_qc']/$torder)*100,2)." %";?></strong></td>
+                <td align="center" width="40%"><strong><?php if($torder != "0"){ echo number_format(($rowQC['qty_claim_qc']/$torder)*100,2)." %"; }else { echo "0.00 %"; }?></strong></td>
             </tr>
         </table></td>
     </tr>
@@ -249,7 +254,8 @@ border:hidden;
             </tr>
             <tr>
                 <td align="left" width="60%"><strong>Persentase</strong></td>
-                <td align="center" width="40%"><strong><?php echo number_format(($rowQC['qty_claim_qc']/$TotalKirim)*100,4)." %";?></strong></td>
+                <td align="center" width="40%">
+					<strong><?php if($TotalKirim != "0"){ echo number_format(($rowQC['qty_claim_qc']/$TotalKirim)*100,4)." %"; } else{ echo " 0.00 %";}?></strong></td>
             </tr>
         </table></td>
     </tr>
