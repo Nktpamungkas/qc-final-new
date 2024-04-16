@@ -21,7 +21,7 @@ include "koneksi.php";
   $Awal = isset($_POST['awal']) ? $_POST['awal'] : '';
   $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
   $Order = isset($_POST['order']) ? $_POST['order'] : '';
-  $PO = isset($_POST['po']) ? $_POST['po'] : '';
+  $ProdOrder = isset($_POST['prod_order']) ? $_POST['prod_order'] : '';
   $Hanger = isset($_POST['hanger']) ? $_POST['hanger'] : '';
   $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 
@@ -54,12 +54,8 @@ include "koneksi.php";
             </div>
           </div>
           <div class="col-sm-2">
-            <input name="order" type="text" class="form-control pull-right" id="order" placeholder="No Order"
-              value="<?php echo $Order; ?>" autocomplete="off" />
-          </div>
-          <div class="col-sm-2">
-            <input name="po" type="text" class="form-control pull-right" id="po" placeholder="No PO"
-              value="<?php echo $PO; ?>" autocomplete="off" />
+            <input name="prod_order" type="text" class="form-control pull-right" id="prod_order" placeholder="Prod Order"
+              value="<?php echo $ProdOrder; ?>" autocomplete="off" />
           </div>
           <div class="col-sm-2">
             <input name="hanger" type="text" class="form-control pull-right" id="hanger" placeholder="No Hanger"
@@ -105,7 +101,7 @@ include "koneksi.php";
                   <div align="center">NO TPUKPE</div>
                 </th>
                 <th rowspan="2">
-                  <div align="center">NO ORDER</div>
+                  <div align="center">PROD ORDER</div>
                 </th>
                 <th rowspan="2">
                   <div align="center">DEMAND</div>
@@ -146,8 +142,9 @@ include "koneksi.php";
               if ($Awal != "") {
                 $Where = " AND DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' ";
               }
-              if ($Awal != "" or $Order != "" or $Hanger != "" or $PO != "" or $Langganan != "") {
+              if ($Awal != "" or $Hanger != "" or $ProdOrder != "" or $Langganan != "") {
                 $qry1 = mysqli_query($con, "select
+                                              a.id,
                                               a.no_tpukpe,
                                               a.no_po,
                                               b.nodemand,
@@ -159,43 +156,30 @@ include "koneksi.php";
                                               a.t_jawab,
                                               a.t_jawab1,
                                               a.t_jawab2,
+                                              a.qty,
+                                              a.qty2,
                                               b.qty_claim,
-                                              b.satuan_c 
+                                              b.satuan_c,
+                                              b.qty_claim2,
+                                              b.satuan_c2,
+                                              b.nokk
                                             FROM tbl_tpukpe_now a
                                             left join tbl_aftersales_now b
                                             on a.id_nsp = b.id
-                                            WHERE a.no_order LIKE '%%' 
-                                              AND a.no_po LIKE '%%' 
-                                              AND b.no_hanger LIKE '%%' 
-                                              AND a.langganan LIKE '%%' $Where ORDER BY a.id ASC");
-              } else {
-                $qry1 = mysqli_query($con, "select
-                                              a.no_tpukpe,
-                                              a.no_po,
-                                              b.nodemand,
-                                              a.langganan,
-                                              b.no_hanger,
-                                              a.warna,
-                                              a.masalah_dominan,
-                                              a.masalah,
-                                              a.t_jawab,
-                                              a.t_jawab1,
-                                              a.t_jawab2,
-                                              b.qty_claim,
-                                              b.satuan_c 
-                                            FROM tbl_tpukpe_now a
-                                            left join tbl_aftersales_now b
-                                            on a.id_nsp = b.id ORDER BY a.id ASC");
-              }
+                                            WHERE b.nokk LIKE '%$ProdOrder%' 
+                                              AND b.no_hanger LIKE '%$Hanger%' 
+                                              AND a.langganan LIKE '%$Langganan%' $Where ORDER BY a.id ASC");
+              
               while ($row1 = mysqli_fetch_array($qry1)) {
                 ?>
 
-<tr>
+                <tr>
                   <td align="center">
-                    <?= $row1['no_tpukpe'] ?>
+                    <?= ''//$row1['no_tpukpe'] ?>
+                    <a href="#" class="edit_tpukpe" id="<?php echo $row1['id'] ?>"><?php echo $row1['no_tpukpe']; ?></a>
                   </td>
                   <td align="center">
-                    <?= $row1['no_po'] ?>
+                    <?= $row1['nokk'] ?>
                   </td>
                   <td align="center">
                     <?= $row1['nodemand'] ?>
@@ -227,16 +211,32 @@ include "koneksi.php";
                     ?>
                   </td>
                   <td align="center">
-                    <?= strtoupper($row1['satuan_c']) == 'KG' ? $row1['qty_claim'] : '' ?>
+                    <?php
+                    if($row1['qty'] != "") {
+                      echo $row1['qty'];
+                    } else {
+                      echo strtoupper($row1['satuan_c']) == 'KG' ? $row1['qty_claim'] : '';
+                    }
+                    ?>
                   </td>
                   <td align="center">
-                    <?= strtoupper($row1['satuan_c']) == 'YD' ? $row1['qty_claim'] : '' ?>
+                    <?php
+                    if($row1['qty2'] != "") {
+                      echo $row1['qty2'];
+                    } else {
+                      echo strtoupper($row1['satuan_c2']) == 'YD' ? $row1['qty_claim2'] : '';
+                    }
+                    ?>
                   </td>
                 </tr>
-<?php } ?>
+        <?php 
+              } 
+            }
+        ?>
             </tbody>
             
           </table>
+          <div id="EditTPUKPE" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
         </div>
 
       </div>

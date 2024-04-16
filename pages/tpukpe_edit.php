@@ -23,8 +23,31 @@ ini_set("error_reporting", 1);
 session_start();
 include("../koneksi.php");
     $modal_id=$_GET['id'];
-	$modal=mysqli_query($con,"SELECT * FROM tbl_tpukpe_now WHERE id='$modal_id' ");
+	$modal=mysqli_query($con,"select
+                                    a.*,
+                                    b.qty_claim,
+                                    b.satuan_c,
+                                    b.qty_claim2,
+                                    b.satuan_c2
+                                from
+                                    tbl_tpukpe_now a
+                                left join tbl_aftersales_now b
+                                on a.id_nsp = b.id
+                                where
+                                    a.id = '$modal_id' ");
 while($r=mysqli_fetch_array($modal)){	
+    if($r['qty'] != "") {
+        $kg = $r['qty'];
+    } else {
+        $kg = strtoupper($r['satuan_c']) == 'KG' ? $r['qty_claim'] : '';
+    }
+
+    if($r['qty2'] != "") {
+        $yd = $r['qty2'];
+    } else {
+        $yd = strtoupper($r['satuan_c2']) == 'YD' ? $r['qty_claim2'] : '';
+    }
+
 ?>
           <div class="modal-dialog">
             <div class="modal-content">
@@ -128,9 +151,15 @@ while($r=mysqli_fetch_array($modal)){
                         </div>	
                 </div>
                 <div class="form-group">
-                    <label for="qty" class="col-sm-2 control-label">Qty</label>
+                    <label for="qty" class="col-sm-2 control-label">Qty (KG)</label>
                         <div class="col-sm-4">
-                            <input name="qty" type="text" class="form-control" id="qty" value="<?php echo $r['qty'];?>" placeholder="0.00">
+                            <input name="qty" type="text" class="form-control" id="qty" value="<?php echo $kg ?>" placeholder="0.00">
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="qty2" class="col-sm-2 control-label">Qty (Yard)</label>
+                        <div class="col-sm-4">
+                            <input name="qty2" type="text" class="form-control" id="qty2" value="<?php echo $yd ?>" placeholder="0.00">
                         </div>
                 </div>
                 <div class="form-group">

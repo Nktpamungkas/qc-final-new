@@ -147,9 +147,9 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
             <?php if($row1['status3']!=""){ echo"<br><span class='label label-danger'>".$row1['status3']."</span>";}?>
             </td>-->
             <td align="center">
-              <a href="EditKPENew-<?php echo $row1['id_nsp']; ?>" target="_blank">
+              <!-- <a href="EditKPENew-<?php //echo $row1['id_nsp']; ?>" target="_blank"> -->
                 <?php echo $row1['no_tpukpe'];?>
-              </a>
+              <!-- </a> -->
             </td>
             <td align="left"><?php echo $row1['langganan'];?></td>
             <td align="center"><?php echo $row1['no_order'];?></td>

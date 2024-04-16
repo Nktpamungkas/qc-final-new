@@ -18,7 +18,8 @@ if ($_POST) {
     $kpi=str_replace("'","''",$_POST['no_kpi']);
     $ft=str_replace("'","''",$_POST['no_ft']);
     $kpe=str_replace("'","''",$_POST['no_kpe']);
-    $qty=str_replace("'","''",$_POST['qty']);
+    $qty=str_replace("'","''",$_POST['qty']); // ini qty kg claim
+    $qty2=str_replace("'","''",$_POST['qty2']); // ini qty yard claim
     $sqlupdate=mysqli_query($con,"UPDATE `tbl_tpukpe_now` SET
 		`status`='$status',
     `masalah`='$masalah',
@@ -30,6 +31,7 @@ if ($_POST) {
     `tgl_kpe`='$tgl_kpe',
     `tgl_conform`='$tgl_conform',
     `qty`='$qty',
+    `qty2`='$qty2',
     `masalah_dominan`='$_POST[masalah_dominan]',
     `t_jawab`='$_POST[t_jawab]',
 		`t_jawab1`='$_POST[t_jawab1]',
