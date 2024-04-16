@@ -212,9 +212,12 @@
                                 <tr>
                                     <td align="center">
                                         <div class="btn-group">
-                                            <a href="#" class="btn btn-danger btn-xs <?php if ($_SESSION['akses'] == 'biasa') {
-                                                echo "disabled";
-                                            } ?>"
+                                            <?php
+                                                $disabled = strtolower(trim($_SESSION['akses'])) == 'admin' &&
+                                                            strtolower(trim($_SESSION['lvl_id'])) == 'leadertq' &&
+                                                            in_array(strtolower(trim($_SESSION['usrid'])), ["janudwilaksono", "vivikkurniawati"]);
+                                            ?>
+                                            <a href="#" class="btn btn-danger btn-xs <?= $disabled ? '':'disabled' ?>"
                                                 onclick="confirm_delete('./HapusDataRandom-<?php echo $r['id'] ?>');"><i
                                                     class="fa fa-trash" data-toggle="tooltip" data-placement="top"
                                                     title="Hapus"></i> </a>
