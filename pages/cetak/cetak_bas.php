@@ -108,8 +108,9 @@ border:hidden;
 </head>
 <body>
     <?php date_default_timezone_set('Asia/Jakarta');
-    $today = date("Y-m-d") ;
-    echo "BULAN : ".date("F Y", strtotime($today));
+    // $today = date("Y-m-d") ;
+    // echo "BULAN : ".date("F Y", strtotime($today));
+    echo 'PERIODE ' . $Awal . ' S/D ' . $Akhir;
     ?>
     <table width="100%" border="1" class="table-list1">
         <thead>
@@ -138,7 +139,7 @@ border:hidden;
         </thead>
         <tbody>
             <?php
-                $query=mysqli_query($con,"SELECT * FROM tbl_tq_randomtest WHERE rbow!='' GROUP BY no_item ");
+                $query=mysqli_query($con,"SELECT * FROM tbl_tq_randomtest WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND rbow!='' GROUP BY no_item ");
                 while($r=mysqli_fetch_array($query)){
                 $q1=mysqli_query($con,"SELECT * FROM tbl_tq_nokk WHERE no_item='$r[no_item]' OR no_hanger='$r[no_hanger]'");
                 $r1=mysqli_fetch_array($q1);

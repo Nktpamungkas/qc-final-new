@@ -73,17 +73,15 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="pages/cetak/cetak_prt.php" target="_blank">P. Random Tumble</a>
+                                        <li><a href="pages/cetak/cetak_prt.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">P. Random Tumble</a>
                                         </li>
-                                        <li><a href="pages/cetak/cetak_pb.php" target="_blank">P. Box</a></li>
-                                        <li><a href="pages/cetak/cetak_pm.php" target="_blank">P. Martindle</a></li>
-                                        <li><a href="pages/cetak/cetak_sp.php" target="_blank">Snag. Pod</a></li>
-                                        <li><a href="pages/cetak/cetak_dt.php" target="_blank">Drying Time AW</a></li>
-                                        <li><a href="pages/cetak/cetak_bs.php" target="_blank">Bursting Strength</a>
-                                        </li>
-                                        <li><a href="pages/cetak/cetak_sr.php" target="_blank">Stretch And Recovery</a>
-                                        </li>
-                                        <li><a href="pages/cetak/cetak_bas.php" target="_blank">Bow & Skew</a></li>
+                                        <li><a href="pages/cetak/cetak_pb.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">P. Box</a></li>
+                                        <li><a href="pages/cetak/cetak_pm.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">P. Martindle</a></li>
+                                        <li><a href="pages/cetak/cetak_sp.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">Snag. Pod</a></li>
+                                        <li><a href="pages/cetak/cetak_dt.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">Drying Time AW</a></li>
+                                        <li><a href="pages/cetak/cetak_bs.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">Bursting Strength</a></li>
+                                        <li><a href="pages/cetak/cetak_sr.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">Stretch And Recovery</a></li>
+                                        <li><a href="pages/cetak/cetak_bas.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">Bow & Skew</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -202,8 +200,8 @@
                         </thead>
                         <tbody>
                             <?php
-                            $query = mysqli_query($con, "SELECT * FROM tbl_tq_randomtest WHERE YEAR(tgl_update) = YEAR(CURRENT_DATE)
-             AND MONTH(tgl_update) = MONTH(CURRENT_DATE) GROUP BY no_item ");
+                            // $query = mysqli_query($con, "SELECT * FROM tbl_tq_randomtest WHERE YEAR(tgl_update) = YEAR(CURRENT_DATE) AND MONTH(tgl_update) = MONTH(CURRENT_DATE) GROUP BY no_item ");
+                            $query = mysqli_query($con, "SELECT * FROM tbl_tq_randomtest WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' GROUP BY no_item ");
                             while ($r = mysqli_fetch_array($query)) {
                                 $q1 = mysqli_query($con, "SELECT * FROM tbl_tq_nokk WHERE no_item='$r[no_item]' OR no_hanger='$r[no_hanger]'");
                                 $r1 = mysqli_fetch_array($q1);
