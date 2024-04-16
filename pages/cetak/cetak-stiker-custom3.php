@@ -335,7 +335,7 @@ $vallebar=substr($rowdb2['LEBAR'],0,$posl);
                 <td colspan="2" width="30%" valign="top" style="border-top:0px #000000 solid; 
                 border-bottom:0px #000000 solid;
                 border-left:0px #000000 solid; 
-                border-right:0px #000000 solid; font-size:10px;"><?php echo $rowdb2['JENIS_KAIN'];?></td>
+                border-right:0px #000000 solid; font-size:10px;"><?php echo $rowdb2['JENIS_KAIN'];?><br><?php echo $rowdb2['DATA_STYLE'];?></td>
                 <td colspan="4" align="right" valign="top" style="border-top:0px #000000 solid; 
                 border-bottom:0px #000000 solid;
                 border-left:0px #000000 solid; 
@@ -353,7 +353,12 @@ $vallebar=substr($rowdb2['LEBAR'],0,$posl);
                 <td colspan="2" width="40%" style="border-top:0px #000000 solid; 
                 border-bottom:0px #000000 solid;
                 border-left:0px #000000 solid; 
-                border-right:0px #000000 solid; font-size:10px;"><?php echo $rowdb2['DATA_STYLE'];?></td>
+                border-right:0px #000000 solid; font-size:10px;"><span style="border-top:0px #000000 solid; 
+                border-bottom:0px #000000 solid;
+                border-left:0px #000000 solid; 
+                border-right:0px #000000 solid;">
+				  <textarea style="text-align:left; font-size: 11px; border: none; resize: none;" name="ket2" placeholder="ketik" maxlength="78" rows="2" cols="35"></textarea>	
+                </span></td>
                 <td colspan="4" align="right" style="border-top:0px #000000 solid; 
                 border-bottom:0px #000000 solid;
                 border-left:0px #000000 solid; 
@@ -395,7 +400,7 @@ $vallebar=substr($rowdb2['LEBAR'],0,$posl);
                 <td colspan="3" style="border-top:0px #000000 solid; 
                 border-bottom:0px #000000 solid;
                 border-left:0px #000000 solid; 
-                border-right:0px #000000 solid;"><input style="text-align:left; font-size: 15px; font-weight:bold;" name="ket" type="text" placeholder="ketik" size="25" /></td>
+                border-right:0px #000000 solid;"><input style="text-align:left; font-size: 15px; font-weight:bold;" name="ket" type="text" placeholder="ketik" size="23" /></td>
                 <td align="right" style="border-top:0px #000000 solid; 
                 border-bottom:0px #000000 solid;
                 border-left:0px #000000 solid; 
