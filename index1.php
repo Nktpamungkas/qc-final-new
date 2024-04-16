@@ -677,7 +677,7 @@
                             <!-- end jika username marketing hidden-->
                         <?php } ?>
                     <?php } ?>
-                    <?php if ($_SESSION['lvl_id'] == "AFTERSALES") {  ?>
+                    <?php if ($_SESSION['lvl_id'] == "AFTERSALES" && strtolower($_SESSION['usrid']) != "kpe") {  ?>
                     
                 
                         <li class="treeview <?php if ($_GET['p'] == "Input-KPE-New") {
@@ -834,7 +834,7 @@
                                 </li>   
                             -->
                     <?php } ?>
-                    <?php if ($_SESSION['lvl_id'] == "AFTERSALES") {  ?>
+                    <?php if ($_SESSION['lvl_id'] == "AFTERSALES" && strtolower($_SESSION['usrid']) != "kpe") {  ?>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Detail-Disposisi-Now" or $_GET['p'] == "Disposisi-Now") {
                                                 echo "active";
                                             } ?>">
@@ -889,7 +889,7 @@
                             </ul>
                         </li>
                     <?php } ?>
-                    <?php if ($_SESSION['lvl_id'] == "SPVQC" or $_SESSION['lvl_id'] == "AFTERSALES") {  ?>
+                    <?php if ($_SESSION['lvl_id'] == "SPVQC" or ($_SESSION['lvl_id'] == "AFTERSALES" && strtolower($_SESSION['usrid']) != "kpe")) {  ?>
                         <li class="treeview <?php if ($_GET['p'] == "Data-Pengiriman-Now" or $_GET['p'] == "Persediaan-Now" or $_GET['p'] == "Aftersales-Now") {
                                                 echo "active";
                                             } ?>">
