@@ -142,7 +142,7 @@ border:hidden;
 	$no=1;
 	$Awal=$_GET['awal'];
 	$Akhir=$_GET['akhir'];		
-  $qry1=mysqli_query($con,"SELECT * FROM tbl_aftersales 
+  $qry1=mysqli_query($con,"SELECT * FROM tbl_aftersales_now 
   WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND sts_claim='1'");
         while($row1=mysqli_fetch_array($qry1)){
 		 ?>
