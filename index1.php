@@ -2586,29 +2586,15 @@
                 }
             });
         });
-        $(document).on('click', '.detail_solusi_perbaikan_garment', function(e) {
-            var m = $(this).attr("id");
-            $.ajax({
-                url: "pages/detail_solusi_perbaikan_garment.php",
-                type: "GET",
-                data: {
-                    id: m,
-                },
-                success: function(ajaxData) {
-                    $("#DataSolusiPerbaikanGarment").html(ajaxData);
-                    $("#DataSolusiPerbaikanGarment").modal('show', {
-                        backdrop: 'true'
-                    });
-                }
-            });
-        });
         $(document).on('click', '.detail_solusi_debit_note', function(e) {
             var m = $(this).attr("id");
+            const nspId = $(this).attr("nsp-id");
             $.ajax({
                 url: "pages/detail_solusi_debit_note.php",
                 type: "GET",
                 data: {
-                    id: m,
+                    // id: m,
+                    nspId: nspId,
                 },
                 success: function(ajaxData) {
                     $("#DataSolusiDebitNote").html(ajaxData);
@@ -2618,33 +2604,55 @@
                 }
             });
         });
-        $(document).on('click', '.edit_detail_solusi_perbaikan_garment', function(e) {
+        $(document).on('click', '.edit_detail_solusi_debit_note', function(e) {
             var m = $(this).attr("id");
+            const nspId = $(this).attr("nsp-id");
             $.ajax({
-                url: "pages/edit_detail_solusi_perbaikan_garment.php",
+                url: "pages/edit_detail_solusi_debit_note.php",
                 type: "GET",
                 data: {
-                    id: m,
+                    // id: m,
+                    nspId: nspId,
                 },
                 success: function(ajaxData) {
-                    $("#EditDataSolusiPerbaikanGarment").html(ajaxData);
-                    $("#EditDataSolusiPerbaikanGarment").modal('show', {
+                    $("#EditDataSolusiDebitNote").html(ajaxData);
+                    $("#EditDataSolusiDebitNote").modal('show', {
                         backdrop: 'true'
                     });
                 }
             });
         });
-        $(document).on('click', '.edit_detail_solusi_debit_note', function(e) {
+        $(document).on('click', '.detail_solusi_perbaikan_garment', function(e) { //disini
             var m = $(this).attr("id");
+            const nspId = $(this).attr("nsp-id");
             $.ajax({
-                url: "pages/edit_detail_solusi_debit_note.php",
+                url: "pages/detail_solusi_perbaikan_garment.php",
                 type: "GET",
                 data: {
-                    id: m,
+                    // id: m,
+                    nspId: nspId,
                 },
                 success: function(ajaxData) {
-                    $("#EditDataSolusiDebitNote").html(ajaxData);
-                    $("#EditDataSolusiDebitNote").modal('show', {
+                    $("#DataSolusiPerbaikanGarment").html(ajaxData);
+                    $("#DataSolusiPerbaikanGarment").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+        $(document).on('click', '.edit_detail_solusi_perbaikan_garment', function(e) {
+            var m = $(this).attr("id");
+            const nspId = $(this).attr("nsp-id");
+            $.ajax({
+                url: "pages/edit_detail_solusi_perbaikan_garment.php",
+                type: "GET",
+                data: {
+                    // id: m,
+                    nspId: nspId,
+                },
+                success: function(ajaxData) {
+                    $("#EditDataSolusiPerbaikanGarment").html(ajaxData);
+                    $("#EditDataSolusiPerbaikanGarment").modal('show', {
                         backdrop: 'true'
                     });
                 }

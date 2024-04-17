@@ -148,9 +148,9 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
           <div class="pull-right">
 
           <?php if($_POST['solusi'] == 'PERBAIKAN GARMENT'){ ?>
-            <a href="pages/cetak/cetak_perbaikan_garment.php" class="btn btn-primary" target="_blank">Cetak Perbaikan Garment</a>
+            <a href="pages/cetak/cetak_perbaikan_garment.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" class="btn btn-primary" target="_blank">Cetak Perbaikan Garment</a>
           <?php }elseif($_POST['solusi'] == 'DEBIT NOTE') {?>
-            <a href="pages/cetak/cetak_debit_note.php" class="btn btn-success" target="_blank">Cetak Debit Note</a>
+            <a href="pages/cetak/cetak_debit_note.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" class="btn btn-success" target="_blank">Cetak Debit Note</a>
             <?php }?>
             
             <a href="pages/cetak/cetak_kpe.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>" class="btn btn-danger <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank">Cetak KPE</a>
@@ -299,22 +299,22 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td><?php echo $row1['masalah'];?></td>
             <td><?php echo $row1['penyebab'];?></td>
             <td>
-                 <?php if($row1['solusi'] == "PERBAIKAN GARMENT") { ?>
+                <?php if($row1['solusi'] == "PERBAIKAN GARMENT") { ?>
 
-                  <a href="#" id='<?php echo $row1['no_item']; ?> / <?php echo $row1['no_hanger']; ?>' class="detail_solusi_perbaikan_garment"><?php echo $row1['solusi'];?></a>
-                  <a href="#" id='<?php echo $row1['no_item']; ?> / <?php echo $row1['no_hanger']; ?>' class="edit_detail_solusi_perbaikan_garment btn btn-info btn-xs">Edit</a>
+                  <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="detail_solusi_perbaikan_garment"><?php echo $row1['solusi'];?></a>
+                  <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="edit_detail_solusi_perbaikan_garment btn btn-info btn-xs">Edit</a>
                   <!-- <a href="#" id='' class="detail_solusi_perbaikan_garment" data-toggle="modal" data-target="#DataSolusi" data-no_item="<?php echo $row1['no_item']; ?>"><?php echo $row1['solusi'];?></a> -->
                 
                 <?php }elseif($row1['solusi'] == "DEBIT NOTE"){?>
-                  <a href="#" id='<?php echo $row1['no_item']; ?> / <?php echo $row1['no_hanger']; ?>' class="detail_solusi_debit_note"><?php echo $row1['solusi'];?></a>
-                  <a href="#" id='<?php echo $row1['no_item']; ?> / <?php echo $row1['no_hanger']; ?>' class="edit_detail_solusi_debit_note btn btn-info btn-xs">Edit</a>
+                  <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="detail_solusi_debit_note"><?php echo $row1['solusi'];?></a>
+                  <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="edit_detail_solusi_debit_note btn btn-info btn-xs">Edit</a>
                   
-                  <?php }else{?>
-                    <?php echo $row1['solusi'];?>
-                  <?php }?>
+                <?php }else{?>
+                  <?php echo $row1['solusi'];?>
+                <?php }?>
             </td>
             
-                  <!-- <td><?php echo $row1['solusi'];?></td> -->
+                  <!-- <td><?php //echo $row1['solusi'];?></td> -->
             <td><?php if($row1['personil2']!=""){echo $row1['personil'].",".$row1['personil2'];}else{echo $row1['personil'];}?></td>
             <td><?php echo $row1['pejabat'];?></td>
             <td><?php if($row1['sts']=="1"){echo "Lolos QC";}else if($row1['sts_disposisiqc']=="1"){echo "Disposisi QC";}else if($row1['sts_disposisipro']=="1"){echo "Disposisi Produksi";}?><?php if($row1['sts_nego']=="1"){echo ", Negosiasi Aftersales";}?></td>
@@ -358,126 +358,6 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 
 
 
-
-
-
-<?php 
-if($_POST['simpan_solusi_pg']=="Simpan"){
-
-	$no_item=strtoupper($_POST['no_item']);
-	$pcs=strtoupper($_POST['pg_pcs']);
-
-  $format_amount = str_replace(['.', ','], '', $_POST['pg_amount']);
-	$amount=strtoupper($format_amount);
-
-  $currency=strtoupper($_POST['currency']);
-  
-	$sqlData1=mysqli_query($con,"INSERT INTO tbl_perbaikan_garment SET 
-		  no_item='$no_item', pcs='$pcs', amount='$amount', currency='$currency'");
-	if($sqlData1){	
-	echo "<script>swal({
-  title: 'Data Telah Tersimpan',   
-  text: 'Klik Ok untuk input data kembali',
-  type: 'success',
-  }).then((result) => {
-  if (result.value) {
-         window.location.href='LapKPE';
-	 
-  }
-});</script>";
-}else {
-      // Tampilkan pesan kesalahan jika perintah SQL gagal
-      echo "Error: " . mysqli_error($con);
-  }
-}
-
-if($_POST['simpan_solusi_db']=="Simpan"){
-	$no_item=strtoupper($_POST['no_item']);
-	$dn_kg=strtoupper($_POST['dn_kg']);
-	$dn_satuan=strtoupper($_POST['dn_satuan']);
-  $format_amount = str_replace(['.', ','], '', $_POST['dn_amount']);
-	$amount=strtoupper($format_amount);
-  $currency=strtoupper($_POST['currency']);
-	$sqlData1=mysqli_query($con,"INSERT INTO tbl_debit_note SET 
-		  no_item='$no_item', kg='$dn_kg', satuan='$dn_satuan', amount='$amount', currency='$currency'");
-	if($sqlData1){	
-	echo "<script>swal({
-  title: 'Data Telah Tersimpan',   
-  text: 'Klik Ok untuk input data kembali',
-  type: 'success',
-  }).then((result) => {
-  if (result.value) {
-    window.location.href='LapKPE';
-	 
-  }
-});</script>";
-}else {
-  // Tampilkan pesan kesalahan jika perintah SQL gagal
-  echo "Error: " . mysqli_error($con);
-}
-}
-
-// Edit Debit Note
-if($_POST['edit_solusi_pg']=="Simpan"){
-
-	$no_item=strtoupper($_POST['no_item']);
-	$pcs=strtoupper($_POST['pg_pcs']);
-
-  $format_amount = str_replace(['.', ','], '', $_POST['pg_amount']);
-	$amount=strtoupper($format_amount);
-
-  $currency=strtoupper($_POST['currency']);
-  
-	$sqlData1=mysqli_query($con,"UPDATE tbl_perbaikan_garment SET 
-		  no_item='$no_item', pcs='$pcs', amount='$amount', currency='$currency' WHERE id='$id'");
-	if($sqlData1){	
-	echo "<script>swal({
-  title: 'Data Telah Tersimpan',   
-  text: 'Klik Ok untuk input data kembali',
-  type: 'success',
-  }).then((result) => {
-  if (result.value) {
-         window.location.href='LapKPE';
-	 
-  }
-});</script>";
-}else {
-      // Tampilkan pesan kesalahan jika perintah SQL gagal
-      echo "Error: " . mysqli_error($con);
-  }
-}
-
-
-if($_POST['edit_solusi_db']=="Simpan"){
-  $id=strtoupper($_POST['id']);
-	$no_item=strtoupper($_POST['no_item']);
-	$dn_kg=strtoupper($_POST['dn_kg']);
-	$dn_satuan=strtoupper($_POST['dn_satuan']);
-  $format_amount = str_replace(['.', ','], '', $_POST['dn_amount']);
-	$amount=strtoupper($format_amount);
-  $currency=strtoupper($_POST['currency']);
-	$sqlData1=mysqli_query($con,"UPDATE tbl_debit_note SET no_item='$no_item', kg='$dn_kg', satuan='$dn_satuan', amount='$amount', currency='$currency' WHERE id='$id'
-  
-  -- INSERT INTO tbl_debit_note SET 
-		  -- no_item='$no_item', kg='$dn_kg', satuan='$dn_satuan', amount='$amount', currency='$currency'
-      ");
-	if($sqlData1){	
-	echo "<script>swal({
-  title: 'Data Telah Tersimpan',   
-  text: 'Klik Ok untuk input data kembali',
-  type: 'success',
-  }).then((result) => {
-  if (result.value) {
-    window.location.href='LapKPE';
-	 
-  }
-});</script>";
-}else {
-  // Tampilkan pesan kesalahan jika perintah SQL gagal
-  echo "Error: " . mysqli_error($con);
-}
-}
-?>
 <script type="text/javascript">
     function confirm_delete(delete_url)
     {
@@ -494,6 +374,7 @@ if($_POST['edit_solusi_db']=="Simpan"){
 
 <script>
 function formatRupiah(input) {
+  if(input.value != "") {
     // Menghilangkan tanda titik dan koma
     var value = input.value.replace(/[^\d]/g, '');
 
@@ -505,17 +386,8 @@ function formatRupiah(input) {
 
     // Memasukkan nilai yang sudah diformat kembali ke dalam input field
     input.value = formattedValue;
+  }
 }
-</script>
-<script>
-$(document).ready(function(){
-    $('.detail_solusi_perbaikan_garment').click(function(e){
-        e.preventDefault(); // Menghentikan perilaku default dari link
-        var no_item = $(this).data('no_item'); // Mengambil nilai no_item dari atribut data
-        $('#no_item').val(no_item); // Memasukkan nilai no_item ke dalam input dengan id no_item di dalam modal
-        $('#DataSolusi').modal('show'); // Menampilkan modal
-    });
-});
 </script>
 </body>
 </html>

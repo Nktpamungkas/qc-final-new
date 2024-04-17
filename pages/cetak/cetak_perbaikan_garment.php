@@ -3,17 +3,9 @@ ini_set("error_reporting", 1);
 session_start();
 include "../../koneksi.php";
 include "../../tgl_indo.php";
-//--
-// $idkk=$_REQUEST['idkk'];
-// $act=$_GET['g'];
-// //-
-// $Awal=$_GET['awal'];
-// $Akhir=$_GET['akhir'];
-// $Dept=$_GET['dept'];
-// $Cancel=$_GET['cancel'];
-// $qTgl=mysqli_query($con,"SELECT DATE_FORMAT(now(),'%Y-%m-%d') as tgl_skrg,DATE_FORMAT(now(),'%H:%i:%s') as jam_skrg");
-// $rTgl=mysqli_fetch_array($qTgl);
-// if($Awal!=""){$tgl=substr($Awal,0,10); $jam=$Awal;}else{$tgl=$rTgl['tgl_skrg']; $jam=$rTgl['jam_skrg'];}
+
+$Awal=$_GET['awal'];
+$Akhir=$_GET['akhir'];
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -102,9 +94,7 @@ border:hidden;
 }	
 </style>	
 </head>
-<?php 
-$nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUSTUS","SEPTEMBER","OKTOBER","NOVEMBER","DESEMBER");	
-?>
+
 <body>
 <table width="100%">
   <thead>
@@ -112,9 +102,9 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
       <td><table width="100%" border="1" class="table-list1"> 
   <tr>
     <td align="center"><strong><font size="+1">Laporan Perbaikan Garment</font><br />
-		<!-- <font size="-1">Periode: <?php echo date("d/m/Y", strtotime($Awal));?> s/d <?php echo date("d/m/Y", strtotime($Akhir));?></font>
+		<font size="-1">Periode: <?php echo date("d/m/Y", strtotime($Awal));?> s/d <?php echo date("d/m/Y", strtotime($Akhir));?></font>
           <br />
-		<font size="-1">FW-06-QCF-01/04</font></strong></td> -->
+		<!--<font size="-1">FW-06-QCF-01/04</font></strong></td> -->
     </tr>
   </table>
 
@@ -135,55 +125,29 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
 		  </thead>	  
 		  <tbody>
 		<?php
-	$no=1;
-// 	$Awal=$_GET['awal'];
-//   $Akhir=$_GET['akhir'];
-//   $Order=$_GET['order'];
-//   $Hanger=$_GET['hanger'];
-//   $PO=$_GET['po'];
-//   $Langganan=$_GET['langganan'];
-//   $Demand=$_GET['demand'];
-//   $Prodorder=$_GET['prodorder'];
-//   $Pejabat=$_GET['pejabat'];
-//   if($Awal!=""){ $Where =" AND DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
-//   if($Awal!="" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!=""){
-//   $qry1=mysqli_query($con,"SELECT * FROM tbl_aftersales_now WHERE no_order LIKE '%$Order%' AND po LIKE '%$PO%' AND no_hanger LIKE '%$Hanger%' AND langganan LIKE '%$Langganan%' AND nodemand LIKE '%$Demand%' AND nokk LIKE '%$Prodorder%' AND pejabat LIKE '%$Pejabat%' $Where ORDER BY masalah_dominan ASC");
-//   }else{
-//   $qry1=mysqli_query($con,"SELECT * FROM tbl_aftersales_now WHERE no_order LIKE '$Order' AND po LIKE '$PO' AND no_hanger LIKE '$Hanger' AND langganan LIKE '$Langganan' AND nodemand LIKE '$Demand' AND nokk LIKE '$Prodorder' AND pejabat LIKE '%$Pejabat%' $Where ORDER BY masalah_dominan ASC");
-//   }
-// 			while($row1=mysqli_fetch_array($qry1)){
-// 				if($row1['t_jawab']!="" and $row1['t_jawab1']!="" and $row1['t_jawab2']!=""){ $tjawab=$row1['t_jawab'].",".$row1['t_jawab1'].", ".$row1['t_jawab2'];
-// 				}else if($row1['t_jawab']!="" and $row1['t_jawab1']!="" and $row1['t_jawab2']==""){
-// 				$tjawab=$row1['t_jawab'].",".$row1['t_jawab1'];	
-// 				}else if($row1['t_jawab']!="" and $row1['t_jawab1']=="" and $row1['t_jawab2']!=""){
-// 				$tjawab=$row1['t_jawab'].",".$row1['t_jawab2'];	
-// 				}else if($row1['t_jawab']=="" and $row1['t_jawab1']!="" and $row1['t_jawab2']!=""){
-// 				$tjawab=$row1['t_jawab1'].",".$row1['t_jawab2'];	
-// 				}else if($row1['t_jawab']!="" and $row1['t_jawab1']=="" and $row1['t_jawab2']==""){
-// 				$tjawab=$row1['t_jawab'];
-// 				}else if($row1['t_jawab']=="" and $row1['t_jawab1']!="" and $row1['t_jawab2']==""){
-// 				$tjawab=$row1['t_jawab1'];
-// 				}else if($row1['t_jawab']=="" and $row1['t_jawab1']=="" and $row1['t_jawab2']!=""){
-// 				$tjawab=$row1['t_jawab2'];	
-// 				}else if($row1['t_jawab']=="" and $row1['t_jawab1']=="" and $row1['t_jawab2']==""){
-// 				$tjawab="";	
-// 				}
-
-        $qry1=mysqli_query($con,"SELECT
-                            no_item,
-                            sum(pcs) as total_pcs,
-                            sum(amount) as total_amount,
-                            currency
-                          from
-                            tbl_perbaikan_garment
-
-                            group by no_item, currency");
-        while($row1=mysqli_fetch_array($qry1)){
+      $no=1;
+      $qry1=mysqli_query($con,"select
+                                  sum(a.qty_pcs) as total_qty_pcs,
+                                  sum(a.amount) as total_amount,
+                                  a.currency,
+                                  b.no_item,
+                                  b.no_hanger,
+                                  b.tgl_buat
+                                from
+                                  tbl_perbaikan_garment a
+                                left join tbl_aftersales_now b
+                                on a.id_nsp = b.id 
+                                where DATE_FORMAT( b.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                                group by
+                                  b.no_item,
+                                  b.no_hanger,
+                                  a.currency ");
+      while($row1=mysqli_fetch_array($qry1)){
 		 ?>
           <tr valign="top">
             <td align="center"><font size="-2"><?php echo $no; ?></font></td>
-            <td valign="top" align="center"><font size="-2"><?php echo $row1['no_item'];?></font></td>
-            <td valign="top" align="center"><font size="-2"><?php echo $row1['total_pcs'];?></font></td>
+            <td valign="top" align="center"><font size="-2"><?php echo $row1['no_item'].'/'.$row1['no_hanger'];?></font></td>
+            <td valign="top" align="center"><font size="-2"><?php echo $row1['total_qty_pcs'];?></font></td>
             <td valign="top" align="center"><font size="-2"><?php echo $row1['currency'];?></font></td>
             <td valign="top" align="center"><font size="-2">
                 <?php 
