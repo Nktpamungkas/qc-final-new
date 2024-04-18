@@ -115,7 +115,7 @@ $TotalKirim = $_GET['total'];
                     // } else if($row2YD['qty_claim'] != "") {
                     //   echo number_format(($row2YD['qty_claim'] / $row2Total['total_qty_claim']) * 100, 2) . ' %';
                     // }
-                    echo number_format((($row2KG['qty_claim'] + $row2YD['qty_claim2']) / $row2Total['total_qty_claim']) * 100, 2) . ' %';
+                    echo number_format(($row2KG['qty_claim'] / $row2Total['total_qty_claim']) * 100, 2) . ' %';
                 ?>
                 </td>
             </tr>
