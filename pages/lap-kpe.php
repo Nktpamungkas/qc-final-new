@@ -225,9 +225,26 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             }
 
             if($Kategori=="REPEAT"){
-              $Group = "a.no_hanger, a.masalah_dominan HAVING COUNT(*) > 1";
-            } else {
-              $Group = "a.nodemand, a.masalah_dominan";
+              $qryh = mysqli_query($con, "select
+                                            a.no_hanger,
+                                            a.masalah_dominan 
+                                          from
+                                            tbl_aftersales_now a
+                                          where
+                                            DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                                          group by
+                                            a.no_hanger, a.masalah_dominan HAVING COUNT(*) > 1
+                                          order by
+                                            a.id asc");
+              $hm = [];
+              while($rowr=mysqli_fetch_array($qryh)){
+                $hm[] = $rowr['no_hanger'] . '|' . $rowr['masalah_dominan'];
+              }
+              $hm = implode(",", array_map(function($elem) {
+                return "'$elem'";
+              }, $hm));
+
+              $WhereHanger = " AND concat_ws('|', a.no_hanger, a.masalah_dominan) IN($hm) ";
             }
 
             if($Awal!="" or $sts_red=="1" or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
@@ -235,18 +252,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               GROUP_CONCAT( DISTINCT b.no_ncp SEPARATOR ', ' ) AS no_ncp,
               GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
               FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
-              WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $Where2 $stsred $stsclaim 
-              GROUP BY $Group
+              WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $Where2 $stsred $stsclaim $WhereHanger
+              GROUP BY a.nodemand, a.masalah_dominan
               ORDER BY a.id ASC");
-            }else{
-              $qry1=mysqli_query($con,"SELECT a.*,
-              GROUP_CONCAT( DISTINCT b.no_ncp SEPARATOR ', ' ) AS no_ncp,
-              GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
-              FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
-              WHERE a.no_order LIKE '$Order' AND a.po LIKE '$PO' AND a.no_hanger LIKE '$Hanger' AND a.langganan LIKE '$Langganan' AND a.nodemand LIKE '$Demand' AND a.nokk LIKE '$Prodorder' AND a.pejabat LIKE '$Pejabat'  $Where $stsred $stsclaim 
-              GROUP BY a.nodemand
-              ORDER BY a.id ASC");
-            }
+            
                 while($row1=mysqli_fetch_array($qry1)){
                   $noorder=str_replace("/","&",$row1['no_order']);
                   if($row1['t_jawab']!="" and $row1['t_jawab1']!="" and $row1['t_jawab2']!=""){ $tjawab=$row1['t_jawab']."+".$row1['t_jawab1']."+".$row1['t_jawab2'];
@@ -322,7 +331,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td><?php echo $row1['masalah_ncp'];?></td>
             <td><?php echo $row1['ket'];?></td>
             </tr>
-          <?php	$no++;  } ?>
+          <?php	$no++;  }} ?>
         </tbody>
       </table>
       </div>
