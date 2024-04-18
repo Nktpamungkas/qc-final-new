@@ -97,9 +97,12 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
               <th><div align="center">Langganan</div></th>
               <th><div align="center">Order</div></th>
               <th><div align="center">Jenis Kain</div></th>
+              <th><div align="center">Hanger</div></th>
               <th><div align="center">Warna</div></th>
+              <th><div align="center">Demand</div></th>
               <th><div align="center">Lot</div></th>
               <th><div align="center">Qty KG</div></th>
+              <th><div align="center">Qty Yard</div></th>
               <th><div align="center">Masalah</div></th>
               <th><div align="center">Dept. Penanggung Jawab</div></th>
               <th><div align="center">Analisa</div></th>
@@ -113,12 +116,50 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
           <tbody>
           <?php
             $no=1;
-            if($Awal!=""){ $Where =" AND DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
+            if($Awal!=""){ $Where =" AND DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
             //if($Status!=""){ $sts=" AND `status`='$Status' ";}else{$sts=" ";}
             if($Awal!="" or $Order!="" or $Langganan!="" or $PO!=""){
-              $qry1=mysqli_query($con,"SELECT * FROM tbl_tpukpe_now WHERE no_order LIKE '$Order%' AND no_po LIKE '$PO%' AND langganan LIKE '%$Langganan%' $Where ORDER BY tgl_buat ASC");
+              $qry1=mysqli_query($con,"SELECT
+                                        a.*,
+                                        b.nodemand,
+                                        b.qty_claim,
+                                        b.satuan_c,
+                                        b.qty_claim2,
+                                        b.satuan_c2,
+                                        b.no_hanger
+                                      FROM
+                                        tbl_tpukpe_now a
+                                      LEFT JOIN tbl_aftersales_now b ON
+                                        a.id_nsp = b.id 
+                                      WHERE 
+                                        a.no_order LIKE '$Order%' AND 
+                                        a.no_po LIKE '$PO%' AND 
+                                        a.langganan LIKE '%$Langganan%' $Where 
+                                      ORDER BY 
+                                        a.tgl_buat 
+                                      ASC
+              ");
             }else{
-              $qry1=mysqli_query($con,"SELECT * FROM tbl_tpukpe_now WHERE no_order LIKE '$Order' AND no_po LIKE '$PO' AND langganan LIKE '%$Langganan%' $Where ORDER BY tgl_buat ASC");
+              $qry1=mysqli_query($con,"SELECT
+                                          a.*,
+                                          b.nodemand,
+                                          b.qty_claim,
+                                          b.satuan_c,
+                                          b.qty_claim2,
+                                          b.satuan_c2,
+                                          b.no_hanger
+                                        FROM
+                                          tbl_tpukpe_now a
+                                        LEFT JOIN tbl_aftersales_now b ON
+                                          a.id_nsp = b.id
+                                        WHERE 
+                                          a.no_order LIKE '$Order' AND 
+                                          a.no_po LIKE '$PO' AND 
+                                          a.langganan LIKE '%$Langganan%' $Where 
+                                        ORDER BY 
+                                          a.tgl_buat 
+                                        ASC
+              ");
             }
                 while($row1=mysqli_fetch_array($qry1)){
                   if($row1['t_jawab']!="" and $row1['t_jawab1']!="" and $row1['t_jawab2']!=""){ $tjawab=$row1['t_jawab'].",".$row1['t_jawab1'].",".$row1['t_jawab2'];
@@ -148,15 +189,35 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
             </td>-->
             <td align="center">
               <!-- <a href="EditKPENew-<?php //echo $row1['id_nsp']; ?>" target="_blank"> -->
-                <?php echo $row1['no_tpukpe'];?>
+                <?php //echo $row1['no_tpukpe'];?>
               <!-- </a> -->
+              <a href="#" class="edit_tpukpe" id="<?php echo $row1['id'] ?>"><?php echo $row1['no_tpukpe']; ?></a>
             </td>
             <td align="left"><?php echo $row1['langganan'];?></td>
             <td align="center"><?php echo $row1['no_order'];?></td>
             <td><?php echo $row1['jenis_kain'];?></td>
+            <td align="center"><?php echo $row1['no_hanger'];?></td>
             <td align="left"><?php echo $row1['warna'];?></td>
+            <td align="center"><?php echo $row1['nodemand'];?></td>
             <td align="center"><?php echo $row1['lot'];?></td>
-            <td align="center"><?php echo $row1['qty'];?></td>
+            <td align="center">
+            <?php
+              if($row1['qty'] != "") {
+                echo $row1['qty'];
+              } else {
+                echo strtoupper($row1['satuan_c']) == 'KG' ? $row1['qty_claim'] : '';
+              }
+            ?>
+            </td>
+            <td align="center">
+              <?php
+              if($row1['qty2'] != "") {
+                echo $row1['qty2'];
+              } else {
+                echo strtoupper($row1['satuan_c2']) == 'YD' ? $row1['qty_claim2'] : '';
+              }
+              ?>
+            </td>
             <td><?php echo $row1['masalah'];?></td>
             <td align="center"><?php echo $tjawab;?></td>
             <td><?php echo $row1['penyelidik_qcf'];?></td>
@@ -169,6 +230,7 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
           <?php	$no++;} ?>
         </tbody>
       </table>
+      <div id="EditTPUKPE" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
       </div>
     </div>
   </div>

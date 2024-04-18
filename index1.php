@@ -733,9 +733,7 @@
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-Ganti-Kain") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarGantiKain"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar Ganti Kain</span></a></li>
-                                <li class="<?php if ($_GET['p'] == "detail-tpukpe") {
-                                                echo "active";
-                                            } ?>"><a href="DetailTPUKPE"><i class="fa fa-bar-chart"></i> <span>Detail TPUKPE</span></a></li>
+                                
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-TPUKPE") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarTPUKPE"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar TPUKPE</span></a></li>

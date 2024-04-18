@@ -519,6 +519,5 @@ RewriteRule ^Newbonpenghubung-([a-zA-Z0-9_-]+)$ ./index1.php?p=Newbonpenghubung=
 
 
 RewriteRule ^InputDataAPTPUKPE$ ./index1.php?p=input-data-analisa-pencegahan-tpu-kpe [L]
-RewriteRule ^DetailTPUKPE$ ./index1.php?p=detail-tpukpe [L]
 
 Options All -Indexes
