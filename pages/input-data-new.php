@@ -72,6 +72,7 @@ $sqlDB2="SELECT
 	p.SUBCODE08,
 	p.SUBCODE09,
 	p.SUBCODE10,
+	p.DESCRIPTION,
 	CONCAT(TRIM(p.SUBCODE02), TRIM(p.SUBCODE03)) AS ITEMNO,
 	p.ORIGDLVSALORDLINESALORDERCODE AS PRO_ORDER,
 	p.ORIGDLVSALORDERLINEORDERLINE AS ORDERLINE,
@@ -596,9 +597,7 @@ $rcekd=mysqli_fetch_array($sqlD);
                   <label for="jml_bruto" class="col-sm-3 control-label">Jml Bruto</label>
                   <div class="col-sm-2">
                     <input name="qty3" type="text" class="form-control" id="qty3" 
-                    value="<?php if($cek>0){echo $rcek['rol_bruto'];}else{if ($rowr['JML_ROLL'] != 0) {
-																										echo $rowr['JML_ROLL'];
-																									}} ?>" placeholder="0.00" required>
+                    value="<?php if($cek>0){echo $rcek['rol_bruto'];}else{if ($rowr['JML_ROLL'] != 0) {echo $rowr['JML_ROLL'];}} ?>" placeholder="0.00" required>
                   </div>
 				  <div class="col-sm-3">
 					<div class="input-group">  
@@ -682,7 +681,14 @@ $rcekd=mysqli_fetch_array($sqlD);
 	  </div>
 	  		<!-- col --> 
 	  <div class="col-md-6">
-	  <div class="form-group">
+	 			 <div class="form-group">
+                  	<label for="lot_legacy" class="col-sm-3 control-label">Lot legacy</label>
+                	<div class="col-sm-3">
+                    	<input name="lot_legacy" type="text" class="form-control" id="lot_legacy" 
+                    	value="<?php if($cek>0){echo $rcek['lot-legacy'];}else{ echo $rowdb2['DESCRIPTION'];} ?>" placeholder="Lot legacy" >
+                  	</div>
+				 </div>	
+	  			<div class="form-group">
                   <label for="qty_mslh" class="col-sm-3 control-label">Sisa</label>
                   <div class="col-sm-3">
 					<div class="input-group">  
@@ -1627,6 +1633,7 @@ if($_POST['save']=="save"){
 		  netto='$_POST[netto]',
 		  panjang='$_POST[panjang]',
 		  satuan='$_POST[satuan2]',
+		  lot_legacy='$_POST[lot_legacy]',
 		  sisa='$_POST[sisa]',
 		  tgl_masuk='$_POST[tglmsk]',
 		  tgl_pack='$_POST[tglpk]',
