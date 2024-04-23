@@ -684,8 +684,7 @@ $rcekd=mysqli_fetch_array($sqlD);
 	 			 <div class="form-group">
                   	<label for="lot_legacy" class="col-sm-3 control-label">Lot legacy</label>
                 	<div class="col-sm-3">
-                    	<input name="lot_legacy" type="text" class="form-control" id="lot_legacy" 
-                    	value="<?php if($cek>0){echo $rcek['lot-legacy'];}else{ echo $rowdb2['DESCRIPTION'];} ?>" placeholder="Lot legacy" >
+                    	<input name="lot_legacy" type="text" class="form-control" id="lot_legacy" value="<?php if($cek>0){echo $rcek['lot-legacy'];}else{ echo $rowdb2['DESCRIPTION'];} ?>" placeholder="Lot legacy" >
                   	</div>
 				 </div>	
 	  			<div class="form-group">
