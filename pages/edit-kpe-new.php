@@ -130,7 +130,7 @@ $rcek=mysqli_fetch_array($sqlCek);
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="qty_order" type="text" class="form-control" id="qty_order" value="<?php if ($cek > 0) {
-								echo $rcek['qty_order'];
+								echo number_format($rcek['qty_order'], 2);
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_o" style="font-size: 12px;" id="satuan1">
@@ -150,7 +150,7 @@ $rcek=mysqli_fetch_array($sqlCek);
 					<div class="col-sm-4">
 						<div class="input-group">
 						<input name="qty_order2" type="text" class="form-control" id="qty_order2" value="<?php if ($cek > 0) {
-								echo $rcek['qty_order2'];
+								echo number_format($rcek['qty_order2'], 2);
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_o2" style="font-size: 12px;" id="satuan1">
@@ -760,6 +760,7 @@ if($_POST['save']=="save"){
 	  $tgl_jawab=$_POST['tgl_jawab'];
 	  $shift=$_POST['shift'];
 	  $qty_order=str_replace(",","",$_POST['qty_order']);
+	  $qty_order2=str_replace(",","",$_POST['qty_order2']);
 	  if($_POST['sts']=="1"){$sts="1";}else{ $sts="0";}
 	  if($_POST['sts_red']=="1"){$sts_red="1";}else{ $sts_red="0";}
 	  if($_POST['sts_revdis']=="1"){$sts_revdis="1";}else{ $sts_revdis="0";}
@@ -835,7 +836,7 @@ if($_POST['save']=="save"){
 		  hod='$_POST[hod]',
 		  qty_kirim2 = '$_POST[qty_kirim2]',
 		qty_claim2 = '$_POST[qty_claim2]',
-		qty_order2 = '$_POST[qty_order2]',
+		qty_order2 = '$qty_order2',
 		qty_foc2 = '$_POST[qty_foc2]',
 		satuan_k2 = '$_POST[satuan_k2]',
 		satuan_c2 = '$_POST[satuan_c2]',

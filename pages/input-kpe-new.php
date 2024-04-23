@@ -316,7 +316,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="qty_order" type="text" class="form-control" id="qty_order" value="<?php if ($cek > 0) {
-								echo $rcek['qty_order'];
+								echo number_format($rcek['qty_order'], 2);
 							} else {
 								echo number_format($rowdb2['QTY_ORDER'], 2);
 							} ?>" placeholder="0.00" style="text-align: right;" required>
@@ -338,7 +338,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-4">
 						<div class="input-group">
 						<input name="qty_order2" type="text" class="form-control" id="qty_order2" value="<?php if ($cek > 0 && $rcek['qty_order2'] != "") {
-								echo $rcek['qty_order2'];
+								echo number_format($rcek['qty_order2'], 2);
 							} else {
 								echo number_format($rowdb2['QTY_PANJANG_ORDER'], 2);
 							} ?>" placeholder="0.00" style="text-align: right;" required>
@@ -511,7 +511,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input name="persen" type="text" class="form-control" id="persen" value="<?php if ($cek > 0) {
-								echo $rcek['persen'];
+								//echo $rcek['persen'];
 							} ?>" placeholder="0.00" style="text-align: right;">
 							<span class="input-group-addon">%</span>
 						</div>
@@ -535,7 +535,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input name="persen1" type="text" class="form-control" id="persen1" value="<?php if ($cek > 0) {
-								echo $rcek['persen1'];
+								//echo $rcek['persen1'];
 							} ?>" placeholder="0.00" style="text-align: right;">
 							<span class="input-group-addon">%</span>
 						</div>
@@ -1156,6 +1156,7 @@ if ($_POST['save'] == "save") {
 	$posbuyer = substr($_POST['pelanggan'], $pos + 1, 50);
 	$buyer = str_replace("'", "''", $posbuyer);
 	$qty_order = str_replace(",", "", $_POST['qty_order']);
+	$qty_order2 = str_replace(",", "", $_POST['qty_order2']);
 	//$multishift="";
 	//foreach($shift as $shift1)  
 	//{  
@@ -1253,7 +1254,7 @@ if ($_POST['save'] == "save") {
 		hod='$_POST[hod]',
 		qty_kirim2 = '$_POST[qty_kirim2]',
 		qty_claim2 = '$_POST[qty_claim2]',
-		qty_order2 = '$_POST[qty_order2]',
+		qty_order2 = '$qty_order2',
 		qty_foc2 = '$_POST[qty_foc2]',
 		satuan_k2 = '$_POST[satuan_k2]',
 		satuan_c2 = '$_POST[satuan_c2]',
