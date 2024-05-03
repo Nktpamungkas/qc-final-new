@@ -201,7 +201,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
 		  <thead>
           <tr align="center">
             <td><font size="-2">NO</font></td>
-            <td><font size="-2">Tanggal </font></td>
+            <!-- <td><font size="-2">Tanggal </font></td> -->
 			<td><font size="-2">Buyer </font></td>
 			<td><font size="-2">Brand</font></td>
 			<td><font size="-2">PO</font></td>
@@ -234,20 +234,20 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
   $Demand=$_GET['demand'];
   $Prodorder=$_GET['prodorder'];
   $Pejabat=$_GET['pejabat'];
-  if($Awal!=""){ $Where =" AND tgl_email BETWEEN '$Awal' AND '$Akhir' "; }
+  if($Awal!=""){ $Where =" AND tgl_buat BETWEEN '$Awal' AND '$Akhir' "; }
   if($Awal!="" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!=""){
 		$sql_cek = "SELECT *, sum(qty_claim) as qty_claim_gabung FROM tbl_aftersales_now WHERE   no_order LIKE '%$Order%' AND po LIKE '%$PO%' AND no_hanger LIKE '%$Hanger%' AND langganan LIKE '%$Langganan%' AND nodemand LIKE '%$Demand%' AND nokk LIKE '%$Prodorder%' AND pejabat LIKE '%$Pejabat%'
 		$Where
-		group by po, no_hanger, warna, masalah_dominan
-		ORDER BY tgl_email ASC";
+		group by po, no_hanger, warna, masalah_dominan, qty_order
+		ORDER BY tgl_buat ASC";
   $qry1=mysqli_query($con,$sql_cek);
 
   
   }else{
 	  $sql_cek = "SELECT *, sum(qty_claim) as qty_claim_gabung FROM tbl_aftersales_now WHERE  and no_order LIKE '$Order' AND po LIKE '$PO' AND no_hanger LIKE '$Hanger' AND langganan LIKE '$Langganan' AND nodemand LIKE '$Demand' AND nokk LIKE '$Prodorder' AND pejabat LIKE '%$Pejabat%'  
 	  $Where 
-	  group by po, no_hanger, warna, masalah_dominan
-	  ORDER BY tgl_email ASC";
+	  group by po, no_hanger, warna, masalah_dominan, qty_order
+	  ORDER BY tgl_buat ASC";
   $qry1=mysqli_query($con,$sql_cek); 
   } ;
   
@@ -289,7 +289,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
 		 ?>
           <tr valign="top">
             <td align="center"><font size="-2"><?php echo $no; ?></font></td>
-            <td align="center"><font size="-2"><?=$row1['tgl_email']?></font></td>
+            <!-- <td align="center"><font size="-2"><?=''//$row1['tgl_email']?></font></td> -->
 			<td align="center"><font size="-2"><?=$row1['pelanggan']?></font></td>
 			<td align="center"><font size="-2"><?php $exp = explode('/',$row1['langganan']); echo  $exp[1]  ?></font></td>
 			
