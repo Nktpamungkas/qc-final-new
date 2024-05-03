@@ -327,7 +327,7 @@ $r1=mysqli_fetch_array($qryr1);
                   	<div class="col-sm-3">
                     	<select class="form-control select2" name="warna1" required>
 							<option value="">Pilih</option>
-							<?php $sqlw1=mysqli_query($con,"SELECT warna,lot FROM tbl_aftersales_now WHERE warna='$rCek[warna]' and lot='$rCek[lot]' and no_order='$rCek[no_order]' and no_hanger='$rCek[no_hanger]' and po='$rCek[po]' ORDER BY warna");
+							<?php $sqlw1=mysqli_query($con,"SELECT warna,lot FROM tbl_aftersales_now WHERE no_order='$rCek[no_order]' and no_hanger='$rCek[no_hanger]' and po='$rCek[po]' GROUP by po, no_order, no_hanger, warna ORDER BY warna");
 							while ($rwarna=mysqli_fetch_array($sqlw1)){ ?>
 							<option value="<?php echo $rwarna['warna'].",".$rwarna['lot'];?>"><?php echo $rwarna['warna']." / ".$rwarna['lot'];?></option>
 							<?php } ?>
