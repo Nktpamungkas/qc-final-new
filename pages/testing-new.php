@@ -1746,12 +1746,12 @@ if (!isset($nodemand)) { ?>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="suhu" class="col-sm-3 control-label">Suhu</label>
+						<label for="proses" class="col-sm-3 control-label">Proses</label>
 						<div class="col-sm-3">
 							<div class="input-group">
-								<input name="suhu" type="text" class="form-control" id="suhu" placeholder="Suhu"
+								<input name="proses" type="text" class="form-control" id="proses" placeholder="Proses"
 									readonly="readonly">
-								<span class="input-group-addon">&deg;C</span>
+								<!-- <span class="input-group-addon">&deg;C</span> -->
 							</div>
 						</div>
 					</div>
@@ -2075,14 +2075,14 @@ if ($nokk_demand_data > 0) {
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="suhu" class="col-sm-3 control-label">Suhu</label>
+					<label for="proses" class="col-sm-3 control-label">Proses</label>
 					<div class="col-sm-3">
 						<div class="input-group">
-							<input name="suhu" type="text" class="form-control" id="suhu" placeholder="Suhu" value="<?php if ($cek > 0) {
-								echo $rcek['suhu'];
+							<input name="proses" type="text" class="form-control" id="proses" placeholder="Proses" value="<?php if ($cek > 0) {
+								echo $rcek['proses_fin'];
 							} else {
 							} ?>" readonly="readonly">
-							<span class="input-group-addon">&deg;C</span>
+							<!-- <span class="input-group-addon">&deg;C</span> -->
 						</div>
 					</div>
 				</div>

@@ -227,11 +227,21 @@ border:hidden;
               $brutoRudi += $row['bruto'];
               $lotRudi +=1;
             }
-            if($row['colorist_qcf']=="FERRY"){
-              $rollFerry += $row['jml_roll'];
-              $brutoFerry += $row['bruto'];
-              $lotFerry +=1;
+            if($row['colorist_qcf']=="UJUK"){
+              $rollUjuk += $row['jml_roll'];
+              $brutoUjuk += $row['bruto'];
+              $lotUjuk +=1;
             }
+			if($row['colorist_qcf']=="TRI"){
+              $rollTri += $row['jml_roll'];
+              $brutoTri += $row['bruto'];
+              $lotTri +=1;
+            }
+			if($row['colorist_qcf']=="WAWAN"){
+              $rollWawan += $row['jml_roll'];
+              $brutoWawan += $row['bruto'];
+              $lotWawan +=1;
+            }  
             
           $roll += $row['jml_roll'];
           $bruto += $row['bruto'];
@@ -389,8 +399,72 @@ border:hidden;
     <td bgcolor="#FFFFFF">&nbsp;</td>
     <td bgcolor="#FFFFFF">&nbsp;</td>
     <td bgcolor="#FFFFFF">&nbsp;</td>
+  </tr>
+  <tr bgcolor="#99FFFF">
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF"><strong>Ujuk</strong></td>
+    <td bgcolor="#FFFFFF"><strong><?php echo number_format($lotUjuk);?></strong></td>
+    <td bgcolor="#FFFFFF"><strong><?php echo number_format($brutoUjuk,'2');?></strong></td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+  </tr>
+  <tr bgcolor="#99FFFF">
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF"><strong>Tri</strong></td>
+    <td bgcolor="#FFFFFF"><strong><?php echo number_format($lotTri);?></strong></td>
+    <td bgcolor="#FFFFFF"><strong><?php echo number_format($brutoTri,'2');?></strong></td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+  </tr>
+  <tr bgcolor="#99FFFF">
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF"><strong>Wawan</strong></td>
+    <td bgcolor="#FFFFFF"><strong><?php echo number_format($lotWawan);?></strong></td>
+    <td bgcolor="#FFFFFF"><strong><?php echo number_format($brutoWawan,'2');?></strong></td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
+    <td bgcolor="#FFFFFF">&nbsp;</td>
   </tr>  
-  </table> <br>
+    </table> 
+      <br>
    <table width="100%" border="0" class="table-list1"> 
   <tr align="center">
     <td colspan="3">&nbsp;</td>
