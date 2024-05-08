@@ -21,7 +21,7 @@ $cek=mysqli_fetch_array($qcek);
 							<div class="form-group">
 								<label for="buyer" class="col-sm-2 control-label">Buyer</label>
 									<div class="col-sm-3">
-										<input name="buyer" type="text" style="text-transform:uppercase" class="form-control" id="buyer" placeholder="Buyer"
+										<input name="buyer" type="text" style="text-transform:uppercase" class="form-control" id="buyer" placeholder="Buyer" <?php if($buyer!=""){echo "readonly";} ?>
 										value="<?php echo $buyer; ?>" required>
 									</div>
 								<?php if($_POST['buyer']!=""){?>
@@ -150,7 +150,11 @@ $cek=mysqli_fetch_array($qcek);
 					<?php if($_POST['buyer']==""){?>
 					<button type="submit" class="btn btn-primary" name="cari" value="cari"><i class="fa fa-search"></i> Cari Data</button>
 					<?php } else { ?>
-					<button type="submit" class="btn btn-primary" <?php if($_POST['buyer']=="" OR $cek['approve']!="" OR $cek['approve']!=NULL) { echo "disabled";}?>  name="save" value="save"><i class="fa fa-save"></i> Simpan</button>
+					<?php if($_POST['buyer']=="" OR $cek['approve']!="" OR $cek['approve']!=NULL) { ?>
+					<button type="submit" class="btn btn-primary" name="save" value="save"><i class="fa fa-save"></i> Edit</button>
+					<?php } else{ ?>
+					<button type="submit" class="btn btn-primary" name="save" value="save"><i class="fa fa-save"></i> Simpan</button>	
+					<?php } ?>
 <!--				<a href="pages/cetak/cetak_masterlabtest.php?buyer=<?php echo $_POST['buyer']; ?>" target="_blank" class="btn btn-danger pull-right">Cetak</a> -->
 					<a href="MasterTestLab" class="btn btn-default pull-right">Kembali</a>
 					<?php }?>
@@ -257,8 +261,7 @@ if($_POST['save']=="save" and $cekMB>0){
   type: 'success',
   }).then((result) => {
   if (result.value) {
-	 window.location.href='MasterTestLab';
-	 
+	 window.location.href='MasterTestLab';	 
   }
 });</script>";
 		}
