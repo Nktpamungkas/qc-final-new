@@ -103,7 +103,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         <select class="form-control select2" name="kategori" id="kategori">
 							<option value="">Kategori</option>
 							<?php 
-							$categories = ["REPEAT", "MAJOR", "GENERAL", "SAMPLE"];
+							$categories = ["MAJOR", "SAMPLE", "REPEAT", "GENERAL"];
 							foreach($categories as $category){
 							?>
 							<option value="<?=$category?>" <?=$Kategori==$category?'selected':''?>><?=$category?></option>	
@@ -215,36 +215,78 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             if($sts_red=="1"){ $stsred =" AND a.sts_red='1' "; }else{$stsred = " ";}
             if($sts_claim=="1"){ $stsclaim =" AND a.sts_claim='1' "; }else{$stsclaim =" ";}
             if($Awal!=""){ $Where =" AND DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
-            
-            if($Kategori=="MAJOR") {
-              $Where2 = " AND a.qty_claim2 > 500";
-            } else if($Kategori=="GENERAL") {
-              $Where2 = " AND a.qty_claim2 < 500";
-            } else if($Kategori=="SAMPLE") {
-              $Where2 = " AND substring(a.no_order, 1, 3) IN ('SAM', 'SME')";
-            }
 
-            if($Kategori=="REPEAT"){
-              $qryh = mysqli_query($con, "select
-                                            a.no_hanger,
-                                            a.masalah_dominan 
-                                          from
-                                            tbl_aftersales_now a
-                                          where
-                                            DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-                                          group by
-                                            a.no_hanger, a.masalah_dominan HAVING COUNT(*) > 1
-                                          order by
-                                            a.id asc");
-              $hm = [];
-              while($rowr=mysqli_fetch_array($qryh)){
-                $hm[] = $rowr['no_hanger'] . '|' . $rowr['masalah_dominan'];
+            if($Kategori != "") {
+              $query4Kategori = mysqli_query($con, "SELECT
+                                                      a.*,
+                                                      b.pjg1
+                                                      FROM
+                                                      tbl_aftersales_now a
+                                                      LEFT JOIN tbl_ganti_kain_now b
+                                                      ON
+                                                      b.id_nsp = a.id
+                                                      WHERE
+                                                      DATE_FORMAT(a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                                                      GROUP BY
+                                                      a.po,
+                                                      a.no_order,
+                                                      a.no_hanger,
+                                                      a.warna,
+                                                      a.masalah_dominan
+                                                      ORDER BY
+                                                      a.tgl_buat ASC");
+
+              $majorTemp = [];
+              $sampleTemp = [];
+              $repeatTemp = [];
+              $generalTemp = [];
+
+              while($row = mysqli_fetch_assoc($query4Kategori)) {
+                  if($row['pjg1'] >= 500) {
+                      $majorTemp[] = $row;
+                  } elseif(in_array(substr($row['no_order'], 0, 3), ['SAM', 'SME'])) {
+                      $sampleTemp[] = $row;
+                  } else {
+                      $generalTemp[] = $row;
+                  }
               }
-              $hm = implode(",", array_map(function($elem) {
-                return "'$elem'";
-              }, $hm));
 
-              $WhereHanger = " AND concat_ws('|', a.no_hanger, a.masalah_dominan) IN($hm) ";
+              $hanger_masalah_dominan = array_map(function($value) {
+                  return $value['no_hanger'].''.$value['masalah_dominan'];
+              }, $generalTemp);
+
+              $count_hanger_masalah_dominan = array_count_values($hanger_masalah_dominan);
+              $group_hanger_masalah_dominan = array_keys(array_filter($count_hanger_masalah_dominan, fn($value) => $value > 1 ));
+
+              foreach ($generalTemp as $key => $value) {
+                  $hmd = $value['no_hanger'].''.$value['masalah_dominan'];
+                  if(in_array($hmd, $group_hanger_masalah_dominan)){
+                      $repeatTemp[] = $value;
+                      unset($generalTemp[$key]);
+                  }
+              }
+
+              $majorTemp = array_column($majorTemp, 'id');
+              $sampleTemp = array_column($sampleTemp, 'id');
+              $repeatTemp = array_column($repeatTemp, 'id');
+              $generalTemp = array_column($generalTemp, 'id');
+
+              switch ($Kategori) {
+                case "MAJOR":
+                    $WhereKategori = "AND a.id IN (" . implode(",", $majorTemp) . ") ";
+                    break;
+                case "SAMPLE":
+                    $WhereKategori = "AND a.id IN (" . implode(",", $sampleTemp) . ") ";
+                    break;
+                case "REPEAT":
+                    $WhereKategori = "AND a.id IN (" . implode(",", $repeatTemp) . ") ";
+                    break;
+                case "GENERAL":
+                    $WhereKategori = "AND a.id IN (" . implode(",", $generalTemp) . ") ";
+                    break;
+                default:
+                    // handle default case if necessary
+              }
             }
 
             if($Awal!="" or $sts_red=="1" or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
@@ -252,7 +294,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               GROUP_CONCAT( DISTINCT b.no_ncp SEPARATOR ', ' ) AS no_ncp,
               GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
               FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
-              WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $Where2 $stsred $stsclaim $WhereHanger
+              WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $WhereKategori $stsred $stsclaim 
               GROUP BY a.nodemand, a.masalah_dominan
               ORDER BY a.id ASC");
             
