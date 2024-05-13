@@ -462,12 +462,18 @@ $rcek=mysqli_fetch_array($sqlCek);
 			<div class="form-group">
 							  
 					
-					<label for="leadtime_email" class="col-sm-3 control-label">HOD</label>
+					<label for="leadtime_email" class="col-sm-3 control-label">HOD / Tgl Solusi Akhir</label>
 					<div class="col-sm-4">
 							<div class="input-group date">
 								<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 								<input  name="hod" type="text" class="form-control pull-right" id="datepicker4" placeholder="0000-00-00" value="<?php if($rcek['tgl_email']!='0000-00-00'){echo $rcek['hod'];} ?>" />
 							</div>
+					</div>
+					<div class="col-sm-4">					  
+						<div class="input-group date">
+							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+								<input  name="tgl_solusi_akhir" type="text" class="form-control pull-right" id="datepicker2" placeholder="0000-00-00" value="<?php if($rcek['tgl_solusi_akhir']!='0000-00-00'){echo $rcek['tgl_solusi_akhir'];} ?>" <?php  if($rcek['sts_red']!="1"){ echo "enabled";}else{ echo "enabled"; } ?>/>
+						</div>
 					</div>
 			</div>
 			
@@ -487,17 +493,6 @@ $rcek=mysqli_fetch_array($sqlCek);
 					</div>
 				</div>
 			
-			</div>
-			
-			<div class="form-group">		  	
-				<label for="tgl_email" class="col-sm-3 control-label">Tgl Solusi Akhir</label>
-			
-				<div class="col-sm-4">					  
-						<div class="input-group date">
-							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-								<input  name="tgl_solusi_akhir" type="text" class="form-control pull-right" id="datepicker2" placeholder="0000-00-00" value="<?php if($rcek['tgl_solusi_akhir']!='0000-00-00'){echo $rcek['tgl_solusi_akhir'];} ?>" <?php  if($rcek['sts_red']!="1"){ echo "enabled";}else{ echo "enabled"; } ?>/>
-						</div>
-					</div>
 			</div>
 			
 			
@@ -689,10 +684,11 @@ $rcek=mysqli_fetch_array($sqlCek);
 					</select>	
 				</div>				   
 			</div>
-			<div class="form-group">
+			<!-- Revisi lolos QC dan keterangan Revisi di form edit KPE minta di hapus tapi saya komentar saja -->
+			<!-- <div class="form-group">
 		  		<label for="sts_revdis" class="col-sm-3 control-label"></label>		  
 				<div class="col-sm-3">
-					<input type="checkbox" name="sts_revdis" id="sts_revdis" value="1" onClick="aktif2();" <?php  if($rcek['sts_revdis']=="1"){ echo "checked";} ?>>  
+					<input type="checkbox" name="sts_revdis" id="sts_revdis" value="1" onClick="aktif2();" <?php  //if($rcek['sts_revdis']=="1"){ echo "checked";} ?>>  
 					<label> Revisi Lolos QC</label>
 				</div>		  	
 		  	</div> 
@@ -700,9 +696,9 @@ $rcek=mysqli_fetch_array($sqlCek);
 				<label for="ket_revdis" class="col-sm-3 control-label">Keterangan Revisi</label>
 				<div class="col-sm-8">
 						<input name="ket_revdis" type="text" class="form-control" id="ket_revdis" 
-						value="<?php if($cek>0){echo $rcek['ket_revdis'];} ?>" placeholder="Keterangan Revisi" <?php  if($rcek['sts_revdis']!="1"){ echo "disabled";}else{ echo "enabled"; } ?>>
+						value="<?php //if($cek>0){echo $rcek['ket_revdis'];} ?>" placeholder="Keterangan Revisi" <?php  //if($rcek['sts_revdis']!="1"){ echo "disabled";}else{ echo "enabled"; } ?>>
 				</div>				   
-			</div>
+			</div> -->
 			<div class="form-group" id="nego1" style="display:none;">
 				<label for="nama_nego" class="col-sm-3 control-label">Nama</label>
 					<div class="col-sm-6">
