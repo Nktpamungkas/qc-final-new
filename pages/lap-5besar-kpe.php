@@ -226,7 +226,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         masalah_dominan
                         FROM
                         `tbl_aftersales_now`
-                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL)
+                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%$Langganan%'
                         GROUP BY masalah_dominan
                         ORDER BY qty_claim_lgn DESC LIMIT 5");
                         while($rd=mysqli_fetch_array($qrydef)){
