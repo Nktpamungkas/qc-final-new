@@ -1487,15 +1487,15 @@ font-family:sans-serif, Roman, serif;
         </tr>
         <tr>
           <td>Nama</td>
+          <td align="center"><input name="nama" type="text" placeholder="Ketik" size="10" /></td>
           <td align="center"><input name="nama1" type="text" placeholder="Ketik" size="10" /></td>
-          <td align="center">Arif Efendi</td>
-          <td align="center">Agung Cahyono</td>
+          <td align="center"><input name="nama2" type="text" placeholder="Ketik" size="10" /></td>
         </tr>
         <tr>
           <td>Jabatan</td>
           <td align="center"><input name="nama" type="text" placeholder="Ketik" size="12" /></td>
-          <td align="center">Asst Supervisor</td>
-          <td align="center">Manager</td>
+          <td align="center"><input name="nama1" type="text" placeholder="Ketik" size="12" /></td>
+          <td align="center"><input name="nama2" type="text" placeholder="Ketik" size="12" /></td>
         </tr>
         <tr>
           <td>Tanggal</td>

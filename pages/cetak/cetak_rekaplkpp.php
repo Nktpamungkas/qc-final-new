@@ -161,26 +161,35 @@ border:hidden;
       <td><table border="0" class="table-list1" width="100%">
         <tr align="center">
           <td width="14%">&nbsp;</td>
-          <td width="17%">Dibuat oleh,</td>
-          <td width="14%">Diketahui oleh,</td>
+          <td width="17%" colspan="2">Dibuat oleh,</td>
+          <td width="14%">Mengetahui,</td>
+          <td width="14%">Menyetujui,</td>
         </tr>
         <tr>
           <td>Nama</td>
-          <td align="center">Arif</td>
-          <td align="center">Ely</td>
+          <td align="center"><input type="text" name="nama" placeholder="Ketik disini"></td>
+          <td align="center"><input type="text" name="nama1" placeholder="Ketik disini"></td>
+          <td align="center"><input type="text" name="nama2" placeholder="Ketik disini"></td>
+          <td align="center"><input type="text" name="nama3" placeholder="Ketik disini"></td>
         </tr>
         <tr>
           <td>Jabatan</td>
-          <td align="center">Asst. Spv</td>
-          <td align="center">Asst. Manager</td>
+          <td align="center"><input type="text" name="nama" placeholder="Ketik disini"></td>
+          <td align="center"><input type="text" name="nama1" placeholder="Ketik disini"></td>
+          <td align="center"><input type="text" name="nama2" placeholder="Ketik disini"></td>
+          <td align="center"><input type="text" name="nama3" placeholder="Ketik disini"></td>
         </tr>
         <tr>
           <td>Tanggal</td>
           <td align="center"><?php echo date("d-M-y", strtotime($rTgl['tgl_skrg']));?></td>
           <td align="center"><?php echo date("d-M-y", strtotime($rTgl['tgl_skrg']));?></td>
+          <td align="center"><?php echo date("d-M-y", strtotime($rTgl['tgl_skrg']));?></td>
+          <td align="center"><?php echo date("d-M-y", strtotime($rTgl['tgl_skrg']));?></td>
         </tr>
         <tr>
           <td valign="top" style="height: 0.6in;" >Tanda Tangan</td>
+          <td align="center">&nbsp;</td>
+          <td align="center">&nbsp;</td>
           <td align="center">&nbsp;</td>
           <td align="center">&nbsp;</td>
         </tr>

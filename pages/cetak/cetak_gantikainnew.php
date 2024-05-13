@@ -450,13 +450,13 @@ border:hidden;
         <td>Nama</td>
         <td align="center"><input type=text name=nama placeholder="Ketik disini" style="font-size: 11px;"></td>
         <td align="center"><input type=text name=nama1 placeholder="Ketik disini" style="font-size: 11px;"></td>
-        <td align="center">Agung Cahyono</td>
+        <td align="center"><input type=text name=nama2 placeholder="Ketik disini" style="font-size: 11px;"></td>
       </tr>
       <tr>
         <td>Jabatan</td>
+        <td align="center"><input type=text name=nama placeholder="Ketik disini" style="font-size: 11px;"></td>
+        <td align="center"><input type=text name=nama1 placeholder="Ketik disini" style="font-size: 11px;"></td>
         <td align="center"><input type=text name=nama2 placeholder="Ketik disini" style="font-size: 11px;"></td>
-        <td align="center"><input type=text name=nama3 placeholder="Ketik disini" style="font-size: 11px;"></td>
-        <td align="center">Manager</td>
       </tr>
       <tr>
         <td>Tanggal</td>
