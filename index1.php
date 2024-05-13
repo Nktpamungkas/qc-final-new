@@ -694,7 +694,7 @@
                                             } ?>"><a href="KPENew"><i class="fa fa-calendar"></i> <span>Input KPE</span></a></li>
                             </ul>
                         </li>
-                        <li class="treeview <?php if ($_GET['p'] == "Lap-KPE" or $_GET['p'] == "Form-LKPP" or $_GET['p'] == "Lap-Disposisi" or $_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-Retur" or $_GET['p'] == "Lap-TPUKPE" or $_GET['p'] == "Lap-ME" or $_GET['p'] == "Lap-5Besar-KPE" or $_GET['p'] == "Lap-5Besar-TPUKPE") {
+                        <li class="treeview <?php if ($_GET['p'] == "Lap-KPE" or $_GET['p'] == "Lap-KPE-Status" or $_GET['p'] == "Form-LKPP" or $_GET['p'] == "Lap-Disposisi" or $_GET['p'] == "Lap-ME" or $_GET['p'] == "Lap-5Besar-KPE") {
                                                 echo "active";
                                             } ?>">
                             <a href="#"><i class="fa fa-file-o text-aqua"></i> <span>Reports KPE</span>
@@ -715,25 +715,57 @@
                                 <li class="<?php if ($_GET['p'] == "Lap-Disposisi") {
                                                 echo "active";
                                             } ?>"><a href="LapDisposisi"><i class="fa fa-sticky-note-o"></i> <span>Lap KPE Disposisi</span></a></li>
-                                <li class="<?php if ($_GET['p'] == "Lap-GantiKain") {
-                                                echo "active";
-                                            } ?>"><a href="LapGantiKain"><i class="fa fa-exchange"></i> <span>Lap Ganti Kain</span></a></li>
-                                <li class="<?php if ($_GET['p'] == "Lap-Retur") {
-                                                echo "active";
-                                            } ?>"><a href="LapRetur"><i class="fa fa-tags"></i> <span>Lap Retur</span></a></li>
-                                <li class="<?php if ($_GET['p'] == "Lap-TPUKPE") {
-                                                echo "active";
-                                            } ?>"><a href="LapTPUKPE"><i class="fa fa-file"></i> <span>Lap TPUKPE</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-ME") {
                                                 echo "active";
                                             } ?>"><a href="LapME"><i class="fa fa-file-text"></i> <span>Lap ME</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-KPE") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarKPE"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar KPE</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview <?php if ($_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-5Besar-Ganti-Kain") {
+                                                echo "active";
+                                            } ?>">
+                            <a href="#"><i class="fa fa-file-o text-aqua"></i> <span>Reports Ganti Kain</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<?php if ($_GET['p'] == "Lap-GantiKain") {
+                                                echo "active";
+                                            } ?>"><a href="LapGantiKain"><i class="fa fa-exchange"></i> <span>Lap Ganti Kain</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-Ganti-Kain") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarGantiKain"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar Ganti Kain</span></a></li>
-                                
+                            </ul>
+                        </li>
+                        <li class="treeview <?php if ($_GET['p'] == "Lap-Retur") {
+                                                echo "active";
+                                            } ?>">
+                            <a href="#"><i class="fa fa-file-o text-aqua"></i> <span>Reports Retur</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<?php if ($_GET['p'] == "Lap-Retur") {
+                                                echo "active";
+                                            } ?>"><a href="LapRetur"><i class="fa fa-tags"></i> <span>Lap Retur</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview <?php if ($_GET['p'] == "Lap-TPUKPE" or $_GET['p'] == "Lap-5Besar-TPUKPE") {
+                                                echo "active";
+                                            } ?>">
+                            <a href="#"><i class="fa fa-file-o text-aqua"></i> <span>Reports TPUKPE</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<?php if ($_GET['p'] == "Lap-TPUKPE") {
+                                                echo "active";
+                                            } ?>"><a href="LapTPUKPE"><i class="fa fa-file"></i> <span>Lap TPUKPE</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-5Besar-TPUKPE") {
                                                 echo "active";
                                             } ?>"><a href="Lap5BesarTPUKPE"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar TPUKPE</span></a></li>
@@ -906,6 +938,23 @@
                                 <li class="<?php if ($_GET['p'] == "Persediaan-Now") {
                                                 echo "active";
                                             } ?>"><a href="PersediaanNOW"><i class="fa fa-warning"></i> <span>Persediaan Stok NOW</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview <?php if ($_GET['p'] == "Newbonpenghubung" or $_GET['p'] == "Lap-5Besar-Bon-Penghubung") {
+                                                echo "active";
+                                            } ?>">
+                            <a href="#"><i class="fa fa-expand"></i> <span>Report Bon Penghubung</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<?php if ($_GET['p'] == "Newbonpenghubung") {
+                                                echo "active";
+                                            } ?>"><a href="Newbonpenghubung"><i class="fa fa-calendar"></i> <span>New bon penghubung</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "Lap-5Besar-Bon-Penghubung") {
+                                                echo "active";
+                                            } ?>"><a href="Lap5BesarBonPenghubung"><i class="fa fa-calendar"></i> <span>Lap 5 Besar Bon Penghubung</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Stiker-Custom-New") {

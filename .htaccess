@@ -516,6 +516,7 @@ RewriteRule ^EditKPENewBon-([0-9]+)-([a-zA-Z0-9-]+)$ ./index1.php?p=Edit-KPE-New
 RewriteRule ^Newbonpenghubung$ ./index1.php?p=Newbonpenghubung [L]
 RewriteRule ^Newbonpenghubung-$ ./index1.php?p=Newbonpenghubung [L]
 RewriteRule ^Newbonpenghubung-([a-zA-Z0-9_-]+)$ ./index1.php?p=Newbonpenghubung=$1 [L]
+RewriteRule ^Lap5BesarBonPenghubung$ ./index1.php?p=Lap-5Besar-Bon-Penghubung [L]
 
 
 RewriteRule ^InputDataAPTPUKPE$ ./index1.php?p=input-data-analisa-pencegahan-tpu-kpe [L]
