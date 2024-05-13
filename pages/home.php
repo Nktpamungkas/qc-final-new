@@ -487,6 +487,59 @@ $page = strtolower($page);
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
+
+          <?php if(@strtoupper($_SESSION['usrid']) != "KPE"){ ?>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <a href="StikerCustomNew">
+              <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-file-text"></i></span>
+                
+                <div class="info-box-content">
+                  <span class="info-box-text">Stiker Custom New</span>
+                  
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+            </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <?php } ?>
+          
+          <?php if(@strtoupper($_SESSION['usrid']) == "INSPEKSI"){ ?>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <a href="InputDisposisiDetail">
+              <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-pencil-square-o"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Input Disposisi QC</span>
+                  <span class="info-box-number">&nbsp;</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+            </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="DisposisiNOW">
+            <div class="info-box">
+              <span class="info-box-icon bg-purple"><i class="fa fa-signal"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Library Disposisi QC</span>
+                <span class="info-box-number">&nbsp;</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <?php } ?>
+
           <!-- end jika username marketing hidden -->
         <?php } ?>
 
@@ -590,8 +643,8 @@ $page = strtolower($page);
         <!-- /.col -->
       <?php } ?>
 
+      <?php if ($_SESSION['lvl_id'] == "LEADERTQ" or $_SESSION['lvl_id'] == "DMF") { ?>
       <div class="col-md-3 col-sm-6 col-xs-12">
-        <?php if ($_SESSION['lvl_id'] == "LEADERTQ" or $_SESSION['lvl_id'] == "DMF") { ?>
           <a href="StatusTQNew">
             <div class="info-box">
               <span class="info-box-icon bg-red"><i class="fa fa-check-square-o"></i></span>
@@ -614,23 +667,11 @@ $page = strtolower($page);
             </div>
           </a>
         <?php } ?>
-
-        <?php if(@strtoupper($_SESSION['usrid']) != "KPE"){ ?>
-        <a href="StikerCustomNew">
-            <div class="info-box">
-              <span class="info-box-icon bg-red"><i class="fa fa-file-text"></i></span>
-              
-              <div class="info-box-content">
-                <span class="info-box-text">Stiker Custom New</span>
-                
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-          </a>
-        <?php } ?>
         <!-- /.info-box -->
       </div>
 
+      
+        
       
       <!-- /.col -->
     </div>

@@ -350,7 +350,9 @@ $rdis=mysqli_fetch_array($sqldis);
                 <option value="<?php echo $rm['masalah'];?>"><?php echo $rm['masalah'];?></option>	
                 <?php }?>
               </select>
+              <?php if(@strtoupper($_SESSION['usrid']) != "INSPEKSI"){ ?>
               <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataMasalah"> ...</button></span>
+              <?php } ?>
             </div>				
           </div>
         </div>	
@@ -373,7 +375,9 @@ $rdis=mysqli_fetch_array($sqldis);
                 <option value="<?php echo $rp['nama'];?>"><?php echo $rp['nama'];?></option>	
                 <?php }?>
               </select>
+              <?php if(@strtoupper($_SESSION['usrid']) != "INSPEKSI"){ ?>
               <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataPejabat"> ...</button></span>
+              <?php } ?>
             </div>
           </div>
         </div>	  
@@ -390,7 +394,9 @@ $rdis=mysqli_fetch_array($sqldis);
                 <option value="<?php echo $rp['nama'];?>"><?php echo $rp['nama'];?></option>	
                 <?php }?>
               </select>
+              <?php if(@strtoupper($_SESSION['usrid']) != "INSPEKSI"){ ?>
               <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataPejabat"> ...</button></span>
+              <?php } ?>
             </div>
           </div>
         </div>
@@ -407,7 +413,9 @@ $rdis=mysqli_fetch_array($sqldis);
                 <option value="<?php echo $rp['nama'];?>"><?php echo $rp['nama'];?></option>	
                 <?php }?>
               </select>
+              <?php if(@strtoupper($_SESSION['usrid']) != "INSPEKSI"){ ?>
               <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataPejabat"> ...</button></span>
+              <?php } ?>
             </div>
           </div>
         </div>
@@ -424,7 +432,9 @@ $rdis=mysqli_fetch_array($sqldis);
                 <option value="<?php echo $rpr['nama'];?>" ><?php echo $rpr['nama'];?></option>	
                 <?php }?>
               </select>
+              <?php if(@strtoupper($_SESSION['usrid']) != "INSPEKSI"){ ?>
               <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataProduksi"> ...</button></span>
+              <?php } ?>
             </div>
           </div>
         </div> 
@@ -441,7 +451,9 @@ $rdis=mysqli_fetch_array($sqldis);
                 <option value="<?php echo $rpm['nama'];?>" ><?php echo $rpm['nama'];?></option>	
                 <?php }?>
               </select>
+              <?php if(@strtoupper($_SESSION['usrid']) != "INSPEKSI"){ ?>
               <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataMKT"> ...</button></span>
+              <?php } ?>
             </div>
           </div>
         </div>
