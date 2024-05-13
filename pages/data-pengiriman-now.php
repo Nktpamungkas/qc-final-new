@@ -97,6 +97,9 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
             <tr>
               <th><div align="center">Tgl Kirim</div></th>
               <th><div align="center">No SJ</div></th>
+              <th><div align="center">No PO</div></th>
+              <th><div align="center">No Order</div></th>
+              <th><div align="center">Hanger</div></th>
               <th><div align="center">Roll</div></th>
               <th><div align="center">KG</div></th>
               <th><div align="center">Yd/Mtr</div></th>
@@ -194,7 +197,7 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               WHERE 
 			  $Where
 			  SALESDOCUMENT.DOCUMENTTYPETYPE ='05'
-              AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL AND SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE LIKE '%$Order%' AND (SALESORDER.EXTERNALREFERENCE LIKE '%$PO%' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '%$PO%') AND SALESDOCUMENTLINE.SUBCODE02 LIKE '%$ArticleGrup%' AND SALESDOCUMENTLINE.SUBCODE03 LIKE '%$ArticleCode%' AND ITXVIEWCOLOR.WARNA LIKE '%$Warna%' AND A.LOTCODE LIKE '%$Prodorder%' AND ITXVIEW_PELANGGAN.LANGGANAN LIKE '%$Pelanggan%'
+              AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL AND SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE LIKE '%$Order%' AND (SALESORDER.EXTERNALREFERENCE LIKE '%$PO%' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '%$PO%') AND SALESDOCUMENTLINE.SUBCODE02 LIKE '%$ArticleGrup%' AND SALESDOCUMENTLINE.SUBCODE03 LIKE '%$ArticleCode%' AND ITXVIEWCOLOR.WARNA LIKE '%$Warna%' AND A.LOTCODE LIKE '%$Prodorder%' AND (ITXVIEW_PELANGGAN.LANGGANAN LIKE '%$Pelanggan%' OR ITXVIEW_PELANGGAN.BUYER LIKE '%$Pelanggan%')
               GROUP BY 
               SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
               SALESDOCUMENTLINE.ORDERLINE,
@@ -311,6 +314,9 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
           <tr bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $row1['TGL_KIRIM'];?></td>
             <td align="center"><a href="#" id='<?php echo $row1['SALESDOCUMENTPROVISIONALCODE']; ?>' nowarna='<?php echo $row1['SUBCODE05']; ?>' project='<?php echo $row1['DLVSALORDERLINESALESORDERCODE']; ?>' lotcode='<?php echo $row1['LOTCODE']; ?>' class="detail_kirim_kain"><?php echo $row1['SALESDOCUMENTPROVISIONALCODE'];?></a></td>
+            <td align="center"><?php echo $row1['PO_NUMBER'];?></td>
+            <td align="center"><?php echo $row1['DLVSALORDERLINESALESORDERCODE'];?></td>
+            <td align="center"><?php echo $row1['SUBCODE02'] . $row1['SUBCODE03'];?></td>
             <td align="center"><?php echo $row1['ROLL'];?></td>
             <td align="center"><?php echo $row1['KG']." ".$row1['USERPRIMARYUOMCODE'];?></td>
             <td align="center"><?php echo $row1['YARD']." ".$row1['USERSECONDARYUOMCODE'];?></td>
