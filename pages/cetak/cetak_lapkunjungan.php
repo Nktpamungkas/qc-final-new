@@ -686,17 +686,17 @@ $rmw_bln = $bln[date('n')];
         </tr>
         <tr>
           <td>Nama</td>
-          <td align="center"><input name="nama3" type="text" placeholder="Ketik" size="10" /></td>
+          <td align="center"><input name="nama" type="text" placeholder="Ketik" size="10" /></td>
           <td align="center"><input name="nama1" type="text" placeholder="Ketik" size="10" /></td>
-          <td align="center"><strong>Agung C</strong></td>
-          <td align="center"><strong>Frans Subrata</strong></td>
+          <td align="center"><input name="nama2" type="text" placeholder="Ketik" size="10" /></td>
+          <td align="center"><input name="nama3" type="text" placeholder="Ketik" size="10" /></td>
         </tr>
         <tr>
           <td>Jabatan</td>
-          <td align="center"><input name="nama4" type="text" placeholder="Ketik" size="10" /></td>
+          <td align="center"><input name="nama" type="text" placeholder="Ketik" size="10" /></td>
+          <td align="center"><input name="nama1" type="text" placeholder="Ketik" size="10" /></td>
           <td align="center"><input name="nama2" type="text" placeholder="Ketik" size="10" /></td>
-          <td align="center">Manager</td>
-          <td align="center">Asst.DMK</td>
+          <td align="center"><input name="nama3" type="text" placeholder="Ketik" size="10" /></td>
         </tr>
         <tr>
           <td>Tanggal</td>
