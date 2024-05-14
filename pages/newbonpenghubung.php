@@ -22,6 +22,7 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
 $Warna	= isset($_POST['warna']) ? $_POST['warna'] : '';
 $Item	= isset($_POST['item']) ? $_POST['item'] : '';
 $Langganan	= isset($_POST['langganan']) ? $_POST['langganan'] : '';
+$Pelanggan	= isset($_POST['pelanggan']) ? $_POST['pelanggan'] : '';
 $Proses	= isset($_POST['prosesmkt']) ? $_POST['prosesmkt'] : '';
 $sts_tembakdok = isset($_POST['sts_tembakdok']) ? $_POST['sts_tembakdok'] : '';
 //$sts_pbon = isset($_POST['sts_pbon']) ? $_POST['sts_pbon'] : '';		
@@ -202,16 +203,16 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             if($Awal!=""){ $Where =" AND DATE_FORMAT( tgl_masuk, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
             if($sts_tembakdok=="1"){ $Sts =" AND sts_tembakdok='1' "; }
             if($Proses!=""){ $prs=" AND sts_aksi='$Proses' ";}else{$prs=" ";}
-            if($Awal!="" or $Order!="" or $Warna!="" or $Hanger!="" or $Item!="" or $PO!="" or $Langganan!=""){
+            if($Awal!="" or $Order!="" or $Warna!="" or $Hanger!="" or $Item!="" or $PO!="" or $Pelanggan!=""){
 				$sql_code = "SELECT  tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
                       LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order 
-                      WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '%$Order%' AND tq.no_po LIKE '%$PO%' AND tq.no_hanger LIKE '%$Hanger%' AND tq.no_item LIKE '%$Item%' AND tq.warna LIKE '%$Warna%' AND tq.pelanggan LIKE '%$Langganan%' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='') 
+                      WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '%$Order%' AND tq.no_po LIKE '%$PO%' AND tq.no_hanger LIKE '%$Hanger%' AND tq.no_item LIKE '%$Item%' AND tq.warna LIKE '%$Warna%' AND tq.pelanggan LIKE '%$Pelanggan%' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='') 
                       GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan";
                 $sql=mysqli_query($con,$sql_code);
             }else{
 				$sql_code = "SELECT  tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
                     LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order 
-                    WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '$Order' AND tq.no_po LIKE '$PO' AND tq.no_hanger LIKE '$Hanger%' AND tq.no_item LIKE '$Item' AND tq.warna LIKE '$Warna' AND tq.pelanggan LIKE '$Langganan' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='')  
+                    WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '$Order' AND tq.no_po LIKE '$PO' AND tq.no_hanger LIKE '$Hanger%' AND tq.no_item LIKE '$Item' AND tq.warna LIKE '$Warna' AND tq.pelanggan LIKE '$Pelanggan' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='')  
                     GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan";
                 $sql=mysqli_query($con,$sql_code);
             }
@@ -288,7 +289,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 						$arrayA = explode(',', $row1['penghubung_dep']);
 						$no_depp = 1;
 						foreach ($arrayA as $key=>$element) {			
-							if (array_key_exists($key,$array_persen )) {
+							if (array_key_exists($key,$array_persen ?? [] )) {
 								
 								if ($no_depp >=2) {
 									echo ',';
