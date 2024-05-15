@@ -51,7 +51,8 @@ $TotalKirim = $_GET['total'];
             
             $query2 = mysqli_query($con, "select 
                                             solusi,
-                                            count(*) as jumlah_kasus 
+                                            count(*) as jumlah_kasus,
+                                            pelanggan
                                         from tbl_aftersales_now
                                         $Where2
                                         group by solusi
@@ -63,6 +64,26 @@ $TotalKirim = $_GET['total'];
             $total_qty_replacement_kg = 0;
             $total_qty_replacement_yd = 0;
             while($row2 = mysqli_fetch_array($query2)){
+            $qryJumlahKasus = mysqli_query($con, "select
+                                                            count(*) as jumlah_kasus
+                                                        from (
+                                                            select
+                                                            *
+                                                            from
+                                                            tbl_aftersales_now
+                                                        where
+                                                            pelanggan like '%$row2[pelanggan]%'
+                                                                AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
+                                                        group by
+                                                            po,
+                                                            no_hanger,
+                                                            warna,
+                                                            masalah_dominan,
+                                                            qty_order
+                                                        order by
+                                                            tgl_buat asc
+                                                        ) temp");
+            $rowQryJumlahKasus = mysqli_fetch_array($qryJumlahKasus);
             $query2KG = mysqli_query($con, "select 
                                                 sum(qty_claim) as qty_claim
                                             from tbl_aftersales_now
@@ -103,7 +124,7 @@ $TotalKirim = $_GET['total'];
             <tr bgcolor="<?php echo $bgcolor; ?>">
                 <td align="center"><?= $no; ?></td>
                 <td align="left"><?= $row2['solusi'] != "" ? $row2['solusi'] : "PENDING" ?></td>
-                <td align="center"><?= $row2['jumlah_kasus'] ?></td>
+                <td align="center"><?= $rowQryJumlahKasus['jumlah_kasus'] ?></td>
                 <td align="center"><?= number_format($row2KG['qty_claim'], 2) ?></td>
                 <td align="center"><?= number_format($row2YD['qty_claim2'], 2) ?></td>
                 <td align="center"><?= number_format($row2ReplacementKG['qty_kg'], 2) ?></td>

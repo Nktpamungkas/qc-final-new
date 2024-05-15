@@ -33,18 +33,38 @@ $TotalKirim=$_GET['total'];
     $rAll=mysqli_fetch_array($qryAll);
     $qrydef=mysqli_query($con,"SELECT COUNT(*) AS jumlah_kasus, SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE tgl_buat BETWEEN '$Awal' AND '$Akhir' 
     AND (masalah_dominan!='' OR masalah_dominan!=NULL))*100,1) AS persen,
-    masalah_dominan
+    masalah_dominan, pelanggan
     FROM
     `tbl_aftersales_now`
     WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL)
     GROUP BY masalah_dominan
     ORDER BY qty_claim_lgn DESC LIMIT 5");
     while($rd=mysqli_fetch_array($qrydef)){
+        $qryJumlahKasus = mysqli_query($con, "select
+                                                    count(*) as jumlah_kasus
+                                                from (
+                                                    select
+                                                    *
+                                                    from
+                                                    tbl_aftersales_now
+                                                where
+                                                    pelanggan like '%$rd[pelanggan]%'
+                                                        AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
+                                                group by
+                                                    po,
+                                                    no_hanger,
+                                                    warna,
+                                                    masalah_dominan,
+                                                    qty_order
+                                                order by
+                                                    tgl_buat asc
+                                                ) temp");
+        $rowQryJumlahKasus = mysqli_fetch_array($qryJumlahKasus);
     ?>
     <tr valign="top">
         <td align="center"><?php echo $no2; ?></td>
         <td align="left"><?php echo $rd['masalah_dominan'];?></td>
-        <td align="right"><?php echo $rd['jumlah_kasus']; ?></td>
+        <td align="right"><?php echo $rowQryJumlahKasus['jumlah_kasus']; ?></td>
         <td align="right"><?php echo $rd['qty_claim_lgn']; ?></td>
         <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$rAll['qty_claim_all'])*100,2)." %";?></td>
         <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$TotalKirim)*100,2)." %";?></td>

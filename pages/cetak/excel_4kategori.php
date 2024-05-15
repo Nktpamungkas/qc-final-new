@@ -1,9 +1,9 @@
 <?php
-// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
-// header("Content-type: application/octet-stream");
-// header("Content-Disposition: attachment; filename=Summary-4Kategori-KPE-TotalKirim-".substr($_GET['awal'],0,10).".xls");//ganti nama sesuai keperluan
-// header("Pragma: no-cache");
-// header("Expires: 0");
+error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+header("Content-type: application/octet-stream");
+header("Content-Disposition: attachment; filename=Summary-4Kategori-KPE-TotalKirim-".substr($_GET['awal'],0,10).".xls");//ganti nama sesuai keperluan
+header("Pragma: no-cache");
+header("Expires: 0");
 //disini script laporan anda
 ?>
 <?php
@@ -34,23 +34,20 @@ $TotalKirim = $_GET['total'];
         <?php 
         if($Awal!=""){
             $query4Kategori = mysqli_query($con, "SELECT
-                                                    a.*,
-                                                    b.pjg1
+                                                        a.*,
+                                                        sum(a.qty_claim) as qty_claim_x
                                                     FROM
-                                                    tbl_aftersales_now a
-                                                    LEFT JOIN tbl_ganti_kain_now b
-                                                    ON
-                                                    b.id_nsp = a.id
+                                                        tbl_aftersales_now a
                                                     WHERE
-                                                    DATE_FORMAT(a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-                                                    GROUP BY
-                                                    a.po,
-                                                    a.no_order,
-                                                    a.no_hanger,
-                                                    a.warna,
-                                                    a.masalah_dominan
+                                                        DATE_FORMAT(a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                                                        GROUP BY
+                                                        a.po,
+                                                        a.no_order,
+                                                        a.no_hanger,
+                                                        a.warna,
+                                                        a.masalah_dominan
                                                     ORDER BY
-                                                    a.tgl_buat ASC");
+                                                        a.tgl_buat ASC");
 
             $majorTemp = [];
             $sampleTemp = [];
@@ -58,6 +55,14 @@ $TotalKirim = $_GET['total'];
             $generalTemp = [];
 
             while($row = mysqli_fetch_assoc($query4Kategori)) {
+                $query4x = mysqli_query($con, "SELECT
+                                                    b.pjg1
+                                                FROM tbl_ganti_kain_now b
+                                                WHERE b.id_nsp = '$row[id]' ");
+                $rowx = mysqli_fetch_assoc($query4x);
+                
+                $row['pjg1'] = $rowx['pjg1'];
+
                 if($row['pjg1'] >= 500) {
                     $majorTemp[] = $row;
                 } elseif(in_array(substr($row['no_order'], 0, 3), ['SAM', 'SME'])) {
@@ -86,28 +91,28 @@ $TotalKirim = $_GET['total'];
             $majorKG = 0;
             foreach ($majorTemp as $key => $value) {
                 if(strtoupper($value['satuan_c']) == 'KG') {
-                    $majorKG += $value['qty_claim'];
+                    $majorKG += $value['qty_claim_x'];
                 }
             }
 
             $sampleKG = 0;
             foreach ($sampleTemp as $key => $value) {
                 if(strtoupper($value['satuan_c']) == 'KG') {
-                    $sampleKG += $value['qty_claim'];
+                    $sampleKG += $value['qty_claim_x'];
                 }
             }
 
             $repeatKG = 0;
             foreach ($repeatTemp as $key => $value) {
                 if(strtoupper($value['satuan_c']) == 'KG') {
-                    $repeatKG += $value['qty_claim'];
+                    $repeatKG += $value['qty_claim_x'];
                 }
             }
 
             $generalKG = 0;
             foreach ($generalTemp as $key => $value) {
                 if(strtoupper($value['satuan_c']) == 'KG') {
-                    $generalKG += $value['qty_claim'];
+                    $generalKG += $value['qty_claim_x'];
                 }
             }
 
@@ -157,14 +162,10 @@ $TotalKirim = $_GET['total'];
                 <td align="right" colspan="1"><strong><?php if($TotalKirim!=""){echo number_format($totalJumlahKasus,2);}else{echo "0";} ?></strong></td>
                 <td align="right" colspan="1"><strong><?php if($TotalKirim!=""){echo number_format($totalKeluhan,2);}else{echo "0";} ?></strong></td>
                 <td align="right" colspan="1"><strong><?php if($TotalKirim!=''){echo number_format($totalDibandingkanTotalKeluhan, 2)." %";}else{echo "0";} ?></strong></td>
-                <td></td>
             </tr>
             <tr valign="top">
                 <td align="right" colspan="2"><strong>TOTAL KIRIM</strong></td>
                 <td align="right" colspan="1"><strong><?php if($TotalKirim!=""){echo number_format($TotalKirim,2);}else{echo "0";} ?></strong></td>
-                <td></td>
-                <td></td>
-                <td></td>
             </tr>
         </tfoot>
     </table>

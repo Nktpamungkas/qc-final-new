@@ -39,11 +39,31 @@ $TotalKirim=$_GET['total'];
     GROUP BY pelanggan
     ORDER BY qty_claim_lgn DESC LIMIT 5");
     while($r=mysqli_fetch_array($qrylgn)){
+        $qryJumlahKasus = mysqli_query($con, "select
+                                                    count(*) as jumlah_kasus
+                                                from (
+                                                    select
+                                                    *
+                                                    from
+                                                    tbl_aftersales_now
+                                                where
+                                                    pelanggan like '%$r[pelanggan]%'
+                                                        AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
+                                                group by
+                                                    po,
+                                                    no_hanger,
+                                                    warna,
+                                                    masalah_dominan,
+                                                    qty_order
+                                                order by
+                                                    tgl_buat asc
+                                                ) temp");
+        $rowQryJumlahKasus = mysqli_fetch_array($qryJumlahKasus);
 	?>
         <tr valign="top">
             <td align="center"><?php echo $no1; ?></td>
             <td align="left"><?php echo $r['pelanggan'];?></td>
-            <td align="right"><?php echo $r['jml']; ?></td>
+            <td align="right"><?php echo $rowQryJumlahKasus['jumlah_kasus']; ?></td>
             <td align="right"><?php echo $r['qty_claim_lgn']; ?></td>
             <td align="right"><?php echo number_format(($r['qty_claim_lgn']/(int)$rAll['qty_claim_all'])*100,2)." %"; ?></td>
             <td align="right"><?php echo number_format(($r['qty_claim_lgn']/$TotalKirim)*100,2)." %";?></td>

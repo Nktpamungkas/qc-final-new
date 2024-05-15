@@ -20,7 +20,7 @@ $TotalKirim=$_GET['total'];
     <tr>
       <th bgcolor="#12C9F0">NO.</th>
       <th bgcolor="#12C9F0">DEPT</th>
-      <th bgcolor="#12C9F0">JUMLAH KASUS</th>
+      <!-- <th bgcolor="#12C9F0">JUMLAH KASUS</th> -->
       <th bgcolor="#12C9F0">QTY KELUHAN (KG)</th>
       <th bgcolor="#12C9F0">% DIBANDINGKAN TOTAL KELUHAN</th>
       <th bgcolor="#12C9F0">% DIBANDINGKAN TOTAL KIRIM</th>
@@ -64,7 +64,7 @@ $TotalKirim=$_GET['total'];
     <tr valign="top">
         <td align="center"><?php echo $no2; ?></td>
         <td align="left"><?php echo $rd['t_jawab'];?></td>
-        <td align="right"><?php echo $rd['jml_tjawab']; ?></td>
+        <!-- <td align="right"><?php echo $rd['jml_tjawab']; ?></td> -->
         <td align="right"><?php echo number_format($rd['qty_claim_dept'], 2); ?></td>
         <td align="right"><?php echo number_format(($rd['qty_claim_dept']/$rAll['qty_claim_all'])*100,2)." %";?></td>
         <td align="right"><?php echo number_format(($rd['qty_claim_dept']/$TotalKirim)*100,2)." %";?></td>
