@@ -292,8 +292,8 @@ $Warna	= isset($_POST['warna']) ? $_POST['warna'] : '';
             <td align="center"><?php echo $row1['WARNA'];?></td>
             <td align="center"><?php echo trim($row1['WHSLOCATIONWAREHOUSEZONECODE'])."-".$row1['WAREHOUSELOCATIONCODE'];?></td>
             <td align="center"><?php echo $row1['ROLL'];?></td>
-            <td align="center"><?php echo $row1['KG']." ".$row1['BASEPRIMARYUNITCODE'];?></td>
-            <td align="center"><?php echo $row1['YD']." ".$row1['BASESECONDARYUNITCODE'];?></td>
+            <td align="center"><?php echo number_format($row1['KG'], 2);?></td>
+            <td align="center"><?php echo number_format($row1['YD'], 2);?></td>
            </tr>
           <?php	$no++;  } ?>
         </tbody>

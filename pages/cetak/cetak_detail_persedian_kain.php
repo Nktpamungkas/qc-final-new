@@ -146,7 +146,9 @@ border:hidden;
              FROM BALANCE BALANCE WHERE BALANCE.LOTCODE ='$modal_id' 
              ";
              $stmt=db2_exec($conn1,$sqldtl, array('cursor'=>DB2_SCROLLABLE));
-         while($r=db2_fetch_assoc($stmt)){
+        $totalPrimaryQty = 0;
+        $totalSecondaryQty = 0;
+        while($r=db2_fetch_assoc($stmt)){
 
           $sqlre="SELECT
                                 ELEMENTS.QUALITYREASONCODE 
@@ -164,17 +166,29 @@ border:hidden;
             <td align="center"><font size="-2"><?php echo $no; ?></font></td>
             <td align="center"><font size="-2"><?php echo substr($r['CREATIONDATETIME'],0,10);?></font></td>
             <td><font size="-2"><?php echo $r['ELEMENTSCODE'];?></font></td>
-            <td><font size="-2"><?php echo $r['BASEPRIMARYQUANTITYUNIT'];?></font></td>
+            <td><font size="-2"><?php echo number_format($r['BASEPRIMARYQUANTITYUNIT'], 2);?></font></td>
             <td align="center"><font size="-2"><?php echo $r['BASEPRIMARYUNITCODE'];?></font></td>
-            <td align="center" style="font-size: 8px;"><?php echo $r['BASESECONDARYQUANTITYUNIT'];?></td>
+            <td align="center" style="font-size: 8px;"><?php echo number_format($r['BASESECONDARYQUANTITYUNIT'], 2);?></td>
             <td align="center"><font size="-2"><?php echo $r['BASESECONDARYUNITCODE'];?></font></td>
             <td align="center"><font size="-2"><?php echo $r['LOGICALWAREHOUSECODE'];?></font></td>
             <td align="center" valign="middle" style="font-size: 8px;"><?php echo $r['WHSLOCATIONWAREHOUSEZONECODE']."-".$r['WAREHOUSELOCATIONCODE'];?></td>
             <td align="center"><font size="-2"><?php echo $re['QUALITYREASONCODE'];?></font></td>
            
           </tr>
-          <?php $no++;}}?>
-			
+          <?php $no++; $totalPrimaryQty+= $r['BASEPRIMARYQUANTITYUNIT']; $totalSecondaryQty += $r['BASESECONDARYQUANTITYUNIT']; }}?>
+			</tbody>
+      <tfoot>
+        <tr>
+          <td align="right" colspan="3">Total</td>
+          <td><?= number_format($totalPrimaryQty, 2) ?></td>
+          <td></td>
+          <td><?= number_format($totalSecondaryQty, 2) ?></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
         
       </table></td>
     </tr>

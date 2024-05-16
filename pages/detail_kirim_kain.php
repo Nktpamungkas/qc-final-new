@@ -22,6 +22,10 @@ include("../koneksi.php");
                     <h5><strong>No Warna : <?php echo $_GET['nowarna'];?></strong></h5>
                     <h5><strong>Project : <?php echo $_GET['project'];?></strong></h5>
                     <h5><strong>Prod. Order : <?php echo $_GET['lotcode'];?></strong></h5>
+                    <div class="pull-right">
+                        <!-- Menambahkan tanda petik yang kurang pada tag href -->
+                        <a href="pages/cetak/cetak_detail_kirim_kain.php?awal=<?php echo htmlspecialchars($modal_id); ?>&nowarna=<?=$nowarna?>&project=<?=$project?>&lotcode=<?=$lotcode?>" class="btn btn-danger" target="_blank">Cetak Detail</a>
+                    </div>
                     <table id="example9" class="table table-bordered table-hover table-striped" width="100%">
                         <thead>
                             <tr>
@@ -72,9 +76,9 @@ include("../koneksi.php");
                             <tr>
                                 <td align="center" width="5%"><?php echo $no;?></td>
                                 <td align="center" width="15%"><?php echo $r['ITEMELEMENTCODE'];?></td>
-                                <td align="center" width="10%"><?php echo $r['USERPRIMARYQUANTITY'];?></td>
+                                <td align="center" width="10%"><?php echo number_format($r['USERPRIMARYQUANTITY'], 2);?></td>
                                 <td align="center" width="5%"><?php echo $r['USERPRIMARYUOMCODE'];?></td>
-                                <td align="center" width="10%"><?php echo $r['USERSECONDARYQUANTITY'];?></td>
+                                <td align="center" width="10%"><?php echo number_format($r['USERSECONDARYQUANTITY'], 2);?></td>
                                 <td align="center" width="5%"><?php echo $r['USERSECONDARYUOMCODE'];?></td>
                                 <td align="center" width="5%"><?php echo trim($r['WHSLOCATIONWAREHOUSEZONECODE'])."-".trim($r['WAREHOUSELOCATIONCODE']);?></td>
                             </tr>

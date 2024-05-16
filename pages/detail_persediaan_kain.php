@@ -77,9 +77,9 @@ include("../koneksi.php");
                                 <td align="center" width="5%"><?php echo $no;?></td>
                                 <td align="center" width="15%"><?php echo substr($r['CREATIONDATETIME'],0,10);?></td>
                                 <td align="center" width="15%"><?php echo $r['ELEMENTSCODE'];?></td>
-                                <td align="center" width="5%"><?php echo $r['BASEPRIMARYQUANTITYUNIT'];?></td>
+                                <td align="center" width="5%"><?php echo number_format($r['BASEPRIMARYQUANTITYUNIT'], 2);?></td>
                                 <td align="center" width="5%"><?php echo $r['BASEPRIMARYUNITCODE'];?></td>
-                                <td align="center" width="5%"><?php echo $r['BASESECONDARYQUANTITYUNIT'];?></td>
+                                <td align="center" width="5%"><?php echo number_format($r['BASESECONDARYQUANTITYUNIT'], 2);?></td>
                                 <td align="center" width="5%"><?php echo $r['BASESECONDARYUNITCODE'];?></td>
                                 <td align="center" width="10%"><?php echo $r['LOGICALWAREHOUSECODE'];?></td>
                                 <td align="center" width="10%"><?php echo $r['WHSLOCATIONWAREHOUSEZONECODE']."-".$r['WAREHOUSELOCATIONCODE'];?></td>
