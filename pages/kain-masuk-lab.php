@@ -14,6 +14,7 @@ $nocounter=$_GET['nocount'];
                             <thead>
                                 <tr class="bg-green">
                                     <th style="border: 1px solid #ddd;">#</th>
+                                    <th style="border: 1px solid #ddd;">Aksi</th>
                                     <th style="border: 1px solid #ddd;">Suffix</th>
                                     <th style="border: 1px solid #ddd;">No Counter</th>
                                     <th style="border: 1px solid #ddd;">Jenis Testing</th>
@@ -42,6 +43,7 @@ $nocounter=$_GET['nocount'];
                                         <td valign="center">
                                             <?php echo $no++; ?>
                                         </td>
+                                        <td valign="center" align="center"><a href="pages/cetak/cetak_label_lab.php?nocounter=<?=$r['no_counter']?>" class="btn btn-danger" target="_blank"><i class="fa fa-print"></i></a></td>
                                         <td valign="center" align="center"><?php echo $r['suffix']; ?></td>
                                         <td valign="center"><?php echo $r['no_counter']; ?></td>
                                         <td valign="center"><?php echo $r['jenis_testing']; ?></td>
@@ -52,7 +54,7 @@ $nocounter=$_GET['nocount'];
                                         <td valign="center"><?php echo $r['no_item']; ?></td>
                                         <td valign="center"><?php echo $r['jenis_kain']; ?></td>
                                         <td valign="center"><?php echo $r['nama_personil_test']; ?></td>
-                                      <td valign="center" align="left"><?php echo $r['permintaan_testing']; ?></td>
+                                      <td valign="center" align="left"><?php echo $r['permintaan_testing'] ?: "FULL TEST"; ?></td>
                                         <td valign="top" class="13"><?php echo $r['created_by']; ?><hr class="divider"><span class="label <?php if($r['sts']=="normal"){ echo "label-warning"; }else{ echo "label-danger blink_me"; } ?>"><?php echo $r['sts']; ?></span></td>
                                       <td valign="top" class="13"><span class="label <?php if($r['sts_laborat']=="Open"){ echo "label-info"; } else if($r['sts_laborat']=="Waiting Approval"){ echo "label-info"; }else if($r['sts_laborat']=="In Progress"){ echo "label-success"; }else{ echo "label-primary"; } ?>"><?php echo $r['sts_laborat']; ?></span><hr class="divider">
                                       <em><?php echo $r['note_laborat']; ?></em></td>
