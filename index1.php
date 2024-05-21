@@ -1064,6 +1064,9 @@
                                 <li class="<?php if ($_GET['p'] == "Grafik-NCP-Now") {
                                                 echo "active";
                                             } ?>"><a href="GrafikNCPNow"><i class="fa fa-circle-o text-purple"></i> <span>Grafik NCP</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "Lap-NCP-New") {
+                                                echo "active";
+                                            } ?>"><a href="LapNCPNew"><i class="fa fa-circle-o text-navy"></i> <span>Laporan NCP Lama</span></a></li>
                             </ul>
                         </li>
                     <?php } ?>
