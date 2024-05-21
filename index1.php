@@ -1066,7 +1066,10 @@
                                             } ?>"><a href="GrafikNCPNow"><i class="fa fa-circle-o text-purple"></i> <span>Grafik NCP</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-NCP-New") {
                                                 echo "active";
-                                            } ?>"><a href="LapNCPNew"><i class="fa fa-circle-o text-navy"></i> <span>Laporan NCP Lama</span></a></li>
+                                            } ?>"><a href="LapNCPNew"><i class="fa fa-circle-o text-navy"></i> <span>Laporan NCP Lama 2022</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "Lap-NCP") {
+                                                echo "active";
+                                            } ?>"><a href="LapNCP"><i class="fa fa-circle-o text-navy"></i> <span>Laporan NCP Lama 2019</span></a></li>
                             </ul>
                         </li>
                     <?php } ?>
