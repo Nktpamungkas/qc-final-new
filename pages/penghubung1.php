@@ -27,6 +27,29 @@
 	</td>
   </tr>
 
+<tr>
+	<td>Advice dari Produksi / QC</td>
+	<td width=350px>
+		<select class="form-control select2" name="advice1" id="advice1" style="width:150px">
+			<option value="">Pilih</option>
+			<?php
+			$advices = [
+				"CUTTING LOSS",
+				"SPECIAL MAKER",
+				"CLOSE MAKER",
+				"PERBAIKAN GARMENT",
+				"LETTER OF GUARANTEE (LG)",
+			];
+			foreach($advices as $advice){
+				?>
+				<option value="<?=$advice?>" <?= $rcek['advice1'] == $advice ? "SELECTED" : ""; ?>>
+					<?= $advice ?>
+				</option>
+			<?php } ?>
+		</select>
+	</td>
+</tr>
+
   <tr>
     <td>Roll</td>
     <td>

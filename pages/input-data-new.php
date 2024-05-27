@@ -1459,6 +1459,7 @@ if($_POST['save']=="save"){
 		 // 1 
 		$penghubung_masalah =  $_POST['penghubung_masalah'];
 		$penghubung_keterangan =  $_POST['penghubung_keterangan'];
+		$advice1 		  = $_POST['advice1'];
 		$penghubung_roll1 =  $_POST['penghubung_roll1'];
 		$penghubung_roll2 =  $_POST['penghubung_roll2'];
 		$penghubung_roll3 =  $_POST['penghubung_roll3'];
@@ -1487,6 +1488,7 @@ if($_POST['save']=="save"){
 		/////////////////////////////////////////////////////////2
 		$penghubung2_masalah =  $_POST['penghubung2_masalah'];
 		$penghubung2_keterangan =  $_POST['penghubung2_keterangan'];
+		$advice2 		   = $_POST['advice2'];
 		$penghubung2_roll1 =  $_POST['penghubung2_roll1'];
 		$penghubung2_roll2 =  $_POST['penghubung2_roll2'];
 		$penghubung2_roll3 =  $_POST['penghubung2_roll3'];
@@ -1515,6 +1517,7 @@ if($_POST['save']=="save"){
 		/////////////////////////////////////////////////////////3
 		$penghubung3_masalah =  $_POST['penghubung3_masalah'];
 		$penghubung3_keterangan =  $_POST['penghubung3_keterangan'];
+		$advice3 		   = $_POST['advice3'];
 		$penghubung3_roll1 =  $_POST['penghubung3_roll1'];
 		$penghubung3_roll2 =  $_POST['penghubung3_roll2'];
 		$penghubung3_roll3 =  $_POST['penghubung3_roll3'];
@@ -1544,6 +1547,7 @@ if($_POST['save']=="save"){
 	  } else {
 		$penghubung_masalah    =  '';
 		$penghubung_keterangan =  '';
+		$advice1 				=  '';
 		$penghubung_roll1      =  '';
 		$penghubung_roll2      =  '';
 		$penghubung_roll3      =  '';
@@ -1554,6 +1558,7 @@ if($_POST['save']=="save"){
 		//2 
 		$penghubung2_masalah    =  '';
 		$penghubung2_keterangan =  '';
+		$advice2 				=  '';
 		$penghubung2_roll1      =  '';
 		$penghubung2_roll2      =  '';
 		$penghubung2_roll3      =  '';
@@ -1564,6 +1569,7 @@ if($_POST['save']=="save"){
 		//3 
 		$penghubung3_masalah    =  '';
 		$penghubung3_keterangan =  '';
+		$advice3 				=  '';
 		$penghubung3_roll1      =  '';
 		$penghubung3_roll2      =  '';
 		$penghubung3_roll3      =  '';
@@ -1655,6 +1661,7 @@ if($_POST['save']=="save"){
 		  tgl_update=now(),
 		  penghubung_masalah = '$penghubung_masalah',
 		  penghubung_keterangan = '$penghubung_keterangan',
+		  advice1          = '$advice1',
 		  penghubung_roll1 = '$penghubung_roll1',
 		  penghubung_roll2 = '$penghubung_roll2',
 		  penghubung_roll3 = '$penghubung_roll3',
@@ -1663,6 +1670,7 @@ if($_POST['save']=="save"){
 		  
 		  penghubung2_masalah = '$penghubung2_masalah',
 		  penghubung2_keterangan = '$penghubung2_keterangan',
+		  advice2           = '$advice2',
 		  penghubung2_roll1 = '$penghubung2_roll1',
 		  penghubung2_roll2 = '$penghubung2_roll2',
 		  penghubung2_roll3 = '$penghubung2_roll3',
@@ -1671,6 +1679,7 @@ if($_POST['save']=="save"){
 		  
 		  penghubung3_masalah = '$penghubung3_masalah',
 		  penghubung3_keterangan = '$penghubung3_keterangan',
+		  advice3           = '$advice3',
 		  penghubung3_roll1 = '$penghubung3_roll1',
 		  penghubung3_roll2 = '$penghubung3_roll2',
 		  penghubung3_roll3 = '$penghubung3_roll3',
@@ -1705,6 +1714,7 @@ if($_POST['update']=="update"){
 	
 		$penghubung_masalah =  $_POST['penghubung_masalah'];
 		$penghubung_keterangan =  $_POST['penghubung_keterangan'];
+		$advice1          = $_POST['advice1'];
 		$penghubung_roll1 =  $_POST['penghubung_roll1'];
 		$penghubung_roll2 =  $_POST['penghubung_roll2'];
 		$penghubung_roll3 =  $_POST['penghubung_roll3'];
@@ -1736,6 +1746,7 @@ if($_POST['update']=="update"){
 		// 2
 		$penghubung2_masalah =  $_POST['penghubung2_masalah'];
 		$penghubung2_keterangan =  $_POST['penghubung2_keterangan'];
+		$advice2           = $_POST['advice2'];
 		$penghubung2_roll1 =  $_POST['penghubung2_roll1'];
 		$penghubung2_roll2 =  $_POST['penghubung2_roll2'];
 		$penghubung2_roll3 =  $_POST['penghubung2_roll3'];
@@ -1768,6 +1779,7 @@ if($_POST['update']=="update"){
 		// 3
 		$penghubung3_masalah =  $_POST['penghubung3_masalah'];
 		$penghubung3_keterangan =  $_POST['penghubung3_keterangan'];
+		$advice3           = $_POST['advice3'];
 		$penghubung3_roll1 =  $_POST['penghubung3_roll1'];
 		$penghubung3_roll2 =  $_POST['penghubung3_roll2'];
 		$penghubung3_roll3 =  $_POST['penghubung3_roll3'];
@@ -1875,6 +1887,7 @@ if($_POST['update']=="update"){
 		  tgl_update=now(),
 		  penghubung_masalah = '$penghubung_masalah',
 		  penghubung_keterangan = '$penghubung_keterangan',
+		  advice1          = '$advice1',
 		  penghubung_roll1 = '$penghubung_roll1',
 		  penghubung_roll2 = '$penghubung_roll2',
 		  penghubung_roll3 = '$penghubung_roll3',
@@ -1883,6 +1896,7 @@ if($_POST['update']=="update"){
 		  
 		  penghubung2_masalah = '$penghubung2_masalah',
 		  penghubung2_keterangan = '$penghubung2_keterangan',
+		  advice2           = '$advice2',
 		  penghubung2_roll1 = '$penghubung2_roll1',
 		  penghubung2_roll2 = '$penghubung2_roll2',
 		  penghubung2_roll3 = '$penghubung2_roll3',
@@ -1891,6 +1905,7 @@ if($_POST['update']=="update"){
 		  
 		  penghubung3_masalah = '$penghubung3_masalah',
 		  penghubung3_keterangan = '$penghubung3_keterangan',
+		  advice3           = '$advice3',
 		  penghubung3_roll1 = '$penghubung3_roll1',
 		  penghubung3_roll2 = '$penghubung3_roll2',
 		  penghubung3_roll3 = '$penghubung3_roll3',

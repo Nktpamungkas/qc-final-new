@@ -26,9 +26,32 @@
 	</select> / 
 	<input type="text" name="penghubung3_keterangan" placeholder="Notes" style="width:150px" value="<?=$rcek['penghubung3_keterangan']?>">
 	</td>
-  </tr>
+	</tr>
 
-  <tr>
+<tr>
+	<td>Advice dari Produksi / QC</td>
+	<td width=350px>
+		<select class="form-control select2" name="advice3" id="advice3" style="width:150px">
+			<option value="">Pilih</option>
+			<?php
+			$advices = [
+				"CUTTING LOSS",
+				"SPECIAL MAKER",
+				"CLOSE MAKER",
+				"PERBAIKAN GARMENT",
+				"LETTER OF GUARANTEE (LG)",
+			];
+			foreach($advices as $advice){
+				?>
+				<option value="<?=$advice?>" <?= $rcek['advice3'] == $advice ? "SELECTED" : ""; ?>>
+					<?= $advice ?>
+				</option>
+			<?php } ?>
+		</select>
+	</td>
+</tr>
+
+<tr>
     <td>Roll</td>
     <td>
       <input type="text" name="penghubung3_roll1" placeholder="0" style="width:50px" value="<?=$rcek['penghubung3_roll1']?>">
