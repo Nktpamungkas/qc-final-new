@@ -1813,25 +1813,11 @@ $rcekcmt=mysqli_fetch_array($sqlCmt);
 										while($row=mysqli_fetch_array($result)){ 
 										$detail=explode(",",$row['permintaan_testing']);
 
-										$fulltest = [
-											"WASHING",
-											"PERSPIRATION ACID",
-											"PERSPIRATION ALKALINE",
-											"WATER",
-											"CROCKING",
-											"PHENOLIC YELLOWING",
-											"LIGHT",
-											"COLOR MIGRATION-OVEN TEST",
-											"COLOR MIGRATION",
-											"LIGHT PERSPIRATION",
-											"SALIVA",
-											"BLEEDING",
-											"CHLORIN & NON-CHLORIN",
-											"DYE TRANSFER",
-											"SWEAT CONCEAL",
-										];
+										$mastertest=mysqli_query($con,"SELECT colorfastness FROM tbl_masterbuyerlab_test WHERE buyer='$row[buyer]'");	
+										$rmastertest=mysqli_fetch_assoc($mastertest);
+										$detail_mastertest=explode(",",$rmastertest['colorfastness']);
 
-										$detail = count($detail) - 1 > 0 ? $detail : $fulltest;
+										$detail = count($detail) - 1 > 0 ? $detail : $detail_mastertest;
 									?>
 										<?php foreach($detail as $key => $value):
 											echo '<option value="'.$value.'">'.$value.'</option>';
