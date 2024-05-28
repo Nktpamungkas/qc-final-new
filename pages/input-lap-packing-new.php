@@ -119,7 +119,15 @@ if ($_POST['simpan'] == "simpan") {
 	`note_loss`='$noteloss',
     `ket_qty`='$_POST[ket_qty]',
     ket_bs = '$_POST[ket_bs]',
-    ket_dept_penyebab = '$_POST[ket_dept_penyebab]'
+    ket_dept_penyebab = '$_POST[ket_dept_penyebab]',
+    qty_kq = '$_POST[qty_kq]',
+    note_kq = '$_POST[note_kq]',
+    qty_bq = '$_POST[qty_bq]',
+    note_bq = '$_POST[note_bq]',
+    qty_kf = '$_POST[qty_kf]',
+    note_kf = '$_POST[note_kf]',
+    qty_bf = '$_POST[qty_bf]',
+    note_bf = '$_POST[note_bf]'
 	WHERE `nodemand`='$_POST[nodemand]' and  `shift`='$_POST[shift]'");
         if ($sql1) {
             //echo " <script>alert('Data has been updated!');</script>";
@@ -194,7 +202,16 @@ if ($_POST['simpan'] == "simpan") {
 	`note_loss`='$noteloss',
     `ket_qty`='$_POST[ket_qty]',
     `ket_bs` = '$_POST[ket_bs]',
-    `ket_dept_penyebab` = '$_POST[ket_dept_penyebab]' ");
+    `ket_dept_penyebab` = '$_POST[ket_dept_penyebab]',
+    qty_kq = '$_POST[qty_kq]',
+    note_kq = '$_POST[note_kq]',
+    qty_bq = '$_POST[qty_bq]',
+    note_bq = '$_POST[note_bq]',
+    qty_kf = '$_POST[qty_kf]',
+    note_kf = '$_POST[note_kf]',
+    qty_bf = '$_POST[qty_bf]',
+    note_bf = '$_POST[note_bf]'
+    ");
         if ($sql) {
             //echo " <script>alert('Data has been saved!');</script>";
             echo "<script>
@@ -1173,7 +1190,74 @@ $rowtoBS = db2_fetch_assoc($stmt2BS);
                             placeholder="Keterangan"><?php echo $row['catatan']; ?></textarea>
                     </div>
                 </div>
-				
+				<div class="form-group">
+                    <label for="qty_kq" class="col-sm-3 control-label">KQ</label>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input name="qty_kq" type="text" class="form-control" id="qty_kq" value="<?php if ($crow > 0) {
+                                echo $row['qty_kq'];
+                            } ?>" placeholder="0.00" required>
+                            <span class="input-group-addon">KGs</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <input name="note_kq" type="text" class="form-control" id="note_kq" value="<?php if ($crow > 0) {
+                                echo $row['note_kq'];
+                            }?>" placeholder="Masalah" required>
+                            
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="qty_bq" class="col-sm-3 control-label">BQ</label>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input name="qty_bq" type="text" class="form-control" id="qty_bq" value="<?php if ($crow > 0) {
+                                echo $row['qty_bq'];
+                            } ?>" placeholder="0.00" required>
+                            <span class="input-group-addon">KGs</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <input name="note_bq" type="text" class="form-control" id="note_bq" value="<?php if ($crow > 0) {
+                                echo $row['note_bq'];
+                            }?>" placeholder="Masalah" required>
+                            
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="qty_kf" class="col-sm-3 control-label">KF</label>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input name="qty_kf" type="text" class="form-control" id="qty_kf" value="<?php if ($crow > 0) {
+                                echo $row['qty_kf'];
+                            } ?>" placeholder="0.00" required>
+                            <span class="input-group-addon">KGs</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <input name="note_kf" type="text" class="form-control" id="note_kf" value="<?php if ($crow > 0) {
+                                echo $row['note_kf'];
+                            }?>" placeholder="Masalah" required>
+                            
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="qty_bf" class="col-sm-3 control-label">BF</label>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input name="qty_bf" type="text" class="form-control" id="qty_bf" value="<?php if ($crow > 0) {
+                                echo $row['qty_bf'];
+                            } ?>" placeholder="0.00" required>
+                            <span class="input-group-addon">KGs</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <input name="note_bf" type="text" class="form-control" id="note_bf" value="<?php if ($crow > 0) {
+                                echo $row['note_bf'];
+                            }?>" placeholder="Masalah" required>
+                            
+                    </div>
+                </div>
             </div>
         </div>
         <div class="box-footer">
