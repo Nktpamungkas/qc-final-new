@@ -1811,7 +1811,28 @@ $rcekcmt=mysqli_fetch_array($sqlCmt);
 										$sql = "SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' and no_counter='$nocounter'";
 										$result=mysqli_query($conlab,$sql);
 										while($row=mysqli_fetch_array($result)){ 
-										$detail=explode(",",$row['permintaan_testing']);?>
+										$detail=explode(",",$row['permintaan_testing']);
+
+										$fulltest = [
+											"WASHING",
+											"PERSPIRATION ACID",
+											"PERSPIRATION ALKALINE",
+											"WATER",
+											"CROCKING",
+											"PHENOLIC YELLOWING",
+											"LIGHT",
+											"COLOR MIGRATION-OVEN TEST",
+											"COLOR MIGRATION",
+											"LIGHT PERSPIRATION",
+											"SALIVA",
+											"BLEEDING",
+											"CHLORIN & NON-CHLORIN",
+											"DYE TRANSFER",
+											"SWEAT CONCEAL",
+										];
+
+										$detail = count($detail) - 1 > 0 ? $detail : $fulltest;
+									?>
 										<?php foreach($detail as $key => $value):
 											echo '<option value="'.$value.'">'.$value.'</option>';
 										endforeach;

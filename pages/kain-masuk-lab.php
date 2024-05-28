@@ -54,7 +54,7 @@ $nocounter=$_GET['nocount'];
                                         <td valign="center"><?php echo $r['no_item']; ?></td>
                                         <td valign="center"><?php echo $r['jenis_kain']; ?></td>
                                         <td valign="center"><?php echo $r['nama_personil_test']; ?></td>
-                                        <td valign="center" align="left"><?php echo (count(explode(',', $r['permintaan_testing'])) - 1) < 15 ? $r['permintaan_testing'] : "FULL TEST"; ?></td>
+                                        <td valign="center" align="left"><?php if($r['permintaan_testing']!=""){ echo $r['permintaan_testing']; }else{ echo "<span class='label label-danger blink_me'>FULL TEST</span>"; } ?></td>
                                         <td valign="top" class="13"><?php echo $r['created_by']; ?><hr class="divider"><span class="label <?php if($r['sts']=="normal"){ echo "label-warning"; }else{ echo "label-danger blink_me"; } ?>"><?php echo $r['sts']; ?></span></td>
                                         <td valign="top" class="13"><span class="label <?php if($r['sts_laborat']=="Open"){ echo "label-info"; } else if($r['sts_laborat']=="Waiting Approval"){ echo "label-info"; }else if($r['sts_laborat']=="In Progress"){ echo "label-success"; }else{ echo "label-primary"; } ?>"><?php echo $r['sts_laborat']; ?></span><hr class="divider">
                                         <em><?php echo $r['note_laborat']; ?></em></td>
