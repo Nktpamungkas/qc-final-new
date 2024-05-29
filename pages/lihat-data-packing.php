@@ -1555,6 +1555,10 @@ $rowPST = mysqli_fetch_array($qryPST);
               <th rowspan="2">
                 <div align="center">Operator</div>
               </th>
+              <th colspan="2"><div align="center">KQ</div></th>
+              <th colspan="2"><div align="center">BQ</div></th>
+              <th colspan="2"><div align="center">KF</div></th>
+              <th colspan="2"><div align="center">BF</div></th>
             </tr>
 
             <tr>
@@ -1562,6 +1566,15 @@ $rowPST = mysqli_fetch_array($qryPST);
               <th>Kg</th>
               <th>Roll</th>
               <th>Kg</th>
+              <th>Kg</th>
+              <th>Note</th>
+
+              <th>Kg</th>
+              <th>Note</th>
+              <th>Kg</th>
+              <th>Note</th>
+              <th>Kg</th>
+              <th>Note</th>
               <th>Kg</th>
               <th>Note</th>
             </tr>
@@ -1646,6 +1659,14 @@ $rowPST = mysqli_fetch_array($qryPST);
                                                       echo implode(' & ', $ops_name);
                                                       ?>
                                                       </td>
+                                                      <td><?= $row1['qty_kq']; ?></td>
+                                                      <td><?= $row1['note_kq']; ?></td>
+                                                      <td><?= $row1['qty_bq']; ?></td>
+                                                      <td><?= $row1['note_bq']; ?></td>
+                                                      <td><?= $row1['qty_kf']; ?></td>
+                                                      <td><?= $row1['note_kf']; ?></td>
+                                                      <td><?= $row1['qty_bf']; ?></td>
+                                                      <td><?= $row1['note_bf']; ?></td>
                                                     </tr>
                                                   <?php $no++;
           } ?>

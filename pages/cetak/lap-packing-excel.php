@@ -123,6 +123,26 @@ No MC :
         <font color="#FFFFFF">Operator</font>
       </strong>
     </th>
+    <th colspan="2" valign="middle" bgcolor="#006699">
+      <strong>
+        <font color="#FFFFFF">KQ</font>
+      </strong>
+    </th>
+    <th colspan="2" valign="middle" bgcolor="#006699">
+      <strong>
+        <font color="#FFFFFF">BQ</font>
+      </strong>
+    </th>
+    <th colspan="2" valign="middle" bgcolor="#006699">
+      <strong>
+        <font color="#FFFFFF">KF</font>
+      </strong>
+    </th>
+    <th colspan="2" valign="middle" bgcolor="#006699">
+      <strong>
+        <font color="#FFFFFF">BF</font>
+      </strong>
+    </th>
   </tr>
 
   <tr>
@@ -147,6 +167,15 @@ No MC :
       </strong>
     </th>
     <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Kg</font></strong></th>
+    <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Note</font> </strong> </th>
+
+    <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Kg</font> </strong> </th>
+    <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Note</font> </strong> </th>
+    <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Kg</font> </strong> </th>
+    <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Note</font> </strong> </th>
+    <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Kg</font> </strong> </th>
+    <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Note</font> </strong> </th>
+    <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Kg</font> </strong> </th>
     <th valign="middle" bgcolor="#006699"> <strong> <font color="#FFFFFF">Note</font> </strong> </th>
   </tr>
   <?php
@@ -265,6 +294,14 @@ No MC :
         echo implode(' & ', $ops_name);
         ?>
       </td>
+      <td><?= $row['qty_kq']; ?></td>
+      <td><?= $row['note_kq']; ?></td>
+      <td><?= $row['qty_bq']; ?></td>
+      <td><?= $row['note_bq']; ?></td>
+      <td><?= $row['qty_kf']; ?></td>
+      <td><?= $row['note_kf']; ?></td>
+      <td><?= $row['qty_bf']; ?></td>
+      <td><?= $row['note_bf']; ?></td>
     </tr>
     <?php $no++;
   }
@@ -272,6 +309,14 @@ No MC :
   for ($ri = 0; $ri < 5; $ri++) {
     ?>
     <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
