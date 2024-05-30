@@ -2535,6 +2535,9 @@ $rd = mysqli_fetch_array($data1);
           </div>
         </td>
       </tr>
+      <tr>
+        <td colspan="3" align="right"><?= $rcek1['tgl_buat'] ?></td>
+      </tr>
     </tbody>
   </table>
 </body>
