@@ -154,6 +154,7 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               A.LOTCODE,
               CASE 
                   WHEN SALESDOCUMENT.PAYMENTMETHODCODE ='FOC' THEN 'FOC' 
+                  WHEN ELEMENTSINSPECTION.QUALITYREASONCODE = 'FOC' THEN 'FOC'
                   ELSE ''
               END AS NOTE,
               ITXVIEW_PELANGGAN.LANGGANAN  
@@ -173,14 +174,16 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
                   SUM(ALLOCATION.USERPRIMARYQUANTITY) AS USERPRIMARYQUANTITY,
                   ALLOCATION.USERPRIMARYUOMCODE,
                   SUM(ALLOCATION.USERSECONDARYQUANTITY) AS USERSECONDARYQUANTITY,
-                  ALLOCATION.USERSECONDARYUOMCODE 
+                  ALLOCATION.USERSECONDARYUOMCODE,
+                  ALLOCATION.ITEMELEMENTCODE
                   FROM ALLOCATION ALLOCATION
                   WHERE ALLOCATION.DETAILTYPE ='0'
                   GROUP BY 
                   ALLOCATION.CODE,
                   ALLOCATION.LOTCODE,
                   ALLOCATION.USERPRIMARYUOMCODE,
-                  ALLOCATION.USERSECONDARYUOMCODE 
+                  ALLOCATION.USERSECONDARYUOMCODE,
+                  ALLOCATION.ITEMELEMENTCODE
               ) A ON ALLOCATION.CODE = A.CODE
               LEFT JOIN ITXVIEWCOLOR ITXVIEWCOLOR ON SALESDOCUMENTLINE.ITEMTYPEAFICODE = ITXVIEWCOLOR.ITEMTYPECODE AND 
               SALESDOCUMENTLINE.SUBCODE01 = ITXVIEWCOLOR.SUBCODE01 AND 
@@ -194,6 +197,7 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               SALESDOCUMENTLINE.SUBCODE09 = ITXVIEWCOLOR.SUBCODE09 AND
               SALESDOCUMENTLINE.SUBCODE10 = ITXVIEWCOLOR.SUBCODE10
               LEFT JOIN ITXVIEW_PELANGGAN ON ITXVIEW_PELANGGAN.CODE = SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE
+              LEFT JOIN ELEMENTSINSPECTION ELEMENTSINSPECTION ON ELEMENTSINSPECTION.ELEMENTCODE = A.ITEMELEMENTCODE 
               WHERE 
 			  $Where
 			  SALESDOCUMENT.DOCUMENTTYPETYPE ='05'
@@ -215,7 +219,8 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               ITXVIEWCOLOR.WARNA,
               A.LOTCODE,
               SALESDOCUMENT.PAYMENTMETHODCODE,
-              ITXVIEW_PELANGGAN.LANGGANAN ";
+              ITXVIEW_PELANGGAN.LANGGANAN,
+              ELEMENTSINSPECTION.QUALITYREASONCODE ";
             }else{
               $sqlDB2="SELECT 
               SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
@@ -313,7 +318,7 @@ $tgl_akhir	= isset($_POST['tgl_akhir']) ? $_POST['tgl_akhir'] : '';
               ?>
           <tr bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $row1['TGL_KIRIM'];?></td>
-            <td align="center"><a href="#" id='<?php echo $row1['SALESDOCUMENTPROVISIONALCODE']; ?>' nowarna='<?php echo $row1['SUBCODE05']; ?>' project='<?php echo $row1['DLVSALORDERLINESALESORDERCODE']; ?>' lotcode='<?php echo $row1['LOTCODE']; ?>' class="detail_kirim_kain"><?php echo $row1['SALESDOCUMENTPROVISIONALCODE'];?></a></td>
+            <td align="center"><a href="#" id='<?php echo $row1['SALESDOCUMENTPROVISIONALCODE']; ?>' nowarna='<?php echo $row1['SUBCODE05']; ?>' project='<?php echo $row1['DLVSALORDERLINESALESORDERCODE']; ?>' lotcode='<?php echo $row1['LOTCODE']; ?>' foc='<?=trim($row1['NOTE']?:'')?>' class="detail_kirim_kain"><?php echo $row1['SALESDOCUMENTPROVISIONALCODE'];?></a></td>
             <td align="center"><?php echo $row1['PO_NUMBER'];?></td>
             <td align="center"><?php echo $row1['DLVSALORDERLINESALESORDERCODE'];?></td>
             <td align="center"><?php echo $row1['SUBCODE02'] . $row1['SUBCODE03'];?></td>

@@ -6,6 +6,7 @@ include("../koneksi.php");
     $nowarna=$_GET['nowarna'];
     $project=$_GET['project'];
     $lotcode=$_GET['lotcode'];
+    $foc=$_GET['foc'];
 ?>
          
 <div class="modal-dialog modal-lg">
@@ -40,6 +41,13 @@ include("../koneksi.php");
                         </thead>
                         <tbody>
                             <?php
+
+                                if($foc=="FOC") {
+                                    $foc = " AND ELEMENTSINSPECTION.QUALITYREASONCODE = 'FOC' ";
+                                } else {
+                                    $foc = " AND (ELEMENTSINSPECTION.QUALITYREASONCODE <> 'FOC' OR ELEMENTSINSPECTION.QUALITYREASONCODE IS NULL) ";
+                                }
+
                                 $no=1;
                             	$sqldtl="SELECT 
                                 ALLOCATION.CODE,
@@ -69,7 +77,9 @@ include("../koneksi.php");
                                     FROM ALLOCATION ALLOCATION
                                     WHERE ALLOCATION.DETAILTYPE ='0' AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL 
                                 ) A ON ALLOCATION.CODE = A.CODE
-                                WHERE ORDERCODE ='$modal_id' AND ALLOCATION.DECOSUBCODE05='$nowarna' AND ALLOCATION.PROJECTCODE='$project' AND A.LOTCODE='$lotcode'";
+                                LEFT JOIN ELEMENTSINSPECTION ELEMENTSINSPECTION
+	                                ON ELEMENTSINSPECTION.ELEMENTCODE = A.ITEMELEMENTCODE
+                                WHERE ORDERCODE ='$modal_id' AND ALLOCATION.DECOSUBCODE05='$nowarna' AND ALLOCATION.PROJECTCODE='$project' AND A.LOTCODE='$lotcode' $foc";
                                 $stmt=db2_exec($conn1,$sqldtl, array('cursor'=>DB2_SCROLLABLE));
                             while($r=db2_fetch_assoc($stmt)){
                             ?>

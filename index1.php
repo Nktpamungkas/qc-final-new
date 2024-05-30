@@ -2606,6 +2606,7 @@
             var a = $(this).attr("nowarna");
             var b = $(this).attr("project");
             var c = $(this).attr("lotcode");
+            var f = $(this).attr("foc");
             $.ajax({
                 url: "pages/detail_kirim_kain.php",
                 type: "GET",
@@ -2614,6 +2615,7 @@
                     nowarna: a,
                     project: b,
                     lotcode: c,
+                    foc: f,
                 },
                 success: function(ajaxData) {
                     $("#DetailKirimKain").html(ajaxData);
