@@ -36,7 +36,8 @@ header("Expires: 0");
          		<th colspan=2 ><div align="center" valign="middle">QTY SISA</div></th>  
 			   <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
-			   <th  rowspan=2><div align="center" valign="middle">RESPONBILITY</div></th>
+			   <th  rowspan=2><div align="center" valign="middle">ADVICE FROM PRODUCTION/QC</div></th>
+			   <th  rowspan=2><div align="center" valign="middle">RESPONSIBILITY</div></th>
 			   <th colspan=3 ><div align="center" valign="middle">QTY KIRIM</div></th>
 			 
 			   
@@ -118,6 +119,7 @@ header("Expires: 0");
 
 			   <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
+                <td align="center"><?php echo $row1['advice1'];?></td>
 				<td align="center">
 				<?php if ($row1['penghubung_dep'] !='') {
 						$arrayA = explode(',', $row1['penghubung_dep']);
@@ -239,6 +241,7 @@ header("Expires: 0");
 
 			  <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
+                <td align="center"><?php echo $row1['advice2'];?></td>
 				<td align="center">
 				<?php if ($row1['penghubung2_dep'] !='') {
 						$arrayA = explode(',', $row1['penghubung2_dep']);
@@ -362,6 +365,7 @@ header("Expires: 0");
 
 			  <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>
+                <td align="center"><?php echo $row1['advice3'];?></td>
 				<td align="center">
 				<?php if ($row1['penghubung3_dep'] !='') {
 						$arrayA = explode(',', $row1['penghubung3_dep']);

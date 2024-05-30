@@ -136,30 +136,30 @@ $TotalLot = isset($_POST['totallot']) ? $_POST['totallot'] : '';
                 <div class="box-body">
                     <?php
                     if ($Langganan != '') {
-                        $lgn = " AND langganan LIKE '%$Langganan%' ";
+                        $lgn = " AND tq.pelanggan LIKE '%$Langganan%' ";
                     }
 
                     $query = mysqli_query($con, "select
-                                                        tq.*
-                                                    from
-                                                        tbl_qcf tq
-                                                    where
-                                                        tq.sts_pbon != '10'
-                                                        AND DATE_FORMAT( tgl_masuk, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-                                                        and (tq.penghubung_masalah != ''
-                                                            or tq.penghubung_keterangan != ''
-                                                            or tq.penghubung_roll1 != ''
-                                                            or tq.penghubung_roll2 != ''
-                                                            or tq.penghubung_roll3 != ''
-                                                            or tq.penghubung_dep != ''
-                                                            or tq.penghubung_dep_persen != '') $lgn
-                                                    group by
-                                                        tq.no_order,
-                                                        tq.no_po,
-                                                        tq.no_hanger,
-                                                        tq.no_item,
-                                                        tq.warna,
-                                                        tq.pelanggan");
+                                                tq.*
+                                            from
+                                                tbl_qcf tq
+                                            where
+                                                tq.sts_pbon != '10'
+                                                AND DATE_FORMAT( tq.tgl_masuk, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                                                and (tq.penghubung_masalah != ''
+                                                    or tq.penghubung_keterangan != ''
+                                                    or tq.penghubung_roll1 != ''
+                                                    or tq.penghubung_roll2 != ''
+                                                    or tq.penghubung_roll3 != ''
+                                                    or tq.penghubung_dep != ''
+                                                    or tq.penghubung_dep_persen != '') $lgn
+                                            group by
+                                                tq.no_order,
+                                                tq.no_po,
+                                                tq.no_hanger,
+                                                tq.no_item,
+                                                tq.warna,
+                                                tq.pelanggan");
 
                     $data = [];
                     while ($row = mysqli_fetch_assoc($query)) {
@@ -257,9 +257,9 @@ $TotalLot = isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         </thead>
                         <tbody>
                             <?php
-                                foreach ($top5Hanger as $key => $value) {
-                                    $satu = 1;
-                                    foreach ($penghubungMasalah[$key] as $key2 => $value2) {
+                            foreach ($top5Hanger as $key => $value) {
+                                $satu = 1;
+                                foreach ($penghubungMasalah[$key] as $key2 => $value2) {
                                     ?>
                                     <tr valign="top" <?= $satu > 0 ? 'style="border-top:2px solid #aaa;"' : ''; ?>>
                                         <td align="center"><?= $satu > 0 ? $key : '' ?></td>
@@ -293,7 +293,8 @@ $TotalLot = isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     </table>
                     <div class="box-footer">
                         <a href="pages/cetak/excel_3besar_masalah_item.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>&totalk=<?= $ri7Total ?>"
-                            class="btn btn-success disabled <?=''//($Awal == "") ? "disabled" : "" ?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
+                            class="btn btn-success disabled <?= ''//($Awal == "") ? "disabled" : "" ?>"
+                            target="_blank"><i class="fa fa-file-excel-o"></i></a>
                     </div>
                 </div>
             </div>
@@ -470,7 +471,8 @@ $TotalLot = isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     </table>
                     <div class="box-footer">
                         <a href="pages/cetak/excel_3besar_masalah_item.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>&totalk=<?= $ri7Total ?>"
-                            class="btn btn-success disabled <?=''//($Awal == "") ? "disabled" : "" ?>" target="_blank"><i class="fa fa-file-excel-o"></i></a>
+                            class="btn btn-success disabled <?= ''//($Awal == "") ? "disabled" : "" ?>"
+                            target="_blank"><i class="fa fa-file-excel-o"></i></a>
                     </div>
                 </div>
             </div>

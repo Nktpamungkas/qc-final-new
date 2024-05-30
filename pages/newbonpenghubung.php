@@ -166,7 +166,8 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
          <th colspan=2 ><div align="center" valign="middle">QTY SISA</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
-			   <th  rowspan=2><div align="center" valign="middle">RESPONBILITY</div></th>
+			   <th  rowspan=2><div align="center" valign="middle">ADVICE FROM PRODUCTION/QC</div></th>
+			   <th  rowspan=2><div align="center" valign="middle">RESPONSIBILITY</div></th>
 
          <th colspan=3 ><div align="center" valign="middle">QTY KIRIM</div></th>
          
@@ -221,13 +222,18 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 					print_r($sql_code);
 				  echo '</pre>'; */
 				  ?>
-				  <div align="right">
-				  <form action="pages/cetak/cetak_newbonpenghubung.php" method="POST" target="_blank">
-				  <input type="hidden" name="sql" value="<?=$sql_code?>">
-				  <input type="submit" value="CETAK EXCELL">
-				  </form>
-				  <bR><br>
-				  </div>
+          <div style="display: flex; justify-content: end">
+              <!-- <form action="pages/cetak/cetak_newbonpenghubung_mkt.php" method="POST" target="_blank">
+                <input type="hidden" name="sql" value="<?= $sql_code ?>">
+                <input type="submit" value="CETAK EXCEL TO MKT">
+              </form> -->
+              &nbsp;&nbsp;&nbsp;
+              <form action="pages/cetak/cetak_newbonpenghubung.php" method="POST" target="_blank">
+                <input type="hidden" name="sql" value="<?= $sql_code ?>">
+                <input type="submit" value="CETAK EXCELL">
+              </form>
+            </div>
+            <br>
 			<?php 
                 while($row1=mysqli_fetch_array($sql)){
                   $dtArr=$row1['t_jawab'];
@@ -284,6 +290,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 
 			   <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
+			    <td align="center"><?php echo $row1['advice1'];?></td>
 				<td align="center">
 				<?php if ($row1['penghubung_dep'] !='') {
 						$arrayA = explode(',', $row1['penghubung_dep']);
@@ -410,6 +417,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 
 			   <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
+			    <td align="center"><?php echo $row1['advice2'];?></td>
 				<td align="center">
 				<?php if ($row1['penghubung2_dep'] !='') {
 						$arrayA = explode(',', $row1['penghubung2_dep']);
@@ -538,6 +546,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         
 			   <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>
+			    <td align="center"><?php echo $row1['advice3'];?></td>
 				<td align="center">
 				<?php if ($row1['penghubung3_dep'] !='') {
 						$arrayA = explode(',', $row1['penghubung3_dep']);
