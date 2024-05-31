@@ -105,8 +105,8 @@ function suratJalan($prodOrder, $po) {
             <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
             <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
             <th  rowspan=2><div align="center" valign="middle">ADVICE FROM PRODUCTION/QC</div></th>
-            <th rowspan="2" ><div align="center" valign="middle">TGL SURAT JALAN</div></th>
-            <th rowspan="2" ><div align="center" valign="middle">NO SURAT JALAN</div></th>
+            <!-- <th rowspan="2" ><div align="center" valign="middle">TGL SURAT JALAN</div></th>
+            <th rowspan="2" ><div align="center" valign="middle">NO SURAT JALAN</div></th> -->
         </tr>
         <tr>  
             <th><div align="center" valign="middle">ROLL</div></th>
@@ -140,7 +140,7 @@ function suratJalan($prodOrder, $po) {
                     }
             }
 
-            $sj = suratJalan($row1['lot'], $row1['no_po']);
+            // $sj = suratJalan($row1['lot'], $row1['no_po']);
     ?>
         <tr bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $row1['tgl_masuk'];?></td>
@@ -168,8 +168,8 @@ function suratJalan($prodOrder, $po) {
             <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
             <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
             <td align="center"><?php echo $row1['advice1']; ?></td>
-            <td align="center"><?= $sj['TGL_KIRIM'] ?></td>
-            <td align="center"><?= $sj['SJ'] ?></td>
+            <!-- <td align="center"><?= $sj['TGL_KIRIM'] ?></td>
+            <td align="center"><?= $sj['SJ'] ?></td> -->
         </tr>
 
         <?php if($row1['penghubung2_roll1'] and  $row1['penghubung2_roll1'] !='') { ?>
@@ -197,8 +197,8 @@ function suratJalan($prodOrder, $po) {
             <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
             <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
             <td align="center"><?php echo $row1['advice2']; ?></td>	 
-            <td align="center"></td>
-            <td align="center"></td>
+            <!-- <td align="center"></td>
+            <td align="center"></td> -->
         </tr>
         <?php } ?>
 
@@ -227,8 +227,8 @@ function suratJalan($prodOrder, $po) {
             <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
             <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>
             <td align="center"><?php echo $row1['advice3']; ?></td>	
-            <td align="center"></td>									 
-            <td align="center"></td>									 
+            <!-- <td align="center"></td>									 
+            <td align="center"></td>									  -->
         </tr>
         <?php  } ?>
 
