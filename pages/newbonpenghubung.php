@@ -1,5 +1,6 @@
 <?PHP
 ini_set("error_reporting", 1);
+set_time_limit(0);
 session_start();
 include"koneksi.php";
 
@@ -28,6 +29,56 @@ $sts_tembakdok = isset($_POST['sts_tembakdok']) ? $_POST['sts_tembakdok'] : '';
 //$sts_pbon = isset($_POST['sts_pbon']) ? $_POST['sts_pbon'] : '';		
 	
 if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";}	
+
+function suratJalan($prodOrder, $po) {
+  global $conn1;
+
+  $sqlDB2 = "SELECT
+              SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE AS SJ,
+              CASE
+                WHEN SALESDOCUMENT.GOODSISSUEDATE IS NULL THEN SALESDOCUMENT.PROVISIONALDOCUMENTDATE
+                  ELSE SALESDOCUMENT.GOODSISSUEDATE
+                END AS TGL_KIRIM
+            FROM
+              SALESDOCUMENTLINE SALESDOCUMENTLINE
+            LEFT JOIN ALLOCATION ALLOCATION ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = ALLOCATION.ORDERCODE AND SALESDOCUMENTLINE.ORDERLINE = ALLOCATION.ORDERLINE 
+            LEFT JOIN SALESDOCUMENT SALESDOCUMENT ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = SALESDOCUMENT.PROVISIONALCODE 
+            LEFT JOIN SALESORDER SALESORDER ON SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE = SALESORDER.CODE 
+            LEFT JOIN SALESORDERLINE SALESORDERLINE ON SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE = SALESORDERLINE.SALESORDERCODE AND SALESDOCUMENTLINE.DLVSALESORDERLINEORDERLINE = SALESORDERLINE.ORDERLINE
+            LEFT JOIN (
+              SELECT
+                ALLOCATION.CODE,
+                ALLOCATION.LOTCODE,
+                COUNT(ALLOCATION.ITEMELEMENTCODE) AS ROLL,
+                SUM(ALLOCATION.USERPRIMARYQUANTITY) AS USERPRIMARYQUANTITY,
+                ALLOCATION.USERPRIMARYUOMCODE,
+                SUM(ALLOCATION.USERSECONDARYQUANTITY) AS USERSECONDARYQUANTITY,
+                ALLOCATION.USERSECONDARYUOMCODE
+              FROM
+                ALLOCATION ALLOCATION
+              WHERE
+                ALLOCATION.DETAILTYPE = '0'
+              GROUP BY
+                ALLOCATION.CODE,
+                ALLOCATION.LOTCODE,
+                ALLOCATION.USERPRIMARYUOMCODE,
+                ALLOCATION.USERSECONDARYUOMCODE
+              ) A ON ALLOCATION.CODE = A.CODE 
+            WHERE
+              A.LOTCODE = '$prodOrder' 
+              AND (SALESORDER.EXTERNALREFERENCE LIKE '%$po%' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '%$po%')
+            GROUP BY
+              SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
+              A.LOTCODE,
+              SALESDOCUMENT.PROVISIONALDOCUMENTDATE,
+              SALESDOCUMENT.GOODSISSUEDATE
+            LIMIT 1";
+
+  $stmt=db2_exec($conn1,$sqlDB2, array('cursor'=>DB2_SCROLLABLE));
+  $row1=db2_fetch_assoc($stmt);
+
+  return $row1;
+}
 ?>
 <div class="box">
   <div class="box-header with-border">
@@ -153,6 +204,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <tr>  
               <th rowspan=2><div align="center" valign="middle">DATE</div></th>
 			  <th  rowspan=2><div align="center" valign="middle">CUSTOMER</div></th>
+			  <th  rowspan=2><div align="center" valign="middle">BUYER</div></th>
 			  <th  rowspan=2><div align="center" valign="middle">PO</div></th>
 			  <th  rowspan=2><div align="center" valign="middle">ORDER</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">HANGER</div></th>
@@ -170,12 +222,11 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			   <th  rowspan=2><div align="center" valign="middle">RESPONSIBILITY</div></th>
 
          <th colspan=3 ><div align="center" valign="middle">QTY KIRIM</div></th>
-         
-			   
-			 
-			   
-			   
-            </tr>
+
+         <th rowspan="2"><div align="center" valign="middle">Tanggal Surat Jalan</div></th>
+         <th rowspan="2"><div align="center" valign="middle">Nomor Surat Jalan</div></th>
+
+      </tr>
 			<tr>  
               
 			    <th><div align="center" valign="middle">ROLL</div></th>
@@ -223,10 +274,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 				  echo '</pre>'; */
 				  ?>
           <div style="display: flex; justify-content: end">
-              <!-- <form action="pages/cetak/cetak_newbonpenghubung_mkt.php" method="POST" target="_blank">
+              <form action="pages/cetak/cetak_newbonpenghubung_mkt.php" method="POST" target="_blank">
                 <input type="hidden" name="sql" value="<?= $sql_code ?>">
                 <input type="submit" value="CETAK EXCEL TO MKT">
-              </form> -->
+              </form>
               &nbsp;&nbsp;&nbsp;
               <form action="pages/cetak/cetak_newbonpenghubung.php" method="POST" target="_blank">
                 <input type="hidden" name="sql" value="<?= $sql_code ?>">
@@ -249,25 +300,14 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 						}
 				  }
 
-          // $query_sisa = "SELECT tli.qty_loss FROM tbl_lap_inspeksi tli
-          //                 LEFT JOIN tbl_qcf tq ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order";
-				  
-          // $sql_sisa=mysqli_query($con,$query_sisa);
-
-          // while($row2=mysqli_fetch_array($sql_sisa)){
-
-        
-				  
-				  
-				  
-				  
-				   
-              ?>
+          $sj = suratJalan($row1['lot'], $row1['no_po']);
+?>
               
 		 
           <tr bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $row1['tgl_masuk'];?></td>
-			<td align="center"><?php echo $row1['pelanggan'];?></td>
+			<td align="center"><?php echo explode('/', $row1['pelanggan'])[0];?></td>
+			<td align="center"><?php echo explode('/', $row1['pelanggan'])[1];?></td>
 			 <td align="center"><?php echo $row1['no_po'];?></td>
 			 <td align="center"><?php echo $row1['no_order'];?></td>
 			 <td align="center"><?php echo $row1['no_hanger'];?></td>
@@ -379,7 +419,8 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             }
         ?>
         <td><?= number_format($d_roll['QTY_SJ_KG'], 2); ?></td>
-
+        <td><?= $sj['TGL_KIRIM'] ?></td>
+        <td><?= $sj['SJ'] ?></td>
           </tr>
 		  
 		  <?php if($row1['penghubung2_roll1'] and  $row1['penghubung2_roll1'] !='')  
@@ -388,11 +429,12 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 		  
 		  
 		  <tr bgcolor="<?php echo $bgcolor; ?>">
-            <td align="center"><?php echo $row1['tgl_masuk'];?></td>
-			<td align="center"><?php echo $row1['pelanggan'];?></td>
-			 <td align="center"><?php echo $row1['no_po'];?></td>
-			 <td align="center"><?php echo $row1['no_order'];?></td>
-			 <td align="center"><?php echo $row1['no_hanger'];?></td>
+        <td align="center"><?php echo $row1['tgl_masuk'];?></td>
+        <td align="center"><?php echo explode('/', $row1['pelanggan'])[0];?></td>
+        <td align="center"><?php echo explode('/', $row1['pelanggan'])[1];?></td>
+        <td align="center"><?php echo $row1['no_po'];?></td>
+        <td align="center"><?php echo $row1['no_order'];?></td>
+        <td align="center"><?php echo $row1['no_hanger'];?></td>
 			  <td align="center"><?php echo $row1['no_item'];?></td>
 			  <td align="center"><?php echo $row1['warna'];?></td>
 			  <td align="center"><?php echo $row1['lot'];?></td>
@@ -507,6 +549,8 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             }
         ?>
         <td><?= number_format($d_roll['QTY_SJ_KG'], 2); ?></td>
+        <td></td>
+        <td></td>
           </tr>
 		  
 		  
@@ -519,11 +563,12 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 		  
 		  
 		   <tr bgcolor="<?php echo $bgcolor; ?>">
-            <td align="center"><?php echo $row1['tgl_masuk'];?></td>
-			<td align="center"><?php echo $row1['pelanggan'];?></td>
-			 <td align="center"><?php echo $row1['no_po'];?></td>
-			 <td align="center"><?php echo $row1['no_order'];?></td>
-			 <td align="center"><?php echo $row1['no_hanger'];?></td>
+        <td align="center"><?php echo $row1['tgl_masuk'];?></td>
+        <td align="center"><?php echo explode('/', $row1['pelanggan'])[0];?></td>
+        <td align="center"><?php echo explode('/', $row1['pelanggan'])[1];?></td>
+        <td align="center"><?php echo $row1['no_po'];?></td>
+        <td align="center"><?php echo $row1['no_order'];?></td>
+        <td align="center"><?php echo $row1['no_hanger'];?></td>
 			  <td align="center"><?php echo $row1['no_item'];?></td>
 			  <td align="center"><?php echo $row1['warna'];?></td>
 			  <td align="center"><?php echo $row1['lot'];?></td>
@@ -636,6 +681,8 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             }
         ?>
         <td><?= number_format($d_roll['QTY_SJ_KG'], 2); ?></td>
+        <td></td>
+        <td></td>
           </tr>
 		  
 		  <?php  } ?>

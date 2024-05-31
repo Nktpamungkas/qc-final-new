@@ -10,81 +10,63 @@ if (isset($_POST['sql'])) {
 
 <?php
 $now = date("Ymdhis");
-// header("Content-type: application/octet-stream");
-// header("Content-Disposition: attachment; filename=reportbonpenghubung_mkt".$now.".xls");//ganti nama sesuai keperluan
-// header("Pragma: no-cache");
-// header("Expires: 0");
+header("Content-type: application/octet-stream");
+header("Content-Disposition: attachment; filename=reportbonpenghubung_mkt".$now.".xls");//ganti nama sesuai keperluan
+header("Pragma: no-cache");
+header("Expires: 0");
 //disini script laporan anda
 ?>
 
 <?php
-// function suratJalan($lot, $po, $isFOC = false) {
-
-//     global $conn1;
-    
-    // $foc = $isFOC ? " AND SALESDOCUMENT.PAYMENTMETHODCODE = 'FOC' " : "";
-
-    // $po = str_replace("'", "''", $po);
-
-    // $sqlDB2 = "SELECT
-    //                 SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
-    //                 CASE
-    //                     WHEN SALESDOCUMENT.GOODSISSUEDATE IS NULL THEN SALESDOCUMENT.PROVISIONALDOCUMENTDATE
-    //                     ELSE SALESDOCUMENT.GOODSISSUEDATE
-    //                 END AS TGL_KIRIM,
-    //                 A.LOTCODE,
-    //                 SALESDOCUMENT.PAYMENTMETHODCODE
-    //             FROM
-    //                 SALESDOCUMENTLINE SALESDOCUMENTLINE
-    //             LEFT JOIN ALLOCATION ALLOCATION ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = ALLOCATION.ORDERCODE AND 
-    //             SALESDOCUMENTLINE.ORDERLINE = ALLOCATION.ORDERLINE 
-    //             LEFT JOIN SALESDOCUMENT SALESDOCUMENT ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = SALESDOCUMENT.PROVISIONALCODE 
-    //             LEFT JOIN SALESORDER SALESORDER ON SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE = SALESORDER.CODE 
-    //             LEFT JOIN SALESORDERLINE SALESORDERLINE ON SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE = SALESORDERLINE.SALESORDERCODE AND 
-    //             SALESDOCUMENTLINE.DLVSALESORDERLINEORDERLINE = SALESORDERLINE.ORDERLINE
-    //             LEFT JOIN (
-    //                 SELECT
-    //                     ALLOCATION.CODE,
-    //                     ALLOCATION.LOTCODE,
-    //                     COUNT(ALLOCATION.ITEMELEMENTCODE) AS ROLL,
-    //                     SUM(ALLOCATION.USERPRIMARYQUANTITY) AS USERPRIMARYQUANTITY,
-    //                     ALLOCATION.USERPRIMARYUOMCODE,
-    //                     SUM(ALLOCATION.USERSECONDARYQUANTITY) AS USERSECONDARYQUANTITY,
-    //                     ALLOCATION.USERSECONDARYUOMCODE
-    //                 FROM
-    //                     ALLOCATION ALLOCATION
-    //                 WHERE
-    //                     ALLOCATION.DETAILTYPE = '0'
-    //                 GROUP BY
-    //                     ALLOCATION.CODE,
-    //                     ALLOCATION.LOTCODE,
-    //                     ALLOCATION.USERPRIMARYUOMCODE,
-    //                     ALLOCATION.USERSECONDARYUOMCODE 
-    //             ) A ON
-    //                 ALLOCATION.CODE = A.CODE
-    //             -- WHERE
-    //             --     A.LOTCODE = '$lot' 
-    //             --     AND (SALESORDER.EXTERNALREFERENCE LIKE '%$po%' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '%$po%') $foc
-    //             GROUP BY
-    //                 SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
-    //                 A.LOTCODE,
-    //                 SALESDOCUMENT.PROVISIONALDOCUMENTDATE,
-    //                 SALESDOCUMENT.GOODSISSUEDATE,
-    //                 SALESDOCUMENT.PAYMENTMETHODCODE";
-
-    // $stmt=db2_exec($conn1,$sqlDB2, array('cursor'=>DB2_SCROLLABLE));
-
-    // $sjTemp = [];
-    // while($row1=db2_fetch_assoc($stmt)){
-    //     $sjTemp[] = $row1;
-    // }
-
-    // echo '<pre>';
-    // print_r($sjTemp);
-    // echo '</pre>';
-
-//     return $row1;
-// }
+function suratJalan($prodOrder, $po) {
+    global $conn1;
+  
+    $sqlDB2 = "SELECT
+                SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE AS SJ,
+                CASE
+                  WHEN SALESDOCUMENT.GOODSISSUEDATE IS NULL THEN SALESDOCUMENT.PROVISIONALDOCUMENTDATE
+                    ELSE SALESDOCUMENT.GOODSISSUEDATE
+                  END AS TGL_KIRIM
+              FROM
+                SALESDOCUMENTLINE SALESDOCUMENTLINE
+              LEFT JOIN ALLOCATION ALLOCATION ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = ALLOCATION.ORDERCODE AND SALESDOCUMENTLINE.ORDERLINE = ALLOCATION.ORDERLINE 
+              LEFT JOIN SALESDOCUMENT SALESDOCUMENT ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = SALESDOCUMENT.PROVISIONALCODE 
+              LEFT JOIN SALESORDER SALESORDER ON SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE = SALESORDER.CODE 
+              LEFT JOIN SALESORDERLINE SALESORDERLINE ON SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE = SALESORDERLINE.SALESORDERCODE AND SALESDOCUMENTLINE.DLVSALESORDERLINEORDERLINE = SALESORDERLINE.ORDERLINE
+              LEFT JOIN (
+                SELECT
+                  ALLOCATION.CODE,
+                  ALLOCATION.LOTCODE,
+                  COUNT(ALLOCATION.ITEMELEMENTCODE) AS ROLL,
+                  SUM(ALLOCATION.USERPRIMARYQUANTITY) AS USERPRIMARYQUANTITY,
+                  ALLOCATION.USERPRIMARYUOMCODE,
+                  SUM(ALLOCATION.USERSECONDARYQUANTITY) AS USERSECONDARYQUANTITY,
+                  ALLOCATION.USERSECONDARYUOMCODE
+                FROM
+                  ALLOCATION ALLOCATION
+                WHERE
+                  ALLOCATION.DETAILTYPE = '0'
+                GROUP BY
+                  ALLOCATION.CODE,
+                  ALLOCATION.LOTCODE,
+                  ALLOCATION.USERPRIMARYUOMCODE,
+                  ALLOCATION.USERSECONDARYUOMCODE
+                ) A ON ALLOCATION.CODE = A.CODE 
+              WHERE
+                A.LOTCODE = '$prodOrder' 
+                AND (SALESORDER.EXTERNALREFERENCE LIKE '%$po%' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '%$po%')
+              GROUP BY
+                SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
+                A.LOTCODE,
+                SALESDOCUMENT.PROVISIONALDOCUMENTDATE,
+                SALESDOCUMENT.GOODSISSUEDATE
+              LIMIT 1";
+  
+    $stmt=db2_exec($conn1,$sqlDB2, array('cursor'=>DB2_SCROLLABLE));
+    $row1=db2_fetch_assoc($stmt);
+  
+    return $row1;
+}
 ?>
 
 <script>
@@ -108,6 +90,7 @@ $now = date("Ymdhis");
         <tr>  
             <th rowspan=2><div align="center" valign="middle">DATE</div></th>
             <th  rowspan=2><div align="center" valign="middle">CUSTOMER</div></th>
+            <th  rowspan=2><div align="center" valign="middle">BUYER</div></th>
             <th  rowspan=2><div align="center" valign="middle">PO</div></th>
             <th  rowspan=2><div align="center" valign="middle">ORDER</div></th>
             <th  rowspan=2><div align="center" valign="middle">HANGER</div></th>
@@ -149,17 +132,20 @@ $now = date("Ymdhis");
             $dtArr1=$row1['persen'];
             $data1 = explode(",",$dtArr1);
         
-        if ($row1['penghubung_dep_persen'] !='') {
-            $array_persen = array();
-            $arrayA = explode(',', $row1['penghubung_dep_persen']);
-                foreach ($arrayA as $element) {
-                    $array_persen[] = $element ;
-                }
-        }
+            if ($row1['penghubung_dep_persen'] !='') {
+                $array_persen = array();
+                $arrayA = explode(',', $row1['penghubung_dep_persen']);
+                    foreach ($arrayA as $element) {
+                        $array_persen[] = $element ;
+                    }
+            }
+
+            $sj = suratJalan($row1['lot'], $row1['no_po']);
     ?>
         <tr bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $row1['tgl_masuk'];?></td>
-			<td align="center"><?php echo $row1['pelanggan'];?></td>
+            <td align="center"><?php echo explode('/', $row1['pelanggan'])[0];?></td>
+			<td align="center"><?php echo explode('/', $row1['pelanggan'])[1];?></td>
             <td align="center"><?php echo $row1['no_po'];?></td>
             <td align="center"><?php echo $row1['no_order'];?></td>
             <td align="center"><?php echo $row1['no_hanger'];?></td>
@@ -182,30 +168,15 @@ $now = date("Ymdhis");
             <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
             <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
             <td align="center"><?php echo $row1['advice1']; ?></td>
-            <td align="center" id="ini-<?=$no?>">
-                <?php
-                    if($row1['berat_extra'] > 0 && $row1['panjang_extra'] > 0){
-                        //echo suratJalan($row1['lot'], $row1['no_po'], true)['TGL_KIRIM'];
-                    } else {
-                        //echo suratJalan($row1['lot'], $row1['no_po'])['TGL_KIRIM'];
-                    }
-                ?>
-            </td>
-            <td align="center">
-                <?php
-                    if($row1['berat_extra'] > 0 && $row1['panjang_extra'] > 0){
-                        //echo suratJalan($row1['lot'], $row1['no_po'], true)['SALESDOCUMENTPROVISIONALCODE'];
-                    } else {
-                        //echo suratJalan($row1['lot'], $row1['no_po'])['SALESDOCUMENTPROVISIONALCODE'];
-                    }
-                ?>
-            </td>
+            <td align="center"><?= $sj['TGL_KIRIM'] ?></td>
+            <td align="center"><?= $sj['SJ'] ?></td>
         </tr>
 
         <?php if($row1['penghubung2_roll1'] and  $row1['penghubung2_roll1'] !='') { ?>
         <tr bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $row1['tgl_masuk'];?></td>
-			<td align="center"><?php echo $row1['pelanggan'];?></td>
+			<td align="center"><?php echo explode('/', $row1['pelanggan'])[0];?></td>
+			<td align="center"><?php echo explode('/', $row1['pelanggan'])[1];?></td>
             <td align="center"><?php echo $row1['no_po'];?></td>
             <td align="center"><?php echo $row1['no_order'];?></td>
             <td align="center"><?php echo $row1['no_hanger'];?></td>
@@ -226,31 +197,16 @@ $now = date("Ymdhis");
             <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
             <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
             <td align="center"><?php echo $row1['advice2']; ?></td>	 
-            <td align="center">
-                <?php
-                    if($row1['berat_extra'] > 0 && $row1['panjang_extra'] > 0){
-                        //echo suratJalan($row1['lot'], $row1['no_po'], true)['TGL_KIRIM'];
-                    } else {
-                        //echo suratJalan($row1['lot'], $row1['no_po'])['TGL_KIRIM'];
-                    }
-                ?>
-            </td>
-            <td align="center">
-                <?php
-                    if($row1['berat_extra'] > 0 && $row1['panjang_extra'] > 0){
-                        //echo suratJalan($row1['lot'], $row1['no_po'], true)['SALESDOCUMENTPROVISIONALCODE'];
-                    } else {
-                        //echo suratJalan($row1['lot'], $row1['no_po'])['SALESDOCUMENTPROVISIONALCODE'];
-                    }
-                ?>
-            </td>
+            <td align="center"></td>
+            <td align="center"></td>
         </tr>
         <?php } ?>
 
         <?php if($row1['penghubung3_roll1'] and  $row1['penghubung3_roll1'] !='') {  ?>
 		<tr bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $row1['tgl_masuk'];?></td>
-			<td align="center"><?php echo $row1['pelanggan'];?></td>
+			<td align="center"><?php echo explode('/', $row1['pelanggan'])[0];?></td>
+			<td align="center"><?php echo explode('/', $row1['pelanggan'])[1];?></td>
             <td align="center"><?php echo $row1['no_po'];?></td>
             <td align="center"><?php echo $row1['no_order'];?></td>
             <td align="center"><?php echo $row1['no_hanger'];?></td>
@@ -271,24 +227,8 @@ $now = date("Ymdhis");
             <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
             <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>
             <td align="center"><?php echo $row1['advice3']; ?></td>	
-            <td align="center">
-                <?php
-                    if($row1['berat_extra'] > 0 && $row1['panjang_extra'] > 0){
-                        //echo suratJalan($row1['lot'], $row1['no_po'], true)['TGL_KIRIM'];
-                    } else {
-                        //echo suratJalan($row1['lot'], $row1['no_po'])['TGL_KIRIM'];
-                    }
-                ?>
-            </td>
-            <td align="center">
-                <?php
-                    if($row1['berat_extra'] > 0 && $row1['panjang_extra'] > 0){
-                        //echo suratJalan($row1['lot'], $row1['no_po'], true)['SALESDOCUMENTPROVISIONALCODE'];
-                    } else {
-                        //echo suratJalan($row1['lot'], $row1['no_po'])['SALESDOCUMENTPROVISIONALCODE'];
-                    }
-                ?>
-            </td>									 
+            <td align="center"></td>									 
+            <td align="center"></td>									 
         </tr>
         <?php  } ?>
 
