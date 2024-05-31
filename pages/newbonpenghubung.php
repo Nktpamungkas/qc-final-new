@@ -223,8 +223,8 @@ function suratJalan($prodOrder, $po) {
 
          <th colspan=3 ><div align="center" valign="middle">QTY KIRIM</div></th>
 
-         <th rowspan="2"><div align="center" valign="middle">Tanggal Surat Jalan</div></th>
-         <th rowspan="2"><div align="center" valign="middle">Nomor Surat Jalan</div></th>
+         <!-- <th rowspan="2"><div align="center" valign="middle">Tanggal Surat Jalan</div></th>
+         <th rowspan="2"><div align="center" valign="middle">Nomor Surat Jalan</div></th> -->
 
       </tr>
 			<tr>  
@@ -300,7 +300,7 @@ function suratJalan($prodOrder, $po) {
 						}
 				  }
 
-          $sj = suratJalan($row1['lot'], $row1['no_po']);
+          // $sj = suratJalan($row1['lot'], $row1['no_po']);
 ?>
               
 		 
@@ -419,8 +419,8 @@ function suratJalan($prodOrder, $po) {
             }
         ?>
         <td><?= number_format($d_roll['QTY_SJ_KG'], 2); ?></td>
-        <td><?= $sj['TGL_KIRIM'] ?></td>
-        <td><?= $sj['SJ'] ?></td>
+        <!-- <td><?= $sj['TGL_KIRIM'] ?></td>
+        <td><?= $sj['SJ'] ?></td> -->
           </tr>
 		  
 		  <?php if($row1['penghubung2_roll1'] and  $row1['penghubung2_roll1'] !='')  
@@ -549,8 +549,8 @@ function suratJalan($prodOrder, $po) {
             }
         ?>
         <td><?= number_format($d_roll['QTY_SJ_KG'], 2); ?></td>
-        <td></td>
-        <td></td>
+        <!-- <td></td>
+        <td></td> -->
           </tr>
 		  
 		  
@@ -681,8 +681,8 @@ function suratJalan($prodOrder, $po) {
             }
         ?>
         <td><?= number_format($d_roll['QTY_SJ_KG'], 2); ?></td>
-        <td></td>
-        <td></td>
+        <!-- <td></td>
+        <td></td> -->
           </tr>
 		  
 		  <?php  } ?>
