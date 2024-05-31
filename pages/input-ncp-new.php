@@ -1073,7 +1073,7 @@ if ($_POST['save'] == "Simpan") {
 
 	$sqlCk = mysqli_query($con, "SELECT no_ncp FROM tbl_ncp_qcf_now WHERE reg_no='$REGNO' ORDER BY id DESC LIMIT 1");
 	$rck = mysqli_fetch_array($sqlCk);
-	$sqlCk1 = mysqli_query($con, "SELECT revisi, no_ncp, dept FROM tbl_ncp_qcf_now WHERE reg_no='$REGNO' and dept='$_POST[dept]' ORDER BY id DESC LIMIT 1");
+	$sqlCk1 = mysqli_query($con, "SELECT revisi, no_ncp, dept FROM tbl_ncp_qcf_now WHERE reg_no='$REGNO' and dept='$_POST[dept]' ORDER BY revisi DESC LIMIT 1");
 	$rck1 = mysqli_fetch_array($sqlCk1);
 	$rev1 = $rck1['revisi'] + 1;
 	if ($rck1['no_ncp'] != "" and $rck1['dept'] != "") {
