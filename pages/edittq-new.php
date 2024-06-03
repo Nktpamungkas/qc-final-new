@@ -236,6 +236,10 @@ echo '</pre>';
 							<option value="Development" <?php if($rcek['development']=="Development"){echo "SELECTED";}?>>Development</option>
 							<option value="1st Bulk" <?php if($rcek['development']=="1st Bulk"){echo "SELECTED";}?>>1st Bulk</option>
 							<option value="Reorder" <?php if($rcek['development']=="Reorder"){echo "SELECTED";}?>>Reorder</option>
+							<option value="Additional" <?php if($rcek['development']=="Additional"){echo "SELECTED";}?>>Additional</option>
+							<option value="Labdip" <?php if($rcek['development']=="Labdip"){echo "SELECTED";}?>>Labdip</option>
+							<option value="Mini Bulk" <?php if($rcek['development']=="Mini Bulk"){echo "SELECTED";}?>>Mini Bulk</option>
+							<option value="Request" <?php if($rcek['development']=="Request"){echo "SELECTED";}?>>Request</option>
 						</select>
 					</div>
 				</div>				   
