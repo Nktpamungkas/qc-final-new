@@ -31,41 +31,46 @@ $TotalKirim=$_GET['total'];
     $totaldll=0;
     $qryAll=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL)");
     $rAll=mysqli_fetch_array($qryAll);
-    $qrydef=mysqli_query($con,"SELECT COUNT(*) AS jumlah_kasus, SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE tgl_buat BETWEEN '$Awal' AND '$Akhir' 
-    AND (masalah_dominan!='' OR masalah_dominan!=NULL))*100,1) AS persen,
-    masalah_dominan, pelanggan
-    FROM
-    `tbl_aftersales_now`
-    WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL)
-    GROUP BY masalah_dominan
-    ORDER BY qty_claim_lgn DESC LIMIT 5");
+    $qrydef=mysqli_query($con,"select
+                                    temp.masalah_dominan,
+                                    count(*) as jml_kasus,
+                                    SUM(temp.qty_claim_gabung) as qty_claim_lgn
+                                from
+                                    (
+                                    select
+                                        *,
+                                        sum(qty_claim) as qty_claim_gabung
+                                    from
+                                        tbl_aftersales_now
+                                    where
+                                        no_order like '%%'
+                                        and po like '%%'
+                                        and no_hanger like '%%'
+                                        and langganan like '%%'
+                                        and nodemand like '%%'
+                                        and nokk like '%%'
+                                        and pejabat like '%%'
+                                        and tgl_buat between '$Awal' AND '$Akhir'
+                                    group by
+                                        po,
+                                        no_hanger,
+                                        warna,
+                                        masalah_dominan,
+                                        qty_order
+                                    order by
+                                        tgl_buat asc) temp
+                                group by 
+                                    temp.masalah_dominan
+                                order by
+                                    jml_kasus desc
+                                limit 5");
     while($rd=mysqli_fetch_array($qrydef)){
-        $qryJumlahKasus = mysqli_query($con, "select
-                                                    count(*) as jumlah_kasus
-                                                from (
-                                                    select
-                                                    *
-                                                    from
-                                                    tbl_aftersales_now
-                                                where
-                                                    pelanggan like '%$rd[pelanggan]%'
-                                                        AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
-                                                group by
-                                                    po,
-                                                    no_hanger,
-                                                    warna,
-                                                    masalah_dominan,
-                                                    qty_order
-                                                order by
-                                                    tgl_buat asc
-                                                ) temp");
-        $rowQryJumlahKasus = mysqli_fetch_array($qryJumlahKasus);
     ?>
     <tr valign="top">
-        <td align="center"><?php echo $no2; ?></td>
+        <td align="center"><?php echo $no2 ?></td>
         <td align="left"><?php echo $rd['masalah_dominan'];?></td>
-        <td align="right"><?php echo $rowQryJumlahKasus['jumlah_kasus']; ?></td>
-        <td align="right"><?php echo $rd['qty_claim_lgn']; ?></td>
+        <td align="right"><?php echo $rd['jml_kasus'];?></td>
+        <td align="right"><?php echo $rd['qty_claim_lgn'];?></td>
         <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$rAll['qty_claim_all'])*100,2)." %";?></td>
         <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$TotalKirim)*100,2)." %";?></td>
     </tr>

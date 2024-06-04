@@ -93,12 +93,12 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     <input name="total" type="text" class="form-control pull-right" placeholder="0" value="<?php echo $TotalKirim; ?>" />
                 </div>
                 </div>
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                 <div class="input-group date">
                     <div class="input-group-addon"> Total Lot Kirim</div>
                     <input name="totallot" type="text" class="form-control pull-right" id="totallot" placeholder="0" value="<?php echo $TotalLot; ?>" />
                 </div>
-                </div>
+                </div> -->
                 <div class="col-sm-2">
                     <div class="input-group date">
                         <div class="input-group-addon"> Langganan</div>
@@ -238,40 +238,38 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         $totaldll2=0;
                         $qryAll2=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL)");
                         $rAll2=mysqli_fetch_array($qryAll2);
-                        $qrydef=mysqli_query($con,"SELECT COUNT(*) AS jumlah_kasus, SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
-                        AND (masalah_dominan!='' OR masalah_dominan!=NULL))*100,1) AS persen,
-                        masalah_dominan, pelanggan
-                        FROM
-                        `tbl_aftersales_now`
-                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%$Langganan%'
-                        GROUP BY masalah_dominan
-                        ORDER BY qty_claim_lgn DESC LIMIT 5");
+                        $qrydef=mysqli_query($con,"select
+                                                        temp.masalah_dominan,
+                                                        count(*) as jml_kasus,
+                                                        SUM(temp.qty_claim_gabung) as qty_claim_lgn
+                                                    from
+                                                        (
+                                                        select
+                                                            *,
+                                                            sum(qty_claim) as qty_claim_gabung
+                                                        from
+                                                            tbl_aftersales_now
+                                                        where
+                                                            tgl_buat between '$Awal' AND '$Akhir'
+                                                        group by
+                                                            po,
+                                                            no_hanger,
+                                                            warna,
+                                                            masalah_dominan,
+                                                            qty_order
+                                                        order by
+                                                            tgl_buat asc) temp
+                                                    group by 
+                                                        temp.masalah_dominan
+                                                    order by
+                                                        jml_kasus desc
+                                                    limit 5");
                         while($rd=mysqli_fetch_array($qrydef)){
-                            $qryJumlahKasus = mysqli_query($con, "select
-                                                                        count(*) as jumlah_kasus
-                                                                    from (
-                                                                        select
-                                                                        *
-                                                                        from
-                                                                        tbl_aftersales_now
-                                                                    where
-                                                                        pelanggan like '%$rd[pelanggan]%'
-                                                                            AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
-                                                                    group by
-                                                                        po,
-                                                                        no_hanger,
-                                                                        warna,
-                                                                        masalah_dominan,
-                                                                        qty_order
-                                                                    order by
-                                                                        tgl_buat asc
-                                                                    ) temp");
-                            $rowQryJumlahKasus = mysqli_fetch_array($qryJumlahKasus);
                         ?>
                         <tr valign="top">
                             <td align="center"><?php echo $no2 ?></td>
                             <td align="left"><?php echo $rd['masalah_dominan'];?></td>
-                            <td align="right"><?php echo $rowQryJumlahKasus['jumlah_kasus'];?></td>
+                            <td align="right"><?php echo $rd['jml_kasus'];?></td>
                             <td align="right"><?php echo $rd['qty_claim_lgn'];?></td>
                             <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$rAll2['qty_claim_all'])*100,2)." %";?></td>
                             <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$TotalKirim)*100,2)." %";?></td>
@@ -605,7 +603,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
         <div class="col-xs-6">	
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> 5 Terbesar Masalah Per Hanger : <?php echo $Awal." s/d ".$Akhir;?></h3> <!-- disini 2 -->
+                    <h3 class="box-title"> 5 Terbesar Masalah Per Hanger : <?php echo $Awal." s/d ".$Akhir;?></h3>
                     <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
@@ -626,54 +624,48 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         <tbody>
                         <?php 
                         if($Langganan!=''){$lgn=" AND langganan LIKE '%$Langganan%' ";}else{$lgn="";}
-                        $qry7Total5 = mysqli_query($con, "SELECT 
-                                                                no_hanger
-                                                            FROM tbl_aftersales_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-                                                            GROUP BY no_hanger
-                                                            ORDER BY SUM(qty_claim) DESC
-                                                            LIMIT 5");
+                        $qry7Total5 = mysqli_query($con, "select
+                                                                temp.no_hanger,
+                                                                count(*) as jml_kasus
+                                                            from
+                                                                (
+                                                                select
+                                                                    *
+                                                                from
+                                                                    tbl_aftersales_now
+                                                                where
+                                                                    tgl_buat between '$Awal' AND '$Akhir' $lgn
+                                                                group by
+                                                                    po,
+                                                                    no_hanger,
+                                                                    warna,
+                                                                    masalah_dominan,
+                                                                    qty_order
+                                                                order by
+                                                                    tgl_buat asc) temp
+                                                            group by 
+                                                                temp.no_hanger
+                                                            order by
+                                                                jml_kasus desc
+                                                            limit 5");
                         $ri7Total = 0;
                         while($ri7Total5 = mysqli_fetch_array($qry7Total5)) {
-                            $qry7Total3 = mysqli_query($con, "SELECT
-                                                                    SUM(qty_claim) AS qty_keluhan 
-                                                                FROM tbl_aftersales_now 
-                                                                WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND no_hanger='$ri7Total5[no_hanger]'
-                                                                ORDER BY qty_keluhan DESC
-                                                                LIMIT 3");
-                            $ri7Total3 = mysqli_fetch_array($qry7Total3);
-                            $ri7Total += $ri7Total3['qty_keluhan'];
-                        }
-
-                        $qry7=mysqli_query($con,"SELECT no_item, no_hanger, SUM(qty_claim) AS qty_keluhan FROM tbl_aftersales_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
-                        GROUP BY no_hanger
-                        ORDER BY qty_keluhan DESC
-                        LIMIT 5");
-                        while($ri7=mysqli_fetch_array($qry7)){
-                            $qryd7=mysqli_query($con,"SELECT count(*) as jumlah_kasus, masalah_dominan, SUM(qty_claim) AS qty_keluhan, pelanggan FROM tbl_aftersales_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $lgn
-                            AND no_hanger='$ri7[no_hanger]' 
-                            GROUP BY masalah_dominan
-                            ORDER BY qty_keluhan DESC
-                            LIMIT 3");
-                            $qrykirim=mysqli_query($con,"SELECT SUM(qty) AS qty_kirim FROM tbl_pengiriman WHERE DATE_FORMAT(tgl_kirim, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND no_item='$ri7[no_item]' AND tmp_hapus='0'");
-                            $rkirim=mysqli_fetch_array($qrykirim);
-                            $qrytitem=mysqli_query($con,"SELECT SUM(a.qty_keluhan) AS total_keluhan FROM
-                            (SELECT SUM(qty_claim) AS qty_keluhan FROM tbl_aftersales_now WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-                            AND no_hanger='$ri7[no_hanger]' 
-                            GROUP BY masalah_dominan
-                            ORDER BY qty_keluhan DESC
-                            LIMIT 3) a");
-                            $ritem=mysqli_fetch_array($qrytitem);
-                            while($rdi7=mysqli_fetch_array($qryd7)){
-                                $qryJumlahKasus = mysqli_query($con, "select
-                                                                        count(*) as jumlah_kasus
-                                                                    from (
-                                                                        select
-                                                                        *
-                                                                        from
+                            $qry7Total3 = mysqli_query($con, "select
+                                                                    sum(temp2.qty_keluhan) as total_qty_keluhan
+                                                                from (
+                                                                select
+                                                                    temp.masalah_dominan,
+                                                                    sum(temp.qty_claim_gabung) as qty_keluhan
+                                                                from
+                                                                    (
+                                                                    select
+                                                                        *,
+                                                                        sum(qty_claim) as qty_claim_gabung
+                                                                    from
                                                                         tbl_aftersales_now
                                                                     where
-                                                                        pelanggan like '%$rdi7[pelanggan]%'
-                                                                            AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
+                                                                        no_hanger = '$ri7Total5[no_hanger]'
+                                                                        and tgl_buat between '$Awal' AND '$Akhir' $lgn
                                                                     group by
                                                                         po,
                                                                         no_hanger,
@@ -681,18 +673,108 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                                         masalah_dominan,
                                                                         qty_order
                                                                     order by
-                                                                        tgl_buat asc
-                                                                    ) temp");
-                                $rowQryJumlahKasus = mysqli_fetch_array($qryJumlahKasus);
+                                                                        tgl_buat asc) temp
+                                                                group by 
+                                                                    temp.masalah_dominan
+                                                                order by
+                                                                    qty_keluhan desc
+                                                                limit 3) temp2");
+                            $ri7Total3 = mysqli_fetch_array($qry7Total3);
+                            $ri7Total += $ri7Total3['total_qty_keluhan'];
+                        }
+
+                        $qry7=mysqli_query($con,"select
+                                                    temp.no_hanger,
+                                                    count(*) as jml_kasus
+                                                from
+                                                    (
+                                                    select
+                                                        *
+                                                    from
+                                                        tbl_aftersales_now
+                                                    where
+                                                        tgl_buat between '$Awal' AND '$Akhir' $lgn
+                                                    group by
+                                                        po,
+                                                        no_hanger,
+                                                        warna,
+                                                        masalah_dominan,
+                                                        qty_order
+                                                    order by
+                                                        tgl_buat asc) temp
+                                                group by 
+                                                    temp.no_hanger
+                                                order by
+                                                    jml_kasus desc
+                                                limit 5");
+                        while($ri7=mysqli_fetch_array($qry7)){
+                            $qryd7=mysqli_query($con,"select
+                                                            temp.masalah_dominan,
+                                                            sum(temp.qty_claim_gabung) as qty_keluhan,
+                                                            count(*) as jml_kasus 
+                                                        from
+                                                            (
+                                                            select
+                                                                *,
+                                                                sum(qty_claim) as qty_claim_gabung
+                                                            from
+                                                                tbl_aftersales_now
+                                                            where
+                                                                no_hanger = '$ri7[no_hanger]'
+                                                                and tgl_buat between '$Awal' AND '$Akhir' $lgn
+                                                            group by
+                                                                po,
+                                                                no_hanger,
+                                                                warna,
+                                                                masalah_dominan,
+                                                                qty_order
+                                                            order by
+                                                                tgl_buat asc) temp
+                                                        group by 
+                                                            temp.masalah_dominan
+                                                        order by
+                                                            qty_keluhan desc
+                                                        limit 3");
+                            $qrytitem=mysqli_query($con,"select
+                                                            sum(temp2.qty_keluhan) as total_qty_keluhan
+                                                        from (
+                                                        select
+                                                            temp.masalah_dominan,
+                                                            sum(temp.qty_claim_gabung) as qty_keluhan
+                                                        from
+                                                            (
+                                                            select
+                                                                *,
+                                                                sum(qty_claim) as qty_claim_gabung
+                                                            from
+                                                                tbl_aftersales_now
+                                                            where
+                                                                no_hanger = '$ri7[no_hanger]'
+                                                                and tgl_buat between '$Awal' AND '$Akhir' $lgn
+                                                            group by
+                                                                po,
+                                                                no_hanger,
+                                                                warna,
+                                                                masalah_dominan,
+                                                                qty_order
+                                                            order by
+                                                                tgl_buat asc) temp
+                                                        group by 
+                                                            temp.masalah_dominan
+                                                        order by
+                                                            qty_keluhan desc
+                                                        limit 3) temp2");
+                            $ritem=mysqli_fetch_array($qrytitem);
+                            while($rdi7=mysqli_fetch_array($qryd7)){
                         ?>
                         <tr valign="top">
                             <td align="center"><?php echo $ri7['no_hanger'];?></td>  
                             <td align="right"><?php echo $rdi7['masalah_dominan'];?></td>
-                            <td align="right"><?php echo $rowQryJumlahKasus['jumlah_kasus'];?></td>
+                            <td align="right"><?php echo $rdi7['jml_kasus'];?></td>
                             <td align="right"><?php echo $rdi7['qty_keluhan'];?></td>
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_keluhan']/$ri7Total)*100,2)." %";}else{echo "0";}?></td>
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
-                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($ritem['total_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
+                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_keluhan']/$ritem['total_qty_keluhan'])*100,2)." %";}else{echo "0";}?></td>
                         </tr>
                         <?php  
                             }
@@ -735,52 +817,72 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         <tbody>
                         <?php 
                         $qry8Total = mysqli_query($con, "select
-                                                            sum(qty_claim) as total_qty_keluhan
-                                                        from tbl_aftersales_now
-                                                        where date_format(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-                                                        order by total_qty_keluhan desc
-                                                        limit 5");
+                                                            sum(temp2.qty_claim_gabung) as total_qty_claim
+                                                        from
+                                                            (
+                                                            select
+                                                                temp.buyer,
+                                                                count(*) as jml_kasus,
+                                                                SUM(temp.qty_claim_gabung) as qty_claim_gabung
+                                                            from
+                                                                (
+                                                                select
+                                                                    *,
+                                                                    sum(qty_claim) as qty_claim_gabung
+                                                                from
+                                                                    tbl_aftersales_now
+                                                                where
+                                                                    tgl_buat between '$Awal' AND '$Akhir'
+                                                                group by
+                                                                    po,
+                                                                    no_hanger,
+                                                                    warna,
+                                                                    masalah_dominan,
+                                                                    qty_order
+                                                                order by
+                                                                    tgl_buat asc) temp
+                                                            group by
+                                                                substring_index(temp.buyer, ' ', 1)
+                                                            order by
+                                                                jml_kasus desc
+                                                            limit 5) temp2");
                         $ri8Total=mysqli_fetch_array($qry8Total);
                         $qry8=mysqli_query($con,"select
-                                                    buyer,
-                                                    count(*) as jumlah_kasus,
-                                                    sum(qty_claim) as qty_keluhan,
-                                                    pelanggan
-                                                from tbl_aftersales_now
-                                                where date_format(tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-                                                group by substring(buyer, 1, 3)
-                                                order by qty_keluhan desc
+                                                    temp.buyer,
+                                                    count(*) as jml_kasus,
+                                                    SUM(temp.qty_claim_gabung) as qty_claim_lgn
+                                                from
+                                                    (
+                                                    select
+                                                        *,
+                                                        sum(qty_claim) as qty_claim_gabung
+                                                    from
+                                                        tbl_aftersales_now
+                                                    where
+                                                        tgl_buat between '$Awal' AND '$Akhir'
+                                                    group by
+                                                        po,
+                                                        no_hanger,
+                                                        warna,
+                                                        masalah_dominan,
+                                                        qty_order
+                                                    order by
+                                                        tgl_buat asc) temp
+                                                group by 
+                                                    substring_index(temp.buyer, ' ', 1)
+                                                order by
+                                                    jml_kasus desc
                                                 limit 5");
                         $no=1;
                         while($ri8=mysqli_fetch_array($qry8)){
-                            $qryJumlahKasus = mysqli_query($con, "select
-                                                                        count(*) as jumlah_kasus
-                                                                    from (
-                                                                        select
-                                                                        *
-                                                                        from
-                                                                        tbl_aftersales_now
-                                                                    where
-                                                                        pelanggan like '%$ri8[pelanggan]%'
-                                                                            AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
-                                                                    group by
-                                                                        po,
-                                                                        no_hanger,
-                                                                        warna,
-                                                                        masalah_dominan,
-                                                                        qty_order
-                                                                    order by
-                                                                        tgl_buat asc
-                                                                    ) temp");
-                            $rowQryJumlahKasus = mysqli_fetch_array($qryJumlahKasus);
                         ?>
                         <tr valign="top">
                             <td align="center"><?= $no++ ?></td>  
                             <td align="right"><?= $ri8['buyer'] ?></td>
-                            <td align="right"><?= $rowQryJumlahKasus['jumlah_kasus'] ?></td>
-                            <td align="right"><?= $ri8['qty_keluhan'] ?></td>
-                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($ri8['qty_keluhan'] / $ri8Total['total_qty_keluhan']) * 100, 2). " %";}else{echo "0";} ?></td>
-                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($ri8['qty_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";} ?></td>
+                            <td align="right"><?= $ri8['jml_kasus'] ?></td>
+                            <td align="right"><?= $ri8['qty_claim_lgn'] ?></td>
+                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($ri8['qty_claim_lgn'] / $ri8Total['total_qty_claim']) * 100, 2). " %";}else{echo "0";} ?></td>
+                            <td align="right"><?php if($TotalKirim!=''){echo number_format(($ri8['qty_claim_lgn']/$TotalKirim)*100,2)." %";}else{echo "0";} ?></td>
                         </tr>
                         <?php  
                         } 
@@ -1003,14 +1105,29 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                         group by solusi ) a");
                     $row2Total = mysqli_fetch_array($qry2Total);
                     
-                    $query2 = mysqli_query($con, "select 
-                                                    solusi,
-                                                    count(*) as jumlah_kasus,
-                                                    pelanggan 
-                                                from tbl_aftersales_now
-                                                $Where2
-                                                group by solusi
-                                                order by jumlah_kasus desc");
+                    $query2 = mysqli_query($con, "select
+                                                        temp.solusi,
+                                                        count(*) as jml_kasus
+                                                    from
+                                                        (
+                                                        select
+                                                            *,
+                                                            sum(qty_claim) as qty_claim_gabung
+                                                        from
+                                                            tbl_aftersales_now
+                                                        $Where2
+                                                        group by
+                                                            po,
+                                                            no_hanger,
+                                                            warna,
+                                                            masalah_dominan,
+                                                            qty_order
+                                                        order by
+                                                            tgl_buat asc) temp
+                                                    group by 
+                                                        temp.solusi
+                                                    order by
+                                                        jml_kasus desc");
                     $no = 1;
                     $total_jumlah_kasus = 0;
                     $total_qty_claim_kg = 0;
@@ -1018,27 +1135,6 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     $total_qty_replacement_kg = 0;
                     $total_qty_replacement_yd = 0;
                     while($row2 = mysqli_fetch_array($query2)){
-
-                    $qryJumlahKasus = mysqli_query($con, "select
-                                                                    count(*) as jumlah_kasus
-                                                                from (
-                                                                    select
-                                                                    *
-                                                                    from
-                                                                    tbl_aftersales_now
-                                                                where
-                                                                    pelanggan like '%$row2[pelanggan]%'
-                                                                        AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
-                                                                group by
-                                                                    po,
-                                                                    no_hanger,
-                                                                    warna,
-                                                                    masalah_dominan,
-                                                                    qty_order
-                                                                order by
-                                                                    tgl_buat asc
-                                                                ) temp");
-                    $rowQryJumlahKasus = mysqli_fetch_array($qryJumlahKasus);
 
                     $query2KG = mysqli_query($con, "select 
                                                         sum(qty_claim) as qty_claim
@@ -1080,7 +1176,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                 <tr bgcolor="<?php echo $bgcolor; ?>">
                     <td align="center"><?= $no; ?></td>
                     <td align="left"><?= $row2['solusi'] != "" ? $row2['solusi'] : "PENDING" ?></td>
-                    <td align="center"><?= $rowQryJumlahKasus['jumlah_kasus'] ?></td>
+                    <td align="center"><?= $row2['jml_kasus'] ?></td>
                     <td align="center"><?= number_format($row2KG['qty_claim'], 2) ?></td>
                     <td align="center"><?= number_format($row2YD['qty_claim2'], 2) ?></td>
                     <td align="center"><?= number_format($row2ReplacementKG['qty_kg'], 2) ?></td>
@@ -1098,7 +1194,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                 </tr>
                 <?php
                     $no++;
-                    $total_jumlah_kasus += $row2['jumlah_kasus'];
+                    $total_jumlah_kasus += $row2['jml_kasus'];
                     $total_qty_claim_kg += $row2KG['qty_claim'];
                     $total_qty_claim_yd += $row2YD['qty_claim2'];
                     $total_qty_replacement_kg += $row2ReplacementKG['qty_kg'];
