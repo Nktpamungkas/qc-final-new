@@ -871,7 +871,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                 group by 
                                                     substring_index(temp.buyer, ' ', 1)
                                                 order by
-                                                    jml_kasus desc
+                                                    qty_claim_lgn desc
                                                 limit 5");
                         $no=1;
                         while($ri8=mysqli_fetch_array($qry8)){
