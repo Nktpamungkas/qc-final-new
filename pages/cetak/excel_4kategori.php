@@ -42,10 +42,10 @@ $TotalKirim = $_GET['total'];
                                                         DATE_FORMAT(a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
                                                         GROUP BY
                                                         a.po,
-                                                        a.no_order,
                                                         a.no_hanger,
                                                         a.warna,
-                                                        a.masalah_dominan
+                                                        a.masalah_dominan,
+                                                        a.qty_order
                                                     ORDER BY
                                                         a.tgl_buat ASC");
 
