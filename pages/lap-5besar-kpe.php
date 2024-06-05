@@ -262,7 +262,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                     group by 
                                                         temp.masalah_dominan
                                                     order by
-                                                        jml_kasus desc
+                                                        qty_claim_lgn desc
                                                     limit 5");
                         while($rd=mysqli_fetch_array($qrydef)){
                         ?>

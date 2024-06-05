@@ -42,15 +42,7 @@ $TotalKirim=$_GET['total'];
                                         sum(qty_claim) as qty_claim_gabung
                                     from
                                         tbl_aftersales_now
-                                    where
-                                        no_order like '%%'
-                                        and po like '%%'
-                                        and no_hanger like '%%'
-                                        and langganan like '%%'
-                                        and nodemand like '%%'
-                                        and nokk like '%%'
-                                        and pejabat like '%%'
-                                        and tgl_buat between '$Awal' AND '$Akhir'
+                                    where tgl_buat between '$Awal' AND '$Akhir'
                                     group by
                                         po,
                                         no_hanger,
@@ -62,7 +54,7 @@ $TotalKirim=$_GET['total'];
                                 group by 
                                     temp.masalah_dominan
                                 order by
-                                    jml_kasus desc
+                                    qty_claim_lgn desc
                                 limit 5");
     while($rd=mysqli_fetch_array($qrydef)){
     ?>
