@@ -74,7 +74,7 @@
     page. However, you can choose any other skin. Make sure you
     apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-    <?php if ($_GET['p'] == "Lap-GantiKainDisposisi" or $_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-Retur" or $_GET['p'] == "Summary-Order" or $_GET['p'] == "Lihat-Data-Cwarna-Dye-New" or $_GET['p'] == "Lihat-Data-Cwarna-Fin-New" or $_GET['p'] == "Lihat-Data-Jahit" or $_GET['p'] == "Lap-Potong" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Lihat-Data-Beda-Roll" or $_GET['p'] == "Mutasi-BS" or $_GET['p'] == "Mutasi-BS-Detail" or $_GET['p'] == "CetakRandom" or $_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "LihatTempelBedaRoll") : ?>
+    <?php if ($_GET['p'] == "Lap-GantiKainDisposisi" or $_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-Retur" or $_GET['p'] == "Summary-Order" or $_GET['p'] == "Lihat-Data-Cwarna-Dye-New" or $_GET['p'] == "Lihat-Data-Cwarna-Fin-New" or $_GET['p'] == "Lihat-Data-Jahit" or $_GET['p'] == "Lap-Potong" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Lihat-Data-Beda-Roll" or $_GET['p'] == "Mutasi-BS" or $_GET['p'] == "Mutasi-BS-Detail" or $_GET['p'] == "CetakRandom" or $_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "LihatTempelBedaRoll" or $_GET['p'] == "Lap-PotongNew") : ?>
         <!-- X Editable -->
         <link href="bower_components/xeditable/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
     <?php endif; ?>
@@ -1519,7 +1519,7 @@
     <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <script src="bower_components/toast-master/js/jquery.toast.js"></script>
     <script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
-    <?php if ($_GET['p'] == "Lap-GantiKainDisposisi" or $_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-Retur" or $_GET['p'] == "Summary-Order" or $_GET['p'] == "Lihat-Data-Cwarna-Dye-New" or $_GET['p'] == "Lihat-Data-Cwarna-Fin-New" or $_GET['p'] == "Lihat-Data-Jahit" or $_GET['p'] == "Lap-Potong" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Lihat-Data-Beda-Roll" or $_GET['p'] == "Mutasi-BS" or $_GET['p'] == "Mutasi-BS-Detail" or $_GET['p'] == "CetakRandom" or $_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "LihatTempelBedaRoll") : ?>
+    <?php if ($_GET['p'] == "Lap-GantiKainDisposisi" or $_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-Retur" or $_GET['p'] == "Summary-Order" or $_GET['p'] == "Lihat-Data-Cwarna-Dye-New" or $_GET['p'] == "Lihat-Data-Cwarna-Fin-New" or $_GET['p'] == "Lihat-Data-Jahit" or $_GET['p'] == "Lap-Potong" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Lihat-Data-Beda-Roll" or $_GET['p'] == "Mutasi-BS" or $_GET['p'] == "Mutasi-BS-Detail" or $_GET['p'] == "CetakRandom" or $_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "LihatTempelBedaRoll" or $_GET['p'] == "Lap-PotongNew") : ?>
         <script src="bower_components/xeditable/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
     <?php endif; ?>
 
