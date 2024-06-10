@@ -204,9 +204,9 @@ include "koneksi.php";
                                                 group by 
                                                 substring_index(a.pelanggan,'/',-1)
                                                 order by jml_kk desc limit 5");
-                                                    while ($rby = mysqli_fetch_array($sqlby)) {
-                                                      //GROUP A
-                                                      $sqlga = mysqli_query($con, "SELECT
+                while ($rby = mysqli_fetch_array($sqlby)) {
+                  //GROUP A
+                  $sqlga = mysqli_query($con, "SELECT
                                                 a.`grouping`,
                                                 count(a.nokk) as jml_kk_a
                                                 from 
@@ -214,9 +214,9 @@ include "koneksi.php";
                                                 where (a.proses !='Oven' or a.proses !='Fin 1X') and a.dept ='QCF'
                                                 AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date' 
                                                 and a.`grouping` = 'A' and SUBSTRING_INDEX(a.pelanggan,'/',-1) ='$rby[buyer]'");
-                                                      $rga = mysqli_fetch_array($sqlga);
-                                                      //GROUP B
-                                                      $sqlgb = mysqli_query($con, "SELECT
+                  $rga = mysqli_fetch_array($sqlga);
+                  //GROUP B
+                  $sqlgb = mysqli_query($con, "SELECT
                                                 a.`grouping`,
                                                 count(a.nokk) as jml_kk_b
                                                 from 
@@ -224,9 +224,9 @@ include "koneksi.php";
                                                 where (a.proses !='Oven' or a.proses !='Fin 1X') and a.dept ='QCF'
                                                 AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date' 
                                                 and a.`grouping` = 'B' and SUBSTRING_INDEX(a.pelanggan,'/',-1) ='$rby[buyer]'");
-                                                      $rgb = mysqli_fetch_array($sqlgb);
-                                                      //GROUP C
-                                                      $sqlgc = mysqli_query($con, "SELECT
+                  $rgb = mysqli_fetch_array($sqlgb);
+                  //GROUP C
+                  $sqlgc = mysqli_query($con, "SELECT
                                                 a.`grouping`,
                                                 count(a.nokk) as jml_kk_c
                                                 from 
@@ -234,9 +234,9 @@ include "koneksi.php";
                                                 where (a.proses !='Oven' or a.proses !='Fin 1X') and a.dept ='QCF'
                                                 AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date'
                                                 and a.`grouping` = 'C' and SUBSTRING_INDEX(a.pelanggan,'/',-1) ='$rby[buyer]'");
-                                                      $rgc = mysqli_fetch_array($sqlgc);
-                                                      //GROUP D
-                                                      $sqlgd = mysqli_query($con, "SELECT
+                  $rgc = mysqli_fetch_array($sqlgc);
+                  //GROUP D
+                  $sqlgd = mysqli_query($con, "SELECT
                                                 a.`grouping`,
                                                 count(a.nokk) as jml_kk_d
                                                 from 
@@ -244,9 +244,9 @@ include "koneksi.php";
                                                 where (a.proses !='Oven' or a.proses !='Fin 1X') and a.dept ='QCF'
                                                 AND DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' AND '$stop_date'
                                                 and a.`grouping` = 'D' and SUBSTRING_INDEX(a.pelanggan,'/',-1) ='$rby[buyer]'");
-                                                      $rgd = mysqli_fetch_array($sqlgd);
-                                                      //NULL
-                                                      $sqlgn = mysqli_query($con, "SELECT
+                  $rgd = mysqli_fetch_array($sqlgd);
+                  //NULL
+                  $sqlgn = mysqli_query($con, "SELECT
                                                 a.`grouping`,
                                                 count(a.nokk) as jml_kk_null
                                                 from 
@@ -482,6 +482,10 @@ include "koneksi.php";
               </b>
           <?php } ?>
           <div class="pull-right">
+            <a href="pages/cetak/lap-grouping-cocok-warna-excel.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>"
+              class="btn btn-primary <?php if ($_POST['awal'] == "") {
+                echo "disabled";
+              } ?>" target="_blank">Cetak Grouping</a>
             <a href="pages/cetak/cetak-reports-cocok-warna.php?awal=<?php echo $_POST['awal']; ?>&jam_awal=<?php echo $_POST['jam_awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&jam_akhir=<?php echo $_POST['jam_akhir']; ?>&shift=<?php echo $_POST['gshift']; ?>"
               class="btn btn-primary <?php if ($_POST['awal'] == "") {
                 echo "disabled";
