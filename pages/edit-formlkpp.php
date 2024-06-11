@@ -26,6 +26,7 @@ $sts_korelasi = isset($_POST['sts_korelasi']) ? $_POST['sts_korelasi'] : '';
         $pejabat=str_replace("'","''",$_POST['pejabat']);
         $petugas=str_replace("'","''",$_POST['petugas']);
         $tgl_kunjungan=$_POST['tgl_kunjungan'];
+        $tgl_kunjungan2=$_POST['tgl_kunjungan2'];
         $tujuan_kunjungan=str_replace("'","''",$_POST['tujuan_kunjungan']);
         $ket=str_replace("'","''",$_POST['ket']);
         $checkbox=$_POST['cek'];
@@ -45,6 +46,7 @@ $sts_korelasi = isset($_POST['sts_korelasi']) ? $_POST['sts_korelasi'] : '';
 		`petugas`='$petugas',
 		`tgl_kunjungan`='$tgl_kunjungan',
 		`tujuan_kunjungan`='$tujuan_kunjungan',
+		`tujuan_kunjungan2`='$tujuan_kunjungan2',
     `ket`='$ket',
         `sts_korelasi`='$sts_korelasi',
 		`tgl_update`=now()
@@ -240,13 +242,19 @@ $sts_korelasi = isset($_POST['sts_korelasi']) ? $_POST['sts_korelasi'] : '';
                   	</div>
             </div>
             <div class="form-group">
-                <label for="tgl_kunjungan" class="col-sm-2 control-label">Tanggal Kunjungan</label>
-                    <div class="col-sm-2">					  
-						<div class="input-group date">
-            				<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-            					<input name="tgl_kunjungan" type="text" class="form-control pull-right" id="datepicker3" placeholder="0000-00-00" value="<?php echo $rcek['tgl_kunjungan'];?>"/>
-          				</div>
-				  	</div>
+              <label for="tgl_kunjungan" class="col-sm-2 control-label">Tanggal Kunjungan</label>
+              <div class="col-sm-2">					  
+                <div class="input-group date">
+                  <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+                  <input name="tgl_kunjungan" type="text" class="form-control pull-right" id="datepicker3" placeholder="0000-00-00" value="<?php echo $rcek['tgl_kunjungan'];?>"/>
+                </div>
+              </div>
+              <div class="col-sm-2">					  
+                <div class="input-group date">
+                  <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+                  <input name="tgl_kunjungan2" type="text" class="form-control pull-right" id="datepicker2" placeholder="0000-00-00" value="<?php echo $rcek['tgl_kunjungan2'];?>"/>
+                </div>
+              </div>
             </div>
             <div class="form-group">
                 <label for="tujuan_kunjungan" class="col-sm-2 control-label">Tujuan Kunjungan</label>

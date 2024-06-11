@@ -19,6 +19,7 @@ $jnk=isset($_POST['jenis_kunjungan']) ? $_POST['jenis_kunjungan'] : '';
 $pjb=isset($_POST['pejabat']) ? $_POST['pejabat'] : '';	
 $ptgs=isset($_POST['petugas']) ? $_POST['petugas'] : '';	
 $tglk=isset($_POST['tgl_kunjungan']) ? $_POST['tgl_kunjungan'] : '';	
+$tglk2=isset($_POST['tgl_kunjungan2']) ? $_POST['tgl_kunjungan2'] : '';	
 $tjk=isset($_POST['tujuan_kunjungan']) ? $_POST['tujuan_kunjungan'] : '';	
 $sts_korelasi = isset($_POST['sts_korelasi']) ? $_POST['sts_korelasi'] : '';
 
@@ -46,6 +47,7 @@ $nomorbaru = $kode.$nomor;
         $pejabat=str_replace("'","''",$_POST['pejabat']);
         $petugas=str_replace("'","''",$_POST['petugas']);
         $tgl_kunjungan=$_POST['tgl_kunjungan'];
+        $tgl_kunjungan2=$_POST['tgl_kunjungan2'];
         $tujuan_kunjungan=str_replace("'","''",$_POST['tujuan_kunjungan']);
         $ket=str_replace("'","''",$_POST['ket']);
         $checkbox=$_POST['cek'];
@@ -64,6 +66,7 @@ $nomorbaru = $kode.$nomor;
 		`pejabat`='$pejabat',
 		`petugas`='$petugas',
 		`tgl_kunjungan`='$tgl_kunjungan',
+		`tgl_kunjungan2`='$tgl_kunjungan2',
 		`tujuan_kunjungan`='$tujuan_kunjungan',
     `ket`='$ket',
     `sts_korelasi`='$sts_korelasi',
@@ -254,13 +257,19 @@ $nomorbaru = $kode.$nomor;
                   	</div>
             </div>
             <div class="form-group">
-                <label for="tgl_kunjungan" class="col-sm-2 control-label">Tanggal Kunjungan</label>
-                    <div class="col-sm-2">					  
-						<div class="input-group date">
-            				<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-            					<input name="tgl_kunjungan" type="text" class="form-control pull-right" id="datepicker3" placeholder="0000-00-00" value="<?php echo $tglk;?>"/>
-          				</div>
-				  	</div>
+              <label for="tgl_kunjungan" class="col-sm-2 control-label">Tanggal Kunjungan</label>
+              <div class="col-sm-2">					  
+                <div class="input-group date">
+                    <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+                    <input name="tgl_kunjungan" type="text" class="form-control pull-right" id="datepicker3" placeholder="0000-00-00" value="<?php echo $tglk; ?>" />
+                </div>
+              </div>
+              <div class="col-sm-2">				  
+                <div class="input-group date">
+                    <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+                    <input name="tgl_kunjungan2" type="text" class="form-control pull-right" id="datepicker3" placeholder="0000-00-00" value="<?php echo $tglk2; ?>" />
+                </div>
+              </div>
             </div>
             <div class="form-group">
                 <label for="tujuan_kunjungan" class="col-sm-2 control-label">Tujuan Kunjungan</label>
@@ -331,11 +340,11 @@ $nomorbaru = $kode.$nomor;
 							<td align="left"><?php echo $r['nm_prshn']; ?></td>
 							<td align="left"><?php echo $r['alamat']; ?></td>
 							<td align="left"><?php echo $r['jenis_kunjungan']; ?></td>
-                            <td align="left"><?php echo $r['pejabat']; ?></td>
-                            <td align="left"><?php echo $r['petugas']; ?></td>
-                            <td align="left"><?php echo $r['tgl_kunjungan']; ?></td>
-                            <td align="left"><?php echo $r['tujuan_kunjungan']; ?></td>
-                            <td align="left"><?php echo $r['tgl_buat']; ?></td>
+              <td align="left"><?php echo $r['pejabat']; ?></td>
+              <td align="left"><?php echo $r['petugas']; ?></td>
+              <td align="left"><?php echo $r['tgl_kunjungan']; ?></td>
+              <td align="left"><?php echo $r['tujuan_kunjungan']; ?></td>
+              <td align="left"><?php echo $r['tgl_buat']; ?></td>
 							<td align="center"><div class="btn-group"><a href="pages/cetak/cetak_lapkunjungan.php?no_lkpp=<?php echo $r['no_lkpp'] ?>" class="btn btn-info btn-xs <?php if($_SESSION['akses']=='biasa'){ echo "disabled"; } ?>" target="_blank"><i class="fa fa-print"></i> </a>
 							<a href="#" class="btn btn-danger btn-xs <?php if($_SESSION['akses']=='biasa'){ echo "disabled"; } ?>" onclick="confirm_delete('./HapusDataLKPP-<?php echo $r['id'] ?>');"><i class="fa fa-trash"></i> </a>
               <a href="EditFormLKPP-<?php echo $r['id']; ?>" class="btn btn-success btn-xs <?php if($_SESSION['akses']=='biasa'){ echo "disabled"; } ?>"><i class="fa fa-edit"></i> </a></div></td>
