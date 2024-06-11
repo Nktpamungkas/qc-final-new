@@ -238,6 +238,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         $totaldll2=0;
                         $qryAll2=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL)");
                         $rAll2=mysqli_fetch_array($qryAll2);
+                        $lgn = $Langganan != "" ? " and buyer like '%$Langganan%'" : "";
                         $qrydef=mysqli_query($con,"select
                                                         temp.masalah_dominan,
                                                         count(*) as jml_kasus,
@@ -250,7 +251,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                         from
                                                             tbl_aftersales_now
                                                         where
-                                                            tgl_buat between '$Awal' AND '$Akhir'
+                                                            tgl_buat between '$Awal' AND '$Akhir' $lgn
                                                         group by
                                                             po,
                                                             no_hanger,
