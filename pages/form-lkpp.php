@@ -267,7 +267,7 @@ $nomorbaru = $kode.$nomor;
               <div class="col-sm-2">				  
                 <div class="input-group date">
                     <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                    <input name="tgl_kunjungan2" type="text" class="form-control pull-right" id="datepicker3" placeholder="0000-00-00" value="<?php echo $tglk2; ?>" />
+                    <input name="tgl_kunjungan2" type="text" class="form-control pull-right" id="datepicker2" placeholder="0000-00-00" value="<?php echo $tglk2; ?>" />
                 </div>
               </div>
             </div>
