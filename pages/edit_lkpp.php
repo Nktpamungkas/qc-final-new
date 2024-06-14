@@ -9,6 +9,7 @@ if ($_POST) {
     $nm_prshn=str_replace("'","''",$_POST['nm_prshn']);
     $alamat=str_replace("'","''",$_POST['alamat']);
     $tgl_kunjungan=$_POST['tgl_kunjungan'];
+    $tgl_kunjungan2=$_POST['tgl_kunjungan2'];
     $jenis_kunjungan=str_replace("'","''",$_POST['jenis_kunjungan']);
     $tujuan_kunjungan=str_replace("'","''",$_POST['tujuan_kunjungan']);
     $petugas=str_replace("'","''",$_POST['petugas']);
@@ -20,6 +21,7 @@ if ($_POST) {
 		`nm_prshn`='$nm_prshn',
 		`alamat`='$alamat',
 		`tgl_kunjungan`='$tgl_kunjungan',
+		`tgl_kunjungan2`='$tgl_kunjungan2',
 		`jenis_kunjungan`='$jenis_kunjungan',
         `tujuan_kunjungan`='$tujuan_kunjungan',
         `petugas`='$petugas',

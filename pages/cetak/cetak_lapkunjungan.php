@@ -307,14 +307,10 @@ $rmw_bln = $bln[date('n')];
         <td><table border="1" class="table-list1" width="100%" style="height:6.5in">
             <tr>
                 <?php
-                if($r['tgl_kunjungan'] != "" && $r['tgl_kunjungan2'] != "") {
-                    $date1 = date_create($r['tgl_kunjungan']);
-                    $date2 = date_create($r['tgl_kunjungan2']);
-                    $diff = date_diff($date1, $date2);
-                    $lama_kunjungan = $diff->format("%a Hari");
-                } else {
-                    $lama_kunjungan = date("d F Y", strtotime($r['tgl_kunjungan']));
-                }
+                $date1 = date("d F Y", strtotime($r['tgl_kunjungan']));
+                $date2 = date("d F Y", strtotime($r['tgl_kunjungan2']));
+                $lama_kunjungan = ($r['tgl_kunjungan'] != "" && $r['tgl_kunjungan2'] != "") ? $date1 . " - " . $date2 : $date1;
+
                 ?>
                 <td width="50%" align="left" style="border-top:0px #000000 solid; 
                         border-bottom:0px #000000 solid; height:0.3in"><strong>TANGGAL KUNJUNGAN : <?php echo $lama_kunjungan ?></strong></td>

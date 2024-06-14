@@ -16,12 +16,17 @@ while($r=mysqli_fetch_array($modal)){
               </div>
               <script>
                 $(document).on("click", ".modal-body", function () {
-                $("#datepicker5").datepicker({
-                    autoclose: true,
-                    format: 'yyyy-mm-dd',
-                    todayHighlight: true,                                    
+                    $("#datepicker4").datepicker({
+                        autoclose: true,
+                        format: 'yyyy-mm-dd',
+                        todayHighlight: true,                                    
                     });
-                    });  
+                    $("#datepicker5").datepicker({
+                        autoclose: true,
+                        format: 'yyyy-mm-dd',
+                        todayHighlight: true,                                    
+                    });
+                });  
             </script>
               <div class="modal-body">
               <input type="hidden" id="id" name="id" value="<?php echo $r['id'];?>">
@@ -66,7 +71,13 @@ while($r=mysqli_fetch_array($modal)){
                         <div class="col-sm-4">					  
                             <div class="input-group date">
                                 <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                                    <input name="tgl_kunjungan" type="text" class="form-control pull-right" id="datepicker5" placeholder="0000-00-00" value="<?php echo $r['tgl_kunjungan'];?>" />
+                                    <input name="tgl_kunjungan" type="text" class="form-control pull-right" id="datepicker4" placeholder="0000-00-00" value="<?php echo $r['tgl_kunjungan'];?>" />
+                            </div>
+                        </div>	
+                        <div class="col-sm-4">					  
+                            <div class="input-group date">
+                                <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+                                    <input name="tgl_kunjungan2" type="text" class="form-control pull-right" id="datepicker5" placeholder="0000-00-00" value="<?php echo $r['tgl_kunjungan2'];?>" />
                             </div>
                         </div>	
                 </div>
