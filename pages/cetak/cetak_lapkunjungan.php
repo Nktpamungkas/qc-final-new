@@ -312,6 +312,8 @@ $rmw_bln = $bln[date('n')];
                     $date2 = date_create($r['tgl_kunjungan2']);
                     $diff = date_diff($date1, $date2);
                     $lama_kunjungan = $diff->format("%a Hari");
+                } else {
+                    $lama_kunjungan = date("d F Y", strtotime($r['tgl_kunjungan']));
                 }
                 ?>
                 <td width="50%" align="left" style="border-top:0px #000000 solid; 
