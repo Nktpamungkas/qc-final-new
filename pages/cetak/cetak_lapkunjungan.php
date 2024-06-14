@@ -309,7 +309,14 @@ $rmw_bln = $bln[date('n')];
                 <?php
                 $date1 = date("d F Y", strtotime($r['tgl_kunjungan']));
                 $date2 = date("d F Y", strtotime($r['tgl_kunjungan2']));
-                $lama_kunjungan = ($r['tgl_kunjungan'] != "" && $r['tgl_kunjungan2'] != "") ? $date1 . " - " . $date2 : $date1;
+                
+                if($r['tgl_kunjungan'] != "" && $r['tgl_kunjungan'] != "0000-00-00" && $r['tgl_kunjungan2'] != "" && $r['tgl_kunjungan2'] != "0000-00-00") {
+                    $lama_kunjungan = $date1 . " - " . $date2;
+                } else if($r['tgl_kunjungan'] != "" && $r['tgl_kunjungan'] != "0000-00-00") {
+                    $lama_kunjungan = $date1;
+                } else {
+                    $lama_kunjungan = "";
+                }
 
                 ?>
                 <td width="50%" align="left" style="border-top:0px #000000 solid; 
