@@ -231,8 +231,8 @@ header("Expires: 0");
 			  <td align="center"><?php echo $row1['penghubung2_roll3'];?></td>
 			   
 			 <!-- Tambahan -->
-			 <td align="center"><?php echo $row1['berat_extra'];?></td>
-			  <td align="center"><?php echo $row1['panjang_extra'];?></td>
+			 <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> --> <td></td>
+			  <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> --> <td></td>
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
         <!-- Nanti ganti -->
@@ -341,7 +341,7 @@ header("Expires: 0");
 		  ?>
 		  
 		  
-		   <tr bgcolor="<?php echo $bgcolor; ?>">
+		   < bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $row1['tgl_masuk'];?></td>
 			<td align="center"><?php echo $row1['pelanggan'];?></td>
 			 <td align="center"><?php echo $row1['no_po'];?></td>
@@ -355,8 +355,8 @@ header("Expires: 0");
 			  <td align="center"><?php echo $row1['penghubung3_roll2'];?></td>
 			  <td align="center"><?php echo $row1['penghubung3_roll3'];?></td>
 			 <!-- Tambahan -->
-			 <td align="center"><?php echo $row1['berat_extra'];?></td>
-			  <td align="center"><?php echo $row1['panjang_extra'];?></td>
+			 <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> --> <td></td>
+			  <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> --> <td></td>
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
         <!-- Nanti ganti -->
