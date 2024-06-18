@@ -1660,6 +1660,21 @@
                 showbuttons: false
             });
             //Cocok Warna Dye
+            $('.tgl_celup').editable({
+                type: 'text',
+                disabled: false,
+                url: 'pages/editable/editable_cwarna_dye_tgl_celup.php',
+            });
+            $('.jml_roll').editable({
+                type: 'text',
+                disabled: false,
+                url: 'pages/editable/editable_cwarna_dye_jml_roll.php',
+            });
+            $('.bruto').editable({
+                type: 'text',
+                disabled: false,
+                url: 'pages/editable/editable_cwarna_dye_bruto.php',
+            });
             $('.sts_warna').editable({
                 type: 'select',
                 url: 'pages/editable/editable_stswarna.php',

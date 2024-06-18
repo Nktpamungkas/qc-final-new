@@ -159,9 +159,9 @@ if (strlen($jamA) == 5) {
             <td align="center"><?php echo $row1['shift'];?></td>
             <td align="center"><div class="btn-group">
             <!--<a href="#" class="btn btn-info btn-xs cwarnadye_edit <?php if($_SESSION['akses']=='biasa' AND ($_SESSION['lvl_id']!='PACKING' OR $_SESSION['lvl_id']!='NCP')){ echo "disabled"; } ?>" id="<?php echo $row1['id']; ?>"><i class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="Edit"></i> </a>-->
-            <a href="#" class="btn btn-danger btn-xs <?php if($_SESSION['akses']=='biasa' AND ($_SESSION['lvl_id']!='PACKING' OR $_SESSION['lvl_id']!='NCP')){ echo "disabled"; } ?>" onclick="confirm_delete('./HapusDataCWarnaDye-<?php echo $row1['id'] ?>');"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Hapus"></i> </a>
+            <a href="#" class="btn btn-danger btn-xs <?php if($_SESSION['akses']=='biasa' AND ($_SESSION['lvl_id']!='PACKING' OR $_SESSION['lvl_id']!='NCP')){ echo "disabled"; } ?>" onclick="confirm_delete('./HapusDataCWarnaDyeNew-<?php echo $row1['id'] ?>');"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Hapus"></i> </a>
             </div></td>
-            <td align="center"><?php echo $row1['tgl_celup'];?></td>
+            <td align="center"><a data-type="date" data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['tgl_celup'] ?>" class="tgl_celup" href="javascipt:void(0)"><?php echo $row1['tgl_celup'];?></a></td>
             <td align="center"><?php echo $row1['nokk'];?></td>
             <td align="center"><?php echo $row1['nodemand'];?></td>
             <td><?php echo $lgg1;?></td>
@@ -175,8 +175,8 @@ if (strlen($jamA) == 5) {
             <td align="center"><?php echo $row1['no_mesin'];?></td>
             <td align="left"><?php echo $row1['colorist_dye'];?></td>
             <td align="center"><?php echo $row1['lot'];?></td>
-            <td align="center"><?php echo $row1['jml_roll'];?></td>
-            <td align="center"><?php echo $row1['bruto'];?></td>
+            <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['jml_roll'] ?>" class="jml_roll" href="javascipt:void(0)"><?php echo $row1['jml_roll'];?></a></td>
+            <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['bruto'] ?>" class="bruto" href="javascipt:void(0)"><?php echo $row1['bruto'];?></a></td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['status_warna'] ?>" class="sts_warna" href="javascipt:void(0)"><?php echo $row1['status_warna'] ?></a>
             </td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['grouping'] ?>" class="grouping_dye" href="javascipt:void(0)"><?php echo $row1['grouping'] ?></a></td>
