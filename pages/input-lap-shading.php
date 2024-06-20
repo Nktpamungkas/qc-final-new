@@ -317,6 +317,9 @@ $rowr = db2_fetch_assoc($stmt1);
                         <div class="col-sm-4">
                             <input name="lot_legacy" type="text" class="form-control" id="lot_legacy" value="<?php if($crow>0){echo $row['lot_legacy'];} ?>" placeholder="Lot Legacy"/>
                         </div>
+                        <div class="col-sm-4">
+                            <input name="bs" type="text" class="form-control" id="bs" value="<?php if($crow>0){echo $row['bs'];} ?>" placeholder="BS"/>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="comment" class="col-sm-3 control-label">Comments</label>
@@ -429,6 +432,7 @@ if(isset($_POST['simpan']))
     `comment`='$_POST[comment]',
     `pengarsipan`='$pengarsipan',
     `lot_legacy`='$_POST[lot_legacy]',
+    `bs`='$_POST[bs]',
     `kk_legacy`='$_POST[kk_legacy]'
 	WHERE `nodemand`='$_POST[nodemand]' and  `shift`='$_POST[shift]'");
 	if($sql1){
@@ -488,6 +492,7 @@ if(isset($_POST['simpan']))
     `comment`='$_POST[comment]',
     `pengarsipan`='$pengarsipan',
     `lot_legacy`='$_POST[lot_legacy]',
+    `bs`='$_POST[bs]',
     `kk_legacy`='$_POST[kk_legacy]',
     `tgl_update`=now(),
     `tgl_buat`=now(),
