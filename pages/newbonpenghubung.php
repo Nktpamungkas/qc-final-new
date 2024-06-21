@@ -26,59 +26,11 @@ $Langganan	= isset($_POST['langganan']) ? $_POST['langganan'] : '';
 $Pelanggan	= isset($_POST['pelanggan']) ? $_POST['pelanggan'] : '';
 $Proses	= isset($_POST['prosesmkt']) ? $_POST['prosesmkt'] : '';
 $sts_tembakdok = isset($_POST['sts_tembakdok']) ? $_POST['sts_tembakdok'] : '';
-//$sts_pbon = isset($_POST['sts_pbon']) ? $_POST['sts_pbon'] : '';		
+$ProdOrder	= isset($_POST['prod_order']) ? $_POST['prod_order'] : '';
+$Demand	= isset($_POST['demand']) ? $_POST['demand'] : '';
 	
 if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";}	
 
-function suratJalan($prodOrder, $po) {
-  global $conn1;
-
-  $sqlDB2 = "SELECT
-              SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE AS SJ,
-              CASE
-                WHEN SALESDOCUMENT.GOODSISSUEDATE IS NULL THEN SALESDOCUMENT.PROVISIONALDOCUMENTDATE
-                  ELSE SALESDOCUMENT.GOODSISSUEDATE
-                END AS TGL_KIRIM
-            FROM
-              SALESDOCUMENTLINE SALESDOCUMENTLINE
-            LEFT JOIN ALLOCATION ALLOCATION ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = ALLOCATION.ORDERCODE AND SALESDOCUMENTLINE.ORDERLINE = ALLOCATION.ORDERLINE 
-            LEFT JOIN SALESDOCUMENT SALESDOCUMENT ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = SALESDOCUMENT.PROVISIONALCODE 
-            LEFT JOIN SALESORDER SALESORDER ON SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE = SALESORDER.CODE 
-            LEFT JOIN SALESORDERLINE SALESORDERLINE ON SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE = SALESORDERLINE.SALESORDERCODE AND SALESDOCUMENTLINE.DLVSALESORDERLINEORDERLINE = SALESORDERLINE.ORDERLINE
-            LEFT JOIN (
-              SELECT
-                ALLOCATION.CODE,
-                ALLOCATION.LOTCODE,
-                COUNT(ALLOCATION.ITEMELEMENTCODE) AS ROLL,
-                SUM(ALLOCATION.USERPRIMARYQUANTITY) AS USERPRIMARYQUANTITY,
-                ALLOCATION.USERPRIMARYUOMCODE,
-                SUM(ALLOCATION.USERSECONDARYQUANTITY) AS USERSECONDARYQUANTITY,
-                ALLOCATION.USERSECONDARYUOMCODE
-              FROM
-                ALLOCATION ALLOCATION
-              WHERE
-                ALLOCATION.DETAILTYPE = '0'
-              GROUP BY
-                ALLOCATION.CODE,
-                ALLOCATION.LOTCODE,
-                ALLOCATION.USERPRIMARYUOMCODE,
-                ALLOCATION.USERSECONDARYUOMCODE
-              ) A ON ALLOCATION.CODE = A.CODE 
-            WHERE
-              A.LOTCODE = '$prodOrder' 
-              AND (SALESORDER.EXTERNALREFERENCE LIKE '%$po%' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '%$po%')
-            GROUP BY
-              SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
-              A.LOTCODE,
-              SALESDOCUMENT.PROVISIONALDOCUMENTDATE,
-              SALESDOCUMENT.GOODSISSUEDATE
-            LIMIT 1";
-
-  $stmt=db2_exec($conn1,$sqlDB2, array('cursor'=>DB2_SCROLLABLE));
-  $row1=db2_fetch_assoc($stmt);
-
-  return $row1;
-}
 ?>
 <div class="box">
   <div class="box-header with-border">
@@ -92,87 +44,48 @@ function suratJalan($prodOrder, $po) {
   <form method="post" enctype="multipart/form-data" name="form1" class="form-horizontal" id="form1">
     <div class="box-body">
     <div class="form-group">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <div class="input-group date">
             <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
             <input name="awal" type="date" class="form-control pull-right" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" autocomplete="off"/>
           </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <input name="order" type="text" class="form-control pull-right" id="order" placeholder="No Order" value="<?php echo $Order;  ?>" autocomplete="off"/>
           </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <input name="hanger" type="text" class="form-control pull-right" id="hanger" placeholder="No Hanger" value="<?php echo $Hanger;  ?>" autocomplete="off"/>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <input name="warna" type="text" class="form-control pull-right" id="warna" placeholder="Warna" value="<?php echo $Warna;  ?>" autocomplete="off"/>
+          </div>
+          <div class="col-sm-2">
+            <input name="prod_order" type="text" class="form-control pull-right" id="prod_order" placeholder="Production Order" value="<?php echo $ProdOrder;  ?>" autocomplete="off"/>
           </div>
         <!-- /.input group -->
       </div>
       <div class="form-group">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <div class="input-group date">
             <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
             <input name="akhir" type="date" class="form-control pull-right" placeholder="Tanggal Akhir" value="<?php echo $Akhir;  ?>" autocomplete="off"/>
           </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <input name="po" type="text" class="form-control pull-right" id="po" placeholder="No PO" value="<?php echo $PO;  ?>" autocomplete="off"/>
           </div>
        
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <input name="item" type="text" class="form-control pull-right" id="item" placeholder="No Item" value="<?php echo $Item;  ?>" autocomplete="off"/>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <input name="pelanggan" type="text" class="form-control pull-right" id="pelanggan" placeholder="Pelanggan" value="<?php echo $Pelanggan;  ?>" autocomplete="off"/>
+          </div>
+          <div class="col-sm-2">
+            <input name="demand" type="text" class="form-control pull-right" id="demand" placeholder="Demand" value="<?php echo $Demand;  ?>" autocomplete="off"/>
           </div>
         <!-- /.input group -->
       </div>
-	  <div class="form-group">
-       
-        
-        <!--<div class="col-sm-2">
-            <input name="langganan" type="text" class="form-control pull-right" id="langganan" placeholder="Langganan/Buyer" value="<?php echo $Langganan;  ?>" autocomplete="off"/>
-          </div>-->
-        <!-- <div class="col-sm-2">
-            <select name="langganan" class="form-control select2">
-            <option value="">Pilih</option> 
-            <?php  /*
-            $sql=sqlsrv_query($conn,"select distinct partnername from partners where Status<>'2'");
-            while($r=sqlsrv_fetch_array($sql)){
-            ?>
-              <option value="<?php echo $r['partnername'];?>" <?php if($Langganan==$r['partnername']){ echo "SELECTED";}?>><?php echo $r['partnername'];?></option>
-            <?php }  */ ?> 
-            </select>
-        </div> -->
-        <!-- /.input group -->
-      </div>
-      <!-- <div class="form-group">
-            <div class="col-sm-2">
-                <select name="prosesmkt" class="form-control select2">
-                  <option value="">Pilih</option> 
-                	<option value="Proses" <?php if($Proses=="Proses"){ echo "SELECTED";}?>>Proses</option>
-                	<option value="Hold" <?php if($Proses=="Hold"){ echo "SELECTED";}?>>Hold</option>
-                	<option value="Tidak Proses" <?php if($Proses=="Tidak Proses"){ echo "SELECTED";}?>>Tidak Proses</option>
-                  <option value="Siapkan Greig" <?php if($Proses=="Siapkan Greig"){ echo "SELECTED";}?>>Siapkan Greig</option>
-                </select>
-            </div>			 
-        </div>
-        <div class="form-group">
-          <label for="sts_tembakdok" class="col-sm-0 control-label"></label>		  
-            <div class="col-sm-3">
-              <input type="checkbox" name="sts_tembakdok" id="sts_tembakdok" value="1" <?php  if($sts_tembakdok=="1"){ echo "checked";} ?>>  
-              <label> Tembak Dokumen</label>
-            </div>		  	
-		  </div> -->
-    <!--<div class="form-group">
-		  <label for="sts_pbon" class="col-sm-0 control-label"></label>		  
-        <div class="col-sm-3">
-        <input type="checkbox" name="sts_pbon" id="sts_pbon" value="1" <?php  if($sts_pbon=="1"){ echo "checked";} ?>>  
-        <label> Bon Penghubung</label>
-          
-        </div>		  	
-		</div>-->	
     </div>
     <!-- /.box-body -->
     <div class="box-footer">
@@ -248,13 +161,13 @@ function suratJalan($prodOrder, $po) {
             if($Awal!="" or $Order!="" or $Warna!="" or $Hanger!="" or $Item!="" or $PO!="" or $Pelanggan!=""){
 				$sql_code = "SELECT  tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
                       LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order 
-                      WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '%$Order%' AND tq.no_po LIKE '%$PO%' AND tq.no_hanger LIKE '%$Hanger%' AND tq.no_item LIKE '%$Item%' AND tq.warna LIKE '%$Warna%' AND tq.pelanggan LIKE '%$Pelanggan%' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='') 
+                      WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '%$Order%' AND tq.no_po LIKE '%$PO%' AND tq.no_hanger LIKE '%$Hanger%' AND tq.no_item LIKE '%$Item%' AND tq.warna LIKE '%$Warna%' AND tq.pelanggan LIKE '%$Pelanggan%' AND tq.nokk LIKE '%$ProdOrder%' AND tq.nodemand LIKE '%$Demand%' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='') 
                       GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan, tq.tgl_masuk";
                 $sql=mysqli_query($con,$sql_code);
             }else{
 				$sql_code = "SELECT  tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
                     LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order 
-                    WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '$Order' AND tq.no_po LIKE '$PO' AND tq.no_hanger LIKE '$Hanger%' AND tq.no_item LIKE '$Item' AND tq.warna LIKE '$Warna' AND tq.pelanggan LIKE '$Pelanggan' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='')  
+                    WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '$Order' AND tq.no_po LIKE '$PO' AND tq.no_hanger LIKE '$Hanger%' AND tq.no_item LIKE '$Item' AND tq.warna LIKE '$Warna' AND tq.pelanggan LIKE '$Pelanggan' AND tq.nokk LIKE '$ProdOrder' AND tq.nodemand LIKE '$Demand' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='')  
                     GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan, tq.tgl_masuk";
                 $sql=mysqli_query($con,$sql_code);
             }
