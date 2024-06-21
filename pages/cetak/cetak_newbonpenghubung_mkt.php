@@ -10,10 +10,10 @@ if (isset($_POST['sql'])) {
 
 <?php
 $now = date("Ymdhis");
-header("Content-type: application/octet-stream");
-header("Content-Disposition: attachment; filename=reportbonpenghubung_mkt".$now.".xls");//ganti nama sesuai keperluan
-header("Pragma: no-cache");
-header("Expires: 0");
+// header("Content-type: application/octet-stream");
+// header("Content-Disposition: attachment; filename=reportbonpenghubung_mkt".$now.".xls");//ganti nama sesuai keperluan
+// header("Pragma: no-cache");
+// header("Expires: 0");
 //disini script laporan anda
 ?>
 
@@ -101,7 +101,6 @@ function suratJalan($prodOrder, $po) {
 
             <th colspan=3 ><div align="center" valign="middle">QTY</div></th>
             <th colspan=2 ><div align="center" valign="middle">QTY FOC</div></th>
-            <th colspan=2 ><div align="center" valign="middle">QTY SISA</div></th>  
             <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
             <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
             <th  rowspan=2><div align="center" valign="middle">ADVICE FROM PRODUCTION/QC</div></th>
@@ -113,9 +112,6 @@ function suratJalan($prodOrder, $po) {
             <th><div align="center" valign="middle">KG</div></th>
             <th><div align="center" valign="middle">YARD</div></th>
             
-            <th><div align="center" valign="middle">KG</div></th>
-            <th><div align="center" valign="middle">YARD</div></th>
-
             <th><div align="center" valign="middle">KG</div></th>
             <th><div align="center" valign="middle">YARD</div></th>
         </tr>
@@ -161,10 +157,6 @@ function suratJalan($prodOrder, $po) {
             <td align="center"><?php echo $row1['panjang_extra'];?></td>
             <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
-            <!-- Nanti ganti -->
-            <td align="center"><?php echo $row1['qty_sisa'];?></td>
-            <td align="center"><?php echo $row1['satuan_sisa'];?></td>
-
             <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
             <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
             <td align="center"><?php echo $row1['advice1']; ?></td>
@@ -191,9 +183,6 @@ function suratJalan($prodOrder, $po) {
             <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> --> <td></td>
             <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> --> <td></td>
             <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
-            <!-- Nanti ganti -->
-            <td align="center"><?php echo $row1['qty_sisa'];?></td>
-            <td align="center"><?php echo $row1['satuan_sisa'];?></td>
             <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
             <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
             <td align="center"><?php echo $row1['advice2']; ?></td>	 
@@ -221,9 +210,6 @@ function suratJalan($prodOrder, $po) {
             <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> --> <td></td>
             <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> --> <td></td>
             <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
-            <!-- Nanti ganti -->
-            <td align="center"><?php echo $row1['qty_sisa'];?></td>
-            <td align="center"><?php echo $row1['satuan_sisa'];?></td>
             <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
             <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>
             <td align="center"><?php echo $row1['advice3']; ?></td>	
