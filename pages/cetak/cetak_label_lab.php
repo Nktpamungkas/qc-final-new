@@ -40,8 +40,6 @@ $r = mysqli_fetch_array($data);
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size: 8px;">
                   <?php echo $r['no_counter']; ?>
-                  <br>
-                  <?php echo "Test-" . $r['no_test']; ?>&nbsp;&nbsp;<?= ''?>
                 </div>
               </td>
             </tr>
@@ -63,7 +61,8 @@ $r = mysqli_fetch_array($data);
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:9px;">
-                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?></div>
+                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?>
+                </div>
               </td>
             </tr>
             <tr>
@@ -80,94 +79,22 @@ $r = mysqli_fetch_array($data);
                 </div>
               </td>
             </tr>
-            <!-- <tr>
+            <tr>
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;">
-                  <?php echo date('d-m-Y H:i', strtotime(substr($r['tgl_masuk'], 0, 18))) . "/" . substr($r['proses_fin'], 0, 14); ?><?php if ($r['suhu'] != '' and $r['suhu'] != '-') {
-                       echo $suhu = '/' . $r['suhu'];
-                     } else {
-                       echo $suhu = '/0';
-                     } ?>
-
+                <div style="font-size:7px;">
+                  <?php echo $r['permintaan_testing'] ?>
                 </div>
               </td>
-            </tr> -->
-            <!-- <tr>
-              <td style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
+            </tr>
+            <tr>
+              <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;">
-                  <?php echo $r['nokk']; ?>&nbsp;<?php if ($r['lot_legacy'] != '-') {
-                      echo $r['lot_legacy'];
-                    }
-                    ; ?></div>
+                <div style="font-size:7px;">
+                  <?php echo $r['tgl_terimakain'] ?>
+                </div>
               </td>
-              <td width="14%" align="right" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;">L&amp;G:</div>
-              </td>
-              <td width="51%" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;"><?php echo $r['lebar'] . " x " . $r['gramasi']; ?></div>
-              </td>
-            </tr> -->
-            <?php
-            // if ($r['development'] == 'Additional') {
-            //   $color = 'green';
-            // } else if ($r['development'] == '1st Bulk') {
-            //   $color = 'yellow';
-            // } else if ($r['development'] == 'Development') {
-            //   $color = 'red';
-            // } else if ($r['development'] == 'Labdip') {
-            //   $color = 'gray';
-            // } else if ($r['development'] == 'Mini Bulk') {
-            //   $color = 'blue';
-            // } else if ($r['development'] == 'Request') {
-            //   $color = 'purple';
-            // } else {
-            //   $color = '';
-            // }
-            ?>
-
-
-
-            <?php
-            if (strpos($r['pelanggan'], 'UNDER A') !== false) {
-              ?>
-              <!-- <tr>
-                <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                  <div style="font-size: 8px;">
-                    Waktu Shrinkage <br>
-                    Waktu Testing : <?php // echo date('d-m-Y H:i', strtotime($r['tgl_update'] . '+ 4 hour'));
-                      echo $waktu_testing = date('d-m-Y H:i', strtotime($r['tgl_masuk'] . '+ 4 hour'));
-
-                      ?>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                  <div style="font-size: 8px;">Waktu Selesai Test :
-                    <?php echo $waktu_selesai = date('d-m-Y H:i', strtotime($waktu_testing . '+ 6 hour')); ?></div>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                  <div style="font-size: 8px;">Waktu Ukur :
-                    <?php echo $waktu_ukur = date('d-m-Y H:i', strtotime($waktu_selesai . '+ 4 hour')); ?></div>
-                </td>
-              </tr> -->
-            <?php } ?>
-
-            <!-- <tr>
-              <td colspan=3 style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-        border-left:0px #000000 solid; border-right:0px #000000 solid; background-color:<?= $color ?>">
-                &nbsp;
-              </td>
-            </tr> -->
+            </tr>
           </table>
         </td> <!-- end of pertama -->
 
@@ -179,8 +106,6 @@ $r = mysqli_fetch_array($data);
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size: 8px;">
                   <?php echo $r['no_counter']; ?>
-                  <br>
-                  <?php echo "Test-" . $r['no_test']; ?>&nbsp;&nbsp;<?= ''?>
                 </div>
               </td>
             </tr>
@@ -202,7 +127,8 @@ $r = mysqli_fetch_array($data);
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:9px;">
-                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?></div>
+                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?>
+                </div>
               </td>
             </tr>
             <tr>
@@ -219,94 +145,22 @@ $r = mysqli_fetch_array($data);
                 </div>
               </td>
             </tr>
-            <!-- <tr>
+            <tr>
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;">
-                  <?php echo date('d-m-Y H:i', strtotime(substr($r['tgl_masuk'], 0, 18))) . "/" . substr($r['proses_fin'], 0, 14); ?><?php if ($r['suhu'] != '' and $r['suhu'] != '-') {
-                       echo $suhu = '/' . $r['suhu'];
-                     } else {
-                       echo $suhu = '/0';
-                     } ?>
-
+                <div style="font-size:7px;">
+                  <?php echo $r['permintaan_testing'] ?>
                 </div>
               </td>
-            </tr> -->
-            <!-- <tr>
-              <td style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
+            </tr>
+            <tr>
+              <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;">
-                  <?php echo $r['nokk']; ?>&nbsp;<?php if ($r['lot_legacy'] != '-') {
-                      echo $r['lot_legacy'];
-                    }
-                    ; ?></div>
+                <div style="font-size:7px;">
+                  <?php echo $r['tgl_terimakain'] ?>
+                </div>
               </td>
-              <td width="14%" align="right" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;">L&amp;G:</div>
-              </td>
-              <td width="51%" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;"><?php echo $r['lebar'] . " x " . $r['gramasi']; ?></div>
-              </td>
-            </tr> -->
-            <?php
-            // if ($r['development'] == 'Additional') {
-            //   $color = 'green';
-            // } else if ($r['development'] == '1st Bulk') {
-            //   $color = 'yellow';
-            // } else if ($r['development'] == 'Development') {
-            //   $color = 'red';
-            // } else if ($r['development'] == 'Labdip') {
-            //   $color = 'gray';
-            // } else if ($r['development'] == 'Mini Bulk') {
-            //   $color = 'blue';
-            // } else if ($r['development'] == 'Request') {
-            //   $color = 'purple';
-            // } else {
-            //   $color = '';
-            // }
-            ?>
-
-
-
-            <?php
-            if (strpos($r['pelanggan'], 'UNDER A') !== false) {
-              ?>
-              <!-- <tr>
-                <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                  <div style="font-size: 8px;">
-                    Waktu Shrinkage <br>
-                    Waktu Testing : <?php // echo date('d-m-Y H:i', strtotime($r['tgl_update'] . '+ 4 hour'));
-                      echo $waktu_testing = date('d-m-Y H:i', strtotime($r['tgl_masuk'] . '+ 4 hour'));
-
-                      ?>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                  <div style="font-size: 8px;">Waktu Selesai Test :
-                    <?php echo $waktu_selesai = date('d-m-Y H:i', strtotime($waktu_testing . '+ 6 hour')); ?></div>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                  <div style="font-size: 8px;">Waktu Ukur :
-                    <?php echo $waktu_ukur = date('d-m-Y H:i', strtotime($waktu_selesai . '+ 4 hour')); ?></div>
-                </td>
-              </tr> -->
-            <?php } ?>
-
-            <!-- <tr>
-              <td colspan=3 style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-        border-left:0px #000000 solid; border-right:0px #000000 solid; background-color:<?= $color ?>">
-                &nbsp;
-              </td>
-            </tr> -->
+            </tr>
           </table>
         </td> <!-- end of kedua -->
 
@@ -318,8 +172,6 @@ $r = mysqli_fetch_array($data);
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size: 8px;">
                   <?php echo $r['no_counter']; ?>
-                  <br>
-                  <?php echo "Test-" . $r['no_test']; ?>&nbsp;&nbsp;<?= ''?>
                 </div>
               </td>
             </tr>
@@ -341,7 +193,8 @@ $r = mysqli_fetch_array($data);
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:9px;">
-                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?></div>
+                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?>
+                </div>
               </td>
             </tr>
             <tr>
@@ -358,94 +211,22 @@ $r = mysqli_fetch_array($data);
                 </div>
               </td>
             </tr>
-            <!-- <tr>
+            <tr>
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;">
-                  <?php echo date('d-m-Y H:i', strtotime(substr($r['tgl_masuk'], 0, 18))) . "/" . substr($r['proses_fin'], 0, 14); ?><?php if ($r['suhu'] != '' and $r['suhu'] != '-') {
-                       echo $suhu = '/' . $r['suhu'];
-                     } else {
-                       echo $suhu = '/0';
-                     } ?>
-
+                <div style="font-size:7px;">
+                  <?php echo $r['permintaan_testing'] ?>
                 </div>
               </td>
-            </tr> -->
-            <!-- <tr>
-              <td style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
+            </tr>
+            <tr>
+              <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;">
-                  <?php echo $r['nokk']; ?>&nbsp;<?php if ($r['lot_legacy'] != '-') {
-                      echo $r['lot_legacy'];
-                    }
-                    ; ?></div>
+                <div style="font-size:7px;">
+                  <?php echo $r['tgl_terimakain'] ?>
+                </div>
               </td>
-              <td width="14%" align="right" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;">L&amp;G:</div>
-              </td>
-              <td width="51%" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;"><?php echo $r['lebar'] . " x " . $r['gramasi']; ?></div>
-              </td>
-            </tr> -->
-            <?php
-            // if ($r['development'] == 'Additional') {
-            //   $color = 'green';
-            // } else if ($r['development'] == '1st Bulk') {
-            //   $color = 'yellow';
-            // } else if ($r['development'] == 'Development') {
-            //   $color = 'red';
-            // } else if ($r['development'] == 'Labdip') {
-            //   $color = 'gray';
-            // } else if ($r['development'] == 'Mini Bulk') {
-            //   $color = 'blue';
-            // } else if ($r['development'] == 'Request') {
-            //   $color = 'purple';
-            // } else {
-            //   $color = '';
-            // }
-            ?>
-
-
-
-            <?php
-            if (strpos($r['pelanggan'], 'UNDER A') !== false) {
-              ?>
-              <!-- <tr>
-                <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                  <div style="font-size: 8px;">
-                    Waktu Shrinkage <br>
-                    Waktu Testing : <?php // echo date('d-m-Y H:i', strtotime($r['tgl_update'] . '+ 4 hour'));
-                      echo $waktu_testing = date('d-m-Y H:i', strtotime($r['tgl_masuk'] . '+ 4 hour'));
-
-                      ?>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                  <div style="font-size: 8px;">Waktu Selesai Test :
-                    <?php echo $waktu_selesai = date('d-m-Y H:i', strtotime($waktu_testing . '+ 6 hour')); ?></div>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-  border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                  <div style="font-size: 8px;">Waktu Ukur :
-                    <?php echo $waktu_ukur = date('d-m-Y H:i', strtotime($waktu_selesai . '+ 4 hour')); ?></div>
-                </td>
-              </tr> -->
-            <?php } ?>
-
-            <!-- <tr>
-              <td colspan=3 style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-        border-left:0px #000000 solid; border-right:0px #000000 solid; background-color:<?= $color ?>">
-                &nbsp;
-              </td>
-            </tr> -->
+            </tr>
           </table>
         </td> <!-- end of ketiga -->
 
