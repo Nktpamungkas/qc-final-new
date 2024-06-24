@@ -25,6 +25,14 @@ while ($datas = mysqli_fetch_assoc($nokk_demand_sql) ) {
 		$array_demand_4_5_6[] = $pemisah.$datas['nodemand'];
 	}
 }
+
+$sqlDB2Season = "SELECT 
+            TRIM(INTERNALREFERENCE) AS INTERNALREFERENCE
+          FROM SALESORDER
+          WHERE CODE = '$r[no_order]'
+          LIMIT 1";
+$stmtSeason = db2_exec($conn1, $sqlDB2Season, array('cursor' => DB2_SCROLLABLE));
+$rowDB2Season = db2_fetch_assoc($stmtSeason);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -79,7 +87,7 @@ while ($datas = mysqli_fetch_assoc($nokk_demand_sql) ) {
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><strong><?php echo $r['no_order'];?></strong><?php echo " (".$r['no_item'].")";?></div></td>
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><strong><?php echo $r['no_order'];?></strong><?php echo " (".$r['no_item'].")";?> <?= $rowDB2Season['INTERNALREFERENCE'] ?? '' ?></div></td>
         </tr>
         <tr>
           <td colspan="3" valign="top" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
@@ -201,7 +209,7 @@ while ($datas = mysqli_fetch_assoc($nokk_demand_sql) ) {
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><strong><?php echo $r['no_order'];?></strong><?php echo " (".$r['no_item'].")";?></div></td>
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><strong><?php echo $r['no_order'];?></strong><?php echo " (".$r['no_item'].")";?> <?= $rowDB2Season['INTERNALREFERENCE'] ?? '' ?></div></td>
         </tr>
         <tr>
           <td colspan="3" valign="top" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
@@ -302,7 +310,7 @@ while ($datas = mysqli_fetch_assoc($nokk_demand_sql) ) {
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><strong><?php echo $r['no_order'];?></strong><?php echo " (".$r['no_item'].")";?></div></td>
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><strong><?php echo $r['no_order'];?></strong><?php echo " (".$r['no_item'].")";?> <?= $rowDB2Season['INTERNALREFERENCE'] ?? '' ?></div></td>
         </tr>
         <tr>
           <td colspan="3" valign="top" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;

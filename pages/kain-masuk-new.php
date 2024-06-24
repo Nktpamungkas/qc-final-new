@@ -536,19 +536,26 @@ $area= isset($_POST['area']) ? $_POST['area'] : '';
 			</div>				   
 		</div>
 		<div class="form-group">
+			<?php
+				// if ($cek > 0) {
+				// 	$season_ = $rcek['season'];
+				// } else {
+					$noOrder = $no_order ?: $rowdb2['SALESORDERCODE'];
+					$sqlDB2Season = "SELECT 
+											TRIM(INTERNALREFERENCE) AS INTERNALREFERENCE
+										FROM SALESORDER
+										WHERE CODE = '$noOrder'
+										LIMIT 1";
+					$stmtSeason = db2_exec($conn1, $sqlDB2Season, array('cursor' => DB2_SCROLLABLE));
+					$rowDB2Season = db2_fetch_assoc($stmtSeason);
+					$season_ = $rowDB2Season['INTERNALREFERENCE'];
+				// }
+			?>
 			<label for="season" class="col-sm-3 control-label">Season</label>
 			<div class="col-sm-4">
 				<div class="input-group">
-					<select class="form-control select2" name="season" id="season" required>
-						<option value="">Pilih</option>
-						<?php 
-						$qrys=mysqli_query($con,"SELECT nama FROM tbl_season_validity ORDER BY nama ASC");
-						while($rs=mysqli_fetch_array($qrys)){
-						?>
-						<option value="<?php echo $rs['nama'];?>" <?php if($rcek['season']==$rs['nama'] OR $Season==$rs['nama']){echo "SELECTED";}?>><?php echo $rs['nama'];?></option>	
-						<?php }?>
-					</select>
-					<span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataSeason"> ...</button></span>
+				<input name="season" type="text" class="form-control" id="season"
+						value="<?= $season_ ?? '' ?>" placeholder="Season" required readonly>
 				</div>
 		 	</div>			   
         </div>
