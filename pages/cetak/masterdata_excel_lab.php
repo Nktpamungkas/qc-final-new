@@ -27,28 +27,147 @@ $no_counter = isset($_GET['no_counter']) ? $_GET['no_counter'] : null;
   <table width="100%" border="1">
     <thead>
       <tr>
-        <th bgcolor="#99FF99">No</th>
-        <th bgcolor="#99FF99">Suffix</th>
-        <th bgcolor="#99FF99">No Counter</th>
-        <th bgcolor="#99FF99">Jenis Testing</th>
-        <th bgcolor="#99FF99">Treatment</th>
-        <th bgcolor="#99FF99">Buyer</th>
-        <th bgcolor="#99FF99">No Warna</th>
-        <th bgcolor="#99FF99">Nama Warna</th>
-        <th bgcolor="#99FF99">Item</th>
-        <th bgcolor="#99FF99">Jenis Kain</th>
-        <th bgcolor="#99FF99">Personil Testing</th>
-        <th bgcolor="#99FF99">Permintaan Testing</th>
-        <th bgcolor="#99FF99">Created By</th>
-        <th bgcolor="#99FF99">Status</th>
-        <th bgcolor="#99FF99">Status QC</th>
+        <th rowspan="3" bgcolor="#99FF99">No</th>
+        <th rowspan="3" bgcolor="#99FF99">Suffix</th>
+        <th rowspan="3" bgcolor="#99FF99">No Counter</th>
+        <th rowspan="3" bgcolor="#99FF99">Jenis Testing</th>
+        <th rowspan="3" bgcolor="#99FF99">Treatment</th>
+        <th rowspan="3" bgcolor="#99FF99">Buyer</th>
+        <th rowspan="3" bgcolor="#99FF99">No Warna</th>
+        <th rowspan="3" bgcolor="#99FF99">Nama Warna</th>
+        <th rowspan="3" bgcolor="#99FF99">Item</th>
+        <th rowspan="3" bgcolor="#99FF99">Jenis Kain</th>
+        <th rowspan="3" bgcolor="#99FF99">Personil Testing</th>
+        <th rowspan="3" bgcolor="#99FF99">Permintaan Testing</th>
+        <th rowspan="3" bgcolor="#99FF99">Created By</th>
+        <th rowspan="3" bgcolor="#99FF99">Status</th>
+        <th rowspan="3" bgcolor="#99FF99">Status QC</th>
+
+        <th rowspan="1" colspan="9" bgcolor="#99FF99">Washing Fastness</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Washing</th>
+        <th rowspan="1" colspan="8" bgcolor="#99FF99">Perspiration Fastness Acid</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Acid</th>
+        <th rowspan="1" colspan="8" bgcolor="#99FF99">Perspiration Fastness Alkaline</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Alkaline</th>
+        <th rowspan="1" colspan="8" bgcolor="#99FF99">Water Fastness</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Water</th>
+        <th rowspan="1" colspan="8" bgcolor="#99FF99">Dye Transfer</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Dye Transfer</th>
+        <th rowspan="1" colspan="4" bgcolor="#99FF99">Crocking Fastness</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Crocking</th>
+        <th rowspan="3" bgcolor="#99FF99">Phenolic Yellowing</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Phenolic Yellowing</th>
+        <th rowspan="1" colspan="2" bgcolor="#99FF99">Light Fastness</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Light Fastness</th>
+        <th rowspan="3" bgcolor="#99FF99">C.Migration-Oven Test</th>
+        <th rowspan="3" bgcolor="#99FF99">Note C.Migration-Oven</th>
+        <th rowspan="1" colspan="3" bgcolor="#99FF99">C.Migration Fastness</th>
+        <th rowspan="3" bgcolor="#99FF99">Note C.Migration Fastness</th>
+        <th rowspan="3" bgcolor="#99FF99">Light Perspiration</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Light Perspiration</th>
+        <th rowspan="3" bgcolor="#99FF99">Saliva Fastness</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Saliva Fastness</th>
+        <th rowspan="1" colspan="2" bgcolor="#99FF99">Bleeding</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Bleeding</th>
+        <th rowspan="3" bgcolor="#99FF99">Chlorin</th>
+        <th rowspan="3" colspan="2" bgcolor="#99FF99">Non-Chlorin</th>
+        <th rowspan="3" bgcolor="#99FF99">Note Chlorin & Non-Chlorin</th>
+      </tr>
+
+      <tr>
+        <!-- Washing Fastness -->
+        <th rowspan="2" bgcolor="#99FF99">Suhu</th>
+        <th rowspan="2" bgcolor="#99FF99">C.Change</th>
+        <th rowspan="2" bgcolor="#99FF99">Acetate</th>
+        <th rowspan="2" bgcolor="#99FF99">Cotton</th>
+        <th rowspan="2" bgcolor="#99FF99">Nylon</th>
+        <th rowspan="2" bgcolor="#99FF99">Polyester</th>
+        <th rowspan="2" bgcolor="#99FF99">Acrylic</th>
+        <th rowspan="2" bgcolor="#99FF99">Wool</th>
+        <th rowspan="2" bgcolor="#99FF99">C.Staining</th>
+
+        <!-- Perspiration Fastness Acid -->
+        <th rowspan="2" bgcolor="#99FF99">C.Change</th>
+        <th rowspan="2" bgcolor="#99FF99">Acetate</th>
+        <th rowspan="2" bgcolor="#99FF99">Cotton</th>
+        <th rowspan="2" bgcolor="#99FF99">Nylon</th>
+        <th rowspan="2" bgcolor="#99FF99">Polyester</th>
+        <th rowspan="2" bgcolor="#99FF99">Acrylic</th>
+        <th rowspan="2" bgcolor="#99FF99">Wool</th>
+        <th rowspan="2" bgcolor="#99FF99">S.Staining</th>
+
+        <!-- Perspiration Fastness Alkaline -->
+        <th rowspan="2" bgcolor="#99FF99">C.Change</th>
+        <th rowspan="2" bgcolor="#99FF99">Acetate</th>
+        <th rowspan="2" bgcolor="#99FF99">Cotton</th>
+        <th rowspan="2" bgcolor="#99FF99">Nylon</th>
+        <th rowspan="2" bgcolor="#99FF99">Polyester</th>
+        <th rowspan="2" bgcolor="#99FF99">Acrylic</th>
+        <th rowspan="2" bgcolor="#99FF99">Wool</th>
+        <th rowspan="2" bgcolor="#99FF99">S.Staining</th>
+
+        <!-- Water Fastness -->
+        <th rowspan="2" bgcolor="#99FF99">C.Change</th>
+        <th rowspan="2" bgcolor="#99FF99">Acetate</th>
+        <th rowspan="2" bgcolor="#99FF99">Cotton</th>
+        <th rowspan="2" bgcolor="#99FF99">Nylon</th>
+        <th rowspan="2" bgcolor="#99FF99">Polyester</th>
+        <th rowspan="2" bgcolor="#99FF99">Acrylic</th>
+        <th rowspan="2" bgcolor="#99FF99">Wool</th>
+        <th rowspan="2" bgcolor="#99FF99">S.Staining</th>
+
+        <!-- Dye Transfer -->
+        <th rowspan="2" bgcolor="#99FF99">Acetate</th>
+        <th rowspan="2" bgcolor="#99FF99">Cotton</th>
+        <th rowspan="2" bgcolor="#99FF99">Nylon</th>
+        <th rowspan="2" bgcolor="#99FF99">Polyester</th>
+        <th rowspan="2" bgcolor="#99FF99">Acrylic</th>
+        <th rowspan="2" bgcolor="#99FF99">Wool</th>
+        <th rowspan="2" bgcolor="#99FF99">C.Staining</th>
+        <th rowspan="2" bgcolor="#99FF99">S.Staining</th>
+
+        <!-- Crocking Fastness -->
+        <th colspan="2" bgcolor="#99FF99">Length</th>
+        <th colspan="2" bgcolor="#99FF99">Width</th>
+
+        <!-- Light Fastness -->
+        <th rowspan="2" bgcolor="#99FF99">C.Change(rating 1)</th>
+        <th rowspan="2" bgcolor="#99FF99">C.Change(rating 2)</th>
+
+        <!-- C.Migration Fastness -->
+        <th rowspan="2" bgcolor="#99FF99">Suhu</th>
+        <th rowspan="2" bgcolor="#99FF99">C.Change</th>
+        <th rowspan="2" bgcolor="#99FF99">C.Staining</th>
+
+        <!-- Bleeding -->
+        <th rowspan="2" bgcolor="#99FF99">Watermark</th>
+        <th rowspan="2" bgcolor="#99FF99">Root</th>
+      </tr>
+
+      <tr>
+        <!-- Crocking Fastness -->
+        <th bgcolor="#99FF99">Dry</th>
+        <th bgcolor="#99FF99">Wet</th>
+        <th bgcolor="#99FF99">Dry</th>
+        <th bgcolor="#99FF99">Wet</th>
       </tr>
     </thead>
     <br>
     <tbody>
       <?php
       $no = 1;
-      $sql = "SELECT * FROM tbl_test_qc WHERE tgl_buat BETWEEN '$Awal' AND '$Akhir'";
+      $sql = "select
+                  *
+                from
+                  tbl_test_qc a
+                left join tbl_tq_test b
+                  on
+                  a.id = b.id_nokk
+                left join tbl_tq_test_2 c
+                  on
+                  b.id_nokk = c.id_nokk
+                where
+                  a.tgl_buat between '$Awal' AND '$Akhir'";
 
       if (!empty($no_counter)) {
         $sql .= " AND no_counter = '$no_counter'";
@@ -93,7 +212,13 @@ $no_counter = isset($_GET['no_counter']) ? $_GET['no_counter'] : null;
             <?php echo $r['nama_personil_test']; ?>
           </td>
           <td>
-            <?php echo $r['permintaan_testing']; ?>
+            <?php
+            if ($r['permintaan_testing'] != "") {
+              echo $r['permintaan_testing'];
+            } else {
+              echo 'FULL TEST';
+            }
+            ?>
           </td>
           <td>
             <?php echo $r['created_by']; ?>
@@ -104,6 +229,225 @@ $no_counter = isset($_GET['no_counter']) ? $_GET['no_counter'] : null;
           </td>
           <td>
             <?php echo $r['sts_qc']; ?>
+          </td>
+          <td>
+            <?php echo $r['wash_temp']; ?>
+          </td>
+          <td>
+            <?php echo $r['wash_colorchange']; ?>
+          </td>
+          <td>
+            <?php echo $r['wash_acetate']; ?>
+          </td>
+          <td>
+            <?php echo $r['wash_cotton']; ?>
+          </td>
+          <td>
+            <?php echo $r['wash_nylon']; ?>
+          </td>
+          <td>
+            <?php echo $r['wash_poly']; ?>
+          </td>
+          <td>
+            <?php echo $r['wash_acrylic']; ?>
+          </td>
+          <td>
+            <?php echo $r['wash_wool']; ?>
+          </td>
+          <td>
+            <?php echo $r['wash_staining']; ?>
+          </td>
+          <td>
+            <?php echo $r['wash_note']; ?>
+          </td><!--10-->
+          <td>
+            <?php echo $r['acid_colorchange']; ?>
+          </td>
+          <td>
+            <?php echo $r['acid_acetate']; ?>
+          </td>
+          <td>
+            <?php echo $r['acid_cotton']; ?>
+          </td>
+          <td>
+            <?php echo $r['acid_nylon']; ?>
+          </td>
+          <td>
+            <?php echo $r['acid_poly']; ?>
+          </td>
+          <td>
+            <?php echo $r['acid_acrylic']; ?>
+          </td>
+          <td>
+            <?php echo $r['acid_wool']; ?>
+          </td>
+          <td>
+            <?php echo $r['acid_staining']; ?>
+          </td>
+          <td>
+            <?php echo $r['acid_note']; ?>
+          </td><!--9-->
+          <td>
+            <?php echo $r['alkaline_colorchange']; ?>
+          </td>
+          <td>
+            <?php echo $r['alkaline_acetate']; ?>
+          </td>
+          <td>
+            <?php echo $r['alkaline_cotton']; ?>
+          </td>
+          <td>
+            <?php echo $r['alkaline_nylon']; ?>
+          </td>
+          <td>
+            <?php echo $r['alkaline_poly']; ?>
+          </td>
+          <td>
+            <?php echo $r['alkaline_acrylic']; ?>
+          </td>
+          <td>
+            <?php echo $r['alkaline_wool']; ?>
+          </td>
+          <td>
+            <?php echo $r['alkaline_staining']; ?>
+          </td>
+          <td>
+            <?php echo $r['alkaline_note']; ?>
+          </td><!--9-->
+          <td>
+            <?php echo $r['water_colorchange']; ?>
+          </td>
+          <td>
+            <?php echo $r['water_acetate']; ?>
+          </td>
+          <td>
+            <?php echo $r['water_cotton']; ?>
+          </td>
+          <td>
+            <?php echo $r['water_nylon']; ?>
+          </td>
+          <td>
+            <?php echo $r['water_poly']; ?>
+          </td>
+          <td>
+            <?php echo $r['water_acrylic']; ?>
+          </td>
+          <td>
+            <?php echo $r['water_wool']; ?>
+          </td>
+          <td>
+            <?php echo $r['water_staining']; ?>
+          </td>
+          <td>
+            <?php echo $r['water_note']; ?>
+          </td><!--9-->
+          <td>
+            <?php echo $r['dye_tf_acetate']; ?>
+          </td>
+          <td>
+            <?php echo $r['dye_tf_cotton']; ?>
+          </td>
+          <td>
+            <?php echo $r['dye_tf_nylon']; ?>
+          </td>
+          <td>
+            <?php echo $r['dye_tf_poly']; ?>
+          </td>
+          <td>
+            <?php echo $r['dye_tf_acrylic']; ?>
+          </td>
+          <td>
+            <?php echo $r['dye_tf_wool']; ?>
+          </td>
+          <td>
+            <?php echo $r['dye_tf_cstaining']; ?>
+          </td>
+          <td>
+            <?php echo $r['dye_tf_sstaining']; ?>
+          </td>
+          <td>
+            <?php echo $r['dye_tf_note']; ?>
+          </td><!--9-->
+          <td>
+            <?php echo $r['crock_len1']; ?>
+          </td>
+          <td>
+            <?php echo $r['crock_len2']; ?>
+          </td>
+          <td>
+            <?php echo $r['crock_wid1']; ?>
+          </td>
+          <td>
+            <?php echo $r['crock_wid2']; ?>
+          </td>
+          <td>
+            <?php echo $r['crock_note']; ?>
+          </td><!--5-->
+          <td>
+            <?php echo $r['phenolic_colorchange']; ?>
+          </td>
+          <td>
+            <?php echo $r['phenolic_note']; ?>
+          </td>
+          <td>
+            <?php echo $r['light_rating1']; ?>
+          </td>
+          <td>
+            <?php echo $r['light_rating2']; ?>
+          </td>
+          <td>
+            <?php echo $r['light_note']; ?>
+          </td><!--3-->
+          <td>
+            <?php echo $r['cm_printing_colorchange']; ?>
+          </td>
+          <td>
+            <?php echo $r['cm_printing_note']; ?>
+          </td><!--2-->
+          <td>
+            <?php echo $r['cm_dye_temp']; ?>
+          </td>
+          <td>
+            <?php echo $r['cm_dye_colorchange']; ?>
+          </td>
+          <td>
+            <?php echo $r['cm_dye_stainingface']; ?>
+          </td>
+          <td>
+            <?php echo $r['cm_dye_note']; ?>
+          </td><!--4-->
+          <td>
+            <?php echo $r['light_pers_colorchange']; ?>
+          </td>
+          <td>
+            <?php echo $r['light_pers_note']; ?>
+          </td><!--2-->
+          <td>
+            <?php echo $r['saliva_staining']; ?>
+          </td>
+          <td>
+            <?php echo $r['saliva_note']; ?>
+          </td><!--2-->
+          <td>
+            <?php echo $r['bleeding']; ?>
+          </td>
+          <td>
+            <?php echo $r['bleeding_root']; ?>
+          </td>
+          <td>
+            <?php echo $r['bleeding_note']; ?>
+          </td><!--2-->
+          <td>
+            <?php echo $r['chlorin']; ?>
+          </td>
+          <td>
+            <?php echo $r['nchlorin1']; ?>
+          </td>
+          <td>
+            <?php echo $r['nchlorin2']; ?>
+          </td>
+          <td>
+            <?php echo $r['chlorin_note']; ?>
           </td>
         </tr>
 

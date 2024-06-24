@@ -94,7 +94,7 @@ $no_counter = isset($_POST['no_counter']) ? $_POST['no_counter'] : '';
       <div class="box">
         <div class="box-header with-border">
           <h3 class="box-title">Data Test Quality</h3>
-          <?php if ($_POST['awal'] != "" and $_POST['akhir'] != "") {
+          <?php if (($_POST['awal'] != "" and $_POST['akhir'] != "") || $no_counter != "") {
 
 
             ?>
@@ -161,13 +161,16 @@ $no_counter = isset($_POST['no_counter']) ? $_POST['no_counter'] : '';
               </tr>
             </thead>
             <tbody>
-              <?php
-              $sql = "SELECT * 
-                      FROM tbl_test_qc
-                      WHERE tgl_buat BETWEEN '$_POST[awal]' AND '$_POST[akhir]'";
+            <?php
+            if ($no_counter != "" || $Awal != "" || $Akhir != "") {
+              $sql = "SELECT * FROM tbl_test_qc";
 
-              if (!empty($no_counter)) {
-                $sql .= " AND no_counter = '$no_counter'";
+              if ($no_counter != "" && ($Awal == "" || $Akhir == "")) {
+                $sql .= " WHERE no_counter = '$no_counter'";
+              } else if ($no_counter == "" && ($Awal != "" || $Akhir != "")) {
+                $sql .= " WHERE tgl_buat BETWEEN '$Awal' AND '$Akhir' ";
+              } else if ($no_counter != "" && $Awal != "" && $Akhir != "") {
+                $sql .= " WHERE  no_counter = '$no_counter' AND tgl_buat BETWEEN '$Awal' AND '$Akhir' ";
               }
 
 
@@ -212,19 +215,41 @@ $no_counter = isset($_POST['no_counter']) ? $_POST['no_counter'] : '';
                     <?php echo $r['nama_personil_test']; ?>
                   </td>
                   <td align="center">
-                    <?php echo $r['permintaan_testing']; ?>
+                  <?php
+                    if ($r['permintaan_testing'] != "") {
+                      echo $r['permintaan_testing'];
+                    } else {
+                      echo "<span class='label label-danger blink_me'>FULL TEST</span>";
+                    }
+                  ?>
                   </td>
                   <td align="center">
                     <?php echo $r['created_by']; ?>
                   </td>
                   <td align="center">
-                    <span class="label <?php if($r['sts_laborat']=="Open"){ echo "label-info"; }else{ echo "label-primary"; } ?>"><?php echo $r['sts_laborat']; ?></span><hr class="divider"><span class="label <?php if($r['sts']=="normal"){ echo "label-warning"; }else{ echo "label-danger blink_me"; } ?>"><?php echo $r['sts']; ?></span>
+                    <span
+                      class="label <?php if ($r['sts_laborat'] == "Open") {
+                        echo "label-info";
+                      } else {
+                        echo "label-primary";
+                      } ?>"><?php echo $r['sts_laborat']; ?></span>
+                    <hr class="divider"><span
+                      class="label <?php if ($r['sts'] == "normal") {
+                        echo "label-warning";
+                      } else {
+                        echo "label-danger blink_me";
+                      } ?>"><?php echo $r['sts']; ?></span>
                   </td>
                   <td align="center">
-                    <span class="label <?php if($r['sts_qc']=="Tunggu Kain"){ echo "label-primary"; }else{ echo "label-warning"; } ?>"><?php echo $r['sts_qc']; ?></span>
+                    <span
+                      class="label <?php if ($r['sts_qc'] == "Tunggu Kain") {
+                        echo "label-primary";
+                      } else {
+                        echo "label-warning";
+                      } ?>"><?php echo $r['sts_qc']; ?></span>
                   </td>
                 </tr>
-              <?php } ?>
+              <?php } } ?>
             </tbody>
             <tfoot class="bg-red">
             </tfoot>
