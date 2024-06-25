@@ -83,7 +83,7 @@ $r = mysqli_fetch_array($data);
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:7px;">
-                  <?php echo $r['permintaan_testing'] ?>
+                  <?php echo $r['permintaan_testing'] != "" ? $r['permintaan_testing'] : 'FULL TEST' ?>
                 </div>
               </td>
             </tr>
@@ -149,7 +149,7 @@ $r = mysqli_fetch_array($data);
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:7px;">
-                  <?php echo $r['permintaan_testing'] ?>
+                  <?php echo $r['permintaan_testing'] != "" ? $r['permintaan_testing'] : 'FULL TEST' ?>
                 </div>
               </td>
             </tr>
@@ -215,7 +215,7 @@ $r = mysqli_fetch_array($data);
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:7px;">
-                  <?php echo $r['permintaan_testing'] ?>
+                  <?php echo $r['permintaan_testing'] != "" ? $r['permintaan_testing'] : 'FULL TEST' ?>
                 </div>
               </td>
             </tr>
