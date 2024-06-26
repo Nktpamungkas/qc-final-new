@@ -187,7 +187,7 @@ $TotalLot = isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             $sumQtyHanger[$hanger] = 0;
                         }
                         $groupHanger[$hanger][$key] = $value;
-                        $sumQtyHanger[$hanger] += $value['qty_kg'];
+                        $sumQtyHanger[$hanger] += $value['qty_kg'] ?: 0;
                     }
                     arsort($sumQtyHanger);
                     $top5Hanger = array_slice($sumQtyHanger, 0, 5);
@@ -202,7 +202,7 @@ $TotalLot = isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                     $tempPenghubungMasalah[$penghubung]['qty_kg'] = 0;
                                     $tempPenghubungMasalah[$penghubung]['jumlah_masalah'] = 0;
                                 }
-                                $tempPenghubungMasalah[$penghubung]['qty_kg'] += $value2['qty_kg'];
+                                $tempPenghubungMasalah[$penghubung]['qty_kg'] += $value2['qty_kg'] ?: 0;
                                 $tempPenghubungMasalah[$penghubung]['jumlah_masalah'] += 1;
                             }
                         }
