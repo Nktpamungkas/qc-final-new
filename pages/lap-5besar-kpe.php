@@ -9,7 +9,16 @@ $Awal		= isset($_POST['awal']) ? $_POST['awal'] : '';
 $Akhir		= isset($_POST['akhir']) ? $_POST['akhir'] : '';
 $TotalKirim		= isset($_POST['total']) ? $_POST['total'] : '';
 $Langganan		= isset($_POST['langganan']) ? $_POST['langganan'] : '';
-$TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
+$Status		= isset($_POST['status']) ? $_POST['status'] : '';
+$Sts_check		= isset($_POST['sts_check']) ? $_POST['sts_check'] : '';
+
+switch ($Status) {
+    case 'Lolos QC': $WStatus = " AND sts = '1' "; break;
+    case 'Disposisi QC': $WStatus = " AND sts_disposisiqc = '1' "; break;
+    case 'Disposisi Produksi': $WStatus = " AND sts_disposisipro = '1' "; break;
+    default: $WStatus = ""; break;
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -105,9 +114,39 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         <input name="langganan" type="text" class="form-control pull-right" placeholder="Langganan" value="<?php echo $Langganan; ?>" />
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success " name="cari"><i class="fa fa-search"></i> Cari Data</button>
+
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <div class="input-group-addon"> Status</div>
+                        <select class="form-control select2" name="status" id="status">
+                            <option value="">Pilih</option>
+                            <?php
+                            $status = ["Lolos QC", "Disposisi QC", "Disposisi Produksi"];
+                            foreach ($status as $value) {
+                                ?>
+                                <option value="<?= $value ?>" <?= $Status == $value ? 'selected' : '' ?>><?= $value ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <div class="input-group-addon"> Status Check</div>
+                        <select class="form-control select2" name="sts_check" id="sts_check">
+                            <option value="">Pilih</option>
+                            <option value="Ceklis" <?= $Sts_check == "Ceklis" ? 'selected' : '' ?>>&#10004;</option>
+                            <option value="Silang" <?= $Sts_check == "Silang" ? 'selected' : '' ?>>X</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-2" style="margin-top: 1rem">
+                    <div class="input-group"></div>
+                        <button type="submit" class="btn btn-success " name="cari"><i class="fa fa-search"></i> Cari Data</button>
+                    </div>
+                </div>
+                
                 <!-- /.input group -->
-            </div>
             <!-- /.box-body -->
             <div class="box-footer">
             </div>
@@ -144,13 +183,14 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         $total1=0;
                         $totaldll=0;
                         // $totalLot=0;
-                        $qryAll=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'");
+                        $qryAll=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND sts_check = '$Sts_check' $WStatus");
                         $rAll=mysqli_fetch_array($qryAll);
                         $qrylgn=mysqli_query($con,"SELECT COUNT(*) AS jml, SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(pelanggan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir')*100,1) AS persen,
                         pelanggan
                         FROM
                         `tbl_aftersales_now`
                         WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                        AND sts_check = '$Sts_check' $WStatus
                         GROUP BY pelanggan
                         ORDER BY qty_claim_lgn DESC LIMIT 5");
                         while($r=mysqli_fetch_array($qrylgn)){
@@ -164,6 +204,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                                     where
                                                                         pelanggan like '%$r[pelanggan]%'
                                                                             AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
+                                                                            AND sts_check = '$Sts_check' $WStatus
                                                                     group by
                                                                         po,
                                                                         no_hanger,
@@ -194,7 +235,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             <td align="center" colspan="2"><strong>DLL</strong></td>
                             <td align="right"><strong><?= ''//$totalLot ?></strong></td>
                             <td align="right"><strong><?php echo number_format($totaldll,2); ?></strong></td>
-                            <td align="right"><strong><?php if($TotalKirim!=""){echo number_format(($totaldll/(int)$rAll['qty_claim_all'])*100,2)." %";}else{echo "0 %";} ?></strong></td>
+                            <td align="right"><strong><?php if($TotalKirim!="" && $rAll['qty_claim_all'] > 0){echo number_format(($totaldll/(int)$rAll['qty_claim_all'])*100,2)." %";}else{echo "0 %";} ?></strong></td>
                             <td align="right"><strong><?php if($TotalKirim!=""){echo number_format(($totaldll/(int)$TotalKirim)*100,2)." %";}else{echo "0 %";} ?></strong></td>
                             </tr>
                             <tr valign="top">
@@ -236,7 +277,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         $no2=1;
                         $totald=0;
                         $totaldll2=0;
-                        $qryAll2=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL)");
+                        $qryAll2=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND sts_check = '$Sts_check' $WStatus AND (masalah_dominan!='' OR masalah_dominan!=NULL)");
                         $rAll2=mysqli_fetch_array($qryAll2);
                         $lgn = $Langganan != "" ? " and buyer like '%$Langganan%'" : "";
                         $qrydef=mysqli_query($con,"select
@@ -252,6 +293,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                             tbl_aftersales_now
                                                         where
                                                             tgl_buat between '$Awal' AND '$Akhir' $lgn
+                                                            AND sts_check = '$Sts_check' $WStatus
                                                         group by
                                                             po,
                                                             no_hanger,
@@ -285,7 +327,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             <td align="center" colspan="2"><strong>DLL</strong></td>
                             <td align="center"></td>
                             <td align="right"><strong><?php echo number_format($totaldll2,2); ?></strong></td>
-                            <td align="right"><strong><?php if($TotalKirim!=""){echo number_format(($totaldll2/$rAll2['qty_claim_all'])*100,2)." %";}else{echo "0 %";} ?></strong></td>
+                            <td align="right"><strong><?php if($TotalKirim!="" && $rAll2['qty_claim_all'] > 0){echo number_format(($totaldll2/$rAll2['qty_claim_all'])*100,2)." %";}else{echo "0 %";} ?></strong></td>
                             <td align="right"><strong><?php if($TotalKirim!=""){echo number_format(($totaldll2/$TotalKirim)*100,2)." %";}else{echo "0 %";} ?></strong></td>
                             </tr>
                             <tr valign="top">
@@ -468,7 +510,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         $no5=1;
                         $totald5=0;
                         $totaldll5=0;
-                        $qryAll5=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%lululemon%'");
+                        $qryAll5=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%lululemon%' AND sts_check = '$Sts_check' $WStatus");
                         $rAll5=mysqli_fetch_array($qryAll5);
                         $qrydef5=mysqli_query($con,"SELECT SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
                         AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%lululemon%')*100,1) AS persen,
@@ -476,6 +518,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         FROM
                         `tbl_aftersales_now`
                         WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%lululemon%'
+                        AND sts_check = '$Sts_check' $WStatus
                         GROUP BY masalah_dominan
                         ORDER BY qty_claim_lgn DESC LIMIT 5");
                         while($rd5=mysqli_fetch_array($qrydef5)){
@@ -536,7 +579,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         $no6=1;
                         $totald6=0;
                         $totaldll6=0;
-                        $qryAll6=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab!='' OR t_jawab!=NULL)");
+                        $qryAll6=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab!='' OR t_jawab!=NULL) AND sts_check = '$Sts_check' $WStatus");
                         $rAll6=mysqli_fetch_array($qryAll6);
                         $qrydef6=mysqli_query($con,"SELECT a.t_jawab, SUM(a.qty_claim_dept) as qty_claim_dept, SUM(a.jml_tjawab) as jml_tjawab
                         from
@@ -546,7 +589,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         COUNT(*) as jml_tjawab
                         FROM
                         db_qc.`tbl_aftersales_now`
-                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab!='' OR t_jawab!=NULL)
+                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab!='' OR t_jawab!=NULL) AND sts_check = '$Sts_check' $WStatus
                         GROUP BY t_jawab
                         union distinct 
                         select t_jawab1, 
@@ -554,7 +597,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         COUNT(*) as jml_tjawab1
                         FROM
                         db_qc.`tbl_aftersales_now`
-                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab1!='' OR t_jawab1!=NULL)
+                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab1!='' OR t_jawab1!=NULL) AND sts_check = '$Sts_check' $WStatus
                         GROUP BY t_jawab1
                         union distinct
                         select t_jawab2, 
@@ -562,7 +605,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         COUNT(*) as jml_tjawab2
                         FROM
                         db_qc.`tbl_aftersales_now`
-                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab2!='' OR t_jawab2!=NULL)
+                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab2!='' OR t_jawab2!=NULL) AND sts_check = '$Sts_check' $WStatus
                         GROUP BY t_jawab2) a
                         group by a.t_jawab
                         ORDER BY qty_claim_dept DESC");
@@ -636,6 +679,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                                     tbl_aftersales_now
                                                                 where
                                                                     tgl_buat between '$Awal' AND '$Akhir' $lgn
+                                                                    AND sts_check = '$Sts_check' $WStatus
                                                                 group by
                                                                     po,
                                                                     no_hanger,
@@ -667,6 +711,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                                     where
                                                                         no_hanger = '$ri7Total5[no_hanger]'
                                                                         and tgl_buat between '$Awal' AND '$Akhir' $lgn
+                                                                        AND sts_check = '$Sts_check' $WStatus
                                                                     group by
                                                                         po,
                                                                         no_hanger,
@@ -695,6 +740,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                         tbl_aftersales_now
                                                     where
                                                         tgl_buat between '$Awal' AND '$Akhir' $lgn
+                                                        AND sts_check = '$Sts_check' $WStatus
                                                     group by
                                                         po,
                                                         no_hanger,
@@ -723,6 +769,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                             where
                                                                 no_hanger = '$ri7[no_hanger]'
                                                                 and tgl_buat between '$Awal' AND '$Akhir' $lgn
+                                                                AND sts_check = '$Sts_check' $WStatus
                                                             group by
                                                                 po,
                                                                 no_hanger,
@@ -752,6 +799,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                             where
                                                                 no_hanger = '$ri7[no_hanger]'
                                                                 and tgl_buat between '$Awal' AND '$Akhir' $lgn
+                                                                AND sts_check = '$Sts_check' $WStatus
                                                             group by
                                                                 po,
                                                                 no_hanger,
@@ -834,6 +882,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                                     tbl_aftersales_now
                                                                 where
                                                                     tgl_buat between '$Awal' AND '$Akhir'
+                                                                    AND sts_check = '$Sts_check' $WStatus
                                                                 group by
                                                                     po,
                                                                     no_hanger,
@@ -861,6 +910,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                         tbl_aftersales_now
                                                     where
                                                         tgl_buat between '$Awal' AND '$Akhir'
+                                                        AND sts_check = '$Sts_check' $WStatus
                                                     group by
                                                         po,
                                                         no_hanger,
@@ -935,6 +985,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                                     tbl_aftersales_now a
                                                                 WHERE
                                                                     DATE_FORMAT(a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
+                                                                    AND sts_check = '$Sts_check' $WStatus
                                                                     GROUP BY
                                                                     a.po,
                                                                     a.no_hanger,
@@ -1014,15 +1065,18 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         // Total
                         $totalJumlahKasus = count($majorTemp) + count($sampleTemp) + count($repeatTemp) + count($generalTemp);
                         $totalKeluhan = $majorKG + $sampleKG + $repeatKG + $generalKG;
-                        $totalDibandingkanTotalKeluhan = number_format(($majorKG / $totalKeluhan) * 100, 2) + number_format(($sampleKG / $totalKeluhan) * 100, 2) + number_format(($repeatKG / $totalKeluhan) * 100, 2) + number_format(($generalKG / $totalKeluhan) * 100, 2);
+                        if($totalKeluhan > 0) {
+                            $totalDibandingkanTotalKeluhan = number_format(($majorKG / $totalKeluhan) * 100, 2) + number_format(($sampleKG / $totalKeluhan) * 100, 2) + number_format(($repeatKG / $totalKeluhan) * 100, 2) + number_format(($generalKG / $totalKeluhan) * 100, 2);
+                        }
                     ?>
                     <tbody>
+                        <?php if($totalKeluhan > 0){ ?>
                         <tr valign="top">
                             <td align="center">1</td>  
                             <td align="left">MAJOR</td>
                             <td align="right"><?= count($majorTemp) ?></td>
                             <td align="right"><?= $majorKG ?></td>
-                            <td align="right"><?= $TotalKirim!="" ? number_format(($majorKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
+                            <td align="right"><?= $TotalKirim!="" && $totalKeluhan > 0 ? number_format(($majorKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
                             <td align="right"><?= $TotalKirim!="" ? number_format(($majorKG / $TotalKirim) * 100, 2) . " %" : "0" ?></td>
                         </tr>
                         <tr valign="top">
@@ -1030,7 +1084,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             <td align="left">SAMPLE</td>
                             <td align="right"><?= count($sampleTemp) ?></td>
                             <td align="right"><?= $sampleKG ?></td>
-                            <td align="right"><?= $TotalKirim!="" ? number_format(($sampleKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
+                            <td align="right"><?= $TotalKirim!="" && $totalKeluhan > 0 ? number_format(($sampleKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
                             <td align="right"><?= $TotalKirim!="" ? number_format(($sampleKG / $TotalKirim) * 100, 2) . " %" : "0" ?></td>
                         </tr>
                         <tr valign="top">
@@ -1038,7 +1092,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             <td align="left">REPEAT</td>
                             <td align="right"><?= count($repeatTemp) ?></td>
                             <td align="right"><?= $repeatKG ?></td>
-                            <td align="right"><?= $TotalKirim!="" ? number_format(($repeatKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
+                            <td align="right"><?= $TotalKirim!="" && $totalKeluhan > 0 ? number_format(($repeatKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
                             <td align="right"><?= $TotalKirim!="" ? number_format(($repeatKG / $TotalKirim) * 100, 2) . " %" : "0" ?></td>
                         </tr>
                         <tr valign="top">
@@ -1046,10 +1100,10 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                             <td align="left">GENERAL</td>
                             <td align="right"><?= count($generalTemp) ?></td>
                             <td align="right"><?= $generalKG ?></td>
-                            <td align="right"><?= $TotalKirim!="" ? number_format(($generalKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
+                            <td align="right"><?= $TotalKirim!="" && $totalKeluhan > 0 ? number_format(($generalKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
                             <td align="right"><?= $TotalKirim!="" ? number_format(($generalKG / $TotalKirim) * 100, 2) . " %" : "0" ?></td>
                         </tr>
-                    <?php } ?>
+                    <?php } } ?>
                     </tbody>
                     <tfoot>
                         <tr valign="top">
@@ -1102,7 +1156,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                         select 
                                                         sum(qty_claim) as qty_claim
                                                         from tbl_aftersales_now
-                                                        $Where2
+                                                        $Where2 AND sts_check = '$Sts_check' $WStatus
                                                         group by solusi ) a");
                     $row2Total = mysqli_fetch_array($qry2Total);
                     
@@ -1116,7 +1170,7 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                                                             sum(qty_claim) as qty_claim_gabung
                                                         from
                                                             tbl_aftersales_now
-                                                        $Where2
+                                                        $Where2 AND sts_check = '$Sts_check' $WStatus
                                                         group by
                                                             po,
                                                             no_hanger,
@@ -1140,14 +1194,14 @@ $TotalLot		= isset($_POST['totallot']) ? $_POST['totallot'] : '';
                     $query2KG = mysqli_query($con, "select 
                                                         sum(qty_claim) as qty_claim
                                                     from tbl_aftersales_now
-                                                    where solusi = '$row2[solusi]' and satuan_c = 'KG' $Where21 
+                                                    where solusi = '$row2[solusi]' and satuan_c = 'KG' $Where21 AND sts_check = '$Sts_check' $WStatus
                                                     group by solusi");
                     $row2KG = mysqli_fetch_array($query2KG);
 
                     $query2YD = mysqli_query($con, "select 
                                                         sum(qty_claim2) as qty_claim2
                                                     from tbl_aftersales_now
-                                                    where solusi = '$row2[solusi]' and satuan_c2 in ('YD', 'MTR') $Where21 
+                                                    where solusi = '$row2[solusi]' and satuan_c2 in ('YD', 'MTR') $Where21 AND sts_check = '$Sts_check' $WStatus
                                                     group by solusi");
                     $row2YD = mysqli_fetch_array($query2YD);
 
