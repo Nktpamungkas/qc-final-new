@@ -45,6 +45,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
       <td><font size="-2"><strong>WARNA</strong></font></td>
       <td><font size="-2"><strong>QTY KIRIM</strong></font></td>
       <td><font size="-2"><strong>QTY KELUHAN</strong></font></td>
+      <td><font size="-2"><strong>MASALAH DOMINAN</strong></font></td>
       <td><font size="-2"><strong>MASALAH</strong></font></td>
       <td><font size="-2"><strong>TGL PROSES</strong></font></td>
       <td><font size="-2"><strong>SOLUSI</strong></font></td>
@@ -97,6 +98,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <td align="center"><font size="-2"><?php echo strtoupper($row1['warna']);?></font></td>
             <td align="right"><font size="-2"><?php echo strtoupper($row1['qty_kirim']);?></font></td>
             <td align="right"><font size="-2"><?php echo strtoupper($row1['qty_claim']);?></font></td>
+            <td valign="top"><font size="-2"><?php echo $row1['masalah_dominan'];?></font></td>
             <td valign="top"><font size="-2"><?php echo $row1['masalah'];?></font></td>
             <td valign="top"><font size="-2"><?php if(strpos($rQCF['ket'],'AKJ') !== false){echo $rQCF['tgl_masuk'];}else if($rQCF['masalah_dominan']=="Beda Warna"){echo $rQCF['tgl_fin'];}else if($rQCF['masalah_dominan']!="Beda Warna"){echo $rQCF['tgl_ins'];}?></font></td>
             <td valign="top"><font size="-2"><?php echo $row1['solusi'];?></font></td>
