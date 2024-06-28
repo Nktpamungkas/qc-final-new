@@ -1,8 +1,8 @@
 <?php
-header("Content-type: application/octet-stream");
-header("Content-Disposition: attachment; filename=Laporan-Baru-NCP-".substr($_GET['awal'],0,10).".xls");//ganti nama sesuai keperluan
-header("Pragma: no-cache");
-header("Expires: 0");
+// header("Content-type: application/octet-stream");
+// header("Content-Disposition: attachment; filename=Laporan-Baru-NCP-".substr($_GET['awal'],0,10).".xls");//ganti nama sesuai keperluan
+// header("Pragma: no-cache");
+// header("Expires: 0");
 
 include "../../koneksi.php";
 include "../../tgl_indo.php";
@@ -106,7 +106,7 @@ $rowTotalNcp = mysqli_fetch_assoc($queryTotalNCP);
                 <td>&nbsp;</td>
                 <td style="vertical-align: top;">
                   <table border="1">
-                    <thead>
+                    <thead bgcolor="green">
                       <tr>
                         <th colspan="3"><?= $row['dept'] ?></th>
                       </tr>
@@ -196,7 +196,7 @@ $rowTotalNcp = mysqli_fetch_assoc($queryTotalNCP);
             $uniqueTop5 = array_unique($arrayTop5);
             ?>
             <table border="1">
-              <thead>
+              <thead bgcolor="green">
                 <tr>
                   <th colspan="<?= count($uniqueTop5) + 3 ?>">TOP 5 DEFECT</th>
                 </tr>
