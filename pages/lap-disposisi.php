@@ -194,6 +194,7 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
             <th><div>
               <div align="center">T Jawab</div>
             </div></th>
+            <th><div align="center">Masalah Dominan</div></th>
             <th><div align="center">Masalah</div></th>
             <th><div align="center">Penyebab</div></th>
             <th><div align="center">Personil</div></th>
@@ -239,6 +240,7 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
             <td align="right"><?php echo $row1['qty_kirim'];?></td>
             <td align="right"><?php echo $row1['qty_claim'];?></td>
             <td align="center"><?php echo $row1['t_jawab'];?></td>
+            <td><?php echo $row1['masalah_dominan'];?></td>
             <td><?php echo $row1['masalah'];?></td>
             <td><?php echo $row1['penyebab'];?></td>
             <td><?php if($row1['personil2']!=""){echo $row1['personil'].",".$row1['personil2'];}else{echo $row1['personil'];}?></td>
