@@ -167,11 +167,16 @@ $no_counter = isset($_GET['no_counter']) ? $_GET['no_counter'] : null;
                   on
                   b.id_nokk = c.id_nokk
                 where
-                  a.tgl_buat between '$Awal' AND '$Akhir'";
-
-      if (!empty($no_counter)) {
-        $sql .= " AND no_counter = '$no_counter'";
+                  ";
+      if (!empty($Awal) && !empty($Akhir)) {
+        $sql .= " a.tgl_buat between '$Awal' AND '$Akhir' ";
       }
+      if (!empty($no_counter) && !empty($Awal) && !empty($Akhir)) {
+        $sql .= " AND no_counter = '$no_counter'";
+      } else if(!empty($no_counter)) {
+        $sql .= " no_counter = '$no_counter'";
+      }
+      echo $sql;
 
       $query = mysqli_query($conlab, $sql);
 
@@ -234,217 +239,217 @@ $no_counter = isset($_GET['no_counter']) ? $_GET['no_counter'] : null;
             <?php echo $r['wash_temp']; ?>
           </td>
           <td>
-            <?php echo $r['wash_colorchange']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['wash_colorchange']); ?>
           </td>
           <td>
-            <?php echo $r['wash_acetate']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['wash_acetate']); ?>
           </td>
           <td>
-            <?php echo $r['wash_cotton']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['wash_cotton']); ?>
           </td>
           <td>
-            <?php echo $r['wash_nylon']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['wash_nylon']); ?>
           </td>
           <td>
-            <?php echo $r['wash_poly']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['wash_poly']); ?>
           </td>
           <td>
-            <?php echo $r['wash_acrylic']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['wash_acrylic']); ?>
           </td>
           <td>
-            <?php echo $r['wash_wool']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['wash_wool']); ?>
           </td>
           <td>
-            <?php echo $r['wash_staining']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['wash_staining']); ?>
           </td>
           <td>
             <?php echo $r['wash_note']; ?>
           </td><!--10-->
           <td>
-            <?php echo $r['acid_colorchange']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['acid_colorchange']); ?>
           </td>
           <td>
-            <?php echo $r['acid_acetate']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['acid_acetate']); ?>
           </td>
           <td>
-            <?php echo $r['acid_cotton']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['acid_cotton']); ?>
           </td>
           <td>
-            <?php echo $r['acid_nylon']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['acid_nylon']); ?>
           </td>
           <td>
-            <?php echo $r['acid_poly']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['acid_poly']); ?>
           </td>
           <td>
-            <?php echo $r['acid_acrylic']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['acid_acrylic']); ?>
           </td>
           <td>
-            <?php echo $r['acid_wool']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['acid_wool']); ?>
           </td>
           <td>
-            <?php echo $r['acid_staining']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['acid_staining']); ?>
           </td>
           <td>
             <?php echo $r['acid_note']; ?>
           </td><!--9-->
           <td>
-            <?php echo $r['alkaline_colorchange']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['alkaline_colorchange']); ?>
           </td>
           <td>
-            <?php echo $r['alkaline_acetate']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['alkaline_acetate']); ?>
           </td>
           <td>
-            <?php echo $r['alkaline_cotton']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['alkaline_cotton']); ?>
           </td>
           <td>
-            <?php echo $r['alkaline_nylon']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['alkaline_nylon']); ?>
           </td>
           <td>
-            <?php echo $r['alkaline_poly']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['alkaline_poly']); ?>
           </td>
           <td>
-            <?php echo $r['alkaline_acrylic']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['alkaline_acrylic']); ?>
           </td>
           <td>
-            <?php echo $r['alkaline_wool']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['alkaline_wool']); ?>
           </td>
           <td>
-            <?php echo $r['alkaline_staining']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['alkaline_staining']); ?>
           </td>
           <td>
             <?php echo $r['alkaline_note']; ?>
           </td><!--9-->
           <td>
-            <?php echo $r['water_colorchange']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['water_colorchange']); ?>
           </td>
           <td>
-            <?php echo $r['water_acetate']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['water_acetate']); ?>
           </td>
           <td>
-            <?php echo $r['water_cotton']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['water_cotton']); ?>
           </td>
           <td>
-            <?php echo $r['water_nylon']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['water_nylon']); ?>
           </td>
           <td>
-            <?php echo $r['water_poly']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['water_poly']); ?>
           </td>
           <td>
-            <?php echo $r['water_acrylic']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['water_acrylic']); ?>
           </td>
           <td>
-            <?php echo $r['water_wool']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['water_wool']); ?>
           </td>
           <td>
-            <?php echo $r['water_staining']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['water_staining']); ?>
           </td>
           <td>
             <?php echo $r['water_note']; ?>
           </td><!--9-->
           <td>
-            <?php echo $r['dye_tf_acetate']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['dye_tf_acetate']); ?>
           </td>
           <td>
-            <?php echo $r['dye_tf_cotton']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['dye_tf_cotton']); ?>
           </td>
           <td>
-            <?php echo $r['dye_tf_nylon']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['dye_tf_nylon']); ?>
           </td>
           <td>
-            <?php echo $r['dye_tf_poly']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['dye_tf_poly']); ?>
           </td>
           <td>
-            <?php echo $r['dye_tf_acrylic']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['dye_tf_acrylic']); ?>
           </td>
           <td>
-            <?php echo $r['dye_tf_wool']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['dye_tf_wool']); ?>
           </td>
           <td>
-            <?php echo $r['dye_tf_cstaining']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['dye_tf_cstaining']); ?>
           </td>
           <td>
-            <?php echo $r['dye_tf_sstaining']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['dye_tf_sstaining']); ?>
           </td>
           <td>
             <?php echo $r['dye_tf_note']; ?>
           </td><!--9-->
           <td>
-            <?php echo $r['crock_len1']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['crock_len1']); ?>
           </td>
           <td>
-            <?php echo $r['crock_len2']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['crock_len2']); ?>
           </td>
           <td>
-            <?php echo $r['crock_wid1']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['crock_wid1']); ?>
           </td>
           <td>
-            <?php echo $r['crock_wid2']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['crock_wid2']); ?>
           </td>
           <td>
             <?php echo $r['crock_note']; ?>
           </td><!--5-->
           <td>
-            <?php echo $r['phenolic_colorchange']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['phenolic_colorchange']); ?>
           </td>
           <td>
             <?php echo $r['phenolic_note']; ?>
           </td>
           <td>
-            <?php echo $r['light_rating1']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['light_rating1']); ?>
           </td>
           <td>
-            <?php echo $r['light_rating2']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['light_rating2']); ?>
           </td>
           <td>
             <?php echo $r['light_note']; ?>
           </td><!--3-->
           <td>
-            <?php echo $r['cm_printing_colorchange']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['cm_printing_colorchange']); ?>
           </td>
           <td>
             <?php echo $r['cm_printing_note']; ?>
           </td><!--2-->
           <td>
-            <?php echo $r['cm_dye_temp']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['cm_dye_temp']); ?>
           </td>
           <td>
-            <?php echo $r['cm_dye_colorchange']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['cm_dye_colorchange']); ?>
           </td>
           <td>
-            <?php echo $r['cm_dye_stainingface']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['cm_dye_stainingface']); ?>
           </td>
           <td>
             <?php echo $r['cm_dye_note']; ?>
           </td><!--4-->
           <td>
-            <?php echo $r['light_pers_colorchange']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['light_pers_colorchange']); ?>
           </td>
           <td>
-            <?php echo $r['light_pers_note']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['light_pers_note']); ?>
           </td><!--2-->
           <td>
-            <?php echo $r['saliva_staining']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['saliva_staining']); ?>
           </td>
           <td>
             <?php echo $r['saliva_note']; ?>
           </td><!--2-->
           <td>
-            <?php echo $r['bleeding']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['bleeding']); ?>
           </td>
           <td>
-            <?php echo $r['bleeding_root']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['bleeding_root']); ?>
           </td>
           <td>
             <?php echo $r['bleeding_note']; ?>
           </td><!--2-->
           <td>
-            <?php echo $r['chlorin']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['chlorin']); ?>
           </td>
           <td>
-            <?php echo $r['nchlorin1']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['nchlorin1']); ?>
           </td>
           <td>
-            <?php echo $r['nchlorin2']; ?>
+            <?php echo preg_replace('/(\d+-\d+)/', "'$1", $r['nchlorin2']); ?>
           </td>
           <td>
             <?php echo $r['chlorin_note']; ?>
