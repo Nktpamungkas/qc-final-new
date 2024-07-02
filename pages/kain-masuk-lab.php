@@ -112,7 +112,8 @@ $nocounter = $_GET['nocount'];
                                         <?php if ($r['sts_qc'] == "Belum Terima Kain") {
                                             echo "</a>";
                                         } ?>
-                                        <hr class="divider"><em>Diterima oleh: <strong><?php echo $r['diterima_oleh']; ?></strong><br>
+                                        <!-- Update by ilham 02/07/2024 -->
+                                        <hr class="divider"><em>Pengirim: <strong><?php echo $r['diterima_oleh']; ?></strong><br>
                                             Penerima: <strong><?php echo $r['nama_penerima']; ?></strong></em><br>
                                         <hr class="divider"><em><a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['note_qc'] ?>" class="note_qc" href="javascript:void(0)"><?php echo $r['note_qc']; ?></a></em><br>
                                     </td>
