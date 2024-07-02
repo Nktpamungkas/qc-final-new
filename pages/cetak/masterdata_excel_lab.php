@@ -176,7 +176,6 @@ $no_counter = isset($_GET['no_counter']) ? $_GET['no_counter'] : null;
       } else if(!empty($no_counter)) {
         $sql .= " no_counter = '$no_counter'";
       }
-      echo $sql;
 
       $query = mysqli_query($conlab, $sql);
 
