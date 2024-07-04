@@ -292,8 +292,8 @@ $TotalLot = isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         </tfoot>
                     </table>
                     <div class="box-footer">
-                        <a href="pages/cetak/excel_3besar_masalah_item.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>&totalk=<?= $ri7Total ?>"
-                            class="btn btn-success disabled <?= ''//($Awal == "") ? "disabled" : "" ?>"
+                        <a href="pages/cetak/excel_5besar_masalah_item_bon_penghubung.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>&totalk=<?= $ri7Total ?>"
+                            class="btn btn-success <?= ($Awal == "") ? "disabled" : "" ?>"
                             target="_blank"><i class="fa fa-file-excel-o"></i></a>
                     </div>
                 </div>
@@ -470,8 +470,8 @@ $TotalLot = isset($_POST['totallot']) ? $_POST['totallot'] : '';
                         </tfoot>
                     </table>
                     <div class="box-footer">
-                        <a href="pages/cetak/excel_3besar_masalah_item.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>&totalk=<?= $ri7Total ?>"
-                            class="btn btn-success disabled <?= ''//($Awal == "") ? "disabled" : "" ?>"
+                        <a href="pages/cetak/excel_5_terbesar_masalah_per_langganan_bon_penghubung.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&kirim=<?php echo $TotalKirim; ?>"
+                            class="btn btn-success <?= ($Awal == "") ? "disabled" : "" ?>"
                             target="_blank"><i class="fa fa-file-excel-o"></i></a>
                     </div>
                 </div>
