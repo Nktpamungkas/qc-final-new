@@ -46,6 +46,7 @@ $r = mysqli_fetch_array($qry);
           </div>
         </div>
         <input type="hidden" id="id" name="id" value="<?php echo $modal_id; ?>">
+        <input type="hidden" id="no_counter" name="no_counter" value="<?php echo $r['no_counter']; ?>">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>

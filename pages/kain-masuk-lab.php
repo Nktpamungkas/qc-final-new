@@ -39,8 +39,8 @@ $nocounter = $_GET['nocount'];
                             $no = 1;
                             //   Update by ilham 21/06/2024 No Ticket BDIT240001517 
 
-                            //   Update by ilham 03/07/2024 FILTER JIKA LABORAT SUDAH APPROVE TIDAK DIMUNCULKAN DALAM TABEL
-                            $sql = mysqli_query($conlab, "SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' AND sts_laborat <> 'Approved Full' AND sts_laborat <> 'Approved Parsial' AND sts_qc <> 'Kain OK' ORDER BY tgl_buat DESC");
+                            //   Update by ilham 03/07/2024 FILTER JIKA LABORAT SUDAH APPROVE TIDAK DIMUNCULKAN DALAM TABEL dan JIKA YG SUDAH DI DELETE JGN MUNCUL
+                            $sql = mysqli_query($conlab, "SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' AND sts_laborat <> 'Approved Full' AND sts_laborat <> 'Approved Parsial' AND deleted_at IS NULL AND sts_qc <> 'Kain OK' ORDER BY tgl_buat DESC");
                             while ($r = mysqli_fetch_array($sql)) {
                                 $bgcolor = ($col++ & 1) ? 'gainsboro' : 'antiquewhite';
                                 $detail2 = explode(",", $r['permintaan_testing']);
