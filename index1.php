@@ -1,9 +1,9 @@
 <?php
-    ini_set("error_reporting", 1);
-    session_start();
-    //include config
-    include("koneksi.php");
-    include("tgl_indo.php");
+ini_set("error_reporting", 1);
+session_start();
+//include config
+include("koneksi.php");
+include("tgl_indo.php");
 ?>
 
 <?php date_default_timezone_set('Asia/Jakarta'); ?>
@@ -11,20 +11,20 @@
     <script>
         setTimeout("location.href='login'", 500);
     </script>
-    <?php die('Illegal Access'); ?> 
+    <?php die('Illegal Access'); ?>
 <?php elseif (!isset($_SESSION['pasid'])) : ?>
     <script>
         setTimeout("location.href='lockscreen'", 500);
     </script>
     <?php die('Illegal Access'); ?>
-<?php endif;?>
+<?php endif; ?>
 
 <?php
-    //request page
-    $page = isset($_GET['p']) ? $_GET['p'] : '';
-    $act  = isset($_GET['act']) ? $_GET['act'] : '';
-    $id   = isset($_GET['id']) ? $_GET['id'] : '';
-    $page = strtolower($page);
+//request page
+$page = isset($_GET['p']) ? $_GET['p'] : '';
+$act  = isset($_GET['act']) ? $_GET['act'] : '';
+$id   = isset($_GET['id']) ? $_GET['id'] : '';
+$page = strtolower($page);
 ?>
 <!DOCTYPE html>
 <html>
@@ -95,8 +95,6 @@
             margin: 0px 0 0px 0;
             font-size: 28px;
         }
-
-        
     </style>
     <!-- Google Font -->
     <!--
@@ -156,6 +154,7 @@
     |               | sidebar-mini                            |
     |---------------------------------------------------------|
 -->
+
 <body class="hold-transition skin-blue <?php if ($_SESSION['lvl_id'] != "TQ" and $_SESSION['lvl_id'] != "LEADERTQ") { ?> sidebar-collapse <?php } ?> fixed sidebar-mini">
     <!--<body class="hold-transition skin-blue sidebar-mini">-->
     <div class="wrapper">
@@ -230,7 +229,7 @@
                                                                     OR ISNULL( penyelesaian ))");
                         $rNCP2 = mysqli_fetch_array($qryNCP2);
                         ?>
-                        
+
                         <!-- Tasks Menu -->
                         <li class="dropdown tasks-menu">
                             <!-- Menu Toggle Button -->
@@ -435,18 +434,18 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Data-New" or $_GET['p'] == "Detail-Data-New") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="InputDataNew"><i class="fa fa-calendar"></i> <span>Input-Data</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="InputDataNew"><i class="fa fa-calendar"></i> <span>Input-Data</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Input-Data-KJ-New" or $_GET['p'] == "Detail-Data-KJ-New") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="InputDataKJNew"><i class="fa fa-calendar"></i> <span>Input-Data-KJ</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="InputDataKJNew"><i class="fa fa-calendar"></i> <span>Input-Data-KJ</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "newbonpenghubung" or $_GET['p'] == "newbonpenghubung") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="Newbonpenghubung"><i class="fa fa-calendar"></i> <span>New bon penghubung</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="Newbonpenghubung"><i class="fa fa-calendar"></i> <span>New bon penghubung</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Label-QCF") {
                                                 echo "active";
                                             } ?>"><a href="LabelQCF"><i class="fa fa-file-text-o"></i> <span>Label QCF</span></a></li>
@@ -454,17 +453,17 @@
                                                     echo "active";
                                                 } ?>"><a href="RekapData"><i class="fa fa-line-chart"></i> <span>Rekap-Data</span></a></li>
                                         <li class="<?php if ($_GET['p'] == "Rekap-Bon") {
-                                                                    echo "active";
-                                                                } ?>"><a href="RekapBon"><i class="fa fa-line-chart"></i> <span>Rekap-Bon</span></a></li>
+                                                        echo "active";
+                                                    } ?>"><a href="RekapBon"><i class="fa fa-line-chart"></i> <span>Rekap-Bon</span></a></li>
                                         <li class="<?php if ($_GET['p'] == "Grafik") {
-                                                                    echo "active";
-                                                                } ?>"><a href="Grafik"><i class="fa fa-line-chart"></i> <span>Grafik</span></a></li>
+                                                        echo "active";
+                                                    } ?>"><a href="Grafik"><i class="fa fa-line-chart"></i> <span>Grafik</span></a></li>
                                         <li class="<?php if ($_GET['p'] == "Terima-KK") {
-                                                                    echo "active";
-                                                                } ?>"><a href="TerimaKK"><i class="fa fa-line-chart"></i> <span>Terima KK</span></a></li>
+                                                        echo "active";
+                                                    } ?>"><a href="TerimaKK"><i class="fa fa-line-chart"></i> <span>Terima KK</span></a></li>
                                         <li class="<?php if ($_GET['p'] == "Serah-Terima") {
-                            echo "active";
-                        } ?>"><a href="SerahTerima"><i class="fa fa-line-chart"></i> <span>Serah Terima KK</span></a></li> -->
+                                                        echo "active";
+                                                    } ?>"><a href="SerahTerima"><i class="fa fa-line-chart"></i> <span>Serah Terima KK</span></a></li> -->
                             </ul>
                         </li>
                     <?php } ?>
@@ -483,8 +482,8 @@
                                     <li class="<?php if ($_GET['p'] == "Kain-Masuk-New") {
                                                     echo "active";
                                                 } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                                        echo "hidden";
-                                    } ?>"><a href="KainInNew"><i class="fa fa-calendar text-aqua"></i> <span>Kain Masuk</span></a></li>
+                                                            echo "hidden";
+                                                        } ?>"><a href="KainInNew"><i class="fa fa-calendar text-aqua"></i> <span>Kain Masuk</span></a></li>
                                     <li class="<?php if ($_GET['p'] == "Testing-New" or $_GET['p'] == "Testing-NewNoTes") {
                                                     echo "active";
                                                 } ?>"><a href="TestingNew"><i class="fa fa-file-text text-aqua"></i> <span>Testing</span></a></li>
@@ -600,8 +599,8 @@
                                     <li class="<?php if ($_GET['p'] == "Kain-Masuk-Lab") {
                                                     echo "active";
                                                 } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                                        echo "hidden";
-                                    } ?>"><a href="KainInLab"><i class="fa fa-calendar text-aqua"></i> <span>Kain Masuk</span></a></li>
+                                                            echo "hidden";
+                                                        } ?>"><a href="KainInLab"><i class="fa fa-calendar text-aqua"></i> <span>Kain Masuk</span></a></li>
                                     <li class="<?php if ($_GET['p'] == "Testing-Lab") {
                                                     echo "active";
                                                 } ?>"><a href="TestingLab"><i class="fa fa-file-text text-aqua"></i> <span>Testing</span></a></li>
@@ -610,6 +609,14 @@
                                 <li class="<?php if ($_GET['p'] == "Result-Lab") {
                                                 echo "active";
                                             } ?>"><a href="ResultLab"><i class="fa fa-check-circle-o text-aqua"></i> <span>Result</span></a></li>
+                                <?php if ($_SESSION['usrid'] != "marketing") { ?>
+                                    <li class="<?php if ($_GET['p'] == "Kain-Selesai-Lab") {
+                                                    echo "active";
+                                                } ?> <?php if ($_SESSION['akses'] == "biasa") {
+                                                            echo "hidden";
+                                                        } ?>"><a href="KainSelesaiLab"><i class="fa fa-list-alt text-aqua"></i> <span>Finish Test</span></a></li>
+                                    <!-- end jika username marketing hidden-->
+                                <?php } ?>
                                 <?php if ($_SESSION['lvl_id'] == "LEADERTQ") { ?>
                                     <!-- jika user marketing hidden -->
                                     <?php if ($_SESSION['usrid'] != "marketing") { ?>
@@ -622,7 +629,7 @@
                                 <li class="<?php if ($_GET['p'] == "Master-Data-Lab") {
                                                 echo "active";
                                             } ?>"><a href="MasterDataLab"><i class="fa fa-database text-aqua"></i> <span>Master Data</span></a></li>
-								<li class="<?php if ($_GET['p'] == "Master-Test-Lab") {
+                                <li class="<?php if ($_GET['p'] == "Master-Test-Lab") {
                                                 echo "active";
                                             } ?>"><a href="MasterTestLab"><i class="fa fa-cube text-aqua"></i> <span>Master Test</span></a></li>
                             </ul>
@@ -643,8 +650,8 @@
                                     <li class="<?php if ($_GET['p'] == "xxx") {
                                                     echo "active";
                                                 } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                                echo "hidden";
-                            } ?>"><a href="KainInNewFL"><i class="fa fa-calendar text-aqua"></i> <span>Kain Masuk <?= $sub_menu_fl ?></span></a></li>
+                                                            echo "hidden";
+                                                        } ?>"><a href="KainInNewFL"><i class="fa fa-calendar text-aqua"></i> <span>Kain Masuk <?= $sub_menu_fl ?></span></a></li>
                                     <li class="<?php if ($_GET['p'] == "xxx") {
                                                     echo "active";
                                                 } ?>"><a href="TestingNewFL"><i class="fa fa-file-text text-aqua"></i> <span>Testing <?= $sub_menu_fl ?></span></a></li>
@@ -678,8 +685,8 @@
                         <?php } ?>
                     <?php } ?>
                     <?php if ($_SESSION['lvl_id'] == "AFTERSALES" && strtolower($_SESSION['usrid']) != "kpe") {  ?>
-                    
-                
+
+
                         <li class="treeview <?php if ($_GET['p'] == "Input-KPE-New") {
                                                 echo "active";
                                             } ?>">
@@ -771,7 +778,7 @@
                                             } ?>"><a href="Lap5BesarTPUKPE"><i class="fa fa-bar-chart"></i> <span>Lap 5 Besar TPUKPE</span></a></li>
                             </ul>
                         </li>
-                            <!-- <li class="treeview <?php if ($_GET['p'] == "Rekap-Data" or $_GET['p'] == "Summary-Order" or $_GET['p'] == "Lap-Inspeksi" or $_GET['p'] == "Lap-Mutasi" or $_GET['p'] == "Lihat-Data-Packing" or $_GET['p'] == "Lihat-Data-Lap-Krah" or $_GET['p'] == "Final-StatusTQ-New" or $_GET['p'] == "SummaryTQ-Aftersales" or $_GET['p'] == "SummaryTQ-AftersalesPO") {
+                        <!-- <li class="treeview <?php if ($_GET['p'] == "Rekap-Data" or $_GET['p'] == "Summary-Order" or $_GET['p'] == "Lap-Inspeksi" or $_GET['p'] == "Lap-Mutasi" or $_GET['p'] == "Lihat-Data-Packing" or $_GET['p'] == "Lihat-Data-Lap-Krah" or $_GET['p'] == "Final-StatusTQ-New" or $_GET['p'] == "SummaryTQ-Aftersales" or $_GET['p'] == "SummaryTQ-AftersalesPO") {
                                                         echo "active";
                                                     } ?>">
                                 <a href="#"><i class="fa fa-file-o text-green"></i> <span>Reports QC</span>
@@ -781,40 +788,40 @@
                                 </a>
                                 <ul class="treeview-menu">
                                 <li class="<?php if ($_GET['p'] == "Rekap-Data") {
-                                                            echo "active";
-                                                        } ?>"><a href="RekapData"><i class="fa fa-line-chart"></i> <span>Rekap Data</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="RekapData"><i class="fa fa-line-chart"></i> <span>Rekap Data</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Summary-Order") {
-                                                            echo "active";
-                                                        } ?>"><a href="SummaryOrder"><i class="fa fa-check text-green"></i> <span>Bon Penghubung</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="SummaryOrder"><i class="fa fa-check text-green"></i> <span>Bon Penghubung</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-Inspeksi") {
-                                                            echo "active";
-                                                        } ?>"><a href="LapInspeksi"><i class="fa fa-line-chart text-danger"></i> <span>Laporan Inspeksi</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="LapInspeksi"><i class="fa fa-line-chart text-danger"></i> <span>Laporan Inspeksi</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lihat-Data-Packing") {
-                                                            echo "active";
-                                                        } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                                                            echo "hidden";
-                                                        } ?>"><a href="LihatPacking"><i class="fa fa-file-text"></i> <span>Laporan Packing</span></a></li>
+                                                echo "active";
+                                            } ?> <?php if ($_SESSION['akses'] == "biasa") {
+                                                        echo "hidden";
+                                                    } ?>"><a href="LihatPacking"><i class="fa fa-file-text"></i> <span>Laporan Packing</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-Mutasi") {
-                                                            echo "active";
-                                                        } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                                                            echo "hidden";
-                                                        } ?>"><a href="LapMutasi"><i class="fa fa-file-text text-maroon"></i> <span>Laporan Mutasi</span></a></li>
+                                                echo "active";
+                                            } ?> <?php if ($_SESSION['akses'] == "biasa") {
+                                                        echo "hidden";
+                                                    } ?>"><a href="LapMutasi"><i class="fa fa-file-text text-maroon"></i> <span>Laporan Mutasi</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lihat-Data-Lap-Krah") {
-                                                            echo "active";
-                                                        } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                                                            echo "hidden";
-                                                        } ?>"><a href="LihatLapKrah"><i class="fa fa-file-text text-green"></i> <span>Laporan Krah</span></a></li>	  
+                                                echo "active";
+                                            } ?> <?php if ($_SESSION['akses'] == "biasa") {
+                                                        echo "hidden";
+                                                    } ?>"><a href="LihatLapKrah"><i class="fa fa-file-text text-green"></i> <span>Laporan Krah</span></a></li>	  
                                 <li class="<?php if ($_GET['p'] == "Final-StatusTQ-New") {
-                                                            echo "active";
-                                                        } ?>"><a href="FinalStatusTQNew"><i class="fa fa-list text-aqua"></i> <span>Final Status Test Quality</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="FinalStatusTQNew"><i class="fa fa-list text-aqua"></i> <span>Final Status Test Quality</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "SummaryTQ-Aftersales" or $_GET['p'] == "SummaryTQ-AftersalesPO") {
-                                                            echo "active";
-                                                        } ?>"><a href="index1.php?p=summarytq-aftersales"><i class="fa fa-list text-aqua"></i> <span>Summary Test Quality</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="index1.php?p=summarytq-aftersales"><i class="fa fa-list text-aqua"></i> <span>Summary Test Quality</span></a></li>
                                 </ul>
                                 </li> -->
-                                                        <!-- <li class="treeview <?php if ($_GET['p'] == "Lihat-Data-Jahit" or $_GET['p'] == "Lihat-Data-Cwarna-Fin" or $_GET['p'] == "Lap-NCP" or $_GET['p'] == "Lap-NCP-CanDis") {
-                                                                                        echo "active";
-                                                                                    } ?>">
+                        <!-- <li class="treeview <?php if ($_GET['p'] == "Lihat-Data-Jahit" or $_GET['p'] == "Lihat-Data-Cwarna-Fin" or $_GET['p'] == "Lap-NCP" or $_GET['p'] == "Lap-NCP-CanDis") {
+                                                        echo "active";
+                                                    } ?>">
                                 <a href="#"><i class="fa fa-file-o text-orange"></i> <span>Reports QC2</span>
                                 <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -822,26 +829,26 @@
                                 </a>
                                 <ul class="treeview-menu">
                                 <li class="<?php if ($_GET['p'] == "Lihat-Data-Jahit") {
-                                                            echo "active";
-                                                        } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                                                            echo "hidden";
-                                                        } ?>"><a href="LihatJahit"><i class="fa fa-file-text text-orange"></i> <span>Laporan Jahit</span></a></li>
+                                                echo "active";
+                                            } ?> <?php if ($_SESSION['akses'] == "biasa") {
+                                                        echo "hidden";
+                                                    } ?>"><a href="LihatJahit"><i class="fa fa-file-text text-orange"></i> <span>Laporan Jahit</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lihat-Data-Cwarna-Fin") {
-                                                            echo "active";
-                                                        } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                                                            echo "hidden";
-                                                        } ?>"><a href="LihatCWarnaFin"><i class="fa fa-calendar"></i> <span>Laporan Cocok Warna Finishing</span></a></li>
+                                                echo "active";
+                                            } ?> <?php if ($_SESSION['akses'] == "biasa") {
+                                                        echo "hidden";
+                                                    } ?>"><a href="LihatCWarnaFin"><i class="fa fa-calendar"></i> <span>Laporan Cocok Warna Finishing</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-NCP") {
-                                                            echo "active";
-                                                        } ?>"><a href="LapNCP"><i class="fa fa-circle-o text-green"></i> <span>Laporan NCP</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="LapNCP"><i class="fa fa-circle-o text-green"></i> <span>Laporan NCP</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-NCP-CanDis") {
-                                                            echo "active";
-                                                        } ?>"><a href="LapNCPCanDis"><i class="fa fa-circle-o text-orange"></i> <span>Laporan NCP Cancel / Disposisi</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="LapNCPCanDis"><i class="fa fa-circle-o text-orange"></i> <span>Laporan NCP Cancel / Disposisi</span></a></li>
                                 </ul>
                                 </li> -->
-                                                        <!-- <li class="treeview <?php if ($_GET['p'] == "Lap-Pengiriman" or $_GET['p'] == "Lap-SJ" or $_GET['p'] == "Lap-PKJ" or $_GET['p'] == "Lap-Kain-Keluar") {
-                                                                                        echo "active";
-                                                                                    } ?>">
+                        <!-- <li class="treeview <?php if ($_GET['p'] == "Lap-Pengiriman" or $_GET['p'] == "Lap-SJ" or $_GET['p'] == "Lap-PKJ" or $_GET['p'] == "Lap-Kain-Keluar") {
+                                                        echo "active";
+                                                    } ?>">
                                 <a href="#"><i class="fa fa-file-o text-maroon"></i> <span>Reports PPC</span>
                                 <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -849,17 +856,17 @@
                                 </a>
                                 <ul class="treeview-menu">
                                 <li class="<?php if ($_GET['p'] == "Lap-Pengiriman") {
-                                                            echo "active";
-                                                        } ?>"><a href="LapPengiriman"><i class="fa fa-circle-o text-red"></i> <span>Laporan Pengiriman</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="LapPengiriman"><i class="fa fa-circle-o text-red"></i> <span>Laporan Pengiriman</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-SJ") {
-                                                            echo "active";
-                                                        } ?>"><a href="LapSJ"><i class="fa fa-circle-o text-yellow"></i> <span>Laporan Surat Jalan</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="LapSJ"><i class="fa fa-circle-o text-yellow"></i> <span>Laporan Surat Jalan</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-PKJ") {
-                                                            echo "active";
-                                                        } ?>"><a href="LapPKJ"><i class="fa fa-circle-o text-white"></i> <span>Laporan Persediaan Kain Jadi</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="LapPKJ"><i class="fa fa-circle-o text-white"></i> <span>Laporan Persediaan Kain Jadi</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-Kain-Keluar") {
-                                                            echo "active";
-                                                        } ?>"><a href="LapKainKeluar"><i class="fa fa-circle-o text-white"></i> <span>Laporan Kain Keluar</span></a></li>
+                                                echo "active";
+                                            } ?>"><a href="LapKainKeluar"><i class="fa fa-circle-o text-white"></i> <span>Laporan Kain Keluar</span></a></li>
                                 </ul>
                                 </li>   
                             -->
@@ -969,15 +976,15 @@
                                 <li class="<?php if ($_GET['p'] == "Stiker-Custom-New") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="StikerCustomNew"><i class="fa fa-file-text"></i> <span>Stiker Custom</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="StikerCustomNew"><i class="fa fa-file-text"></i> <span>Stiker Custom</span></a></li>
                             </ul>
                         </li>
                     <?php } ?>
                     <!-- <?php if ($_SESSION['lvl_id'] == "PRODUKSI") {  ?>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Proses") {
-                                                            echo "active";
-                                                        } ?>">
+                                                echo "active";
+                                            } ?>">
                         <a href="#"><i class="fa fa-gears"></i> <span>Data Kartu Kerja</span>
                         <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -985,13 +992,13 @@
                         </a>
                         <ul class="treeview-menu">
                         <li class="<?php if ($_GET['p'] == "Input-Proses") {
-                                                            echo "active";
-                                                        } ?>"><a href="KKPro"><i class="fa fa-calendar"></i> <span>Input Proses</span></a></li>		   	  
+                                        echo "active";
+                                    } ?>"><a href="KKPro"><i class="fa fa-calendar"></i> <span>Input Proses</span></a></li>		   	  
                         </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Lap-Proses") {
-                                                            echo "active";
-                                                        } ?>">
+                                                echo "active";
+                                            } ?>">
                         <a href="#"><i class="fa fa-gears"></i> <span>Reports Proses</span>
                         <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -999,8 +1006,8 @@
                         </a>
                         <ul class="treeview-menu">
                         <li class="<?php if ($_GET['p'] == "Lap-Proses") {
-                                                            echo "active";
-                                                        } ?>"><a href="LapPro"><i class="fa fa-calendar"></i> <span>Lap Proses</span></a></li>		   	  
+                                        echo "active";
+                                    } ?>"><a href="LapPro"><i class="fa fa-calendar"></i> <span>Lap Proses</span></a></li>		   	  
                         </ul>
                         </li>  
                         <?php } ?>   
@@ -1135,13 +1142,13 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Lap-Cwarna-Fin-New" or $_GET['p'] == "Lihat-Data-Cwarna-Fin-New") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="CWarnaFinNew"><i class="fa fa-calendar"></i> <span>Lap Cocok Warna Finishing</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="CWarnaFinNew"><i class="fa fa-calendar"></i> <span>Lap Cocok Warna Finishing</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Input-Lap-Cwarna-Dye-New" or $_GET['p'] == "Lihat-Data-Cwarna-Dye-New") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="CWarnaDyeNew"><i class="fa fa-calendar"></i> <span>Lap Cocok Warna Dyeing</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="CWarnaDyeNew"><i class="fa fa-calendar"></i> <span>Lap Cocok Warna Dyeing</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Lap-Jahit-New" or $_GET['p'] == "Lihat-Data-Jahit-New") {
@@ -1156,8 +1163,8 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Lap-Jahit-New" or $_GET['p'] == "Lihat-Data-Jahit-New") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="LapJahitNew"><i class="fa fa-file-text text-orange"></i> <span>Lap Jahit</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="LapJahitNew"><i class="fa fa-file-text text-orange"></i> <span>Lap Jahit</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Lap-Krah-New" or $_GET['p'] == "Lihat-Data-Lap-Krah-New" or $_GET['p'] == "Form-Schedule-Krah" or $_GET['p'] == "Schedule-Krah" or $_GET['p'] == "Lap-Data-Krah-New") {
@@ -1172,25 +1179,25 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Lap-Krah-New" or $_GET['p'] == "Lihat-Data-Lap-Krah-New") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="LapKrahNew"><i class="fa fa-file-text"></i> <span>Lap Krah</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="LapKrahNew"><i class="fa fa-file-text"></i> <span>Lap Krah</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Schedule-Krah") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="ScheduleKrah"><i class="fa fa-file-text"></i> <span>Schedule Krah</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="ScheduleKrah"><i class="fa fa-file-text"></i> <span>Schedule Krah</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-Data-Krah-New") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="LapDataKrahNew"><i class="fa fa-file-text"></i> <span>Lap Krah </span><span class="pull-right-container">
+                                                        echo "hidden";
+                                                    } ?>"><a href="LapDataKrahNew"><i class="fa fa-file-text"></i> <span>Lap Krah </span><span class="pull-right-container">
                                             <small class="label pull-right bg-green blink_me">new</small>
                                         </span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Mutasi-BS") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="MutasiBS"><i class="fa fa-file-text"></i> <span>Mutasi BS</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="MutasiBS"><i class="fa fa-file-text"></i> <span>Mutasi BS</span></a></li>
                                 <li class="<?= ($_GET['p'] == "Lap-Personil") ? "active" : ""; ?>
                                     <?= ($_SESSION['akses'] == "biasa") ? "hidden" : ""; ?>">
                                     <a href="LapPersonil"><i class="fa fa-file-text"></i> <span>Laporan Personil</span></a>
@@ -1209,18 +1216,18 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Lap-Packing-New" or $_GET['p'] == "Lihat-Data-Lap-Packing") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="LapPackingNew"><i class="fa fa-file-text"></i> <span>Lap Packing</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="LapPackingNew"><i class="fa fa-file-text"></i> <span>Lap Packing</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Input-Sisa-Lap-Packing") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="SisaSiapPacking"><i class="fa fa-file-text"></i> <span>Sisa Siap Packing</span></a></li>
-								<li class="<?php if ($_GET['p'] == "Input-Add-NOW") {
+                                                        echo "hidden";
+                                                    } ?>"><a href="SisaSiapPacking"><i class="fa fa-file-text"></i> <span>Sisa Siap Packing</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "Input-Add-NOW") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="InputAddNOW"><i class="fa fa-file-text"></i> <span>Input Add NOW</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="InputAddNOW"><i class="fa fa-file-text"></i> <span>Input Add NOW</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Lap-InspekMeja-New" or $_GET['p'] == "Lihat-Data-InspekMeja") {
@@ -1235,8 +1242,8 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Lap-InspekMeja-New" or $_GET['p'] == "Lihat-Data-InspekMeja") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="LapInspekMejaNew"><i class="fa fa-file-text"></i> <span>Lap Inspek Meja</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="LapInspekMejaNew"><i class="fa fa-file-text"></i> <span>Lap Inspek Meja</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Lap-FirstLot-New" or $_GET['p'] == "Lihat-Data-Lap-FirstLot-New" or $_GET['p'] == "Lap-Potong-New") {
@@ -1251,8 +1258,8 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Lap-FirstLot-New" or $_GET['p'] == "Lihat-Data-Lap-FirstLot-New") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="FirstLotNew"><i class="fa fa-file-text"></i> <span>Laporan First Lot</span>
+                                                        echo "hidden";
+                                                    } ?>"><a href="FirstLotNew"><i class="fa fa-file-text"></i> <span>Laporan First Lot</span>
                                         <span class="pull-right-container">
                                             <?php
                                             $today = date('Y-m-d');
@@ -1271,8 +1278,8 @@
                                 <li class="<?php if ($_GET['p'] == "Lap-Potong-New") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="Lap-PotongNew"><i class="fa fa-file-text text-orange"></i> <span>Laporan Potong</span>
+                                                        echo "hidden";
+                                                    } ?>"><a href="Lap-PotongNew"><i class="fa fa-file-text text-orange"></i> <span>Laporan Potong</span>
                                         <span class="pull-right-container">
                                             <?php
                                             $sqlr = mysqli_query($con, "SELECT COUNT(*) as cnt FROM tbl_potong");
@@ -1295,8 +1302,8 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Lap-Shading" or $_GET['p'] == "Lihat-Data-Shading") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="InputLapShading"><i class="fa fa-gear text-teal"></i> <span>Lap Shading</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="InputLapShading"><i class="fa fa-gear text-teal"></i> <span>Lap Shading</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Lap-Beda-Roll" or $_GET['p'] == "Lihat-Data-Beda-Roll") {
@@ -1311,8 +1318,8 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Lap-Beda-Roll" or $_GET['p'] == "Lihat-Data-Beda-Roll") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="InputLapBedaRoll"><i class="fa fa-gear text-teal"></i> <span>Lap Beda Roll</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="InputLapBedaRoll"><i class="fa fa-gear text-teal"></i> <span>Lap Beda Roll</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Lap-Jahit-Shading" or $_GET['p'] == "LihatDataJahitShading") {
@@ -1327,8 +1334,8 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Lap-Jahit-Shading" or $_GET['p'] == "LihatDataJahitShading") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="InputLapJahitShading"><i class="fa fa-gear text-teal"></i> <span>Lap Jahit Shading</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="InputLapJahitShading"><i class="fa fa-gear text-teal"></i> <span>Lap Jahit Shading</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Tempel-Beda-Roll" or $_GET['p'] == "LihatTempelBedaRoll") {
@@ -1343,8 +1350,8 @@
                                 <li class="<?php if ($_GET['p'] == "Input-Tempel-Beda-Roll" or $_GET['p'] == "LihatTempelBedaRoll") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="InputTempelBedaRoll"><i class="fa fa-gear text-teal"></i> <span>Lap Tempel Beda Roll</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="InputTempelBedaRoll"><i class="fa fa-gear text-teal"></i> <span>Lap Tempel Beda Roll</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Stiker_Custom") {
@@ -1359,8 +1366,8 @@
                                 <li class="<?php if ($_GET['p'] == "Stiker_Custom") {
                                                 echo "active";
                                             } ?> <?php if ($_SESSION['akses'] == "biasa") {
-                            echo "hidden";
-                        } ?>"><a href="StikerCustom"><i class="fa fa-file-text"></i> <span>Stiker Custom</span></a></li>
+                                                        echo "hidden";
+                                                    } ?>"><a href="StikerCustom"><i class="fa fa-file-text"></i> <span>Stiker Custom</span></a></li>
                             </ul>
                         </li>
                     <?php } ?>
@@ -1376,19 +1383,19 @@
             <!-- Main content -->
             <section class="content container-fluid">
                 <?php
-                    if (!empty($page) and !empty($act)) {
-                        $files = 'pages/' . $page . '.' . $act . '.php';
-                    } elseif (!empty($page)) {
-                        $files = 'pages/' . $page . '.php';
-                    } else {
-                        $files = 'pages/home.php';
-                    }
+                if (!empty($page) and !empty($act)) {
+                    $files = 'pages/' . $page . '.' . $act . '.php';
+                } elseif (!empty($page)) {
+                    $files = 'pages/' . $page . '.php';
+                } else {
+                    $files = 'pages/home.php';
+                }
 
-                    if (file_exists($files)) {
-                        include($files);
-                    } else {
-                        include("blank.php");
-                    }
+                if (file_exists($files)) {
+                    include($files);
+                } else {
+                    include("blank.php");
+                }
                 ?>
 
             </section>
@@ -1735,7 +1742,7 @@
                 }, {
                     value: "RUDI",
                     text: "RUDI"
-				}, {
+                }, {
                     value: "TRI",
                     text: "TRI"
                 }, {
@@ -1743,7 +1750,7 @@
                     text: "WAWAN"
                 }, {
                     value: "UJUK",
-                    text: "UJUK"	
+                    text: "UJUK"
                 }]
             });
             $('.review_qcf_dye').editable({
@@ -1929,7 +1936,7 @@
                 disabled: false,
                 url: 'pages/editable/editable_ket_fin.php',
             });
-			$('.ket_tbrol').editable({
+            $('.ket_tbrol').editable({
                 type: 'text',
                 disabled: false,
                 url: 'pages/editable/editable_ket_tbrol.php',
@@ -1963,7 +1970,7 @@
                 }, {
                     value: "RUDI",
                     text: "RUDI"
-				}, {
+                }, {
                     value: "TRI",
                     text: "TRI"
                 }, {
@@ -1971,7 +1978,7 @@
                     text: "WAWAN"
                 }, {
                     value: "UJUK",
-                    text: "UJUK"	
+                    text: "UJUK"
                 }]
             });
             $('.disposisi_fin').editable({
@@ -3364,7 +3371,7 @@
                 }
             });
         });
-		$(document).on('click', '.kain_approved_parsial', function(e) {
+        $(document).on('click', '.kain_approved_parsial', function(e) {
             var m = $(this).attr("id");
             $.ajax({
                 url: "pages/kain_approved_parsial.php",
@@ -3380,7 +3387,7 @@
                 }
             });
         });
-		$(document).on('click', '.kain_terima', function(e) {
+        $(document).on('click', '.kain_terima', function(e) {
             var m = $(this).attr("id");
             $.ajax({
                 url: "pages/kain_terima.php",
