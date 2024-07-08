@@ -2,7 +2,6 @@
 session_start();
 
 $id = $_POST['id'];
-$sts = $_POST['sts'];
 $no_counter = $_POST['no_counter'];
 
 function get_client_ip()
@@ -38,8 +37,8 @@ try {
                     `sts_laborat`='Waiting Approval Full',
                     `tgl_approve_qc` = NOW(),
                     `approved_qc1` ='$approved1',
-                    `approved_qc2` ='$approved2',
-                    `terimakain_by`='{$_SESSION['usrid']}'
+                    `approved_qc2` ='$approved2'
+                    -- `terimakain_by`='{$_SESSION['usrid']}'
                     WHERE `id`='$id' LIMIT 1";
 
 	$result_update = mysqli_query($conlab, $sql_update);
@@ -62,6 +61,14 @@ try {
 	echo "<script>window.location='KainInLab';</script>";
 } catch (Exception $e) {
 	mysqli_rollback($conlab);
-	echo "<script>window.location='KainInLab';</script>";
-	// echo "$e";
+
+	echo "<script>swal({
+	title: 'Gagal approve!!',
+	text: 'Terjadi kesalahan,coba lagi nanti.',
+	type: 'error',
+	}).then((result) => {
+	if (result.value) {
+		window.history.back();
+	}
+	});</script>";
 }

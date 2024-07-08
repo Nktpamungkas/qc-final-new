@@ -2,7 +2,6 @@
 session_start();
 
 $id = $_POST['id'];
-$sts = $_POST['sts'];
 $no_counter = $_POST['no_counter'];
 
 function get_client_ip()
@@ -37,8 +36,8 @@ try {
                     `sts_qc`='Hasil Test Parsial',
                     `sts_laborat`='Waiting Approval Parsial',
                     `tgl_approve_qc` = NOW(),
-                    `approved_qc1` ='$approved1',
-                    `terimakain_by`='{$_SESSION['usrid']}'
+                    `approved_qc1` ='$approved1'
+                    -- `terimakain_by`='{$_SESSION['usrid']}'
                     WHERE `id`='$id' LIMIT 1";
 
 	$result_update = mysqli_query($conlab, $sql_update);
@@ -50,7 +49,7 @@ try {
 	$sql_insert_log = "INSERT INTO log_qc_test (no_counter, `status`, info, do_by, do_at, ip_address)
                         VALUES ('$no_counter', 'Waiting Approval Parsial', 'QC sudah approve parsial', '{$_SESSION['userLAB']}', NOW(), '$ip_num')";
 
-	$result_insert_log = mysqli_query($con, $sql_insert_log);
+	$result_insert_log = mysqli_query($conlab, $sql_insert_log);
 
 	if (!$result_insert_log) {
 		throw new Exception("Query INSERT log failed.");
@@ -61,5 +60,14 @@ try {
 	echo "<script>window.location='KainInLab';</script>";
 } catch (Exception $e) {
 	mysqli_rollback($conlab);
-	echo "<script>window.location='KainInLab';</script>";
+
+	echo "<script>swal({
+	title: 'Gagal approve!!',
+	text: 'Terjadi kesalahan,coba lagi nanti.',
+	type: 'error',
+	}).then((result) => {
+	if (result.value) {
+		window.history.back();
+	}
+	});</script>";
 }

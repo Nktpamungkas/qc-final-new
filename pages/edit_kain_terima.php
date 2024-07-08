@@ -63,5 +63,13 @@ if ($success) {
 	echo "<script>window.location='KainInLab';</script>";
 } else {
 	mysqli_rollback($conlab);
-	echo "<script>window.location='KainInLab';</script>";
+	echo "<script>swal({
+	title: 'Gagal terima kain!!',
+	text: 'Terjadi kesalahan,coba lagi nanti.',
+	type: 'error',
+	}).then((result) => {
+	if (result.value) {
+		window.history.back();
+	}
+	});</script>";
 }

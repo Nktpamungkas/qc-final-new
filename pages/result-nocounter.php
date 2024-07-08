@@ -10,7 +10,6 @@
 	}
 </style>
 <script>
-
 	function roundToTwo(num) {
 		return +(Math.round(num + "e+2") + "e-2");
 	}
@@ -22,7 +21,7 @@ include "koneksi.php";
 
 $no_counter = $_GET['no_counter'];
 
-$qryNoKK = mysqli_query($conlab, "SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' and sts_qc <> 'Belum Terima Kain' and no_counter='$no_counter'");
+$qryNoKK = mysqli_query($conlab, "SELECT * FROM tbl_test_qc WHERE sts_laborat <> 'Cancel' AND sts_qc <> 'Belum Terima Kain' AND deleted_at IS NULL AND no_counter='$no_counter'");
 $NoKKcek = mysqli_num_rows($qryNoKK);
 $rNoKK = mysqli_fetch_array($qryNoKK);
 
@@ -45,8 +44,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 		<div class="box-header with-border">
 			<h3 class="box-title">Testing Kartu Kerja</h3>
 			<div class="box-tools pull-right">
-				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-						class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 			</div>
 		</div>
 		<div class="box-body">
@@ -55,10 +53,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 					<label for="no_counter" class="col-sm-3 control-label">No Counter</label>
 					<div class="col-sm-5">
 						<div class="input-group">
-							<input name="no_counter" type="text" class="form-control" id="no_counter"
-								onchange="window.location='ResultNoCounter-'+this.value"
-								onBlur="window.location='ResultNoCounter-'+this.value"
-								value="<?php echo $_GET['no_counter']; ?>" placeholder="No Counter" required>
+							<input name="no_counter" type="text" class="form-control" id="no_counter" onchange="window.location='ResultNoCounter-'+this.value" onBlur="window.location='ResultNoCounter-'+this.value" value="<?php echo $_GET['no_counter']; ?>" placeholder="No Counter" required>
 						</div>
 					</div>
 				</div>
@@ -66,34 +61,30 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 					<div class="form-group">
 						<label for="no_hanger" class="col-sm-3 control-label">No Hanger / No Item</label>
 						<div class="col-sm-3">
-							<input name="no_hanger" type="text" class="form-control" id="no_hanger" placeholder="No Hanger"
-								value="<?php if ($NoKKcek > 0) {
-									echo $rNoKK['no_hanger'];
-								} ?>" readonly="readonly">
+							<input name="no_hanger" type="text" class="form-control" id="no_hanger" placeholder="No Hanger" value="<?php if ($NoKKcek > 0) {
+																																		echo $rNoKK['no_hanger'];
+																																	} ?>" readonly="readonly">
 						</div>
 						<div class="col-sm-3">
-							<input name="no_item" type="text" class="form-control" id="no_item" placeholder="No Item"
-								value="<?php if ($NoKKcek > 0) {
-									echo $rNoKK['no_item'];
-								} ?>" readonly="readonly">
+							<input name="no_item" type="text" class="form-control" id="no_item" placeholder="No Item" value="<?php if ($NoKKcek > 0) {
+																																	echo $rNoKK['no_item'];
+																																} ?>" readonly="readonly">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="jns_kain" class="col-sm-3 control-label">Jenis Kain</label>
 						<div class="col-sm-8">
-							<textarea name="jns_kain" readonly="readonly" class="form-control" id="jns_kain"
-								placeholder="Jenis Kain"><?php if ($NoKKcek > 0) {
-									echo $rNoKK['jenis_kain'];
-								} ?></textarea>
+							<textarea name="jns_kain" readonly="readonly" class="form-control" id="jns_kain" placeholder="Jenis Kain"><?php if ($NoKKcek > 0) {
+																																			echo $rNoKK['jenis_kain'];
+																																		} ?></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="warna" class="col-sm-3 control-label">Warna</label>
 						<div class="col-sm-8">
-							<textarea name="warna" readonly="readonly" class="form-control" id="warna"
-								placeholder="Warna"><?php if ($NoKKcek > 0) {
-									echo $rNoKK['warna'];
-								} ?></textarea>
+							<textarea name="warna" readonly="readonly" class="form-control" id="warna" placeholder="Warna"><?php if ($NoKKcek > 0) {
+																																echo $rNoKK['warna'];
+																															} ?></textarea>
 						</div>
 					</div>
 				<?php } ?>
@@ -129,7 +120,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 				<hr>
 				<table class="table">
 					<?php if ($rcek1['wash_temp'] != "" or $rcek1['wash_colorchange'] != "" or $rcek1['wash_acetate'] != "" or $rcek1['wash_cotton'] != "" or $rcek1['wash_nylon'] != "" or $rcek1['wash_poly'] != "" or $rcek1['wash_acrylic'] != "" or $rcek1['wash_wool'] != "" or $rcek1['wash_staining'] != "") {
-						?>
+					?>
 						<tr>
 							<th rowspan="5">Washing</th>
 							<th>Suhu</th>
@@ -666,7 +657,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 						</tr>
 					<?php } ?>
 					<?php if ($rcek1['dye_tf_cstaining'] != "" or $rcek1['dye_tf_acetate'] != "" or $rcek1['dye_tf_cotton'] != "" or $rcek1['dye_tf_nylon'] != "" or $rcek1['dye_tf_poly'] != "" or $rcek1['dye_tf_acrylic'] != "" or $rcek1['dye_tf_wool'] != "" or $rcek1['dye_tf_sstaining'] != "") {
-						?>
+					?>
 						<tr>
 							<th rowspan="4" colspan="2">Dye Transfer</th>
 							<td><strong>Ace</strong></td>
@@ -773,11 +764,10 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 		<!-- this row will not appear when printing -->
 		<div class="row no-print">
 			<div class="col-xs-12">
-				<a href="pages/cetak/cetak_result_lab.php?idkk=<?php echo $rNoKK['id']; ?>&noitem=<?php echo $rNoKK['no_item']; ?>&nohanger=<?php echo $rNoKK['no_hanger']; ?>"
-					target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+				<a href="pages/cetak/cetak_result_lab.php?idkk=<?php echo $rNoKK['id']; ?>&noitem=<?php echo $rNoKK['no_item']; ?>&nohanger=<?php echo $rNoKK['no_hanger']; ?>" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
 				<div class="btn-group pull-right">
-				<a href="#" class="btn btn-info kain_approved_parsial" id="<?php echo $rNoKK['id']; ?>"><i class="fa fa-check"></i> Approved Parsial</a>
-				<a href="#" class="btn btn-danger kain_approved_full" id="<?php echo $rNoKK['id']; ?>"><i class="fa fa-check"></i> Approved Full</a>
+					<a href="#" class="btn btn-info kain_approved_parsial" id="<?php echo $rNoKK['id']; ?>"><i class="fa fa-check"></i> Approved Parsial</a>
+					<a href="#" class="btn btn-danger kain_approved_full" id="<?php echo $rNoKK['id']; ?>"><i class="fa fa-check"></i> Approved Full</a>
 				</div>
 
 			</div>

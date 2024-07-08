@@ -8,8 +8,7 @@ $data = mysqli_query($conlab, "SELECT * FROM tbl_test_qc WHERE no_counter = '$no
 $r = mysqli_fetch_array($data);
 
 ?>
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -61,7 +60,7 @@ $r = mysqli_fetch_array($data);
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:9px;">
-                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?>
+                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?> <?= "- " . $r['treatment'] ?>
                 </div>
               </td>
             </tr>
@@ -74,8 +73,7 @@ $r = mysqli_fetch_array($data);
             <tr>
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;"><span
-                    style="font-size:7px;"><?php echo "<strong><span style='font-size:9px;'>" . substr($r['warna'], 0, 60) . "</span></strong>/" . substr($r['no_warna'], 0, 15); ?></span>
+                <div style="font-size:9px;"><span style="font-size:7px;"><?php echo "<strong><span style='font-size:9px;'>" . substr($r['warna'], 0, 60) . "</span></strong>/" . substr($r['no_warna'], 0, 15); ?></span>
                 </div>
               </td>
             </tr>
@@ -88,7 +86,7 @@ $r = mysqli_fetch_array($data);
               </td>
             </tr>
             <tr>
-              <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
+              <td colspan="3" style="border-top:0px #000000 solid; border-bottom:20px solid grey;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:7px;">
                   <?php echo $r['tgl_terimakain'] ?>
@@ -127,7 +125,7 @@ $r = mysqli_fetch_array($data);
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:9px;">
-                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?>
+                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?> <?= "- " . $r['treatment'] ?>
                 </div>
               </td>
             </tr>
@@ -140,8 +138,7 @@ $r = mysqli_fetch_array($data);
             <tr>
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;"><span
-                    style="font-size:7px;"><?php echo "<strong><span style='font-size:9px;'>" . substr($r['warna'], 0, 60) . "</span></strong>/" . substr($r['no_warna'], 0, 15); ?></span>
+                <div style="font-size:9px;"><span style="font-size:7px;"><?php echo "<strong><span style='font-size:9px;'>" . substr($r['warna'], 0, 60) . "</span></strong>/" . substr($r['no_warna'], 0, 15); ?></span>
                 </div>
               </td>
             </tr>
@@ -154,7 +151,7 @@ $r = mysqli_fetch_array($data);
               </td>
             </tr>
             <tr>
-              <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
+              <td colspan="3" style="border-top:0px #000000 solid; border-bottom:20px solid grey;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:7px;">
                   <?php echo $r['tgl_terimakain'] ?>
@@ -193,7 +190,7 @@ $r = mysqli_fetch_array($data);
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:9px;">
-                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?>
+                  <strong><?php echo $r['no_order']; ?></strong><?php echo " (" . $r['no_item'] . ")"; ?> <?= "- " . $r['treatment'] ?>
                 </div>
               </td>
             </tr>
@@ -206,8 +203,7 @@ $r = mysqli_fetch_array($data);
             <tr>
               <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
-                <div style="font-size:9px;"><span
-                    style="font-size:7px;"><?php echo "<strong><span style='font-size:9px;'>" . substr($r['warna'], 0, 60) . "</span></strong>/" . substr($r['no_warna'], 0, 15); ?></span>
+                <div style="font-size:9px;"><span style="font-size:7px;"><?php echo "<strong><span style='font-size:9px;'>" . substr($r['warna'], 0, 60) . "</span></strong>/" . substr($r['no_warna'], 0, 15); ?></span>
                 </div>
               </td>
             </tr>
@@ -220,7 +216,7 @@ $r = mysqli_fetch_array($data);
               </td>
             </tr>
             <tr>
-              <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
+              <td colspan="3" style="border-top:0px #000000 solid; border-bottom:20px solid grey;
   border-left:0px #000000 solid; border-right:0px #000000 solid;">
                 <div style="font-size:7px;">
                   <?php echo $r['tgl_terimakain'] ?>
