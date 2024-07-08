@@ -50,7 +50,7 @@ if (!$result_update) {
 }
 
 $sql_log = "INSERT INTO log_qc_test (no_counter, `status`, info, do_by, do_at, ip_address)
-            VALUES ('$no_counter', 'In Progress', 'Kain sudah diterima QC', '{$_SESSION['userLAB']}', NOW(), '$ip_num')";
+            VALUES ('$no_counter', 'In Progress', 'Kain sudah diterima QC', '{$_SESSION['usrid']}', NOW(), '$ip_num')";
 
 $result_log = mysqli_query($conlab, $sql_log);
 
