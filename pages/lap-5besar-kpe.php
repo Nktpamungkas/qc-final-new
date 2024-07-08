@@ -19,6 +19,8 @@ switch ($Status) {
     default: $WStatus = ""; break;
 }
 
+$WCheck = $Sts_check != "" ? " $WCheck " : '';
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -183,14 +185,14 @@ switch ($Status) {
                         $total1=0;
                         $totaldll=0;
                         // $totalLot=0;
-                        $qryAll=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND sts_check = '$Sts_check' $WStatus");
+                        $qryAll=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $WCheck $WStatus");
                         $rAll=mysqli_fetch_array($qryAll);
                         $qrylgn=mysqli_query($con,"SELECT COUNT(*) AS jml, SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(pelanggan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir')*100,1) AS persen,
                         pelanggan
                         FROM
                         `tbl_aftersales_now`
                         WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-                        AND sts_check = '$Sts_check' $WStatus
+                        $WCheck $WStatus
                         GROUP BY pelanggan
                         ORDER BY qty_claim_lgn DESC LIMIT 5");
                         while($r=mysqli_fetch_array($qrylgn)){
@@ -204,7 +206,7 @@ switch ($Status) {
                                                                     where
                                                                         pelanggan like '%$r[pelanggan]%'
                                                                             AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
-                                                                            AND sts_check = '$Sts_check' $WStatus
+                                                                            $WCheck $WStatus
                                                                     group by
                                                                         po,
                                                                         no_hanger,
@@ -277,7 +279,7 @@ switch ($Status) {
                         $no2=1;
                         $totald=0;
                         $totaldll2=0;
-                        $qryAll2=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND sts_check = '$Sts_check' $WStatus AND (masalah_dominan!='' OR masalah_dominan!=NULL)");
+                        $qryAll2=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $WCheck $WStatus AND (masalah_dominan!='' OR masalah_dominan!=NULL)");
                         $rAll2=mysqli_fetch_array($qryAll2);
                         $lgn = $Langganan != "" ? " and buyer like '%$Langganan%'" : "";
                         $qrydef=mysqli_query($con,"select
@@ -293,7 +295,7 @@ switch ($Status) {
                                                             tbl_aftersales_now
                                                         where
                                                             tgl_buat between '$Awal' AND '$Akhir' $lgn
-                                                            AND sts_check = '$Sts_check' $WStatus
+                                                            $WCheck $WStatus
                                                         group by
                                                             po,
                                                             no_hanger,
@@ -510,7 +512,7 @@ switch ($Status) {
                         $no5=1;
                         $totald5=0;
                         $totaldll5=0;
-                        $qryAll5=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%lululemon%' AND sts_check = '$Sts_check' $WStatus");
+                        $qryAll5=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%lululemon%' $WCheck $WStatus");
                         $rAll5=mysqli_fetch_array($qryAll5);
                         $qrydef5=mysqli_query($con,"SELECT SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
                         AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%lululemon%')*100,1) AS persen,
@@ -518,7 +520,7 @@ switch ($Status) {
                         FROM
                         `tbl_aftersales_now`
                         WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%lululemon%'
-                        AND sts_check = '$Sts_check' $WStatus
+                        $WCheck $WStatus
                         GROUP BY masalah_dominan
                         ORDER BY qty_claim_lgn DESC LIMIT 5");
                         while($rd5=mysqli_fetch_array($qrydef5)){
@@ -579,7 +581,7 @@ switch ($Status) {
                         $no6=1;
                         $totald6=0;
                         $totaldll6=0;
-                        $qryAll6=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab!='' OR t_jawab!=NULL) AND sts_check = '$Sts_check' $WStatus");
+                        $qryAll6=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab!='' OR t_jawab!=NULL) $WCheck $WStatus");
                         $rAll6=mysqli_fetch_array($qryAll6);
                         $qrydef6=mysqli_query($con,"SELECT a.t_jawab, SUM(a.qty_claim_dept) as qty_claim_dept, SUM(a.jml_tjawab) as jml_tjawab
                         from
@@ -589,7 +591,7 @@ switch ($Status) {
                         COUNT(*) as jml_tjawab
                         FROM
                         db_qc.`tbl_aftersales_now`
-                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab!='' OR t_jawab!=NULL) AND sts_check = '$Sts_check' $WStatus
+                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab!='' OR t_jawab!=NULL) $WCheck $WStatus
                         GROUP BY t_jawab
                         union distinct 
                         select t_jawab1, 
@@ -597,7 +599,7 @@ switch ($Status) {
                         COUNT(*) as jml_tjawab1
                         FROM
                         db_qc.`tbl_aftersales_now`
-                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab1!='' OR t_jawab1!=NULL) AND sts_check = '$Sts_check' $WStatus
+                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab1!='' OR t_jawab1!=NULL) $WCheck $WStatus
                         GROUP BY t_jawab1
                         union distinct
                         select t_jawab2, 
@@ -605,7 +607,7 @@ switch ($Status) {
                         COUNT(*) as jml_tjawab2
                         FROM
                         db_qc.`tbl_aftersales_now`
-                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab2!='' OR t_jawab2!=NULL) AND sts_check = '$Sts_check' $WStatus
+                        WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab2!='' OR t_jawab2!=NULL) $WCheck $WStatus
                         GROUP BY t_jawab2) a
                         group by a.t_jawab
                         ORDER BY qty_claim_dept DESC");
@@ -679,7 +681,7 @@ switch ($Status) {
                                                                     tbl_aftersales_now
                                                                 where
                                                                     tgl_buat between '$Awal' AND '$Akhir' $lgn
-                                                                    AND sts_check = '$Sts_check' $WStatus
+                                                                    $WCheck $WStatus
                                                                 group by
                                                                     po,
                                                                     no_hanger,
@@ -711,7 +713,7 @@ switch ($Status) {
                                                                     where
                                                                         no_hanger = '$ri7Total5[no_hanger]'
                                                                         and tgl_buat between '$Awal' AND '$Akhir' $lgn
-                                                                        AND sts_check = '$Sts_check' $WStatus
+                                                                        $WCheck $WStatus
                                                                     group by
                                                                         po,
                                                                         no_hanger,
@@ -740,7 +742,7 @@ switch ($Status) {
                                                         tbl_aftersales_now
                                                     where
                                                         tgl_buat between '$Awal' AND '$Akhir' $lgn
-                                                        AND sts_check = '$Sts_check' $WStatus
+                                                        $WCheck $WStatus
                                                     group by
                                                         po,
                                                         no_hanger,
@@ -769,7 +771,7 @@ switch ($Status) {
                                                             where
                                                                 no_hanger = '$ri7[no_hanger]'
                                                                 and tgl_buat between '$Awal' AND '$Akhir' $lgn
-                                                                AND sts_check = '$Sts_check' $WStatus
+                                                                $WCheck $WStatus
                                                             group by
                                                                 po,
                                                                 no_hanger,
@@ -799,7 +801,7 @@ switch ($Status) {
                                                             where
                                                                 no_hanger = '$ri7[no_hanger]'
                                                                 and tgl_buat between '$Awal' AND '$Akhir' $lgn
-                                                                AND sts_check = '$Sts_check' $WStatus
+                                                                $WCheck $WStatus
                                                             group by
                                                                 po,
                                                                 no_hanger,
@@ -882,7 +884,7 @@ switch ($Status) {
                                                                     tbl_aftersales_now
                                                                 where
                                                                     tgl_buat between '$Awal' AND '$Akhir'
-                                                                    AND sts_check = '$Sts_check' $WStatus
+                                                                    $WCheck $WStatus
                                                                 group by
                                                                     po,
                                                                     no_hanger,
@@ -910,7 +912,7 @@ switch ($Status) {
                                                         tbl_aftersales_now
                                                     where
                                                         tgl_buat between '$Awal' AND '$Akhir'
-                                                        AND sts_check = '$Sts_check' $WStatus
+                                                        $WCheck $WStatus
                                                     group by
                                                         po,
                                                         no_hanger,
@@ -985,7 +987,7 @@ switch ($Status) {
                                                                     tbl_aftersales_now a
                                                                 WHERE
                                                                     DATE_FORMAT(a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-                                                                    AND sts_check = '$Sts_check' $WStatus
+                                                                    $WCheck $WStatus
                                                                     GROUP BY
                                                                     a.po,
                                                                     a.no_hanger,
@@ -1156,7 +1158,7 @@ switch ($Status) {
                                                         select 
                                                         sum(qty_claim) as qty_claim
                                                         from tbl_aftersales_now
-                                                        $Where2 AND sts_check = '$Sts_check' $WStatus
+                                                        $Where2 $WCheck $WStatus
                                                         group by solusi ) a");
                     $row2Total = mysqli_fetch_array($qry2Total);
                     
@@ -1170,7 +1172,7 @@ switch ($Status) {
                                                             sum(qty_claim) as qty_claim_gabung
                                                         from
                                                             tbl_aftersales_now
-                                                        $Where2 AND sts_check = '$Sts_check' $WStatus
+                                                        $Where2 $WCheck $WStatus
                                                         group by
                                                             po,
                                                             no_hanger,
@@ -1194,14 +1196,14 @@ switch ($Status) {
                     $query2KG = mysqli_query($con, "select 
                                                         sum(qty_claim) as qty_claim
                                                     from tbl_aftersales_now
-                                                    where solusi = '$row2[solusi]' and satuan_c = 'KG' $Where21 AND sts_check = '$Sts_check' $WStatus
+                                                    where solusi = '$row2[solusi]' and satuan_c = 'KG' $Where21 $WCheck $WStatus
                                                     group by solusi");
                     $row2KG = mysqli_fetch_array($query2KG);
 
                     $query2YD = mysqli_query($con, "select 
                                                         sum(qty_claim2) as qty_claim2
                                                     from tbl_aftersales_now
-                                                    where solusi = '$row2[solusi]' and satuan_c2 in ('YD', 'MTR') $Where21 AND sts_check = '$Sts_check' $WStatus
+                                                    where solusi = '$row2[solusi]' and satuan_c2 in ('YD', 'MTR') $Where21 $WCheck $WStatus
                                                     group by solusi");
                     $row2YD = mysqli_fetch_array($query2YD);
 
