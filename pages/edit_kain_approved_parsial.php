@@ -47,7 +47,7 @@ try {
 	}
 
 	$sql_insert_log = "INSERT INTO log_qc_test (no_counter, `status`, info, do_by, do_at, ip_address)
-                        VALUES ('$no_counter', 'Waiting Approval Parsial', 'QC sudah approve parsial', '{$_SESSION['userLAB']}', NOW(), '$ip_num')";
+                        VALUES ('$no_counter', 'Waiting Approval Parsial', 'QC sudah approve parsial', '{$_SESSION['usrid']}', NOW(), '$ip_num')";
 
 	$result_insert_log = mysqli_query($conlab, $sql_insert_log);
 
