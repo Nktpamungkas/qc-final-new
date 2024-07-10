@@ -760,7 +760,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 				</div>
 				<div class="form-group">
 					<label for="kategori" class="col-sm-3 control-label">Kategori</label>
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<div class="input-group">
 							<select class="form-control select2" name="kategori" id="kategori">
 								<option value="">Pilih</option>
@@ -777,6 +777,24 @@ $rcek = mysqli_fetch_array($sqlCek);
 							</select>
 							<span class="input-group-btn"><button type="button" class="btn btn-default"
 									data-toggle="modal" data-target="#DataKategori"> ...</button></span>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="input-group">
+							<input name="qty_lolos" type="number" class="form-control" id="qty_lolos" value="<?= ($cek > 0 && !is_null($rcek['qty_lolos']) && !empty($rcek['qty_lolos'])) ? number_format($rcek['qty_lolos'], 2) : '' ?>" placeholder="0.00" style="text-align: right;" disabled>
+							<span class="input-group-addon">
+								<select name="satuan_l" style="font-size: 12px;" id="satuan1">
+									<?php
+									$units_l = ['KG']; // Define the units you want to check for
+									
+									foreach ($units_l as $unit_l) {
+										$isSelected_o = $rcek['satuan_o'] == $unit_l;
+										$selectedAttribute_o = $isSelected_o ? 'selected' : '';
+										echo "<option value=\"$unit_l\" $selectedAttribute_o>$unit_l</option>";
+									}
+									?>
+								</select>
+							</span>
 						</div>
 					</div>
 					<div class="col-sm-3">
@@ -1193,7 +1211,7 @@ if ($_POST['save'] == "save") {
 		$sts_nego = "0";
 	}
 
-	$sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET 
+$sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET 
 		nokk='$_POST[nokk]',
 		nodemand='$_POST[nodemand]',
 		langganan='$_POST[pelanggan]',
@@ -1216,6 +1234,7 @@ if ($_POST['save'] == "save") {
 		qty_kirim='$_POST[qty_kirim]',
 		qty_claim='$_POST[qty_claim]',
 		qty_foc='$_POST[qty_foc]',
+		qty_lolos='$_POST[qty_lolos]',
 		t_jawab='$_POST[t_jawab]',
 		t_jawab1='$_POST[t_jawab1]',
 		t_jawab2='$_POST[t_jawab2]',
@@ -1226,6 +1245,7 @@ if ($_POST['save'] == "save") {
 		satuan_k='$_POST[satuan_k]',
 		satuan_c='$_POST[satuan_c]',
 		satuan_f='$_POST[satuan_f]',
+		satuan_l='$_POST[satuan_l]',
 		personil='$_POST[personil]',
 		shift='$shift',
 		shift2='$_POST[shift2]',
@@ -1320,6 +1340,10 @@ if ($_POST['save'] == "save") {
 			document.form1.sts_disposisipro.setAttribute("disabled", true);
 			document.form1.sts_check.removeAttribute("disabled");
 			document.form1.sts_check.setAttribute("required", true);
+			document.form1.qty_lolos.removeAttribute("disabled");
+			document.form1.qty_lolos.setAttribute("required", true);
+			document.form1.satuan_l.removeAttribute("disabled");
+			document.form1.satuan_l.setAttribute("required", true);
 		} else {
 			//document.form1.personil.setAttribute("disabled",true);
 			//document.form1.personil.removeAttribute("required");
@@ -1337,6 +1361,10 @@ if ($_POST['save'] == "save") {
 			document.form1.sts_disposisipro.removeAttribute("disabled");
 			document.form1.sts_check.setAttribute("disabled", true);
 			document.form1.sts_check.removeAttribute("required");
+			document.form1.qty_lolos.setAttribute("disabled", true);
+			document.form1.qty_lolos.removeAttribute("required");
+			document.form1.satuan_l.setAttribute("disabled", true);
+			document.form1.satuan_l.removeAttribute("required");
 		}
 	}
 	function aktif1() {

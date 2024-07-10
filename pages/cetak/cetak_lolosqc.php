@@ -202,6 +202,9 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
               <font size="-2"><strong>QTY KELUHAN</strong></font>
             </td>
             <td>
+              <font size="-2"><strong>QTY LOLOS QC (kg)</strong></font>
+            </td>
+            <td>
               <font size="-2"><strong>MASALAH</strong></font>
             </td>
             <td>
@@ -335,6 +338,9 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
               </td>
               <td align="right">
                 <font size="-2"><?php echo strtoupper($row1['qty_claim']); ?></font>
+              </td>
+              <td valign="top">
+                <font size="-2"><?php echo $row1['qty_lolos']; ?></font>
               </td>
               <td valign="top">
                 <font size="-2"><?php echo $row1['masalah']; ?></font>
