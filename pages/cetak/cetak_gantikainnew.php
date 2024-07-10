@@ -393,7 +393,7 @@ border:hidden;
     </tr>
     <tr>
       <td>PERSENTASE</td>
-      <td align="center"><?php echo round(($tclaim/$TotalKirim)*100,5)."%";?></td>
+      <td align="center"><?php echo number_format(($tclaim/$TotalKirim) * 100, 2) ." %";?></td>
     </tr>
     </table></td>
     </tr>
@@ -418,7 +418,7 @@ border:hidden;
       </tr>
       <tr>
         <td>PERSENTASE</td>
-        <td align="center"><?php echo round(($rowQC['qty_claim_qc']/$torder)*100,5)."%";?></td>
+        <td align="center"><?php echo number_format(($rowQC['qty_claim_qc']/$torder) * 100, 2) ." %";?></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
@@ -434,7 +434,7 @@ border:hidden;
       </tr>
       <tr>
         <td>PERSENTASE</td>
-        <td align="center"><?php echo round(($rowQC['qty_claim_qc']/$TotalKirim)*100,5)."%";?></td>
+        <td align="center"><?php echo number_format(($rowQC['qty_claim_qc']/$TotalKirim) * 100, 2) ." %";?></td>
       </tr>
       </table></td>
     </tr>
