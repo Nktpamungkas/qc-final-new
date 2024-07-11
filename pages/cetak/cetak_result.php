@@ -26,7 +26,13 @@ $rcekR = mysqli_fetch_array($sqlCekR);
 $sqlCekD = mysqli_query($con, "SELECT *,
     CONCAT_WS(' ',dfc_note,dph_note, dabr_note, dbas_note, ddry_note, dfla_note, dfwe_note, dfwi_note, dburs_note,drepp_note,dwick_note,dabsor_note,dapper_note,dfiber_note,dpillb_note,dpillm_note,dpillr_note,dthick_note,dgrowth_note,drecover_note,dstretch_note,dsns_note,dsnab_note,dsnam_note,dsnap_note,dwash_note,dwater_note,dacid_note,dalkaline_note,dcrock_note,dphenolic_note,dcm_printing_note,dcm_dye_note,dlight_note,dlight_pers_note,dsaliva_note,dh_shrinkage_note,dfibre_note,dpilll_note,dsoil_note,dapperss_note,dbleeding_note,dchlorin_note,ddye_tf_note,dhumidity_note,dodour_note) AS dnote_g FROM tbl_tq_disptest WHERE id_nokk='$idkk' ORDER BY id DESC LIMIT 1");
 $rcekD = mysqli_fetch_array($sqlCekD);
-$data1 = mysqli_query($con, "SELECT nodemand,nokk FROM tbl_tq_nokk WHERE id='$idkk'");
+$data1 = mysqli_query($con, "SELECT nodemand,
+                                    nokk,
+                                    substring_index(pelanggan, '/', -1) as buyer,
+                                    no_item,
+                                    no_hanger,
+                                    warna 
+                                  FROM tbl_tq_nokk WHERE id='$idkk'");
 $rd = mysqli_fetch_array($data1);
 ?>
 <!DOCTYPE html
@@ -51,6 +57,33 @@ $rd = mysqli_fetch_array($data1);
 <body>
   <table width="100%" border="0" style="width: 5.5in;">
     <tbody>
+      <tr>
+        <td colspan="1" align="left" valign="top">
+          Buyer : <?php echo $rd['buyer']; ?>
+        </td>
+        <td>&nbsp;</td>
+        <td colspan="1" align="right" valign="top">
+          No Prod Order : <?php echo $rd['nokk']; ?>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" align="left" valign="top">
+          Item / Hanger : <?php echo trim($rd['no_item']); ?> / <?= $rd['no_hanger'] ?>
+        </td>
+        <td>&nbsp;</td>
+        <td colspan="1" align="right" valign="top">
+          Demand : <?php echo trim($rd['nodemand']); ?>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" align="left">
+          Warna : <?= $rd['warna'] ?>
+        </td>
+        <td>&nbsp;</td>
+        <td colspan="1" align="right">
+          <?= $rcek1['tgl_buat'] ?>
+        </td>
+      </tr>
       <tr>
         <td width="187" align="left" valign="top" style="height: 1.6in;">PHYSICAL
           <hr>
@@ -2526,17 +2559,6 @@ $rd = mysqli_fetch_array($data1);
           }
           ?>
         </td>
-      </tr>
-      <tr>
-        <td colspan="3" align="right" valign="top">
-          <div style="">No Prod Order :
-            <?php echo $rd['nokk']; ?> | Demand :
-            <?php echo trim($rd['nodemand']); ?>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="3" align="right"><?= $rcek1['tgl_buat'] ?></td>
       </tr>
     </tbody>
   </table>
