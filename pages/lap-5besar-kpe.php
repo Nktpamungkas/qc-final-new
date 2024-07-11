@@ -187,7 +187,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         // $totalLot=0;
                         $qryAll=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $WCheck $WStatus");
                         $rAll=mysqli_fetch_array($qryAll);
-                        $qrylgn=mysqli_query($con,"SELECT COUNT(*) AS jml, SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(pelanggan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir')*100,1) AS persen,
+                        $qrylgn=mysqli_query($con,"SELECT COUNT(*) AS jml, SUM(qty_claim) AS qty_claim_lgn, SUM(qty_lolos) as qty_lolos_qc, ROUND(COUNT(pelanggan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir')*100,1) AS persen,
                         pelanggan
                         FROM
                         `tbl_aftersales_now`
@@ -222,7 +222,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                             <td align="center"><?php echo $no1; ?></td>
                             <td align="left"><?php echo $r['pelanggan'];?></td>
                             <td align="right"><?php echo $rowQryJumlahKasus['jumlah_kasus'] ; ?></td>
-                            <td align="right"><?php echo $r['qty_claim_lgn'];?></td>
+                            <td align="right"><?php echo $Status === 'Lolos QC' ? $r['qty_lolos_qc'] : $r['qty_claim_lgn']; ?></td>
                             <td align="right"><?php if($TotalKirim!=""){echo number_format(($r['qty_claim_lgn']/(int)$rAll['qty_claim_all'])*100,2)." %";}else{echo "0 %";}?></td>
                             <td align="right"><?php if($TotalKirim!=""){echo number_format(($r['qty_claim_lgn']/(int)$TotalKirim)*100,2)." %";}else{echo "0 %";}?></td>
                         </tr>
@@ -285,7 +285,8 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         $qrydef=mysqli_query($con,"select
                                                         temp.masalah_dominan,
                                                         count(*) as jml_kasus,
-                                                        SUM(temp.qty_claim_gabung) as qty_claim_lgn
+                                                        SUM(temp.qty_claim_gabung) as qty_claim_lgn,
+                                                        SUM(qty_lolos) as qty_lolos_qc
                                                     from
                                                         (
                                                         select
@@ -315,7 +316,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                             <td align="center"><?php echo $no2 ?></td>
                             <td align="left"><?php echo $rd['masalah_dominan'];?></td>
                             <td align="right"><?php echo $rd['jml_kasus'];?></td>
-                            <td align="right"><?php echo $rd['qty_claim_lgn'];?></td>
+                            <td align="right"><?php echo $Status === 'Lolos QC' ? $rd['qty_lolos_qc'] : $rd['qty_claim_lgn']; ?></td>
                             <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$rAll2['qty_claim_all'])*100,2)." %";?></td>
                             <td align="right"><?php echo number_format(($rd['qty_claim_lgn']/$TotalKirim)*100,2)." %";?></td>
                         </tr>
@@ -514,7 +515,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         $totaldll5=0;
                         $qryAll5=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%lululemon%' $WCheck $WStatus");
                         $rAll5=mysqli_fetch_array($qryAll5);
-                        $qrydef5=mysqli_query($con,"SELECT SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
+                        $qrydef5=mysqli_query($con,"SELECT SUM(qty_claim) AS qty_claim_lgn, SUM(qty_lolos) as qty_lolos_qc, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' 
                         AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND langganan LIKE '%lululemon%')*100,1) AS persen,
                         masalah_dominan
                         FROM
@@ -528,7 +529,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         <tr valign="top">
                             <td align="center"><?php echo $no5; ?></td>
                             <td align="left"><?php echo $rd5['masalah_dominan'];?></td>
-                            <td align="right"><?php echo $rd5['qty_claim_lgn'];?></td>
+                            <td align="right"><?php echo $Status === 'Lolos QC' ? $rd5['qty_lolos_qc'] : $rd5['qty_claim_lgn']; ?></td>
                             <td align="right"><?php if($TotalKirim!=""){echo number_format(($rd5['qty_claim_lgn']/$TotalKirim)*100,2)." %";}else{echo "0 %";}?></td>
                         </tr>
                         <?php	$no5++;  
@@ -583,11 +584,12 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         $totaldll6=0;
                         $qryAll6=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND (t_jawab!='' OR t_jawab!=NULL) $WCheck $WStatus");
                         $rAll6=mysqli_fetch_array($qryAll6);
-                        $qrydef6=mysqli_query($con,"SELECT a.t_jawab, SUM(a.qty_claim_dept) as qty_claim_dept, SUM(a.jml_tjawab) as jml_tjawab
+                        $qrydef6=mysqli_query($con,"SELECT a.t_jawab, SUM(a.qty_claim_dept) as qty_claim_dept, SUM(a.qty_lolos_qc) as qty_lolos_qc, SUM(a.jml_tjawab) as jml_tjawab
                         from
                         (SELECT 
                         t_jawab,
                         SUM(IF(t_jawab2!='',qty_claim/3,IF(t_jawab1!='',qty_claim/2,qty_claim))) AS qty_claim_dept,
+                        SUM(if(t_jawab2 != '', qty_lolos / 3, if(t_jawab1 != '', qty_lolos / 2, qty_lolos))) as qty_lolos_qc,
                         COUNT(*) as jml_tjawab
                         FROM
                         db_qc.`tbl_aftersales_now`
@@ -596,6 +598,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         union distinct 
                         select t_jawab1, 
                         SUM(IF(t_jawab2!='',qty_claim/3,IF(t_jawab1!='',qty_claim/2,qty_claim))) AS qty_claim_dept,
+                        SUM(if(t_jawab2 != '', qty_lolos / 3, if(t_jawab1 != '', qty_lolos / 2, qty_lolos))) as qty_lolos_qc,
                         COUNT(*) as jml_tjawab1
                         FROM
                         db_qc.`tbl_aftersales_now`
@@ -604,6 +607,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         union distinct
                         select t_jawab2, 
                         SUM(IF(t_jawab2!='',qty_claim/3,IF(t_jawab1!='',qty_claim/2,qty_claim))) AS qty_claim_dept,
+                        SUM(if(t_jawab2 != '', qty_lolos / 3, if(t_jawab1 != '', qty_lolos / 2, qty_lolos))) as qty_lolos_qc,
                         COUNT(*) as jml_tjawab2
                         FROM
                         db_qc.`tbl_aftersales_now`
@@ -617,7 +621,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                             <td align="center"><?php echo $no6; ?></td>
                             <td align="left"><?php echo $rd6['t_jawab'];?></td>
                             <!-- <td align="right"><?php echo $rd6['jml_tjawab'];?></td> -->
-                            <td align="right"><?php echo number_format($rd6['qty_claim_dept'], 2);?></td>
+                            <td align="right"><?php echo $Status === 'Lolos QC' ? number_format($rd6['qty_lolos_qc'], 2) : number_format($rd6['qty_claim_dept'], 2);?></td>
                             <td align="right"><?php if($TotalKirim!=""){echo number_format(($rd6['qty_claim_dept']/$rAll6['qty_claim_all'])*100,2)." %";}else{echo "0 %";}?></td>
                             <td align="right"><?php if($TotalKirim!=""){echo number_format(($rd6['qty_claim_dept']/$TotalKirim)*100,2)." %";}else{echo "0 %";}?></td>
                         </tr>
@@ -760,12 +764,14 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                             $qryd7=mysqli_query($con,"select
                                                             temp.masalah_dominan,
                                                             sum(temp.qty_claim_gabung) as qty_keluhan,
+                                                            sum(temp.qty_lolos_qc) as qty_lolos,
                                                             count(*) as jml_kasus 
                                                         from
                                                             (
                                                             select
                                                                 *,
-                                                                sum(qty_claim) as qty_claim_gabung
+                                                                sum(qty_claim) as qty_claim_gabung,
+                                                                sum(qty_lolos) as qty_lolos_qc
                                                             from
                                                                 tbl_aftersales_now
                                                             where
@@ -822,7 +828,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                             <td align="center"><?php echo $ri7['no_hanger'];?></td>  
                             <td align="right"><?php echo $rdi7['masalah_dominan'];?></td>
                             <td align="right"><?php echo $rdi7['jml_kasus'];?></td>
-                            <td align="right"><?php echo $rdi7['qty_keluhan'];?></td>
+                            <td align="right"><?php echo $Status === 'Lolos QC' ? $rdi7['qty_lolos'] : $rdi7['qty_keluhan'];?></td>
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_keluhan']/$ri7Total)*100,2)." %";}else{echo "0";}?></td>
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_keluhan']/$TotalKirim)*100,2)." %";}else{echo "0";}?></td>
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($rdi7['qty_keluhan']/$ritem['total_qty_keluhan'])*100,2)." %";}else{echo "0";}?></td>
@@ -902,12 +908,14 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         $qry8=mysqli_query($con,"select
                                                     temp.buyer,
                                                     count(*) as jml_kasus,
-                                                    SUM(temp.qty_claim_gabung) as qty_claim_lgn
+                                                    SUM(temp.qty_claim_gabung) as qty_claim_lgn,
+                                                    SUM(temp.qty_lolos_qc) as qty_lolos_qc
                                                 from
                                                     (
                                                     select
                                                         *,
-                                                        sum(qty_claim) as qty_claim_gabung
+                                                        sum(qty_claim) as qty_claim_gabung,
+                                                        sum(qty_lolos) as qty_lolos_qc
                                                     from
                                                         tbl_aftersales_now
                                                     where
@@ -933,7 +941,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                             <td align="center"><?= $no++ ?></td>  
                             <td align="right"><?= $ri8['buyer'] ?></td>
                             <td align="right"><?= $ri8['jml_kasus'] ?></td>
-                            <td align="right"><?= $ri8['qty_claim_lgn'] ?></td>
+                            <td align="right"><?= $Status === 'Lolos QC' ? $ri8['qty_lolos_qc'] : $ri8['qty_claim_lgn'] ?></td>
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($ri8['qty_claim_lgn'] / $ri8Total['total_qty_claim']) * 100, 2). " %";}else{echo "0";} ?></td>
                             <td align="right"><?php if($TotalKirim!=''){echo number_format(($ri8['qty_claim_lgn']/$TotalKirim)*100,2)." %";}else{echo "0";} ?></td>
                         </tr>
@@ -982,7 +990,8 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                     if($Awal!=""){
                         $query4Kategori = mysqli_query($con, "SELECT
                                                                     a.*,
-                                                                    sum(a.qty_claim) as qty_claim_x
+                                                                    sum(a.qty_claim) as qty_claim_x,
+                                                                    sum(a.qty_lolos) as qty_lolos_qc
                                                                 FROM
                                                                     tbl_aftersales_now a
                                                                 WHERE
@@ -1037,30 +1046,38 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
 
                         // JUMLAH KG
                         $majorKG = 0;
+                        $majorKGLolosQC = 0;
                         foreach ($majorTemp as $key => $value) {
                             if(strtoupper($value['satuan_c']) == 'KG') {
                                 $majorKG += $value['qty_claim_x'];
+                                $majorKGLolosQC += $value['qty_lolos_qc'];
                             }
                         }
 
                         $sampleKG = 0;
+                        $sampleKGLolosQC = 0;
                         foreach ($sampleTemp as $key => $value) {
                             if(strtoupper($value['satuan_c']) == 'KG') {
                                 $sampleKG += $value['qty_claim_x'];
+                                $sampleKGLolosQC += $value['qty_lolos_qc'];
                             }
                         }
 
                         $repeatKG = 0;
+                        $repeatKGLolosQC = 0;
                         foreach ($repeatTemp as $key => $value) {
                             if(strtoupper($value['satuan_c']) == 'KG') {
                                 $repeatKG += $value['qty_claim_x'];
+                                $repeatKG += $value['qty_lolos_qc'];
                             }
                         }
 
                         $generalKG = 0;
+                        $generalKGLolosQC = 0;
                         foreach ($generalTemp as $key => $value) {
                             if(strtoupper($value['satuan_c']) == 'KG') {
                                 $generalKG += $value['qty_claim_x'];
+                                $generalKG += $value['qty_lolos_qc'];
                             }
                         }
 
@@ -1077,7 +1094,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                             <td align="center">1</td>  
                             <td align="left">MAJOR</td>
                             <td align="right"><?= count($majorTemp) ?></td>
-                            <td align="right"><?= $majorKG ?></td>
+                            <td align="right"><?= $Status === 'Lolos QC' ? $majorKGLolosQC : $majorKG ?></td>
                             <td align="right"><?= $TotalKirim!="" && $totalKeluhan > 0 ? number_format(($majorKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
                             <td align="right"><?= $TotalKirim!="" ? number_format(($majorKG / $TotalKirim) * 100, 2) . " %" : "0" ?></td>
                         </tr>
@@ -1085,7 +1102,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                             <td align="center">2</td>  
                             <td align="left">SAMPLE</td>
                             <td align="right"><?= count($sampleTemp) ?></td>
-                            <td align="right"><?= $sampleKG ?></td>
+                            <td align="right"><?= $Status === 'Lolos QC' ? $sampleKGLolosQC : $sampleKG ?></td>
                             <td align="right"><?= $TotalKirim!="" && $totalKeluhan > 0 ? number_format(($sampleKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
                             <td align="right"><?= $TotalKirim!="" ? number_format(($sampleKG / $TotalKirim) * 100, 2) . " %" : "0" ?></td>
                         </tr>
@@ -1093,7 +1110,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                             <td align="center">3</td>  
                             <td align="left">REPEAT</td>
                             <td align="right"><?= count($repeatTemp) ?></td>
-                            <td align="right"><?= $repeatKG ?></td>
+                            <td align="right"><?= $Status === 'Lolos QC' ? $repeatKGLolosQC : $repeatKG ?></td>
                             <td align="right"><?= $TotalKirim!="" && $totalKeluhan > 0 ? number_format(($repeatKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
                             <td align="right"><?= $TotalKirim!="" ? number_format(($repeatKG / $TotalKirim) * 100, 2) . " %" : "0" ?></td>
                         </tr>
@@ -1101,7 +1118,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                             <td align="center">4</td>  
                             <td align="left">GENERAL</td>
                             <td align="right"><?= count($generalTemp) ?></td>
-                            <td align="right"><?= $generalKG ?></td>
+                            <td align="right"><?= $Status === 'Lolos QC' ? $generalKGLolosQC : $generalKG ?></td>
                             <td align="right"><?= $TotalKirim!="" && $totalKeluhan > 0 ? number_format(($generalKG / $totalKeluhan) * 100, 2) . " %" : "0" ?></td>
                             <td align="right"><?= $TotalKirim!="" ? number_format(($generalKG / $TotalKirim) * 100, 2) . " %" : "0" ?></td>
                         </tr>
@@ -1194,7 +1211,8 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                     while($row2 = mysqli_fetch_array($query2)){
 
                     $query2KG = mysqli_query($con, "select 
-                                                        sum(qty_claim) as qty_claim
+                                                        sum(qty_claim) as qty_claim,
+                                                        sum(qty_lolos) as qty_lolos
                                                     from tbl_aftersales_now
                                                     where solusi = '$row2[solusi]' and satuan_c = 'KG' $Where21 $WCheck $WStatus
                                                     group by solusi");
@@ -1234,7 +1252,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                     <td align="center"><?= $no; ?></td>
                     <td align="left"><?= $row2['solusi'] != "" ? $row2['solusi'] : "PENDING" ?></td>
                     <td align="center"><?= $row2['jml_kasus'] ?></td>
-                    <td align="center"><?= number_format($row2KG['qty_claim'], 2) ?></td>
+                    <td align="center"><?= $Status === 'Lolos QC' ? number_format($row2KG['qty_lolos'], 2) : number_format($row2KG['qty_claim'], 2) ?></td>
                     <td align="center"><?= number_format($row2YD['qty_claim2'], 2) ?></td>
                     <td align="center"><?= number_format($row2ReplacementKG['qty_kg'], 2) ?></td>
                     <td align="center"><?= number_format($row2ReplacementYD['qty_yard'], 2) ?></td>
