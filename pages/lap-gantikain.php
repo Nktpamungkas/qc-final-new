@@ -21,6 +21,9 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
 $Status	= isset($_POST['status']) ? $_POST['status'] : '';	
 $TotalKirim	= isset($_POST['total']) ? $_POST['total'] : '';	
 $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
+$Warna	= isset($_POST['warna']) ? $_POST['warna'] : '';
+$Hanger	= isset($_POST['hanger']) ? $_POST['hanger'] : '';
+$OrderReplacement	= isset($_POST['order_replacement']) ? $_POST['order_replacement'] : 0;
 ?>
 <div class="box">
   <div class="box-header with-border">
@@ -37,46 +40,75 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
         <div class="col-sm-2">
           <div class="input-group date">
             <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-            <input name="awal" type="date" class="form-control pull-right" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" autocomplete="off"/>
+            <input name="awal" type="date" class="form-control pull-right" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" autocomplete="off" />
           </div>
         </div>
+        <div class="col-sm-2">
+          <input name="order" type="text" class="form-control pull-right" id="order" placeholder="No Order"
+            value="<?php echo $Order; ?>" autocomplete="off" />
+        </div>
+        <div class="col-sm-2">
+          <input name="langganan" type="text" class="form-control pull-right" id="langganan" placeholder="Langganan/Buyer"
+            value="<?php echo $Langganan; ?>" autocomplete="off" />
+        </div>
+        <div class="col-sm-2">
+          <input name="warna" type="text" class="form-control pull-right" id="warna" placeholder="Warna"
+            value="<?php echo $Warna; ?>" autocomplete="off" />
+        </div>
+        <!-- /.input group -->
+      </div>
+
+      <div class="form-group">
         <div class="col-sm-2">
           <div class="input-group date">
             <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-            <input name="akhir" type="date" class="form-control pull-right" placeholder="Tanggal Akhir" value="<?php echo $Akhir;  ?>" autocomplete="off"/>
+            <input name="akhir" type="date" class="form-control pull-right" placeholder="Tanggal Akhir"
+              value="<?php echo $Akhir; ?>" autocomplete="off" />
           </div>
         </div>
         <div class="col-sm-2">
-            <input name="order" type="text" class="form-control pull-right" id="order" placeholder="No Order" value="<?php echo $Order;  ?>" autocomplete="off"/>
-          </div>
+          <input name="po" type="text" class="form-control pull-right" id="po" placeholder="No PO"
+            value="<?php echo $PO; ?>" autocomplete="off" />
+        </div>
         <div class="col-sm-2">
-            <input name="po" type="text" class="form-control pull-right" id="po" placeholder="No PO" value="<?php echo $PO;  ?>" autocomplete="off"/>
-          </div>
+          <input name="bon" type="text" class="form-control pull-right" id="bon" placeholder="No Bon"
+            value="<?php echo $Bon; ?>" autocomplete="off" />
+        </div>
         <div class="col-sm-2">
-            <input name="langganan" type="text" class="form-control pull-right" id="langganan" placeholder="Langganan/Buyer" value="<?php echo $Langganan;  ?>" autocomplete="off"/>
-          </div>
-        <div class="col-sm-2">
-            <input name="bon" type="text" class="form-control pull-right" id="bon" placeholder="No Bon" value="<?php echo $Bon;  ?>" autocomplete="off"/>
-          </div>
+          <input name="hanger" type="text" class="form-control pull-right" id="hanger" placeholder="Hanger"
+            value="<?php echo $Hanger; ?>" autocomplete="off" />
+        </div>
         <!-- /.input group -->
       </div>
+
       <div class="form-group">
         <div class="col-sm-2">
           <div class="input-group date">
             <div class="input-group-addon"> Total Kirim</div>
-              <input name="total" type="text" class="form-control pull-right" placeholder="0" value="<?php echo $TotalKirim; ?>" />
+            <input name="total" type="text" class="form-control pull-right" placeholder="0"
+              value="<?php echo $TotalKirim; ?>" />
           </div>
         </div>
+        <div class="col-sm-2">
+						<input type="checkbox" name="order_replacement" id="order_replacement" value="1" <?= $OrderReplacement > 0 ? 'checked' : '' ?>>
+						<label>Order Replacement</label>
+					</div>
       </div>
-      <div class="form-group">
-            <div class="col-sm-2">
-                <select name="status" class="form-control select2">
-                  <option value="">Pilih</option> 
-                	<option value="BELUM OK" <?php if($Status=="BELUM OK"){ echo "SELECTED";}?>>BELUM OK</option>
-                	<option value="OK" <?php if($Status=="OK"){ echo "SELECTED";}?>>OK</option>
-                </select>
-            </div>			 
+
+      <!-- <div class="form-group">
+        <div class="col-sm-2">
+          <select name="status" class="form-control select2">
+            <option value="">Pilih</option>
+            <option value="BELUM OK" <?php if ($Status == "BELUM OK") {
+              echo "SELECTED";
+            } ?>>BELUM OK</option>
+            <option value="OK" <?php if ($Status == "OK") {
+              echo "SELECTED";
+            } ?>>OK</option>
+          </select>
         </div>
+      </div> -->
+
     </div>
     <!-- /.box-body -->
     <div class="box-footer">
@@ -122,7 +154,7 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
             <tr>
               <th rowspan="2"><div align="center">No</div></th>
               <th rowspan="2"><div align="center">Aksi</div></th>
-              <th rowspan="2"><div align="center">Status</div></th>
+              <!-- <th rowspan="2"><div align="center">Status</div></th> -->
               <th rowspan="2"><div align="center">Tgl</div></th>
               <th rowspan="2"><div align="center">No Bon</div></th>
               <th rowspan="2"><div align="center">Langganan</div></th>
@@ -165,9 +197,11 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
             $no=1;
             if($Awal!=""){ $Where =" AND DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
             if($Status!=""){ $sts=" AND `status`='$Status' ";}else{$sts=" ";}
+            if($Warna!=""){ $warna=" AND `warna`='$Warna' ";}else{$warna=" ";}
+            if($Hanger!=""){ $hanger=" AND `no_hanger`='$Hanger' ";}else{$hanger=" ";}
             if($Awal!="" or $Order!="" or $Langganan!="" or $PO!="" or $Bon!=""){
 			  $sql_qry1 = "SELECT *,substr(no_hanger, 1,3) as prefix,
-        substr(no_hanger, 4) as subprefix FROM tbl_ganti_kain_now WHERE id_disposisi is null and  no_order LIKE '$Order%' AND no_po LIKE '$PO%' AND langganan LIKE '%$Langganan%' AND no_bon LIKE '%$Bon%' $Where $sts ORDER BY tgl_buat ASC";
+        substr(no_hanger, 4) as subprefix FROM tbl_ganti_kain_now WHERE id_disposisi is null and  no_order LIKE '$Order%' AND no_po LIKE '$PO%' AND langganan LIKE '%$Langganan%' AND no_bon LIKE '%$Bon%' $Where $sts $warna $hanger ORDER BY tgl_buat ASC";
               $qry1=mysqli_query($con,$sql_qry1);
             }else{
 			   $sql_qry1 = "SELECT *,substr(no_hanger, 1,3) as prefix,
@@ -211,7 +245,7 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
 			<a href="#" class="btn btn-danger btn-xs <?php if($_SESSION['akses']=='biasa' OR $_SESSION['lvl_id']!='AFTERSALES'){ echo "disabled"; } ?>" onclick="confirm_delete('./HapusDataGK-<?php echo $row1['id'] ?>');"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Hapus"></i> </a>
 			</div>
 			</td>
-            <td align="center"><a data-pk="<?php echo $row1['id'];?>" data-value="<?php echo $row1['status'] ?>" class="statusgk" href="javascript:void(0)"><?php echo $row1['status'];?></a></td>
+            <!-- <td align="center"><a data-pk="<?php echo $row1['id'];?>" data-value="<?php echo $row1['status'] ?>" class="statusgk" href="javascript:void(0)"><?php echo $row1['status'];?></a></td> -->
             <td align="center"><?php echo $row1['tgl_buat'];?></td>
             <td align="center"><?php echo $row1['no_bon'];?></td>
             <td><?php echo $row1['langganan'];?></td>
@@ -230,33 +264,33 @@ $Bon	= isset($_POST['bon']) ? $_POST['bon'] : '';
                 </td>
             <?php } ?> -->
 
-            <?php 
-              $q_order_new = db2_exec($conn1, "SELECT DISTINCT
-              NO_ORDER
-            FROM
-              ITXVIEW_MEMOPENTINGPPC
-            WHERE
-              NO_PO LIKE '%$row1[no_po]%' 
-              AND SUBCODE02 = '$row1[prefix]'
-              AND SUBCODE03 = '$row1[subprefix]' 
-              AND WARNA LIKE '%$row1[warna]%'
-              AND (SUBSTR(NO_ORDER, 1, 3) = 'RFD'
-                OR SUBSTR(NO_ORDER, 1, 3) = 'RFE'
-                OR SUBSTR(NO_ORDER, 1, 3) = 'RPE'
-                OR SUBSTR(NO_ORDER, 1, 3) = 'REP')
-              ");
-            $d_order_new = db2_fetch_assoc($q_order_new);
-            
-            // echo $d_order_new['NO_ORDER'];
-
-            ?>
-
             <td align="center">
+              <?php
+                if ($OrderReplacement > 0) {
+                  $q_order_new = db2_exec($conn1, "SELECT DISTINCT
+                                                      NO_ORDER
+                                                    FROM
+                                                      ITXVIEW_MEMOPENTINGPPC
+                                                    WHERE
+                                                      NO_PO LIKE '%$row1[no_po]%' 
+                                                      AND SUBCODE02 = '$row1[prefix]'
+                                                      AND SUBCODE03 = '$row1[subprefix]' 
+                                                      AND WARNA LIKE '%$row1[warna]%'
+                                                      AND (SUBSTR(NO_ORDER, 1, 3) = 'RFD'
+                                                        OR SUBSTR(NO_ORDER, 1, 3) = 'RFE'
+                                                        OR SUBSTR(NO_ORDER, 1, 3) = 'RPE'
+                                                        OR SUBSTR(NO_ORDER, 1, 3) = 'REP')
+                                                      ");
 
-
-           
-            <a target="_blank" href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $d_order_new['NO_ORDER'] ?>"><?php echo $d_order_new['NO_ORDER']; ?></a>
-          </td>
+                  while ($d_order_new = db2_fetch_assoc($q_order_new)) {
+              ?>
+                  <a target="_blank"
+                    href="https://online.indotaichen.com/laporan/aftersales_memopenting_order.php?bonorder=<?php echo $d_order_new['NO_ORDER'] ?>"><?php echo $d_order_new['NO_ORDER']; ?></a><br>
+              <?php
+                  }
+                }
+              ?>
+            </td>
 
 
             <!-- <td align="center">
