@@ -405,8 +405,6 @@ function renderRow($testName, $aliasTestName, $detailArray, $row, $statColumn, $
     }
 }
 
-$Awal = isset($_POST['awal']) ? $_POST['awal'] : '';
-$Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
 ?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -419,45 +417,6 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
 
 <body>
 
-    <div class="box box-info">
-        <div class="box-header with-border">
-            <h3 class="box-title">Filter Data Status Test Quality</h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                        class="fa fa-minus"></i></button>
-            </div>
-        </div>
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form method="post" enctype="multipart/form-data" name="form1" class="form-horizontal" id="form1">
-            <div class="box-body">
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <div class="input-group date">
-                            <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                            <input name="awal" type="text" class="form-control pull-right" id="datepicker"
-                                placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" required />
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="input-group date">
-                            <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                            <input name="akhir" type="text" class="form-control pull-right" id="datepicker1"
-                                placeholder="Tanggal Akhir" value="<?php echo $Akhir; ?>" required />
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <button type="submit" class="btn btn-success " name="cari"><i class="fa fa-search"></i> Cari
-                            Data</button>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer"></div>
-                <!-- /.box-footer -->
-            </div>
-        </form>
-    </div>
-
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -466,19 +425,17 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                         echo "disabled";
                     } ?>"><i class="fa fa-plus-circle"></i> Tambah</a>-->
                     <?php
-                    if ($Awal != "" && $Akhir != "") {
                         $delay = date('Y-m-d');
                         $sqldt = mysqli_query($con, "SELECT COUNT(*) as cnt FROM tbl_tq_nokk a
         LEFT JOIN tbl_tq_test b ON a.id=b.id_nokk
-        WHERE (`status`='' or `status` IS NULL) AND DATE_FORMAT( tgl_masuk, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND tgl_target < '$delay'");
+        WHERE (`status`='' or `status` IS NULL) AND DATE_FORMAT( tgl_masuk, '%Y-%m-%d' ) BETWEEN date_sub(now(),INTERVAL 30 DAY) and now() AND tgl_target < '$delay'");
                         $row = mysqli_fetch_array($sqldt);
-                    }
                     ?>
                     <div class="alert alert-warning alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h4><i class="icon fa fa-info"></i> Informasi</h4>
 
-                        <p>Terdapat <?php echo ($Awal != "" && $Akhir != "") ? $row['cnt'] : ''; ?> test Delay.</p>
+                        <p>Terdapat <?php echo $row['cnt'] ?> test Delay.</p>
                     </div>
                     <div class="box-body">
                         <div class="pull-right">
@@ -494,9 +451,9 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                     <th width="24">
                                         <div align="center">No. Test</div>
                                     </th>
-                                    <th width="24">
+                                    <!-- <th width="24">
                                         <div align="center">Testing Belum Selesai</div>
-                                    </th>
+                                    </th> -->
                                     <th width="90">
                                         <div align="center">No. Demand</div>
                                     </th>
@@ -548,10 +505,9 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                 <?php
                                 include ('koneksi.php');
 
-                                if ($Awal != "" && $Akhir != "") {
                                     $sqldt = mysqli_query($con, "SELECT a.*, a.id AS idkk, b.* FROM tbl_tq_nokk a
                                                                 LEFT JOIN tbl_tq_test b ON a.id=b.id_nokk
-                                                                WHERE (`status`='' or `status` IS NULL) and (DATE_FORMAT( tgl_masuk, '%Y-%m-%d' ) between '$Awal' and '$Akhir')
+                                                                WHERE (`status`='' or `status` IS NULL) and DATE_FORMAT( tgl_masuk, '%Y-%m-%d' ) between date_sub(now(),INTERVAL 30 DAY) and now()
                                                                 ORDER BY tgl_target ASC");
                                     $no = "1";
                                     while ($rowd = mysqli_fetch_array($sqldt)) {
@@ -561,59 +517,59 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                         $delay = $tgltarget->diff($now);
                                         //$nokk = $rowd['nokk'];
                                 
-                                        $TDObjects = [];
-                                        $qryTest = mysqli_query($con, "select
-                                                                            a.*,
-                                                                            b.*,
-                                                                            c.*,
-                                                                            d.*
-                                                                        from
-                                                                            tbl_tq_nokk a
-                                                                        inner join tbl_master_test b on
-                                                                            a.no_test = b.no_testmaster
-                                                                        inner join tbl_tq_test c on
-                                                                            a.id = c.id_nokk
-                                                                        left join tbl_tq_test_2 d on
-                                                                            c.id_nokk = d.id_nokk
-                                                                        where
-                                                                            a.no_test = '$rowd[no_test]'
-                                                                        order by
-                                                                            a.id desc
-                                                                        limit 1");
-                                        $rowt = mysqli_fetch_assoc($qryTest);
+                                        // $TDObjects = [];
+                                        // $qryTest = mysqli_query($con, "select
+                                        //                                     a.*,
+                                        //                                     b.*,
+                                        //                                     c.*,
+                                        //                                     d.*
+                                        //                                 from
+                                        //                                     tbl_tq_nokk a
+                                        //                                 inner join tbl_master_test b on
+                                        //                                     a.no_test = b.no_testmaster
+                                        //                                 inner join tbl_tq_test c on
+                                        //                                     a.id = c.id_nokk
+                                        //                                 left join tbl_tq_test_2 d on
+                                        //                                     c.id_nokk = d.id_nokk
+                                        //                                 where
+                                        //                                     a.no_test = '$rowd[no_test]'
+                                        //                                 order by
+                                        //                                     a.id desc
+                                        //                                 limit 1");
+                                        // $rowt = mysqli_fetch_assoc($qryTest);
 
-                                        $detail = explode(",", $rowt['physical']);
-                                        $detail2 = explode(",", $rowt['functional']);
-                                        $detail3 = explode(",", $rowt['colorfastness']);
+                                        // $detail = explode(",", $rowt['physical']);
+                                        // $detail2 = explode(",", $rowt['functional']);
+                                        // $detail3 = explode(",", $rowt['colorfastness']);
 
-                                        array_pop($detail);
-                                        array_pop($detail2);
-                                        array_pop($detail3);
+                                        // array_pop($detail);
+                                        // array_pop($detail2);
+                                        // array_pop($detail3);
 
-                                        foreach ($physical as $testName => $testDataArray) {
-                                            // Check if $testName is in $detail3
-                                            if (in_array($testName, $detail)) {
-                                                foreach ($testDataArray as $testData) {
-                                                    $TDObjects[] = renderRow($testName, $testData['alias'], $detail, $rowt, $testData['status'], $testData['conditional']);
-                                                }
-                                            }
-                                        }
-                                        foreach ($functional as $testName => $testDataArray) {
-                                            // Check if $testName is in $detail3
-                                            if (in_array($testName, $detail2)) {
-                                                foreach ($testDataArray as $testData) {
-                                                    $TDObjects[] = renderRow($testName, $testData['alias'], $detail2, $rowt, $testData['status'], $testData['conditional']);
-                                                }
-                                            }
-                                        }
-                                        foreach ($colorfastness as $testName => $testDataArray) {
-                                            // Check if $testName is in $detail3
-                                            if (in_array($testName, $detail3)) {
-                                                foreach ($testDataArray as $testData) {
-                                                    $TDObjects[] = renderRow($testName, $testData['alias'], $detail3, $rowt, $testData['status'], $testData['conditional']);
-                                                }
-                                            }
-                                        }
+                                        // foreach ($physical as $testName => $testDataArray) {
+                                        //     // Check if $testName is in $detail3
+                                        //     if (in_array($testName, $detail)) {
+                                        //         foreach ($testDataArray as $testData) {
+                                        //             $TDObjects[] = renderRow($testName, $testData['alias'], $detail, $rowt, $testData['status'], $testData['conditional']);
+                                        //         }
+                                        //     }
+                                        // }
+                                        // foreach ($functional as $testName => $testDataArray) {
+                                        //     // Check if $testName is in $detail3
+                                        //     if (in_array($testName, $detail2)) {
+                                        //         foreach ($testDataArray as $testData) {
+                                        //             $TDObjects[] = renderRow($testName, $testData['alias'], $detail2, $rowt, $testData['status'], $testData['conditional']);
+                                        //         }
+                                        //     }
+                                        // }
+                                        // foreach ($colorfastness as $testName => $testDataArray) {
+                                        //     // Check if $testName is in $detail3
+                                        //     if (in_array($testName, $detail3)) {
+                                        //         foreach ($testDataArray as $testData) {
+                                        //             $TDObjects[] = renderRow($testName, $testData['alias'], $detail3, $rowt, $testData['status'], $testData['conditional']);
+                                        //         }
+                                        //     }
+                                        // }
                                         ?>
                                         <tr>
                                             <td align="center"><?php echo $no; ?></td>
@@ -621,14 +577,14 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                                 <a
                                                     href="SummaryTQNew-<?php echo $rowd['no_test']; ?>"><?php echo $rowd['no_test']; ?></a>
                                             </td>
-                                            <td align="center">
+                                            <!-- <td align="center">
                                                 <?php
-                                                $testTemp = array_unique(array_filter($TDObjects));
-                                                foreach ($testTemp as $test) {
-                                                    echo "<span class='label bg-red'>$test</span><br>";
-                                                }
+                                                // $testTemp = array_unique(array_filter($TDObjects));
+                                                // foreach ($testTemp as $test) {
+                                                //     echo "<span class='label bg-red'>$test</span><br>";
+                                                // }
                                                 ?>
-                                            </td>
+                                            </td> -->
                                             <td align="center">
                                                 <?php if ($rowd['nodemand_new'] != '') {
                                                     echo $rowd['nodemand_new'];
@@ -674,7 +630,7 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                         </tr>
                                         <?php $no++;
                                     }
-                                } ?>
+                                ?>
                             </tbody>
                         </table>
                     </div>
