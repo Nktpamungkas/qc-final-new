@@ -781,7 +781,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
-							<input name="qty_lolos" type="number" class="form-control" id="qty_lolos" value="<?= ($cek > 0 && !is_null($rcek['qty_lolos']) && !empty($rcek['qty_lolos'])) ? number_format($rcek['qty_lolos'], 2) : '' ?>" placeholder="0.00" style="text-align: right;" disabled>
+							<input name="qty_lolos" type="text" class="form-control" id="qty_lolos" value="<?= ($cek > 0 && !is_null($rcek['qty_lolos']) && !empty($rcek['qty_lolos'])) ? number_format($rcek['qty_lolos'], 2) : '' ?>" placeholder="0.00" style="text-align: right;" disabled>
 							<span class="input-group-addon">
 								<select name="satuan_l" style="font-size: 12px;" id="satuan1">
 									<?php

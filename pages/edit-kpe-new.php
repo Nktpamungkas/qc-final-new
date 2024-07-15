@@ -532,7 +532,7 @@ $rcek=mysqli_fetch_array($sqlCek);
 		 	 		</div>
 					<div class="col-sm-3">
 						<div class="input-group">
-							<input name="qty_lolos" type="number" class="form-control" id="qty_lolos" value="<?= ($cek > 0 && !is_null($rcek['qty_lolos']) && !empty($rcek['qty_lolos'])) ? number_format($rcek['qty_lolos'], 2) : '' ?>" placeholder="0.00" style="text-align: right;" disabled>
+							<input name="qty_lolos" type="text" class="form-control" id="qty_lolos" value="<?= ($cek > 0 && !is_null($rcek['qty_lolos']) && !empty($rcek['qty_lolos'])) ? number_format($rcek['qty_lolos'], 2) : '' ?>" placeholder="0.00" style="text-align: right;" disabled>
 							<span class="input-group-addon">
 								<select name="satuan_l" style="font-size: 12px;" id="satuan1">
 									<?php
@@ -920,7 +920,6 @@ function aktif(){
 			document.form1.qty_lolos.setAttribute("required", true);
 			document.form1.satuan_l.removeAttribute("disabled");
 			document.form1.satuan_l.setAttribute("required", true);
-			alert('on');
 		}else {
 			document.form1.personil.setAttribute("disabled",true);
 			document.form1.personil.removeAttribute("required");
@@ -942,7 +941,6 @@ function aktif(){
 			document.form1.qty_lolos.setAttribute("disabled", true);
 			document.form1.satuan_l.removeAttribute("required");
 			document.form1.satuan_l.setAttribute("disabled", true);
-			alert('off');
 		}
 }
 function aktif1(){		
