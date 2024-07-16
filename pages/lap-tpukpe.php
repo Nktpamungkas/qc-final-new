@@ -104,6 +104,7 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
               <th><div align="center">Qty KG</div></th>
               <th><div align="center">Qty Yard</div></th>
               <th><div align="center">Masalah</div></th>
+              <th><div align="center">Sub Defect</div></th>
               <th><div align="center">Dept. Penanggung Jawab</div></th>
               <th><div align="center">Analisa</div></th>
               <th><div align="center">Pencegahan</div></th>
@@ -219,6 +220,7 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
               ?>
             </td>
             <td><?php echo $row1['masalah'];?></td>
+            <td><?php echo $row1['masalah_dominan'];?></td>
             <td align="center"><?php echo $tjawab;?></td>
             <td><?php echo $row1['penyelidik_qcf'];?></td>
             <td><?php echo $row1['cegah_qcf'];?></td>
