@@ -44,7 +44,7 @@ if ($_POST) {
       type: 'success',
       }).then((result) => {
       if (result.value) {
-        window.location='TambahTPUKPE-$idnsp';
+        window.location='LapTPUKPE';
       }
     });</script>";
 }
