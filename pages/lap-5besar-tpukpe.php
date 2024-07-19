@@ -62,13 +62,15 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                     <div class="col-sm-2">
                         <div class="input-group date">
                             <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                            <input name="awal" type="text" class="form-control pull-right" id="datepicker" placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" />
+                            <input name="awal" type="text" class="form-control pull-right" id="datepicker"
+                                placeholder="Tanggal Awal" value="<?php echo $Awal; ?>" />
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="input-group date">
                             <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                            <input name="akhir" type="text" class="form-control pull-right" id="datepicker1" placeholder="Tanggal Akhir" value="<?php echo $Akhir; ?>" />
+                            <input name="akhir" type="text" class="form-control pull-right" id="datepicker1"
+                                placeholder="Tanggal Akhir" value="<?php echo $Akhir; ?>" />
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success " name="cari"><i class="fa fa-search"></i> Cari
@@ -127,7 +129,7 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                                         order by sum(a.qty) desc 
                                                         limit 5");
 
-                            $queryTotalTPUKPE = mysqli_query($con,"select
+                            $queryTotalTPUKPE = mysqli_query($con, "select
                                                                         sum(qty) as total_tpukpe
                                                                     from
                                                                         tbl_tpukpe_now
@@ -223,7 +225,6 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                         <tbody>
                             <?php
                             $query = mysqli_query($con, "select
-                                                                b.no_hanger,
                                                                 substring_index(a.langganan, '/', 1) as buyer
                                                             from
                                                                 tbl_tpukpe_now a
@@ -232,14 +233,13 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                                             where
                                                                 DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) between '$Awal' AND '$Akhir'
                                                             group by
-                                                                b.no_hanger
+                                                                substring_index(a.langganan, '/', 1)
                                                             order by
                                                                 sum(a.qty) desc
                                                             limit 3");
 
                             while ($row = mysqli_fetch_array($query)) {
                                 $query2 = mysqli_query($con, "select
-                                                                    b.no_hanger,
                                                                     a.masalah_dominan,
                                                                     sum(a.qty) as kg
                                                                 from
@@ -248,9 +248,8 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                                                     a.id_nsp = b.id
                                                                 where
                                                                     DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) between '$Awal' AND '$Akhir'
-                                                                    and b.no_hanger = '$row[no_hanger]'
+                                                                    and substring_index(a.langganan, '/', 1) = '$row[buyer]'
                                                                 group by
-                                                                    b.no_hanger,
                                                                     a.masalah_dominan
                                                                 order by
                                                                     sum(a.qty) desc
@@ -300,39 +299,40 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
 
     <!--Section 3 -->
     <div class="row"></div>
-    
-        <!-- 5 Masalah Qty terbesar TPUKPE (QC) -->
-        <div class="col-xs-6">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"> 5 Masalah Qty terbesar TPUKPE (QC) PERIODE <?= $Awal ?> S/D <?= $Akhir ?>
-                    </h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                class="fa fa-minus"></i></button>
-                    </div>
+
+    <!-- 5 Masalah Qty terbesar TPUKPE (QC) -->
+    <div class="col-xs-6">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title"> 5 Masalah Qty terbesar TPUKPE (QC) PERIODE <?= $Awal ?> S/D <?= $Akhir ?>
+                </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                            class="fa fa-minus"></i></button>
                 </div>
-                <div class="box-body">
-                    <table class="table table-bordered table-striped top-5-besar" style="width: 100%;">
-                        <thead class="bg-blue">
-                            <tr>
-                                <th width="5%">
-                                    <div align="center">No</div>
-                                </th>
-                                <th width="25%">
-                                    <div align="center">Masalah</div>
-                                </th>
-                                <th width="14%">
-                                    <div align="center">Qty</div>
-                                </th>
-                                <th width="14%">
-                                    <div align="center">Total Kasus</div>
-                                </th>
-                                <th width="15%">
-                                    <div align="center">%</div>
-                                </th>
-                            </tr>
-                        </thead>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-striped top-5-besar" style="width: 100%;">
+                    <thead class="bg-blue">
+                        <tr>
+                            <th width="5%">
+                                <div align="center">No</div>
+                            </th>
+                            <th width="25%">
+                                <div align="center">Masalah</div>
+                            </th>
+                            <th width="14%">
+                                <div align="center">Qty</div>
+                            </th>
+                            <th width="14%">
+                                <div align="center">Total Kasus</div>
+                            </th>
+                            <th width="15%">
+                                <div align="center">%</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <?php if ($Awal != "" && $Akhir != "") { ?>
                         <tbody>
                             <?php
                             $query = mysqli_query($con, "select
@@ -368,7 +368,7 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                                                     order by
                                                                         sum(a.qty) desc) temp");
                             $rowTotal = mysqli_fetch_array($queryTotal);
-                            
+
                             $no = 1;
                             $persen = 0;
                             while ($row = mysqli_fetch_array($query)) {
@@ -378,13 +378,15 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                     <td align="left"><?= $row['masalah_dominan'] ?></td>
                                     <td align="center"><?= $row['qty'] ?></td>
                                     <td align="center"><?= $row['total_kasus'] ?></td>
-                                    <td align="center"><?= number_format(($row['qty'] / $rowTotal['total_qty']) * 100, 2, ',', '.') . '%' ?></td>
+                                    <td align="center">
+                                        <?= number_format(($row['qty'] / $rowTotal['total_qty']) * 100, 2, ',', '.') . '%' ?>
+                                    </td>
                                 </tr>
                                 <?php
                                 $persen += ($row['qty'] / $rowTotal['total_qty']) * 100;
                             }
 
-                            $queryDLL = mysqli_query($con,"SELECT
+                            $queryDLL = mysqli_query($con, "SELECT
                                                                 SUM(a.qty) AS qty,
                                                                 COUNT(*) AS total_kasus
                                                             FROM
@@ -425,7 +427,9 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                 <td align="left">Lain lain</td>
                                 <td align="center"><?= $rowDLL['qty'] ?></td>
                                 <td align="center"><?= $rowDLL['total_kasus'] ?></td>
-                                <td align="center"><?= number_format(($rowDLL['qty'] / $rowTotal['total_qty']) * 100, 2, ',', '.') . '%' ?></td>
+                                <td align="center">
+                                    <?= number_format(($rowDLL['qty'] / $rowTotal['total_qty']) * 100, 2, ',', '.') . '%' ?>
+                                </td>
                             </tr>
                         </tbody>
                         <tfoot>
@@ -437,47 +441,49 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                 <td align="center"><strong><?= number_format($persen, 2, ',', '.') . '%' ?></strong></td>
                             </tr>
                         </tfoot>
-                    </table>
-                    <div class="box-footer">
-                        <!-- <a href="pages/cetak/excel_5besar_def_tpukpe1.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>"
+                    <?php } ?>
+                </table>
+                <div class="box-footer">
+                    <!-- <a href="pages/cetak/excel_5besar_def_tpukpe1.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>"
                             class="btn btn-success <?php if ($_POST['awal'] == "") {
                                 echo "disabled";
                             } ?>"
                             target="_blank"><i class="fa fa-file-excel-o"></i></a> -->
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- 5 Kasus terbesar TPUKPE (QC) -->
-        <div class="col-xs-6">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"> 5 Kasus terbesar TPUKPE (QC) <?= $Awal ?> S/D <?= $Akhir ?>
-                    </h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                class="fa fa-minus"></i></button>
-                    </div>
+    <!-- 5 Kasus terbesar TPUKPE (QC) -->
+    <div class="col-xs-6">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title"> 5 Kasus terbesar TPUKPE (QC) <?= $Awal ?> S/D <?= $Akhir ?>
+                </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                            class="fa fa-minus"></i></button>
                 </div>
-                <div class="box-body">
-                    <table class="table table-bordered table-striped top-5-besar" style="width: 100%;">
-                        <thead class="bg-blue">
-                            <tr>
-                                <th width="5%">
-                                    <div align="center">No</div>
-                                </th>
-                                <th width="25%">
-                                    <div align="center">Masalah</div>
-                                </th>
-                                <th width="14%">
-                                    <div align="center">Total Kasus</div>
-                                </th>
-                                <th width="15%">
-                                    <div align="center">%</div>
-                                </th>
-                            </tr>
-                        </thead>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-striped top-5-besar" style="width: 100%;">
+                    <thead class="bg-blue">
+                        <tr>
+                            <th width="5%">
+                                <div align="center">No</div>
+                            </th>
+                            <th width="25%">
+                                <div align="center">Masalah</div>
+                            </th>
+                            <th width="14%">
+                                <div align="center">Total Kasus</div>
+                            </th>
+                            <th width="15%">
+                                <div align="center">%</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <?php if ($Awal != "" && $Akhir != "") { ?>
                         <tbody>
                             <?php
                             $query = mysqli_query($con, "select
@@ -518,13 +524,15 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                     <td align="center"><?= $no++ ?></td>
                                     <td align="left"><?= $row['masalah_dominan'] ?></td>
                                     <td align="center"><?= $row['total_kasus'] ?></td>
-                                    <td align="center"><?= number_format(($row['total_kasus'] / $rowTotal['total_kasus']) * 100, 2, ',', '.') . '%' ?></td>
+                                    <td align="center">
+                                        <?= number_format(($row['total_kasus'] / $rowTotal['total_kasus']) * 100, 2, ',', '.') . '%' ?>
+                                    </td>
                                 </tr>
                                 <?php
                                 $persen += ($row['total_kasus'] / $rowTotal['total_kasus']) * 100;
                             }
 
-                            $queryDLL = mysqli_query($con,"SELECT
+                            $queryDLL = mysqli_query($con, "SELECT
                                                                 COUNT(*) AS total_kasus
                                                             FROM
                                                                 tbl_tpukpe_now a
@@ -569,7 +577,9 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                 <td align="center"><?= $no++ ?></td>
                                 <td align="left">Lain lain</td>
                                 <td align="center"><?= $rowDLL['total_kasus'] ?></td>
-                                <td align="center"><?= number_format(($rowDLL['total_kasus'] / $rowTotal['total_kasus']) * 100, 2, ',', '.') . '%' ?></td>
+                                <td align="center">
+                                    <?= number_format(($rowDLL['total_kasus'] / $rowTotal['total_kasus']) * 100, 2, ',', '.') . '%' ?>
+                                </td>
                             </tr>
                         </tbody>
                         <tfoot>
@@ -580,17 +590,18 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                 <td align="center"><strong><?= number_format($persen, 2, ',', '.') . '%' ?></strong></td>
                             </tr>
                         </tfoot>
-                    </table>
-                    <div class="box-footer">
-                        <!-- <a href="pages/cetak/excel_5besar_def_tpukpe1.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>"
+                    <?php } ?>
+                </table>
+                <div class="box-footer">
+                    <!-- <a href="pages/cetak/excel_5besar_def_tpukpe1.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>"
                             class="btn btn-success <?php if ($_POST['awal'] == "") {
                                 echo "disabled";
                             } ?>"
                             target="_blank"><i class="fa fa-file-excel-o"></i></a> -->
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
 

@@ -146,11 +146,32 @@
                                     $tgl_akhir = date("Y-m-d");
                                 }
                                 if ($tgl_awal != "") {
-                                    $Where = " (CASE
+                                    $Where = " AND (CASE
                                                     WHEN SALESDOCUMENT.GOODSISSUEDATE IS NOT NULL THEN SALESDOCUMENT.GOODSISSUEDATE
                                                     ELSE SALESDOCUMENT.PROVISIONALDOCUMENTDATE
-                                                END) BETWEEN '$tgl_awal' AND '$tgl_akhir' AND ";
+                                                END) BETWEEN '$tgl_awal' AND '$tgl_akhir' ";
                                 }
+                                if($Order != ""){ 
+                                    $WOrder = " AND SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE LIKE '%$Order%' "; 
+                                }
+                                if($PO != ""){ 
+                                    $WPO = " AND (SALESORDER.EXTERNALREFERENCE LIKE '%$PO%' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '%$PO%') "; 
+                                }
+                                if($ArticleGrup != ""){ 
+                                    $WArticleGrup = " AND SALESDOCUMENTLINE.SUBCODE02 LIKE '%$ArticleGrup%' "; 
+                                }
+                                if($ArticleCode != ""){ 
+                                    $WArticleCode = " AND SALESDOCUMENTLINE.SUBCODE03 LIKE '%$ArticleCode%' "; 
+                                }
+                                if($Warna != ""){ 
+                                    $WWarna = " AND ITXVIEWCOLOR.WARNA LIKE '%$Warna%' "; 
+                                }
+                                if($Prodorder != ""){ 
+                                    $WProdorder = " AND A.LOTCODE LIKE '%$Prodorder%' "; 
+                                }
+                                if($Pelanggan != ""){ 
+                                    $WPelanggan = " AND (ITXVIEW_PELANGGAN.LANGGANAN LIKE '%$Pelanggan%' OR ITXVIEW_PELANGGAN.BUYER LIKE '%$Pelanggan%') ";
+                                 }
 
                                 if ($tgl_awal != "" or $Order != "" or $PO != "" or $ArticleGrup != "" or $ArticleCode != "" or $Warna != "" or $Prodorder != "" or $Pelanggan != "") {
                                     $sqlDB2 = "SELECT
@@ -225,16 +246,16 @@
                                                 LEFT JOIN ITXVIEW_PELANGGAN ON 	ITXVIEW_PELANGGAN.CODE = SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE
                                                 LEFT JOIN ELEMENTSINSPECTION ELEMENTSINSPECTION ON ELEMENTSINSPECTION.ELEMENTCODE = A.ITEMELEMENTCODE
                                                 WHERE 
-                                                    $Where
                                                     SALESDOCUMENT.DOCUMENTTYPETYPE = '05'
                                                     AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL
-                                                    AND SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE LIKE '%$Order%'
-                                                    AND (SALESORDER.EXTERNALREFERENCE LIKE '%$PO%' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '%$PO%')
-                                                    AND SALESDOCUMENTLINE.SUBCODE02 LIKE '%$ArticleGrup%'
-                                                    AND SALESDOCUMENTLINE.SUBCODE03 LIKE '%$ArticleCode%'
-                                                    AND ITXVIEWCOLOR.WARNA LIKE '%$Warna%'
-                                                    AND A.LOTCODE LIKE '%$Prodorder%'
-                                                    AND (ITXVIEW_PELANGGAN.LANGGANAN LIKE '%$Pelanggan%' OR ITXVIEW_PELANGGAN.BUYER LIKE '%$Pelanggan%')
+                                                    $Where
+                                                    $WOrder
+                                                    $WPO
+                                                    $WArticleGrup
+                                                    $WArticleCode
+                                                    $WWarna
+                                                    $WProdorder
+                                                    $WPelanggan
                                                 GROUP BY
                                                     SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
                                                     SALESDOCUMENTLINE.ORDERLINE,
@@ -254,107 +275,7 @@
                                                     SALESDOCUMENT.PAYMENTMETHODCODE,
                                                     ITXVIEW_PELANGGAN.LANGGANAN,
                                                     ELEMENTSINSPECTION.QUALITYREASONCODE";
-                                } else {
-                                    $sqlDB2 = "SELECT
-                                                SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
-                                                SALESDOCUMENTLINE.ORDERLINE,
-                                                CASE
-                                                    WHEN SALESDOCUMENT.GOODSISSUEDATE IS NULL THEN SALESDOCUMENT.PROVISIONALDOCUMENTDATE
-                                                    ELSE SALESDOCUMENT.GOODSISSUEDATE
-                                                END AS TGL_KIRIM,
-                                                SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE,
-                                                SALESDOCUMENTLINE.DLVSALESORDERLINEORDERLINE,
-                                                TRIM(SALESDOCUMENTLINE.SUBCODE02) AS SUBCODE02,
-                                                TRIM(SALESDOCUMENTLINE.SUBCODE03) AS SUBCODE03,
-                                                TRIM(SALESDOCUMENTLINE.SUBCODE05) AS SUBCODE05,
-                                                CASE
-                                                    WHEN SALESORDER.EXTERNALREFERENCE IS NULL THEN SALESORDERLINE.EXTERNALREFERENCE
-                                                    ELSE SALESORDER.EXTERNALREFERENCE
-                                                END AS PO_NUMBER,
-                                                SUM(A.ROLL) AS ROLL,
-                                                SUM(A.USERPRIMARYQUANTITY) AS KG,
-                                                A.USERPRIMARYUOMCODE,
-                                                SUM(A.USERSECONDARYQUANTITY) AS YARD,
-                                                A.USERSECONDARYUOMCODE,
-                                                ITXVIEWCOLOR.WARNA,
-                                                A.LOTCODE,
-                                                CASE
-                                                    WHEN SALESDOCUMENT.PAYMENTMETHODCODE = 'FOC' THEN 'FOC'
-                                                    ELSE ''
-                                                END AS NOTE,
-                                                ITXVIEW_PELANGGAN.LANGGANAN
-                                            FROM
-                                                SALESDOCUMENTLINE SALESDOCUMENTLINE
-                                            LEFT JOIN ALLOCATION ALLOCATION ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = ALLOCATION.ORDERCODE
-                                                AND SALESDOCUMENTLINE.ORDERLINE = ALLOCATION.ORDERLINE
-                                            LEFT JOIN SALESDOCUMENT SALESDOCUMENT ON SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE = SALESDOCUMENT.PROVISIONALCODE
-                                            LEFT JOIN SALESORDER SALESORDER ON SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE = SALESORDER.CODE
-                                            LEFT JOIN SALESORDERLINE SALESORDERLINE ON SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE = SALESORDERLINE.SALESORDERCODE
-                                                AND SALESDOCUMENTLINE.DLVSALESORDERLINEORDERLINE = SALESORDERLINE.ORDERLINE
-                                            LEFT JOIN (
-                                                    SELECT
-                                                        ALLOCATION.CODE,
-                                                        ALLOCATION.LOTCODE,
-                                                        COUNT(ALLOCATION.ITEMELEMENTCODE) AS ROLL,
-                                                        SUM(ALLOCATION.USERPRIMARYQUANTITY) AS USERPRIMARYQUANTITY,
-                                                        ALLOCATION.USERPRIMARYUOMCODE,
-                                                        SUM(ALLOCATION.USERSECONDARYQUANTITY) AS USERSECONDARYQUANTITY,
-                                                        ALLOCATION.USERSECONDARYUOMCODE
-                                                    FROM
-                                                        ALLOCATION ALLOCATION
-                                                    WHERE
-                                                        ALLOCATION.DETAILTYPE = '0'
-                                                    GROUP BY
-                                                        ALLOCATION.CODE,
-                                                        ALLOCATION.LOTCODE,
-                                                        ALLOCATION.USERPRIMARYUOMCODE,
-                                                        ALLOCATION.USERSECONDARYUOMCODE
-                                                ) A ON ALLOCATION.CODE = A.CODE
-                                            LEFT JOIN ITXVIEWCOLOR ITXVIEWCOLOR ON SALESDOCUMENTLINE.ITEMTYPEAFICODE = ITXVIEWCOLOR.ITEMTYPECODE
-                                                AND SALESDOCUMENTLINE.SUBCODE01 = ITXVIEWCOLOR.SUBCODE01
-                                                AND SALESDOCUMENTLINE.SUBCODE02 = ITXVIEWCOLOR.SUBCODE02
-                                                AND SALESDOCUMENTLINE.SUBCODE03 = ITXVIEWCOLOR.SUBCODE03
-                                                AND SALESDOCUMENTLINE.SUBCODE04 = ITXVIEWCOLOR.SUBCODE04
-                                                AND SALESDOCUMENTLINE.SUBCODE05 = ITXVIEWCOLOR.SUBCODE05
-                                                AND SALESDOCUMENTLINE.SUBCODE06 = ITXVIEWCOLOR.SUBCODE06
-                                                AND SALESDOCUMENTLINE.SUBCODE07 = ITXVIEWCOLOR.SUBCODE07
-                                                AND SALESDOCUMENTLINE.SUBCODE08 = ITXVIEWCOLOR.SUBCODE08
-                                                AND SALESDOCUMENTLINE.SUBCODE09 = ITXVIEWCOLOR.SUBCODE09
-                                                AND SALESDOCUMENTLINE.SUBCODE10 = ITXVIEWCOLOR.SUBCODE10
-                                            LEFT JOIN ITXVIEW_PELANGGAN ON ITXVIEW_PELANGGAN.CODE = SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE
-                                            WHERE
-                                                (CASE
-                                                    WHEN SALESDOCUMENT.GOODSISSUEDATE IS NOT NULL THEN SALESDOCUMENT.GOODSISSUEDATE
-                                                    ELSE SALESDOCUMENT.PROVISIONALDOCUMENTDATE
-                                                END) BETWEEN '$tgl_awal' AND '$tgl_akhir'
-                                                AND SALESDOCUMENT.DOCUMENTTYPETYPE = '05'
-                                                AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL
-                                                AND SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE LIKE '$Order'
-                                                AND (SALESORDER.EXTERNALREFERENCE LIKE '$PO' OR SALESORDERLINE.EXTERNALREFERENCE LIKE '$PO')
-                                                AND TRIM(SALESDOCUMENTLINE.SUBCODE02) LIKE '$ArticleGrup'
-                                                AND TRIM(SALESDOCUMENTLINE.SUBCODE03) LIKE '$ArticleCode'
-                                                AND ITXVIEWCOLOR.WARNA LIKE '$Warna'
-                                                AND A.LOTCODE LIKE '$Prodorder'
-                                                AND ITXVIEW_PELANGGAN.LANGGANAN LIKE '$Pelanggan'
-                                            GROUP BY
-                                                SALESDOCUMENTLINE.SALESDOCUMENTPROVISIONALCODE,
-                                                SALESDOCUMENTLINE.ORDERLINE,
-                                                SALESDOCUMENT.GOODSISSUEDATE,
-                                                SALESDOCUMENT.PROVISIONALDOCUMENTDATE,
-                                                SALESDOCUMENTLINE.DLVSALORDERLINESALESORDERCODE,
-                                                SALESDOCUMENTLINE.DLVSALESORDERLINEORDERLINE,
-                                                SALESDOCUMENTLINE.SUBCODE02,
-                                                SALESDOCUMENTLINE.SUBCODE03,
-                                                SALESDOCUMENTLINE.SUBCODE05,
-                                                SALESORDER.EXTERNALREFERENCE,
-                                                SALESORDERLINE.EXTERNALREFERENCE,
-                                                A.USERPRIMARYUOMCODE,
-                                                A.USERSECONDARYUOMCODE,
-                                                ITXVIEWCOLOR.WARNA,
-                                                A.LOTCODE,
-                                                SALESDOCUMENT.PAYMENTMETHODCODE,
-                                                ITXVIEW_PELANGGAN.LANGGANAN";
-                                }
+                                
                                 $stmt = db2_exec($conn1, $sqlDB2, array('cursor' => DB2_SCROLLABLE));
                                 while ($row1 = db2_fetch_assoc($stmt)) {
                                 ?>
@@ -372,7 +293,7 @@
                                         <td align="center"><?php echo $row1['NOTE']; ?></td>
                                     </tr>
                                 <?php $no++;
-                                } ?>
+                                } } ?>
                             </tbody>
                         </table>
                     </div>
