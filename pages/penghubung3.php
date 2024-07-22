@@ -36,8 +36,8 @@
 			<?php
 			$advices = [
 				"CUTTING LOSS",
-				"SPECIAL MAKER",
-				"CLOSE MAKER",
+				"SPECIAL MARKER",
+				"CLOSE MARKER",
 				"PERBAIKAN GARMENT",
 				"LETTER OF GUARANTEE (LG)",
 			];
