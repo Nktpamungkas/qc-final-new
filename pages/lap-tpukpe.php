@@ -192,7 +192,7 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
               <!-- <a href="EditKPENew-<?php //echo $row1['id_nsp']; ?>" target="_blank"> -->
                 <?php //echo $row1['no_tpukpe'];?>
               <!-- </a> -->
-              <a href="#" class="edit_tpukpe" id="<?php echo $row1['id'] ?>"><?php echo $row1['no_tpukpe']; ?></a>
+              <a href="EditTPUKPE-<?php echo $row1['id'] ?>" target="_blank"><?php echo $row1['no_tpukpe']; ?></a>
             </td>
             <td align="left"><?php echo $row1['langganan'];?></td>
             <td align="center"><?php echo $row1['no_order'];?></td>
@@ -232,7 +232,6 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
           <?php	$no++;} ?>
         </tbody>
       </table>
-      <div id="EditTPUKPE" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
       </div>
     </div>
   </div>
