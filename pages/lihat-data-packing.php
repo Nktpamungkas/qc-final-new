@@ -89,7 +89,14 @@ if ($jamA!="" or $jamAr!=""){
 		  <div class="form-group">
             <label for="awal" class="col-sm-3 control-label">Jam Awal</label>
             <div class="col-sm-2">
-              <input type="text" class="form-control timepicker" name="jam_awal" id="jam_awal" placeholder="00:00" value="<?php echo $jamA; ?>" autocomplete="off" disabled>
+            <input name="jam_awal" type="text" class="form-control" placeholder="00:00" pattern="[0-9]{2}:[0-9]{2}$" title=" e.g 14:25 " onkeyup="
+                                                var time = this.value;
+                                                if (time.match(/^\d{2}$/) !== null) {
+                                                this.value = time + ':';
+                                                } else if (time.match(/^\d{2}\:\d{2}$/) !== null) {
+                                                this.value = time + '';
+                                                }" value="<?php echo $jamA; ?>" size="5" maxlength="5" autocomplete="off" disabled>
+              <!-- <input type="text" class="form-control timepicker" name="jam_awal" id="jam_awal" placeholder="00:00" value="<?php echo $jamA; ?>" disabled> -->
             </div>
             <!-- /.input group -->
           </div>	
@@ -107,7 +114,14 @@ if ($jamA!="" or $jamAr!=""){
 	      <div class="form-group">
             <label for="akhir" class="col-sm-3 control-label">Jam Akhir</label>
             <div class="col-sm-2">
-              <input type="text" class="form-control timepicker" name="jam_akhir" id="jam_akhir" placeholder="00:00" value="<?php echo $jamAr; ?>" autocomplete="off" disabled>
+            <input name="jam_akhir" type="text" class="form-control" placeholder="00:00" pattern="[0-9]{2}:[0-9]{2}$" title=" e.g 14:25 " onkeyup="
+                                                var time = this.value;
+                                                if (time.match(/^\d{2}$/) !== null) {
+                                                this.value = time + ':';
+                                                } else if (time.match(/^\d{2}\:\d{2}$/) !== null) {
+                                                this.value = time + '';
+                                                }" value="<?php echo $jamAr; ?>" size="5" maxlength="5" autocomplete="off" disabled>
+              <!-- <input type="text" class="form-control timepicker" name="jam_akhir" id="jam_akhir" placeholder="00:00" value="<?php echo $jamAr; ?>" autocomplete="off" disabled> -->
             </div>
 			    
             <!-- /.input group -->
