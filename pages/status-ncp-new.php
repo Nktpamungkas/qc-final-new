@@ -452,10 +452,13 @@ include "koneksi.php";
                 $filterStatus .= "status IN ('Belum OK', 'OK', 'BS', 'Cancel', 'Disposisi') ";
               }
 
+              if(!isset($_POST['cari'])) {
+                $Today = ' substring(tgl_buat, 1, 9) = substring(now(), 1, 9) AND ';
+              }
+
               // print_r($filterStatus);
-              
               $qry1 = mysqli_query($con, "SELECT *,DATEDIFF(tgl_rencana,DATE_FORMAT(now(),'%Y-%m-%d')) as lama, DATEDIFF(DATE_FORMAT(now(),'%Y-%m-%d'),tgl_rencana) as delay 
-	FROM tbl_ncp_qcf_now WHERE " . $filterStatus . $where . $where1 . $where2 . " ORDER BY id ASC");
+	FROM tbl_ncp_qcf_now WHERE " . $Today . $filterStatus . $where . $where1 . $where2 . " ORDER BY id ASC");
               while ($row1 = mysqli_fetch_array($qry1)) {
                 if ($row1['nokk_salinan'] != "") {
                   $nokk1 = $row1['nokk_salinan'];
