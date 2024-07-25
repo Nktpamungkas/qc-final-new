@@ -22,6 +22,7 @@ include "koneksi.php";
   $GShift = isset($_POST['gshift']) ? $_POST['gshift'] : '';
   $Dept = isset($_POST['dept']) ? $_POST['dept'] : '';
   $NCP = isset($_POST['no_ncp']) ? $_POST['no_ncp'] : '';
+  $Thn = isset($_POST['thn']) ? $_POST['thn'] : '';
 
   $FilterByStatus = isset($_POST['filter_by_status']) ? $_POST['filter_by_status'] : '';
 
@@ -261,6 +262,17 @@ include "koneksi.php";
     <form method="post" enctype="multipart/form-data" name="form1" class="form-horizontal" id="form1">
       <div class="box-body">
         <div class="form-group">
+		  <div class="col-sm-2">
+            <select class="form-control select2" name="thn" id="thn">
+              <option value="">Pilih</option>
+              <option value="2024" <?php if ($Thn == "2024") {
+                echo "SELECTED";
+              } ?>>2024</option>
+              <option value="2023" <?php if ($Thn == "2023") {
+                echo "SELECTED";
+              } ?>>2023</option>
+            </select>
+          </div>	
           <div class="col-sm-2">
             <select class="form-control select2" name="dept" id="dept">
               <option value="">Pilih</option>
@@ -440,6 +452,18 @@ include "koneksi.php";
               } else {
                 $where2 = " ";
               }
+			  if ($Thn != "") {
+                $where3 = " AND substring(tgl_buat, 1, 4) = '$Thn' ";
+              } else {
+                $where3 = " ";
+              }	
+			
+			  if ($Thn =="" and $NCP =="" and $Dept == "" and $_SESSION['dept'] == "QC" and isset($_POST['cari'])){
+				 $where4 = " AND substring(tgl_buat, 1, 4) = substring(now(), 1, 4) "; 
+			  } else {
+				 $where4 = " "; 
+			  }
+				  
 
               if ($FilterByStatus != "") {
                 $filterStatus = "";
@@ -453,12 +477,12 @@ include "koneksi.php";
               }
 
               if(!isset($_POST['cari'])) {
-                $Today = ' substring(tgl_buat, 1, 9) = substring(now(), 1, 9) AND ';
+                $Today = ' substring(tgl_buat, 1, 10) = substring(now(), 1, 10) AND ';
               }
 
               // print_r($filterStatus);
               $qry1 = mysqli_query($con, "SELECT *,DATEDIFF(tgl_rencana,DATE_FORMAT(now(),'%Y-%m-%d')) as lama, DATEDIFF(DATE_FORMAT(now(),'%Y-%m-%d'),tgl_rencana) as delay 
-	FROM tbl_ncp_qcf_now WHERE " . $Today . $filterStatus . $where . $where1 . $where2 . " ORDER BY id ASC");
+	FROM tbl_ncp_qcf_now WHERE " . $Today . $filterStatus . $where . $where1 . $where2 . $where3 . $where4 . " ORDER BY id ASC");
               while ($row1 = mysqli_fetch_array($qry1)) {
                 if ($row1['nokk_salinan'] != "") {
                   $nokk1 = $row1['nokk_salinan'];
