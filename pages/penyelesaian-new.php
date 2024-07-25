@@ -255,7 +255,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								<option value="ST-10" <?php if ($rcek['mesin'] == "STENTER YT 10" or $rcek['mesin'] == "ST-10") {
 															echo "SELECTED";
 														} ?>>ST-10</option>
-								<option value="ST-09" <?php if ($rcek['mesin'] == "INSPEK" or $rcek['mesin'] == "INSPEK") {
+								<option value="INSPEK" <?php if ($rcek['mesin'] == "INSPEK" or $rcek['mesin'] == "INSPEK") {
 															echo "SELECTED";
 														} ?>>INSPEK</option>
 							</select>
@@ -420,7 +420,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								<option value="ST-10" <?php if ($rcek['mesin_perbaikan'] == "STENTER YT 10" or $rcek['mesin_perbaikan'] == "ST-10") {
 															echo "SELECTED";
 														} ?>>ST-10</option>
-								<option value="ST-09" <?php if ($rcek['mesin_perbaikan'] == "INSPEK" or $rcek['mesin_perbaikan'] == "INSPEK") {
+								<option value="INSPEK" <?php if ($rcek['mesin_perbaikan'] == "INSPEK" or $rcek['mesin_perbaikan'] == "INSPEK") {
 															echo "SELECTED";
 														} ?>>INSPEK</option>
 							</select>
