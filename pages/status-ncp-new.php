@@ -22,8 +22,9 @@ include "koneksi.php";
   $GShift = isset($_POST['gshift']) ? $_POST['gshift'] : '';
   $Dept = isset($_POST['dept']) ? $_POST['dept'] : '';
   $NCP = isset($_POST['no_ncp']) ? $_POST['no_ncp'] : '';
+  $Bln = isset($_POST['bln']) ? $_POST['bln'] : '';
   $Thn = isset($_POST['thn']) ? $_POST['thn'] : '';
-
+	
   $FilterByStatus = isset($_POST['filter_by_status']) ? $_POST['filter_by_status'] : '';
 
   if ($_POST['gshift'] == "ALL") {
@@ -272,6 +273,47 @@ include "koneksi.php";
                 echo "SELECTED";
               } ?>>2023</option>
             </select>
+          </div>
+		  <div class="col-sm-2">
+            <select class="form-control select2" name="bln" id="bln">
+              <option value="">Pilih</option>
+              <option value="01" <?php if ($Bln == "01") {
+                echo "SELECTED";
+              } ?>>Januari</option>
+              <option value="02" <?php if ($Bln == "02") {
+                echo "SELECTED";
+              } ?>>Februari</option>
+			  <option value="03" <?php if ($Bln == "03") {
+                echo "SELECTED";
+              } ?>>Maret</option>
+              <option value="04" <?php if ($Bln == "04") {
+                echo "SELECTED";
+              } ?>>April</option>
+			   <option value="05" <?php if ($Bln == "05") {
+                echo "SELECTED";
+              } ?>>Mei</option>
+              <option value="06" <?php if ($Bln == "06") {
+                echo "SELECTED";
+              } ?>>Juni</option>
+			  <option value="07" <?php if ($Bln == "07") {
+                echo "SELECTED";
+              } ?>>Juli</option>
+              <option value="08" <?php if ($Bln == "08") {
+                echo "SELECTED";
+              } ?>>Agustus</option>	
+			  <option value="09" <?php if ($Bln == "09") {
+                echo "SELECTED";
+              } ?>>September</option>
+              <option value="10" <?php if ($Bln == "10") {
+                echo "SELECTED";
+              } ?>>Oktober</option>
+			  <option value="11" <?php if ($Bln == "11") {
+                echo "SELECTED";
+              } ?>>November</option>
+              <option value="12" <?php if ($Bln == "12") {
+                echo "SELECTED";
+              } ?>>Desember</option>	
+            </select>
           </div>	
           <div class="col-sm-2">
             <select class="form-control select2" name="dept" id="dept">
@@ -452,16 +494,22 @@ include "koneksi.php";
               } else {
                 $where2 = " ";
               }
-			  if ($Thn != "") {
+			  if ($Thn != "" and $Bln == "") {
                 $where3 = " AND substring(tgl_buat, 1, 4) = '$Thn' ";
               } else {
                 $where3 = " ";
               }	
+			  
+			  if ($Thn != "" and $Bln != "") {
+                $where4 = " AND substring(tgl_buat, 1, 7) = '$Thn-$Bln' ";
+              } else {
+                $where4 = " ";
+              }		
 			
-			  if ($Thn =="" and $NCP =="" and $Dept == "" and $_SESSION['dept'] == "QC" and isset($_POST['cari'])){
-				 $where4 = " AND substring(tgl_buat, 1, 4) = substring(now(), 1, 4) "; 
+			  if ($Bln =="" and $Thn =="" and $NCP =="" and $Dept == "" and $_SESSION['dept'] == "QC" and isset($_POST['cari'])){
+				 $where5 = " AND substring(tgl_buat, 1, 4) = substring(now(), 1, 4) "; 
 			  } else {
-				 $where4 = " "; 
+				 $where5 = " "; 
 			  }
 				  
 
@@ -482,7 +530,7 @@ include "koneksi.php";
 
               // print_r($filterStatus);
               $qry1 = mysqli_query($con, "SELECT *,DATEDIFF(tgl_rencana,DATE_FORMAT(now(),'%Y-%m-%d')) as lama, DATEDIFF(DATE_FORMAT(now(),'%Y-%m-%d'),tgl_rencana) as delay 
-	FROM tbl_ncp_qcf_now WHERE " . $Today . $filterStatus . $where . $where1 . $where2 . $where3 . $where4 . " ORDER BY id ASC");
+	FROM tbl_ncp_qcf_now WHERE " . $Today . $filterStatus . $where . $where1 . $where2 . $where3 . $where4 . $where5 . " ORDER BY id ASC");
               while ($row1 = mysqli_fetch_array($qry1)) {
                 if ($row1['nokk_salinan'] != "") {
                   $nokk1 = $row1['nokk_salinan'];
