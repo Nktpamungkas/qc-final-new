@@ -187,6 +187,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 								<option value="C+A" <?php if ($rcek['shift'] == "C+A") {
 														echo "SELECTED";
 													} ?>>C+A</option>
+								<option value="A+B+C" <?php if ($rcek['shift'] == "A+B+C") {
+														echo "SELECTED";
+													} ?>>A+B+C</option>
 								<option value="Non-Shift" <?php if ($rcek['shift'] == "Non-Shift") {
 																echo "SELECTED";
 															} ?>>Non-Shift</option>
@@ -216,6 +219,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 								<option value="COMPACT 02" <?php if ($rcek['mesin'] == "COMPACT 02") {
 																echo "SELECTED";
 															} ?>>COMPACT 02</option>
+								<option value="COMPACT 03" <?php if ($rcek['mesin'] == "COMPACT 03") {
+																echo "SELECTED";
+															} ?>>COMPACT 03</option>
 								<option value="OVEN-01" <?php if ($rcek['mesin'] == "OVEN-01") {
 															echo "SELECTED";
 														} ?>>OVEN-01</option>
@@ -246,6 +252,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 								<option value="ST-09" <?php if ($rcek['mesin'] == "STENTER YT 09" or $rcek['mesin'] == "ST-09") {
 															echo "SELECTED";
 														} ?>>ST-09</option>
+								<option value="ST-10" <?php if ($rcek['mesin'] == "STENTER YT 10" or $rcek['mesin'] == "ST-10") {
+															echo "SELECTED";
+														} ?>>ST-10</option>
 								<option value="ST-09" <?php if ($rcek['mesin'] == "INSPEK" or $rcek['mesin'] == "INSPEK") {
 															echo "SELECTED";
 														} ?>>INSPEK</option>
@@ -375,6 +384,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 								<option value="COMPACT 02" <?php if ($rcek['mesin_perbaikan'] == "COMPACT 02") {
 																echo "SELECTED";
 															} ?>>COMPACT 02</option>
+								<option value="COMPACT 03" <?php if ($rcek['mesin_perbaikan'] == "COMPACT 03") {
+																echo "SELECTED";
+															} ?>>COMPACT 03</option>
 								<option value="OVEN-01" <?php if ($rcek['mesin_perbaikan'] == "OVEN-01") {
 															echo "SELECTED";
 														} ?>>OVEN-01</option>
@@ -405,6 +417,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 								<option value="ST-09" <?php if ($rcek['mesin_perbaikan'] == "STENTER YT 09" or $rcek['mesin_perbaikan'] == "ST-09") {
 															echo "SELECTED";
 														} ?>>ST-09</option>
+								<option value="ST-10" <?php if ($rcek['mesin_perbaikan'] == "STENTER YT 10" or $rcek['mesin_perbaikan'] == "ST-10") {
+															echo "SELECTED";
+														} ?>>ST-10</option>
 								<option value="ST-09" <?php if ($rcek['mesin_perbaikan'] == "INSPEK" or $rcek['mesin_perbaikan'] == "INSPEK") {
 															echo "SELECTED";
 														} ?>>INSPEK</option>
