@@ -902,7 +902,7 @@ $cekNoTes=mysqli_num_rows($sqlcekNoTes);
   <?php if($_GET['nodemand']!=""){ ?> 	
    <button type="submit" class="btn btn-primary pull-left" <?php if($_POST['buyer']==""){echo "disabled";}?> name="save" value="save"><i class="fa fa-save"></i> Simpan</button> 
    <div class="btn-group pull-right">	
-   <a href="pages/cetak/cetak_formbagi_new.php?idkk=<?php echo $_GET['nodemand']; ?>&po=<?php echo $PO; ?>&item=<?php echo $Item; ?>&warna=<?php echo $Warna; ?>&buyer=<?php echo $Langganan; ?>" target="_blank" class="btn btn-warning">Cetak Bagi Kain</a> 	   
+   <a href="pages/cetak/cetak_label_list_test.php?idkk=<?php echo $_GET['nodemand']; ?>" target="_blank" class="btn btn-warning">Cetak List Test</a> 	   
    <a href="pages/cetak/cetak_label_new.php?idkk=<?php echo $_GET['nodemand']; ?>&po=<?php echo $PO; ?>&item=<?php echo $Item; ?>&warna=<?php echo $Warna; ?>&buyer=<?php echo $Langganan; ?>" target="_blank" class="btn btn-danger ">Cetak</a> 
    </div>
    <?php } ?>
