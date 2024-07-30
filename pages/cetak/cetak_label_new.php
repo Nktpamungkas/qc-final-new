@@ -91,7 +91,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
         </tr>
         <tr>
           <td colspan="3" valign="top" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:6px;"><?php echo substr($r['jenis_kain'],0,100);?></div></td>
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:5px;"><?php echo substr($r['jenis_kain'],0);?></div></td>
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
@@ -213,7 +213,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
         </tr>
         <tr>
           <td colspan="3" valign="top" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:6px;"><?php echo substr($r['jenis_kain'],0,100);?></div></td>
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:5px;"><?php echo substr($r['jenis_kain'],0);?></div></td>
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
@@ -314,7 +314,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
         </tr>
         <tr>
           <td colspan="3" valign="top" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:6px;"><?php echo substr($r['jenis_kain'],0,100);?></div></td>
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:5px;"><?php echo substr($r['jenis_kain'],0);?></div></td>
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
