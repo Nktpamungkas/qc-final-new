@@ -177,10 +177,12 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 				  echo '</pre>'; */
 				  ?>
           <div style="display: flex; justify-content: end">
+              <?php if($_SESSION['usrid'] != 'ppc'): ?>
               <form action="pages/cetak/cetak_newbonpenghubung_mkt.php" method="POST" target="_blank">
                 <input type="hidden" name="sql" value="<?= $sql_code ?>">
                 <input type="submit" value="CETAK EXCEL TO MKT">
               </form>
+              <?php endif; ?>
               &nbsp;&nbsp;&nbsp;
               <form action="pages/cetak/cetak_newbonpenghubung.php" method="POST" target="_blank">
                 <input type="hidden" name="sql" value="<?= $sql_code ?>">

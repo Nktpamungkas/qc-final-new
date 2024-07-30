@@ -328,12 +328,29 @@ $page = strtolower($page);
         </div>
         <!-- /.col -->
         <?php } ?>
+
+        <?php if($_SESSION['usrid'] == 'ppc'){ ?>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="Newbonpenghubung">
+            <div class="info-box">
+              <span class="info-box-icon bg-pink"><i class="fa fa-truck"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">New Bon Penghubung</span>
+                <span class="info-box-number">&nbsp;</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+          <!-- /.info-box -->
+        </div>
+        <?php } ?>
         
       <?php if ($_SESSION['lvl_id'] != "DMF" and $_SESSION['lvl_id'] != "TQ" and $_SESSION['lvl_id'] != "SPVQC" and $_SESSION['lvl_id'] != "AFTERSALES") { ?>
 
 
         <!-- jika username marketing hidden -->
-        <?php if ($_SESSION['usrid'] != "marketing") { ?>
+        <?php if ($_SESSION['usrid'] != "marketing" && $_SESSION['usrid'] != "ppc") { ?>
           <div class="col-md-3 col-sm-6 col-xs-12">
             <a href="SummaryOrder">
               <div class="info-box">
