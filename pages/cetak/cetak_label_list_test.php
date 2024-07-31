@@ -77,10 +77,6 @@ $detail1 = explode(",", rtrim($row['functional'], ','));
 $detail2 = explode(",", rtrim($row['colorfastness'], ','));
 
 $r = array_merge($detail, $detail1, $detail2);
-
-$i = 0;
-$ii = 0;
-$iii = 0;
 ?>
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -91,93 +87,133 @@ $iii = 0;
   <link href="styles_cetak.css" rel="stylesheet" type="text/css">
   <title>Cetak Label</title>
   <style>
+    *, ::before, ::after {
+      box-sizing: border-box;
+    }
+
     td {
       border: none !important;
       font-size: 7px !important;
       vertical-align: top !important;
+      padding: 0 !important;
     }
   </style>
 </head>
 
 
 <body>
-  <table width="100%" border="0" style="width: 7in; border-collapse: collapse">
+  <table width="100%" border="0" style="width: 7in;">
     <tbody>
       <tr>
-        <td align="left" valign="top" style="height: 1.6in;;">
+
+
+        <td align="left" valign="top" style="height: 1.6in; border: 1px solid #000 !important; padding: 5px !important;">
           <table width="100%" border="0" class="table-list1" style="width: 2.3in;">
             <tr>
-              <td colspan="3">
-                <table>
-                  <?php while ($i < 10) { ?>
-                    <tr>
-                      <td><?= $singkatan[$r[$i++]] ?></td>
-                    </tr>
-                  <?php } ?>
-                </table>
-              </td>
-              <td colspan="3">
-                <table>
-                  <?php while ($i < 20) { ?>
-                    <tr>
-                      <td><?= $singkatan[$r[$i++]] ?></td>
-                    </tr>
-                  <?php } ?>
-                </table>
-              </td>
+              <?php
+              $i = 0;
+              // Jumlah baris per kolom
+              $max = 15;
+              // Hitung jumlah kolom yang diperlukan
+              $numColumns = ceil(count($r) / $max);
+
+              for ($x = 0; $x < $numColumns; $x++) {
+                ?>
+                <td colspan="3">
+                  <table style="border-collapse: collapse;">
+                    <?php
+                    $c = 0;
+                    // Tampilkan maksimal $max baris
+                    while ($c < $max && $i < count($r)) {
+                      ?>
+                      <tr>
+                        <td><?= $singkatan[$r[$i++]] ?></td>
+                      </tr>
+                      <?php
+                      $c++;
+                    }
+                    ?>
+                  </table>
+                </td>
+                <?php
+              }
+              ?>
             </tr>
           </table>
         </td>
 
-        <td align="left" valign="top" style="height: 1.6in;">
+
+        <td align="left" valign="top" style="height: 1.6in; border: 1px solid #000 !important; padding: 5px !important;">
           <table width="100%" border="0" class="table-list1" style="width: 2.3in;">
             <tr>
-              <td colspan="3">
-                <table>
-                  <?php while ($ii < 10) { ?>
-                    <tr>
-                      <td><?= $singkatan[$r[$ii++]] ?></td>
-                    </tr>
-                  <?php } ?>
-                </table>
-              </td>
-              <td colspan="3">
-                <table>
-                  <?php while ($ii < 20) { ?>
-                    <tr>
-                      <td><?= $singkatan[$r[$ii++]] ?></td>
-                    </tr>
-                  <?php } ?>
-                </table>
-              </td>
+              <?php
+              $i = 0;
+              // Jumlah baris per kolom
+              $max = 15;
+              // Hitung jumlah kolom yang diperlukan
+              $numColumns = ceil(count($r) / $max);
+
+              for ($x = 0; $x < $numColumns; $x++) {
+                ?>
+                <td colspan="3">
+                  <table style="border-collapse: collapse;">
+                    <?php
+                    $c = 0;
+                    // Tampilkan maksimal $max baris
+                    while ($c < $max && $i < count($r)) {
+                      ?>
+                      <tr>
+                        <td><?= $singkatan[$r[$i++]] ?></td>
+                      </tr>
+                      <?php
+                      $c++;
+                    }
+                    ?>
+                  </table>
+                </td>
+                <?php
+              }
+              ?>
             </tr>
           </table>
         </td>
 
-        <td align="left" valign="top" style="height: 1.6in;">
+
+        <td align="left" valign="top" style="height: 1.6in; border: 1px solid #000 !important; padding: 5px !important;">
           <table width="100%" border="0" class="table-list1" style="width: 2.3in;">
             <tr>
-              <td colspan="3">
-                <table>
-                  <?php while ($iii < 10) { ?>
-                    <tr>
-                      <td><?= $singkatan[$r[$iii++]] ?></td>
-                    </tr>
-                  <?php } ?>
-                </table>
-              </td>
-              <td colspan="3">
-                <table>
-                  <?php while ($iii < 20) { ?>
-                    <tr>
-                      <td><?= $singkatan[$r[$iii++]] ?></td>
-                    </tr>
-                  <?php } ?>
-                </table>
-              </td>
+              <?php
+              $i = 0;
+              // Jumlah baris per kolom
+              $max = 15;
+              // Hitung jumlah kolom yang diperlukan
+              $numColumns = ceil(count($r) / $max);
+
+              for ($x = 0; $x < $numColumns; $x++) {
+                ?>
+                <td colspan="3">
+                  <table style="border-collapse: collapse;">
+                    <?php
+                    $c = 0;
+                    // Tampilkan maksimal $max baris
+                    while ($c < $max && $i < count($r)) {
+                      ?>
+                      <tr>
+                        <td><?= $singkatan[$r[$i++]] ?></td>
+                      </tr>
+                      <?php
+                      $c++;
+                    }
+                    ?>
+                  </table>
+                </td>
+                <?php
+              }
+              ?>
             </tr>
           </table>
         </td>
+
 
       </tr>
     </tbody>
