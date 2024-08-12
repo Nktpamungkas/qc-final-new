@@ -98,20 +98,20 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><span style="font-size:7px;"><?php echo "<strong><span style='font-size:9px;'>".substr($r['warna'],0,60)."</span></strong>/".substr($r['no_warna'],0,15);?></span></div></td>
         </tr>
         <tr>
-          <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;">
-	<div style="font-size:9px;">
-	<?php echo date('d-m-Y H:i', strtotime(substr($r['tgl_masuk'],0,18)))."/".substr($r['proses_fin'],0,14);?><?php if ($r['suhu'] !='' and $r['suhu'] !='-' ) { echo  $suhu  = '/'.$r['suhu']; } else { echo  $suhu = '/0';}  ?>
-
-	</div></td>
-        </tr>
-        <tr>
           <td style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php echo $r['nokk'];?>&nbsp;<?php if($r['lot_legacy']!='-') { echo $r['lot_legacy']; };?></div></td>
           <td width="14%" align="right" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;">L&amp;G:</div></td>
           <td width="51%" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php echo $r['lebar']." x ".$r['gramasi'];?></div></td>
+        </tr>
+        <tr>
+          <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
+	border-left:0px #000000 solid; border-right:0px #000000 solid;">
+	<div style="font-size:9px;">
+	<?php echo date('d-m-Y H:i', strtotime(substr($r['tgl_masuk'],0,18)))."/".substr($r['proses_fin'],0,14);?><?php if ($r['suhu'] !='' and $r['suhu'] !='-' ) { echo  $suhu  = '/'.$r['suhu']; } else { echo  $suhu = '/0';}  ?>
+
+	</div></td>
         </tr>
 		<?php 
 		if ($r['development']=='Additional') {
@@ -220,19 +220,19 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><span style="font-size:7px;"><?php echo "<strong><span style='font-size:9px;'>".substr($r['warna'],0,60)."</span></strong>/".substr($r['no_warna'],0,15);?></span></div></td>
         </tr>
         <tr>
-          <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php echo date('d-m-Y H:i', strtotime(substr($r['tgl_masuk'],0,18)))."/".substr($r['proses_fin'],0,14);?><?=$suhu?>
-	
-	
-	</div></td>
-        </tr>
-        <tr>
           <td style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php echo $r['nokk'];?>&nbsp;<?php if($r['lot_legacy']!='-') { echo $r['lot_legacy']; };?></div></td>
           <td width="14%" align="right" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;">L&amp;G:</div></td>
           <td width="51%" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php echo $r['lebar']." x ".$r['gramasi'];?></div></td>
+        </tr>
+        <tr>
+          <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php echo date('d-m-Y H:i', strtotime(substr($r['tgl_masuk'],0,18)))."/".substr($r['proses_fin'],0,14);?><?=$suhu?>
+	
+	
+	</div></td>
         </tr>
 		
         <?php 
@@ -321,16 +321,16 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><span style="font-size:7px;"><?php echo "<strong><span style='font-size:9px;'>".substr($r['warna'],0,60)."</span></strong>/".substr($r['no_warna'],0,15);?></span></div></td>
         </tr>
         <tr>
-          <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php echo date('d-m-Y H:i', strtotime(substr($r['tgl_masuk'],0,18)))."/".substr($r['proses_fin'],0,14);?><?=$suhu?></div></td>
-        </tr>
-        <tr>
           <td style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php echo $r['nokk'];?>&nbsp;<?php if($r['lot_legacy']!='-') { echo $r['lot_legacy']; };?></div></td>
           <td width="14%" align="right" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;">L&amp;G:</div></td>
           <td width="51%" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
 	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php echo $r['lebar']." x ".$r['gramasi'];?></div></td>
+        </tr>
+        <tr>
+          <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php echo date('d-m-Y H:i', strtotime(substr($r['tgl_masuk'],0,18)))."/".substr($r['proses_fin'],0,14);?><?=$suhu?></div></td>
         </tr>
 	
         <?php 
