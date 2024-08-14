@@ -132,11 +132,11 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
               <td colspan="1">
                 <div style="font-size:9px;">L</div>
               </td>
-              <td colspan="1">
-                <div style="font-size:9px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+              <td colspan="1" style="padding: 0;">
+                <div style="font-size:9px;">:</div>
               </td>
               <td colspan="1">
-                <div style="font-size:9px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div style="font-size:9px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               </td>
             </tr>
             <tr>
@@ -149,11 +149,11 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
               <td colspan="1">
                 <div style="font-size:9px;">W</div>
               </td>
-              <td colspan="1">
-                <div style="font-size:9px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+              <td colspan="1" style="padding: 0">
+                <div style="font-size:9px;">:</div>
               </td>
               <td colspan="1">
-                <div style="font-size:9px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div style="font-size:9px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               </td>
             </tr>
             <tr>
@@ -164,13 +164,13 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
                 </div>
               </td>
               <td colspan="1">
-                <div style="font-size:9px;">S</div>
+                <div style="font-size:9px;">SP</div>
+              </td>
+              <td colspan="1" style="padding: 0">
+                <div style="font-size:9px;">:</div>
               </td>
               <td colspan="1">
-                <div style="font-size:9px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-              </td>
-              <td colspan="1">
-                <div style="font-size:9px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div style="font-size:9px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               </td>
             </tr>
             <?php
