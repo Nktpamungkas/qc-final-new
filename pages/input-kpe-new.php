@@ -1402,6 +1402,10 @@ $sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET
 			document.form1.sts_disposisipro.setAttribute("disabled", true);
 			document.form1.sts_check.removeAttribute("disabled");
 			document.form1.sts_check.setAttribute("required", true);
+			document.form1.qty_lolos.removeAttribute("disabled");
+			document.form1.qty_lolos.setAttribute("required", true);
+			document.form1.satuan_l.removeAttribute("disabled");
+			document.form1.satuan_l.setAttribute("required", true);
 		} else {
 			//document.form1.shift.setAttribute("disabled",true);
 			//document.form1.shift.removeAttribute("required");
@@ -1416,6 +1420,10 @@ $sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET
 			document.form1.sts_disposisipro.removeAttribute("disabled");
 			document.form1.sts_check.setAttribute("disabled", true);
 			document.form1.sts_check.removeAttribute("required");
+			document.form1.qty_lolos.setAttribute("disabled", true);
+			document.form1.qty_lolos.removeAttribute("required");
+			document.form1.satuan_l.setAttribute("disabled", true);
+			document.form1.satuan_l.removeAttribute("required");
 		}
 	}
 	function aktif3() {
