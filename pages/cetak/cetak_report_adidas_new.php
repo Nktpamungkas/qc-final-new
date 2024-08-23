@@ -93,7 +93,7 @@ border:hidden;
                                 border-bottom:0px #000000 solid;
                                 border-left:0px #000000 solid; 
                                 border-right:0px #000000 solid;"><strong><font size="-2" >FABRIC TEST REPORT</font> <br> 
-                    FW-12-QCF-04/06</strong></td>
+                    FW-12-QCF-04/07</strong></td>
                 </tr>
                 <tr>
                     <td align="right" colspan="8" style="border-top:0px #000000 solid; 
@@ -955,7 +955,7 @@ border:hidden;
             <td align="center" rowspan="2" style="font-size: 8px;" valign="top"><strong>KW</strong></td>
             <td align="center" rowspan="2" style="font-size: 8px;" valign="top"><strong>NS</strong></td>
             <td align="left" rowspan="2" style="font-size: 8px;" valign="top"><strong>Water Absorbency (drop test)</strong><br><br>*PHX-AP0604 is required as well for all<br>fabrics with hydrophilic finish</td>
-            <td align="left" rowspan="2" style="font-size: 8px;" >Depends On RDY Label<br><br>&le; 3 sec Knits / &le; 5 sec Woven<br>&le; 5 sec Seamless (Knits & Woven)</td>
+            <td align="left" rowspan="2" style="font-size: 8px;" >Depends On Climacool Label<br><br>&le; 3 sec Knits / &le; 5 sec Woven<br>&le; 5 sec Seamless (Knits & Woven)</td>
             <td align="center" rowspan="2" style="font-size: 8px;" >
             <?php if($rcek1['stat_abs']=="RANDOM"){echo $rcekR['rabsor_f1'];}else if($rcek1['stat_abs']=="DISPOSISI"){echo $rcekD['dabsor_f1'];}else{echo $rcek1['absor_f1'];}?><br><br>
             <?php if($rcek1['stat_abs1']=="RANDOM"){echo $rcekR['rabsor_b1'];}else if($rcek1['stat_abs1']=="DISPOSISI"){echo $rcekD['dabsor_b1'];}else{echo $rcek1['absor_b1'];}?>
@@ -973,7 +973,7 @@ border:hidden;
             <td align="center" rowspan="2" style="font-size: 8px;" valign="top"><strong>KW</strong></td>
             <td align="center" rowspan="2" style="font-size: 8px;" valign="top"><strong>NS</strong></td>
             <td align="left" rowspan="2" style="font-size: 8px;" valign="top"><strong>Wicking Height-Vertical</strong></td>
-            <td align="left" rowspan="2" style="font-size: 8px;" >Depends On RDY Label<br><br>&ge; 100 mm Knits (incl. Seamless)<br>&ge; 90 mm Woven_[mm/30min]</td>
+            <td align="left" rowspan="2" style="font-size: 8px;" >Depends On Climacool Label<br><br>&ge; 100 mm Knits (incl. Seamless) [mm/10min]<br>&ge; 90 mm Woven_[mm/10min]</td>
             <td align="center" rowspan="2" style="font-size: 8px;" >
             <?php if($rcek1['stat_wic']=="RANDOM"){echo $rcekR['rwick_l1'];}else if($rcek1['stat_wic']=="DISPOSISI"){echo $rcekD['dwick_l1'];}else{echo $rcek1['wick_l1'];}?><br><br>
             <?php if($rcek1['stat_wic2']=="RANDOM"){echo $rcekR['rwick_l2'];}else if($rcek1['stat_wic2']=="DISPOSISI"){echo $rcekD['dwick_l2'];}else{echo $rcek1['wick_l2'];}?>
@@ -989,7 +989,7 @@ border:hidden;
             <td align="center" rowspan="2" style="font-size: 8px;" valign="top"><strong>KW</strong></td>
             <td align="center" rowspan="2" style="font-size: 8px;" valign="top"><strong>NS</strong></td>
             <td align="left" rowspan="2" style="font-size: 8px;" valign="top"><strong>Wicking Height-Horizontal</strong></td>
-            <td align="left" rowspan="2" style="font-size: 8px;" >Depends On RDY Label<br><br>&ge; 100 mm Knits (incl. Seamless)<br>&ge; 90 mm Woven_[mm/30min]</td>
+            <td align="left" rowspan="2" style="font-size: 8px;" >Depends On Climacool Label<br><br>&ge; 100 mm Knits (incl. Seamless) [mm/10min]<br>&ge; 90 mm Woven_[mm/10min]</td>
             <td align="center" rowspan="2" style="font-size: 8px;" >
             <?php if($rcek1['stat_wic1']=="RANDOM"){echo $rcekR['rwick_w1'];}else if($rcek1['stat_wic1']=="DISPOSISI"){echo $rcekD['dwick_w1'];}else{echo $rcek1['wick_w1'];}?><br><br>
             <?php if($rcek1['stat_wic3']=="RANDOM"){echo $rcekR['rwick_w2'];}else if($rcek1['stat_wic3']=="DISPOSISI"){echo $rcekD['dwick_w2'];}else{echo $rcek1['wick_w2'];}?>
@@ -1007,7 +1007,7 @@ border:hidden;
             <td align="center" rowspan="2" style="font-size: 8px;" valign="top"><strong>KW</strong></td>
             <td align="center" rowspan="2" style="font-size: 8px;" valign="top"><strong>NS</strong></td>
             <td align="left" rowspan="2" style="font-size: 8px;" valign="top"><strong>Evaporation Rate</strong><br><br>*PHM-AP0617 is to replace PHX-AP0607</td>
-            <td align="left" rowspan="2" style="font-size: 8px;" >Depends On RDY Label<br><br>&ge; 0.2</td>
+            <td align="left" rowspan="2" style="font-size: 8px;" >Depends On Climacool Label<br><br>&ge; 0.25</td>
             <td align="center" rowspan="2" style="font-size: 8px;" >
             <?php if($rcek1['stat_dry']=="RANDOM"){echo $rcekR['rdry1'];}else if($rcek1['stat_dry']=="DISPOSISI"){echo $rcekD['ddry1'];}else{echo $rcek1['dry1'];}?><br><br>
             <?php if($rcek1['stat_dry1']=="RANDOM"){echo $rcekR['rdryaf1'];}else if($rcek1['stat_dry1']=="DISPOSISI"){echo $rcekD['ddryaf1'];}else{echo $rcek1['dryaf1'];}?>
