@@ -27,6 +27,8 @@ include "koneksi.php";
 	
   $FilterByStatus = isset($_POST['filter_by_status']) ? $_POST['filter_by_status'] : '';
 
+  $hitung = isset($_POST['hitung']) ? $_POST['hitung'] : '';
+
   if ($_POST['gshift'] == "ALL") {
     $shft = " ";
   } else {
@@ -243,6 +245,19 @@ include "koneksi.php";
     return $get;
   }
 
+  function getLotLegacyByDemand($demand) {
+    global $conn1;
+
+    $sql = "SELECT 
+              TRIM(DESCRIPTION) AS LOTLEGACY
+            FROM PRODUCTIONDEMAND
+            WHERE CODE = '$demand' ";
+
+    $stmt = db2_exec($conn1, $sql);
+    $row = db2_fetch_assoc($stmt);
+    return $row['LOTLEGACY'];
+  }
+
   ?>
   <div class="alert alert-success alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -394,7 +409,12 @@ include "koneksi.php";
                   } ?>>
                 <?= $label ?>
               </label>
-            <?php } ?>
+              <?php } ?>
+
+              <label style="margin-right: 5px">
+                <input type="checkbox" name="hitung" value="ya" <?php echo $hitung != "" ? 'checked' : ''; ?>>
+                Hitung
+              </label>
           </div>
         </div>
         <!-- /.box-body -->
@@ -441,6 +461,9 @@ include "koneksi.php";
                 <th width="6%">
                   <div align="center">Tgl Target</div>
                 </th>
+                <th width="6%">
+                  <div align="center">No Item</div>
+                </th>
                 <th width="20%">
                   <div align="center">Jenis_Kain</div>
                 </th>
@@ -452,6 +475,9 @@ include "koneksi.php";
                 </th>
                 <th width="7%">
                   <div align="center">Lot Salinan</div>
+                </th>
+                <th width="7%">
+                  <div align="center">Lot Legacy</div>
                 </th>
                 <th width="7%">
                   <div align="center">Warna</div>
@@ -467,6 +493,9 @@ include "koneksi.php";
                 </th>
                 <th width="9%">
                   <div align="center">Masalah</div>
+                </th>
+                <th width="9%">
+                  <div align="center">Masalah Utama</div>
                 </th>
                 <th width="5%">
                   <div align="center">Tempat Kain</div>
@@ -528,9 +557,13 @@ include "koneksi.php";
                 $Today = ' substring(tgl_buat, 1, 10) = substring(now(), 1, 10) AND ';
               }
 
+              if($hitung != "") {
+                $where6 = " AND ncp_hitung = 'ya' ";
+              }
+
               // print_r($filterStatus);
               $qry1 = mysqli_query($con, "SELECT *,DATEDIFF(tgl_rencana,DATE_FORMAT(now(),'%Y-%m-%d')) as lama, DATEDIFF(DATE_FORMAT(now(),'%Y-%m-%d'),tgl_rencana) as delay 
-	FROM tbl_ncp_qcf_now WHERE " . $Today . $filterStatus . $where . $where1 . $where2 . $where3 . $where4 . $where5 . " ORDER BY id ASC");
+	FROM tbl_ncp_qcf_now WHERE " . $Today . $filterStatus . $where . $where1 . $where2 . $where3 . $where4 . $where5 . $where6 . " ORDER BY id ASC");
               while ($row1 = mysqli_fetch_array($qry1)) {
                 if ($row1['nokk_salinan'] != "") {
                   $nokk1 = $row1['nokk_salinan'];
@@ -634,6 +667,11 @@ include "koneksi.php";
                     </font>
                   </td>
                   <td>
+                    <font size="-1">
+                      <?php echo $row1['no_item']; ?>
+                    </font>
+                  </td>
+                  <td>
                     <font size="-2">
                       <?php echo $row1['jenis_kain']; ?>
                     </font>
@@ -651,6 +689,11 @@ include "koneksi.php";
                   <td align="center">
                     <font size="-1">
                       <?php echo $row1['lot_salinan']; ?>
+                    </font>
+                  </td>
+                  <td align="center">
+                    <font size="-1">
+                      <?php echo getLotLegacyByDemand($row1['nodemand']); ?>
                     </font>
                   </td>
                   <td align="center">
@@ -676,6 +719,11 @@ include "koneksi.php";
                   <td>
                     <font size="-1">
                       <?php echo $row1['masalah']; ?>
+                    </font>
+                  </td>
+                  <td>
+                    <font size="-1">
+                      <?php echo $row1['masalah_dominan']; ?>
                     </font>
                   </td>
                   <td>
