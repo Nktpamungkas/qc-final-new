@@ -420,7 +420,13 @@ include "koneksi.php";
                   <div align="center">Langganan</div>
                 </th>
                 <th width="11%">
-                  <div align="center">Status</div>
+                  <div align="center">Status 1</div>
+                </th>
+                <th width="11%">
+                  <div align="center">Status 2</div>
+                </th>
+                <th width="11%">
+                  <div align="center">Status 3</div>
                 </th>
                 <th width="6%">
                   <div align="center">Buyer</div>
@@ -430,6 +436,9 @@ include "koneksi.php";
                 </th>
                 <th width="6%">
                   <div align="center">Order</div>
+                </th>
+                <th width="6%">
+                  <div align="center">No NCP</div>
                 </th>
                 <th width="6%">
                   <div align="center">Tgl Target</div>
@@ -623,12 +632,15 @@ include "koneksi.php";
                       } ?> ">
                           <?php echo $row1['status']; ?>
                         </span></a>
+                  </td>
+                  <td>
                       <?php if ($row1['tgl_rencana'] != "" and $row1['penyelesaian'] == "") {
                         echo "<span class='label label-primary'>Sudah diterima " . $row1['dept'] . "</span>";
                       } else if ($row1['tgl_rencana'] != "" and $row1['penyelesaian'] != "") {
                         echo "<span class='label label-danger'>Tunggu OK dari QCF</span>";
                       } ?>
-
+                  </td>
+                  <td>
                       <!-- inistart -->
                       <?php
                       $status_operation = getStatusOperationByDemand($row1['nodemand']);
@@ -653,14 +665,16 @@ include "koneksi.php";
                   <td align="center">
                     <font size="-1">
                       <?php echo $row1['no_order']; ?>
-                    </font><br><a href="PenyelesaianNew-<?php echo $row1['id']; ?>" class="btn"><span
-                        class="label label-danger">
-                        <?php echo $row1['no_ncp_gabungan']; ?>
-                      </span></a><br>
-                    <?php echo $row1['nokk']; ?>
+                    </font><br>
                     <?php if ($r1['tgl_terima'] == "" and $r1['jml'] > 0) { ?><a href="#" class="btn terima_ncp_lama"
                         id="<?php echo $r1['id']; ?>"><span class="label label-success">NCP Lama</span></a>
                     <?php } ?>
+                  </td>
+                  <td>
+                    <a href="PenyelesaianNew-<?php echo $row1['id']; ?>" class="btn"><span
+                      class="label label-danger">
+                      <?php echo $row1['no_ncp_gabungan']; ?>
+                    </span></a>
                   </td>
                   <td>
                     <font size="-1">
