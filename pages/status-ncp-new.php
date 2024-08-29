@@ -411,6 +411,12 @@ include "koneksi.php";
                   <div align="center">Lama Proses</div>
                 </th>
                 <th width="11%">
+                  <div align="center">No Demand</div>
+                </th>
+                <th width="11%">
+                  <div align="center">Registration</div>
+                </th>
+                <th width="11%">
                   <div align="center">Langganan</div>
                 </th>
                 <th width="11%">
@@ -586,11 +592,15 @@ include "koneksi.php";
                       echo "<span class='label label-success'>" . $row1['lama'] . " Hari Lagi</span>";
                     } else {
                       echo "<span class='label bg-fuchsia'>NCP belum-diterima</span>";
-                    } ?><br>
+                    } ?>
+                  </td>
+                  <td>
                     <a href="http://10.0.0.10/laporan/ppc_filter_steps.php?demand=<?= $row1['nodemand'] ?>"
                       class="posisi_kk" id="<?php echo $row1['nodemand']; ?>" target="_blank">
                       <?php echo $row1['nodemand']; ?>
-                    </a><br>
+                    </a>
+                  </td>
+                  <td>
                     <a href="#" class="demanadno_" id="<?php echo $row1['reg_no']; ?>">
                       <?php echo $row1['reg_no']; ?>
                     </a>
