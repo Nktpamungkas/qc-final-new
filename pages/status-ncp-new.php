@@ -22,12 +22,11 @@ include "koneksi.php";
   $GShift = isset($_POST['gshift']) ? $_POST['gshift'] : '';
   $Dept = isset($_POST['dept']) ? $_POST['dept'] : '';
   $NCP = isset($_POST['no_ncp']) ? $_POST['no_ncp'] : '';
-  $Bln = isset($_POST['bln']) ? $_POST['bln'] : '';
-  $Thn = isset($_POST['thn']) ? $_POST['thn'] : '';
 	
   $FilterByStatus = isset($_POST['filter_by_status']) ? $_POST['filter_by_status'] : '';
 
   $hitung = isset($_POST['hitung']) ? $_POST['hitung'] : '';
+  $posisi_terakhir = isset($_POST['posisi_terakhir']) ? $_POST['posisi_terakhir'] : '';
 
   if ($_POST['gshift'] == "ALL") {
     $shft = " ";
@@ -278,59 +277,19 @@ include "koneksi.php";
     <form method="post" enctype="multipart/form-data" name="form1" class="form-horizontal" id="form1">
       <div class="box-body">
         <div class="form-group">
-		  <div class="col-sm-2">
-            <select class="form-control select2" name="thn" id="thn">
-              <option value="">Pilih</option>
-              <option value="2024" <?php if ($Thn == "2024") {
-                echo "SELECTED";
-              } ?>>2024</option>
-              <option value="2023" <?php if ($Thn == "2023") {
-                echo "SELECTED";
-              } ?>>2023</option>
-            </select>
-          </div>
-		  <div class="col-sm-2">
-            <select class="form-control select2" name="bln" id="bln">
-              <option value="">Pilih</option>
-              <option value="01" <?php if ($Bln == "01") {
-                echo "SELECTED";
-              } ?>>Januari</option>
-              <option value="02" <?php if ($Bln == "02") {
-                echo "SELECTED";
-              } ?>>Februari</option>
-			  <option value="03" <?php if ($Bln == "03") {
-                echo "SELECTED";
-              } ?>>Maret</option>
-              <option value="04" <?php if ($Bln == "04") {
-                echo "SELECTED";
-              } ?>>April</option>
-			   <option value="05" <?php if ($Bln == "05") {
-                echo "SELECTED";
-              } ?>>Mei</option>
-              <option value="06" <?php if ($Bln == "06") {
-                echo "SELECTED";
-              } ?>>Juni</option>
-			  <option value="07" <?php if ($Bln == "07") {
-                echo "SELECTED";
-              } ?>>Juli</option>
-              <option value="08" <?php if ($Bln == "08") {
-                echo "SELECTED";
-              } ?>>Agustus</option>	
-			  <option value="09" <?php if ($Bln == "09") {
-                echo "SELECTED";
-              } ?>>September</option>
-              <option value="10" <?php if ($Bln == "10") {
-                echo "SELECTED";
-              } ?>>Oktober</option>
-			  <option value="11" <?php if ($Bln == "11") {
-                echo "SELECTED";
-              } ?>>November</option>
-              <option value="12" <?php if ($Bln == "12") {
-                echo "SELECTED";
-              } ?>>Desember</option>	
-            </select>
-          </div>	
-          <div class="col-sm-2">
+      <div class="col-sm-2">
+        <div class="input-group date">
+          <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+          <input name="awal" type="text" class="form-control pull-right" id="datepicker" placeholder="Awal" value="<?=$Awal?>" autocomplete="off" />
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="input-group date">
+          <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+          <input name="akhir" type="text" class="form-control pull-right" id="datepicker2" placeholder="Akhir" value="<?=$Akhir?>" autocomplete="off" />
+        </div>
+      </div>
+          <div class="col-sm-1">
             <select class="form-control select2" name="dept" id="dept">
               <option value="">Pilih</option>
               <option value="MKT" <?php if ($Dept == "MKT") {
@@ -415,6 +374,11 @@ include "koneksi.php";
                 <input type="checkbox" name="hitung" value="ya" <?php echo $hitung != "" ? 'checked' : ''; ?>>
                 Hitung
               </label>
+
+              <label style="margin-right: 5px">
+                <input type="checkbox" name="posisi_terakhir" value="1" <?php echo $posisi_terakhir != "" ? 'checked' : ''; ?>>
+                Posisi Terakhir
+              </label>
           </div>
         </div>
         <!-- /.box-body -->
@@ -448,6 +412,9 @@ include "koneksi.php";
                 </th>
                 <th width="11%">
                   <div align="center">Langganan</div>
+                </th>
+                <th width="11%">
+                  <div align="center">Status</div>
                 </th>
                 <th width="6%">
                   <div align="center">Buyer</div>
@@ -510,60 +477,82 @@ include "koneksi.php";
               $no = 1;
               if ($_SESSION['dept'] != "QC") {
                 $where = " AND dept='$_SESSION[dept]' ";
-              } else {
-                $where = " ";
-              }
+                $whereT1 = " AND t1.dept='$_SESSION[dept]' ";
+              } 
               if ($Dept != "") {
                 $where1 = " AND dept='$Dept' ";
-              } else {
-                $where1 = " ";
+                $where1T1 = " AND t1.dept='$Dept' ";
               }
               if ($NCP != "") {
                 $where2 = " AND no_ncp='$NCP' ";
-              } else {
-                $where2 = " ";
+                $where2T1 = " AND t1.no_ncp='$NCP' ";
               }
-			  if ($Thn != "" and $Bln == "") {
-                $where3 = " AND substring(tgl_buat, 1, 4) = '$Thn' ";
-              } else {
-                $where3 = " ";
-              }	
-			  
-			  if ($Thn != "" and $Bln != "") {
-                $where4 = " AND substring(tgl_buat, 1, 7) = '$Thn-$Bln' ";
-              } else {
-                $where4 = " ";
-              }		
-			
-			  if ($Bln =="" and $Thn =="" and $NCP =="" and $Dept == "" and $_SESSION['dept'] == "QC" and isset($_POST['cari'])){
-				 $where5 = " AND substring(tgl_buat, 1, 4) = substring(now(), 1, 4) "; 
-			  } else {
-				 $where5 = " "; 
-			  }
-				  
 
               if ($FilterByStatus != "") {
                 $filterStatus = "";
                 if (count($FilterByStatus) > 1) {
                   $filterStatus .= "status IN ('" . implode("', '", $FilterByStatus) . "') ";
+                  $filterStatusT1 .= "t1.status IN ('" . implode("', '", $FilterByStatus) . "') ";
                 } else {
                   $filterStatus .= "status = '" . $FilterByStatus[0] . "' ";
+                  $filterStatusT1 .= "t1.status = '" . $FilterByStatus[0] . "' ";
                 }
               } else {
                 $filterStatus .= "status IN ('Belum OK', 'OK', 'BS', 'Cancel', 'Disposisi') ";
+                $filterStatusT1 .= "t1.status IN ('Belum OK', 'OK', 'BS', 'Cancel', 'Disposisi') ";
               }
 
               if(!isset($_POST['cari'])) {
                 $Today = ' substring(tgl_buat, 1, 10) = substring(now(), 1, 10) AND ';
+                $TodayT1 = ' substring(t1.tgl_buat, 1, 10) = substring(now(), 1, 10) AND ';
               }
 
               if($hitung != "") {
                 $where6 = " AND ncp_hitung = 'ya' ";
+                $where6T1 = " AND t1.ncp_hitung = 'ya' ";
+              }
+
+              if($Awal != "" && $Akhir != "") {
+                $where7   = " and tgl_buat between '$Awal' and '$Akhir' ";
+                $where7T1 = " and t1.tgl_buat between '$Awal' and '$Akhir' ";
               }
 
               // print_r($filterStatus);
-              $qry1 = mysqli_query($con, "SELECT *,DATEDIFF(tgl_rencana,DATE_FORMAT(now(),'%Y-%m-%d')) as lama, DATEDIFF(DATE_FORMAT(now(),'%Y-%m-%d'),tgl_rencana) as delay 
-	FROM tbl_ncp_qcf_now WHERE " . $Today . $filterStatus . $where . $where1 . $where2 . $where3 . $where4 . $where5 . $where6 . " ORDER BY id ASC");
+              if($posisi_terakhir != "") {
+                $qry1 = mysqli_query($con, "SELECT
+                                                t1.*,
+                                                DATEDIFF(t1.tgl_rencana, CURDATE()) AS lama,
+                                                DATEDIFF(CURDATE(), t1.tgl_rencana) AS delay
+                                            FROM
+                                                tbl_ncp_qcf_now t1
+                                            JOIN (
+                                                SELECT 
+                                                    no_ncp, 
+                                                    MAX(tgl_update) AS max_tgl_update
+                                                FROM 
+                                                    tbl_ncp_qcf_now
+                                                WHERE
+                                                    " . $Today . $filterStatus . $where . $where1 . $where2 . $where6 . $where7 . "
+                                                GROUP BY 
+                                                    no_ncp
+                                            ) t2
+                                            ON t1.no_ncp = t2.no_ncp AND t1.tgl_update = t2.max_tgl_update
+                                            WHERE
+                                                " . $TodayT1 . $filterStatusT1 . $whereT1 . $where1T1 . $where2T1 . $where6T1 . $where7T1 . "
+                                            ORDER BY
+                                                t1.id ASC, t1.no_ncp ASC, t1.tgl_update DESC;");
+              } else {
+                $qry1 = mysqli_query($con, "select
+                                              *,
+                                              DATEDIFF(tgl_rencana, DATE_FORMAT(now(), '%Y-%m-%d')) as lama,
+                                              DATEDIFF(DATE_FORMAT(now(), '%Y-%m-%d'), tgl_rencana) as delay
+                                            from
+                                              tbl_ncp_qcf_now
+                                            where
+                                              " . $Today . $filterStatus . $where . $where1 . $where2 . $where6 . $where7 . "
+                                            order by
+                                              id asc");
+              }
               while ($row1 = mysqli_fetch_array($qry1)) {
                 if ($row1['nokk_salinan'] != "") {
                   $nokk1 = $row1['nokk_salinan'];
@@ -609,35 +598,37 @@ include "koneksi.php";
                   <td>
                     <font size="-1">
                       <?php echo $row1['langganan']; ?>
-                    </font><br>
+                    </font>
+                  </td>
+                  <td>
                     <a href="StatusNCPNewUbah-<?php echo $row1['id']; ?>" class="btn 
-                    <?php
-                    // if ($_SESSION['dept'] != "QC") {
-                    //      echo "disabled";
-                    //    } 
-                    ?>"><span class="label <?php if ($row1['status'] == "OK") {
-                      echo "label-success";
-                    } else {
-                      echo "label-warning";
-                    } ?> ">
-                        <?php echo $row1['status']; ?>
-                      </span></a>
-                    <?php if ($row1['tgl_rencana'] != "" and $row1['penyelesaian'] == "") {
-                      echo "<span class='label label-primary'>Sudah diterima " . $row1['dept'] . "</span>";
-                    } else if ($row1['tgl_rencana'] != "" and $row1['penyelesaian'] != "") {
-                      echo "<span class='label label-danger'>Tunggu OK dari QCF</span>";
-                    } ?>
+                      <?php
+                      // if ($_SESSION['dept'] != "QC") {
+                      //      echo "disabled";
+                      //    } 
+                      ?>"><span class="label <?php if ($row1['status'] == "OK") {
+                        echo "label-success";
+                      } else {
+                        echo "label-warning";
+                      } ?> ">
+                          <?php echo $row1['status']; ?>
+                        </span></a>
+                      <?php if ($row1['tgl_rencana'] != "" and $row1['penyelesaian'] == "") {
+                        echo "<span class='label label-primary'>Sudah diterima " . $row1['dept'] . "</span>";
+                      } else if ($row1['tgl_rencana'] != "" and $row1['penyelesaian'] != "") {
+                        echo "<span class='label label-danger'>Tunggu OK dari QCF</span>";
+                      } ?>
 
-                    <!-- inistart -->
-                    <?php
-                    $status_operation = getStatusOperationByDemand($row1['nodemand']);
-                    ?>
-                    <?php if ($status_operation != null && $status_operation != "") { ?>
-                      <span class='label label-danger'>
-                        <?= $status_operation ?>
-                      </span>
-                    <?php } ?>
-                    <!-- endinistart -->
+                      <!-- inistart -->
+                      <?php
+                      $status_operation = getStatusOperationByDemand($row1['nodemand']);
+                      ?>
+                      <?php if ($status_operation != null && $status_operation != "") { ?>
+                        <span class='label label-danger'>
+                          <?= $status_operation ?>
+                        </span>
+                      <?php } ?>
+                      <!-- endinistart -->
                   </td>
                   <td>
                     <font size="-1">
@@ -745,7 +736,7 @@ include "koneksi.php";
       </div>
     </div>
   </div>
-  < !--Modal -->
+    <!--Modal -->
     <div id="StsNewEdit" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
       aria-hidden="true"></div>
     <div id="SelesaiNewEdit" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
