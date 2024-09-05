@@ -396,6 +396,12 @@ include "koneksi.php";
       <div class="box">
         <div class="box-header with-border">
           <h3 class="box-title">Status NCP</h3>
+          <div class="pull-right">
+            <a href="pages/cetak/status_ncp_excel.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>&gshift=<?=$GShift?>&dept=<?=$Dept?>&ncp=<?=$NCP?>&filter_by_status=<?=$FilterByStatus?>&hitung=<?=$hitung?>&posisi_terakhir=<?=$posisi_terakhir?>"
+              class="btn btn-primary <?php if ($Awal == "") {
+                echo "disabled";
+              } ?>" target="_blank">Cetak Excel</a>
+          </div>
         </div>
         <div class="box-body">
           <table class="table table-bordered table-hover table-striped nowrap" id="example3" style="width:100%">
