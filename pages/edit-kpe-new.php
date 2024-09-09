@@ -58,7 +58,7 @@ $rcek=mysqli_fetch_array($sqlCek);
 		  <label for="no_po" class="col-sm-3 control-label">Pelanggan</label>
 		  <div class="col-sm-6">
 			<input name="pelanggan" type="text" class="form-control" id="no_po" placeholder="Pelanggan" 
-			value="<?php if($cek>0){echo $rcek['langganan'];}?>" readonly="readonly" >
+			value="<?php if($cek>0){echo $rcek['langganan'];}?>" >
 			<input name="pelanggan1" type="hidden" class="form-control" id="pelanggan1" 
 			value="<?php if($cek>0){echo $rcek['pelanggan'];}?>" placeholder="Pelanggan" >
 		  </div>				   
