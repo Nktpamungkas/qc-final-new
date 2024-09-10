@@ -188,7 +188,8 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         $qryAll=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $WCheck $WStatus");
                         $rAll=mysqli_fetch_array($qryAll);
                         $qrylgn=mysqli_query($con,"SELECT COUNT(*) AS jml, SUM(qty_claim) AS qty_claim_lgn, SUM(qty_lolos) as qty_lolos_qc, ROUND(COUNT(pelanggan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir')*100,1) AS persen,
-                        pelanggan
+                        pelanggan,
+                        langganan
                         FROM
                         `tbl_aftersales_now`
                         WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
@@ -220,7 +221,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         ?>
                         <tr valign="top">
                             <td align="center"><?php echo $no1; ?></td>
-                            <td align="left"><?php echo $r['pelanggan'];?></td>
+                            <td align="left"><?php echo $r['langganan'];?></td>
                             <td align="right"><?php echo $rowQryJumlahKasus['jumlah_kasus'] ; ?></td>
                             <td align="right"><?php echo $Status === 'Lolos QC' ? $r['qty_lolos_qc'] : $r['qty_claim_lgn']; ?></td>
                             <td align="right"><?php if($TotalKirim!=""){echo number_format(($r['qty_claim_lgn']/(int)$rAll['qty_claim_all'])*100,2)." %";}else{echo "0 %";}?></td>

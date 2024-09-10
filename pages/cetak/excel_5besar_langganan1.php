@@ -32,7 +32,8 @@ $TotalKirim=$_GET['total'];
     $qryAll=mysqli_query($con,"SELECT COUNT(*) AS jml_all, SUM(qty_claim) AS qty_claim_all FROM tbl_aftersales_now WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'");
     $rAll=mysqli_fetch_array($qryAll);
     $qrylgn=mysqli_query($con,"SELECT COUNT(*) AS jml, SUM(qty_claim) AS qty_claim_lgn, ROUND(COUNT(pelanggan)/(SELECT COUNT(*) FROM tbl_aftersales_now WHERE tgl_buat BETWEEN '$Awal' AND '$Akhir')*100,1) AS persen,
-    pelanggan
+    pelanggan,
+    langganan
     FROM
     `tbl_aftersales_now`
     WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
@@ -62,7 +63,7 @@ $TotalKirim=$_GET['total'];
 	?>
         <tr valign="top">
             <td align="center"><?php echo $no1; ?></td>
-            <td align="left"><?php echo $r['pelanggan'];?></td>
+            <td align="left"><?php echo $r['langganan'];?></td>
             <td align="right"><?php echo $rowQryJumlahKasus['jumlah_kasus']; ?></td>
             <td align="right"><?php echo $r['qty_claim_lgn']; ?></td>
             <td align="right"><?php echo number_format(($r['qty_claim_lgn']/(int)$rAll['qty_claim_all'])*100,2)." %"; ?></td>
