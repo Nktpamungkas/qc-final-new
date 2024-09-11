@@ -397,7 +397,11 @@ include "koneksi.php";
         <div class="box-header with-border">
           <h3 class="box-title">Status NCP</h3>
           <div class="pull-right">
-            <a href="pages/cetak/status_ncp_excel.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>&gshift=<?=$GShift?>&dept=<?=$Dept?>&ncp=<?=$NCP?>&filter_by_status=<?=$FilterByStatus?>&hitung=<?=$hitung?>&posisi_terakhir=<?=$posisi_terakhir?>"
+            <?php
+              $queryArray = array('filter_by_status' => $FilterByStatus);
+              $queryString = http_build_query($queryArray, '', '&', PHP_QUERY_RFC3986);
+            ?>
+            <a href="pages/cetak/status_ncp_excel.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>&gshift=<?=$GShift?>&dept=<?=$Dept?>&ncp=<?=$NCP?>&<?=$queryString?>&hitung=<?=$hitung?>&posisi_terakhir=<?=$posisi_terakhir?>"
               class="btn btn-primary <?php if ($Awal == "") {
                 echo "disabled";
               } ?>" target="_blank">Cetak Excel</a>
