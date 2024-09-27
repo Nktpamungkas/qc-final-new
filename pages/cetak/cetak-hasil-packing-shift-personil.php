@@ -169,11 +169,11 @@ border:hidden;
             WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING A' $nomc $grp AND `dept`='PACKING' GROUP BY operator,no_mc");
                 while($row=mysqli_fetch_array($qry1)){
                     //QTY KECIL
-                    $qryKecil=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
+                    $qryKecil=mysqli_query($con,"SELECT SUM(jml_netto) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
                     WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING A' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Kecil'");
                     $rowKecil=mysqli_fetch_array($qryKecil);
                     //QTY BESAR
-                    $qryBesar=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
+                    $qryBesar=mysqli_query($con,"SELECT SUM(jml_netto) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
                     WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING A' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
                     $rowBesar=mysqli_fetch_array($qryBesar);
 					// QTY LOSS
@@ -271,11 +271,11 @@ border:hidden;
             WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING B' $nomc $grp AND `dept`='PACKING' GROUP BY operator,no_mc");
                 while($row=mysqli_fetch_array($qry1)){
                     //QTY KECIL
-                    $qryKecil=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
+                    $qryKecil=mysqli_query($con,"SELECT SUM(jml_netto) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
                     WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING B' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Kecil'");
                     $rowKecil=mysqli_fetch_array($qryKecil);
                     //QTY BESAR
-                    $qryBesar=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
+                    $qryBesar=mysqli_query($con,"SELECT SUM(jml_netto) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
                     WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING B' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
                     $rowBesar=mysqli_fetch_array($qryBesar);
 					// QTY LOSS
@@ -372,11 +372,11 @@ border:hidden;
             WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING C' $nomc $grp AND `dept`='PACKING' GROUP BY operator,no_mc");
                 while($row=mysqli_fetch_array($qry1)){
                     //QTY KECIL
-                    $qryKecil=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
+                    $qryKecil=mysqli_query($con,"SELECT SUM(jml_netto) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
                     WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING C' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Kecil'");
                     $rowKecil=mysqli_fetch_array($qryKecil);
                     //QTY BESAR
-                    $qryBesar=mysqli_query($con,"SELECT SUM(jml_roll) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
+                    $qryBesar=mysqli_query($con,"SELECT SUM(jml_netto) as roll, SUM(bruto) AS bruto, SUM(netto) AS netto, SUM(panjang) AS panjang FROM tbl_lap_inspeksi
                     WHERE DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' AND `inspektor`='PACKING C' $grp AND `dept`='PACKING' AND operator='$row[operator]' AND no_mc='$row[no_mc]' AND ket_qty='Quantity Besar'");
                     $rowBesar=mysqli_fetch_array($qryBesar);
 					// QTY LOSS
