@@ -37,7 +37,7 @@ $TotalKirim=$_GET['total'];
     FROM
     `tbl_aftersales_now`
     WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
-    GROUP BY pelanggan
+    GROUP BY langganan
     ORDER BY qty_claim_lgn DESC LIMIT 5");
     while($r=mysqli_fetch_array($qrylgn)){
         $qryJumlahKasus = mysqli_query($con, "select
@@ -48,14 +48,15 @@ $TotalKirim=$_GET['total'];
                                                     from
                                                     tbl_aftersales_now
                                                 where
-                                                    pelanggan like '%$r[pelanggan]%'
+                                                    langganan like '%$r[langganan]%'
                                                         AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
                                                 group by
                                                     po,
                                                     no_hanger,
                                                     warna,
                                                     masalah_dominan,
-                                                    qty_order
+                                                    qty_order,
+                                                    langganan
                                                 order by
                                                     tgl_buat asc
                                                 ) temp");
@@ -63,7 +64,7 @@ $TotalKirim=$_GET['total'];
 	?>
         <tr valign="top">
             <td align="center"><?php echo $no1; ?></td>
-            <td align="left"><?php echo $r['langganan'];?></td>
+            <td align="left"><?php echo explode('/', $r['langganan'])[0];?></td>
             <td align="right"><?php echo $rowQryJumlahKasus['jumlah_kasus']; ?></td>
             <td align="right"><?php echo $r['qty_claim_lgn']; ?></td>
             <td align="right"><?php echo number_format(($r['qty_claim_lgn']/(int)$rAll['qty_claim_all'])*100,2)." %"; ?></td>

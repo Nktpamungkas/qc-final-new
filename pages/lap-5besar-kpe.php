@@ -194,7 +194,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         `tbl_aftersales_now`
                         WHERE DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir'
                         $WCheck $WStatus
-                        GROUP BY pelanggan
+                        GROUP BY langganan
                         ORDER BY qty_claim_lgn DESC LIMIT 5");
                         while($r=mysqli_fetch_array($qrylgn)){
                             $qryJumlahKasus = mysqli_query($con, "select
@@ -205,7 +205,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                                                                         from
                                                                         tbl_aftersales_now
                                                                     where
-                                                                        pelanggan like '%$r[pelanggan]%'
+                                                                        langganan like '%$r[langganan]%'
                                                                             AND tgl_buat BETWEEN '$Awal' AND '$Akhir'
                                                                             $WCheck $WStatus
                                                                     group by
@@ -213,7 +213,8 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                                                                         no_hanger,
                                                                         warna,
                                                                         masalah_dominan,
-                                                                        qty_order
+                                                                        qty_order,
+                                                                        langganan
                                                                     order by
                                                                         tgl_buat asc
                                                                     ) temp");
@@ -221,7 +222,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         ?>
                         <tr valign="top">
                             <td align="center"><?php echo $no1; ?></td>
-                            <td align="left"><?php echo $r['langganan'];?></td>
+                            <td align="left"><?php echo explode('/', $r['langganan'])[0];?></td>
                             <td align="right"><?php echo $rowQryJumlahKasus['jumlah_kasus'] ; ?></td>
                             <td align="right"><?php echo $Status === 'Lolos QC' ? $r['qty_lolos_qc'] : $r['qty_claim_lgn']; ?></td>
                             <td align="right"><?php if($TotalKirim!=""){echo number_format(($r['qty_claim_lgn']/(int)$rAll['qty_claim_all'])*100,2)." %";}else{echo "0 %";}?></td>
