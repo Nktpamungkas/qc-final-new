@@ -154,23 +154,57 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
           </thead>
           <tbody>
           <?php
+          if(($Awal != "" && $Akhir != "") || $Order != "" || $PO != "" || $Hanger != "" || $Item != "" || $Warna != "" || $Pelanggan != "" || $ProdOrder != "" || $Demand != "" || $Proses != ""){
             $no=1;
-            if($Awal!=""){ $Where =" AND DATE_FORMAT( tgl_masuk, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
-            if($sts_tembakdok=="1"){ $Sts =" AND sts_tembakdok='1' "; }
-            if($Proses!=""){ $prs=" AND sts_aksi='$Proses' ";}else{$prs=" ";}
-            if($Awal!="" or $Order!="" or $Warna!="" or $Hanger!="" or $Item!="" or $PO!="" or $Pelanggan!=""){
-				$sql_code = "SELECT  tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
-                      LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order 
-                      WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '%$Order%' AND tq.no_po LIKE '%$PO%' AND tq.no_hanger LIKE '%$Hanger%' AND tq.no_item LIKE '%$Item%' AND tq.warna LIKE '%$Warna%' AND tq.pelanggan LIKE '%$Pelanggan%' AND tq.nokk LIKE '%$ProdOrder%' AND tq.nodemand LIKE '%$Demand%' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='') 
-                      GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan, tq.tgl_masuk";
-                $sql=mysqli_query($con,$sql_code);
-            }else{
-				$sql_code = "SELECT  tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
-                    LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order 
-                    WHERE tq.sts_pbon!='10' AND tq.no_order LIKE '$Order' AND tq.no_po LIKE '$PO' AND tq.no_hanger LIKE '$Hanger%' AND tq.no_item LIKE '$Item' AND tq.warna LIKE '$Warna' AND tq.pelanggan LIKE '$Pelanggan' AND tq.nokk LIKE '$ProdOrder' AND tq.nodemand LIKE '$Demand' $Where $prs $Sts AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='')  
-                    GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan, tq.tgl_masuk";
-                $sql=mysqli_query($con,$sql_code);
+
+            $fields = [];
+
+            if($Awal != "" && $Akhir != ""){ 
+              $fields[] = " DATE_FORMAT( tgl_masuk, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; 
             }
+            if($Order != ""){ 
+              $fields[] = " tq.no_order LIKE '%$Order%' "; 
+            }
+            if($PO != ""){ 
+              $fields[] = " tq.no_po LIKE '%$PO%' "; 
+            }
+            if($Hanger != ""){ 
+              $fields[] = " tq.no_hanger LIKE '%$Hanger%' "; 
+            }
+            if($Item != ""){ 
+              $fields[] = " tq.no_item LIKE '%$Item%' "; 
+            }
+            if($Warna != ""){ 
+              $fields[] = " tq.warna LIKE '%$Warna%' "; 
+            }
+            if($Pelanggan != ""){ 
+              $fields[] = " tq.pelanggan LIKE '%$Pelanggan%' "; 
+            }
+            if($ProdOrder != ""){ 
+              $fields[] = " tq.nokk LIKE '%$ProdOrder%' "; 
+            }
+            if($Demand != ""){ 
+              $fields[] = " tq.nodemand LIKE '%$Demand%' "; 
+            }
+            if($Proses != ""){ 
+              $fields[] = " sts_aksi='$Proses' "; 
+            }
+            if($sts_tembakdok=="1"){ 
+              $fields[] = " sts_tembakdok='1' "; 
+            }
+            
+            $default_fields = " AND tq.sts_pbon!='10' AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='') ";
+            $group_by_fields = " GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan, tq.tgl_masuk; ";
+
+            $sql_code = "SELECT  tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
+                      LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order ";
+
+            if(count($fields) > 0) {
+              $sql_code .= "WHERE " . implode("AND", $fields) . $default_fields . $group_by_fields;
+            }
+
+            $sql=mysqli_query($con,$sql_code);
+            
 			/*
 			echo '<pre>';
 					print_r($sql_code);
@@ -375,7 +409,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 		  
 		  
 		  
-          <?php	$no++;  } ?>
+          <?php	$no++;  } } ?>
         </tbody>
       </table>
 	  
