@@ -101,7 +101,7 @@ function suratJalan($prodOrder, $po) {
 
             <th colspan=3 ><div align="center" valign="middle">QTY</div></th>
             <th colspan=2 ><div align="center" valign="middle">QTY FOC</div></th>
-            <th colspan=2 ><div align="center" valign="middle">ESTIMASI</div></th>
+            <th colspan=2 ><div align="center" valign="middle">ESTIMASI FOC</div></th>
 
             <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
             <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>

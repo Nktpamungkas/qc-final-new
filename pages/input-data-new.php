@@ -829,7 +829,7 @@ $rcekd=mysqli_fetch_array($sqlD);
                   </div>				   
                 </div>
 		  <div class="form-group">
-                  <label for="extra" class="col-sm-3 control-label">Extra</label>
+                  <label for="extra" class="col-sm-3 control-label">FOC</label>
                   <div class="col-sm-3">
 					<div class="input-group">  
                     <input name="extra" type="text" class="form-control" id="extra" 
@@ -852,7 +852,7 @@ $rcekd=mysqli_fetch_array($sqlD);
                 </div>
 				
 		  <div class="form-group">
-                  <label for="estimasi" class="col-sm-3 control-label">Estimasi</label>
+                  <label for="estimasi" class="col-sm-3 control-label">Estimasi FOC</label>
                   <div class="col-sm-3">
 					<div class="input-group">  
                     <input name="estimasi" type="text" class="form-control" id="estimasi" 
