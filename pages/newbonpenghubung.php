@@ -279,6 +279,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 				<?php if ($row1['penghubung_dep'] !='') {
 						$arrayA = explode(',', $row1['penghubung_dep']);
 						$no_depp = 1;
+            echo $row1['penghubung_dep'].' ' ;
 						foreach ($arrayA as $key=>$element) {			
 							if (array_key_exists($key,$array_persen ?? [] )) {
 								
@@ -286,7 +287,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 									echo ',';
 								}
 								
-								echo $element.' ' ;
+								// echo $element.' ' ;
 								echo $array_persen [$key];
 								
 								
@@ -338,6 +339,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 				<?php if ($row1['penghubung2_dep'] !='') {
 						$arrayA = explode(',', $row1['penghubung2_dep']);
 						$no_depp = 1;
+            echo $row1['penghubung2_dep'].' ' ;
 						foreach ($arrayA as $key=>$element) {			
 							if (array_key_exists($key,$array_persen )) {
 								
@@ -345,7 +347,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 									echo ',';
 								}
 								
-								echo $element.' ' ;
+								// echo $element.' ' ;
 								echo $array_persen [$key];
 								
 								
@@ -400,6 +402,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 				<?php if ($row1['penghubung3_dep'] !='') {
 						$arrayA = explode(',', $row1['penghubung3_dep']);
 						$no_depp = 1;
+            echo $row1['penghubung3_dep'];
 						foreach ($arrayA as $key=>$element) {			
 							if (array_key_exists($key,$array_persen )) {
 								
@@ -407,7 +410,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 									echo ',';
 								}
 								
-								echo $element.' ' ;
+								// echo $element.' ' ;
 								echo $array_persen [$key];
 								
 								
