@@ -128,6 +128,8 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			   
 			   <th colspan=3 ><div align="center" valign="middle">QTY</div></th>
          <th colspan=2 ><div align="center" valign="middle">QTY FOC</div></th>
+         <th colspan=2 ><div align="center" valign="middle">ESTIMASI</div></th>
+
 			   <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">ADVICE FROM PRODUCTION/QC</div></th>
@@ -144,6 +146,9 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 				<th><div align="center" valign="middle">YARD</div></th>
 
         <!-- <th><div align="center" valign="middle">ROLL</div></th> -->
+				<th><div align="center" valign="middle">KG</div></th>
+				<th><div align="center" valign="middle">YARD</div></th>
+        <!-- ESTIMASI -->
 				<th><div align="center" valign="middle">KG</div></th>
 				<th><div align="center" valign="middle">YARD</div></th>
 				
@@ -263,6 +268,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <td align="center"><?php echo $row1['panjang_extra'];?></td>
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
+        <!-- ESTIMASI -->
+        <td align="center"><?php echo $row1['estimasi'];?></td>
+			  <td align="center"><?php echo $row1['panjang_estimasi'];?></td>
+
 			   <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
 			    <td align="center"><?php echo $row1['advice1'];?></td>
@@ -313,6 +322,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
      <!-- Tambahan -->
      <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> -->
      <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> -->
+     <td align="center"></td>
+     <td align="center"></td>
+
+     <!-- ESTINASI -->
      <td align="center"></td>
      <td align="center"></td>
 			  
@@ -372,6 +385,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
        <!-- Tambahan -->
        <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> -->
      <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> -->
+     <td align="center"></td>
+     <td align="center"></td>
+
+     <!-- ESTIMASI -->
      <td align="center"></td>
      <td align="center"></td>
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->

@@ -8,11 +8,11 @@ if (isset($_POST['sql'])) {
 ?>
 
 <?php
-// $now = date("Ymdhis");
-// header("Content-type: application/octet-stream");
-// header("Content-Disposition: attachment; filename=reportbonpenghubung".$now.".xls");//ganti nama sesuai keperluan
-// header("Pragma: no-cache");
-// header("Expires: 0");
+$now = date("Ymdhis");
+header("Content-type: application/octet-stream");
+header("Content-Disposition: attachment; filename=reportbonpenghubung".$now.".xls");//ganti nama sesuai keperluan
+header("Pragma: no-cache");
+header("Expires: 0");
 //disini script laporan anda
 ?>
 
@@ -33,6 +33,8 @@ if (isset($_POST['sql'])) {
 			   
 			   <th colspan=3 ><div align="center" valign="middle">QTY</div></th>
 			   <th colspan=2 ><div align="center" valign="middle">QTY FOC</div></th>
+			   <th colspan=2 ><div align="center" valign="middle">ESTIMASI</div></th>
+
 			   <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">ADVICE FROM PRODUCTION/QC</div></th>
@@ -47,6 +49,10 @@ if (isset($_POST['sql'])) {
 				<th><div align="center" valign="middle">KG</div></th>
 				<th><div align="center" valign="middle">YARD</div></th>
 				
+				<th><div align="center" valign="middle">KG</div></th>
+				<th><div align="center" valign="middle">YARD</div></th>
+
+				<!-- ESTIMASI -->
 				<th><div align="center" valign="middle">KG</div></th>
 				<th><div align="center" valign="middle">YARD</div></th>
 				
@@ -104,6 +110,10 @@ if (isset($_POST['sql'])) {
 			  <td align="center"><?php echo $row1['panjang_extra'];?></td>
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
+			  <!-- ESTIMASI -->
+        	  <td align="center"><?php echo $row1['estimasi'];?></td>
+			  <td align="center"><?php echo $row1['panjang_estimasi'];?></td>
+
 			   <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
                 <td align="center"><?php echo $row1['advice1'];?></td>
@@ -155,6 +165,10 @@ if (isset($_POST['sql'])) {
 			 <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> --> <td></td>
 			  <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> --> <td></td>
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
+
+				<!-- ESTINASI -->
+				<td align="center"></td>
+				<td align="center"></td>
 
 			  <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
@@ -209,6 +223,10 @@ if (isset($_POST['sql'])) {
 			 <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> --> <td></td>
 			  <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> --> <td></td>
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
+
+			  <!-- ESTINASI -->
+				<td align="center"></td>
+				<td align="center"></td>
 
 			  <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>

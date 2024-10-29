@@ -850,7 +850,7 @@ $rcekd=mysqli_fetch_array($sqlD);
 					    </span></div>
 					  </div>
                 </div>
-		 <!--
+				
 		  <div class="form-group">
                   <label for="estimasi" class="col-sm-3 control-label">Estimasi</label>
                   <div class="col-sm-3">
@@ -858,7 +858,7 @@ $rcekd=mysqli_fetch_array($sqlD);
                     <input name="estimasi" type="text" class="form-control" id="estimasi" 
                     value="<?php if($cek>0){echo $rcek['estimasi'];}?>" placeholder="0.00" style="text-align: right;" >
 					<span class="input-group-addon">KG</span>
-					</div>		
+					</div>
                   </div>
 			      <div class="col-sm-4">
 					  <div class="input-group">
@@ -872,9 +872,11 @@ $rcekd=mysqli_fetch_array($sqlD);
 							  </select>
 					    </span></div>
 					  </div>
-					  <?php if($cek>0){ ?><a href="DetailData-<?php echo $rcek['id'];?>"><i class="btn btn-success">Detail</i> </a> <?php } ?>
+					  <?php if($cek>0){ ?>
+						<!-- <a href="DetailData-<?php echo $rcek['id'];?>"><i class="btn btn-success">Detail</i> </a>  -->
+						<?php } ?>
                 </div>
-			-->
+			
 				
 				<!--
 				<div class="form-group">
