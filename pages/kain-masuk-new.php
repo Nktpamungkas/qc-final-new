@@ -1013,6 +1013,7 @@ $nourut=nourut();
 	  $nowarna=str_replace("'","''",$_POST['no_warna']);	
 	  $jns=str_replace("'","''",$_POST['jns_kain']);
 	  $po=str_replace("'","''",$_POST['no_po']);
+	  $season=str_replace("'","''",$_POST['season']);
 	  $lot=trim($_POST['lot']);
       $checkbox1=$_POST['physical'];
       $checkbox2=$_POST['functional'];
@@ -1063,7 +1064,7 @@ $nourut=nourut();
           buyer='$buyer',
 		  development='$_POST[development]',
 		  tgl_target='$target',
-		  season='$_POST[season]',
+		  season='$season',
 		  kk_legacy='$_POST[kk_legacy]',
 		  lot_legacy='$_POST[lot_legacy]',
 		  ip='$ip',
@@ -1077,7 +1078,7 @@ $nourut=nourut();
 				no_demand_insert($_POST['no_demand_4'],4,$id_nokk);
 				no_demand_insert($_POST['no_demand_5'],5,$id_nokk);
 				no_demand_insert($_POST['no_demand_6'],6,$id_nokk);
-			}
+			
 	
 	
 		$sqlData2=mysqli_query($con,"INSERT INTO tbl_master_test SET
@@ -1099,8 +1100,6 @@ $nourut=nourut();
 			
 			
 
-		
-		if($sqlData2){
 			
 			echo "<script>swal({
   title: 'Data Tersimpan',   
@@ -1113,7 +1112,7 @@ $nourut=nourut();
 	 
   }
 });</script>";
-		}
+	}
 				
 }else if($_POST['save']=="save" AND $_POST['physical']=="" AND $_POST['functional']=="" AND $_POST['colorfastness']==""){
 	echo "<script>swal({
