@@ -201,6 +201,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               <th><div align="center">Masalah Dominan</div></th>
               <th><div align="center">Masalah</div></th>
               <th><div align="center">Penyebab</div></th>
+              <th><div align="center">Route Cause</div></th>
               <th><div align="center">Solusi</div></th>
               <th><div align="center">Personil</div></th>
               <th><div align="center">Pejabat</div></th>
@@ -351,6 +352,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td><?php echo $row1['masalah_dominan'];?></td>
             <td><?php echo $row1['masalah'];?></td>
             <td><?php echo $row1['penyebab'];?></td>
+            <td><?php echo $row1['kategori'];?></td> <!-- route cause -->
             <td>
                 <?php if($row1['solusi'] == "PERBAIKAN GARMENT") { ?>
 

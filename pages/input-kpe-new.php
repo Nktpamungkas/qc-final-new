@@ -759,7 +759,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="kategori" class="col-sm-3 control-label">Kategori</label>
+					<label for="kategori" class="col-sm-3 control-label">Route Cause</label>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<select class="form-control select2" name="kategori" id="kategori">
