@@ -104,7 +104,7 @@ while ($r = mysqli_fetch_array($modal)) {
 					<div class="form-group">
 						<label for="operator" class="col-md-4 control-label">Operators</label>
 						<div class="col-md-5">
-							<select name="operator" class="form-control" id="operator">
+							<select name="operator" class="form-control operator_x" id="operator" demand="<?=$r['nodemand']?>" onchange="proses_operator()">
 								<option value="">Pilih</option>
 								<?php
 								$sqlop = "SELECT
@@ -129,37 +129,20 @@ while ($r = mysqli_fetch_array($modal)) {
 							<span class="help-block with-errors"></span>
 						</div>
 					</div>
-					<?php
-						$sqlYard = "SELECT 
-										SUM(LENGTHGROSS) AS LENGTHGROSS
-									FROM ELEMENTSINSPECTION
-									WHERE DEMANDCODE ='$r[nodemand]' ";
-						$stmtYard = db2_exec($conn1, $sqlYard, array('cursor' => DB2_SCROLLABLE));
-						$rowYard = db2_fetch_assoc($stmtYard);
-
-						$sqlKonversi = "SELECT
-										SECONDARYUNSTEADYCVSFACTOR
-									FROM ITXVIEW_NETTO
-									WHERE CODE ='$r[nodemand]' ";
-						$stmtKonversi = db2_exec($conn1, $sqlKonversi, array('cursor' => DB2_SCROLLABLE));
-						$rowKonversi = db2_fetch_assoc($stmtKonversi);
-
-						$KG = $rowYard['LENGTHGROSS'] * $rowKonversi['SECONDARYUNSTEADYCVSFACTOR'];
-					?>
 					<div class="form-group">
 						<label for="qty" class="col-md-4 control-label">Qty Aktual</label>
 						<div class="col-sm-4">
 							<div class="input-group">
-								<input name="qty" id="qty" type="text" class="form-control" placeholder="0.00"
-									style="text-align: right;" value="<?=$KG?>" required>
+								<input name="qty" id="qty_x" type="text" class="form-control" placeholder="0.00"
+									style="text-align: right;" required>
 								<span class="input-group-addon">KGs</span>
 							</div>
 							<span class="help-block with-errors"></span>
 						</div>
 						<div class="col-sm-4">
 							<div class="input-group">
-								<input name="yard" class="form-control" id="yard" placeholder="0.00"
-									style="text-align: right;" value="<?=$rowYard['LENGTHGROSS']?>" required>
+								<input name="yard" class="form-control" id="yard_x" placeholder="0.00"
+									style="text-align: right;" required>
 								<span class="input-group-addon">Yards</span>
 							</div>
 							<span class="help-block with-errors"></span>
@@ -219,3 +202,9 @@ while ($r = mysqli_fetch_array($modal)) {
 	</div>
 	<!-- /.modal-dialog -->
 <?php } ?>
+
+<script>
+	function proses_operator() {
+		
+	}
+</script>

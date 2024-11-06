@@ -3954,6 +3954,25 @@ $page = strtolower($page);
                     });
                 }
             });
+
+        });
+        $(document).on('click', '.operator_x', function(e) {
+            // Mendapatkan nilai yang dipilih dari <select>
+            var selectedValue = $(this).closest('select').val();
+            var demand = $(this).attr("demand");
+            $.ajax({
+                url: "pages/operator_x.php",
+                type: "GET",
+                data: {
+                    selectedValue: selectedValue,
+                    demand: demand,
+                },
+                dataType: 'json',
+                success: function(ajaxData) {
+                    $('#qty_x').attr('value', ajaxData.kg)
+                    $('#yard_x').attr('value', ajaxData.yard)
+                }
+            });
         });
     </script>
     <script src="bower_components/ckeditor/ckeditor.js"></script>
