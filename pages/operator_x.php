@@ -16,7 +16,7 @@ $sqlKonversi = "SELECT
 $stmtKonversi = db2_exec($conn1, $sqlKonversi, array('cursor' => DB2_SCROLLABLE));
 $rowKonversi = db2_fetch_assoc($stmtKonversi);
 
-$KG = $rowYard['LENGTHGROSS'] * $rowKonversi['SECONDARYUNSTEADYCVSFACTOR'];
+$KG = $rowYard['LENGTHGROSS'] / $rowKonversi['SECONDARYUNSTEADYCVSFACTOR'];
 
 $response['yard'] = sprintf("%.2f", $rowYard['LENGTHGROSS']);
 $response['kg'] = sprintf("%.2f", $KG);
