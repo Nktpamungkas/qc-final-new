@@ -20,6 +20,7 @@ if($_POST){
 	$demand_lgcy = mysqli_real_escape_string($con,$_POST['demand_lgcy']);
 	$t_jawab = mysqli_real_escape_string($con,$_POST['t_jawab']);
 	$t_jawab_buyer = mysqli_real_escape_string($con,$_POST['t_jawab_buyer']);
+	$operator = mysqli_real_escape_string($con,$_POST['operator']);
 	
 	$Qrycek=mysqli_query($con,"SELECT * FROM tbl_schedule WHERE id='$id' LIMIT 1");
 	$rCek=mysqli_fetch_array($Qrycek);
@@ -44,7 +45,8 @@ if($_POST){
 				`t_jawab_buyer`='$t_jawab_buyer',
 				`g_shift`='$gshift',
 				`qty_loss`='$qtyloss',
-				`note_loss`='$noteloss'
+				`note_loss`='$noteloss',
+				`operator`='$operator'
 				WHERE `id`='$id' LIMIT 1");
 				$sqlUrut=mysqli_query($con,"UPDATE tbl_schedule 
 		  		SET no_urut = no_urut - 1 

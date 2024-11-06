@@ -293,6 +293,27 @@ $rcek = mysqli_fetch_array($sqlCek);
 $sqlCek1 = mysqli_query($con, "SELECT * FROM tbl_schedule WHERE nokk='$nodemand' AND not status='selesai' ORDER BY id DESC LIMIT 1");
 $cek1 = mysqli_num_rows($sqlCek1);
 
+
+$sqlDB21  = " SELECT DISTINCT 
+				x.INITIALUSERPRIMARYQUANTITY AS KG_BAGIKAIN 
+				FROM DB2ADMIN.ITXVIEW_RESERVATION x 
+			WHERE x.PRODUCTIONORDERCODE='".$rcek['nokk']."'";
+$stmt1   = db2_exec($conn1, $sqlDB21, array('cursor' => DB2_SCROLLABLE));	
+$rowdb21 = db2_fetch_assoc($stmt1);
+	
+$sqlDB21S  = " SELECT 
+					x.USEDUSERPRIMARYQUANTITY AS KG_BAGIKAIN,
+					x.USERPRIMARYQUANTITY AS KG_BAGIKAIN1  FROM DB2ADMIN.PRODUCTIONRESERVATION x
+				WHERE x.ORDERCODE = '". $_GET['nodemand'] ."' ";
+$stmt1S   = db2_exec($conn1, $sqlDB21S, array('cursor' => DB2_SCROLLABLE));	
+$rowdb21S = db2_fetch_assoc($stmt1S);	
+// var_dump($sqlDB21S);
+if($rowdb21['KG_BAGIKAIN']>0){
+	$KGBAGI=$rowdb21['KG_BAGIKAIN'];
+}else if($rowdb21S['KG_BAGIKAIN1']>0){
+	$KGBAGI=$rowdb21S['KG_BAGIKAIN1'];
+}
+
 ?>
 <?php
 $Kapasitas = isset($_POST['kapasitas']) ? $_POST['kapasitas'] : '';
@@ -528,7 +549,7 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 							<input name="qty4" type="text" class="form-control" id="qty4" value="<?php if ($cek > 0) {
 								echo $rcek['bruto'];
 							} else {
-								echo round($rowdb2['QTY_BAGI_KAIN'], 2);
+								echo round($KGBAGI,2); //disini
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">KGs</span>
 						</div>
