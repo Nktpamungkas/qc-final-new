@@ -89,19 +89,6 @@ while ($r = mysqli_fetch_array($modal)) {
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="jml_rol" class="col-md-4 control-label">Jml Roll Aktual</label>
-						<div class="col-sm-2">
-							<input name="jml_rol" class="form-control" id="jml_rol" placeholder="0" required>
-							<span class="help-block with-errors"></span>
-						</div>
-						<!-- <label for="demand_lgcy" class="col-md-2 control-label">No Demand x</label>
-						<div class="col-sm-3">
-							<input name="demand_lgcy" class="form-control" id="demand_lgcy" placeholder="Demand"
-								minlength="6" required>
-						</div> -->
-
-					</div>
-					<div class="form-group">
 						<label for="operator" class="col-md-4 control-label">Operators</label>
 						<div class="col-md-5">
 							<select name="operator" class="form-control operator_x" id="operator" demand="<?=$r['nodemand']?>" onchange="proses_operator()">
@@ -128,6 +115,19 @@ while ($r = mysqli_fetch_array($modal)) {
 							</select>
 							<span class="help-block with-errors"></span>
 						</div>
+					</div>
+					<div class="form-group">
+						<label for="jml_rol" class="col-md-4 control-label">Jml Roll Aktual</label>
+						<div class="col-sm-2">
+							<input name="jml_rol" class="form-control" id="jml_rol_x" placeholder="0" required>
+							<span class="help-block with-errors"></span>
+						</div>
+						<!-- <label for="demand_lgcy" class="col-md-2 control-label">No Demand x</label>
+						<div class="col-sm-3">
+							<input name="demand_lgcy" class="form-control" id="demand_lgcy" placeholder="Demand"
+								minlength="6" required>
+						</div> -->
+
 					</div>
 					<div class="form-group">
 						<label for="qty" class="col-md-4 control-label">Qty Aktual</label>

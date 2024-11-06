@@ -3971,6 +3971,7 @@ $page = strtolower($page);
                 success: function(ajaxData) {
                     $('#qty_x').attr('value', ajaxData.kg)
                     $('#yard_x').attr('value', ajaxData.yard)
+                    $('#jml_rol_x').attr('value', ajaxData.rol)
                 }
             });
         });
