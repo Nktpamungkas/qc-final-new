@@ -37,6 +37,25 @@ $sqlDB2Season = "SELECT
                   LIMIT 1";
 $stmtSeason = db2_exec($conn1, $sqlDB2Season, array('cursor' => DB2_SCROLLABLE));
 $rowDB2Season = db2_fetch_assoc($stmtSeason);
+
+
+include "../../phpqrcode/qrlib.php";
+$tempdir1 = "../../temp/"; //Nama folder tempat menyimpan file qrcode
+if (!file_exists($tempdir1)) //Buat folder bername temp
+  mkdir($tempdir1);
+
+//isi qrcode jika di scan
+$codeContents1 = $r['no_test'];
+//nama file qrcode yang akan disimpan
+$namaFile1 = $r['no_test'] . ".png";
+//ECC Level
+$level1 = QR_ECLEVEL_H;
+//Ukuran pixel
+$UkuranPixel1 = 1; //10
+//Ukuran frame
+$UkuranFrame1 = 1; //4
+
+QRcode::png($codeContents1, $tempdir1 . $namaFile1, $level1, $UkuranPixel1, $UkuranFrame1);
 ?>
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -64,7 +83,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
           <table width="100%" border="0" class="table-list1" style="width: 2.3in;">
             <tr>
               <td colspan="4">
-                <div style="font-size: 8px;">
+                <div style="font-size: 8px; position: relative">
                   <?php echo $r['nodemand']; ?>
                   <?php
                   foreach ($array_demand_2_3 as $data) {
@@ -79,6 +98,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
                   ?>
                   <br>
                   <?php echo "Test-" . $r['no_test']; ?>&nbsp;&nbsp;<?= $r['area'] ?>
+                  <?php echo '<img src="' . $tempdir1 . $namaFile1 . '" style="position:absolute; top:0; right:0" />'; ?>
                 </div>
               </td>
             </tr>
@@ -125,7 +145,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
               <td colspan="1">
                 <div style="font-size:9px;">
                   <span style="font-size:7px;">
-                    <?php echo "<strong><span style='font-size:9px;'>" . substr($r['warna'], 0, 60) . "</span></strong>/" . substr($r['no_warna'], 0, 15); ?>
+                    <?php echo "<strong><span style='font-size:8px;'>" . substr($r['warna'], 0, 60) . "</span></strong>/" . substr($r['no_warna'], 0, 15); ?>
                   </span>
                 </div>
               </td>
@@ -141,7 +161,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
             </tr>
             <tr>
               <td colspan="1">
-                <div style="font-size:9px;">
+                <div style="font-size:8px;">
                   <?php echo $r['nokk']; ?>&nbsp;<?php echo ($r['lot_legacy'] != '-') ? $r['lot_legacy'] : ''; ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   L&amp;G: &nbsp;&nbsp;
                   <?php echo $r['lebar'] . " x " . $r['gramasi']; ?></div>
@@ -236,7 +256,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
           <table width="100%" border="0" class="table-list1" style="width: 2.3in;">
             <tr>
               <td colspan="4">
-                <div style="font-size: 8px;">
+                <div style="font-size: 8px; position: relative">
                   <?php echo $r['nodemand']; ?>
                   <?php
                   foreach ($array_demand_2_3 as $data) {
@@ -251,6 +271,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
                   ?>
                   <br>
                   <?php echo "Test-" . $r['no_test']; ?>&nbsp;&nbsp;<?= $r['area'] ?>
+                  <?php echo '<img src="' . $tempdir1 . $namaFile1 . '" style="position:absolute; top:0; right:0" />'; ?>
                 </div>
               </td>
             </tr>
@@ -408,7 +429,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
           <table width="100%" border="0" class="table-list1" style="width: 2.3in;">
             <tr>
               <td colspan="4">
-                <div style="font-size: 8px;">
+                <div style="font-size: 8px; position: relative">
                   <?php echo $r['nodemand']; ?>
                   <?php
                   foreach ($array_demand_2_3 as $data) {
@@ -423,6 +444,7 @@ $rowDB2Season = db2_fetch_assoc($stmtSeason);
                   ?>
                   <br>
                   <?php echo "Test-" . $r['no_test']; ?>&nbsp;&nbsp;<?= $r['area'] ?>
+                  <?php echo '<img src="' . $tempdir1 . $namaFile1 . '" style="position:absolute; top:0; right:0" />'; ?>
                 </div>
               </td>
             </tr>
