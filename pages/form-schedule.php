@@ -230,7 +230,7 @@ $sqlDB20 = " SELECT
 $stmt0 = db2_exec($conn1, $sqlDB20, array('cursor' => DB2_SCROLLABLE));
 $rowdb20 = db2_fetch_assoc($stmt0);
 
-$sqlDB21 = " 
+$sqlDB211 = " 
 SELECT
 	PRODUCT.SUBCODE01,
 	PRODUCT.SUBCODE02,
@@ -273,8 +273,8 @@ GROUP BY
 	PRODUCT.SUBCODE09,
 	PRODUCT.SUBCODE10
 ";
-$stmt1 = db2_exec($conn1, $sqlDB21, array('cursor' => DB2_SCROLLABLE));
-$rowdb21 = db2_fetch_assoc($stmt1);
+$stmt211 = db2_exec($conn1, $sqlDB211, array('cursor' => DB2_SCROLLABLE));
+$rowdb211 = db2_fetch_assoc($stmt211);
 
 $sqlroll = "SELECT 
 STOCKTRANSACTION.ORDERCODE,
@@ -284,8 +284,8 @@ WHERE STOCKTRANSACTION.ORDERCODE ='$rowdb2[PRODUCTIONORDERCODE]' AND STOCKTRANSA
 AND STOCKTRANSACTION.ITEMTYPECODE ='KGF'
 GROUP BY 
 STOCKTRANSACTION.ORDERCODE";
-$stmt1 = db2_exec($conn1, $sqlroll, array('cursor' => DB2_SCROLLABLE));
-$rowr = db2_fetch_assoc($stmt1);
+$stmt1r = db2_exec($conn1, $sqlroll, array('cursor' => DB2_SCROLLABLE));
+$rowr = db2_fetch_assoc($stmt1r);
 
 $sqlCek = mysqli_query($con, "SELECT * FROM tbl_schedule WHERE nodemand='$nodemand' ORDER BY id DESC LIMIT 1");
 $cek = mysqli_num_rows($sqlCek);
@@ -453,14 +453,15 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 						<input name="lebar" type="text" class="form-control" id="lebar" value="<?php if ($cek > 0) {
 							echo $rcek['lebar'];
 						} else {
-							echo round($rowdb21['WIDTH']);
-						} ?>" placeholder="0" required>
+							echo round($rowdb211['WIDTH']);
+						}
+						 ?>" placeholder="0" required>
 					</div>
 					<div class="col-sm-2">
 						<input name="grms" type="text" class="form-control" id="grms" value="<?php if ($cek > 0) {
 							echo $rcek['gramasi'];
 						} else {
-							echo round($rowdb21['GSM']);
+							echo round($rowdb211['GSM']);
 						} ?>" placeholder="0" required>
 					</div>
 				</div>
