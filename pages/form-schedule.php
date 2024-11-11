@@ -287,10 +287,12 @@ STOCKTRANSACTION.ORDERCODE";
 $stmt1 = db2_exec($conn1, $sqlroll, array('cursor' => DB2_SCROLLABLE));
 $rowr = db2_fetch_assoc($stmt1);
 
-$sqlCek = mysqli_query($con, "SELECT * FROM tbl_schedule WHERE nokk='$nodemand' ORDER BY id DESC LIMIT 1");
+$sqlCek = mysqli_query($con, "SELECT * FROM tbl_schedule WHERE nodemand='$nodemand' ORDER BY id DESC LIMIT 1");
 $cek = mysqli_num_rows($sqlCek);
 $rcek = mysqli_fetch_array($sqlCek);
-$sqlCek1 = mysqli_query($con, "SELECT * FROM tbl_schedule WHERE nokk='$nodemand' AND not status='selesai' ORDER BY id DESC LIMIT 1");
+// echo "SELECT * FROM tbl_schedule WHERE nokk='$nodemand' ORDER BY id DESC LIMIT 1 ||";
+
+$sqlCek1 = mysqli_query($con, "SELECT * FROM tbl_schedule WHERE nodemand='$nodemand' AND not status='selesai' ORDER BY id DESC LIMIT 1");
 $cek1 = mysqli_num_rows($sqlCek1);
 
 
@@ -300,6 +302,7 @@ $sqlDB21  = " SELECT DISTINCT
 			WHERE x.PRODUCTIONORDERCODE='".$rcek['nokk']."'";
 $stmt1   = db2_exec($conn1, $sqlDB21, array('cursor' => DB2_SCROLLABLE));	
 $rowdb21 = db2_fetch_assoc($stmt1);
+// echo $sqlDB21;
 	
 $sqlDB21S  = " SELECT 
 					x.USEDUSERPRIMARYQUANTITY AS KG_BAGIKAIN,
