@@ -133,8 +133,9 @@ include "koneksi.php";
 								</select>
 							</div>
 							<div class="col-sm-3">
-							<input name="no_item" type="text" class="form-control" placeholder="No Item" value="<?php echo $Item; ?>" />	
-							</div>	
+								<input name="no_item" type="text" class="form-control" placeholder="No Item"
+									value="<?php echo $Item; ?>" />
+							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-5">
@@ -474,7 +475,7 @@ GROUP BY b.g_shift	");
 							<td align="center">&nbsp;</td>
 						</tr>
 						<?php
-//						$qrySI = mysqli_query($con, "SELECT SUM(bruto) AS kg, COUNT(*) AS sisa_kk FROM tbl_schedule WHERE NOT STATUS = 'selesai' AND `status`='antri mesin' AND NOT proses='Perbaikan'");
+						//						$qrySI = mysqli_query($con, "SELECT SUM(bruto) AS kg, COUNT(*) AS sisa_kk FROM tbl_schedule WHERE NOT STATUS = 'selesai' AND `status`='antri mesin' AND NOT proses='Perbaikan'");
 						$qrySI = mysqli_query($con, "SELECT SUM(bruto) AS kg, COUNT(*) AS sisa_kk FROM tbl_schedule WHERE NOT STATUS = 'selesai'");
 						$rSI = mysqli_fetch_array($qrySI);
 						$qrySPR = mysqli_query($con, "SELECT COUNT(*) AS kk_pr, SUM(a.bruto-b.qty) AS qty_pr
@@ -642,8 +643,12 @@ GROUP BY b.g_shift	");
 								<th>
 									<div align="center">Catatan</div>
 								</th>
-								<th><div align="center">Qty Loss</div></th>
-								<th><div align="center">Note Loss</div></th>
+								<th>
+									<div align="center">Qty Loss</div>
+								</th>
+								<th>
+									<div align="center">Note Loss</div>
+								</th>
 								<th>Nokk</th>
 								<th>No Demand</th>
 								<th>Action</th>
@@ -654,80 +659,82 @@ GROUP BY b.g_shift	");
 							$no = 1;
 
 							$qry1 = mysqli_query($con, "SELECT
-	a.id as idins,
-	a.catatan,
-	a.personil,
-	b.langganan,
-	b.buyer,
-	CONCAT(b.langganan,'/',b.buyer) as pelanggan,
-	b.po,
-	b.no_order,
-	b.jenis_kain,
-	b.warna,
-	b.lot,
-	b.no_item,
-	b.tgl_delivery,
-	b.no_mesin,
-	b.bruto,
-	b.rol,
-	a.jml_rol,
-	a.qty,
-	if(a.jml_rol>0,CONCAT(a.jml_rol,'x',a.qty),CONCAT(b.rol,'x',b.bruto)) as qty_bruto,
-	if(a.yard>0,a.yard,b.pjng_order) as yard,
-	b.tgl_mulai,
-	b.tgl_stop,
-	b.istirahat,
-	b.lembap_fin,
-	b.lembap_qcf,
-	b.nokk,
-	b.nodemand,
-	b.qty_loss,
-	b.note_loss,
-	a.catatan,
-	TIMESTAMPDIFF(
-    MINUTE,
-	b.tgl_mulai,b.tgl_stop) as waktu,
-	b.proses,
-	c.status_produk,
-	IF
-	( c.status_produk = '1', 'OK', IF(c.status_produk = '2', 'TK','PR')) AS sts,
-IF
-	(
-	NOT c.no_gerobak6 = '',
-	CONCAT( no_gerobak1, '+', no_gerobak2, '+', no_gerobak3, '+', no_gerobak4, '+', no_gerobak5, '+', no_gerobak6 ),
-IF
-	(
-	NOT c.no_gerobak5 = '',
-	CONCAT( no_gerobak1, '+', no_gerobak2, '+', no_gerobak3, '+', no_gerobak4, '+', no_gerobak5 ),
-IF
-	(
-	NOT c.no_gerobak4 = '',
-	CONCAT( no_gerobak1, '+', no_gerobak2, '+', no_gerobak3, '+', no_gerobak4 ),
-IF
-	(
-	NOT c.no_gerobak3 = '',
-	CONCAT( no_gerobak1, '+', no_gerobak2, '+', no_gerobak3 ),
-IF
-	(
-	NOT c.no_gerobak2 = '',
-	CONCAT( no_gerobak1, '+', no_gerobak2 ),
-IF
-	( NOT c.no_gerobak1 = '', c.no_gerobak1, '' ) 
-	) 
-	) 
-	) 
-	) 
-	) AS no_grobak 
-FROM
-	tbl_inspection a
-	INNER JOIN tbl_schedule b ON a.id_schedule = b.id
-	INNER JOIN tbl_gerobak c ON c.id_schedule = b.id
-WHERE
-	$Wshift $WGshift $WProses a.`status`='selesai' and
-	DATE_FORMAT( a.tgl_buat, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' 
-	AND '$stop_date' $WBuyer $WItem
-ORDER BY
-	a.id ASC");
+																	a.id as idins,
+																	b.id as id_schedule,
+																	a.catatan,
+																	a.personil,
+																	b.langganan,
+																	b.buyer,
+																	CONCAT(b.langganan,'/',b.buyer) as pelanggan,
+																	b.po,
+																	b.no_order,
+																	b.jenis_kain,
+																	b.warna,
+																	b.lot,
+																	b.no_item,
+																	b.tgl_delivery,
+																	b.no_mesin,
+																	b.bruto,
+																	b.rol,
+																	a.jml_rol,
+																	a.qty,
+																	if(a.jml_rol>0,CONCAT(a.jml_rol,'x',a.qty),CONCAT(b.rol,'x',b.bruto)) as qty_bruto,
+																	a.yard,
+																	b.pjng_order,
+																	b.tgl_mulai,
+																	b.tgl_stop,
+																	b.istirahat,
+																	b.lembap_fin,
+																	b.lembap_qcf,
+																	b.nokk,
+																	b.nodemand,
+																	b.qty_loss,
+																	b.note_loss,
+																	a.catatan,
+																	TIMESTAMPDIFF(
+																	MINUTE,
+																	b.tgl_mulai,b.tgl_stop) as waktu,
+																	b.proses,
+																	c.status_produk,
+																	IF
+																	( c.status_produk = '1', 'OK', IF(c.status_produk = '2', 'TK','PR')) AS sts,
+																IF
+																	(
+																	NOT c.no_gerobak6 = '',
+																	CONCAT( no_gerobak1, '+', no_gerobak2, '+', no_gerobak3, '+', no_gerobak4, '+', no_gerobak5, '+', no_gerobak6 ),
+																IF
+																	(
+																	NOT c.no_gerobak5 = '',
+																	CONCAT( no_gerobak1, '+', no_gerobak2, '+', no_gerobak3, '+', no_gerobak4, '+', no_gerobak5 ),
+																IF
+																	(
+																	NOT c.no_gerobak4 = '',
+																	CONCAT( no_gerobak1, '+', no_gerobak2, '+', no_gerobak3, '+', no_gerobak4 ),
+																IF
+																	(
+																	NOT c.no_gerobak3 = '',
+																	CONCAT( no_gerobak1, '+', no_gerobak2, '+', no_gerobak3 ),
+																IF
+																	(
+																	NOT c.no_gerobak2 = '',
+																	CONCAT( no_gerobak1, '+', no_gerobak2 ),
+																IF
+																	( NOT c.no_gerobak1 = '', c.no_gerobak1, '' ) 
+																	) 
+																	) 
+																	) 
+																	) 
+																	) AS no_grobak 
+																FROM
+																	tbl_inspection a
+																	INNER JOIN tbl_schedule b ON a.id_schedule = b.id
+																	INNER JOIN tbl_gerobak c ON c.id_schedule = b.id
+																WHERE
+																	$Wshift $WGshift $WProses a.`status`='selesai' and
+																	DATE_FORMAT( a.tgl_buat, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' 
+																	AND '$stop_date' $WBuyer $WItem
+																ORDER BY
+																	a.id ASC");
 							$totOk = 0;
 							$totTk = 0;
 							$totPr = 0;
@@ -799,21 +806,45 @@ ORDER BY
 										<?php echo $row1['no_mesin']; ?>
 									</td>
 									<td align="center">
-										<?php if ($row1['jml_rol'] > 0) {
-											echo $row1['jml_rol'];
-										} else {
-											echo $row1['rol'];
-										} ?>
+										<?php if ($row1['jml_rol'] > 0) { ?>
+											<a data-pk="<?php echo $row1['idins']; ?>"
+												data-value="<?php echo $row1['jml_rol']; ?>" class="jml_roll_inspeksi"
+												href="javascript:void(0)">
+												<?php echo $row1['jml_rol']; ?>
+											</a>
+										<?php } else { ?>
+											<a data-pk="<?php echo $row1['id_schedule']; ?>"
+												data-value="<?php echo $row1['rol']; ?>" class="jml_roll_inspeksi2"
+												href="javascript:void(0)">
+												<?php echo $row1['rol']; ?>
+											</a>
+										<?php } ?>
 									</td>
 									<td align="center">
-										<?php if ($row1['jml_rol'] > 0) {
-											echo $row1['qty'];
-										} else {
-											echo $row1['bruto'];
-										} ?>
+										<?php if ($row1['jml_rol'] > 0) { ?>
+											<a data-pk="<?php echo $row1['idins']; ?>" data-value="<?php echo $row1['qty']; ?>" class="qty_inspeksi"
+												href="javascript:void(0)">
+												<?php echo $row1['qty']; ?>
+											</a>
+										<?php } else { ?>
+											<a data-pk="<?php echo $row1['id_schedule']; ?>" data-value="<?php echo $row1['bruto']; ?>" class="qty_inspeksi2"
+												href="javascript:void(0)">
+												<?php echo $row1['bruto']; ?>
+											</a>
+										<?php } ?>
 									</td>
 									<td align="center">
-										<?php echo $row1['yard']; ?>
+										<?php if ($row1['yard'] > 0) { ?>
+											<a data-pk="<?php echo $row1['idins']; ?>" data-value="<?php echo $row1['yard']; ?>" class="qty_inspeksi"
+												href="javascript:void(0)">
+												<?php echo $row1['yard']; ?>
+											</a>
+										<?php } else { ?>
+											<a data-pk="<?php echo $row1['id_schedule']; ?>" data-value="<?php echo $row1['pjng_order']; ?>" class="qty_inspeksi2"
+												href="javascript:void(0)">
+												<?php echo $row1['pjng_order']; ?>
+											</a>
+										<?php } ?>
 									</td>
 									<td align="center">
 										<?php echo $hourdiff; ?>
