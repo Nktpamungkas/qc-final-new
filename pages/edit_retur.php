@@ -40,6 +40,12 @@ if ($_POST) {
 		`t_jawab`='$_POST[t_jawab]',
 		`t_jawab1`='$_POST[t_jawab1]',
 		`t_jawab2`='$_POST[t_jawab2]',
+		`qc_staff`='$_POST[qc_staff]',
+		`gkj`='$_POST[gkj]',
+		`sales`='$_POST[sales]',
+		`mkt_ppc_manager`='$_POST[mkt_ppc_manager]',
+		`dmf`='$_POST[dmf]',
+		`qcf_manager`='$_POST[qcf_manager]',
         `tgl_update`=now()
 				WHERE `id`='$id' LIMIT 1");
     echo "<script>swal({
