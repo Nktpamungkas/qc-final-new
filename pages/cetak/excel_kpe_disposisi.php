@@ -37,7 +37,6 @@ $Pejabat=$_GET['pejabat'];
     <th bgcolor="#12C9F0">WARNA</th>
     <th bgcolor="#12C9F0">QTY KIRIM</th>
     <th bgcolor="#12C9F0">QTY CLAIM</th>
-    <th bgcolor="#12C9F0">QTY DISPOSISI QC</th>
     <th bgcolor="#12C9F0">T JAWAB</th>
     <th bgcolor="#12C9F0">MASALAH</th>
     <th bgcolor="#12C9F0">KETERANGAN</th>
@@ -80,7 +79,6 @@ $Pejabat=$_GET['pejabat'];
       <td><?php echo $row1['warna'];?></td>
       <td><?php echo $row1['qty_kirim'];?></td>
       <td><?php echo $row1['qty_claim'];?></td>
-      <td><?php if($row1['sts_disposisiqc']=="1"){ echo $lolos=$row1['qty_lolos']; }else{ echo $lolos="0"; } ?></td>
       <td><?php echo $tjawab;?></td>
       <td><?php echo $row1['masalah'];?></td>
       <td><?php echo $row1['ket'];?></td>
@@ -88,16 +86,15 @@ $Pejabat=$_GET['pejabat'];
     <?php $no++;
     $tkirim=$tkirim+$row1['qty_kirim'];
     $tclaim=$tclaim+$row1['qty_claim'];
-	$tlolos=$tlolos+$lolos;
 	} ?>
   <tr valign="top">
     <td colspan="8" align="right">TOTAL</td>
     <td align="right">&nbsp;</td>
     <td align="right"><?php echo $tkirim;?></td>
     <td align="center"><?php echo $tclaim;?></td>
-    <td align="right"><?php echo $tlolos;?></td>
     <td align="center">&nbsp;</td>
     <td align="center">&nbsp;</td>
+	<td align="center">&nbsp;</td>
   </tr>
 </table>
 </body>

@@ -138,7 +138,6 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <td><font size="-2">WARNA</td>
             <td><font size="-2">QTY KIRIM</font></td>
             <td><font size="-2">QTY CLAIM</font></td>
-            <td><font size="-2">QTY DISPOSISI QC</font></td>
             <td><font size="-2">T JAWAB</font></td>
             <td><font size="-2">MASALAH</font></td>
             <td><font size="-2">KETERANGAN</font></td>
@@ -192,7 +191,6 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <td align="left" valign="middle" style="font-size: 8px;"><?php echo substr($row1['warna'],0,40);?></td>
             <td align="right"><font size="-2"><?php echo strtoupper($row1['qty_kirim']);?></font></td>
             <td align="right"><font size="-2"><?php echo strtoupper($row1['qty_claim']);?></font></td>
-            <td align="right"><font size="-2"><?php if($row1['sts_disposisiqc']=="1"){ echo $lolos=$row1['qty_lolos']; }else{ echo $lolos="0"; } ?></font></td>
             <td valign="top"><font size="-2"><?php echo $tjawab;?></font></td>
             <td valign="top"><font size="-2"><?php echo $row1['masalah'];?></font></td>
             <td valign="top"><font size="-2"><?php echo $row1['ket'];?></font></td>
@@ -210,16 +208,15 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
 				
 				$tkirim=$tkirim+$row1['qty_kirim'];
 				$tclaim=$tclaim+$row1['qty_claim'];
-				$tlolos=$tlolos+$lolos;
 			} ?>	
           <tr valign="top">
             <td colspan="8" align="right">TOTAL</td>
             <td align="right">&nbsp;</td>
             <td align="right"><?php echo $tkirim;?></td>
             <td align="right"><?php echo $tclaim;?></td>
-            <td align="right"><?php echo $tlolos;?></td>
             <td align="center">&nbsp;</td>
             <td align="center">&nbsp;</td>
+			<td align="center">&nbsp;</td>
           </tr>
 			
         

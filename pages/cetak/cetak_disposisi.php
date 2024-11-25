@@ -139,6 +139,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <td><font size="-2"><strong>WARNA</strong></font></td>
             <td><font size="-2"><strong>QTY KIRIM</strong></font></td>
             <td><font size="-2"><strong>QTY KELUHAN</strong></font></td>
+            <td><font size="-2"><strong>QTY DISPOSISI QC</strong></font></td>
             <td><font size="-2"><strong>MASALAH</strong></font></td>
             <td><font size="-2"><strong>SOLUSI</strong></font></td>
             <td><font size="-2"><strong>PENYEBAB</strong></font></td>
@@ -195,6 +196,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <td align="center"><font size="-2"><?php echo strtoupper($row1['warna']);?></font></td>
             <td align="right"><font size="-2"><?php echo strtoupper($row1['qty_kirim']);?></font></td>
             <td align="right"><font size="-2"><?php echo strtoupper($row1['qty_claim']);?></font></td>
+            <td align="right"><font size="-2"><?php if($row1['sts_disposisiqc']=="1"){ echo $lolos=$row1['qty_lolos']; }else{ echo $lolos="0"; } ?></font></td>
             <td valign="top"><font size="-2"><?php echo $row1['masalah'];?></font></td>
             <td valign="top"><font size="-2"><?php echo $row1['solusi'];?></font></td>
             <td valign="top"><font size="-2"><?php echo $row1['penyebab'];?></font></td>
@@ -206,11 +208,13 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
 		<?php	$no++; 
 				$tkirim=$tkirim+$row1['qty_kirim'];
 				$tclaim=$tclaim+$row1['qty_claim'];
+				$tlolos=$tlolos+$lolos;
 			} ?>	
           <tr valign="top">
             <td colspan="7" align="right"><strong>TOTAL</strong></td>
             <td align="right"><strong><?php echo $tkirim;?></strong></td>
             <td align="right"><strong><?php echo $tclaim;?></strong></td>
+            <td align="right"><strong><?php echo $tlolos;?></strong></td>
             <td align="center">&nbsp;</td>
             <td align="center">&nbsp;</td>
             <td align="center">&nbsp;</td>
@@ -313,9 +317,9 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
               $tot_a=$tot_a+$row1['qty_claim_a']; }?>
                 <td align="left">A</td>
                 <td align="right"><?php echo number_format($tot_a,2)." Kg";?></td>
-                <td align="center"><?php echo number_format(($tot_a/$TotalKirim)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalKirim>0){ echo number_format(($tot_a/$TotalKirim)*100,2)." %"; }?></td>
                 <td align="center"><?php echo $rowjml1['jml_a']." Kasus"; ?></td>
-                <td align="center"><?php echo number_format(($rowjml1['jml_a']/$TotalLot)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalLot>0){echo number_format(($rowjml1['jml_a']/$TotalLot)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rlqcdefa['jml_def'];?></td>
                 <td align="center"><?php echo number_format($rlqcdefa['qty_kg'],2)." Kg";?></td>
                 <td align="center"><?php echo $rlqcbwa['jml_bw'];?></td>
@@ -339,9 +343,9 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
               $tot_b=$tot_b+$row2['qty_claim_b']; }?>
                 <td align="left">B</td>
                 <td align="right"><?php echo number_format($tot_b,2)." Kg";?></td>
-                <td align="center"><?php echo number_format(($tot_b/$TotalKirim)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalKirim>0){echo number_format(($tot_b/$TotalKirim)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rowjml2['jml_b']." Kasus"; ?></td>
-                <td align="center"><?php echo number_format(($rowjml2['jml_b']/$TotalLot)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalLot>0){echo number_format(($rowjml2['jml_b']/$TotalLot)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rlqcdefb['jml_def'];?></td>
                 <td align="center"><?php echo number_format($rlqcdefb['qty_kg'],2)." Kg";?></td>
                 <td align="center"><?php echo $rlqcbwb['jml_bw'];?></td>
@@ -365,9 +369,9 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
               $tot_c=$tot_c+$row3['qty_claim_c']; }?>
                 <td align="left">C</td>
                 <td align="right"><?php echo number_format($tot_c,2)." Kg";?></td>
-                <td align="center"><?php echo number_format(($tot_c/$TotalKirim)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalKirim>0){echo number_format(($tot_c/$TotalKirim)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rowjml3['jml_c']." Kasus"; ?></td>
-                <td align="center"><?php echo number_format(($rowjml3['jml_c']/$TotalLot)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalLot>0){echo number_format(($rowjml3['jml_c']/$TotalLot)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rlqcdefc['jml_def'];?></td>
                 <td align="center"><?php echo number_format($rlqcdefc['qty_kg'],2)." Kg";?></td>
                 <td align="center"><?php echo $rlqcbwc['jml_bw'];?></td>
@@ -391,9 +395,9 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
               $tot_non=$tot_non+$row4['qty_claim_non']; }?>
                 <td align="left">Non-Shift</td>
                 <td align="right"><?php echo number_format($tot_non,2)." Kg";?></td>
-                <td align="center"><?php echo number_format(($tot_non/$TotalKirim)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalKirim>0){echo number_format(($tot_non/$TotalKirim)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rowjml4['jml_non']." Kasus"; ?></td>
-                <td align="center"><?php echo number_format(($rowjml4['jml_non']/$TotalLot)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalLot>0){echo number_format(($rowjml4['jml_non']/$TotalLot)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rlqcdefn['jml_def'];?></td>
                 <td align="center"><?php echo number_format($rlqcdefn['qty_kg'],2)." Kg";?></td>
                 <td align="center"><?php echo $rlqcbwn['jml_bw'];?></td>
@@ -417,9 +421,9 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
               $tot_qc2=$tot_qc2+$row5['qty_claim_qc2']; }?>
                 <td align="left">QC2</td>
                 <td align="right"><?php echo number_format($tot_qc2,2)." Kg";?></td>
-                <td align="center"><?php echo number_format(($tot_qc2/$TotalKirim)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalKirim>0){echo number_format(($tot_qc2/$TotalKirim)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rowjml5['jml_qc2']." Kasus"; ?></td>
-                <td align="center"><?php echo number_format(($rowjml5['jml_qc2']/$TotalLot)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalLot>0){echo number_format(($rowjml5['jml_qc2']/$TotalLot)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rlqcdefqc2['jml_def'];?></td>
                 <td align="center"><?php echo number_format($rlqcdefqc2['qty_kg'],2)." Kg";?></td>
                 <td align="center"><?php echo $rlqcbwqc2['jml_bw'];?></td>
@@ -443,9 +447,9 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
               $tot_tq=$tot_tq+$row6['qty_claim_tq']; }?>
                 <td align="left">Test Quality</td>
                 <td align="right"><?php echo number_format($tot_tq,2)." Kg";?></td>
-                <td align="center"><?php echo number_format(($tot_tq/$TotalKirim)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalKirim>0){echo number_format(($tot_tq/$TotalKirim)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rowjml6['jml_tq']." Kasus"; ?></td>
-                <td align="center"><?php echo number_format(($rowjml6['jml_tq']/$TotalLot)*100,2)." %";?></td>
+                <td align="center"><?php if($TotalLot>0){echo number_format(($rowjml6['jml_tq']/$TotalLot)*100,2)." %";}?></td>
                 <td align="center"><?php echo $rlqcdeftq['jml_def'];?></td>
                 <td align="center"><?php echo number_format($rlqcdeftq['qty_kg'],2)." Kg";?></td>
                 <td align="center"><?php echo $rlqcbwtq['jml_bw'];?></td>
@@ -462,9 +466,9 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <tr>
                 <td align="left"><strong>Total</strong></td>
                 <td align="right"><strong><?php echo number_format($total,2)." Kg"; ?></strong></td>
-                <td align="center"><strong><?php echo number_format(($total/$TotalKirim)*100,2)." %";?></strong></td>
+                <td align="center"><strong><?php if($TotalKirim>0){echo number_format(($total/$TotalKirim)*100,2)." %";}?></strong></td>
                 <td align="center"><strong><?php echo $totalkasus." Kasus"; ?></strong></td>
-                <td align="center"><strong><?php echo number_format(($totalkasus/$TotalLot)*100,2)." %";?></strong></td>
+                <td align="center"><strong><?php if($TotalLot>0){echo number_format(($totalkasus/$TotalLot)*100,2)." %";}?></strong></td>
                 <td align="center"><strong><?php echo $totallqcdef." Kasus"; ?></strong></td>
                 <td align="center"><strong><?php echo number_format($totalqtylqcdef,2)." Kg";?></strong></td>
                 <td align="center"><strong><?php echo $totallqcbw." Kasus"; ?></strong></td>
