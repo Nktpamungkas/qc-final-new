@@ -962,7 +962,7 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
                                 echo  'NOT YET APPROVE';
                             }
                         } else {
-                            echo '<img src="../../dist/img/' . htmlspecialchars($data_gkj_staff['image']) . '" alt="Gambar Tidak Ditemukan">';
+                            echo '<img width="50" height="50" src="../../dist/img/' . htmlspecialchars($data_gkj_staff['image']) . '" alt="Gambar Tidak Ditemukan">';
                         }
                         ?>
 
@@ -1003,7 +1003,7 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
                         if ($row_approve_qc_mng < 1) {
                                 echo 'NOT YET APPROVE';
                         } else {
-                            echo '<img src="../../dist/img/' . htmlspecialchars($dmng['image']) . '" alt="Gambar Tidak Ditemukan">';
+                            echo '<img width="50" height="50" src="../../dist/img/' . htmlspecialchars($dmng['image']) . '" alt="Gambar Tidak Ditemukan">';
                         }
                         ?>
                     </td>
@@ -1045,7 +1045,7 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
                             if ($row_approve_sales < 1) {
                                 echo 'NOT YET APPROVE';
                             } else {
-                                echo '<img src="../../dist/img/' . htmlspecialchars($dstaff['image']) . '" alt="Gambar Tidak Ditemukan">';
+                                echo '<img width="50" height="50" src="../../dist/img/' . htmlspecialchars($dstaff['image']) . '" alt="Gambar Tidak Ditemukan">';
                             }
                         } else {
                             echo "";
@@ -1090,7 +1090,7 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
                             if ($row_approve_mkt_ppc < 1) {
                                 echo 'NOT YET APPROVE';
                             } else {
-                                echo '<img src="../../dist/img/' . htmlspecialchars($data_manager['image']) . '" alt="Gambar Tidak Ditemukan">';
+                                echo '<img width="50" height="50" src="../../dist/img/' . htmlspecialchars($data_manager['image']) . '" alt="Gambar Tidak Ditemukan">';
                             }
                         } else {
                             echo "";
@@ -1132,7 +1132,7 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
                             if ($row_approve_dmf < 1) {
                                 echo 'NOT YET APPROVE';
                             } else {
-                                echo '<img src="../../dist/img/' . htmlspecialchars($ddmf['image']) . '" alt="Gambar Tidak Ditemukan">';
+                                echo '<img width="50" height="50" src="../../dist/img/' . htmlspecialchars($ddmf['image']) . '" alt="Gambar Tidak Ditemukan">';
                             }
                         }
                         ?>
