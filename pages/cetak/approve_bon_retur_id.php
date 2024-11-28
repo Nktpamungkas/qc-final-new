@@ -159,11 +159,11 @@ if ($step == 2) {
                                     <meta charset="utf-8">
                                     <meta name="viewport" content="width=device-width, initial-scale=1">
                                     <title>Approval Bon Retur</title>
-                                    // <script type="text/javascript">
-                                    //     setTimeout(function() {
-                                    //         window.close();
-                                    //     }, 4000);
-                                    // </script>
+                                    <script type="text/javascript">
+                                         setTimeout(function() {
+                                             window.close();
+                                         }, 4000);
+                                     </script>
                                 </head>
                                 <body>
                                     <h1>Data berhasil di-approve!</h1>
@@ -183,11 +183,11 @@ if ($step == 2) {
                                     <meta charset="utf-8">
                                     <meta name="viewport" content="width=device-width, initial-scale=1">
                                     <title>Approval Bon Retur</title>
-                                    // <script type="text/javascript">
-                                    //     setTimeout(function() {
-                                    //         window.close();
-                                    //     }, 4000);
-                                    // </script>
+                                    <script type="text/javascript">
+                                        setTimeout(function() {
+                                            window.close();
+                                        }, 4000);
+                                    </script>
                                 </head>
                                 <body>
                                     <h1>Sudah Diapprove!</h1>
