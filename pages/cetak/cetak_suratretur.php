@@ -1098,7 +1098,7 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
                         ?>
                     </td>
                     <td align="center">&nbsp;
-                        <?php if ($data_manager['nama'] != '') {
+                        <?php if ($ddmf['nama'] != '') {
                             // Cek apakah nilai id_cek1 dan id_cek2 sudah ada
                             if ($cek2 != 0) {
                                 $id_approve2 = "AND id_cek1 = '$_GET[id_cek1]'";
@@ -1118,9 +1118,6 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
                                                 id_cek = '$_GET[id_cek]' 
                                                 $id_approve2
                                                 $id_approve3
-                                                AND status_email_qc = '1' 
-                                                AND status_email_gkj = '1'
-                                                AND status_email_qc_mng = '1'
                                                 AND status_email_dmf = '1'
                                                 ORDER BY id DESC
                                                 LIMIT 1";
@@ -1137,8 +1134,6 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
                             } else {
                                 echo '<img src="../../dist/img/' . htmlspecialchars($ddmf['image']) . '" alt="Gambar Tidak Ditemukan">';
                             }
-                        } else {
-                            echo "";
                         }
                         ?>
                     </td>
