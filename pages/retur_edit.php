@@ -6,7 +6,7 @@ $modal_id = $_GET['id'];
 $modal = mysqli_query($con, "SELECT * FROM tbl_detail_retur_now WHERE id='$modal_id' ");
 while ($r = mysqli_fetch_array($modal)) {
     ?>
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form class="form-horizontal" name="modal_popup" data-toggle="validator" method="post" action="EditRetur"
                 enctype="multipart/form-data">
@@ -102,7 +102,7 @@ while ($r = mysqli_fetch_array($modal)) {
                             </div>
                         </div>
                         <!-- End Roll & KG -->
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <div class="input-group">
                                 <input name="pjg" type="text" class="form-control" id="pjg" value="<?php echo $r['pjg']; ?>"
                                     placeholder="0.00" style="text-align: right;">
@@ -126,7 +126,7 @@ while ($r = mysqli_fetch_array($modal)) {
                     </div>
                     <div class="form-group">
                         <label for="lot" class="col-sm-2 control-label">Qty Timbang Ulang</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <div class="input-group">
                                 <input name="qty_tu" type="text" class="form-control" id="qty_tu"
                                     value="<?php echo $r['qty_tu']; ?>" placeholder="0.00" style="text-align: right;">
@@ -159,8 +159,8 @@ while ($r = mysqli_fetch_array($modal)) {
                                 <?php $sqlkkncp = mysqli_query($con, "SELECT nodemand FROM tbl_aftersales_now WHERE po='$r[po]' and no_order='$r[no_order]' ORDER BY nodemand");
                                 while ($rkkncp = mysqli_fetch_array($sqlkkncp)) { ?>
                                     <option value="<?php echo $rkkncp['nodemand']; ?>" <?php if ($r['nodemand_ncp'] == $rkkncp['nodemand']) {
-                                          echo "SELECTED";
-                                      } ?>>
+                                        echo "SELECTED";
+                                    } ?>>
                                         <?php echo $rkkncp['nodemand']; ?></option>
                                 <?php } ?>
                             </select>
