@@ -162,7 +162,7 @@ if ($step == 2) {
                                     <script type="text/javascript">
                                          setTimeout(function() {
                                              window.close();
-                                         }, 3500);
+                                         }, 4000);
                                      </script>
                                 </head>
                                 <body>
@@ -186,7 +186,7 @@ if ($step == 2) {
                                     <script type="text/javascript">
                                         setTimeout(function() {
                                             window.close();
-                                        }, 3500);
+                                        }, 4000);
                                     </script>
                                 </head>
                                 <body>
@@ -285,7 +285,7 @@ if ($step == 2) {
                                     <script type="text/javascript">
                                         setTimeout(function() {
                                             window.close();
-                                        }, 3500);
+                                        }, 4000);
                                     </script>
                                 </head>
                                 <body>
@@ -313,6 +313,7 @@ if ($step == 2) {
                 mysqli_query($con, $sql);
 
             $step4 = 5;
+            $step5 = 6;
             $email_mkt_ppc_mng = $data_mkt_ppc_mng['email'];
             $transport = (new Swift_SmtpTransport('mail.ridinet.id', 465))  // Ganti dengan host SMTP server Anda (misal Gmail)
                 ->setUsername('noreply@ridinet.id')   // Ganti dengan email Anda
@@ -339,6 +340,19 @@ if ($step == 2) {
                         ', // Body dalam format HTML
                     'text/html'  // Tipe MIME untuk HTML
                 );
+            $message_dmf = (new Swift_Message($subject))
+                ->setFrom(['noreply@ridinet.id' => 'DEPT. QCF'])  // Ganti dengan email pengirim Anda
+                // // Buat Dept IT
+                // ->setFrom(['dept.it@indotaichen.com' => 'Dept IT'])  // Ganti dengan email pengirim Anda
+                ->setTo([$email_dmf => $data_dmf['nama']])  // Ganti dengan email penerima
+                ->setBody('<h1>Bon Retur QCF</h1>
+                        <p>Dear,  ' . $data_dmf['nama'] . '</p>
+                        <p>Mohon di approve untuk bon retur ini. Untuk detail dapat dilihat disini <a href="localhost/qc-final-new/pages/cetak/cetak_suratretur.php?no_order=' . $no_order . '&po=' . $po . '&id_nsp=' . $id_nsp . '&id_cek=' . $id_cek . '&id_cek1=' . $id_cek1 . '&id_cek2=' . $id_cek2 . '">Detail</a></p>
+                        <p><strong style="color: green">APPROVE</strong> <a href="localhost/qc-final-new/pages/cetak/approve_bon_retur_id.php?no_order=' . $no_order . '&po=' . $po . '&id_nsp=' . $id_nsp . '&id_cek=' . $id_cek . '&id_cek1=' . $id_cek1 . '&id_cek2=' . $id_cek2 . '&step=' . $step5 . '">Klik untuk Approve</a></p>
+                        <p><strong style="color: red">REJECT</strong> <a href="localhost/qc-final-new/pages/cetak/reject_bon_retur_id.php?no_order=' . $no_order . '&po=' . $po . '&id_nsp=' . $id_nsp . '&id_cek=' . $id_cek . '&id_cek1=' . $id_cek1 . '&id_cek2=' . $id_cek2 . '&step=' . $step5 . '">Klik untuk Reject</a></p>
+                        ', // Body dalam format HTML
+                    'text/html'  // Tipe MIME untuk HTML
+                );
             // Mengirim email
             try {
                 $result = $mailer->send($message_mkt_mng);
@@ -350,14 +364,14 @@ if ($step == 2) {
                                 <meta name="viewport" content="width=device-width, initial-scale=1">
                                 <title>Approval Bon Retur</title>
                                 <script type="text/javascript">
-                                        setTimeout(function() {
-                                            window.close();
-                                        }, 3500);
-                                    </script>
+                                           setTimeout(function() {
+                                               window.close();
+                                           }, 4000);
+                                       </script>
                             </head>
                             <body>
                                 <h1>Data berhasil di-approve!</h1>
-                                <p>Email dikirimkan ke ' . htmlspecialchars($data_mkt_ppc_mng['nama']) . '</p>
+                                <p>Email dikirimkan ke ' . htmlspecialchars($data_mkt_ppc_mng['nama']) . ', ' . htmlspecialchars($data_dmf['nama']) . '</p>
                             </body>
                             </html>';
             } catch (Exception $e) {
@@ -380,6 +394,8 @@ if ($step == 2) {
             mysqli_query($con, $sql);
                 
             $step3 = 4;
+            $step4 = 5;
+            $step5 = 6;
             $email_sales = $data_sales['email'];
             $email_mkt_ppc_mng = $data_mkt_ppc_mng['email'];
             $transport = (new Swift_SmtpTransport('mail.ridinet.id', 465))  // Ganti dengan host SMTP server Anda (misal Gmail)
@@ -406,11 +422,37 @@ if ($step == 2) {
                         ', // Body dalam format HTML
                     'text/html'  // Tipe MIME untuk HTML
                 );
+            $message_mkt_mng = (new Swift_Message($subject))
+                // // Buat Dept IT
+                // ->setFrom(['dept.it@indotaichen.com' => 'Dept IT'])  // Ganti dengan email pengirim Anda
+                ->setFrom(['noreply@ridinet.id' => 'DEPT. QCF'])  // Ganti dengan email pengirim Anda
+                ->setTo([$email_mkt_ppc_mng => $data_mkt_ppc_mng['nama']])  // Ganti dengan email penerima
+                ->setBody('<h1>Bon Retur QCF</h1>
+                        <p>Dear,  ' . $data_mkt_ppc_mng['nama'] . '</p>
+                        <p>Mohon di approve untuk bon retur ini. Untuk detail dapat dilihat disini <a href="localhost/qc-final-new/pages/cetak/cetak_suratretur.php?no_order=' . $no_order . '&po=' . $po . '&id_nsp=' . $id_nsp . '&id_cek=' . $id_cek . '&id_cek1=' . $id_cek1 . '&id_cek2=' . $id_cek2 . '">Detail</a></p>
+                        <p><strong style="color: green">APPROVE</strong> <a href="localhost/qc-final-new/pages/cetak/approve_bon_retur_id.php?no_order=' . $no_order . '&po=' . $po . '&id_nsp=' . $id_nsp . '&id_cek=' . $id_cek . '&id_cek1=' . $id_cek1 . '&id_cek2=' . $id_cek2 . '&step=' . $step4 . '">Klik untuk Approve</a></p>
+                        <p><strong style="color: red">REJECT</strong> <a href="localhost/qc-final-new/pages/cetak/reject_bon_retur_id.php?no_order=' . $no_order . '&po=' . $po . '&id_nsp=' . $id_nsp . '&id_cek=' . $id_cek . '&id_cek1=' . $id_cek1 . '&id_cek2=' . $id_cek2 . '&step=' . $step4 . '">Klik untuk Reject</a></p>
+                        ', // Body dalam format HTML
+                    'text/html'  // Tipe MIME untuk HTML
+                );
+            $message_dmf = (new Swift_Message($subject))
+                ->setFrom(['noreply@ridinet.id' => 'DEPT. QCF'])  // Ganti dengan email pengirim Anda
+                // // Buat Dept IT
+                // ->setFrom(['dept.it@indotaichen.com' => 'Dept IT'])  // Ganti dengan email pengirim Anda
+                ->setTo([$email_dmf => $data_dmf['nama']])  // Ganti dengan email penerima
+                ->setBody('<h1>Bon Retur QCF</h1>
+                        <p>Dear,  ' . $data_dmf['nama'] . '</p>
+                        <p>Mohon di approve untuk bon retur ini. Untuk detail dapat dilihat disini <a href="localhost/qc-final-new/pages/cetak/cetak_suratretur.php?no_order=' . $no_order . '&po=' . $po . '&id_nsp=' . $id_nsp . '&id_cek=' . $id_cek . '&id_cek1=' . $id_cek1 . '&id_cek2=' . $id_cek2 . '">Detail</a></p>
+                        <p><strong style="color: green">APPROVE</strong> <a href="localhost/qc-final-new/pages/cetak/approve_bon_retur_id.php?no_order=' . $no_order . '&po=' . $po . '&id_nsp=' . $id_nsp . '&id_cek=' . $id_cek . '&id_cek1=' . $id_cek1 . '&id_cek2=' . $id_cek2 . '&step=' . $step5 . '">Klik untuk Approve</a></p>
+                        <p><strong style="color: red">REJECT</strong> <a href="localhost/qc-final-new/pages/cetak/reject_bon_retur_id.php?no_order=' . $no_order . '&po=' . $po . '&id_nsp=' . $id_nsp . '&id_cek=' . $id_cek . '&id_cek1=' . $id_cek1 . '&id_cek2=' . $id_cek2 . '&step=' . $step5 . '">Klik untuk Reject</a></p>
+                        ', // Body dalam format HTML
+                    'text/html'  // Tipe MIME untuk HTML
+                );
             // Mengirim email
             try {
                 $result = $mailer->send($message_sales);
-                // $result = $mailer->send($message_mkt_mng);
-                // $result = $mailer->send($message_dmf);
+                $result = $mailer->send($message_mkt_mng);
+                $result = $mailer->send($message_dmf);
                 echo '<!doctype html>
                             <html lang="en">
                             <head>
@@ -418,14 +460,14 @@ if ($step == 2) {
                                 <meta name="viewport" content="width=device-width, initial-scale=1">
                                 <title>Approval Bon Retur</title>
                                 <script type="text/javascript">
-                                        setTimeout(function() {
-                                            window.close();
-                                        }, 3500);
-                                    </script>
+                                           setTimeout(function() {
+                                               window.close();
+                                           }, 4000);
+                                       </script>
                             </head>
                             <body>
                                 <h1>Data berhasil di-approve!</h1>
-                                <p>Email dikirimkan ke ' . htmlspecialchars($data_sales['nama']) . '</p>
+                                <p>Email dikirimkan ke ' . htmlspecialchars($data_sales['nama']) . ', ' . htmlspecialchars($data_mkt_ppc_mng['nama']) . ', ' . htmlspecialchars($data_dmf['nama']) . '</p>
                             </body>
                             </html>';
             } catch (Exception $e) {
@@ -444,7 +486,7 @@ if ($step == 2) {
                                     <script type="text/javascript">
                                         setTimeout(function() {
                                             window.close();
-                                        }, 3500);
+                                        }, 4000);
                                     </script>
                                 </head>
                                 <body>
@@ -506,7 +548,7 @@ if ($step == 2) {
                                     <script type="text/javascript">
                                         setTimeout(function() {
                                             window.close();
-                                        }, 3500);
+                                        }, 4000);
                                     </script>
                                 </head>
                                 <body>
@@ -527,7 +569,7 @@ if ($step == 2) {
                         <script type="text/javascript">
                             setTimeout(function() {
                                 window.close();
-                            }, 3500);
+                            }, 4000);
                         </script>
                     </head>
                     <body>
@@ -587,7 +629,7 @@ if ($step == 2) {
                                     <script type="text/javascript">
                                         setTimeout(function() {
                                             window.close();
-                                        }, 3500);
+                                        }, 4000);
                                     </script>
                                 </head>
                                 <body>
@@ -608,7 +650,7 @@ if ($step == 2) {
                         <script type="text/javascript">
                             setTimeout(function() {
                                 window.close();
-                            }, 3500);
+                            }, 4000);
                         </script>
                     </head>
                     <body>
@@ -668,7 +710,7 @@ if ($step == 2) {
                                     <script type="text/javascript">
                                         setTimeout(function() {
                                             window.close();
-                                        }, 3500);
+                                        }, 4000);
                                     </script>
                                 </head>
                                 <body>
@@ -688,7 +730,7 @@ if ($step == 2) {
                         <script type="text/javascript">
                             setTimeout(function() {
                                 window.close();
-                            }, 3500);
+                            }, 4000);
                         </script>
                     </head>
                     <body>

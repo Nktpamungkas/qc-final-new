@@ -173,14 +173,6 @@ while ($r = mysqli_fetch_array($modal)) {
                                 value="<?php echo $r['nodemand_akj']; ?>" placeholder="No Demand AKJ">
                         </div>
                         <?php
-                            // Query untuk mengambil data manager atau asisten supervisor dari dept QCF
-                            $qmng = "SELECT * FROM tbl_digital_signature t
-                                        WHERE t.dept = 'QCF'
-                                        AND t.jabatan IN ('Manager', 'Ast. Supervisor')
-                                        AND t.status_aktif = 1";
-                            $r_qmng = mysqli_query($con, $qmng);
-                            $dmng = mysqli_fetch_array($r_qmng);
-
                             // Query untuk mengambil data dari dept DMF
                             $qdmf = "SELECT * FROM tbl_digital_signature t
                                         WHERE t.dept = 'DMF'
@@ -189,13 +181,6 @@ while ($r = mysqli_fetch_array($modal)) {
                             $ddmf = mysqli_fetch_array($r_qdmf);
                             ?>
                         
-                        <!-- Input field untuk QCF Manager, disembunyikan -->
-                        <input name="qcf_manager" type="hidden" class="form-control" id="qcf_manager" value="<?php echo $dmng['id']; ?>"
-                            placeholder="No Demand AKJ">
-                        
-                        <!-- Input field untuk DMF, disembunyikan -->
-                        <input name="dmf" type="hidden" class="form-control" id="dmf" value="<?php echo $ddmf['id']; ?>"
-                            placeholder="No Demand AKJ">
 
                     </div>
                     <div class="form-group">
@@ -418,13 +403,35 @@ while ($r = mysqli_fetch_array($modal)) {
                                     AND t.status_aktif = 1";
                             $rstaff = mysqli_query($con, $qstaf);
                             ?>
-                            <select class="form-control select2" name="qc_staff">
+                            <select class="form-control select2" name="qc_staff" required>
                                 <option value="">Pilih</option>
                                 <?php while ($d_qc_staff = mysqli_fetch_array($rstaff)) { ?>
                                     <option value="<?php echo $d_qc_staff['id']; ?>" <?php if ($r['qc_staff'] == $d_qc_staff['id']) {
                                            echo "SELECTED";
                                        } ?>>
                                         <?php echo $d_qc_staff['nama']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="t_jawab" class="col-sm-2 control-label">Diterima QC Manager</label>
+                        <div class="col-sm-5">
+                            <?php
+                            $qstaf = "SELECT * FROM tbl_digital_signature t
+                                    WHERE t.dept = 'QCF'
+                                    AND t.jabatan IN ('Manager', 'Ast. Supervisor')
+                                    AND t.status_aktif = 1";
+                            $rstaff = mysqli_query($con, $qstaf);
+                            ?>
+                            <select class="form-control select2" name="qcf_manager" required>
+                                <option value="">Pilih</option>
+                                <?php while ($d_qc_mng = mysqli_fetch_array($rstaff)) { ?>
+                                    <option value="<?php echo $d_qc_mng['id']; ?>" <?php if ($r['qcf_manager'] == $d_qc_mng['id']) {
+                                           echo "SELECTED";
+                                       } ?>>
+                                        <?php echo $d_qc_mng['nama']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -439,7 +446,7 @@ while ($r = mysqli_fetch_array($modal)) {
                                     AND t.status_aktif = 1";
                                 $r_gstaff = mysqli_query($con, $gstaf);
                                 ?>
-                            <select class="form-control select2" name="gkj">
+                            <select class="form-control select2" name="gkj" required>
                                 <option value="">Pilih</option>
                                 <?php while ($d_gkj_staff = mysqli_fetch_array($r_gstaff)) { ?>
                                     <option value="<?php echo $d_gkj_staff['id']; ?>" <?php if ($r['gkj'] == $d_gkj_staff['id']) {
@@ -452,7 +459,9 @@ while ($r = mysqli_fetch_array($modal)) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="t_jawab" class="col-sm-2 control-label">Sales Assistant</label>
+                        <label for="t_jawab" class="col-sm-2 control-label">Sales Assistant
+                            *optional
+                        </label>
                         <div class="col-sm-5">
                             <?php
                                 $sstaf = "SELECT * FROM tbl_digital_signature t
@@ -474,7 +483,9 @@ while ($r = mysqli_fetch_array($modal)) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="t_jawab" class="col-sm-2 control-label">MKT/PPC Manager</label>
+                        <label for="t_jawab" class="col-sm-2 control-label">MKT/PPC Manager
+                            *optional
+                        </label>
                         <div class="col-sm-5">
                             <?php
                                 $gmng = "SELECT * FROM tbl_digital_signature t
@@ -490,6 +501,28 @@ while ($r = mysqli_fetch_array($modal)) {
                                            echo "SELECTED";
                                        } ?>>
                                         <?php echo $d_ppc_mkt_mng['nama']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="t_jawab" class="col-sm-2 control-label">Mengetahui DMF
+                        </label>
+                        <div class="col-sm-5">
+                            <?php
+                                $gmng = "SELECT * FROM tbl_digital_signature t
+                                    WHERE t.dept IN ('DMF') 
+                                    AND t.status_aktif = 1";
+                                $r_gmng = mysqli_query($con, $gmng);
+                                ?>
+                            <select class="form-control select2" name="dmf">
+                                <option value="">Pilih</option>
+                                <?php while ($d_dmf = mysqli_fetch_array($r_gmng)) { ?>
+                                    <option value="<?php echo $d_dmf['id']; ?>" <?php if ($r['dmf'] == $d_dmf['id']) {
+                                           echo "SELECTED";
+                                       } ?>>
+                                        <?php echo $d_dmf['nama']; ?>
                                     </option>
                                 <?php } ?>
                             </select>
