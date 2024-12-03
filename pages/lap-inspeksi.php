@@ -835,12 +835,12 @@ GROUP BY b.g_shift	");
 									</td>
 									<td align="center">
 										<?php if ($row1['yard'] > 0) { ?>
-											<a data-pk="<?php echo $row1['idins']; ?>" data-value="<?php echo $row1['yard']; ?>" class="qty_inspeksi"
+											<a data-pk="<?php echo $row1['idins']; ?>" data-value="<?php echo $row1['yard']; ?>" class="jml_yard_inspeksi"
 												href="javascript:void(0)">
 												<?php echo $row1['yard']; ?>
 											</a>
 										<?php } else { ?>
-											<a data-pk="<?php echo $row1['id_schedule']; ?>" data-value="<?php echo $row1['pjng_order']; ?>" class="qty_inspeksi2"
+											<a data-pk="<?php echo $row1['id_schedule']; ?>" data-value="<?php echo $row1['pjng_order']; ?>" class="jml_yard_inspeksi2"
 												href="javascript:void(0)">
 												<?php echo $row1['pjng_order']; ?>
 											</a>
