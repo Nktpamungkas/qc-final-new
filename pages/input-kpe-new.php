@@ -3,128 +3,156 @@ include "koneksi.php";
 // ini_set("error_reporting", 1);
 $nodemand = $_GET['nodemand'];
 $sqlDB2 = "SELECT 
-A.CODE AS DEMANDNO, 
-TRIM(B.PRODUCTIONORDERCODE) AS PRODUCTIONORDERCODE,
-TRIM(F.LEGALNAME1) AS LEGALNAME1, 
-TRIM(C.BUYER) AS BUYER,
-CASE
-	WHEN C.PO_HEADER IS NULL THEN C.PO_LINE
-	ELSE C.PO_HEADER
-END AS PO_NUMBER,
-CASE
-	WHEN C.STYLE_HEADER IS NULL THEN C.STYLE_LINE
-	ELSE C.STYLE_HEADER
-END AS DATA_STYLE,
-TRIM(C.SALESORDERCODE) AS SALESORDERCODE,
-C.QTY_ORDER,
-C.QTY_PANJANG_ORDER_UOM,
-C.QTY_PANJANG_ORDER,
-C.QTY_PANJANG_ORDER_SCND_UOM,
-TRIM(C.NO_ITEM) AS NO_ITEM,
-TRIM(A.SUBCODE02) AS SUBCODE02, 
-TRIM(A.SUBCODE03) AS SUBCODE03,
-TRIM(C.ITEMDESCRIPTION) AS ITEMDESCRIPTION, 
-PRODUCT.LONGDESCRIPTION AS JENIS_KAIN,
-D.VALUEDECIMAL AS GRAMASI,
-E.VALUEDECIMAL AS LEBAR,
-C.DELIVERYDATE, 
-C.ABSUNIQUEID,
-TRIM(A.SUBCODE05) AS NO_WARNA, 
-ITXVIEWCOLOR.WARNA,
-H.COLORPFD
-FROM PRODUCTIONDEMAND A 
-LEFT JOIN 
-	(SELECT PRODUCTIONDEMANDSTEP.PRODUCTIONORDERCODE, PRODUCTIONDEMANDSTEP.PRODUCTIONDEMANDCODE FROM 
-	PRODUCTIONDEMANDSTEP PRODUCTIONDEMANDSTEP
-	GROUP BY PRODUCTIONDEMANDSTEP.PRODUCTIONORDERCODE,PRODUCTIONDEMANDSTEP.PRODUCTIONDEMANDCODE) B
-ON A.CODE=B.PRODUCTIONDEMANDCODE
-LEFT JOIN 
-	(SELECT SALESORDER.ORDERPARTNERBRANDCODE, SALESORDER.EXTERNALREFERENCE AS PO_HEADER, SALESORDER.INTERNALREFERENCE AS STYLE_HEADER, SALESORDERLINE.SALESORDERCODE, SALESORDERLINE.ORDERLINE, SALESORDERLINE.EXTERNALREFERENCE AS PO_LINE, SALESORDERLINE.INTERNALREFERENCE AS STYLE_LINE,
-	SALESORDERLINE.ITEMDESCRIPTION, SALESORDERLINE.SUBCODE03, SALESORDERLINE.SUBCODE05, SUM(SALESORDERLINE.BASEPRIMARYQUANTITY) AS QTY_ORDER, SUM(SALESORDERLINE.BASESECONDARYQUANTITY) AS QTY_PANJANG_ORDER, SALESORDERLINE.BASEPRIMARYUOMCODE AS QTY_PANJANG_ORDER_UOM,
-	SALESORDERLINE.BASESECONDARYUOMCODE AS QTY_PANJANG_ORDER_SCND_UOM, SALESORDERLINE.CREATIONUSER, SALESORDERDELIVERY.DELIVERYDATE, SALESORDERLINE.ABSUNIQUEID, ITXVIEWORDERITEMLINKACTIVE.LONGDESCRIPTION AS NO_ITEM, ORDERPARTNERBRAND.LONGDESCRIPTION AS BUYER
-	FROM SALESORDER SALESORDER
-	LEFT JOIN SALESORDERLINE SALESORDERLINE ON SALESORDER.CODE=SALESORDERLINE.SALESORDERCODE 
-	LEFT JOIN SALESORDERDELIVERY SALESORDERDELIVERY ON SALESORDERLINE.SALESORDERCODE=SALESORDERDELIVERY.SALESORDERLINESALESORDERCODE AND SALESORDERLINE.ORDERLINE=SALESORDERDELIVERY.SALESORDERLINEORDERLINE
-	LEFT JOIN ITXVIEWORDERITEMLINKACTIVE ITXVIEWORDERITEMLINKACTIVE ON SALESORDER.ORDPRNCUSTOMERSUPPLIERCODE = ITXVIEWORDERITEMLINKACTIVE.ORDPRNCUSTOMERSUPPLIERCODE AND SALESORDERLINE.ITEMTYPEAFICODE= ITXVIEWORDERITEMLINKACTIVE.ITEMTYPEAFICODE AND 
-	SALESORDERLINE.SUBCODE01 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE01 AND SALESORDERLINE.SUBCODE02 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE02 AND SALESORDERLINE.SUBCODE03 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE03 AND
-	SALESORDERLINE.SUBCODE04 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE04 AND SALESORDERLINE.SUBCODE05 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE05 AND SALESORDERLINE.SUBCODE06 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE06 AND 
-	SALESORDERLINE.SUBCODE07 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE07 AND SALESORDERLINE.SUBCODE08 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE08 AND SALESORDERLINE.SUBCODE09 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE09 AND 
-	SALESORDERLINE.SUBCODE10 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE10
-	LEFT JOIN ORDERPARTNERBRAND ORDERPARTNERBRAND 
-	ON SALESORDER.ORDERPARTNERBRANDCODE = ORDERPARTNERBRAND.CODE AND SALESORDER.ORDPRNCUSTOMERSUPPLIERCODE = ORDERPARTNERBRAND.ORDPRNCUSTOMERSUPPLIERCODE 
-	GROUP BY SALESORDER.ORDERPARTNERBRANDCODE, SALESORDER.EXTERNALREFERENCE, SALESORDER.INTERNALREFERENCE, SALESORDERLINE.SALESORDERCODE, SALESORDERLINE.ORDERLINE, SALESORDERLINE.EXTERNALREFERENCE, SALESORDERLINE.INTERNALREFERENCE, SALESORDERLINE.ITEMDESCRIPTION, SALESORDERLINE.SUBCODE03, SALESORDERLINE.SUBCODE05,
-	SALESORDERLINE.BASEPRIMARYUOMCODE,SALESORDERLINE.BASESECONDARYUOMCODE, SALESORDERLINE.CREATIONUSER, SALESORDERDELIVERY.DELIVERYDATE, SALESORDERLINE.ABSUNIQUEID, ITXVIEWORDERITEMLINKACTIVE.LONGDESCRIPTION, ORDERPARTNERBRAND.LONGDESCRIPTION) C
-ON A.ORIGDLVSALORDLINESALORDERCODE = C.SALESORDERCODE AND A.SUBCODE03 = C.SUBCODE03 AND A.ORIGDLVSALORDERLINEORDERLINE = C.ORDERLINE
-LEFT JOIN
-	(SELECT PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
-	PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10,  
-	ADSTORAGE.VALUEDECIMAL
-	FROM PRODUCT PRODUCT LEFT JOIN ADSTORAGE ADSTORAGE ON PRODUCT.ABSUNIQUEID=ADSTORAGE.UNIQUEID
-	WHERE ADSTORAGE.NAMENAME ='GSM'
-	GROUP BY PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
-	PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10, ADSTORAGE.VALUEDECIMAL) D
-ON A.SUBCODE01=D.SUBCODE01 AND
-A.SUBCODE02=D.SUBCODE02 AND
-A.SUBCODE03=D.SUBCODE03 AND 
-A.SUBCODE04=D.SUBCODE04 AND
-A.SUBCODE05=D.SUBCODE05 AND 
-A.SUBCODE06=D.SUBCODE06 AND 
-A.SUBCODE07=D.SUBCODE07 AND 
-A.SUBCODE08=D.SUBCODE08 AND 
-A.SUBCODE09=D.SUBCODE09 AND 
-A.SUBCODE10=D.SUBCODE10
-LEFT JOIN
-	(SELECT PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
-	PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10,  
-	ADSTORAGE.VALUEDECIMAL
-	FROM PRODUCT PRODUCT LEFT JOIN ADSTORAGE ADSTORAGE ON PRODUCT.ABSUNIQUEID=ADSTORAGE.UNIQUEID
-	WHERE ADSTORAGE.NAMENAME ='Width'
-	GROUP BY PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
-	PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10,ADSTORAGE.VALUEDECIMAL) E
-ON A.SUBCODE01=E.SUBCODE01 AND
-A.SUBCODE02=E.SUBCODE02 AND
-A.SUBCODE03=E.SUBCODE03 AND 
-A.SUBCODE04=E.SUBCODE04 AND
-A.SUBCODE05=E.SUBCODE05 AND 
-A.SUBCODE06=E.SUBCODE06 AND 
-A.SUBCODE07=E.SUBCODE07 AND 
-A.SUBCODE08=E.SUBCODE08 AND 
-A.SUBCODE09=E.SUBCODE09 AND 
-A.SUBCODE10=E.SUBCODE10
-LEFT JOIN
-	(SELECT BUSINESSPARTNER.LEGALNAME1,ORDERPARTNER.CUSTOMERSUPPLIERCODE FROM BUSINESSPARTNER BUSINESSPARTNER 
-	LEFT JOIN ORDERPARTNER ORDERPARTNER ON BUSINESSPARTNER.NUMBERID=ORDERPARTNER.ORDERBUSINESSPARTNERNUMBERID) F
-ON A.CUSTOMERCODE=F.CUSTOMERSUPPLIERCODE
-LEFT JOIN ITXVIEWCOLOR ITXVIEWCOLOR ON 
-A.ITEMTYPEAFICODE = ITXVIEWCOLOR.ITEMTYPECODE AND 
-A.SUBCODE01=ITXVIEWCOLOR.SUBCODE01 AND
-A.SUBCODE02=ITXVIEWCOLOR.SUBCODE02 AND
-A.SUBCODE03=ITXVIEWCOLOR.SUBCODE03 AND 
-A.SUBCODE04=ITXVIEWCOLOR.SUBCODE04 AND
-A.SUBCODE05=ITXVIEWCOLOR.SUBCODE05 AND 
-A.SUBCODE06=ITXVIEWCOLOR.SUBCODE06 AND 
-A.SUBCODE07=ITXVIEWCOLOR.SUBCODE07 AND 
-A.SUBCODE08=ITXVIEWCOLOR.SUBCODE08 AND 
-A.SUBCODE09=ITXVIEWCOLOR.SUBCODE09 AND 
-A.SUBCODE10=ITXVIEWCOLOR.SUBCODE10
-LEFT JOIN 
-	(SELECT ADSTORAGE.UNIQUEID, ADSTORAGE.VALUESTRING AS COLORPFD FROM ADSTORAGE ADSTORAGE WHERE TRIM(ADSTORAGE.NAMENAME)='ColorPFD') H 
-ON C.ABSUNIQUEID=H.UNIQUEID
-LEFT JOIN PRODUCT PRODUCT ON 
-A.ITEMTYPEAFICODE = PRODUCT.ITEMTYPECODE AND 
-A.SUBCODE01=PRODUCT.SUBCODE01 AND
-A.SUBCODE02=PRODUCT.SUBCODE02 AND
-A.SUBCODE03=PRODUCT.SUBCODE03 AND 
-A.SUBCODE04=PRODUCT.SUBCODE04 AND
-A.SUBCODE05=PRODUCT.SUBCODE05 AND 
-A.SUBCODE06=PRODUCT.SUBCODE06 AND 
-A.SUBCODE07=PRODUCT.SUBCODE07 AND 
-A.SUBCODE08=PRODUCT.SUBCODE08 AND 
-A.SUBCODE09=PRODUCT.SUBCODE09 AND 
-A.SUBCODE10=PRODUCT.SUBCODE10
-WHERE A.CODE='$nodemand'";
+			A.CODE AS DEMANDNO, 
+			TRIM(B.PRODUCTIONORDERCODE) AS PRODUCTIONORDERCODE,
+			TRIM(F.LEGALNAME1) AS LEGALNAME1, 
+			TRIM(C.BUYER) AS BUYER,
+			CASE
+				WHEN C.PO_HEADER IS NULL THEN C.PO_LINE
+				ELSE C.PO_HEADER
+			END AS PO_NUMBER,
+			CASE
+				WHEN C.STYLE_HEADER IS NULL THEN C.STYLE_LINE
+				ELSE C.STYLE_HEADER
+			END AS DATA_STYLE,
+			TRIM(C.SALESORDERCODE) AS SALESORDERCODE,
+			C.QTY_ORDER,
+			C.QTY_PANJANG_ORDER_UOM,
+			C.QTY_PANJANG_ORDER,
+			C.QTY_PANJANG_ORDER_SCND_UOM,
+			TRIM(C.NO_ITEM) AS NO_ITEM,
+			TRIM(A.SUBCODE02) AS SUBCODE02, 
+			TRIM(A.SUBCODE03) AS SUBCODE03,
+			TRIM(C.ITEMDESCRIPTION) AS ITEMDESCRIPTION, 
+			PRODUCT.LONGDESCRIPTION AS JENIS_KAIN,
+			D.VALUEDECIMAL AS GRAMASI,
+			E.VALUEDECIMAL AS LEBAR,
+			C.DELIVERYDATE, 
+			C.ABSUNIQUEID,
+			TRIM(A.SUBCODE05) AS NO_WARNA, 
+			ITXVIEWCOLOR.WARNA,
+			H.COLORPFD
+			FROM PRODUCTIONDEMAND A 
+			LEFT JOIN 
+				(SELECT PRODUCTIONDEMANDSTEP.PRODUCTIONORDERCODE, PRODUCTIONDEMANDSTEP.PRODUCTIONDEMANDCODE FROM 
+				PRODUCTIONDEMANDSTEP PRODUCTIONDEMANDSTEP
+				GROUP BY PRODUCTIONDEMANDSTEP.PRODUCTIONORDERCODE,PRODUCTIONDEMANDSTEP.PRODUCTIONDEMANDCODE) B
+			ON A.CODE=B.PRODUCTIONDEMANDCODE
+			LEFT JOIN 
+				(SELECT SALESORDER.ORDERPARTNERBRANDCODE, SALESORDER.EXTERNALREFERENCE AS PO_HEADER, SALESORDER.INTERNALREFERENCE AS STYLE_HEADER, SALESORDERLINE.SALESORDERCODE, SALESORDERLINE.ORDERLINE, SALESORDERLINE.EXTERNALREFERENCE AS PO_LINE, SALESORDERLINE.INTERNALREFERENCE AS STYLE_LINE,
+				SALESORDERLINE.ITEMDESCRIPTION, SALESORDERLINE.SUBCODE03, SALESORDERLINE.SUBCODE05, SUM(SALESORDERLINE.BASEPRIMARYQUANTITY) AS QTY_ORDER, SUM(SALESORDERLINE.BASESECONDARYQUANTITY) AS QTY_PANJANG_ORDER, SALESORDERLINE.BASEPRIMARYUOMCODE AS QTY_PANJANG_ORDER_UOM,
+				SALESORDERLINE.BASESECONDARYUOMCODE AS QTY_PANJANG_ORDER_SCND_UOM, SALESORDERLINE.CREATIONUSER, SALESORDERDELIVERY.DELIVERYDATE, SALESORDERLINE.ABSUNIQUEID, ITXVIEWORDERITEMLINKACTIVE.LONGDESCRIPTION AS NO_ITEM, ORDERPARTNERBRAND.LONGDESCRIPTION AS BUYER
+				FROM SALESORDER SALESORDER
+				LEFT JOIN SALESORDERLINE SALESORDERLINE ON SALESORDER.CODE=SALESORDERLINE.SALESORDERCODE 
+				LEFT JOIN SALESORDERDELIVERY SALESORDERDELIVERY ON SALESORDERLINE.SALESORDERCODE=SALESORDERDELIVERY.SALESORDERLINESALESORDERCODE AND SALESORDERLINE.ORDERLINE=SALESORDERDELIVERY.SALESORDERLINEORDERLINE
+				LEFT JOIN ITXVIEWORDERITEMLINKACTIVE ITXVIEWORDERITEMLINKACTIVE ON SALESORDER.ORDPRNCUSTOMERSUPPLIERCODE = ITXVIEWORDERITEMLINKACTIVE.ORDPRNCUSTOMERSUPPLIERCODE AND SALESORDERLINE.ITEMTYPEAFICODE= ITXVIEWORDERITEMLINKACTIVE.ITEMTYPEAFICODE AND 
+				SALESORDERLINE.SUBCODE01 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE01 AND SALESORDERLINE.SUBCODE02 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE02 AND SALESORDERLINE.SUBCODE03 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE03 AND
+				SALESORDERLINE.SUBCODE04 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE04 AND SALESORDERLINE.SUBCODE05 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE05 AND SALESORDERLINE.SUBCODE06 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE06 AND 
+				SALESORDERLINE.SUBCODE07 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE07 AND SALESORDERLINE.SUBCODE08 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE08 AND SALESORDERLINE.SUBCODE09 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE09 AND 
+				SALESORDERLINE.SUBCODE10 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE10
+				LEFT JOIN ORDERPARTNERBRAND ORDERPARTNERBRAND 
+				ON SALESORDER.ORDERPARTNERBRANDCODE = ORDERPARTNERBRAND.CODE AND SALESORDER.ORDPRNCUSTOMERSUPPLIERCODE = ORDERPARTNERBRAND.ORDPRNCUSTOMERSUPPLIERCODE 
+				GROUP BY SALESORDER.ORDERPARTNERBRANDCODE, SALESORDER.EXTERNALREFERENCE, SALESORDER.INTERNALREFERENCE, SALESORDERLINE.SALESORDERCODE, SALESORDERLINE.ORDERLINE, SALESORDERLINE.EXTERNALREFERENCE, SALESORDERLINE.INTERNALREFERENCE, SALESORDERLINE.ITEMDESCRIPTION, SALESORDERLINE.SUBCODE03, SALESORDERLINE.SUBCODE05,
+				SALESORDERLINE.BASEPRIMARYUOMCODE,SALESORDERLINE.BASESECONDARYUOMCODE, SALESORDERLINE.CREATIONUSER, SALESORDERDELIVERY.DELIVERYDATE, SALESORDERLINE.ABSUNIQUEID, ITXVIEWORDERITEMLINKACTIVE.LONGDESCRIPTION, ORDERPARTNERBRAND.LONGDESCRIPTION) C
+			ON A.ORIGDLVSALORDLINESALORDERCODE = C.SALESORDERCODE AND A.SUBCODE03 = C.SUBCODE03 AND A.ORIGDLVSALORDERLINEORDERLINE = C.ORDERLINE
+			LEFT JOIN
+				(SELECT PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
+				PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10,  
+				ADSTORAGE.VALUEDECIMAL
+				FROM PRODUCT PRODUCT LEFT JOIN ADSTORAGE ADSTORAGE ON PRODUCT.ABSUNIQUEID=ADSTORAGE.UNIQUEID
+				WHERE ADSTORAGE.NAMENAME ='GSM'
+				GROUP BY PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
+				PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10, ADSTORAGE.VALUEDECIMAL) D
+			ON A.SUBCODE01=D.SUBCODE01 AND
+			A.SUBCODE02=D.SUBCODE02 AND
+			A.SUBCODE03=D.SUBCODE03 AND 
+			A.SUBCODE04=D.SUBCODE04 AND
+			A.SUBCODE05=D.SUBCODE05 AND 
+			A.SUBCODE06=D.SUBCODE06 AND 
+			A.SUBCODE07=D.SUBCODE07 AND 
+			A.SUBCODE08=D.SUBCODE08 AND 
+			A.SUBCODE09=D.SUBCODE09 AND 
+			A.SUBCODE10=D.SUBCODE10
+			LEFT JOIN
+				(SELECT PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
+				PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10,  
+				ADSTORAGE.VALUEDECIMAL
+				FROM PRODUCT PRODUCT LEFT JOIN ADSTORAGE ADSTORAGE ON PRODUCT.ABSUNIQUEID=ADSTORAGE.UNIQUEID
+				WHERE ADSTORAGE.NAMENAME ='Width'
+				GROUP BY PRODUCT.SUBCODE01, PRODUCT.SUBCODE02, PRODUCT.SUBCODE03, PRODUCT.SUBCODE04, PRODUCT.SUBCODE05,
+				PRODUCT.SUBCODE06, PRODUCT.SUBCODE07, PRODUCT.SUBCODE08, PRODUCT.SUBCODE09, PRODUCT.SUBCODE10,ADSTORAGE.VALUEDECIMAL) E
+			ON A.SUBCODE01=E.SUBCODE01 AND
+			A.SUBCODE02=E.SUBCODE02 AND
+			A.SUBCODE03=E.SUBCODE03 AND 
+			A.SUBCODE04=E.SUBCODE04 AND
+			A.SUBCODE05=E.SUBCODE05 AND 
+			A.SUBCODE06=E.SUBCODE06 AND 
+			A.SUBCODE07=E.SUBCODE07 AND 
+			A.SUBCODE08=E.SUBCODE08 AND 
+			A.SUBCODE09=E.SUBCODE09 AND 
+			A.SUBCODE10=E.SUBCODE10
+			LEFT JOIN
+				(SELECT BUSINESSPARTNER.LEGALNAME1,ORDERPARTNER.CUSTOMERSUPPLIERCODE FROM BUSINESSPARTNER BUSINESSPARTNER 
+				LEFT JOIN ORDERPARTNER ORDERPARTNER ON BUSINESSPARTNER.NUMBERID=ORDERPARTNER.ORDERBUSINESSPARTNERNUMBERID) F
+			ON A.CUSTOMERCODE=F.CUSTOMERSUPPLIERCODE
+			LEFT JOIN ITXVIEWCOLOR ITXVIEWCOLOR ON 
+			A.ITEMTYPEAFICODE = ITXVIEWCOLOR.ITEMTYPECODE AND 
+			A.SUBCODE01=ITXVIEWCOLOR.SUBCODE01 AND
+			A.SUBCODE02=ITXVIEWCOLOR.SUBCODE02 AND
+			A.SUBCODE03=ITXVIEWCOLOR.SUBCODE03 AND 
+			A.SUBCODE04=ITXVIEWCOLOR.SUBCODE04 AND
+			A.SUBCODE05=ITXVIEWCOLOR.SUBCODE05 AND 
+			A.SUBCODE06=ITXVIEWCOLOR.SUBCODE06 AND 
+			A.SUBCODE07=ITXVIEWCOLOR.SUBCODE07 AND 
+			A.SUBCODE08=ITXVIEWCOLOR.SUBCODE08 AND 
+			A.SUBCODE09=ITXVIEWCOLOR.SUBCODE09 AND 
+			A.SUBCODE10=ITXVIEWCOLOR.SUBCODE10
+			LEFT JOIN 
+				(SELECT ADSTORAGE.UNIQUEID, ADSTORAGE.VALUESTRING AS COLORPFD FROM ADSTORAGE ADSTORAGE WHERE TRIM(ADSTORAGE.NAMENAME)='ColorPFD') H 
+			ON C.ABSUNIQUEID=H.UNIQUEID
+			LEFT JOIN PRODUCT PRODUCT ON 
+			A.ITEMTYPEAFICODE = PRODUCT.ITEMTYPECODE AND 
+			A.SUBCODE01=PRODUCT.SUBCODE01 AND
+			A.SUBCODE02=PRODUCT.SUBCODE02 AND
+			A.SUBCODE03=PRODUCT.SUBCODE03 AND 
+			A.SUBCODE04=PRODUCT.SUBCODE04 AND
+			A.SUBCODE05=PRODUCT.SUBCODE05 AND 
+			A.SUBCODE06=PRODUCT.SUBCODE06 AND 
+			A.SUBCODE07=PRODUCT.SUBCODE07 AND 
+			A.SUBCODE08=PRODUCT.SUBCODE08 AND 
+			A.SUBCODE09=PRODUCT.SUBCODE09 AND 
+			A.SUBCODE10=PRODUCT.SUBCODE10
+			WHERE A.CODE='$nodemand'";
+// echo $sqlDB2;
 $stmt = db2_exec($conn1, $sqlDB2, array('cursor' => DB2_SCROLLABLE));
 $rowdb2 = db2_fetch_assoc($stmt);
+if(!empty($nodemand)){
+	// Buat ambil PO BON ORDER
+	$qdb21 = "SELECT 
+			* 
+				FROM ITXVIEWBONORDER i 
+			WHERE
+				i.DEMAND ='$nodemand'";
+	$stmt2 = db2_exec($conn1, $qdb21);
+	$rowdb21 = db2_fetch_assoc($stmt2);
+
+	// Buat Total KG & YDS
+	$qdb22 = "SELECT 
+			* 
+				FROM ITXVIEW_TOTAL_BONORDER_ITEM i 
+			WHERE
+				i.CODE ='$rowdb21[SALESORDERCODE]'
+				AND i.SUBCODE02 ='$rowdb21[SUBCODE02]'
+				AND i.SUBCODE03 ='$rowdb21[SUBCODE03]'
+				AND i.SUBCODE05 ='$rowdb21[SUBCODE05]'
+				AND i.EXTERNALREFERENCE = '$rowdb21[EXTERNALREFERENCE]'
+				";
+	$stmt3 = db2_exec($conn1, $qdb22);
+	$rowdb22 = db2_fetch_assoc($stmt3);
+} else {
+	'';
+}
+
 //GRAMASI
 $posg = strpos($rowdb2['GRAMASI'], ".");
 $valgramasi = substr($rowdb2['GRAMASI'], 0, $posg);
@@ -133,11 +161,11 @@ $posl = strpos($rowdb2['LEBAR'], ".");
 $vallebar = substr($rowdb2['LEBAR'], 0, $posl);
 
 $sqlCek = mysqli_query($con, "SELECT a.*,
-GROUP_CONCAT( DISTINCT b.no_ncp SEPARATOR ', ' ) AS no_ncp,
-GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
-FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf b ON a.nodemand=b.nodemand WHERE a.nodemand='$nodemand'
-GROUP BY a.nodemand
-ORDER BY a.id DESC LIMIT 1");
+												GROUP_CONCAT( DISTINCT b.no_ncp SEPARATOR ', ' ) AS no_ncp,
+												GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
+												FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf b ON a.nodemand=b.nodemand WHERE a.nodemand='$nodemand'
+												GROUP BY a.nodemand
+											ORDER BY a.id DESC LIMIT 1");
 // if(!$sqlCek || mysqli_num_rows($sqlCek) == 0){
 // 	$cek=mysqli_num_rows($sqlCek);
 // }
@@ -168,7 +196,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<?php
 						if ($cek > 0) {
 							// echo "Sudah Input Pada Tgl: " . $rcek['tgl_buat'] . " | ";
-							$qm = mysqli_query($con, "select 
+							$qm = mysqli_query($con, "SELECT 
 															group_concat(masalah_dominan) as masalah_dominan
 														from tbl_aftersales_now
 														where nodemand = '$_GET[nodemand]'
@@ -246,22 +274,22 @@ $rcek = mysqli_fetch_array($sqlCek);
 				<!-- <div class="form-group">
 					<label for="jns_kain" class="col-sm-3 control-label">Jenis Kain</label>
 					<div class="col-sm-8"> -->
-						<input name="jns_kain" type="hidden" class="form-control" id="jns_kain" value="<?php if ($cek > 0 && $rcek['jenis_kain'] != "") {
-						echo $rcek['jenis_kain'];
-						} else {
-						echo stripslashes($rowdb2['JENIS_KAIN']);
-						}      ?>" placeholder="Jenis Kain">
-					<!-- </div>
+				<input name="jns_kain" type="hidden" class="form-control" id="jns_kain" value="<?php if ($cek > 0 && $rcek['jenis_kain'] != "") {
+					echo $rcek['jenis_kain'];
+				} else {
+					echo stripslashes($rowdb2['JENIS_KAIN']);
+				} ?>" placeholder="Jenis Kain">
+				<!-- </div>
 				</div>
 				<div class="form-group">
 					<label for="styl" class="col-sm-3 control-label">Style</label>
 					<div class="col-sm-8"> -->
-						<input name="styl" type="hidden" class="form-control" id="styl" value="<?php if ($cek > 0 && $rcek['styl'] != "") {
-						echo $rcek['styl'];
-						} else {
-						echo $rowdb2['DATA_STYLE'];
-						}      ?>" placeholder="Style">
-					<!-- </div>
+				<input name="styl" type="hidden" class="form-control" id="styl" value="<?php if ($cek > 0 && $rcek['styl'] != "") {
+					echo $rcek['styl'];
+				} else {
+					echo $rowdb2['DATA_STYLE'];
+				} ?>" placeholder="Style">
+				<!-- </div>
 				</div> -->
 				<div class="form-group">
 					<label for="l_g" class="col-sm-3 control-label">Lebar X Gramasi</label>
@@ -318,7 +346,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<input name="qty_order" type="text" class="form-control" id="qty_order" value="<?php if ($cek > 0) {
 								echo number_format($rcek['qty_order'], 2);
 							} else {
-								echo number_format($rowdb2['QTY_ORDER'], 2);
+								echo number_format($rowdb22['TOTAL_PRIMARY'], 2);
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_o" style="font-size: 12px;" id="satuan1">
@@ -337,10 +365,10 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<div class="col-sm-4">
 						<div class="input-group">
-						<input name="qty_order2" type="text" class="form-control" id="qty_order2" value="<?php if ($cek > 0 && $rcek['qty_order2'] != "") {
+							<input name="qty_order2" type="text" class="form-control" id="qty_order2" value="<?php if ($cek > 0 && $rcek['qty_order2'] != "") {
 								echo number_format($rcek['qty_order2'], 2);
 							} else {
-								echo number_format($rowdb2['QTY_PANJANG_ORDER'], 2);
+								echo number_format($rowdb22['TOTAL_SECONDARY'], 2);
 							} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_o2" style="font-size: 12px;" id="satuan1">
@@ -362,9 +390,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="tgl_finishing" class="col-sm-3 control-label">Qty Kirim</label>
 					<div class="col-sm-4">
 						<div class="input-group">
-						<input name="qty_kirim" type="text" class="form-control" id="qty_kirim" value="<?php if ($cek > 0) {
-								//echo $rcek['qty_kirim'];
-							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<input name="qty_kirim" type="text" class="form-control" id="qty_kirim" value="<?php if ($cek > 0) {
+							//echo $rcek['qty_kirim'];
+						} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_k" style="font-size: 12px;" id="satuan_k">
 									<?php
@@ -382,9 +410,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<div class="col-sm-4">
 						<div class="input-group">
-						<input name="qty_kirim2" type="text" class="form-control" id="qty_kirim2" value="<?php if ($cek > 0) {
-								//echo $rcek['qty_kirim'];
-							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<input name="qty_kirim2" type="text" class="form-control" id="qty_kirim2" value="<?php if ($cek > 0) {
+							//echo $rcek['qty_kirim'];
+						} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_k2" style="font-size: 12px;" id="satuan_k2">
 									<?php
@@ -407,9 +435,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="proses" class="col-sm-3 control-label">Qty Claim</label>
 					<div class="col-sm-4">
 						<div class="input-group">
-						<input name="qty_claim" type="text" class="form-control" id="qty_claim" value="<?php if ($cek > 0) {
-								//echo $rcek['qty_claim'];
-							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<input name="qty_claim" type="text" class="form-control" id="qty_claim" value="<?php if ($cek > 0) {
+							//echo $rcek['qty_claim'];
+						} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_c" style="font-size: 12px;" id="satuan_c">
 									<?php
@@ -427,9 +455,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<div class="col-sm-4">
 						<div class="input-group">
-						<input name="qty_claim2" type="text" class="form-control" id="qty_claim2" value="<?php if ($cek > 0) {
-								//echo $rcek['qty_claim'];
-							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<input name="qty_claim2" type="text" class="form-control" id="qty_claim2" value="<?php if ($cek > 0) {
+							//echo $rcek['qty_claim'];
+						} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_c2" style="font-size: 12px;" id="satuan_c2">
 									<?php
@@ -450,9 +478,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="tgl_finishing" class="col-sm-3 control-label">Qty FOC</label>
 					<div class="col-sm-4">
 						<div class="input-group">
-						<input name="qty_foc" type="text" class="form-control" id="qty_foc" value="<?php if ($cek > 0) {
-								//echo $rcek['qty_foc'];
-							} ?>" placeholder="0.00" style="text-align: right;" required>
+							<input name="qty_foc" type="text" class="form-control" id="qty_foc" value="<?php if ($cek > 0) {
+							//echo $rcek['qty_foc'];
+						} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_f" style="font-size: 12px;" id="satuan_f">
 									<?php
@@ -471,8 +499,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="qty_foc2" type="text" class="form-control" id="qty_foc2" value="<?php if ($cek > 0) {
-								//echo $rcek['qty_foc'];
-							} ?>" placeholder="0.00" style="text-align: right;" required>
+							//echo $rcek['qty_foc'];
+						} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan_f2" style="font-size: 12px;" id="satuan_f2">
 									<?php
@@ -500,19 +528,19 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<option value="">Pilih</option>
 
 							<?php
-								$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
-								foreach ($depts as $dept) {
-									echo "<option value=\"$dept\">$dept</option>";
-								}
+							$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
+							foreach ($depts as $dept) {
+								echo "<option value=\"$dept\">$dept</option>";
+							}
 							?>
-							
+
 						</select>
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input name="persen" type="text" class="form-control" id="persen" value="<?php if ($cek > 0) {
-								//echo $rcek['persen'];
-							} ?>" placeholder="0.00" style="text-align: right;">
+							//echo $rcek['persen'];
+						} ?>" placeholder="0.00" style="text-align: right;">
 							<span class="input-group-addon">%</span>
 						</div>
 					</div>
@@ -524,10 +552,10 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<option value="">Pilih</option>
 
 							<?php
-								$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
-								foreach ($depts as $dept) {
-									echo "<option value=\"$dept\">$dept</option>";
-								}
+							$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
+							foreach ($depts as $dept) {
+								echo "<option value=\"$dept\">$dept</option>";
+							}
 							?>
 
 						</select>
@@ -535,8 +563,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input name="persen1" type="text" class="form-control" id="persen1" value="<?php if ($cek > 0) {
-								//echo $rcek['persen1'];
-							} ?>" placeholder="0.00" style="text-align: right;">
+							//echo $rcek['persen1'];
+						} ?>" placeholder="0.00" style="text-align: right;">
 							<span class="input-group-addon">%</span>
 						</div>
 					</div>
@@ -546,12 +574,12 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-2">
 						<select class="form-control select2" name="t_jawab2">
 							<option value="">Pilih</option>
-							
+
 							<?php
-								$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
-								foreach ($depts as $dept) {
-									echo "<option value=\"$dept\">$dept</option>";
-								}
+							$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
+							foreach ($depts as $dept) {
+								echo "<option value=\"$dept\">$dept</option>";
+							}
 							?>
 
 						</select>
@@ -559,8 +587,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input name="persen2" type="text" class="form-control" id="persen2" value="<?php if ($cek > 0) {
-								// echo $rcek['persen2'];
-							} ?>" placeholder="0.00" style="text-align: right;">
+							// echo $rcek['persen2'];
+						} ?>" placeholder="0.00" style="text-align: right;">
 							<span class="input-group-addon">%</span>
 						</div>
 					</div>
@@ -581,7 +609,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 								$riQryma = mysqli_fetch_array($qryma);
 								$qrym = mysqli_query($con, "SELECT masalah FROM tbl_masalah_aftersales ORDER BY masalah ASC");
 								while ($rm = mysqli_fetch_array($qrym)) {
-									
+
 									$disabled = in_array($rm['masalah'], explode(',', $riQryma['masalah_dominan'])) ? "disabled" : '';
 									?>
 									<option value="<?= $rm['masalah']; ?>" <?= $disabled ?>>
@@ -602,8 +630,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rs = mysqli_fetch_array($qrys)) {
 									?>
 									<option value="<?php echo $rs['solusi']; ?>" <?php if ($rcek['solusi'] == $rs['solusi']) {
-										   //echo "SELECTED";
-									   } ?>>
+									   //echo "SELECTED";
+							   	} ?>>
 										<?php echo $rs['solusi']; ?>
 									</option>
 								<?php } ?>
@@ -617,54 +645,54 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="masalah" class="col-sm-3 control-label">Masalah / Keterangan</label>
 					<div class="col-sm-3">
 						<input name="masalah" type="text" class="form-control" id="masalah" value="<?php if ($cek > 0) {
-							//echo $rcek['masalah'];
-						} ?>" placeholder="Masalah">
+						//echo $rcek['masalah'];
+					} ?>" placeholder="Masalah">
 					</div>
 					<div class="col-sm-3">
 						<input name="ket" type="text" class="form-control" id="ket" value="<?php if ($cek > 0) {
-							//echo $rcek['ket'];
-						} ?>" placeholder="Keterangan">
+						//echo $rcek['ket'];
+					} ?>" placeholder="Keterangan">
 					</div>
 					<div class="col-sm-2">
 						<input type="checkbox" name="sts_claim" id="sts_claim" value="1" <?php if ($rcek['sts_claim'] == "1") {
-							//echo "checked";
-						} ?>>
+						//echo "checked";
+					} ?>>
 						<label> Claim</label>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3">
 						<input type="checkbox" name="sts_red" id="sts_red" value="1" onClick="aktif1();" <?php if ($rcek['sts_red'] == "1") {
-							//echo "checked";
-						} ?>>
+						//echo "checked";
+					} ?>>
 						<label> Red Category Email</label>
 					</div>
 					<label for="leadtime_email" class="col-sm-2 control-label">Leadtime Email</label>
 					<div class="col-sm-3">
 						<select class="form-control select2" name="leadtime_email" <?php if ($rcek['sts_red'] != "1") {
-							//echo "disabled";
-						} else {
-							//echo "enabled";
-						} ?>>
+						//echo "disabled";
+					} else {
+						//echo "enabled";
+					} ?>>
 							<option value="">Pilih</option>
 							<option value="1 Hari Kerja" <?php if ($rcek['leadtime_email'] == "1 Hari Kerja") {
-								//echo "SELECTED";
-							} ?>>1 Hari Kerja</option>
+							//echo "SELECTED";
+						} ?>>1 Hari Kerja</option>
 							<option value="2 Hari Kerja" <?php if ($rcek['leadtime_email'] == "2 Hari Kerja") {
-								//echo "SELECTED";
-							} ?>>2 Hari Kerja</option>
+							//echo "SELECTED";
+						} ?>>2 Hari Kerja</option>
 							<option value="3 Hari Kerja" <?php if ($rcek['leadtime_email'] == "3 Hari Kerja") {
-								//echo "SELECTED";
-							} ?>>3 Hari Kerja</option>
+							//echo "SELECTED";
+						} ?>>3 Hari Kerja</option>
 							<option value="4 Hari Kerja" <?php if ($rcek['leadtime_email'] == "4 Hari Kerja") {
-								//echo "SELECTED";
-							} ?>>4 Hari Kerja</option>
+							//echo "SELECTED";
+						} ?>>4 Hari Kerja</option>
 							<option value="5 Hari Kerja" <?php if ($rcek['leadtime_email'] == "5 Hari Kerja") {
-								//echo "SELECTED";
-							} ?>>5 Hari Kerja</option>
+							//echo "SELECTED";
+						} ?>>5 Hari Kerja</option>
 							<option value="6 Hari Kerja" <?php if ($rcek['leadtime_email'] == "6 Hari Kerja") {
-								//echo "SELECTED";
-							} ?>>6 Hari Kerja</option>
+							//echo "SELECTED";
+						} ?>>6 Hari Kerja</option>
 						</select>
 					</div>
 
@@ -679,8 +707,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 							<input name="hod" type="text" class="form-control pull-right" id="datepicker4"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
-									//echo $rcek['hod'];
-								} ?>" />
+								//echo $rcek['hod'];
+							} ?>" />
 						</div>
 					</div>
 
@@ -689,12 +717,12 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 							<input name="tgl_solusi_akhir" type="text" class="form-control pull-right" id="datepicker2"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
-									//echo $rcek['tgl_solusi_akhir'];
-								} ?>" <?php if ($rcek['sts_red'] != "1") {
-									 //echo "";
-								 } else {
-									 //echo "";
-								 } ?> />
+								//echo $rcek['tgl_solusi_akhir'];
+							} ?>" <?php if ($rcek['sts_red'] != "1") {
+							 //echo "";
+						 } else {
+							 //echo "";
+						 } ?> />
 						</div>
 					</div>
 				</div>
@@ -706,12 +734,12 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 							<input name="tgl_email" type="text" class="form-control pull-right" id="datepicker"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
-									//echo $rcek['tgl_email'];
-								} ?>" <?php if ($rcek['sts_red'] != "1") {
-									 //echo "";
-								 } else {
-									 //echo "";
-								 } ?> />
+								//echo $rcek['tgl_email'];
+							} ?>" <?php if ($rcek['sts_red'] != "1") {
+							 //echo "";
+						 } else {
+							 //echo "";
+						 } ?> />
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -719,12 +747,12 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 							<input name="tgl_jawab" type="text" class="form-control pull-right" id="datepicker1"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
-									//echo $rcek['tgl_jawab'];
-								} ?>" <?php if ($rcek['sts_red'] != "1") {
-									 //echo "";
-								 } else {
-									 //echo "";
-								 } ?> />
+								//echo $rcek['tgl_jawab'];
+							} ?>" <?php if ($rcek['sts_red'] != "1") {
+							 //echo "";
+						 } else {
+							 //echo "";
+						 } ?> />
 						</div>
 					</div>
 
@@ -733,28 +761,28 @@ $rcek = mysqli_fetch_array($sqlCek);
 				<div class="form-group">
 					<div class="col-sm-3">
 						<input type="checkbox" name="sts" id="sts" value="1" onClick="aktif();" <?php if ($rcek['sts'] == "1") {
-							//echo "checked";
-						} ?> required>
+						//echo "checked";
+					} ?> required>
 						<label> Lolos QC</label>
 					</div>
 					<div class="col-sm-3">
 						<input type="checkbox" name="sts_disposisiqc" id="sts_disposisiqc" onClick="aktif2();" value="1"
 							<?php if ($rcek['sts_disposisiqc'] == "1") {
-								//echo "checked";
-							} ?> required>
+							//echo "checked";
+						} ?> required>
 						<label> Disposisi QC</label>
 					</div>
 					<div class="col-sm-3">
 						<input type="checkbox" name="sts_disposisipro" id="sts_disposisipro" onClick="aktif3();"
 							value="1" <?php if ($rcek['sts_disposisipro'] == "1") {
-								//echo "checked";
-							} ?> required>
+							//echo "checked";
+						} ?> required>
 						<label> Disposisi Produksi</label>
 					</div>
 					<div class="col-sm-3">
 						<input type="checkbox" name="sts_nego" id="sts_nego" onClick="aktif5();" value="1" <?php if ($rcek['sts_nego'] == "1") {
-							//echo "checked";
-						} ?>>
+						//echo "checked";
+					} ?>>
 						<label> Nego Aftersales</label>
 					</div>
 				</div>
@@ -769,8 +797,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rk = mysqli_fetch_array($qryk)) {
 									?>
 									<option value="<?php echo $rk['kategori']; ?>" <?php if ($rcek['kategori'] == $rk['kategori']) {
-										   //echo "SELECTED";
-									   } ?>>
+									   //echo "SELECTED";
+							   	} ?>>
 										<?php echo $rk['kategori']; ?>
 									</option>
 								<?php } ?>
@@ -781,7 +809,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
-							<input name="qty_lolos" type="text" class="form-control" id="qty_lolos" value="<?= ($cek > 0 && !is_null($rcek['qty_lolos']) && !empty($rcek['qty_lolos'])) ? number_format($rcek['qty_lolos'], 2) : '' ?>" placeholder="0.00" style="text-align: right;" disabled>
+							<input name="qty_lolos" type="text" class="form-control" id="qty_lolos"
+								value="<?= ($cek > 0 && !is_null($rcek['qty_lolos']) && !empty($rcek['qty_lolos'])) ? number_format($rcek['qty_lolos'], 2) : '' ?>"
+								placeholder="0.00" style="text-align: right;" disabled>
 							<span class="input-group-addon">
 								<select name="satuan_l" style="font-size: 12px;" id="satuan1">
 									<?php
@@ -799,8 +829,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<div class="col-sm-3">
 						<input type="checkbox" name="addpersonil" id="addpersonil" value="1" onClick="aktif6();" <?php if ($rcek['addpersonil'] == "1") {
-							//echo "checked";
-						} ?>>
+						//echo "checked";
+					} ?>>
 						<label> > 2 Personil</label>
 					</div>
 				</div>
@@ -815,8 +845,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rp = mysqli_fetch_array($qryp)) {
 									?>
 									<option value="<?php echo $rp['nama']; ?>" <?php if ($rcek['personil'] == $rp['nama']) {
-										   //echo "SELECTED";
-									   } ?>>
+									   //echo "SELECTED";
+							   	} ?>>
 										<?php echo $rp['nama']; ?>
 									</option>
 								<?php } ?>
@@ -834,8 +864,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rp = mysqli_fetch_array($qryp)) {
 									?>
 									<option value="<?php echo $rp['nama']; ?>" <?php if ($rcek['personil2'] == $rp['nama']) {
-										  // echo "SELECTED";
-									   } ?>>
+									   // echo "SELECTED";
+							   	} ?>>
 										<?php echo $rp['nama']; ?>
 									</option>
 								<?php } ?>
@@ -851,24 +881,24 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<select class="form-control select2" name="shift" id="shift">
 							<option value="">Pilih</option>
 							<option value="A" <?php if ($rcek['shift'] == "A") {
-								//echo "SELECTED";
-							} ?>>A</option>
+							//echo "SELECTED";
+						} ?>>A</option>
 							<option value="B" <?php if ($rcek['shift'] == "B") {
-								//echo "SELECTED";
-							} ?>>B</option>
+							//echo "SELECTED";
+						} ?>>B</option>
 							<option value="C" <?php if ($rcek['shift'] == "C") {
-								//echo "SELECTED";
-							} ?>>C</option>
+							//echo "SELECTED";
+						} ?>>C</option>
 							<option value="Non-Shift" <?php if ($rcek['shift'] == "Non-Shift") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								Non-Shift</option>
 							<option value="QC2" <?php if ($rcek['shift'] == "QC2") {
-								//echo "SELECTED";
-							} ?>>QC2</option>
+							//echo "SELECTED";
+						} ?>>QC2</option>
 							<option value="Test Quality" <?php if ($rcek['shift'] == "Test Quality") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								Test Quality</option>
 						</select>
 					</div>
@@ -876,24 +906,24 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<select class="form-control select2" name="shift2" id="shift2">
 							<option value="">Pilih</option>
 							<option value="A" <?php if ($rcek['shift2'] == "A") {
-								//echo "SELECTED";
-							} ?>>A</option>
+							//echo "SELECTED";
+						} ?>>A</option>
 							<option value="B" <?php if ($rcek['shift2'] == "B") {
-								//echo "SELECTED";
-							} ?>>B</option>
+							//echo "SELECTED";
+						} ?>>B</option>
 							<option value="C" <?php if ($rcek['shift2'] == "C") {
-								//echo "SELECTED";
-							} ?>>C</option>
+							//echo "SELECTED";
+						} ?>>C</option>
 							<option value="Non-Shift" <?php if ($rcek['shift2'] == "Non-Shift") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								Non-Shift</option>
 							<option value="QC2" <?php if ($rcek['shift2'] == "QC2") {
-								//echo "SELECTED";
-							} ?>>QC2</option>
+							//echo "SELECTED";
+						} ?>>QC2</option>
 							<option value="Test Quality" <?php if ($rcek['shift2'] == "Test Quality") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								Test Quality</option>
 						</select>
 					</div>
@@ -909,8 +939,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rp = mysqli_fetch_array($qryp)) {
 									?>
 									<option value="<?php echo $rp['nama']; ?>" <?php if ($rcek['personil3'] == $rp['nama']) {
-										   //echo "SELECTED";
-									   } ?>>
+									   //echo "SELECTED";
+							   	} ?>>
 										<?php echo $rp['nama']; ?>
 									</option>
 								<?php } ?>
@@ -928,8 +958,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rp = mysqli_fetch_array($qryp)) {
 									?>
 									<option value="<?php echo $rp['nama']; ?>" <?php if ($rcek['personil4'] == $rp['nama']) {
-										   //echo "SELECTED";
-									   } ?>>
+									   //echo "SELECTED";
+							   	} ?>>
 										<?php echo $rp['nama']; ?>
 									</option>
 								<?php } ?>
@@ -945,24 +975,24 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<select class="form-control select2" name="shift3" id="shift3">
 							<option value="">Pilih</option>
 							<option value="A" <?php if ($rcek['shift3'] == "A") {
-								//echo "SELECTED";
-							} ?>>A</option>
+							//echo "SELECTED";
+						} ?>>A</option>
 							<option value="B" <?php if ($rcek['shift3'] == "B") {
-								//echo "SELECTED";
-							} ?>>B</option>
+							//echo "SELECTED";
+						} ?>>B</option>
 							<option value="C" <?php if ($rcek['shift3'] == "C") {
-								//echo "SELECTED";
-							} ?>>C</option>
+							//echo "SELECTED";
+						} ?>>C</option>
 							<option value="Non-Shift" <?php if ($rcek['shift3'] == "Non-Shift") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								Non-Shift</option>
 							<option value="QC2" <?php if ($rcek['shift3'] == "QC2") {
-								//echo "SELECTED";
-							} ?>>QC2</option>
+							//echo "SELECTED";
+						} ?>>QC2</option>
 							<option value="Test Quality" <?php if ($rcek['shift3'] == "Test Quality") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								Test Quality</option>
 						</select>
 					</div>
@@ -970,24 +1000,24 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<select class="form-control select2" name="shift4" id="shift4">
 							<option value="">Pilih</option>
 							<option value="A" <?php if ($rcek['shift4'] == "A") {
-								//echo "SELECTED";
-							} ?>>A</option>
+							//echo "SELECTED";
+						} ?>>A</option>
 							<option value="B" <?php if ($rcek['shift4'] == "B") {
-								//echo "SELECTED";
-							} ?>>B</option>
+							//echo "SELECTED";
+						} ?>>B</option>
 							<option value="C" <?php if ($rcek['shift4'] == "C") {
-								//echo "SELECTED";
-							} ?>>C</option>
+							//echo "SELECTED";
+						} ?>>C</option>
 							<option value="Non-Shift" <?php if ($rcek['shift4'] == "Non-Shift") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								Non-Shift</option>
 							<option value="QC2" <?php if ($rcek['shift4'] == "QC2") {
-								//echo "SELECTED";
-							} ?>>QC2</option>
+							//echo "SELECTED";
+						} ?>>QC2</option>
 							<option value="Test Quality" <?php if ($rcek['shift4'] == "Test Quality") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								Test Quality</option>
 						</select>
 					</div>
@@ -996,65 +1026,65 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="subdept" class="col-sm-3 control-label">Sub Dept / Pejabat</label>
 					<div class="col-sm-4">
 						<select class="form-control select2" name="subdept" id="subdept" onChange="aktif4();" <?php if ($rcek['sts'] != "1" or $rcek['sts_disposisiqc'] != "1") {
-							//echo "disabled";
-						} else {
-							//echo "enabled";
-						} ?>>
+						//echo "disabled";
+					} else {
+						//echo "enabled";
+					} ?>>
 							<option value="">Pilih</option>
 							<option value="ADM" <?php if ($rcek['subdept'] == "ADM") {
-								//echo "SELECTED";
-							} ?>>ADM</option>
+							//echo "SELECTED";
+						} ?>>ADM</option>
 							<option value="AFTERSALES" <?php if ($rcek['subdept'] == "AFTERSALES") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								AFTERSALES</option>
 							<option value="COLORIST" <?php if ($rcek['subdept'] == "COLORIST") {
-								//echo "SELECTED";
-							} ?>>COLORIST
+							//echo "SELECTED";
+						} ?>>COLORIST
 							</option>
 							<option value="INSPECTION" <?php if ($rcek['subdept'] == "INSPECTION") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								INSPECTION</option>
 							<option value="KRAGH" <?php if ($rcek['subdept'] == "KRAGH") {
-								//echo "SELECTED";
-							} ?>>KRAGH
+							//echo "SELECTED";
+						} ?>>KRAGH
 							</option>
 							<option value="LEADER" <?php if ($rcek['subdept'] == "LEADER") {
-								//echo "SELECTED";
-							} ?>>LEADER
+							//echo "SELECTED";
+						} ?>>LEADER
 							</option>
 							<option value="MANAGER/ASST.MANAGER" <?php if ($rcek['subdept'] == "MANAGER/ASST.MANAGER") {
-								//echo "SELECTED";
-							} ?>>MANAGER/ASST.MANAGER</option>
+							//echo "SELECTED";
+						} ?>>MANAGER/ASST.MANAGER</option>
 							<option value="PACKING" <?php if ($rcek['subdept'] == "PACKING") {
-								//echo "SELECTED";
-							} ?>>PACKING
+							//echo "SELECTED";
+						} ?>>PACKING
 							</option>
 							<option value="SPV" <?php if ($rcek['subdept'] == "SPV") {
-								//echo "SELECTED";
-							} ?>>SPV</option>
+							//echo "SELECTED";
+						} ?>>SPV</option>
 							<option value="TEST QUALITY" <?php if ($rcek['subdept'] == "TEST QUALITY") {
-								//echo "SELECTED";
-							} ?>>
+							//echo "SELECTED";
+						} ?>>
 								TEST QUALITY</option>
 						</select>
 					</div>
 					<div class="col-sm-4">
 						<div class="input-group">
 							<select class="form-control select2" name="pejabat" id="pejabat" <?php if ($rcek['sts_disposisiqc'] != "1") {
-								//echo "disabled";
-							} else {
-								//echo "enabled";
-							} ?>>
+							//echo "disabled";
+						} else {
+							//echo "enabled";
+						} ?>>
 								<option value="">Pilih</option>
 								<?php
 								$qryp = mysqli_query($con, "SELECT nama FROM tbl_personil_aftersales WHERE jenis='pejabat' ORDER BY nama ASC");
 								while ($rp = mysqli_fetch_array($qryp)) {
 									?>
 									<option value="<?php echo $rp['nama']; ?>" <?php if ($rcek['personil'] == $rp['nama']) {
-										   //echo "SELECTED";
-									   } ?>>
+									   //echo "SELECTED";
+							   	} ?>>
 										<?php echo $rp['nama']; ?>
 									</option>
 								<?php } ?>
@@ -1068,27 +1098,27 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="penyebab" class="col-sm-3 control-label">Penyebab</label>
 					<div class="col-sm-6">
 						<input name="penyebab" type="text" class="form-control" id="penyebab" value="<?php if ($cek > 0) {
-							//echo $rcek['penyebab'];
-						} ?>" placeholder="Penyebab" <?php if ($rcek['sts'] != "1" or $rcek['sts_disposisiqc'] != "1" or $rcek['sts_disposisipro'] != "1") {
-							 //echo "disabled";
-						 } else {
-							 //echo "enabled";
-						 } ?>>
+						//echo $rcek['penyebab'];
+					} ?>" placeholder="Penyebab" <?php if ($rcek['sts'] != "1" or $rcek['sts_disposisiqc'] != "1" or $rcek['sts_disposisipro'] != "1") {
+					 //echo "disabled";
+				 } else {
+					 //echo "enabled";
+				 } ?>>
 					</div>
 					<div class="col-sm-2">
 						<select class="form-control select2" name="sts_check" <?php if ($rcek['sts'] != "1" or $rcek['sts_disposisiqc'] != "1") {
-							//echo "disabled";
-						} else {
-							//echo "enabled";
-						} ?>>
+						//echo "disabled";
+					} else {
+						//echo "enabled";
+					} ?>>
 							<option value="">Pilih</option>
 							<option value="Ceklis" <?php if ($rcek['sts_check'] == "Ceklis") {
-								//echo "SELECTED";
-							} ?>>&#10004;
+							//echo "SELECTED";
+						} ?>>&#10004;
 							</option>
 							<option value="Silang" <?php if ($rcek['sts_check'] == "Silang") {
-								//echo "SELECTED";
-							} ?>>X</option>
+							//echo "SELECTED";
+						} ?>>X</option>
 						</select>
 					</div>
 				</div>
@@ -1103,8 +1133,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 								while ($rnm = mysqli_fetch_array($qrynm)) {
 									?>
 									<option value="<?php echo $rnm['nama']; ?>" <?php if ($rcek['nama_nego'] == $rnm['nama']) {
-										   //echo "SELECTED";
-									   } ?>>
+									   //echo "SELECTED";
+							   	} ?>>
 										<?php echo $rnm['nama']; ?>
 									</option>
 								<?php } ?>
@@ -1117,12 +1147,12 @@ $rcek = mysqli_fetch_array($sqlCek);
 						<select class="form-control select2" name="checknego">
 							<option value="">Pilih</option>
 							<option value="Ceklis" <?php if ($rcek['checknego'] == "Ceklis") {
-								//echo "SELECTED";
-							} ?>>&#10004;
+							//echo "SELECTED";
+						} ?>>&#10004;
 							</option>
 							<option value="Silang" <?php if ($rcek['checknego'] == "Silang") {
-								//echo "SELECTED";
-							} ?>>X</option>
+							//echo "SELECTED";
+						} ?>>X</option>
 						</select>
 					</div>
 				</div>
@@ -1130,8 +1160,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<label for="hasil_nego" class="col-sm-3 control-label">Hasil Negosiasi</label>
 					<div class="col-sm-8">
 						<input name="hasil_nego" type="text" class="form-control" id="hasil_nego" value="<?php if ($cek > 0) {
-							//echo $rcek['hasil_nego'];
-						} ?>" placeholder="Hasil Negosiasi">
+						//echo $rcek['hasil_nego'];
+					} ?>" placeholder="Hasil Negosiasi">
 					</div>
 				</div>
 			</div>
@@ -1139,7 +1169,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 		</div>
 		<div class="box-footer">
 			<?php if ($_GET['nodemand'] != "") { ?>
-				<button type="submit" class="btn btn-primary pull-right" name="save" value="save" id="save" style="display: none"><i class="fa fa-save"></i>
+				<button type="submit" class="btn btn-primary pull-right" name="save" value="save" id="save"
+					style="display: none"><i class="fa fa-save"></i>
 					Simpan</button>
 			<?php } ?>
 		</div>
@@ -1211,7 +1242,7 @@ if ($_POST['save'] == "save") {
 		$sts_nego = "0";
 	}
 
-$sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET 
+	$sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET 
 		nokk='$_POST[nokk]',
 		nodemand='$_POST[nodemand]',
 		langganan='$_POST[pelanggan]',
@@ -1469,7 +1500,7 @@ $sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET
 	}
 
 	function masalah_dominan_solusi(e) {
-		if(e.value != "")
+		if (e.value != "")
 			document.getElementById('save').style.display = 'block';
 		else
 			document.getElementById('save').style.display = 'none';
