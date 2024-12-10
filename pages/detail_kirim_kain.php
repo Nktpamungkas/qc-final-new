@@ -37,60 +37,42 @@ include("../koneksi.php");
                                 <th width="10%"><div align="center">Secondary Qty</div></th>
                                 <th width="5%"><div align="center">UOM Secondary</div></th>
                                 <th width="10%"><div align="center">Lokasi</div></th>
+                                <th width="10%"><div align="center">Keterangan</div></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-
-                                if($foc=="FOC") {
-                                    $foc = " AND ELEMENTSINSPECTION.QUALITYREASONCODE = 'FOC' ";
-                                } else {
-                                    $foc = " AND (ELEMENTSINSPECTION.QUALITYREASONCODE <> 'FOC' OR ELEMENTSINSPECTION.QUALITYREASONCODE IS NULL) ";
-                                }
-
+                                $sj = $_GET['id'] ;
+                                $lot = $_GET['lotcode'];
                                 $no=1;
-                            	$sqldtl="SELECT 
-                                ALLOCATION.CODE,
-                                ALLOCATION.ORDERCODE,
-                                ALLOCATION.DECOSUBCODE05,
-                                ALLOCATION.PROJECTCODE,
-                                A.ITEMELEMENTCODE,
-                                A.LOTCODE,
-                                A.USERPRIMARYQUANTITY,
-                                A.USERPRIMARYUOMCODE,
-                                A.USERSECONDARYQUANTITY,
-                                A.USERSECONDARYUOMCODE,
-                                A.WHSLOCATIONWAREHOUSEZONECODE,
-                                A.WAREHOUSELOCATIONCODE
-                                FROM ALLOCATION ALLOCATION 
-                                LEFT JOIN (
-                                    SELECT 
-                                    ALLOCATION.CODE,
-                                    ALLOCATION.LOTCODE,
-                                    ALLOCATION.ITEMELEMENTCODE,
-                                    ALLOCATION.USERPRIMARYQUANTITY,
-                                    ALLOCATION.USERPRIMARYUOMCODE,
-                                    ALLOCATION.USERSECONDARYQUANTITY,
-                                    ALLOCATION.USERSECONDARYUOMCODE,
-                                    ALLOCATION.WHSLOCATIONWAREHOUSEZONECODE,
-                                    ALLOCATION.WAREHOUSELOCATIONCODE
-                                    FROM ALLOCATION ALLOCATION
-                                    WHERE ALLOCATION.DETAILTYPE ='0' AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL 
-                                ) A ON ALLOCATION.CODE = A.CODE
-                                LEFT JOIN ELEMENTSINSPECTION ELEMENTSINSPECTION
-	                                ON ELEMENTSINSPECTION.ELEMENTCODE = A.ITEMELEMENTCODE
-                                WHERE ORDERCODE ='$modal_id' AND ALLOCATION.DECOSUBCODE05='$nowarna' AND ALLOCATION.PROJECTCODE='$project' AND A.LOTCODE='$lotcode' $foc";
+                                $sqldtl = "SELECT 
+                                                i.*,
+                                                a.USERPRIMARYUOMCODE,
+                                                a.USERSECONDARYUOMCODE,
+                                                a.WHSLOCATIONWAREHOUSEZONECODE,
+                                                a.LOGICALWAREHOUSECODE,
+                                                a.WAREHOUSELOCATIONCODE
+                                                FROM ITXVIEW_SUBDETAIL_EXIM2  i
+                                            LEFT JOIN ALLOCATION a ON a.ITEMELEMENTCODE = i.ITEMELEMENTCODE 
+                                                AND a.CODE = i.CODE
+                                                AND a.DETAILTYPE ='0' 
+                                                AND a.ORIGINTRNTRANSACTIONNUMBER IS NULL  
+                                            WHERE 
+                                                i.PROVISIONALCODE = '$sj' 
+                                                AND i.LOTCODE = '$lot'
+                                            ";
                                 $stmt=db2_exec($conn1,$sqldtl, array('cursor'=>DB2_SCROLLABLE));
                             while($r=db2_fetch_assoc($stmt)){
                             ?>
                             <tr>
                                 <td align="center" width="5%"><?php echo $no;?></td>
                                 <td align="center" width="15%"><?php echo $r['ITEMELEMENTCODE'];?></td>
-                                <td align="center" width="10%"><?php echo number_format($r['USERPRIMARYQUANTITY'], 2);?></td>
+                                <td align="center" width="10%"><?php echo number_format($r['JML_KG'], 2);?></td>
                                 <td align="center" width="5%"><?php echo $r['USERPRIMARYUOMCODE'];?></td>
-                                <td align="center" width="10%"><?php echo number_format($r['USERSECONDARYQUANTITY'], 2);?></td>
+                                <td align="center" width="10%"><?php echo number_format($r['JML_YD'], 2);?></td>
                                 <td align="center" width="5%"><?php echo $r['USERSECONDARYUOMCODE'];?></td>
                                 <td align="center" width="5%"><?php echo trim($r['WHSLOCATIONWAREHOUSEZONECODE'])."-".trim($r['WAREHOUSELOCATIONCODE']);?></td>
+                                <td align="center" width="5%"><?php echo $r['QUALITYREASON'];?></td>
                             </tr>
                             <?php $no++;}?>
                         </tbody>

@@ -125,62 +125,73 @@ border:hidden;
             <th width="10%"><div align="center">Secondary Qty</div></th>
             <th width="5%"><div align="center">UOM Secondary</div></th>
             <th width="10%"><div align="center">Lokasi</div></th>
+            <th width="10%"><div align="center">Keterangan</div></th>
         </tr>
     </thead>
     <tbody>
       <?php
           $no=1;
-        $sqldtl="SELECT 
-          ALLOCATION.CODE,
-          ALLOCATION.ORDERCODE,
-          ALLOCATION.DECOSUBCODE05,
-          ALLOCATION.PROJECTCODE,
-          A.ITEMELEMENTCODE,
-          A.LOTCODE,
-          A.USERPRIMARYQUANTITY,
-          A.USERPRIMARYUOMCODE,
-          A.USERSECONDARYQUANTITY,
-          A.USERSECONDARYUOMCODE,
-          A.WHSLOCATIONWAREHOUSEZONECODE,
-          A.WAREHOUSELOCATIONCODE
-          FROM ALLOCATION ALLOCATION 
-          LEFT JOIN (
-              SELECT 
-              ALLOCATION.CODE,
-              ALLOCATION.LOTCODE,
-              ALLOCATION.ITEMELEMENTCODE,
-              ALLOCATION.USERPRIMARYQUANTITY,
-              ALLOCATION.USERPRIMARYUOMCODE,
-              ALLOCATION.USERSECONDARYQUANTITY,
-              ALLOCATION.USERSECONDARYUOMCODE,
-              ALLOCATION.WHSLOCATIONWAREHOUSEZONECODE,
-              ALLOCATION.WAREHOUSELOCATIONCODE
-              FROM ALLOCATION ALLOCATION
-              WHERE ALLOCATION.DETAILTYPE ='0' AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL 
-          ) A ON ALLOCATION.CODE = A.CODE
-          WHERE ORDERCODE ='$modal_id' AND ALLOCATION.DECOSUBCODE05='$nowarna' AND ALLOCATION.PROJECTCODE='$project' AND A.LOTCODE='$lotcode'";
+      $sqldtl = "SELECT 
+                                                i.*,
+                                                a.USERPRIMARYUOMCODE,
+                                                a.USERSECONDARYUOMCODE,
+                                                a.WHSLOCATIONWAREHOUSEZONECODE,
+                                                a.LOGICALWAREHOUSECODE,
+                                                a.WAREHOUSELOCATIONCODE
+                                                FROM ITXVIEW_SUBDETAIL_EXIM2  i
+                                            LEFT JOIN ALLOCATION a ON a.ITEMELEMENTCODE = i.ITEMELEMENTCODE 
+                                                AND a.CODE = i.CODE
+                                                AND a.DETAILTYPE ='0' 
+                                                AND a.ORIGINTRNTRANSACTIONNUMBER IS NULL  
+                                            WHERE 
+                                                i.PROVISIONALCODE = '$modal_id' 
+                                                AND i.LOTCODE = '$lotcode'
+                                            ";
           $stmt=db2_exec($conn1,$sqldtl, array('cursor'=>DB2_SCROLLABLE));
-          $totalPrimaryQty = 0;
-          $totalSecondaryQty = 0;
-      while($r=db2_fetch_assoc($stmt)){
+         
+          
+          while($r=db2_fetch_assoc($stmt)){
       ?>
       <tr>
           <td align="center" width="5%"><?php echo $no;?></td>
           <td align="center" width="15%"><?php echo $r['ITEMELEMENTCODE'];?></td>
-          <td align="center" width="10%"><?php echo number_format($r['USERPRIMARYQUANTITY'], 2);?></td>
+          <td align="center" width="10%"><?php echo number_format($r['JML_KG'], 2);?></td>
           <td align="center" width="5%"><?php echo $r['USERPRIMARYUOMCODE'];?></td>
-          <td align="center" width="10%"><?php echo number_format($r['USERSECONDARYQUANTITY'], 2);?></td>
+          <td align="center" width="10%"><?php echo number_format($r['JML_YD'], 2);?></td>
           <td align="center" width="5%"><?php echo $r['USERSECONDARYUOMCODE'];?></td>
           <td align="center" width="5%"><?php echo trim($r['WHSLOCATIONWAREHOUSEZONECODE'])."-".trim($r['WAREHOUSELOCATIONCODE']);?></td>
+          <td align="center" width="5%"><?php echo $r['QUALITYREASON'];?></td>
       </tr>
-      <?php $no++; $totalPrimaryQty += $r['USERPRIMARYQUANTITY']; $totalSecondaryQty += $r['USERSECONDARYQUANTITY'];}?>
+      <?php $no++; }?>
   </tbody>
+  <?php $total = "SELECT
+                                                    i.PROVISIONALCODE,
+                                                    i.EXTERNALITEM,
+                                                    i.LOTCODE,
+                                                    i.PROJECTCODE,
+                                                    SUM(JML_ROLL) AS ROLL,
+                                                    SUM(JML_KG) AS KG,
+                                                    SUM(JML_YD) AS YD
+                                                FROM
+                                                    ITXVIEW_SUBDETAIL_EXIM2 i
+                                                WHERE
+                                                    i.QUALITYREASON <> 'FOC'
+                                                    AND i.PROVISIONALCODE = '$modal_id'
+                                                    AND i.LOTCODE = '$lotcode'
+                                                GROUP BY
+                                                i.PROVISIONALCODE,
+                                                    i.EXTERNALITEM,
+                                                    i.LOTCODE,
+                                                    i.PROJECTCODE";
+  $stmt2 = db2_exec($conn1, $total, array('cursor' => DB2_SCROLLABLE));
+  $t = db2_fetch_assoc($stmt2);
+  ?>
       <tfoot>
         <tr>
           <td align="right" colspan="2">Total</td>
-          <td><?= number_format($totalPrimaryQty, 2) ?></td>
+          <td><?= number_format($t['KG'], 2) ?></td>
           <td></td>
-          <td><?= number_format($totalSecondaryQty, 2) ?></td>
+          <td><?= number_format($t['YD'], 2) ?></td>
           <td></td>
           <td></td>
         </tr>
