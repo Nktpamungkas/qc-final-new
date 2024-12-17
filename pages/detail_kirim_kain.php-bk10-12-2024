@@ -1,0 +1,140 @@
+<?php
+ini_set("error_reporting", 1);
+session_start();
+include("../koneksi.php");
+$modal_id = $_GET['id'];
+$nowarna = $_GET['nowarna'];
+$project = $_GET['project'];
+$lotcode = $_GET['lotcode'];
+$foc = $_GET['foc'];
+?>
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <form class="form-horizontal" name="modal_popup" data-toggle="validator" method="post" action=""
+            enctype="multipart/form-data">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Data Detail Kirim Kain</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="id" name="id" value="<?php echo $r['id']; ?>">
+                <h5><strong>No SJ : <?php echo $_GET['id']; ?></strong></h5>
+                <h5><strong>No Warna : <?php echo $_GET['nowarna']; ?></strong></h5>
+                <h5><strong>Project : <?php echo $_GET['project']; ?></strong></h5>
+                <h5><strong>Prod. Order : <?php echo $_GET['lotcode']; ?></strong></h5>
+                <div class="pull-right">
+                    <!-- Menambahkan tanda petik yang kurang pada tag href -->
+                    <a href="pages/cetak/cetak_detail_kirim_kain.php?awal=<?php echo htmlspecialchars($modal_id); ?>&nowarna=<?= $nowarna ?>&project=<?= $project ?>&lotcode=<?= $lotcode ?>"
+                        class="btn btn-danger" target="_blank">Cetak Detail</a>
+                </div>
+                <table id="example9" class="table table-bordered table-hover table-striped" width="100%">
+                    <thead>
+                        <tr>
+                            <th width="5%">
+                                <div align="center">No</div>
+                            </th>
+                            <th width="15%">
+                                <div align="center">Item Element</div>
+                            </th>
+                            <th width="10%">
+                                <div align="center">Primary Qty</div>
+                            </th>
+                            <th width="5%">
+                                <div align="center">UOM Primary</div>
+                            </th>
+                            <th width="10%">
+                                <div align="center">Secondary Qty</div>
+                            </th>
+                            <th width="5%">
+                                <div align="center">UOM Secondary</div>
+                            </th>
+                            <th width="10%">
+                                <div align="center">Lokasi</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+                        if ($foc == "FOC") {
+                            $foc = " AND ELEMENTSINSPECTION.QUALITYREASONCODE = 'FOC' ";
+                        } else {
+                            $foc = " AND (ELEMENTSINSPECTION.QUALITYREASONCODE <> 'FOC' OR ELEMENTSINSPECTION.QUALITYREASONCODE IS NULL) ";
+                        }
+
+                        $no = 1;
+                        $sqldtl = "SELECT 
+                                ALLOCATION.CODE,
+                                ALLOCATION.ORDERCODE,
+                                ALLOCATION.DECOSUBCODE05,
+                                ALLOCATION.PROJECTCODE,
+                                A.ITEMELEMENTCODE,
+                                A.LOTCODE,
+                                A.USERPRIMARYQUANTITY,
+                                A.USERPRIMARYUOMCODE,
+                                A.USERSECONDARYQUANTITY,
+                                A.USERSECONDARYUOMCODE,
+                                A.WHSLOCATIONWAREHOUSEZONECODE,
+                                A.WAREHOUSELOCATIONCODE
+                                FROM ALLOCATION ALLOCATION 
+                                LEFT JOIN (
+                                    SELECT 
+                                    ALLOCATION.CODE,
+                                    ALLOCATION.LOTCODE,
+                                    ALLOCATION.ITEMELEMENTCODE,
+                                    ALLOCATION.USERPRIMARYQUANTITY,
+                                    ALLOCATION.USERPRIMARYUOMCODE,
+                                    ALLOCATION.USERSECONDARYQUANTITY,
+                                    ALLOCATION.USERSECONDARYUOMCODE,
+                                    ALLOCATION.WHSLOCATIONWAREHOUSEZONECODE,
+                                    ALLOCATION.WAREHOUSELOCATIONCODE
+                                    FROM ALLOCATION ALLOCATION
+                                    WHERE ALLOCATION.DETAILTYPE ='0' AND ALLOCATION.ORIGINTRNTRANSACTIONNUMBER IS NULL 
+                                ) A ON ALLOCATION.CODE = A.CODE
+                                LEFT JOIN ELEMENTSINSPECTION ELEMENTSINSPECTION
+	                                ON ELEMENTSINSPECTION.ELEMENTCODE = A.ITEMELEMENTCODE
+                                WHERE ORDERCODE ='$modal_id' AND ALLOCATION.DECOSUBCODE05='$nowarna' AND ALLOCATION.PROJECTCODE='$project' AND A.LOTCODE='$lotcode' $foc";
+                        $stmt = db2_exec($conn1, $sqldtl, array('cursor' => DB2_SCROLLABLE));
+                        while ($r = db2_fetch_assoc($stmt)) {
+                            ?>
+                            <tr>
+                                <td align="center" width="5%"><?php echo $no; ?></td>
+                                <td align="center" width="15%"><?php echo $r['ITEMELEMENTCODE']; ?></td>
+                                <td align="center" width="10%"><?php echo number_format($r['USERPRIMARYQUANTITY'], 2); ?>
+                                </td>
+                                <td align="center" width="5%"><?php echo $r['USERPRIMARYUOMCODE']; ?></td>
+                                <td align="center" width="10%"><?php echo number_format($r['USERSECONDARYQUANTITY'], 2); ?>
+                                </td>
+                                <td align="center" width="5%"><?php echo $r['USERSECONDARYUOMCODE']; ?></td>
+                                <td align="center" width="5%">
+                                    <?php echo trim($r['WHSLOCATIONWAREHOUSEZONECODE']) . "-" . trim($r['WAREHOUSELOCATIONCODE']); ?>
+                                </td>
+                            </tr>
+                            <?php $no++;
+                        } ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!-- <button type="submit" class="btn btn-primary" <?php if ($_SESSION['lvl_id'] != "LEADERTQ") {
+                    echo "disabled";
+                } ?> >Save Changes</button> -->
+                <!--<?php if ($_SESSION['lvl_id'] != "ADMIN") {
+                    echo "disabled";
+                } ?>-->
+            </div>
+        </form>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+<script>
+    $(function () {
+        $('#example9').DataTable({
+            'paging': true,
+        })
+    });
+</script>

@@ -1,4 +1,6 @@
 <?PHP
+include "vendor/autoload.php";
+use GuzzleHttp\Client;
 ini_set("error_reporting", 1);
 session_start();
 include "koneksi.php";
@@ -135,134 +137,36 @@ include "koneksi.php";
               <tbody>
                 <?php
                 $no = 1;
+                // Inisialisasi client
+                $client = new Client();
 
-                if ($tgl_awal != '') {
-                  $tgl_awal = $_POST['tgl_awal'];
-                } else {
-                  $tgl_awal = '';
+                // Membuat URL dengan menggantikan variabel PHP di dalam string
+                $url = sprintf(
+                  'http://localhost/qc-final-new/pages/api/pengiriman-now.php?tgl_awal=%s&tgl_akhir=%s&po=%s&order=%s&pelanggan=%s&warna=%s&prodorder=%s',
+                  urlencode($tgl_awal),  // Pastikan untuk melakukan encoding URL untuk menghindari karakter spesial
+                  urlencode($tgl_akhir),
+                  urlencode($PO),
+                  urlencode($Order),
+                  urlencode($Pelanggan),
+                  urlencode($Warna),
+                  urlencode($Prodorder)
+                );
+
+                // Melakukan request GET
+                try {
+                  $response = $client->request('GET', $url);
+
+                  // Mendapatkan isi response dan mendecode JSON
+                  $datas = json_decode($response->getBody()->getContents(), true);
+
+
+                } catch (\GuzzleHttp\Exception\RequestException $e) {
+                  // Menangani error jika terjadi masalah pada permintaan
+                  echo "Error: " . $e->getMessage();
                 }
-                ;
+                foreach($datas as $data) {
 
-                if ($tgl_akhir != '') {
-                  $tgl_akhir = $_POST['tgl_akhir'];
-                } else {
-                  $tgl_akhir = '';
-                }
-
-                // Filter untuk tanggal
-                if (!empty($tgl_akhir) && !empty($tgl_awal)) {
-                  $where_date = "AND i.GOODSISSUEDATE BETWEEN '$tgl_awal' AND '$tgl_akhir'";
-                } else if (!empty($tgl_awal) && empty($tgl_akhir)) {
-                  $where_date = "AND i.GOODSISSUEDATE = '$tgl_awal'";
-                } else '';
-                // Filter Untuk PO
-                if (!empty($PO)) {
-                  $where_po = "AND i.PO_NUMBER LIKE '%$PO%'";
-                } else '';
-                // Filter Untuk NO ORDER
-                if (!empty($Order)) {
-                  $where_order = "AND i.DLVSALORDERLINESALESORDERCODE = '$Order'";
-                } else
-                  '';
-                // Filter Untuk Pelanggan
-                if (!empty($Pelanggan)) {
-                  $where_pelanggan = "AND i.LEGALNAME1 LIKE '%$Pelanggan%'";
-                } else
-                  '';
-                // Filter Untuk Warna
-                if (!empty($Warna)) {
-                  $where_warna = "AND i2.WARNA LIKE '%$Warna%'";
-                } else
-                  '';
-                // Filter Untuk Prod Order
-                if (!empty($Prodorder)) {
-                  $where_Prodorder = "AND iasp.LOTCODE LIKE '%$Prodorder%'";
-                } else
-                  '';
-
-                $sqlDB2 = "SELECT
-                            DISTINCT 
-                            LISTAGG(DISTINCT TRIM(i.SUBCODE05), ', ') AS NO_WARNA,
-                            i.PROVISIONALCODE,
-                            TRIM(i.PRICEUNITOFMEASURECODE) AS PRICEUNITOFMEASURECODE,
-                            i.DEFINITIVECOUNTERCODE,
-                            i.DEFINITIVEDOCUMENTDATE,
-                            i.ORDERPARTNERBRANDCODE,
-                            TRIM(i.SUBCODE02) AS SUBCODE02,
-                            TRIM(i.SUBCODE03) AS SUBCODE03,
-                            TRIM(i.SUBCODE05) AS SUBCODE05,
-                            i.PO_NUMBER AS PO_NUMBER,
-                            i.ITEMDESCRIPTION AS JENIS_KAIN,
-                            LISTAGG(DISTINCT TRIM(iasp.WAREHOUSELOCATIONCODE), ', ') AS LOKASI,
-                            i.GOODSISSUEDATE,
-                            i.ORDPRNCUSTOMERSUPPLIERCODE,
-                            CASE 
-                                WHEN i.PAYMENTMETHODCODE <> 'FOC' THEN ''
-                                ELSE i.PAYMENTMETHODCODE
-                            END AS PAYMENTMETHODCODE,
-                            i.ITEMTYPEAFICODE,
-                            i.DLVSALORDERLINESALESORDERCODE AS DLVSALORDERLINESALESORDERCODE,
-                            i.DLVSALESORDERLINEORDERLINE AS DLVSALESORDERLINEORDERLINE,
-                            LISTAGG(DISTINCT TRIM(iasp.LOTCODE), ', ' ) AS LOTCODE,
-                            LISTAGG(DISTINCT ''''|| TRIM(iasp.LOTCODE) ||'''', ', ' ) AS LOTCODE2,
-                            i2.WARNA AS WARNA,
-                            i.LEGALNAME1,
-                            i.CODE AS CODE
-                        FROM
-                            ITXVIEW_SURATJALAN_PPC_FOR_POSELESAI i
-                        LEFT JOIN ITXVIEW_ALLOCATION_SURATJALAN_PPC iasp ON
-                            iasp.CODE = i.CODE
-                        LEFT JOIN ITXVIEWCOLOR i2 ON
-                            i2.ITEMTYPECODE = i.ITEMTYPEAFICODE
-                            AND i2.SUBCODE01 = i.SUBCODE01
-                            AND i2.SUBCODE02 = i.SUBCODE02
-                            AND i2.SUBCODE03 = i.SUBCODE03
-                            AND i2.SUBCODE04 = i.SUBCODE04
-                            AND i2.SUBCODE05 = i.SUBCODE05
-                            AND i2.SUBCODE06 = i.SUBCODE06
-                            AND i2.SUBCODE07 = i.SUBCODE07
-                            AND i2.SUBCODE08 = i.SUBCODE08
-                            AND i2.SUBCODE09 = i.SUBCODE09
-                            AND i2.SUBCODE10 = i.SUBCODE10
-                        WHERE
-                            NOT (SUBSTR(i.DLVSALORDERLINESALESORDERCODE, 1,3) = 'CAP' AND (i.ITEMTYPEAFICODE = 'KFF' OR i.ITEMTYPEAFICODE = 'KGF' OR i.ITEMTYPEAFICODE = 'CAP'))
-                            AND i.DOCUMENTTYPETYPE = 05 
-                            AND NOT i.CODE IS NULL 
-                            AND i.PROGRESSSTATUS_SALDOC = 2
-                            $where_date 
-                            $where_po
-                            $where_order
-                            $where_warna
-                            $where_pelanggan
-                            $where_Prodorder
-                        GROUP BY
-                            i.SUBCODE02,
-	                          i.SUBCODE03,
-	                          i.SUBCODE05,
-                            i.PROVISIONALCODE,
-                            i.PRICEUNITOFMEASURECODE,
-                            i.DEFINITIVEDOCUMENTDATE,
-                            i.ORDERPARTNERBRANDCODE,
-                            i.PO_NUMBER,
-                            i.PROJECTCODE,
-                            i.GOODSISSUEDATE,
-                            i.ORDPRNCUSTOMERSUPPLIERCODE,
-                            i.PAYMENTMETHODCODE,
-                            i.PO_NUMBER,
-                            i.ITEMTYPEAFICODE,
-                            i.DLVSALORDERLINESALESORDERCODE,
-                            i.DLVSALESORDERLINEORDERLINE,
-                            i.ITEMDESCRIPTION,
-                            i.DEFINITIVECOUNTERCODE,
-                            i2.WARNA,
-                            i.LEGALNAME1,
-                            i.CODE
-                            ORDER BY
-                            i.PROVISIONALCODE ASC";
-                      
-                $stmt = db2_exec($conn1, $sqlDB2, array('cursor' => DB2_SCROLLABLE));
-                while ($row1 = db2_fetch_assoc($stmt)) {
-                  $q_ket_foc = db2_exec($conn1, "SELECT 
+                $q_ket_foc = db2_exec($conn1, "SELECT 
                                                       COUNT(QUALITYREASONCODE) AS ROLL,
                                                       SUM(FOC_KG) AS KG,
                                                       SUM(FOC_YARDMETER) AS YARD_MTR,
@@ -272,8 +176,8 @@ include "koneksi.php";
                                                       ITXVIEW_SURATJALAN_EXIM2A
                                                   WHERE 
                                                       QUALITYREASONCODE = 'FOC'
-                                                      AND PROVISIONALCODE = '$row1[PROVISIONALCODE]'
-                                                      AND ALLOCATIONCODE = '$row1[CODE]'
+                                                      AND PROVISIONALCODE = '$data[PROVISIONALCODE]'
+                                                      AND ALLOCATIONCODE = '$data[CODE]'
                                                   GROUP BY 
                                                       KET_YARDMETER,
                                                       ALLOCATIONCODE");
@@ -281,28 +185,28 @@ include "koneksi.php";
 
                   <?php if ($d_ket_foc['ROLL'] > 0 and $d_ket_foc['KG'] > 0 and $d_ket_foc['YARD_MTR'] > 0): ?>
                   <tr bgcolor="<?php echo $bgcolor; ?>">
-                    <td align="center"><?php echo $row1['GOODSISSUEDATE']; ?></td>
-                    <td align="center"><a href="#" id='<?php echo $row1['PROVISIONALCODE']; ?>'
-                        nowarna='<?php echo $row1['SUBCODE05']; ?>'
-                        project='<?php echo $row1['DLVSALORDERLINESALESORDERCODE']; ?>'
-                        lotcode='<?php echo $row1['LOTCODE']; ?>' 
-                        foc='<?= trim($row1['NOTE'] ?: '') ?>'
+                    <td align="center"><?php echo $data['GOODSISSUEDATE']; ?></td>
+                    <td align="center"><a href="#" id='<?php echo $data['PROVISIONALCODE']; ?>'
+                        nowarna='<?php echo $data['SUBCODE05']; ?>'
+                        project='<?php echo $data['DLVSALORDERLINESALESORDERCODE']; ?>'
+                        lotcode='<?php echo $data['LOTCODE']; ?>' 
+                        foc='<?= trim($data['NOTE'] ?: '') ?>'
                         class="detail_kirim_kain">
-                        <?php echo $row1['PROVISIONALCODE']; ?></a></td>
-                    <td align="center"><?php echo $row1['PO_NUMBER']; ?></td>
-                    <td align="center"><?php echo $row1['DLVSALORDERLINESALESORDERCODE']; ?></td>
-                    <td align="center"><?php echo $row1['SUBCODE02'].$row1['SUBCODE03']; ?></td>
+                        <?php echo $data['PROVISIONALCODE']; ?></a></td>
+                    <td align="center"><?php echo $data['PO_NUMBER']; ?></td>
+                    <td align="center"><?php echo $data['DLVSALORDERLINESALESORDERCODE']; ?></td>
+                    <td align="center"><?php echo $data['SUBCODE02'].$data['SUBCODE03']; ?></td>
                     <td align="center"><?php echo $d_ket_foc['ROLL']; ?></td>
                     <td align="center"><?php echo str_replace(",", "", number_format($d_ket_foc['KG'], 2)) ?></td>
                     <td align="center"><?php echo str_replace(",", "", number_format($d_ket_foc['YARD_MTR'], 2)) ?></td>
-                    <td align="center"><?php echo $row1['LOTCODE']; ?></td>
-                    <td align="center"><?php echo $row1['WARNA']; ?></td>
+                    <td align="center"><?php echo $data['LOTCODE']; ?></td>
+                    <td align="center"><?php echo $data['WARNA']; ?></td>
                     <td>FOC</td>
                   </tr>
 
                   <!-- Perhitungan roll baru -->
                   <?php
-                    if (in_array($row1['DEFINITIVECOUNTERCODE'], array('CESDEF', 'DREDEF', 'DSEDEF', 'EXDPROV', 'EXPPROV', 'GSEPROV', 'CESPROV', 'DREPROV', 'EXDDEF', 'EXPDEF', 'GSEDEF', 'PSEPROV'))) {
+                    if (in_array($data['DEFINITIVECOUNTERCODE'], array('CESDEF', 'DREDEF', 'DSEDEF', 'EXDPROV', 'EXPPROV', 'GSEPROV', 'CESPROV', 'DREPROV', 'EXDDEF', 'EXPDEF', 'GSEDEF', 'PSEPROV'))) {
                       $q_roll = db2_exec($conn1, "SELECT
                                                 COUNT(ise.COUNTROLL) AS ROLL,
                                                 SUM(ise.QTY_KG) AS QTY_SJ_KG,
@@ -315,8 +219,8 @@ include "koneksi.php";
                                                 ITXVIEW_SURATJALAN_EXIM2A ise 
                                             LEFT JOIN ITXVIEW_NO_PROJECTS_EXIM inpe ON inpe.PROVISIONALCODE = ise.PROVISIONALCODE 
                                             WHERE 
-                                                ise.PROVISIONALCODE = '$row1[PROVISIONALCODE]'
-                                                AND ise.ALLOCATIONCODE = '$row1[CODE]'
+                                                ise.PROVISIONALCODE = '$data[PROVISIONALCODE]'
+                                                AND ise.ALLOCATIONCODE = '$data[CODE]'
                                                 -- AND (ise.QUALITYREASONCODE <> 'FOC' OR ise.QUALITYREASONCODE IS NULL)
                                             GROUP BY 
                                                 inpe.PROJECT,ise.ADDRESSEE,ise.BRAND_NM,ise.ALLOCATIONCODE
@@ -334,8 +238,8 @@ include "koneksi.php";
                                                         ITXVIEW_SURATJALAN_EXIM2A ise 
                                                     LEFT JOIN ITXVIEW_NO_PROJECTS_EXIM inpe ON inpe.PROVISIONALCODE = ise.PROVISIONALCODE 
                                                     WHERE 
-                                                        ise.PROVISIONALCODE = '$row1[PROVISIONALCODE]'
-                                                        AND ise.ALLOCATIONCODE = '$row1[CODE]'
+                                                        ise.PROVISIONALCODE = '$data[PROVISIONALCODE]'
+                                                        AND ise.ALLOCATIONCODE = '$data[CODE]'
                                                         AND ise.QUALITYREASONCODE = 'FOC' 
                                                     GROUP BY 
                                                         inpe.PROJECT,ise.ADDRESSEE,ise.BRAND_NM,ise.ALLOCATIONCODE
@@ -350,7 +254,7 @@ include "koneksi.php";
                                                   FROM 
                                                       ITXVIEWALLOCATION0 
                                                   WHERE 
-                                                      CODE = '$row1[CODE]' AND LOTCODE IN ($row1[LOTCODE2])");
+                                                      CODE = '$data[CODE]' AND LOTCODE IN ($data[LOTCODE2])");
                       $d_roll = db2_fetch_assoc($q_roll);
                       $roll = $d_roll['ROLL'];
                     }
@@ -358,45 +262,44 @@ include "koneksi.php";
                     <!-- Kondisi pertama -->
                     <?php if ($roll > 0): ?>
                     <tr bgcolor="<?php echo $bgcolor; ?>">
-                    <td align="center"><?php echo $row1['GOODSISSUEDATE']; ?></td>
-                    <td align="center"><a href="#" id='<?php echo $row1['PROVISIONALCODE']; ?>'
-                        nowarna='<?php echo $row1['SUBCODE05']; ?>'
-                        project='<?php echo $row1['DLVSALORDERLINESALESORDERCODE']; ?>'
-                        lotcode='<?php echo $row1['LOTCODE']; ?>' 
-                        foc='<?= trim($row1['NOTE'] ?: '') ?>'
+                    <td align="center"><?php echo $data['GOODSISSUEDATE']; ?></td>
+                    <td align="center"><a href="#" id='<?php echo $data['PROVISIONALCODE']; ?>'
+                        nowarna='<?php echo $data['SUBCODE05']; ?>'
+                        project='<?php echo $data['DLVSALORDERLINESALESORDERCODE']; ?>'
+                        lotcode='<?php echo $data['LOTCODE']; ?>' 
+                        foc='<?= trim($data['NOTE'] ?: '') ?>'
                         class="detail_kirim_kain">
-                        <?php echo $row1['PROVISIONALCODE']; ?></a></td>
-                    <td align="center"><?php echo $row1['PO_NUMBER']; ?></td>
-                    <td align="center"><?php echo $row1['DLVSALORDERLINESALESORDERCODE']; ?></td>
-                    <td align="center"><?php echo $row1['SUBCODE02'].$row1['SUBCODE03']; ?></td>
+                        <?php echo $data['PROVISIONALCODE']; ?></a></td>
+                    <td align="center"><?php echo $data['PO_NUMBER']; ?></td>
+                    <td align="center"><?php echo $data['DLVSALORDERLINESALESORDERCODE']; ?></td>
+                    <td align="center"><?php echo $data['SUBCODE02'].$data['SUBCODE03']; ?></td>
                     <td align="center"><?php echo $roll; ?></td>
                     <td align="center"><?php echo str_replace(",", "", number_format($d_roll['QTY_SJ_KG'], 2)) ?></td>
                     <td align="center"><?php
-                          if ($row1['PRICEUNITOFMEASURECODE'] == 'm') {
+                          if ($data['PRICEUNITOFMEASURECODE'] == 'm') {
                             echo str_replace(",", "", round(number_format($d_roll['QTY_SJ_YARD'], 2) * 0.9144, 2));
                           } else {
                             echo str_replace(",", "", number_format($d_roll['QTY_SJ_YARD'], 2));
                           }
                           ?></td>
-                    <td align="center"><?php echo $row1['LOTCODE']; ?></td>
-                    <td align="center"><?php echo $row1['WARNA']; ?></td>
-                    <td><?php echo $row1['PAYMENTMETHODCODE']; ?></td>
-                    </tr>
+                    <td align="center"><?php echo $data['LOTCODE']; ?></td>
+                    <td align="center"><?php echo $data['WARNA']; ?></td>
+                    <td><?php echo $data['PAYMENTMETHODCODE']; ?></td>
+                  </tr>
                     <?php endif; ?>
                     <!-- Kondisi lagi -->
                     <?php else: ?>
                       <tr bgcolor="<?php echo $bgcolor; ?>">
-                        <td align="center"><?php echo $row1['GOODSISSUEDATE']; ?></td>
-                        <td align="center"><a href="#" id='<?php echo $row1['PROVISIONALCODE']; ?>'
-                            nowarna='<?php echo $row1['SUBCODE05']; ?>' project='<?php echo $row1['DLVSALORDERLINESALESORDERCODE']; ?>'
-                            lotcode='<?php echo $row1['LOTCODE']; ?>' foc='<?= trim($row1['NOTE'] ?: '') ?>' class="detail_kirim_kain">
-                            <?php echo $row1['PROVISIONALCODE']; ?></a></td>
-                        <td align="center"><?php echo $row1['PO_NUMBER']; ?></td>
-                        <td align="center"><?php echo $row1['DLVSALORDERLINESALESORDERCODE']; ?></td>
-                        <td align="center"><?php echo $row1['SUBCODE02'].$row1['SUBCODE03']; ?></td>
-                        <td align="center">
-                          <?php
-                          if (in_array($row1['DEFINITIVECOUNTERCODE'], array('CESDEF', 'DREDEF', 'DSEDEF', 'EXDPROV', 'EXPPROV', 'GSEPROV', 'CESPROV', 'DREPROV', 'EXDDEF', 'EXPDEF', 'GSEDEF', 'PSEPROV'))) {
+                        <td align="center"><?php echo $data['GOODSISSUEDATE']; ?></td>
+                        <td align="center"><a href="#" id='<?php echo $data['PROVISIONALCODE']; ?>'
+                            nowarna='<?php echo $data['SUBCODE05']; ?>' project='<?php echo $data['DLVSALORDERLINESALESORDERCODE']; ?>'
+                            lotcode='<?php echo $data['LOTCODE']; ?>' foc='<?= trim($data['NOTE'] ?: '') ?>' class="detail_kirim_kain">
+                            <?php echo $data['PROVISIONALCODE']; ?></a></td>
+                        <td align="center"><?php echo $data['PO_NUMBER']; ?></td>
+                        <td align="center"><?php echo $data['DLVSALORDERLINESALESORDERCODE']; ?></td>
+                        <td align="center"><?php echo $data['SUBCODE02'].$data['SUBCODE03']; ?></td>
+                        <td align="center"><?php
+                          if (in_array($data['DEFINITIVECOUNTERCODE'], array('CESDEF', 'DREDEF', 'DSEDEF', 'EXDPROV', 'EXPPROV', 'GSEPROV', 'CESPROV', 'DREPROV', 'EXDDEF', 'EXPDEF', 'GSEDEF', 'PSEPROV'))) {
                             $q_roll = db2_exec($conn1, "SELECT
                                                             COUNT(ise.COUNTROLL) AS ROLL,
                                                             SUM(ise.QTY_KG) AS QTY_SJ_KG,
@@ -409,8 +312,8 @@ include "koneksi.php";
                                                             ITXVIEW_SURATJALAN_EXIM2A ise 
                                                         LEFT JOIN ITXVIEW_NO_PROJECTS_EXIM inpe ON inpe.PROVISIONALCODE = ise.PROVISIONALCODE 
                                                         WHERE 
-                                                            ise.PROVISIONALCODE = '$row1[PROVISIONALCODE]'
-                                                            AND ise.ALLOCATIONCODE = '$row1[CODE]'
+                                                            ise.PROVISIONALCODE = '$data[PROVISIONALCODE]'
+                                                            AND ise.ALLOCATIONCODE = '$data[CODE]'
                                                         GROUP BY 
                                                             inpe.PROJECT,ise.ADDRESSEE,ise.BRAND_NM,ise.ALLOCATIONCODE");
                             $d_roll = db2_fetch_assoc($q_roll);
@@ -423,23 +326,22 @@ include "koneksi.php";
                                                         FROM 
                                                             ITXVIEWALLOCATION0 
                                                         WHERE 
-                                                            CODE = '$row1[CODE]' AND LOTCODE IN ($row1[LOTCODE2])");
+                                                            CODE = '$data[CODE]' AND LOTCODE IN ($data[LOTCODE2])");
                             $d_roll = db2_fetch_assoc($q_roll);
                             echo $d_roll['ROLL'];
                           }
-                          ?>
-                        </td>
+                          ?></td>
                         <td align="center"><?php echo str_replace(",", "", number_format($d_roll['QTY_SJ_KG'], 2)) ?></td>
                         <td align="center"><?php
-                        if ($row1['PRICEUNITOFMEASURECODE'] == 'm') {
+                        if ($data['PRICEUNITOFMEASURECODE'] == 'm') {
                           echo str_replace(",", "", round(number_format($d_roll['QTY_SJ_YARD'], 2) * 0.9144, 2));
                         } else {
                           echo str_replace(",", "", number_format($d_roll['QTY_SJ_YARD'], 2));
                         }
                         ?></td>
-                        <td align="center"><?php echo $row1['LOTCODE']; ?></td>
-                        <td align="center"><?php echo $row1['WARNA']; ?></td>
-                        <td><?php echo $row1['PAYMENTMETHODCODE']; ?></td>
+                        <td align="center"><?php echo $data['LOTCODE']; ?></td>
+                        <td align="center"><?php echo $data['WARNA']; ?></td>
+                        <td><?php echo $data['PAYMENTMETHODCODE']; ?></td>
                       </tr>
                   <?php endif; ?>
 
@@ -471,12 +373,16 @@ include "koneksi.php";
     aria-hidden="true"></div>
   <div id="DetailKirimKain" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true"></div>
+
+
   <script type="text/javascript">
     function confirm_delete(delete_url) {
       $('#modal_del').modal('show', { backdrop: 'static' });
       document.getElementById('delete_link').setAttribute('href', delete_url);
     }
   </script>
+
+
   <script>
     $(document).ready(function () {
       $('[data-toggle="tooltip"]').tooltip();
