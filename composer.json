@@ -1,6 +1,7 @@
 {
     "require": {
         "phpmailer/phpmailer": "^6.9",
-        "swiftmailer/swiftmailer": "^6.3"
+        "swiftmailer/swiftmailer": "^6.3",
+        "guzzlehttp/guzzle": "^7.9"
     }
 }

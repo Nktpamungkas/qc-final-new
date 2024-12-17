@@ -763,7 +763,12 @@ $page = strtolower($page);
                                             KPE</span></a></li>
                             </ul>
                         </li>
-                        <li class="treeview <?php if ($_GET['p'] == "Lap-KPE" or $_GET['p'] == "Lap-KPE-Status" or $_GET['p'] == "Form-LKPP" or $_GET['p'] == "Lap-Disposisi" or $_GET['p'] == "Lap-ME" or $_GET['p'] == "Lap-5Besar-KPE") {
+                        <li class="treeview <?php if ($_GET['p'] == "Lap-KPE" 
+                        or $_GET['p'] == "Lap-KPE-Status" 
+                        or $_GET['p'] == "Form-LKPP" 
+                        or $_GET['p'] == "Lap-Disposisi" 
+                        or $_GET['p'] == "Lap-ME" 
+                        or $_GET['p'] == "Lap-5Besar-KPE") {
                             echo "active";
                         } ?>">
                             <a href="#"><i class="fa fa-file-o text-aqua"></i> <span>Reports KPE</span>
@@ -796,6 +801,9 @@ $page = strtolower($page);
                                     echo "active";
                                 } ?>"><a href="Lap5BesarKPE"><i class="fa fa-bar-chart"></i> <span>Lap 5
                                             Besar KPE</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "trackingBonRetur") {
+                                    echo "active";
+                                } ?>"><a href="TrackingRetur"><i class="fa-duotone fa-solid fa-address-card"></i> <span>Tracking Bon Retur</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-5Besar-Ganti-Kain") {
