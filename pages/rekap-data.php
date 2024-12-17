@@ -588,6 +588,7 @@ order by a.id desc";
       <th width="200" rowspan="2"><div align="center">Aksi_detail</div></th>
       <th width="78" rowspan="2"><div align="center">No KK</div></th>
       <th width="78" rowspan="2"><div align="center">No Demand New Server</div></th>
+      <th width="70" rowspan="2"><div align="center">Lot Legacy</div></th>
       <th width="78" rowspan="2"><div align="center">Buyer</div></th>
       <th width="78" rowspan="2"><div align="center">Order</div></th>
       <th width="78" rowspan="2"><div align="center">PO</div></th>
@@ -610,12 +611,14 @@ order by a.id desc";
       <th width="60" rowspan="2"><div align="center">Netto</div></th>
       <th width="102" rowspan="2"><div align="center">Panjang</div></th>
       <th width="70" rowspan="2"><div align="center">Sisa</div></th>
+      <!-- <th width="70" rowspan="2"><div align="center">LOT Legacy</div></th> -->
 	  <!--
       <th colspan="2"><div align="center"> Fin</div></th>
       <th colspan="2"><div align="center"> Ins</div></th>-->
       <th width="70" rowspan="2"><div align="center">Cek Warna</div></th>
       <th width="70" rowspan="2"><div align="center">Masalah</div></th>
-      <th colspan="2"><div align="center">Extra</div></th>
+      <th colspan="2"><div align="center">FOC</div></th>
+      <th colspan="2"><div align="center">Estimasi FOC</div></th>
       <th width="78" rowspan="2"><div align="center">No Demand Old Server</div></th>
       <th width="78" rowspan="2"><div align="center">Prod. Order Old Server</div></th>
       <th width="70" rowspan="2"><div align="center">Ket</div></th>
@@ -628,6 +631,8 @@ order by a.id desc";
      <th width="70"><div align="center">L</div></th>
      <th width="70"><div align="center">Grms</div></th>
 	 -->
+     <th width="70"><div align="center">KG</div></th>
+     <th width="70"><div align="center">Panjang</div></th>
      <th width="70"><div align="center">KG</div></th>
      <th width="70"><div align="center">Panjang</div></th>
      </tr>
@@ -675,8 +680,6 @@ order by a.id desc";
 	//$nodemand = ['00190922','00000560','00000562','00000951'];
 	//$qtyoutput = qty_order($get_nodemand );
 	
-
-	
 	while($r=mysqli_fetch_array($sql)){
     $bgcolor = ($col++ & 1) ? 'gainsboro' : 'antiquewhite';
     if($r['tglcwarna']==NULL){
@@ -703,6 +706,7 @@ order by a.id desc";
       <?php } ?>
      </td>
      <td><?php echo $r['nodemand'];?></td> 
+     <td><?php echo $r['lot_legacy']; ?></td>
      <td><?php echo $r['pelanggan'];?></td>
      <td><?php echo $r['no_order'];?></td>
      <td><?php echo $r['no_po'];?></td>
@@ -757,6 +761,8 @@ order by a.id desc";
      <td align="left"><?php echo $r['masalah'];?></td>
      <td align="right"><?php echo $r['berat_extra'];?></td>
      <td align="right"><?php echo $r['panjang_extra'];?></td>
+     <td><?php echo $r['estimasi'];?></td>
+     <td><?php echo $r['panjang_estimasi'];?></td>
      <td><?php echo $r['demand'];?></td>
      <td><?php echo $r['lot_erp_qcf'];?></td>
      <td><?php echo $r['ket'];?></td>
