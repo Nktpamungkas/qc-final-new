@@ -1331,7 +1331,7 @@ $page = strtolower($page);
                                 </li>
                             </ul>
                         </li>
-                        <li class="treeview <?php if ($_GET['p'] == "Input-Lap-Packing-New" or $_GET['p'] == "Lihat-Data-Lap-Packing" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Input-Add-NOW") {
+                        <li class="treeview <?php if ($_GET['p'] == "Input-Lap-Packing-New" or $_GET['p'] == "Schedule_Packing" or $_GET['p'] == "Lihat-Data-Lap-Packing" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Input-Add-NOW") {
                             echo "active";
                         } ?>">
                             <a href="#"><i class="fa fa-gear"></i> <span>Packing</span>
@@ -1345,19 +1345,29 @@ $page = strtolower($page);
                                 } ?> <?php if ($_SESSION['akses'] == "biasa") {
                                       echo "hidden";
                                   } ?>"><a href="LapPackingNew"><i class="fa fa-file-text"></i>
-                                        <span>Lap Packing</span></a></li>
+                                        <span>Lap Packing</span></a>
+                                    </li>
+                                <li class="<?php if ($_GET['p'] == "Schedule_Packing") {
+                                    echo "active";
+                                } ?> <?php if ($_SESSION['akses'] == "biasa") {
+                                      echo "hidden";
+                                  } ?>"><a href="SchedulePacking"><i class="fa fa-file-text"></i>
+                                        <span>Schedule Packing</span></a>
+                                    </li>
                                 <li class="<?php if ($_GET['p'] == "Input-Sisa-Lap-Packing") {
                                     echo "active";
                                 } ?> <?php if ($_SESSION['akses'] == "biasa") {
                                       echo "hidden";
                                   } ?>"><a href="SisaSiapPacking"><i class="fa fa-file-text"></i>
-                                        <span>Sisa Siap Packing</span></a></li>
+                                        <span>Sisa Siap Packing</span></a>
+                                    </li>
                                 <li class="<?php if ($_GET['p'] == "Input-Add-NOW") {
                                     echo "active";
                                 } ?> <?php if ($_SESSION['akses'] == "biasa") {
                                       echo "hidden";
                                   } ?>"><a href="InputAddNOW"><i class="fa fa-file-text"></i>
-                                        <span>Input Add NOW</span></a></li>
+                                        <span>Input Add NOW</span></a>
+                                    </li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Input-Lap-InspekMeja-New" or $_GET['p'] == "Lihat-Data-InspekMeja") {
