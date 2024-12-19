@@ -763,14 +763,14 @@ if ($_POST['save'] == "save") {
 	$rowN = mysqli_num_rows($qryCekN);
 	// $qryCekS = mysqli_query($con, "SELECT * from tbl_schedule_packing WHERE no_urut='$_POST[no_urut]' and  no_mesin='$_POST[no_mc]' and not `status`='selesai'");
 	// $rowS = mysqli_num_rows($qryCekS);
-	if ($cek1< 1) {
-		echo "<script> swal({
-            title: 'Tidak bisa simpan! Data sudah diinput di Lap Packing!',
-            text: ' Silahkan cek laporan packing',
-            type: 'warning'
-        }, function(){
-            window.location='';
-        });</script>";
+	// if ($cek1> 1) {
+	// 	echo "<script> swal({
+    //         title: 'Tidak bisa simpan! Data sudah diinput di Lap Packing!',
+    //         text: ' Silahkan cek laporan packing',
+    //         type: 'warning'
+    //     }, function(){
+    //         window.location='';
+    //     });</script>";
 	// } else if ($rowN > 0) {
 	// 	echo "<script> swal({
     //         title: 'Tidak bisa input, No Demand sudah di mesin ini',
@@ -787,7 +787,7 @@ if ($_POST['save'] == "save") {
     //     }, function(){
     //         window.location='';
     //     });</script>";
-	} else {
+	// } else {
 		if ($_POST['nokk'] != "") {
 			$kartu = $_POST['nokk'];
 		} else {
@@ -855,7 +855,7 @@ if ($_POST['save'] == "save") {
 });</script>";
 		}
 	}
-}
+// }
 if ($_POST['update'] == "update") {
 	$warna = str_replace("'", "''", $_POST['warna']);
 	$nowarna = str_replace("'", "''", $_POST['no_warna']);
