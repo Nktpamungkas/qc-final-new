@@ -19,17 +19,17 @@ $modal=mysqli_query($con,"select
 
 $r=mysqli_fetch_array($modal);
 
-if($r['qty'] != "") {
-	$kg = $r['qty'];
-} else {
-	$kg = strtoupper($r['satuan_c']) == 'KG' ? $r['qty_claim'] : '';
-}
+// if($r['qty'] != "") {
+// 	$kg = $r['qty'];
+// } else {
+// 	$kg = strtoupper($r['satuan_c']) == 'KG' ? $r['qty_claim'] : '';
+// }
 
-if($r['qty2'] != "") {
-	$yd = $r['qty2'];
-} else {
-	$yd = strtoupper($r['satuan_c2']) == 'YD' ? $r['qty_claim2'] : '';
-}
+// if($r['qty2'] != "") {
+// 	$yd = $r['qty2'];
+// } else {
+// 	$yd = strtoupper($r['satuan_c2']) == 'YD' ? $r['qty_claim2'] : '';
+// }
 
 $tgl_packing = (!empty($r['tgl_packing']) && $r['tgl_packing'] != '0000-00-00') ? $r['tgl_packing'] : '';
 $tgl_kpe 	 = (!empty($r['tgl_kpe']) 	  && $r['tgl_kpe'] != '0000-00-00')     ? $r['tgl_kpe'] : '';

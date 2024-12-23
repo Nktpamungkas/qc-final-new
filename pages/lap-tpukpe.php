@@ -205,18 +205,20 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
             <?php
               if($row1['qty'] != "") {
                 echo $row1['qty'];
-              } else {
-                echo strtoupper($row1['satuan_c']) == 'KG' ? $row1['qty_claim'] : '';
-              }
+              } 
+              // else {
+              //   echo strtoupper($row1['satuan_c']) == 'KG' ? $row1['qty_claim'] : '';
+              // }
             ?>
             </td>
             <td align="center">
               <?php
               if($row1['qty2'] != "") {
                 echo $row1['qty2'];
-              } else {
-                echo strtoupper($row1['satuan_c2']) == 'YD' ? $row1['qty_claim2'] : '';
               }
+              //  else {
+              //   echo strtoupper($row1['satuan_c2']) == 'YD' ? $row1['qty_claim2'] : '';
+              // }
               ?>
             </td>
             <td><?php echo $row1['masalah'];?></td>
