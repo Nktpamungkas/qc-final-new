@@ -3,7 +3,7 @@ session_start();
 include "../koneksi.php";
 
 $modal_id=$_GET['id'];
-$modal=mysqli_query($con,"select
+$modal=mysqli_query($con,"SELECT
 								a.*,
 								b.qty_claim,
 								b.satuan_c,
@@ -19,15 +19,17 @@ $modal=mysqli_query($con,"select
 
 $r=mysqli_fetch_array($modal);
 
-// if($r['qty'] != "") {
-// 	$kg = $r['qty'];
-// } else {
+if($r['qty'] != "") {
+	$kg = $r['qty'];
+}
+//  else {
 // 	$kg = strtoupper($r['satuan_c']) == 'KG' ? $r['qty_claim'] : '';
 // }
 
-// if($r['qty2'] != "") {
-// 	$yd = $r['qty2'];
-// } else {
+if($r['qty2'] != "") {
+	$yd = $r['qty2'];
+} 
+// else {
 // 	$yd = strtoupper($r['satuan_c2']) == 'YD' ? $r['qty_claim2'] : '';
 // }
 
@@ -103,15 +105,15 @@ $serah_qai	 = (!empty($r['serah_qai'])   && $r['serah_qai'] != '0000-00-00')   ?
                 <div class="form-group">
                     <label for="qty" class="col-sm-2 control-label">Qty (KG)</label>
 					<div class="col-sm-4">
-						<!-- <input name="qty" type="text" class="form-control" id="qty" value="<?php echo $kg ?>" placeholder="0.00"> -->
-						<input name="qty" type="text" class="form-control" id="qty"  placeholder="0.00">
+						<input name="qty" type="text" class="form-control" id="qty" value="<?php echo $kg ?>" placeholder="0.00">
+						<!-- <input name="qty" type="text" class="form-control" id="qty"  placeholder="0.00"> -->
 					</div>
                 </div>
                 <div class="form-group">
                     <label for="qty2" class="col-sm-2 control-label">Qty (Yard)</label>
 					<div class="col-sm-4">
-						<!-- <input name="qty2" type="text" class="form-control" id="qty2" value="<?php echo $yd ?>" placeholder="0.00"> -->
-						<input name="qty2" type="text" class="form-control" id="qty2"  placeholder="0.00">
+						<input name="qty2" type="text" class="form-control" id="qty2" value="<?php echo $yd ?>" placeholder="0.00">
+						<!-- <input name="qty2" type="text" class="form-control" id="qty2"  placeholder="0.00"> -->
 					</div>
                 </div>
                 <div class="form-group">
