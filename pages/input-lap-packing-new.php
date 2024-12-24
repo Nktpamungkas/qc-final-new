@@ -63,9 +63,10 @@
 include "koneksi.php";
 // ini_set("error_reporting", 1);
 
+
 if ($_POST['simpan'] == "simpan") {
     // $ceksql = mysqli_query($con, "SELECT * FROM `tbl_lap_inspeksi` WHERE `nodemand`='$_GET[nodemand]' and `shift`='$_POST[shift]' AND DATE_FORMAT(tgl_update, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d') AND `dept`='PACKING' LIMIT 1");
-    $ceksql = mysqli_query($con, "SELECT * FROM `tbl_lap_inspeksi` WHERE `nodemand`='$_GET[nodemand]' and `shift`='$_POST[shift]' AND `dept`='PACKING' LIMIT 1");
+    $ceksql = mysqli_query($con, "SELECT * FROM `tbl_lap_inspeksi` WHERE `nodemand`='$_GET[nodemand]' and `shift`='$_POST[shift]' AND `dept`='PACKING' AND`operator`='$_GET[operator]'LIMIT 1");
     $cek = mysqli_num_rows($ceksql);
     if ($cek > 0) {
         $pelanggan = str_replace("'", "''", $_POST['pelanggan']);
@@ -245,10 +246,9 @@ $row1 = mysqli_fetch_array($msql1);
 $crow1 = mysqli_num_rows($msql1);
 
 //Data sudah disimpan di database mysqli
-$msql = mysqli_query($con, "SELECT * FROM `tbl_lap_inspeksi` WHERE `nodemand`='$nodemand' and `shift`='$_GET[shift]' AND `dept`='PACKING'");
+$msql = mysqli_query($con, "SELECT * FROM `tbl_lap_inspeksi` WHERE `nodemand`='$nodemand' and `shift`='$_GET[shift]' AND `dept`='PACKING' AND `operator`='$_GET[operator]' ");
 $row = mysqli_fetch_array($msql);
 $crow = mysqli_num_rows($msql);
-
 //Data sudah disimpan di database mysqli
 $qryfin = mysqli_query($con, "SELECT * FROM `tbl_lap_inspeksi` WHERE `nodemand`='$nodemand' AND `dept`='PACKING' ORDER BY id DESC");
 $rfin = mysqli_fetch_array($qryfin);
@@ -322,8 +322,7 @@ WHERE p.CODE = '$nodemand'
 $stmt = db2_exec($conn1, $sqlDB2, array('cursor' => DB2_SCROLLABLE));
 $rowdb2 = db2_fetch_assoc($stmt);
 
-$sqlDB20 = " 
-SELECT
+$sqlDB20 = "SELECT
 		SALESORDER.ORDERPARTNERBRANDCODE,
 		SALESORDERLINE.SALESORDERCODE,
 		SALESORDERLINE.ORDERLINE,
@@ -375,7 +374,7 @@ SELECT
 		AND SALESORDER.ORDERPARTNERBRANDCODE = ORDERPARTNERBRAND.CODE
 	WHERE SALESORDERLINE.SALESORDERCODE ='" . $rowdb2['PRO_ORDER'] . "'
 	AND SALESORDERLINE.ORDERLINE='" . $rowdb2['ORDERLINE'] . "'		
-	GROUP BY
+    GROUP BY
 		SALESORDER.ORDERPARTNERBRANDCODE,
 		SALESORDERLINE.SALESORDERCODE,
 		SALESORDERLINE.ORDERLINE,
@@ -391,13 +390,11 @@ SELECT
 		SALESORDERDELIVERY.DELIVERYDATE,
 		ITXVIEWORDERITEMLINKACTIVE.EXTERNALITEMCODE,
 		ITXVIEWORDERITEMLINKACTIVE.LONGDESCRIPTION,
-		ORDERPARTNERBRAND.LONGDESCRIPTION
-";
+		ORDERPARTNERBRAND.LONGDESCRIPTION";
 $stmt0 = db2_exec($conn1, $sqlDB20, array('cursor' => DB2_SCROLLABLE));
 $rowdb20 = db2_fetch_assoc($stmt0);
 
-$sqlDB21 = " 
-SELECT
+$sqlDB21 = "SELECT
 	PRODUCT.SUBCODE01,
 	PRODUCT.SUBCODE02,
 	PRODUCT.SUBCODE03,
@@ -893,14 +890,16 @@ $rowtoBS = db2_fetch_assoc($stmt2BS);
                                 <option value="<?php echo trim($rowop['OPERATORCODE']); ?>" <?php
                                    if ($row['operator'] == $rowop['OPERATORCODE'] or $_GET['operator'] == $rowop['OPERATORCODE']) {
                                        echo "SELECTED";
-                                   } ?>>
+                                    } ?>>
                                     <?php echo $rowop['NAMA']; ?>
+                                    
                                 </option>
-                            <?php } ?>
+                            <?php }
+                            ?>
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group"> 
                     <label for="l_g" class="col-sm-3 control-label">Lebar X Gramasi</label>
                     <div class="col-sm-2">
                         <input name="lebar" type="text" class="form-control" id="lebar" value="<?php if ($crow > 0) {
