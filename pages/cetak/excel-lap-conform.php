@@ -10,7 +10,7 @@ include "../../koneksi.php";
 //--
 $Awal=$_GET['awal'];
 $Akhir=$_GET['akhir'];
-$Nokk=$_GET['nokk'];
+// $Nokk=$_GET['nokk'];
 $Order=$_GET['order'];
 $Langganan=$_GET['langganan'];
 $Item=$_GET['item'];
@@ -28,7 +28,8 @@ $Warna=$_GET['warna'];
       <th bgcolor="#12C9F0">BUYER</th>
       <th bgcolor="#12C9F0">NO PO</th>
       <th bgcolor="#12C9F0">ORDER</th>
-      <th bgcolor="#12C9F0">JENIS KAIN</th>
+      <th bgcolor="#12C9F0">HANGER</th>
+      <!-- <th bgcolor="#12C9F0">JENIS KAIN</th> -->
       <th bgcolor="#12C9F0">NO WARNA</th>
       <th bgcolor="#12C9F0">WARNA</th>
       <th bgcolor="#12C9F0">LOT</th>
@@ -41,9 +42,25 @@ $Warna=$_GET['warna'];
     $no=1;
     if($Awal!=""){ $Where =" AND DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
     if($Awal!="" or $Order!="" or $Item!="" or $Warna!="" or $Langganan!=""){
-        $query=mysqli_query($con,"SELECT * FROM tbl_firstlot WHERE nokk LIKE '%$Nokk%' AND no_order LIKE '%$Order%' AND no_item LIKE '%$Item%' AND langganan LIKE '%$Langganan%' AND warna LIKE '%$Warna%' $Where ORDER BY id ASC ");
+        $query=mysqli_query($con,"SELECT 
+                                                    * 
+                                                FROM tbl_firstlot 
+                                                WHERE 
+                                                    no_order LIKE '%$Order%' AND 
+                                                    no_item LIKE '%$Item%' AND 
+                                                    langganan LIKE '%$Langganan%' AND 
+                                                    warna LIKE '%$Warna%' $Where 
+                                                ORDER BY id ASC ");
     }else{
-        $query=mysqli_query($con,"SELECT * FROM tbl_firstlot WHERE nokk LIKE '%$Nokk%' AND no_order LIKE '$Order' AND no_item LIKE '$Item' AND langganan LIKE '$Langganan' AND warna LIKE '$Warna' $Where ORDER BY id ASC");
+        $query=mysqli_query($con,"SELECT 
+                                                    * 
+                                                FROM tbl_firstlot 
+                                                WHERE 
+                                                    no_order LIKE '$Order' AND 
+                                                    no_item LIKE '$Item' AND 
+                                                    langganan LIKE '$Langganan' AND 
+                                                    warna LIKE '$Warna' $Where 
+                                                ORDER BY id ASC");
     }
 	while($r=mysqli_fetch_array($query)){
         $pos=strpos($r['langganan'], "/");
@@ -58,7 +75,8 @@ $Warna=$_GET['warna'];
       <td><?php echo $buyer;?></td>
       <td><?php echo $r['po'];?></td>
       <td><?php echo $r['no_order'];?></td>
-      <td><?php echo $r['jenis_kain'];?></td>
+      <td><?php echo $r['no_hanger'];?></td>
+      <!-- <td><?php //echo $r['jenis_kain'];?></td> -->
       <td><?php echo $r['no_warna'];?></td>
       <td><?php echo $r['warna'];?></td>
       <td>'<?php echo $r['lot'];?></td>
