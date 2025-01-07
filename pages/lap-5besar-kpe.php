@@ -1070,7 +1070,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         foreach ($repeatTemp as $key => $value) {
                             if(strtoupper($value['satuan_c']) == 'KG') {
                                 $repeatKG += $value['qty_claim_x'];
-                                $repeatKG += $value['qty_lolos_qc'];
+                                $repeatKGLolosQC += $value['qty_lolos_qc'];
                             }
                         }
 
@@ -1079,7 +1079,7 @@ $WCheck = $Sts_check != "" ? " AND sts_check = '$Sts_check' " : '';
                         foreach ($generalTemp as $key => $value) {
                             if(strtoupper($value['satuan_c']) == 'KG') {
                                 $generalKG += $value['qty_claim_x'];
-                                $generalKG += $value['qty_lolos_qc'];
+                                $generalKGLolosQC += $value['qty_lolos_qc'];
                             }
                         }
 
