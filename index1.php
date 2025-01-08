@@ -1504,7 +1504,7 @@ $page = strtolower($page);
                         <li class="treeview <?php if ($_GET['p'] == "Stiker_Custom") {
                             echo "active";
                         } ?>">
-                            <a href="#"><i class="fa fa-tag"></i> <span>Sticker Custom</span>
+                            <a href="#"><i class="fa fa-tag"></i> <span>Sticker Customrrr</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
@@ -1516,6 +1516,23 @@ $page = strtolower($page);
                                       echo "hidden";
                                   } ?>"><a href="StikerCustom"><i class="fa fa-file-text"></i>
                                         <span>Stiker Custom</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview <?php if ($_GET['p'] == "Top 5 ") {
+                            echo "active";
+                        } ?>">
+                            <a href="#"><i class="fa fa-tag"></i> <span>TOP 5 Defect</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<?php if ($_GET['p'] == "Top5") {
+                                    echo "active";
+                                } ?> <?php if ($_SESSION['akses'] == "biasa") {
+                                      echo "hidden";
+                                  } ?>"><a href="Top5"><i class="fa fa-file-text"></i>
+                                        <span>TOP 5</span></a></li>
                             </ul>
                         </li>
                     <?php } ?>

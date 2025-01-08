@@ -530,5 +530,6 @@ RewriteRule ^Lap5BesarBonPenghubung$ ./index1.php?p=Lap-5Besar-Bon-Penghubung [L
 
 
 RewriteRule ^InputDataAPTPUKPE$ ./index1.php?p=input-data-analisa-pencegahan-tpu-kpe [L]
+RewriteRule ^Top5$ ./index1.php?p=top5 [L]
 
 Options All -Indexes
