@@ -53,10 +53,17 @@ ORDER BY
     <div class="col-xs-12">
       <div class="box">
         <div class="box-header">
-          
+
           <a href="FormSchedulePacking" class="btn btn-success <?php if ($_SESSION['lvl_id'] != "PACKING") {
-            echo "disabled";
-          } ?>"><i class="fa fa-plus-circle"></i> Tambah</a>
+                                                                  echo "disabled";
+                                                                } ?>"><i class="fa fa-plus-circle"></i> Tambah</a>&nbsp;
+
+          <a href="pages/cetak/cetak-laporan-schedulepacking.php"
+            class="btn btn-primary"
+            target="_blank">
+            <i class="fa fa-print" aria-hidden="true"></i> Cetak
+          </a>
+
           <!--	
   <a href="?p=Form-Schedule-Manual" class="btn btn-warning"><i class="fa fa-plus-circle"></i> Tambah Manual</a>-->
           <div class="btn-group pull-right">
@@ -131,7 +138,7 @@ ORDER BY
                   //$now=new DateTime();
                   //$selisih = $tglupdate->diff($now);
                   //$difference = ($selisih->days * 24)+$selisih->h;
-                  ?>
+                ?>
                   <div class="modal fade modal-super-scaled" id="PrintHalaman<?php echo $rowd['id']; ?>">
                     <div class="modal-dialog modal-sm">
                       <div class="modal-content">
@@ -170,22 +177,23 @@ ORDER BY
                     <td align="center">
                       <div class="btn-group">
                         <!-- <a href="#" id='<?php echo $rowd['id']; ?>' class="btn btn-xs btn-warning gerobak_tambah <?php if ($_SESSION['akses'] != "biasa") {
-                             echo "disabled";
-                           } ?>"><i class="fa fa-plus"></i></a> -->
+                                                                                                                        echo "disabled";
+                                                                                                                      } ?>"><i class="fa fa-plus"></i></a> -->
                         <!-- <a href="#" id='<?php echo $rowd['id']; ?>' class="btn btn-xs btn-info schedule_edit <?php if ($_SESSION['akses'] == "biasa" or $rCEk['status'] == "sedang jalan" or $_SESSION['lvl_id'] != "INSPEKSI") {
-                             echo "disabled";
-                           } ?>"><i class="fa fa-edit"></i></a> -->
+                                                                                                                    echo "disabled";
+                                                                                                                  } ?>"><i class="fa fa-edit"></i></a> -->
                         <a href="#" onclick="confirm_del('HapusPack-<?php echo $rowd['id'] ?>');" class="btn btn-xs btn-danger 
                            "><i class="fa fa-trash"></i></a>
                       </div>
                     </td>
-                    <?php //echo $_SESSION['lvl_id10'];?>
+                    <?php //echo $_SESSION['lvl_id10'];
+                    ?>
                     <td align="center">
                       <?php echo $no;
                       // echo $rowd['no_urut']; 
                       ?>
-                      <br/>
-                       <a href="javascript:void(0);" 
+                      <br />
+                      <a href="javascript:void(0);"
                         id="stop-<?php echo $rowd['id']; ?>" class="btn btn-xs btn-danger"
                         data-id="<?php echo $rowd['id']; ?>" data-nodemand="<?php echo $rowd['nodemand']; ?>"
                         onclick="stopPacking('<?php echo $rowd['id']; ?>', '<?php echo $rowd['nodemand']; ?>')">
@@ -214,16 +222,18 @@ ORDER BY
                       </a></td>
                     <td>
                       <i>
-                        <?php echo 'KK: '. $rowd['nokk']; ?>
+                        <?php echo 'KK: ' . $rowd['nokk']; ?>
                       </i><br />
                       <i>
-                        <?php echo 'Demand: '. $rowd['nodemand']; ?>
+                        <?php echo 'Demand: ' . $rowd['nodemand']; ?>
                       </i><br />
                       <i style="color:red;"><strong>
                           <?php echo $rowd['catatan']; ?>
                         </strong></i><br />
-                      <!-- <a href="#" id='<?php //echo $rowd['id']; ?>' class="detail_kartu"><span class="label label-danger">
-                          <?php //echo $rowd['ket_kartu']; ?>
+                      <!-- <a href="#" id='<?php //echo $rowd['id']; 
+                                            ?>' class="detail_kartu"><span class="label label-danger">
+                          <?php //echo $rowd['ket_kartu']; 
+                          ?>
                         </span></a> -->
                     </td>
                     <td align="center">
@@ -242,7 +252,7 @@ ORDER BY
                       <?php echo $rowd['tgl_delivery']; ?>
                     </td>
                   </tr>
-                  <?php
+                <?php
                   $no++;
                 } ?>
             </table>
@@ -296,18 +306,17 @@ ORDER BY
     });
     document.getElementById('del_link').setAttribute('href', delete_url);
   }
-
 </script>
 <script>
-    function stopPacking(id, nodemand) {
-        // Buat URL untuk mengupdate status secara langsung
-        var url = 'UpdateStsPack-' + id + '-' + nodemand;
+  function stopPacking(id, nodemand) {
+    // Buat URL untuk mengupdate status secara langsung
+    var url = 'UpdateStsPack-' + id + '-' + nodemand;
 
-        // Redirect ke URL yang telah dibentuk untuk melakukan update status
-        window.location.href = url;
+    // Redirect ke URL yang telah dibentuk untuk melakukan update status
+    window.location.href = url;
 
-        // Jika perlu, Anda bisa menambahkan query string, contoh:
-        // var url = 'UpdateStsPack-' + id + '-' + nodemand + '?status=selesai';
-        // window.location.href = url;
-    }
+    // Jika perlu, Anda bisa menambahkan query string, contoh:
+    // var url = 'UpdateStsPack-' + id + '-' + nodemand + '?status=selesai';
+    // window.location.href = url;
+  }
 </script>
