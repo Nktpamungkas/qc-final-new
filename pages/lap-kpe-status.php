@@ -28,6 +28,7 @@ $Langganan	= isset($_POST['langganan']) ? $_POST['langganan'] : '';
 $Demand	= isset($_POST['demand']) ? $_POST['demand'] : '';
 $Prodorder	= isset($_POST['prodorder']) ? $_POST['prodorder'] : '';
 $Pejabat	= isset($_POST['pejabat']) ? $_POST['pejabat'] : '';
+$kategori	= isset($_POST['kategori']) ? $_POST['kategori'] : '';
 	
 if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";}	
 ?>
@@ -76,7 +77,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         <div class="col-sm-2">
           <input name="prodorder" type="text" class="form-control pull-right" id="prodorder" placeholder="Prod. Order" value="<?php echo $Prodorder;  ?>" />
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <select class="form-control select2" name="pejabat" id="pejabat">
               <option value="">Pilih Pejabat</option>
                 <?php 
@@ -84,6 +85,17 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
                   while($rp=mysqli_fetch_array($qryp)){
                 ?>
               <option value="<?php echo $rp['nama'];?>" <?php if($Pejabat==$rp['nama']){echo "SELECTED";}?>><?php echo $rp['nama'];?></option>	
+                <?php }?>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <select class="form-control select2" name="kategori" id="kategori">
+              <option value="">Pilih Kategori 4 KPE</option>
+                <?php 
+                  $qryp=mysqli_query($con,"SELECT kategori FROM tbl_kategori_kpe ORDER BY id ASC");
+                  while($rp=mysqli_fetch_array($qryp)){
+                ?>
+              <option value="<?php echo $rp['kategori'];?>" <?php if($kategori==$rp['kategori']){echo "SELECTED";}?>><?php echo $rp['kategori'];?></option>	
                 <?php }?>
             </select>
         </div>
@@ -127,10 +139,11 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 		<div class="pull-right">
 			<a href="pages/cetak/cetak_kpe_memo_all.php?awal=<?php echo $Awal; ?>&akhir=<?php echo $Akhir; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>" class="btn btn-warning <?php if($Awal=="") { echo "disabled"; }?>" target="_blank">Cetak KPE All</a>
 			<a href="pages/cetak/cetak_kpe_memo_all.php?awal=<?php echo $Awal; ?>&akhir=<?php echo $Akhir; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>&excel=1" class="btn btn-warning <?php if($Awal=="") { echo "disabled"; }?>" target="_blank">Cetak KPE All Excel</a>
-			
 			<a href="pages/cetak/cetak_kpe_memo.php?awal=<?php echo $Awal; ?>&akhir=<?php echo $Akhir; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>" class="btn btn-danger <?php if($Awal=="") { echo "disabled"; }?>" target="blank">Cetak KPE All (on progress)</a>
 			<a href="pages/cetak/cetak_kpe_memo.php?awal=<?php echo $Awal; ?>&akhir=<?php echo $Akhir; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>&excel=1" class="btn btn-danger <?php if($Awal=="") { echo "disabled"; }?>" target="blank">Cetak KPE All (on progress) excel</a>
+      <a href="pages/cetak/cetak_4kategori_kpe.php?awal=<?php echo $Awal; ?>&akhir=<?php echo $Akhir; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>&kategori=<?php echo $_POST['kategori']; ?>&excel=1" class="btn btn-success <?php if($Awal=="") { echo "disabled"; }?>" target="_blank">Cetak Detail 4 Kategori KPE Excel</a>
 		</div>
+
 
       
 	    </div>
