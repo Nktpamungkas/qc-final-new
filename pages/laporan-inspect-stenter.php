@@ -450,16 +450,25 @@
 					<label for="no_mc" class="col-sm-3 control-label">No MC</label>
 					<div class="col-sm-3">
 						<select name="no_mc" class="form-control" id="no_mc" required>
-							<option value="">Pilih</option>
-							<option value="STENTER 1">STENTER 1</option>
-							<option value="STENTER 2">STENTER 2</option>
-							<option value="STENTER 3">STENTER 3</option>
-							<option value="STENTER 4">STENTER 4</option>
-							<option value="STENTER 5">STENTER 5</option>
-							<option value="STENTER 6">STENTER 6</option>
-							<option value="STENTER 7">STENTER 7</option>
-							<option value="STENTER 8">STENTER 8</option>
-							<option value="STENTER 9">STENTER 9</option>
+						<option value="">Pilih</option>
+							<?php
+							$qry1 = db2_exec($conn1, "SELECT
+											CODE
+										  FROM
+											RESOURCES r
+										  WHERE
+											SUBSTR(CODE, 1,4) = 'P3ST'
+										  ORDER BY 
+											SUBSTR(CODE, 6,2) ASC");
+
+							while ($r = db2_fetch_assoc($qry1)) {
+								$selected = ($row_mesin['MESIN'] == $r['CODE']) ? 'SELECTED' : '';
+								$stenterNumber = substr($r['CODE'], 5, 2); // Extract the number from the code
+							?>
+								<option value="<?= $r['CODE']; ?>" <?= $selected; ?>>
+									<?= $r['CODE']; ?> - STENTER <?= $stenterNumber; ?>
+								</option>
+							<?php } ?>
 						</select>
 					</div>
 
