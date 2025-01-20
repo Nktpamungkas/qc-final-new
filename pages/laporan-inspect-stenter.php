@@ -476,7 +476,7 @@
 				</div>
 				<div class="form-group">
 					<label for="multi" class="col-sm-3 control-label">Personil</label>
-					<div class="col-sm-8">
+					<div class="col-sm-5">
 						<div class="input-group">
 							<select class="form-control select2" data-placeholder="Pilih Personil" name="operator" id="operator" required>
 								<option value="" disabled selected>Pilih Personil</option>
