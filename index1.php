@@ -1244,8 +1244,9 @@ $page = strtolower($page);
                                         <span>Lap-Inspektor</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Lap-Inspeksi") {
                                     echo "active";
-                                } ?>"><a href="LapInspeksi"><i class="fa fa-line-chart text-danger"></i>
-                                        <span>Lap-Inspeksi</span></a></li>
+                                } ?>"><a href="LaporanInspeksiStanter"><i class="fa fa-line-chart text-danger"></i>
+                                        <span>Laporan Inspeksi Stanter</span></a></li>
+                                
                             </ul>
                         </li>
                     <?php } ?>
