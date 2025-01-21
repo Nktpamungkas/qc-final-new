@@ -1696,7 +1696,7 @@ $page = strtolower($page);
     <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <script src="bower_components/toast-master/js/jquery.toast.js"></script>
     <script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
-    <?php if ($_GET['p'] == "Lap-Inspeksi" or $_GET['p'] == "Lap-GantiKainDisposisi" or $_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-Retur" or $_GET['p'] == "Summary-Order" or $_GET['p'] == "Lihat-Data-Cwarna-Dye-New" or $_GET['p'] == "Lihat-Data-Cwarna-Fin-New" or $_GET['p'] == "Lihat-Data-Jahit" or $_GET['p'] == "Lap-Potong" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Lihat-Data-Beda-Roll" or $_GET['p'] == "Mutasi-BS" or $_GET['p'] == "Mutasi-BS-Detail" or $_GET['p'] == "CetakRandom" or $_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "LihatTempelBedaRoll" or $_GET['p'] == "Lap-PotongNew"): ?>
+    <?php if ($_GET['p'] == "Lap-Inspeksi" or $_GET['p'] == "Lap-GantiKainDisposisi" or $_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-Retur" or $_GET['p'] == "Summary-Order" or $_GET['p'] == "Lihat-Data-Cwarna-Dye-New" or $_GET['p'] == "Lihat-Data-Cwarna-Fin-New" or $_GET['p'] == "Lihat-Data-Jahit" or $_GET['p'] == "Lap-Potong" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Lihat-Data-Beda-Roll" or $_GET['p'] == "Mutasi-BS" or $_GET['p'] == "Mutasi-BS-Detail" or $_GET['p'] == "CetakRandom" or $_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "LihatTempelBedaRoll" or $_GET['p'] == "Lap-PotongNew" or $_GET['p'] == "laporan-inspect-stenter-report"): ?>
         <script src="bower_components/xeditable/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
     <?php endif; ?>
 
@@ -2335,6 +2335,11 @@ $page = strtolower($page);
                 type: 'text',
                 disabled: false,
                 url: 'pages/editable/editable_yard_inspek.php',
+            });
+             $('.edit-catatan').editable({
+                type: 'text',
+                disabled: false,
+                url: 'pages/editable/editable_catatan.php',
             });
              $('.jml_yard_inspeksi2').editable({
                 type: 'text',

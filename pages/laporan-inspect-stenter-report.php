@@ -85,72 +85,85 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                 $stmt1 = mysqli_query($con, $qryb);
                 if ($stmt1) {
                 ?>
-                    
-                <div class="box-body">
-                    <table id="example3" class="table table-bordered table-hover table-striped display nowrap" width="100%">
-                        <thead class="bg-blue">
-                            <tr>
-                                <th>No</th>
-                                <th>No KK</th>
-                                <th>No Demand</th>
-                                <th>Langganan</th>
-                                <th>Buyer</th>
-                                <th>No Order</th>
-                                <th>Jenis Kain</th>
-                                <th>Warna</th>
-                                <th>No MC</th>
-                                <th>Bruto</th>
-                                <th>Roll</th>
-                                <th>No Hanger</th>
-                                <th>No Item</th>
-                                <th>Status</th>
-                                <th>Catatan</th>
-                                <th>No PO</th>
-                                <th>Lebar</th>
-                                <th>Gramasi</th>
-                                <th>Operator</th>
-                                <th>No Warna</th>
-                                <th>Tanggal Buat</th>
-                            </tr>
-                            
-                                
-                        </thead>
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            while ($row = mysqli_fetch_assoc($stmt1)) {
-                            ?>
+
+                    <div class="box-body">
+                        <table id="example3" class="table table-bordered table-hover table-striped display nowrap" width="100%">
+                            <thead class="bg-blue">
                                 <tr>
-                                    <td><?php echo $no; ?></td>
-                                    <td><?php echo $row['nokk']; ?></td>
-                                    <td><?php echo $row['nodemand']; ?></td>
-                                    <td><?php echo $row['langganan']; ?></td>
-                                    <td><?php echo $row['buyer']; ?></td>
-                                    <td><?php echo $row['no_order']; ?></td>
-                                    <td><?php echo $row['jenis_kain']; ?></td>
-                                    <td><?php echo $row['warna']; ?></td>
-                                    <td><?php echo $row['no_mc']; ?></td>
-                                    <td><?php echo $row['bruto']; ?></td>
-                                    <td><?php echo $row['roll']; ?></td>
-                                    <td><?php echo $row['no_hanger']; ?></td>
-                                    <td><?php echo $row['no_item']; ?></td>
-                                    <td><?php echo $row['status']; ?></td>
-                                    <td><?php echo $row['catatan']; ?></td>
-                                    <td><?php echo $row['no_po']; ?></td>
-                                    <td><?php echo $row['lebar']; ?></td>
-                                    <td><?php echo $row['gramasi']; ?></td>
-                                    <td><?php echo $row['operator']; ?></td>
-                                    <td><?php echo $row['no_warna']; ?></td>
-                                    <td><?php echo $row['tanggal_buat']; ?></td>
+                                    <th>No</th>
+                                    <th>No KK</th>
+                                    <th>No Demand</th>
+                                    <th>Langganan</th>
+                                    <th>Buyer</th>
+                                    <th>No Order</th>
+                                    <th>Jenis Kain</th>
+                                    <th>Warna</th>
+                                    <th>No MC</th>
+                                    <th>Bruto</th>
+                                    <th>Roll</th>
+                                    <th>No Hanger</th>
+                                    <th>No Item</th>
+                                    <th>Status</th>
+                                    <th>Catatan</th>
+                                    <th>No PO</th>
+                                    <th>Lebar</th>
+                                    <th>Gramasi</th>
+                                    <th>Operator</th>
+                                    <th>No Warna</th>
+                                    <th>Tanggal Buat</th>
                                 </tr>
-                            <?php
-                                $no++;
-                            }
-                            ?>
-                        </tbody>
-                        
-                    </table>
-                </div>
+
+
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                while ($row = mysqli_fetch_assoc($stmt1)) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $no; ?></td>
+                                        <td><?php echo $row['nokk']; ?></td>
+                                        <td><?php echo $row['nodemand']; ?></td>
+                                        <td><?php echo $row['langganan']; ?></td>
+                                        <td><?php echo $row['buyer']; ?></td>
+                                        <td><?php echo $row['no_order']; ?></td>
+                                        <td><?php echo $row['jenis_kain']; ?></td>
+                                        <td><?php echo $row['warna']; ?></td>
+                                        <td><?php echo $row['no_mc']; ?></td>
+                                        <td><?php echo $row['bruto']; ?></td>
+                                        <td><?php echo $row['roll']; ?></td>
+                                        <td><?php echo $row['no_hanger']; ?></td>
+                                        <td><?php echo $row['no_item']; ?></td>
+                                        <td><?php echo $row['status']; ?></td>
+                                        <td><?php echo $row['catatan']; ?></td>
+                                        <!-- <td>
+                                            <?php if (!empty($row['catatan'])) { ?>
+                                                <a data-pk="<?php echo $row['id']; ?>" data-value="<?php echo $row['catatan']; ?>" class="edit-catatan"
+                                                    href="javascript:void(0)">
+                                                    <?php echo $row['catatan']; ?>
+                                                </a>
+                                            <?php } else { ?>
+                                                <a data-pk="<?php echo $row['id']; ?>" data-value="No Catatan" class="edit-catatan"
+                                                    href="javascript:void(0)">
+                                                    No Catatan
+                                                </a>
+                                            <?php } ?>
+                                        </td> -->
+                                        <td><?php echo $row['no_po']; ?></td>
+                                        <td><?php echo $row['lebar']; ?></td>
+                                        <td><?php echo $row['gramasi']; ?></td>
+                                        <td><?php echo $row['operator']; ?></td>
+                                        <td><?php echo $row['no_warna']; ?></td>
+                                        <td><?php echo $row['tanggal_buat']; ?></td>
+                                    </tr>
+                                <?php
+                                    $no++;
+                                }
+                                ?>
+                            </tbody>
+
+                        </table>
+                    </div>
                 <?php
                 } else {
                     echo "Query execution failed: " . mysqli_error($con);
