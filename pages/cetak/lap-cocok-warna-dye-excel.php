@@ -23,6 +23,7 @@ Shift 	: <?php echo $shift;?>
     <td><h4>Tgl Celup</h4></td>
     <td><h4>No Demand</h4></td>
     <td><h4>Pelanggan</h4></td>
+    <td><h4>Buyer</h4></td>
     <td><h4>PO</h4></td>
     <td><h4>Order</h4></td>
     <td><h4>Item</h4></td>
@@ -58,6 +59,7 @@ Shift 	: <?php echo $shift;?>
     <td><?php echo $row['tgl_celup'];?></td>
     <td>'<?php echo $row['nodemand'];?></td>
     <td><?php echo $row['pelanggan'];?></td>
+    <td><?php echo $row['buyer'];?></td>
     <td><?php echo $row['no_po'];?></td>
     <td><?php echo $row['no_order'];?></td>
     <td><?php echo $row['no_item'];?></td>
@@ -129,8 +131,10 @@ Shift 	: <?php echo $shift;?>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
   </tr>
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -167,6 +171,7 @@ Shift 	: <?php echo $shift;?>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1">Team Dye A</td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1"><strong>TB</strong></td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1"><strong><?php echo number_format($lotTBA);?></strong></td>
@@ -175,6 +180,7 @@ Shift 	: <?php echo $shift;?>
     <td align="right" bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
   </tr>
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -211,6 +217,7 @@ Shift 	: <?php echo $shift;?>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1">Team Dye C</td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1"><strong>TB</strong></td>
     <td align="right" bgcolor="#FFFFFF" class="table-list1"><strong><?php echo number_format($lotTBC);?></strong></td>
@@ -219,6 +226,7 @@ Shift 	: <?php echo $shift;?>
     <td align="right" bgcolor="#FFFFFF" class="table-list1">&nbsp;</td>
   </tr>
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>

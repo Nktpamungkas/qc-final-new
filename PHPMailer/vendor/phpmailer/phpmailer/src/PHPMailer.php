@@ -280,14 +280,14 @@ class PHPMailer
      *
      * @var string
      */
-    public $Host = 'localhost';
+    public $Host = 'mail.indotaichen.com';
 
     /**
      * The default SMTP server port.
      *
      * @var int
      */
-    public $Port = 25;
+    public $Port = 587;
 
     /**
      * The SMTP HELO/EHLO name used for the SMTP connection.
@@ -298,7 +298,7 @@ class PHPMailer
      *
      * @var string
      */
-    public $Helo = '';
+    public $Helo = 'dept.it@indotaichen.com';
 
     /**
      * What kind of encryption to use on the SMTP connection.
@@ -306,7 +306,7 @@ class PHPMailer
      *
      * @var string
      */
-    public $SMTPSecure = '';
+    public $SMTPSecure = 'TLS';
 
     /**
      * Whether to enable TLS encryption automatically if a server supports it,
@@ -340,14 +340,14 @@ class PHPMailer
      *
      * @var string
      */
-    public $Username = '';
+    public $Username = 'dept.it@indotaichen.com';
 
     /**
      * SMTP password.
      *
      * @var string
      */
-    public $Password = '';
+    public $Password = 'Xr7PzUWoyPA';
 
     /**
      * SMTP auth type.
