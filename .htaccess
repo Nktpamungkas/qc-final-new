@@ -531,5 +531,8 @@ RewriteRule ^Lap5BesarBonPenghubung$ ./index1.php?p=Lap-5Besar-Bon-Penghubung [L
 
 RewriteRule ^InputDataAPTPUKPE$ ./index1.php?p=input-data-analisa-pencegahan-tpu-kpe [L]
 RewriteRule ^Top5$ ./index1.php?p=top5 [L]
+RewriteRule ^LaporanInspeksiStanter$ ./index1.php?p=laporan-inspect-stenter [L]
+RewriteRule ^LaporanInspeksiStanter-([a-zA-Z0-9_-]+)$ ./index1.php?p=laporan-inspect-stenter&nodemand=$1  [L]
+RewriteRule ^LaporanInspeksiStanterReport$ ./index1.php?p=laporan-inspect-stenter-report [L]
 
 Options All -Indexes
