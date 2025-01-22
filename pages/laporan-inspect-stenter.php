@@ -572,44 +572,63 @@
 
 <?php
 if (isset($_POST['save'])) {
-	// Insert data into tbl_schedule
-	$sqlData = mysqli_query($con, "INSERT INTO tbl_lap_stenter SET
-		nokk='$_POST[nokk]',
-		nodemand='$_POST[nodemand]',
-		langganan='$_POST[langganan]',
-		buyer='$_POST[buyer]',
-		no_order='$_POST[no_order]',
-		jenis_kain='$_POST[jenis_kain]',
-		warna='$_POST[warna]',
-		no_mc='$_POST[no_mc]',
-		bruto='$_POST[bruto]',
-		no_hanger='$_POST[no_hanger]',
-		no_item='$_POST[no_item]',
-		status='$_POST[status]',
-		catatan='$_POST[catatan]',
-		no_po='$_POST[no_po]',
-		lebar='$_POST[lebar]',
-		gramasi='$_POST[gramasi]',
-		operator='$_POST[operator]',
-		roll='$_POST[roll]',
-		no_warna='$_POST[no_warna]',
-		tanggal_buat=NOW()
-	");
+    // Escape special characters in input data
+    $nokk = mysqli_real_escape_string($con, $_POST['nokk']);
+    $nodemand = mysqli_real_escape_string($con, $_POST['nodemand']);
+    $langganan = mysqli_real_escape_string($con, $_POST['langganan']);
+    $buyer = mysqli_real_escape_string($con, $_POST['buyer']);
+    $no_order = mysqli_real_escape_string($con, $_POST['no_order']);
+    $jenis_kain = mysqli_real_escape_string($con, $_POST['jenis_kain']);
+    $warna = mysqli_real_escape_string($con, $_POST['warna']);
+    $no_mc = mysqli_real_escape_string($con, $_POST['no_mc']);
+    $bruto = mysqli_real_escape_string($con, $_POST['bruto']);
+    $no_hanger = mysqli_real_escape_string($con, $_POST['no_hanger']);
+    $no_item = mysqli_real_escape_string($con, $_POST['no_item']);
+    $status = mysqli_real_escape_string($con, $_POST['status']);
+    $catatan = mysqli_real_escape_string($con, $_POST['catatan']);
+    $no_po = mysqli_real_escape_string($con, $_POST['no_po']);
+    $lebar = mysqli_real_escape_string($con, $_POST['lebar']);
+    $gramasi = mysqli_real_escape_string($con, $_POST['gramasi']);
+    $operator = mysqli_real_escape_string($con, $_POST['operator']);
+    $roll = mysqli_real_escape_string($con, $_POST['roll']);
+    $no_warna = mysqli_real_escape_string($con, $_POST['no_warna']);
 
-		if ($sqlData) {
-			echo "<script>swal({
-				title: 'Data Tersimpan',
-				text: 'Klik Ok untuk input data kembali',
-				type: 'success',
-			}).then((result) => {
-				if (result.value) {
-					window.location.href='LaporanInspeksiStanter';
-				}
-			});</script>";
-		} else {
-			echo "<script>alert('Gagal menyimpan data ke tbl_lap_stenter: " . mysqli_error($con) . "');</script>";
-		}
-	}
+    // Insert data into tbl_lap_stenter
+    $sqlData = mysqli_query($con, "INSERT INTO tbl_lap_stenter SET
+        nokk='$nokk',
+        nodemand='$nodemand',
+        langganan='$langganan',
+        buyer='$buyer',
+        no_order='$no_order',
+        jenis_kain='$jenis_kain',
+        warna='$warna',
+        no_mc='$no_mc',
+        bruto='$bruto',
+        no_hanger='$no_hanger',
+        no_item='$no_item',
+        status='$status',
+        catatan='$catatan',
+        no_po='$no_po',
+        lebar='$lebar',
+        gramasi='$gramasi',
+        operator='$operator',
+        roll='$roll',
+        no_warna='$no_warna',
+        tanggal_buat=NOW()
+    ");
 
-
+    if ($sqlData) {
+        echo "<script>swal({
+            title: 'Data Tersimpan',
+            text: 'Klik Ok untuk input data kembali',
+            type: 'success',
+        }).then((result) => {
+            if (result.value) {
+                window.location.href='LaporanInspeksiStanter';
+            }
+        });</script>";
+    } else {
+        echo "<script>alert('Gagal menyimpan data ke tbl_lap_stenter: " . mysqli_error($con) . "');</script>";
+    }
+}
 ?>
