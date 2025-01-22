@@ -115,7 +115,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 		  <label for="status_red" class="col-sm-0 control-label"></label>		  
         <div class="col-sm-3">
         <input type="checkbox" name="sts_red" id="sts_red" value="1" <?php  if($sts_red=="1"){ echo "checked";} ?>>  
-        <label> Red Category Email</label>
+        <label> Laporan Leadtime Email</label>
           
         </div>		  	
 		  </div>
