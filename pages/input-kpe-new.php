@@ -669,7 +669,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 					<label for="leadtime_email" class="col-sm-2 control-label">Leadtime Email</label>
 					<div class="col-sm-3">
-						<select class="form-control select2" name="leadtime_email" <?php if ($rcek['sts_red'] != "1") {
+						<select class="form-control select2" name="leadtime_email" required <?php if ($rcek['sts_red'] != "1") {
 						//echo "disabled";
 					} else {
 						//echo "enabled";
@@ -735,11 +735,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<input name="tgl_email" type="text" class="form-control pull-right" id="datepicker"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
 								//echo $rcek['tgl_email'];
-							} ?>" <?php if ($rcek['sts_red'] != "1") {
-							 //echo "";
-						 } else {
-							 //echo "";
-						 } ?> />
+							} ?>" required />
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -752,7 +748,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 							 //echo "";
 						 } else {
 							 //echo "";
-						 } ?> />
+						 } ?> required />
 						</div>
 					</div>
 

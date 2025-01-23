@@ -440,13 +440,13 @@ $rcek=mysqli_fetch_array($sqlCek);
 				</div>				   
 			</div>
 			<div class="form-group">
-					<div class="col-sm-3">
+					<!-- <div class="col-sm-3">
 						<input type="checkbox" name="sts_red" id="sts_red" value="1" onClick="aktif1();" <?php  if($rcek['sts_red']=="1"){ echo "checked";} ?>>  
 						<label> Red Category Email</label>
-					</div>
+					</div> -->
 					<label for="leadtime_email" class="col-sm-2 control-label">Leadtime Email</label>		  
 					<div class="col-sm-3">
-						<select class="form-control select2" name="leadtime_email" <?php  if($rcek['sts_red']!="1"){ echo "disabled";}else{ echo "enabled"; } ?>>
+						<select class="form-control select2" name="leadtime_email" required <?php  if($rcek['sts_red']!="1"){ echo "disabled";}else{ echo "enabled"; } ?>>
 							<option value="">Pilih</option>
 							<option value="1 Hari Kerja" <?php if($rcek['leadtime_email']=="1 Hari Kerja"){echo "SELECTED";}?>>1 Hari Kerja</option>
 							<option value="2 Hari Kerja" <?php if($rcek['leadtime_email']=="2 Hari Kerja"){echo "SELECTED";}?>>2 Hari Kerja</option>
@@ -483,13 +483,13 @@ $rcek=mysqli_fetch_array($sqlCek);
 				<div class="col-sm-4">					  
 					<div class="input-group date">
 						<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-						<input name="tgl_email" type="text" class="form-control pull-right" id="datepicker" placeholder="0000-00-00" value="<?php if($rcek['tgl_email']!='0000-00-00'){echo $rcek['tgl_email'];} ?>" <?php  if($rcek['sts_red']!="1"){ echo "";}else{ echo "enabled"; } ?>/>
+						<input name="tgl_email" type="text" class="form-control pull-right" id="datepicker" placeholder="0000-00-00" value="<?php if($rcek['tgl_email']!='0000-00-00'){echo $rcek['tgl_email'];} ?>" <?php  if($rcek['sts_red']!="1"){ echo "";}else{ echo "enabled"; } ?> required/>
 					</div>
 				</div>
 				<div class="col-sm-4">					  
 					<div class="input-group date">
 						<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-						<input name="tgl_jawab" type="text" class="form-control pull-right" id="datepicker1" placeholder="0000-00-00" value="<?php if($rcek['tgl_jawab']!='0000-00-00'){echo $rcek['tgl_jawab'];} ?>" <?php  if($rcek['sts_red']!="1"){ echo "";}else{ echo "enabled"; } ?>/>
+						<input name="tgl_jawab" type="text" class="form-control pull-right" id="datepicker1" placeholder="0000-00-00" value="<?php if($rcek['tgl_jawab']!='0000-00-00'){echo $rcek['tgl_jawab'];} ?>" <?php  if($rcek['sts_red']!="1"){ echo "";}else{ echo "enabled"; } ?>required/>
 					</div>
 				</div>
 			

@@ -166,7 +166,7 @@ border:hidden;
             $qry1 = mysqli_query($con, "SELECT * FROM tbl_aftersales_now
               WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d') BETWEEN '$Awal' AND '$Akhir' 
               AND sts_red='1' 
-              AND (leadtime_email = '2 Hari Kerja' OR leadtime_email = '3 Hari Kerja' OR leadtime_email = '4 Hari Kerja' OR leadtime_email = '5 Hari Kerja' OR leadtime_email = '6 Hari Kerja')");
+              AND (leadtime_email = '3 Hari Kerja' OR leadtime_email = '4 Hari Kerja' OR leadtime_email = '5 Hari Kerja' OR leadtime_email = '6 Hari Kerja')");
               $totalLot = 0;
 
             while ($row1 = mysqli_fetch_array($qry1)) {
@@ -175,7 +175,8 @@ border:hidden;
               <tr valign="top">
               <td align="center" valign="middle"><font size="-2"><?php echo $no; ?></font></td>
               <td align="center" valign="middle"><font size="-2"><?php echo date("l, d/m/y", strtotime($row1['tgl_email'])); ?></font></td>
-              <td align="center" valign="middle"></td>
+              <td align="center" valign="middle"><font size="-2"><?php echo date("l, d/m/y", strtotime($row1['tgl_jawab'])); ?></font></td>
+              <!-- <td align="center" valign="middle"></td> -->
               <td align="center" valign="middle"><font size="-2">
                 <?php
                 if ($row1['leadtime_email'] == "2 Hari Kerja" or $row1['leadtime_email'] == "3 Hari Kerja" or $row1['leadtime_email'] == "4 Hari Kerja" or $row1['leadtime_email'] == "5 Hari Kerja" or $row1['leadtime_email'] == "6 Hari Kerja") {
@@ -229,7 +230,7 @@ border:hidden;
             $rowlot = mysqli_query($con, "SELECT COUNT(*) AS jumlah_data FROM tbl_aftersales_now
               WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d') BETWEEN '$Awal' AND '$Akhir' 
               AND sts_red='1' 
-              AND (leadtime_email = '2 Hari Kerja' OR leadtime_email = '3 Hari Kerja' OR leadtime_email = '4 Hari Kerja' OR leadtime_email = '5 Hari Kerja' OR leadtime_email = '6 Hari Kerja')");
+              AND (leadtime_email = '1 Hari Kerja' OR leadtime_email = '2 Hari Kerja' OR leadtime_email = '3 Hari Kerja' OR leadtime_email = '4 Hari Kerja' OR leadtime_email = '5 Hari Kerja' OR leadtime_email = '6 Hari Kerja')");
               $jumlot = mysqli_fetch_array($rowlot);
 
             $rowlot2 = mysqli_query($con, "SELECT COUNT(*) AS jumlah_data_lebih_2_hari FROM tbl_aftersales_now
