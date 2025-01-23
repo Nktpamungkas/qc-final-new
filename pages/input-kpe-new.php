@@ -661,13 +661,13 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-3">
+					<!-- <div class="col-sm-3"> -->
 						<!-- <input type="checkbox" name="sts_red" id="sts_red" value="1" onClick="aktif1();" <?php if ($rcek['sts_red'] == "1") {
 						//echo "checked";
 					} ?>> -->
 						<!-- <label> Red Category Email</label> -->
-					</div>
-					<label for="leadtime_email" class="col-sm-2 control-label">Leadtime Email</label>
+					<!-- </div> -->
+					<label for="leadtime_email" class="col-sm-3 control-label">Leadtime Email</label>
 					<div class="col-sm-3">
 						<select class="form-control select2" name="leadtime_email" required <?php if ($rcek['sts_red'] != "1") {
 						//echo "disabled";
