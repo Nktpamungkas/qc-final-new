@@ -114,7 +114,8 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
     <div class="form-group">
 		  <label for="status_red" class="col-sm-0 control-label"></label>		  
         <div class="col-sm-3">
-        <input type="checkbox" name="sts_red" id="sts_red" value="1" <?php  if($sts_red=="1"){ echo "checked";} ?>>  
+        <!-- <input type="checkbox" name="sts_red" id="sts_red" value="1" >   -->
+        <input type="checkbox" name="sts_red" id="sts_red" value="1" <?php  if($sts_red=="1" or $sts_red=="0"){ echo "checked";} ?>>  
         <label> Laporan Leadtime Email</label>
           
         </div>		  	
@@ -159,7 +160,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			<a href="pages/cetak/cetak_kpe_disposisi.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>" class="btn btn-danger <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank">Cetak KPE Disposisi</a> 
             <a href="pages/cetak/excel_kpe_disposisi.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>" class="btn btn-success <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank">Excel KPE Disposisi</a> 
           </div>
-        <?php if($sts_red=='1'){?>
+        <?php if($sts_red=='1' or $sts_red=='0'){ ?>
               <div class="pull-right">
                 <a href="pages/cetak/cetak_redemail.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>" class="btn btn-primary <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank">Cetak Leadtime Email</a>
                 </div>
@@ -214,7 +215,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
           <tbody>
           <?php
             $no=1;
-            if($sts_red=="1"){ $stsred =" AND a.sts_red='1' "; }else{$stsred = " ";}
+            // if($sts_red=="1"){ $stsred =" AND a.sts_red='1' "; }else{$stsred = " ";}
             if($sts_claim=="1"){ $stsclaim =" AND a.sts_claim='1' "; }else{$stsclaim =" ";}
             if($Awal!=""){ $Where =" AND DATE_FORMAT( a.tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
 
@@ -291,16 +292,17 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               }
             }
 
-            if($Awal!="" or $sts_red=="1" or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
+            // if($Awal!="" or $sts_red=="1" or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
+            if($Awal!=""  or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
               $qry1=mysqli_query($con,"SELECT a.*,
               GROUP_CONCAT( DISTINCT b.no_ncp SEPARATOR ', ' ) AS no_ncp,
               GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
               FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
-              WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $WhereKategori $stsred $stsclaim 
+              WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $WhereKategori $stsclaim 
+              -- WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $WhereKategori $stsred $stsclaim 
               GROUP BY a.nodemand, a.masalah_dominan
-              ORDER BY a.id ASC");
-            
-                while($row1=mysqli_fetch_array($qry1)){
+              ORDER BY a.id ASC");                
+              while($row1=mysqli_fetch_array($qry1)){
                   $noorder=str_replace("/","&",$row1['no_order']);
                   if($row1['t_jawab']!="" and $row1['t_jawab1']!="" and $row1['t_jawab2']!=""){ $tjawab=$row1['t_jawab']."+".$row1['t_jawab1']."+".$row1['t_jawab2'];
                   }else if($row1['t_jawab']!="" and $row1['t_jawab1']!="" and $row1['t_jawab2']==""){

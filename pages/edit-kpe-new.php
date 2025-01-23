@@ -446,7 +446,8 @@ $rcek=mysqli_fetch_array($sqlCek);
 					</div> -->
 					<label for="leadtime_email" class="col-sm-2 control-label">Leadtime Email</label>		  
 					<div class="col-sm-3">
-						<select class="form-control select2" name="leadtime_email" required <?php  if($rcek['sts_red']!="1"){ echo "disabled";}else{ echo "enabled"; } ?>>
+						<!-- <select class="form-control select2" name="leadtime_email" required <?php  if($rcek['sts_red']!="1"){ echo "disabled";}else{ echo "enabled"; } ?>> -->
+						<select class="form-control select2" name="leadtime_email" required>
 							<option value="">Pilih</option>
 							<option value="1 Hari Kerja" <?php if($rcek['leadtime_email']=="1 Hari Kerja"){echo "SELECTED";}?>>1 Hari Kerja</option>
 							<option value="2 Hari Kerja" <?php if($rcek['leadtime_email']=="2 Hari Kerja"){echo "SELECTED";}?>>2 Hari Kerja</option>
