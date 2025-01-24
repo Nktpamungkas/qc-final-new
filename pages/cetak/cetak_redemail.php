@@ -165,7 +165,7 @@ border:hidden;
             $Akhir = $_GET['akhir'];
             $qry1 = mysqli_query($con, "SELECT * FROM tbl_aftersales_now
               WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d') BETWEEN '$Awal' AND '$Akhir' 
-              AND sts_red='1' 
+              -- AND sts_red='1' 
               AND (leadtime_email = '3 Hari Kerja' OR leadtime_email = '4 Hari Kerja' OR leadtime_email = '5 Hari Kerja' OR leadtime_email = '6 Hari Kerja')");
               $totalLot = 0;
 
@@ -220,7 +220,7 @@ border:hidden;
         <table border="0" class="table-list1" width="100%">
           <tr>
             <!-- <td>Target : <input name="target" type="text" placeholder="Ketik" style="font-size: 11px; margin-left: 40px;" /></td> -->
-            <td>Target : 95%</td>
+            <td>Target : 100%</td>
             <td></td>
             <td></td>
           </tr>
@@ -229,13 +229,13 @@ border:hidden;
              <?php
             $rowlot = mysqli_query($con, "SELECT COUNT(*) AS jumlah_data FROM tbl_aftersales_now
               WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d') BETWEEN '$Awal' AND '$Akhir' 
-              AND sts_red='1' 
+              -- AND sts_red='1' 
               AND (leadtime_email = '1 Hari Kerja' OR leadtime_email = '2 Hari Kerja' OR leadtime_email = '3 Hari Kerja' OR leadtime_email = '4 Hari Kerja' OR leadtime_email = '5 Hari Kerja' OR leadtime_email = '6 Hari Kerja')");
               $jumlot = mysqli_fetch_array($rowlot);
 
             $rowlot2 = mysqli_query($con, "SELECT COUNT(*) AS jumlah_data_lebih_2_hari FROM tbl_aftersales_now
               WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d') BETWEEN '$Awal' AND '$Akhir' 
-              AND sts_red='1' 
+              -- AND sts_red='1' 
               AND (leadtime_email = '3 Hari Kerja' OR leadtime_email = '4 Hari Kerja' OR leadtime_email = '5 Hari Kerja' OR leadtime_email = '6 Hari Kerja')");
               $jumlot2 = mysqli_fetch_array($rowlot2);
             ?>
