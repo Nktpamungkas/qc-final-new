@@ -425,7 +425,7 @@ textarea {
         </thead>
         <tbody>
             <tr>
-                <td align="left" style="font-size: 12px;"><!--pH IN TEXTILES-->PH Value in textile</td>
+                <td align="left" style="font-size: 12px;">PH IN TEXTILE<!--PH Value in textile--></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="MARGINAL PASS"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
@@ -495,6 +495,14 @@ textarea {
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pb']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pb']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;">N/A</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 12px;">SNAGGING</td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="MARGINAL PASS"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']==""){echo "N/A";}else if($rcek1['stat_ph']!=""){echo $rcekM['mph_note'];}else{echo "&nbsp;";}?></td>
             </tr>
             <tr>
                 <td align="left" style="font-size: 12px;">BURSTING STRENGTH OF FABRICS<!--: BALL BURST METHOD--></td>
@@ -693,7 +701,8 @@ textarea {
         </tr>
         <!-- PH BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u><!--pH IN TEXTILES-->PH VALUE IN TEXTILE</u></strong> (AATCC 81)</td>
+            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>pH IN TEXTILESPH VALUE IN TEXTILE</u></strong> (AATCC 81)</td> -->
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u><!--pH IN TEXTILES-->PH VALUE IN TEXTILE</u></strong> (AATCC 81-2022)</td>
             <!-- <td align="left" style="font-size: 12px;" ><strong>T1 (1A) R22 DARK GREEN / T3 (1B) FLEECE DARK GREEN</strong></td> -->
         </tr>
         <tr>
@@ -712,7 +721,8 @@ textarea {
         </tr>
         <!-- FABRIC WEIGHT BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WEIGHT</u></strong> (ASTM D3776, OPTION C)</td>
+            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WEIGHT</u></strong> (ASTM D3776, OPTION C)</td> -->
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WEIGHT</u></strong> (ASTM D3776/D3776M-20, OPTION C)</td>
             <!-- <td align="center" style="font-size: 12px;"><strong>T2 / T3 LIGHT GREEN</strong></td>
             <td align="left" style="font-size: 12px;">&nbsp; </td> -->
         </tr>
@@ -739,7 +749,8 @@ textarea {
         <!-- FABRIC WEIGHT END -->
         <!-- FABRIC WIDTH BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WIDTH</u></strong> (ASTM D3774, OPTION B)</td>
+            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WIDTH</u></strong> (ASTM D3774, OPTION B)</td> -->
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WIDTH</u></strong> (ASTM D3774-18, OPTION B)</td>
             <!-- <td align="center" style="font-size: 12px;"><strong>T2 / T3 GREY</strong> </td>
             <td align="left" style="font-size: 12px;">&nbsp;</td> -->
         </tr>
@@ -762,10 +773,13 @@ textarea {
             <td align="left" style="font-size: 12px;" colspan="3"><strong><u>DIMENSIONAL CHANGE OF FABRICS AFTER HOME LAUNDERING</u></strong> (AATCC 135)</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">AATCC 1993 WOB STANDARD REFERENCE DETERGENT, NORMAL CYCLE AT 27 &#177; 3 DEGREE CELCIUS</td>
+            <!-- <td align="left" style="font-size: 11px;" colspan="3">AATCC 1993 WOB STANDARD REFERENCE DETERGENT, NORMAL CYCLE AT 27 &#177; 3 DEGREE CELCIUS</td> -->
+            <td align="left" style="font-size: 11px;" colspan="3">AATCC TM-2018; OPTION 1, MACHINE WASH AT 80&#177;5&deg;F WITH 1.8 KG TOTAL LOADING (TYPE 3 BALLAST + SPECIMEN) </td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">(80 FAHRENHEIT), TUMBLE DRY LOW, MEASURE AT 10 INCHES, (1 WASH) UNRESTORED</td>
+            <!-- <td align="left" style="font-size: 11px;" colspan="3">(80 FAHRENHEIT), TUMBLE DRY LOW, MEASURE AT 10 INCHES, (1 WASH) UNRESTORED</td> -->
+            <td align="left" style="font-size: 11px;" colspan="3">AND 66&#177;1G OF 1993 AATCC STANDARD REFERENC DETERGEN WOB, NORMAL CYCLE, TUMBLE DRY LOW
+            </td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;"> UNRESTORED</td>
@@ -774,6 +788,9 @@ textarea {
         </tr> -->
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">AFTER 1 WASH</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">LENGTHWISE</td>
@@ -791,10 +808,7 @@ textarea {
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">AATCC 1993 WOB STANDARD REFERENCE DETERGENT, NORMAL CYCLE AT 27 &#177; 3 DEGREE CELCIUS</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">(80 FAHRENHEIT), TUMBLE DRY LOW, MEASURE AT 10 INCHES, (5 WASH)</td>
+            <td align="left" style="font-size: 11px;" width="33%">AFTER 5 WASH</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">LENGTHWISE</td>
@@ -812,7 +826,8 @@ textarea {
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%" colspan="2">(+) DENOTES ELONGATION &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (-) SHRINKAGE</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%" colspan="2">(+) DENOTES ELONGATION &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (-) SHRINKAGE</td> -->
+            <td align="left" style="font-size: 11px;" width="33%" colspan="2">(+) MEANS GROWTH &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (-) MEANS SHRINKAGE</td>
             <td align="center" style="font-size: 12px;" width="33%">&nbsp;</td>
         </tr>
         <!-- DIMENSIONAL CHANGE END -->
@@ -821,13 +836,10 @@ textarea {
         </tr>
         <!-- SKEWNESS BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SKEWING <!--FROM HOME LAUNDERING--></u></strong> (AATCC 179)</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">METHOD 1, OPTION 2, WOB DETERGENT, NORMAL CYCLE AT 27 &#177; 3 DEGREE CELCIUS (80 FAHRENHEIT),</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">TUMBLE DRY LOW (1 WASH)</td>
+            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SKEWING  -->
+                <!--FROM HOME LAUNDERING-->
+            <!-- </u></strong> (AATCC 179)</td> -->
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SKEWING <!--FROM HOME LAUNDERING--></u></strong> (AATCC TM 179-2023; METHOD 1; OPTION 2)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;">&nbsp;</td>
@@ -838,7 +850,11 @@ textarea {
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">SKEWNESS (%)</td>
+            <td align="left" style="font-size: 11px;" width="33%">AFTER 1 WASH</td>
+        </tr>
+        <tr>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">SKEWNESS (%)</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">SKEWNESS/TWIST (%)</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mspirality1']!='' AND $rcekM['mspirality1'] < -5){echo "color:red;";}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mspirality1']!='' AND $rcekM['mspirality1'] > 5){echo "color:red;";}else if($rcek1['spirality1']!='' AND $rcek1['spirality1'] < -5){echo "color:red;";}else if($rcek1['spirality1']!='' AND $rcek1['spirality1'] > 5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mspirality1']=="" AND $rcek1['spirality1']==""){echo "N/A";}else if($rcek1['stat_fwss']=="MARGINAL PASS"){echo $rcekM['mspirality1'];}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mspirality1']==""){echo "N/A";}else{echo $rcek1['spirality1'];}?></td>
             <td align="right" style="font-size: 11px;" width="33%">-3 TO + 3 %</td>
         </tr>
@@ -846,26 +862,16 @@ textarea {
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">METHOD 1, OPTION 2, WOB DETERGENT, NORMAL CYCLE AT 27 &#177; 3 DEGREE CELCIUS (80 FAHRENHEIT),</td>
+            <td align="left" style="font-size: 11px;" width="33%">AFTER 5 WASH</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">TUMBLE DRY LOW (5 WASH)</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">SKEWNESS (%)</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">SKEWNESS (%)</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">SKEWNESS/TWIST (%)</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mspirality2']!='' AND $rcekM['mspirality2'] < -5){echo "color:red;";}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mspirality2']!='' AND $rcekM['mspirality2'] > 5){echo "color:red;";}else if($rcek1['spirality2']!='' AND $rcek1['spirality2'] < -5){echo "color:red;";}else if($rcek1['spirality2']!='' AND $rcek1['spirality2'] > 5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mspirality2']=="" AND $rcek1['spirality2']==""){echo "N/A";}else if($rcek1['stat_fwss']=="MARGINAL PASS"){echo $rcekM['mspirality2'];}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mspirality2']==""){echo "N/A";}else{echo $rcek1['spirality2'];}?></td>
             <td align="right" style="font-size: 11px;" width="33%">-3 TO + 3 %</td>
         </tr>
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 11px;" width="33%" colspan="2">( + ) INDICATED SKEWNESS TO THE LEFT</td>
-            <td align="right" style="font-size: 12px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 11px;" width="33%" colspan="2">( - ) INDICATED SKEWNESS TO THE RIGHT</td>
-            <td align="right" style="font-size: 12px;" width="33%">&nbsp;</td>
         </tr>
         <!-- SKEWNESS END -->
         <tr>
@@ -1003,7 +1009,10 @@ textarea {
         </tr>
         <!-- BURSTING STRENGTH BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>BURSTING STRENGTH OF FABRIC<!--: BALL BURST METHOD--></u></strong> (ASTM D6797)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>BURSTING STRENGTH OF FABRIC
+                <!--: BALL BURST METHOD-->
+            <!-- </u></strong> (ASTM D6797)</td> -->
+            </u></strong> (ASTM D6797-24)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
@@ -1023,13 +1032,33 @@ textarea {
             </select></td> -->
             <td align="right" style="font-size: 11px;" width="33%"><?php if($rd2['gramasi'] >= 200){echo "MIN 50.0 $kode_LBF";}else if($rd2['gramasi'] < 200){echo "MIN 35.0 $kode_LBF";}?></td>
         </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" colspan="3">ASTM D3512-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST</td>
+        </tr>
         <!-- BURSTING STRENGTH END -->
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">AS RECEIVED RATING</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">AFTER 50 CYCLES</td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['wash_cotton']!="" AND $rcek1['wash_cotton'] < 3){echo "color:red;";}?>" width="33%"><?php if($rcek1['wash_cotton']!=""){echo $rcek1['wash_cotton'];}else{echo "N/A";}?></td>
+            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">AFTER 75 CYCLES</td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['wash_nylon']!="" AND $rcek1['wash_nylon'] < 3){echo "color:red;";}?>" width="33%"><?php if($rcek1['wash_nylon']!=""){echo $rcek1['wash_nylon'];}else{echo "N/A";}?></td>
+            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 3.5</td>
+        </tr>
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
         <!-- WASHING BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LAUNDERING: ACCELERATED</u></strong> (AATCC 61, MODIFIED, TEST NO.2A (40 DEGREE CELCIUS),</td>
+            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LAUNDERING: ACCELERATED</u></strong> (AATCC 61, MODIFIED, TEST NO.2A (40 DEGREE CELCIUS),</td> -->
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LAUNDERING: ACCELERATED</u></strong> (AATCC TM 61-2013E(2020)E2; TEST NO 2A; MODIFIED</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" colspan="3">AATCC DETERGENT WOB (POWDER), MULTIFIBER NO.10)</td>
@@ -1053,7 +1082,8 @@ textarea {
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.5</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3"><u>COLOR STAINING ON</u></td>
+            <!-- <td align="left" style="font-size: 11px;" colspan="3"><u>COLOR STAINING ON</u></td> -->
+            <td align="left" style="font-size: 11px;" colspan="3"><u> STAINING ON MULTI-FIBER STRIPE</u></td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">ACETATE</td>
@@ -1091,7 +1121,8 @@ textarea {
         </tr>
         <!-- CROCKING BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC 8)</td>
+            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC 8)</td> -->
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC TM 8-2022E)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
@@ -1102,12 +1133,14 @@ textarea {
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">DRY (COLOR STAIN)</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">DRY (COLOR STAIN)</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">DRY STAINING</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len1']!="" AND $rcekM['mcrock_len1'] < 4){echo "color:red;";}else if($rcek1['crock_len1']!="" AND $rcek1['crock_len1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mcrock_len1']=="" AND $rcek1['crock_len1']==""){echo "N/A";}else if($rcek1['stat_cr']=="MARGINAL PASS"){echo $rcekM['mcrock_len1'];}else if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len1']==""){echo "N/A";}else{echo $rcek1['crock_len1'];}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">WET (COLOR STAIN)</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">WET (COLOR STAIN)</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">WET STAINING</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len2']!="" AND $rcekM['mcrock_len2'] < 3.5){echo "color:red;";}else if($rcek1['crock_len2']!="" AND $rcek1['crock_len2'] < 3.5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mcrock_len2']=="" AND $rcek1['crock_len2']==""){echo "N/A";}else if($rcek1['stat_cr']=="MARGINAL PASS"){echo $rcekM['mcrock_len2'];}else if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len2']==""){echo "N/A";}else{echo $rcek1['crock_len2'];}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 3.5</td>
         </tr>
@@ -1117,7 +1150,8 @@ textarea {
         </tr>
         <!-- WATER BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WATER</u></strong> (AATCC 107, MULTIFIBER NO.10)</td>
+            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WATER</u></strong> (AATCC 107, MULTIFIBER NO.10)</td> -->
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WATER</u></strong> (AATCC 107-2022E)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
@@ -1137,8 +1171,11 @@ textarea {
             <td align="center" style="font-size: 11px; <?php if($rcek1['water_staining']!="" AND $rcek1['water_staining'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_staining']!=""){echo $rcek1['water_staining'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.5</td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td align="left" style="font-size: 11px;" colspan="3"><u>COLOR STAINING ON</u></td>
+        </tr> -->
+        <tr>
+            <td align="left" style="font-size: 11px;" colspan="3"><u> STAINING ON MULT-FIBER STRIPE</u></td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">ACETATE</td>
@@ -1253,19 +1290,22 @@ textarea {
         </tr>
         <!-- PERSPIRATION ACID BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO PERSPIRATION</u></strong> (AATCC 15, AATCC GRAY SCALE, MULTIFIBER NO.10)</td>
+            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO PERSPIRATION</u></strong> (AATCC 15, AATCC GRAY SCALE, MULTIFIBER NO.10)</td> -->
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO PERSPIRATION</u></strong> (AATCC 15, AATCC TM 15-2021E)</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">ACIDIC</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">ACIDIC</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">ACID PERSPIRATION SOLUTION</td>
             <!-- <td align="center" style="font-size: 11px;" width="33%"><strong>T1 (6A) BLACK / T5 (6B) NAVY</strong></td> -->
             <td align="center" style="font-size: 11px;" width="33%">&nbsp;</td>
             <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">CHANGE IN SHADE</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['acid_colorchange']!="" AND $rcek1['acid_colorchange'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['acid_colorchange']!=""){echo $rcek1['acid_colorchange'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
         </tr>
@@ -1275,7 +1315,8 @@ textarea {
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.5</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3"><u>COLOR STAINING ON</u></td>
+            <!-- <td align="left" style="font-size: 11px;" colspan="3"><u>COLOR STAINING ON</u></td> -->
+            <td align="left" style="font-size: 11px;" colspan="3"><u>STAINING ON MULTI-FIBER STRIPE</u></td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">ACETATE</td>
@@ -1313,13 +1354,15 @@ textarea {
         </tr>
         <!-- PERSPIRATION ALKALINE BEGIN -->
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">ALKALINE</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">ALKALINE</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">ALKALINE PERSPIRATION SOLUTION</td>
             <!-- <td align="center" style="font-size: 11px;" width="33%"><strong>T1 (6A) BLACK / T5 (6B) NAVY</strong></td> -->
             <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
             <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">CHANGE IN SHADE</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['alkaline_colorchange']!="" AND $rcek1['alkaline_colorchange'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['alkaline_colorchange']!=""){echo $rcek1['alkaline_colorchange'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
         </tr>
@@ -1329,7 +1372,8 @@ textarea {
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.5</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3"><u>COLOR STAINING ON</u></td>
+            <!-- <td align="left" style="font-size: 11px;" colspan="3"><u>COLOR STAINING ON</u></td> -->
+            <td align="left" style="font-size: 11px;" colspan="3"><u>STAINING ON MULTI-FIBER STRIPE</u></td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">ACETATE</td>
@@ -1385,12 +1429,14 @@ textarea {
             <td align="right" style="font-size: 11px;" width="33%" colspan="2">MIN GRADE 4.0</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">CHANGE IN SHADE</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['dye_tf_cstaining']!="" AND $rcek1['dye_tf_cstaining'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['dye_tf_cstaining']==""){echo "N/A";}else{echo $rcek1['dye_tf_cstaining'];}?></td>
             <td align="right" style="font-size: 11px;" width="33%" colspan="2">&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">COLOR STAINING ON</td>
+            <!-- <td align="left" style="font-size: 11px;" colspan="3">COLOR STAINING ON</td> -->
+            <td align="left" style="font-size: 11px;" colspan="3">STAINING ON MULTI-FIBER STRIPE</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">ACETATE</td>
@@ -1509,7 +1555,8 @@ textarea {
         </tr> -->
         <!-- LIGHT FASTNESS BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td>
+            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td> -->
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3-2020, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
@@ -1520,9 +1567,12 @@ textarea {
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr> -->
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE (20 AFU)</td>
+            <td align="left" style="font-size: 11px;" width="33%">AFTER 20 HOURS</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_lg']=="MARGINAL PASS" AND $rcekM['mlight_rating1']!="" AND $rcekM['mlight_rating1'] < 4){echo "color:red;";}else if($rcek1['light_rating1']!="" AND $rcek1['light_rating1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mlight_rating1']=="" AND $rcek1['light_rating1']==""){echo "N/A";}else if($rcek1['stat_lg']=="MARGINAL PASS"){echo $rcekM['mlight_rating1'];}else if($rcek1['stat_lg']=="MARGINAL PASS" AND $rcekM['mlight_rating1']==""){echo "N/A";}else{echo $rcek1['light_rating1'];}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">CHANGE IN SHADE</td>
         </tr>
         <!-- LIGHT PERSPIRATION END -->
         <tr>
@@ -1551,13 +1601,7 @@ textarea {
         </tr>
         <!-- APPEARANCE BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>APPEARANCE AFTER CARE<!--LAUNDERING-->(TS-008)</u></strong> (MODIFIED)</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">SUBJECTIVE, AATCC 1993 WOB STANDARD REFERENCE DETERGENT, MACHINE WASH COLD, NORMAL CYCLE,</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">TUMBLE DRY LOW, AFTER 1,5 AND 10 WASHES</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>APPEARANCE AFTER CARE<!--LAUNDERING-->(TS-008)</u></strong> (MODIFIED WASHING PROCEDURE SAME AS WASHING SHRINKAGE)</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" ><u>AFTER 1 WASH</u></td>
@@ -1565,22 +1609,8 @@ textarea {
             <td align="left" style="font-size: 11px;" >&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">FIBRILLATION: NEGLIGIBLE</td>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">FABRIC WRINKLING: NEGLIGIBLE</td>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">HOLES OR OTHER SIGNS OF ABRASION: NONE</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">OBSERVATION ON WASHED SAMPLE</td>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
             <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
         </tr>
@@ -1589,31 +1619,75 @@ textarea {
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_cc1']!="" AND $rcek1['apper_cc1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_cc1']!=""){echo $rcek1['apper_cc1'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
+        <!-- HERE -->
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">CROSS - STAINING</td>
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_st']!="" AND $rcek1['apper_st'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st']!=""){echo $rcek1['apper_st'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.5</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">PILLING AND FUZZING HAIR</td>
+            <td align="left" style="font-size: 11px;" width="33%">FABRIC WRINKLING</td>
+            <td align="left" style="font-size: 11px;" width="33%">SLIGHT</td>
+            <td align="right" style="font-size: 11px;" width="33%">SLIGHT</td>
+        </tr>
+        <tr>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">PILLING AND FUZZING HAIR</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">PILLING/FUZZING</td>
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pf1']!="" AND $rcek1['apper_pf1'] < 4){echo "color:red;";}?>" width="33%">FACE: <?php if($rcek1['apper_pf1']!=""){echo $rcek1['apper_pf1'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pb1']!="" AND $rcek1['apper_pb1'] < 4){echo "color:red;";}?>" width="33%">BACK: <?php if($rcek1['apper_pb1']!=""){echo $rcek1['apper_pb1'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">ANY OBSERVED DEFECTS</td>
-            <td align="left" style="font-size: 11px;" width="33%">SATISFACTORY</td>
+            <td align="right" style="font-size: 11px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">SHAPE</td>
+            <td align="left" style="font-size: 11px;" width="33%">SLIGHT DISTORTION</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">FIBRILLATION</td>
+            <td align="left" style="font-size: 11px;" width="33%">NEGLIGIBLE CHANGE</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">OTHER</td>
+            <td align="left" style="font-size: 11px;" width="33%">NO HOLE OR OTHER</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+            <td align="left" style="font-size: 11px;" width="33%">SIGNS OF ABRASION</td>
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 11px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
+            <td align="left" style="font-size: 11px;" width="33%">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td align="left" width="50%">SATISFACTORY</td>
+                        <td align="left" width="50%">N/A</td>
+                    </tr>
+                </table>
+            </td>
+    
             <td align="right" style="font-size: 11px;" width="33%">SATISFACTORY</td>
         </tr>
         <!-- <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr> -->
         <tr>
+            <td align="left" style="font-size: 11px;" colspan="3">CROSS STAINING</td>
+        </tr>
+        <!-- <tr>
             <td align="left" style="font-size: 11px;" colspan="3">COLOR STAIN ON</td>
+        </tr> -->
+        <tr>
+            <td align="left" style="font-size: 11px;" colspan="3">COLOR STAINING AFTER 1 WASH</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">ACETATE</td>
@@ -1655,22 +1729,8 @@ textarea {
             <td align="left" style="font-size: 11px;" colspan="3"><u>AFTER 5 WASH</u></td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">FIBRILLATION: NEGLIGIBLE</td>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">FABRIC WRINKLING: SLIGHT</td>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">HOLES OR OTHER SIGNS OF ABRASION: NONE</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">OBSERVATION ON WASHED SAMPLE</td>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
             <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
         </tr>
@@ -1679,46 +1739,63 @@ textarea {
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_cc2']!="" AND $rcek1['apper_cc2'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_cc2']!=""){echo $rcek1['apper_cc2'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
+        <!-- HERE -->
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td>
+            <!-- <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td> -->
+            <td align="left" style="font-size: 11px;" width="33%">CROSS - STAINING</td>
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_st2']!="" AND $rcek1['apper_st2'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st2']!=""){echo $rcek1['apper_st2'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.5</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">PILLING AND FUZZING HAIR</td>
+            <td align="left" style="font-size: 11px;" width="33%">FABRIC WRINKLING</td>
+            <td align="left" style="font-size: 11px;" width="33%">SLIGHT</td>
+            <td align="right" style="font-size: 11px;" width="33%">SLIGHT</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">PILLING/FUZZING</td>
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pf2']!="" AND $rcek1['apper_pf2'] < 4){echo "color:red;";}?>" width="33%">FACE: <?php if($rcek1['apper_pf2']!=""){echo $rcek1['apper_pf2'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pb2']!="" AND $rcek1['apper_pb2'] < 4){echo "color:red;";}?>" width="33%">BACK: <?php if($rcek1['apper_pb2']!=""){echo $rcek1['apper_pb2'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">ANY OBSERVED DEFECTS</td>
+            <td align="right" style="font-size: 11px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">SHAPE</td>
+            <td align="left" style="font-size: 11px;" width="33%">SLIGHT DISTORTION</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">FIBRILLATION</td>
+            <td align="left" style="font-size: 11px;" width="33%">NEGLIGIBLE CHANGE</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">OTHER</td>
+            <td align="left" style="font-size: 11px;" width="33%">NO HOLE OR OTHER</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+            <td align="left" style="font-size: 11px;" width="33%">SIGNS OF ABRASION</td>
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 11px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
             <td align="left" style="font-size: 11px;" width="33%">SATISFACTORY</td>
             <td align="right" style="font-size: 11px;" width="33%">SATISFACTORY</td>
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" colspan="3"><u>AFTER 10 WASH</u></td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">FIBRILLATION: NEGLIGIBLE</td>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">FABRIC WRINKLING: SLIGHT</td>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">HOLES OR OTHER SIGNS OF ABRASION: NONE</td>
+            <td align="left" style="font-size: 11px;" width="33%">OBSERVATION ON WASHED SAMPLE</td>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
             <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
         </tr>
@@ -1728,22 +1805,49 @@ textarea {
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td>
+            <td align="left" style="font-size: 11px;" width="33%">CROSS - STAINING</td>
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_st3']!="" AND $rcek1['apper_st3'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st3']!=""){echo $rcek1['apper_st3'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.5</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">PILLING AND FUZZING HAIR</td>
+            <td align="left" style="font-size: 11px;" width="33%">FABRIC WRINKLING</td>
+            <td align="left" style="font-size: 11px;" width="33%">SLIGHT</td>
+            <td align="right" style="font-size: 11px;" width="33%">SLIGHT</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">PILLING/FUZZING</td>
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pf3']!="" AND $rcek1['apper_pf3'] < 4){echo "color:red;";}?>" width="33%">FACE: <?php if($rcek1['apper_pf3']!=""){echo $rcek1['apper_pf3'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
             <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pb3']!="" AND $rcek1['apper_pb3'] < 4){echo "color:red;";}?>" width="33%">BACK: <?php if($rcek1['apper_pb3']!=""){echo $rcek1['apper_pb3'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">ANY OBSERVED DEFECTS</td>
+            <td align="right" style="font-size: 11px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">SHAPE</td>
+            <td align="left" style="font-size: 11px;" width="33%">SLIGHT DISTORTION</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">FIBRILLATION</td>
+            <td align="left" style="font-size: 11px;" width="33%">NEGLIGIBLE CHANGE</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">OTHER</td>
+            <td align="left" style="font-size: 11px;" width="33%">NO HOLE OR OTHER</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+            <td align="left" style="font-size: 11px;" width="33%">SIGNS OF ABRASION</td>
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 11px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
             <td align="left" style="font-size: 11px;" width="33%">SATISFACTORY</td>
             <td align="right" style="font-size: 11px;" width="33%">SATISFACTORY</td>
         </tr>
