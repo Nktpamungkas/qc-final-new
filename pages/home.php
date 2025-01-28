@@ -329,7 +329,7 @@ $page = strtolower($page);
         <!-- /.col -->
         <?php } ?>
 
-        <?php if($_SESSION['usrid'] == 'ppc' || $_SESSION['usrid'] == 'mkt'){ ?>
+        <?php if($_SESSION['usrid'] == 'ppc' || $_SESSION['usrid'] == 'marketing'||$_SESSION['dept'] == 'MKT'){ ?>
         <div class="col-md-3 col-sm-6 col-xs-12">
           <a href="Newbonpenghubung">
             <div class="info-box">
@@ -344,13 +344,32 @@ $page = strtolower($page);
           </a>
           <!-- /.info-box -->
         </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="ApproveBonPenghubung">
+            <div class="info-box">
+              <span class="info-box-icon bg-teal"><i class="fa fa-check"></i></span>
+
+              <div class="info-box-content">
+                  <span class="info-box-text">Approve Bon Penghubung</span>
+                  <span class="label bg-red blink_me">MARKETING =
+                    <?php echo $row['jml_a']; ?>
+                  </span><br>
+                  <span class="label bg-red blink_me">PPC =
+                    <?php echo $row1['jml_b']; ?>
+                  </span><br>
+                </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+          <!-- /.info-box -->
+        </div>
         <?php } ?>
         
       <?php if ($_SESSION['lvl_id'] != "DMF" and $_SESSION['lvl_id'] != "TQ" and $_SESSION['lvl_id'] != "SPVQC" and $_SESSION['lvl_id'] != "AFTERSALES") { ?>
 
 
         <!-- jika username marketing hidden -->
-        <?php if ($_SESSION['usrid'] != "mkt" && $_SESSION['usrid'] != "ppc") { ?>
+        <?php if ($_SESSION['dept'] != "MKT" && $_SESSION['usrid'] != "ppc") { ?>
           <div class="col-md-3 col-sm-6 col-xs-12">
             <a href="SummaryOrder">
               <div class="info-box">

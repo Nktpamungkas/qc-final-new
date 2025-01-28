@@ -528,6 +528,9 @@ RewriteRule ^Newbonpenghubung-$ ./index1.php?p=Newbonpenghubung [L]
 RewriteRule ^Newbonpenghubung-([a-zA-Z0-9_-]+)$ ./index1.php?p=Newbonpenghubung=$1 [L]
 RewriteRule ^Lap5BesarBonPenghubung$ ./index1.php?p=Lap-5Besar-Bon-Penghubung [L]
 
+RewriteRule ^ApproveBonPenghubung$ ./index1.php?p=approve_bonpenghubung [L]
+RewriteRule ^ApproveBonPenghubung-$ ./index1.php?p=approve_bonpenghubung [L]
+RewriteRule ^ApproveBonPenghubung-([a-zA-Z0-9_-]+)$ ./index1.php?p=approve_bonpenghubung&demand=$1 [L]
 
 RewriteRule ^InputDataAPTPUKPE$ ./index1.php?p=input-data-analisa-pencegahan-tpu-kpe [L]
 RewriteRule ^Top5$ ./index1.php?p=top5 [L]
