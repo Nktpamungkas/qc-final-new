@@ -538,4 +538,7 @@ RewriteRule ^LaporanInspeksiStanter$ ./index1.php?p=laporan-inspect-stenter [L]
 RewriteRule ^LaporanInspeksiStanter-([a-zA-Z0-9_-]+)$ ./index1.php?p=laporan-inspect-stenter&nodemand=$1  [L]
 RewriteRule ^LaporanInspeksiStanterReport$ ./index1.php?p=laporan-inspect-stenter-report [L]
 
+RewriteRule ^Top5Detail$ ./index1.php?p=top5_detail [L]
+RewriteRule ^Top5Detail-([a-zA-Z0-9_-]+)&([a-zA-Z0-9_-]+)&([a-zA-Z0-9_-]+)&([a-zA-Z0-9_-]+)$ ./index1.php?p=top5_detail&buyer=$1&awal=$2&akhir=$3&digit=$4 [L]
+
 Options All -Indexes
