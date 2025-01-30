@@ -702,7 +702,7 @@ textarea {
         <!-- PH BEGIN -->
         <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>pH IN TEXTILESPH VALUE IN TEXTILE</u></strong> (AATCC 81)</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u><!--pH IN TEXTILES-->PH VALUE IN TEXTILE</u></strong> (AATCC 81-2022)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u><!--pH IN TEXTILES-->PH VALUE IN TEXTILE</u></strong> (AATCC TM 81-2022)</td>
             <!-- <td align="left" style="font-size: 12px;" ><strong>T1 (1A) R22 DARK GREEN / T3 (1B) FLEECE DARK GREEN</strong></td> -->
         </tr>
         <tr>
@@ -774,7 +774,7 @@ textarea {
         </tr>
         <tr>
             <!-- <td align="left" style="font-size: 11px;" colspan="3">AATCC 1993 WOB STANDARD REFERENCE DETERGENT, NORMAL CYCLE AT 27 &#177; 3 DEGREE CELCIUS</td> -->
-            <td align="left" style="font-size: 11px;" colspan="3">AATCC TM-2018; OPTION 1, MACHINE WASH AT 80&#177;5&deg;F WITH 1.8 KG TOTAL LOADING (TYPE 3 BALLAST + SPECIMEN) </td>
+            <td align="left" style="font-size: 11px;" colspan="3">AATCC TM 135-2018; OPTION 1, MACHINE WASH AT 80&#177;5&deg;F WITH 1.8 KG TOTAL LOADING (TYPE 3 BALLAST + SPECIMEN) </td>
         </tr>
         <tr>
             <!-- <td align="left" style="font-size: 11px;" colspan="3">(80 FAHRENHEIT), TUMBLE DRY LOW, MEASURE AT 10 INCHES, (1 WASH) UNRESTORED</td> -->
@@ -1033,7 +1033,7 @@ textarea {
             <td align="right" style="font-size: 11px;" width="33%"><?php if($rd2['gramasi'] >= 200){echo "MIN 50.0 $kode_LBF";}else if($rd2['gramasi'] < 200){echo "MIN 35.0 $kode_LBF";}?></td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">ASTM D3512-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST</td>
+            <td align="left" style="font-size: 11px;" colspan="3">SNAGGING (ASTM D3512-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST)</td>
         </tr>
         <!-- BURSTING STRENGTH END -->
         <tr>
@@ -1151,7 +1151,7 @@ textarea {
         <!-- WATER BEGIN -->
         <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WATER</u></strong> (AATCC 107, MULTIFIBER NO.10)</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WATER</u></strong> (AATCC 107-2022E)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WATER</u></strong> (AATCC TM 107-2022E)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
@@ -1291,7 +1291,7 @@ textarea {
         <!-- PERSPIRATION ACID BEGIN -->
         <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO PERSPIRATION</u></strong> (AATCC 15, AATCC GRAY SCALE, MULTIFIBER NO.10)</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO PERSPIRATION</u></strong> (AATCC 15, AATCC TM 15-2021E)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO PERSPIRATION</u></strong> (AATCC TM 15-2021E)</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 12px;" colspan="3">&nbsp;</td>
