@@ -70,7 +70,7 @@ if (isset($_POST['nodemand']) && isset($_POST['action'])) {
                 $mail->Port       = 587;
                 $mail->setFrom('dept.it@indotaichen.com', 'DEPT IT');
                 $mail->addAddress('qcf.adm@indotaichen.com', 'ADM QCF');
-                $mail->addAddress('arif.efendi@indotaichen.com', 'Arif Efendi');
+                // $mail->addAddress('arif.efendi@indotaichen.com', 'Arif Efendi');
                 $mail->addAddress('tobias.sulistiyo@indotaichen.com', 'TOBIAS');
                 $user_email = mysqli_query($con, "SELECT * FROM email_user_penghubung WHERE dept='PPC'");
                 $listmail   = [];
