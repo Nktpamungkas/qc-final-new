@@ -180,7 +180,7 @@
                                                    }?></td>
 			<td>
 			<?php
-                if (($_SESSION['usrid'] == 'marketing') || ($_SESSION['dept'] == 'PPC') || ($_SESSION['dept'] == 'MKT')) {
+                if (($_SESSION['usrid'] == 'septian.saputra') || ($_SESSION['dept'] == 'MKT')) {
                         // Mengecek status_approve apakah 0 untuk menampilkan tombol approve
                     if ($row1['status_approve'] == 0) { ?>
 						<button class="button btn-success" id="approveButton" data-nodemand="<?php echo $row1['nodemand']; ?>"<?php echo($row1['status_approve'] >= 1) ? 'disabled' : ''; ?>> APPROVE</button>
