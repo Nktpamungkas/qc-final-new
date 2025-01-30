@@ -2,7 +2,7 @@
 ini_set("error_reporting", 1);
 set_time_limit(0);
 session_start();
-include"koneksi.php";
+include "koneksi.php";
 
 ?>
 
@@ -116,6 +116,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
           <thead class="bg-blue">
             <tr>  
               <th rowspan=2><div align="center" valign="middle">DATE</div></th>
+			  <th  rowspan=2><div align="center" valign="middle">STATUS</div></th>
 			  <th  rowspan=2><div align="center" valign="middle">CUSTOMER</div></th>
 			  <th  rowspan=2><div align="center" valign="middle">BUYER</div></th>
 			  <th  rowspan=2><div align="center" valign="middle">PO</div></th>
@@ -123,17 +124,21 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			   <th  rowspan=2><div align="center" valign="middle">HANGER</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">ITEM</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">COLOR</div></th>
+			   <th  rowspan=2><div align="center" valign="middle">LOT-LEGACY</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">LOT</div></th>
          <th  rowspan=2><div align="center" valign="middle">DEMAND</div></th>
-			   
-			   <th colspan=3 ><div align="center" valign="middle">QTY</div></th>
-         <th colspan=2 ><div align="center" valign="middle">QTY FOC</div></th>
+
+         <th colspan=2><div align="center" valign="middle">QTY-ORDER</div></th>
+			   <th colspan=3 ><div align="center" valign="middle">QTY-PACKING</div></th>
+         <th colspan=2 ><div align="center" valign="middle">QTY-FOC</div></th>
          <th colspan=2 ><div align="center" valign="middle">ESTIMASI FOC</div></th>
+         <th colspan=3 ><div align="center" valign="middle">QTY-BERMASALAH</div></th>
 
 			   <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">ADVICE FROM PRODUCTION/QC</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">RESPONSIBILITY</div></th>
+			   <th  rowspan=2><div align="center" valign="middle">ACTUAL DELIVERY</div></th>
 
          <!-- <th rowspan="2"><div align="center" valign="middle">Tanggal Surat Jalan</div></th>
          <th rowspan="2"><div align="center" valign="middle">Nomor Surat Jalan</div></th> -->
@@ -141,6 +146,9 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
       </tr>
 			<tr>  
               
+				<th><div align="center" valign="middle">KG</div></th>
+				<th><div align="center" valign="middle">YARD</div></th>
+
 			    <th><div align="center" valign="middle">ROLL</div></th>
 				<th><div align="center" valign="middle">KG</div></th>
 				<th><div align="center" valign="middle">YARD</div></th>
@@ -149,6 +157,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 				<th><div align="center" valign="middle">KG</div></th>
 				<th><div align="center" valign="middle">YARD</div></th>
         <!-- ESTIMASI -->
+				<th><div align="center" valign="middle">KG</div></th>
+				<th><div align="center" valign="middle">YARD</div></th>
+        <!-- MASALAH -->
+        <th><div align="center" valign="middle">ROLL</div></th>
 				<th><div align="center" valign="middle">KG</div></th>
 				<th><div align="center" valign="middle">YARD</div></th>
 				
@@ -207,7 +219,6 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             if(count($fields) > 0) {
               $sql_code .= "WHERE " . implode("AND", $fields) . $default_fields . $group_by_fields;
             }
-
             $sql=mysqli_query($con,$sql_code);
             
 			/*
@@ -250,6 +261,17 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 		 
           <tr bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $row1['tgl_masuk'];?></td>
+            <td align="center"><?php $rsts= mysqli_query($con,"SELECT * FROM tbl_bonpenghubung_mail WHERE nodemand='$row1[nodemand]'");
+            $dtsts = mysqli_fetch_assoc($rsts);
+            if($dtsts['status_approve']==1){
+              echo 'APPROVE OLEH'.$dtsts['approve_mkt'];
+            }else if($dtsts['status_approve']==99){
+              echo 'REJECT OLEH'.$dtsts['approve_mkt'];
+            }else if($dtsts['status_approve']==2){
+              echo 'CLOSED OLEH'.$dtsts['closed_ppc'];
+            } else {
+              echo '';
+            }?></td>
 			<td align="center"><?php echo explode('/', $row1['pelanggan'])[0];?></td>
 			<td align="center"><?php echo explode('/', $row1['pelanggan'])[1];?></td>
 			 <td align="center"><?php echo $row1['no_po'];?></td>
@@ -257,11 +279,16 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			 <td align="center"><?php echo $row1['no_hanger'];?></td>
 			  <td align="center"><?php echo $row1['no_item'];?></td>
 			  <td align="center"><?php echo $row1['warna'];?></td>
+			  <td align="center"><?php echo $row1['lot_legacy'];?></td>
 			  <td align="center"><?php echo $row1['lot'];?></td>
         <td align="center"><?php echo $row1['nodemand'];?></td>
-			  <td align="center"><?php echo $row1['penghubung_roll1'];?></td>
-			  <td align="center"><?php echo $row1['penghubung_roll2'];?></td>
-			  <td align="center"><?php echo $row1['penghubung_roll3'];?></td>
+
+			  <td align="center"><?php echo $row1['berat_order'];?></td>
+			  <td align="center"><?php echo $row1['panjang_order'];?></td>
+
+			  <td align="center"><?php echo $row1['rol'];?></td>
+			  <td align="center"><?php echo $row1['netto'];?></td>
+			  <td align="center"><?php echo $row1['panjang'];?></td>
 
         <!-- Tambahan -->
         <td align="center"><?php echo $row1['berat_extra'];?></td>
@@ -271,6 +298,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         <!-- ESTIMASI -->
         <td align="center"><?php echo $row1['estimasi'];?></td>
 			  <td align="center"><?php echo $row1['panjang_estimasi'];?></td>
+
+        <td align="center"><?php echo $row1['penghubung_roll1'];?></td>
+			  <td align="center"><?php echo $row1['penghubung_roll2'];?></td>
+			  <td align="center"><?php echo $row1['penghubung_roll3'];?></td>
 
 			   <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
@@ -297,7 +328,32 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 						$no_depp++;
 						}
 				  }   ?>
-				</td>	 
+				</td>
+        <td> <?php 
+        $qDemand =db2_exec($conn1, "SELECT 
+	CASE 
+		WHEN p.DLVSALORDERLINESALESORDERCODE IS NULL THEN p.ORIGDLVSALORDLINESALORDERCODE
+		ELSE p.DLVSALORDERLINESALESORDERCODE
+	END AS SALESORDERCODE,
+	CASE 
+		WHEN p.DLVSALESORDERLINEORDERLINE IS NULL THEN p.ORIGDLVSALORDERLINEORDERLINE 
+		ELSE p.DLVSALESORDERLINEORDERLINE
+	END AS ORDERLINE
+	FROM PRODUCTIONDEMAND p 
+	WHERE p.CODE ='$row1[nodemand]'");
+        $rowdb2 = db2_fetch_assoc($qDemand);
+        $q_actual_delivery      = db2_exec($conn1, "SELECT
+        COALESCE(s2.CONFIRMEDDELIVERYDATE, s.CONFIRMEDDUEDATE) AS ACTUAL_DELIVERY
+    FROM
+        SALESORDER s 
+    LEFT JOIN SALESORDERDELIVERY s2 ON s2.SALESORDERLINESALESORDERCODE = s.CODE AND s2.SALORDLINESALORDERCOMPANYCODE = s.COMPANYCODE AND s2.SALORDLINESALORDERCOUNTERCODE = s.COUNTERCODE 
+    WHERE
+        s2.SALESORDERLINESALESORDERCODE = '$rowdb2[SALESORDERCODE]'
+        AND s2.SALESORDERLINEORDERLINE = '$rowdb2[ORDERLINE]'");
+$row_actual_delivery    = db2_fetch_assoc($q_actual_delivery);
+echo $row_actual_delivery['ACTUAL_DELIVERY'];?></td>	 
+        
+
           </tr>
 		  
 		  <?php if($row1['penghubung2_roll1'] and  $row1['penghubung2_roll1'] !='')  
@@ -307,6 +363,17 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 		  
 		  <tr bgcolor="<?php echo $bgcolor; ?>">
         <td align="center"><?php echo $row1['tgl_masuk'];?></td>
+        <td align="center"><?php $rsts= mysqli_query($con,"SELECT * FROM tbl_bonpenghubung_mail WHERE nodemand='$row1[nodemand]'");
+            $dtsts = mysqli_fetch_assoc($rsts);
+            if($dtsts['status_approve']==1){
+              echo 'APPROVE OLEH'.$dtsts['approve_mkt'];
+            }else if($dtsts['status_approve']==99){
+              echo 'REJECT OLEH'.$dtsts['approve_mkt'];
+            }else if($dtsts['status_approve']==2){
+              echo 'CLOSED OLEH'.$dtsts['closed_ppc'];
+            } else {
+              echo '';
+            }?></td>
         <td align="center"><?php echo explode('/', $row1['pelanggan'])[0];?></td>
         <td align="center"><?php echo explode('/', $row1['pelanggan'])[1];?></td>
         <td align="center"><?php echo $row1['no_po'];?></td>
@@ -314,11 +381,19 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         <td align="center"><?php echo $row1['no_hanger'];?></td>
 			  <td align="center"><?php echo $row1['no_item'];?></td>
 			  <td align="center"><?php echo $row1['warna'];?></td>
+			  <td align="center"><?php echo $row1['lot_legacy'];?></td>
 			  <td align="center"><?php echo $row1['lot'];?></td>
         <td align="center"><?php echo $row1['nodemand'];?></td>
-			  <td align="center"><?php echo $row1['penghubung2_roll1'];?></td>
-			  <td align="center"><?php echo $row1['penghubung2_roll2'];?></td>
-			  <td align="center"><?php echo $row1['penghubung2_roll3'];?></td>
+
+
+
+			  <td align="center"><?php echo $row1['berat_order'];?></td>
+			  <td align="center"><?php echo $row1['panjang_order'];?></td>
+
+
+			  <td align="center"><?php echo $row1['rol'];?></td>
+			  <td align="center"><?php echo $row1['netto'];?></td>
+			  <td align="center"><?php echo $row1['panjang'];?></td>
 
      <!-- Tambahan -->
      <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> -->
@@ -329,6 +404,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
      <!-- ESTINASI -->
      <td align="center"></td>
      <td align="center"></td>
+
+     <td align="center"><?php echo $row1['penghubung2_roll1'];?></td>
+			  <td align="center"><?php echo $row1['penghubung2_roll2'];?></td>
+			  <td align="center"><?php echo $row1['penghubung2_roll3'];?></td>
 			  
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
@@ -358,7 +437,30 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 						}
 				  }   ?>
 				</td>	
-        
+        <td> <?php 
+        $qDemand =db2_exec($conn1, "SELECT 
+	CASE 
+		WHEN p.DLVSALORDERLINESALESORDERCODE IS NULL THEN p.ORIGDLVSALORDLINESALORDERCODE
+		ELSE p.DLVSALORDERLINESALESORDERCODE
+	END AS SALESORDERCODE,
+	CASE 
+		WHEN p.DLVSALESORDERLINEORDERLINE IS NULL THEN p.ORIGDLVSALORDERLINEORDERLINE 
+		ELSE p.DLVSALESORDERLINEORDERLINE
+	END AS ORDERLINE
+	FROM PRODUCTIONDEMAND p 
+	WHERE p.CODE ='$row1[nodemand]'");
+        $rowdb2 = db2_fetch_assoc($qDemand);
+        $q_actual_delivery      = db2_exec($conn1, "SELECT
+        COALESCE(s2.CONFIRMEDDELIVERYDATE, s.CONFIRMEDDUEDATE) AS ACTUAL_DELIVERY
+    FROM
+        SALESORDER s 
+    LEFT JOIN SALESORDERDELIVERY s2 ON s2.SALESORDERLINESALESORDERCODE = s.CODE AND s2.SALORDLINESALORDERCOMPANYCODE = s.COMPANYCODE AND s2.SALORDLINESALORDERCOUNTERCODE = s.COUNTERCODE 
+    WHERE
+        s2.SALESORDERLINESALESORDERCODE = '$rowdb2[SALESORDERCODE]'
+        AND s2.SALESORDERLINEORDERLINE = '$rowdb2[ORDERLINE]'");
+$row_actual_delivery    = db2_fetch_assoc($q_actual_delivery);
+echo $row_actual_delivery['ACTUAL_DELIVERY'];?></td>	
+        	
           </tr>
 		  
 		  
@@ -372,6 +474,17 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 		  
 		   <tr bgcolor="<?php echo $bgcolor; ?>">
         <td align="center"><?php echo $row1['tgl_masuk'];?></td>
+        <td align="center"><?php $rsts= mysqli_query($con,"SELECT * FROM tbl_bonpenghubung_mail WHERE nodemand='$row1[nodemand]'");
+            $dtsts = mysqli_fetch_assoc($rsts);
+            if($dtsts['status_approve']==1){
+              echo 'APPROVE OLEH: '.$dtsts['approve_mkt'];
+            }else if($dtsts['status_approve']==99){
+              echo 'REJECT OLEH: '.$dtsts['approve_mkt'];
+            }else if($dtsts['status_approve']==2){
+              echo 'CLOSED OLEH: '.$dtsts['closed_ppc'];
+            } else {
+              echo '';
+            }?></td>
         <td align="center"><?php echo explode('/', $row1['pelanggan'])[0];?></td>
         <td align="center"><?php echo explode('/', $row1['pelanggan'])[1];?></td>
         <td align="center"><?php echo $row1['no_po'];?></td>
@@ -379,11 +492,16 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         <td align="center"><?php echo $row1['no_hanger'];?></td>
 			  <td align="center"><?php echo $row1['no_item'];?></td>
 			  <td align="center"><?php echo $row1['warna'];?></td>
+			  <td align="center"><?php echo $row1['lot_legacy'];?></td>
 			  <td align="center"><?php echo $row1['lot'];?></td>
 			  <td align="center"><?php echo $row1['nodemand'];?></td>
-			  <td align="center"><?php echo $row1['penghubung3_roll1'];?></td>
-			  <td align="center"><?php echo $row1['penghubung3_roll2'];?></td>
-			  <td align="center"><?php echo $row1['penghubung3_roll3'];?></td>
+
+			  <td align="center"><?php echo $row1['berat_order'];?></td>
+			  <td align="center"><?php echo $row1['panjang_order'];?></td>
+			  
+        <td align="center"><?php echo $row1['rol'];?></td>
+			  <td align="center"><?php echo $row1['netto'];?></td>
+			  <td align="center"><?php echo $row1['panjang'];?></td>
        <!-- Tambahan -->
        <!-- <td align="center"><?php echo $row1['berat_extra'];?></td> -->
      <!-- <td align="center"><?php echo $row1['panjang_extra'];?></td> -->
@@ -393,13 +511,17 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
      <!-- ESTIMASI -->
      <td align="center"></td>
      <td align="center"></td>
-			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
+
+     
+      <td align="center"><?php echo $row1['penghubung3_roll1'];?></td>
+      <td align="center"><?php echo $row1['penghubung3_roll2'];?></td>
+      <td align="center"><?php echo $row1['penghubung3_roll3'];?></td>
         
 			   <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>
 			    <td align="center"><?php echo $row1['advice3'];?></td>
 				<td align="center">
-				<?php if ($row1['penghubung3_dep'] !='') {
+<?php if ($row1['penghubung3_dep'] !='') {
 						$arrayA = explode(',', $row1['penghubung3_dep']);
 						$no_depp = 1;
             echo $row1['penghubung3_dep'];
@@ -421,6 +543,29 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 						}
 				  }   ?>
 				</td>	 	
+        <td> <?php 
+        $qDemand =db2_exec($conn1, "SELECT 
+	CASE 
+		WHEN p.DLVSALORDERLINESALESORDERCODE IS NULL THEN p.ORIGDLVSALORDLINESALORDERCODE
+		ELSE p.DLVSALORDERLINESALESORDERCODE
+	END AS SALESORDERCODE,
+	CASE 
+		WHEN p.DLVSALESORDERLINEORDERLINE IS NULL THEN p.ORIGDLVSALORDERLINEORDERLINE 
+		ELSE p.DLVSALESORDERLINEORDERLINE
+	END AS ORDERLINE
+	FROM PRODUCTIONDEMAND p 
+	WHERE p.CODE ='$row1[nodemand]'");
+        $rowdb2 = db2_fetch_assoc($qDemand);
+        $q_actual_delivery      = db2_exec($conn1, "SELECT
+        COALESCE(s2.CONFIRMEDDELIVERYDATE, s.CONFIRMEDDUEDATE) AS ACTUAL_DELIVERY
+    FROM
+        SALESORDER s 
+    LEFT JOIN SALESORDERDELIVERY s2 ON s2.SALESORDERLINESALESORDERCODE = s.CODE AND s2.SALORDLINESALORDERCOMPANYCODE = s.COMPANYCODE AND s2.SALORDLINESALORDERCOUNTERCODE = s.COUNTERCODE 
+    WHERE
+        s2.SALESORDERLINESALESORDERCODE = '$rowdb2[SALESORDERCODE]'
+        AND s2.SALESORDERLINEORDERLINE = '$rowdb2[ORDERLINE]'");
+$row_actual_delivery    = db2_fetch_assoc($q_actual_delivery);
+echo $row_actual_delivery['ACTUAL_DELIVERY'];?></td>	
         
           </tr>
 		  
