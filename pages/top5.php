@@ -226,7 +226,7 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                                         <td align="center"><?php echo $no; ?></td>
                                         <!-- <td align="center"><?php echo $row['BUYERS']; ?></td> -->
                                         <td align="center">
-                                            <a href="Top5Detail-<?php echo urlencode($row['BUYERS']); ?>&<?php echo urlencode($Awal); ?>&<?php echo urlencode($Akhir); ?>&<?php echo urlencode($Digit); ?>" target="_blank">
+                                            <a href="Top5Detail-<?php echo rawurlencode($row['BUYERS']); ?>&<?php echo urlencode($Awal); ?>&<?php echo urlencode($Akhir); ?>&<?php echo urlencode($Digit); ?>" target="_blank">
                                                 <?php echo $row['BUYERS']; ?>
                                             </a>
                                         </td>
