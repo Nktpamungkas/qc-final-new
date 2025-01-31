@@ -1536,7 +1536,7 @@ if($_POST['save']=="save"){
 		}
 		$penghubung3_dep_persen =  $_POST['penghubung3_dep_persen'];
 		
-		require 'C:/xampp/htdocs/QC-Final-New-bk/vendor/autoload.php';
+		require 'C:/xampp/htdocs/QC-Final-New/vendor/autoload.php';
 		$mail = new PHPMailer\PHPMailer\PHPMailer();
 		$mail->isSMTP();
 		$mail->Host       = 'mail.indotaichen.com';
