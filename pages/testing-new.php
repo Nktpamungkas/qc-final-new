@@ -4913,6 +4913,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="R">R</option>
 											<option <?php if ($rcek1['stat_sb'] == "PASS") { ?> selected=selected <?php }
 											; ?>value="PASS">PASS</option>
+											<option <?php if($rcek1['stat_sb']== "MARGINAL PASS") {?> selected=selected <?php }
+											;?>value="MARGINAL PASS">MARGINAL PASS</option>
 											<option <?php if ($rcek1['stat_sb'] == "FAIL") { ?> selected=selected <?php }
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_sb'] == "RANDOM") { ?> selected=selected <?php }

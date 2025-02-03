@@ -498,11 +498,11 @@ textarea {
             </tr>
             <tr>
                 <td align="left" style="font-size: 12px;">SNAGGING</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="MARGINAL PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']==""){echo "N/A";}else if($rcek1['stat_ph']!=""){echo $rcekM['mph_note'];}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="MARGINAL PASS"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;">N/A</td>
             </tr>
             <tr>
                 <td align="left" style="font-size: 12px;">BURSTING STRENGTH OF FABRICS<!--: BALL BURST METHOD--></td>
@@ -778,7 +778,7 @@ textarea {
         </tr>
         <tr>
             <!-- <td align="left" style="font-size: 11px;" colspan="3">(80 FAHRENHEIT), TUMBLE DRY LOW, MEASURE AT 10 INCHES, (1 WASH) UNRESTORED</td> -->
-            <td align="left" style="font-size: 11px;" colspan="3">AND 66&#177;1G OF 1993 AATCC STANDARD REFERENC DETERGEN WOB, NORMAL CYCLE, TUMBLE DRY LOW
+            <td align="left" style="font-size: 11px;" colspan="3">AND 66&#177;1G OF 1993 AATCC STANDARD REFERENCE DETERGEN WOB, NORMAL CYCLE, TUMBLE DRY LOW
             </td>
         </tr>
         <!-- <tr>
@@ -1033,7 +1033,7 @@ textarea {
             <td align="right" style="font-size: 11px;" width="33%"><?php if($rd2['gramasi'] >= 200){echo "MIN 50.0 $kode_LBF";}else if($rd2['gramasi'] < 200){echo "MIN 35.0 $kode_LBF";}?></td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">SNAGGING (ASTM D3512-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST)</td>
+            <td align="left" style="font-size: 11px;" colspan="3"><strong><u>SNAGGING</u></strong> (ASTM D3512-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST)</td>
         </tr>
         <!-- BURSTING STRENGTH END -->
         <tr>
@@ -1072,7 +1072,7 @@ textarea {
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td>
+            <td align="left" style="font-size: 11px;" width="33%">CHANGE IN SHADE</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['wash_colorchange']!="" AND $rcek1['wash_colorchange'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['wash_colorchange']!=""){echo $rcek1['wash_colorchange'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
         </tr>
@@ -1670,7 +1670,7 @@ textarea {
                 <table width="100%" style="border-collapse: collapse;">
                     <tr>
                         <td align="left" width="50%">SATISFACTORY</td>
-                        <td align="left" width="50%">N/A</td>
+                        <!-- <td align="left" width="50%">N/A</td> -->
                     </tr>
                 </table>
             </td>
@@ -1886,7 +1886,7 @@ textarea {
         </tr>
         <!-- STRETCH AND RECOVERY BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>ELONGATION, MODULUS & RECOVERY</u></strong> (<?php echo "(".$rd2['extension'].")";?>)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>ELONGATION, MODULUS & RECOVERY</u></strong> (<?php echo "(".$rd2['extension']." METHOD A; TESTING SPEED AT 500MM/MIN; RETURNING SPEED AT 500MM/MIN; GAUGE LENGHT 100MM; TEST FOR 2 CYCLES)";?>)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;" colspan="3"><?php echo "(".$rd2['extension'].")";?></td> 
@@ -1905,44 +1905,44 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">LENGTH - MODULUS @ 10% EXTENSION</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['dstretch_l2']!=""){echo $rcekD['dstretch_l2'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if( $rcek1['stretch_l2']!=""){echo  $rcek1['stretch_l2'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">LENGTH - MODULUS @ 30% EXTENSION</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['dstretch_l3']!=""){echo $rcekD['dstretch_l3'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['stretch_l3']!=""){echo $rcek1['stretch_l3'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">LENGTH - MODULUS @ 50% EXTENSION</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['dstretch_l4']!=""){echo $rcekD['dstretch_l4'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['stretch_l4']!=""){echo $rcek1['stretch_l4'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">LENGTH - MODULUS @ 80% EXTENSION</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['dstretch_l5']!=""){echo $rcekD['dstretch_l5'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['stretch_l5']!=""){echo $rcek1['stretch_l5'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">LENGTH - TOTAL ELONGATION</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['dstretch_l1']!=""){echo $rcekD['dstretch_l1'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['stretch_l1']!=""){echo $rcek1['stretch_l1'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">LENGTH - RECOVERY AFTER 1 MINUTE</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['drecover_l1']!=""){echo $rcekD['drecover_l1'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['recover_l1']!=""){echo $rcek1['recover_l1'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">MIN. 90%</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">LENGTH - RECOVERY AFTER 30 MINUTES</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['drecover_l2']!=""){echo $rcekD['drecover_l2'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['recover_l2']!=""){echo $rcek1['recover_l2'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">MIN. 90%</td> 
         </tr>
         <tr>
@@ -1950,44 +1950,44 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">WIDTH - MODULUS @ 10% EXTENSION</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['dstretch_w2']!=""){echo $rcekD['dstretch_w2'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['stretch_w2']!=""){echo $rcek1['stretch_w2'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">WIDTH - MODULUS @ 30% EXTENSION</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['dstretch_w3']!=""){echo $rcekD['dstretch_w3'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['stretch_w3']!=""){echo $rcek1['stretch_w3'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">WIDTH - MODULUS @ 50% EXTENSION</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['dstretch_w4']!=""){echo $rcekD['dstretch_w4'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['stretch_w4']!=""){echo $rcek1['stretch_w4'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">WIDTH - MODULUS @ 80% EXTENSION</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['dstretch_w5']!=""){echo $rcekD['dstretch_w5'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['stretch_w5']!=""){echo $rcek1['stretch_w5'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">WIDTH - TOTAL ELONGATION</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['dstretch_w1']!=""){echo $rcekD['dstretch_w1'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['stretch_w1']!=""){echo $rcek1['stretch_w1'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">WIDTH - RECOVERY AFTER 1 MINUTE</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['drecover_w1']!=""){echo $rcekD['drecover_w1'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['recover_w1']!=""){echo $rcek1['recover_w1'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">MIN. 90%</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">WIDTH - RECOVERY AFTER 30 MINUTES</td> 
-            <!-- <td align="center" style="font-size: 11px;"><?php if($rcekD['drecover_w2']!=""){echo $rcekD['drecover_w2'];}else{echo "N/A";}?></td>  -->
-            <td align="center" style="font-size: 11px;">N/A</td> 
+            <td align="center" style="font-size: 11px;"><?php if($rcek1['recover_w2']!=""){echo $rcek1['recover_w2'];}else{echo "N/A";}?></td> 
+            <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
             <td align="right" style="font-size: 11px;">MIN. 90%</td> 
         </tr>
         <!-- STRETCH AND RECOVERY END -->
