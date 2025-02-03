@@ -69,7 +69,9 @@ if (isset($_POST['nodemand']) && isset($_POST['action'])) {
                 $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
                 $mail->setFrom('dept.it@indotaichen.com', 'DEPT IT');
-                $mail->addAddress('deden.kurnia@indotaichen.com', 'ADM QCF');
+                $mail->addAddress('qcf.adm@indotaichen.com', 'ADM QCF');
+                // $mail->addAddress('arif.efendi@indotaichen.com', 'Arif Efendi');
+                $mail->addAddress('tobias.sulistiyo@indotaichen.com', 'TOBIAS');
                 $user_email = mysqli_query($con, "SELECT * FROM email_user_penghubung WHERE dept='PPC'");
                 $listmail   = [];
                 while ($data_email = mysqli_fetch_array($user_email)) {
@@ -85,11 +87,11 @@ if (isset($_POST['nodemand']) && isset($_POST['action'])) {
                 $mail->isHTML(true);
                 $mail->Body = "<p>Dear PPC Teams,</p>
                                <p>Mohon ditindaklanjuti terkait Approval Bon Penghubung.</p>
-                               <p>Bon Penghubung sudah di Approve oleh $_SESSION[nama1]-($_SESSION[dept])</p>
+                               <p>Bon Penghubung sebelumnya sudah di Approve oleh $_SESSION[nama1]-($_SESSION[dept])</p>
                                <p>Mohon untuk dapat CLOSED Bon Penghubung ini</p>
                                <p>&nbsp;</p>
-                               <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sebelum melakukan CLOSE, Mohon untuk login terlebih dahulu <a href='online.indotaichen.com/qc-final-new-bk'>Login</a></p>
-                               <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Anda dapat melakukan CLOSED pada link berikut: <a href='online.indotaichen.com/qc-final-new-bk/ApproveBonPenghubung-" . htmlspecialchars($nodemand) . "'>Closed Bon Penghubung</a></p>
+                               <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sebelum melakukan CLOSE, Mohon untuk login terlebih dahulu <a href='online.indotaichen.com/Qc-Final-New'>Login</a></p>
+                               <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Anda dapat melakukan CLOSED pada link berikut: <a href='online.indotaichen.com/Qc-Final-New/ApproveBonPenghubung-" . htmlspecialchars($nodemand) . "'>Closed Bon Penghubung</a></p>
                                <p>&nbsp;</p>";
                 if ($mail->send()) {
                     echo "Update dan email berhasil dikirim!";

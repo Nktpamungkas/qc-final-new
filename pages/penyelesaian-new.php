@@ -76,6 +76,14 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 				</div>
 				<div class="form-group">
+					<label for="ket" class="col-sm-2 control-label">Keterangan</label>
+					<div class="col-sm-4">
+						<textarea name="ket" rows="3" class="form-control" id="ket" placeholder="Keterangan"><?php if ($cek > 0) {
+																													echo $rcek['ket_penyelesaian'];
+																												} ?></textarea>
+					</div>
+				</div>
+				<div class="form-group">
 					<label for="akar_masalah" class="col-sm-2 control-label">Akar Masalah</label>
 					<div class="col-sm-3">
 						<input name="akar_masalah" type="text" class="form-control" id="akar_masalah" value="<?php echo $rcek['akar_masalah']; ?>" placeholder="Akar Masalah" required>
@@ -439,14 +447,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 						</div>
 					</div>
 				<?php } ?>
-				<div class="form-group">
-					<label for="ket" class="col-sm-2 control-label">Keterangan</label>
-					<div class="col-sm-4">
-						<textarea name="ket" rows="3" class="form-control" id="ket" placeholder="Keterangan"><?php if ($cek > 0) {
-																													echo $rcek['ket_penyelesaian'];
-																												} ?></textarea>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 		<div class="box-footer">
