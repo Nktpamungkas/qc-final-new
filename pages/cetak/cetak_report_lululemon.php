@@ -498,7 +498,7 @@ textarea {
             </tr>
             <tr>
                 <td align="left" style="font-size: 12px;">SNAGGING</td>
-                td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="MARGINAL PASS"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
