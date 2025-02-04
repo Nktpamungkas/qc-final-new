@@ -313,6 +313,9 @@ include "koneksi.php";
               <option value="QCF" <?php if ($Dept == "QCF") {
                 echo "SELECTED";
               } ?>>QCF</option>
+			  <option value="CQA" <?php if ($Dept == "CQA") {
+                echo "SELECTED";
+              } ?>>CQA</option>	
               <option value="RMP" <?php if ($Dept == "RMP") {
                 echo "SELECTED";
               } ?>>RMP</option>
