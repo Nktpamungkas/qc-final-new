@@ -329,7 +329,7 @@ $page = strtolower($page);
         <!-- /.col -->
         <?php } ?>
 
-        <?php if($_SESSION['usrid'] == 'ppc' || $_SESSION['usrid'] == 'marketing'||$_SESSION['dept'] == 'MKT'){ ?>
+        <?php if($_SESSION['usrid'] == 'ppc' ||$_SESSION['dept'] == 'MKT'){ ?>
         <div class="col-md-3 col-sm-6 col-xs-12">
           <a href="Newbonpenghubung">
             <div class="info-box">

@@ -211,7 +211,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             }
             
             $default_fields = " AND tq.sts_pbon!='10' AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='') ";
-            $group_by_fields = " GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan, tq.tgl_masuk; ";
+            $group_by_fields = " GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan, tq.tgl_masuk, tq.nodemand; ";
 
             $sql_code = "SELECT  tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
                       LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order ";
@@ -219,6 +219,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             if(count($fields) > 0) {
               $sql_code .= "WHERE " . implode("AND", $fields) . $default_fields . $group_by_fields;
             }
+            
             $sql=mysqli_query($con,$sql_code);
             
 			/*
@@ -264,11 +265,11 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td align="center"><?php $rsts= mysqli_query($con,"SELECT * FROM tbl_bonpenghubung_mail WHERE nodemand='$row1[nodemand]'");
             $dtsts = mysqli_fetch_assoc($rsts);
             if($dtsts['status_approve']==1){
-              echo 'APPROVE OLEH'.$dtsts['approve_mkt'];
+              echo 'APPROVE OLEH : '.$dtsts['approve_mkt'];
             }else if($dtsts['status_approve']==99){
-              echo 'REJECT OLEH'.$dtsts['approve_mkt'];
+              echo 'REJECT OLEH : '.$dtsts['approve_mkt'];
             }else if($dtsts['status_approve']==2){
-              echo 'CLOSED OLEH'.$dtsts['closed_ppc'];
+              echo 'CLOSED OLEH : '.$dtsts['closed_ppc'];
             } else {
               echo '';
             }?></td>
@@ -366,11 +367,11 @@ echo $row_actual_delivery['ACTUAL_DELIVERY'];?></td>
         <td align="center"><?php $rsts= mysqli_query($con,"SELECT * FROM tbl_bonpenghubung_mail WHERE nodemand='$row1[nodemand]'");
             $dtsts = mysqli_fetch_assoc($rsts);
             if($dtsts['status_approve']==1){
-              echo 'APPROVE OLEH'.$dtsts['approve_mkt'];
+              echo 'APPROVE OLEH : '.$dtsts['approve_mkt'];
             }else if($dtsts['status_approve']==99){
-              echo 'REJECT OLEH'.$dtsts['approve_mkt'];
+              echo 'REJECT OLEH : '.$dtsts['approve_mkt'];
             }else if($dtsts['status_approve']==2){
-              echo 'CLOSED OLEH'.$dtsts['closed_ppc'];
+              echo 'CLOSED OLEH : '.$dtsts['closed_ppc'];
             } else {
               echo '';
             }?></td>
@@ -477,11 +478,11 @@ echo $row_actual_delivery['ACTUAL_DELIVERY'];?></td>
         <td align="center"><?php $rsts= mysqli_query($con,"SELECT * FROM tbl_bonpenghubung_mail WHERE nodemand='$row1[nodemand]'");
             $dtsts = mysqli_fetch_assoc($rsts);
             if($dtsts['status_approve']==1){
-              echo 'APPROVE OLEH: '.$dtsts['approve_mkt'];
+              echo 'APPROVE OLEH : '.$dtsts['approve_mkt'];
             }else if($dtsts['status_approve']==99){
-              echo 'REJECT OLEH: '.$dtsts['approve_mkt'];
+              echo 'REJECT OLEH : '.$dtsts['approve_mkt'];
             }else if($dtsts['status_approve']==2){
-              echo 'CLOSED OLEH: '.$dtsts['closed_ppc'];
+              echo 'CLOSED OLEH : '.$dtsts['closed_ppc'];
             } else {
               echo '';
             }?></td>

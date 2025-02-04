@@ -175,41 +175,50 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         <table class="table table-bordered table-hover table-striped nowrap" id="example3" style="width:100%">
           <thead class="bg-blue">
             <tr>
-              <th><div align="center">No</div></th>
-              <th><div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Aksi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></th>
-              <th><div align="center">Tgl</div></th>
-              <th><div align="center">Langganan</div></th>
-              <th><div align="center">No Demand</div></th>
-              <th><div align="center">No Prod Order</div></th>
-              <th><div align="center">PO</div></th>
-              <!-- <th><div align="center">NO ITEM</div></th> -->
-              <th><div align="center">Order</div></th>
-              <th><div align="center">Hanger</div></th>
-              <th><div align="center">Jenis Kain</div></th>
-              <th><div align="center">Lebar &amp; Gramasi</div></th>
-              <th><div align="center">Lot</div></th>
-              <th><div align="center">Warna</div></th>
-              <th><div align="center">Qty Order</div></th>
-              <th><div align="center">Qty Order (yd)</div></th>
-              <th><div align="center">Qty Kirim</div></th>
-              <th><div align="center">Qty Kirim (yd)</div></th>
-              <th><div align="center">Qty Claim</div></th>
-              <th><div align="center">Qty Claim (yd)</div></th>
-              <th><div align="center">Qty Lolos QC (kg)</div></th>
-              <th><div>
+              <th rowspan='2' rowspan='2'><div align="center">No</div></th>
+              <th rowspan='2'><div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Aksi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></th>
+              <th rowspan='2'><div align="center">Tgl</div></th>
+              <th rowspan='2'><div align="center">Pelanggan</div></th>
+              <th rowspan='2'><div align="center">Buyer</div></th>
+              <th rowspan='2'><div align="center">No Demand</div></th>
+              <th rowspan='2'><div align="center">No Prod Order</div></th>
+              <th rowspan='2'><div align="center">PO</div></th>
+              <!-- <th rowspan='2'><div align="center">NO ITEM</div></th> -->
+              <th rowspan='2'><div align="center">Order</div></th>
+              <th rowspan='2'><div align="center">Hanger</div></th>
+              <th rowspan='2'><div align="center">Jenis Kain</div></th>
+              <th rowspan='2'><div align="center">Lebar</div></th>
+              <th rowspan='2'><div align="center">Gramasi</div></th>
+              <th rowspan='2'><div align="center">Lot</div></th>
+              <th rowspan='2'><div align="center">Warna</div></th>
+              <th rowspan='2'><div align="center">Qty Order</div></th>
+              <th rowspan='2'><div align="center">Qty Order (yd)</div></th>
+              <th rowspan='2'><div align="center">Qty Kirim</div></th>
+              <th rowspan='2'><div align="center">Qty Kirim (yd)</div></th>
+              <th rowspan='2'><div align="center">Qty Claim</div></th>
+              <th rowspan='2'><div align="center">Qty Claim (yd)</div></th>
+              <th rowspan='2'><div align="center">Qty Lolos QC (kg)</div></th>
+              <th rowspan='2'><div>
                 <div align="center">T Jawab</div>
               </div></th>
-              <th><div align="center">Masalah Dominan</div></th>
-              <th><div align="center">Masalah</div></th>
-              <th><div align="center">Penyebab</div></th>
-              <th><div align="center">Route Cause</div></th>
-              <th><div align="center">Solusi</div></th>
-              <th><div align="center">Personil</div></th>
-              <th><div align="center">Pejabat</div></th>
-              <th><div align="center">Lolos/Disposisi</div></th>
-              <th><div align="center">No NCP</div></th>
-              <th><div align="center">Analisa Kerusakan</div></th>
-              <th><div align="center">Ket</div></th>
+              <th rowspan='2'><div align="center">Masalah Dominan</div></th>
+              <th rowspan='2'><div align="center">Masalah</div></th>
+              <th rowspan='2'><div align="center">Penyebab</div></th>
+              <th rowspan='2'><div align="center">Route Cause</div></th>
+              <th rowspan='2'><div align="center">Solusi</div></th>
+              <th rowspan='2'><div align="center">Personil</div></th>
+              <th rowspan='2'><div align="center">Pejabat</div></th>
+              <th rowspan='2'><div align="center">Lolos/Disposisi</div></th>
+              <th rowspan='2'><div align="center">BPP</div></th>
+              <th colspan= '4'class="text-center">NCP</th>
+              <!-- <th><div align="center">Analisa Kerusakan</div></th> -->
+              <th rowspan='2'><div align="center">Ket</div></th>
+            </tr>
+            <tr>
+            <th class="text-center">No NCP</th>
+              <th class="text-center">Masalah Utama</th>
+              <th class="text-center">Akar Masalah</th>
+              <th class="text-center">Solusi Jangka Panjang</th>
             </tr>
           </thead>
           <tbody>
@@ -295,13 +304,16 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             // if($Awal!="" or $sts_red=="1" or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
             if($Awal!=""  or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
               $qry1=mysqli_query($con,"SELECT a.*,
-              GROUP_CONCAT( DISTINCT b.no_ncp SEPARATOR ', ' ) AS no_ncp,
-              GROUP_CONCAT( DISTINCT b.masalah SEPARATOR ', ' ) AS masalah_ncp 
-              FROM tbl_aftersales_now a LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
+                          GROUP_CONCAT( distinct b.no_ncp_gabungan separator ', ' ) as no_ncp,
+                          GROUP_CONCAT( distinct b.masalah_dominan separator ', ' ) as masalah_utama,
+                          GROUP_CONCAT( distinct b.akar_masalah separator ', ' ) as akar_masalah,
+                          GROUP_CONCAT( distinct b.solusi_panjang separator ', ' ) as solusi_panjang 
+              FROM tbl_aftersales_now a 
+              LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
               WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $WhereKategori $stsclaim 
               -- WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $WhereKategori $stsred $stsclaim 
               GROUP BY a.nodemand, a.masalah_dominan
-              ORDER BY a.id ASC");                
+              ORDER BY a.id ASC");
               while($row1=mysqli_fetch_array($qry1)){
                   $noorder=str_replace("/","&",$row1['no_order']);
                   if($row1['t_jawab']!="" and $row1['t_jawab1']!="" and $row1['t_jawab2']!=""){ $tjawab=$row1['t_jawab']."+".$row1['t_jawab1']."+".$row1['t_jawab2'];
@@ -332,7 +344,14 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <a href="#" class="btn btn-danger btn-xs <?php if($_SESSION['akses']=='biasa' OR $_SESSION['lvl_id']!='AFTERSALES'){ echo "disabled"; } ?>" onclick="confirm_delete('./HapusDataKPE-<?php echo $row1['id'] ?>');"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Hapus"></i> </a>
             </div></td>
             <td align="center"><?php echo $row1['tgl_buat'];?></td>
-            <td><?php echo $row1['langganan'];?></td>
+            <?php 
+              $pelanggan = explode('/', $row1['langganan'])[0]; 
+              $buyer = explode('/', $row1['langganan'])[1];
+            ?>
+
+            <td><?php echo $pelanggan; ?></td>
+            <td><?php echo $buyer; ?></td>
+
             <td align="center"><?php echo $row1['nodemand'];?></td>
             <td align="center"><?php echo $row1['nokk'];?></td>
             <td align="center"><?php echo $row1['po'];?></td>
@@ -340,7 +359,8 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td align="center"><?php echo $row1['no_order'];?></td>
             <td align="center" valign="top"><?php echo $row1['no_hanger'];?></td>
             <td><?php echo $row1['jenis_kain'];?></td>
-            <td align="center"><?php echo $row1['lebar']."x".$row1['gramasi'];?></td>
+            <td align="center"><?php echo $row1['lebar'];?></td>
+            <td align="center"><?php echo $row1['gramasi'];?></td>
             <td align="center"><?php echo $row1['lot'];?></td>
             <td align="center"><?php echo $row1['warna'];?></td>
             <td align="right"><?php echo $row1['qty_order'];?></td>
@@ -375,6 +395,15 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td><?php if($row1['personil2']!=""){echo $row1['personil'].",".$row1['personil2'];}else{echo $row1['personil'];}?></td>
             <td><?php echo $row1['pejabat'];?></td>
             <td><?php if($row1['sts']=="1"){echo "Lolos QC";}else if($row1['sts_disposisiqc']=="1"){echo "Disposisi QC";}else if($row1['sts_disposisipro']=="1"){echo "Disposisi Produksi";}?><?php if($row1['sts_nego']=="1"){echo ", Negosiasi Aftersales";}?></td>
+            <td><?php if($row1['status_penghubung']=='terima'){
+              echo '&#10004';
+            }else if($row1['status_penghubung']=='tolak'){
+              echo 'X';
+            }else{
+              echo '';
+            }?></td>
+            <td><?php echo $row1['no_ncp'];?></td>
+            <td><?php echo $row1['masalah_ncp'];?></td>
             <td><?php echo $row1['no_ncp'];?></td>
             <td><?php echo $row1['masalah_ncp'];?></td>
             <td><?php echo $row1['ket'];?></td>

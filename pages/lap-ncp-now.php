@@ -273,14 +273,19 @@ include "koneksi.php";
               $rAll = mysqli_fetch_array($qryAll);
               $qryAllDis = mysqli_query($con, "SELECT COUNT(*) AS jml_all, SUM(berat) AS berat_all FROM tbl_ncp_qcf_now WHERE $WKategori DATE_FORMAT( tgl_buat, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' AND (masalah_dominan!='' OR masalah_dominan!=NULL) AND `status`='Disposisi' $sts ");
               $rAllDis = mysqli_fetch_array($qryAllDis);
-              $qrydef = mysqli_query($con, "SELECT SUM(berat) AS berat, ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) FROM tbl_ncp_qcf_now WHERE $WKategori DATE_FORMAT( tgl_buat, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' $sts
-            AND (masalah_dominan!='' OR masalah_dominan!=NULL))*100,1) AS persen,
-            masalah_dominan
-            FROM
-            `tbl_ncp_qcf_now`
-            WHERE $WKategori DATE_FORMAT( tgl_buat, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' AND (masalah_dominan!='' OR masalah_dominan!=NULL) $sts  
-            GROUP BY masalah_dominan
-            ORDER BY berat DESC LIMIT 5");
+              $qrydef = mysqli_query($con, "SELECT 
+                                                SUM(berat) AS berat, 
+                                                ROUND(COUNT(masalah_dominan)/(SELECT COUNT(*) 
+                                              FROM tbl_ncp_qcf_now 
+                                              WHERE $WKategori 
+                                              DATE_FORMAT( tgl_buat, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' $sts
+                                              AND (masalah_dominan!='' OR masalah_dominan!=NULL))*100,1) AS persen,
+                                              masalah_dominan
+                                              FROM
+                                              `tbl_ncp_qcf_now`
+                                              WHERE $WKategori DATE_FORMAT( tgl_buat, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' AND (masalah_dominan!='' OR masalah_dominan!=NULL) $sts  
+                                              GROUP BY masalah_dominan
+                                      ORDER BY berat DESC LIMIT 5");
               $qryBDominan = mysqli_query($con, "SELECT COUNT(*) AS jml_all, SUM(berat) AS berat_all FROM tbl_ncp_qcf_now WHERE $WKategori DATE_FORMAT( tgl_buat, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' AND (masalah_dominan='' OR masalah_dominan=NULL) $sts ");
               $rBD = mysqli_fetch_array($qryBDominan);
               $qryAllDisBD = mysqli_query($con, "SELECT COUNT(*) AS jml_all, SUM(berat) AS berat_all FROM tbl_ncp_qcf_now WHERE $WKategori DATE_FORMAT( tgl_buat, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' AND (masalah_dominan='' OR masalah_dominan=NULL) AND `status`='Disposisi' $sts ");
@@ -761,8 +766,7 @@ include "koneksi.php";
                     <?php echo $row1['po']; ?>
                   </td>
                   <td align="center"><a href="PenyelesaianNew-<?php echo $row1['id']; ?>" class="btn <?php if (strtoupper($_SESSION['usrid']) != "ARIF") {
-                                                                                                        echo "disabled";
-                                                                                                      } ?>"><span class="label label-danger">
+                                                                                                        echo "disabled";} ?>"><span class="label label-danger">
                         <?php echo $row1['no_ncp_gabungan']; ?>
                       </span></a></td>
                   <td align="center">

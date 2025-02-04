@@ -149,6 +149,13 @@ if(!empty($nodemand)){
 				";
 	$stmt3 = db2_exec($conn1, $qdb22);
 	$rowdb22 = db2_fetch_assoc($stmt3);
+
+	$dt_penghubung = "SELECT 
+					* 
+						FROM tbl_qcf
+					WHERE nodemand ='$nodemand' ";
+	$exec = mysqli_query($con,$dt_penghubung );
+	$penghubung = mysqli_fetch_array($exec);
 } else {
 	'';
 }
@@ -225,6 +232,37 @@ $rcek = mysqli_fetch_array($sqlCek);
 						} ?>
 					</font>
 				</div>
+				<?php if(!empty($penghubung['penghubung_masalah'])||!empty($penghubung['penghubung2_masalah'])||!empty($penghubung['penghubung3_masalah'])){?>
+					<div class="form-group">
+						<label for="pengubung" class="col-sm-3 control-label">Bon Penghubung</label>
+						<div class="col-md-3">
+						<?php if(!empty($penghubung['penghubung_masalah'])){?>
+							<label for="penghubung" class="control-label">Issue 1 / Notes </label>
+							<br><br><?php echo $penghubung['penghubung_masalah'] .' / '. $penghubung['penghubung_keterangan'];?>
+						<?php }?>
+						<?php if(!empty($penghubung['penghubung2_masalah'])){?>
+							<br><br><label for="penghubung" class="control-label">Issue 2 / Notes</label>
+							<br><br><?php echo $penghubung['penghubung2_masalah'] .' / '. $penghubung['penghubung2_keterangan'];?>
+							<?php }?>
+						<?php if(!empty($penghubung['penghubung3_masalah'])){?>
+							<br><br><label for="penghubung" class="control-label">Issue 3 / Notes</label>
+							<br><br><?php echo $penghubung['penghubung3_masalah'] .' / '. $penghubung['penghubung3_keterangan'];?>
+							<?php }?>
+							<br><br>
+							<form id="myForm">
+								<label>
+									<input type="radio" name="status_penghubung" value="terima" required> Yes
+								</label>
+								&nbsp;&nbsp;&nbsp;
+								<label>
+									<input type="radio" name="status_penghubung" value="tolak" required> No
+								</label>
+								<br><br>
+							</form>
+						</div>
+					</div>
+				<?php }?>
+
 				<div class="form-group">
 					<label for="no_po" class="col-sm-3 control-label">Pelanggan</label>
 					<div class="col-sm-6">
@@ -1239,6 +1277,7 @@ if ($_POST['save'] == "save") {
 	}
 
 	$sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET 
+		status_penghubung='$_POST[status_penghubung]',
 		nokk='$_POST[nokk]',
 		nodemand='$_POST[nodemand]',
 		langganan='$_POST[pelanggan]',
