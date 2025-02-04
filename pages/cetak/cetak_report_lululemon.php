@@ -1033,7 +1033,10 @@ textarea {
             <td align="right" style="font-size: 11px;" width="33%"><?php if($rd2['gramasi'] >= 200){echo "MIN 50.0 $kode_LBF";}else if($rd2['gramasi'] < 200){echo "MIN 35.0 $kode_LBF";}?></td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="3"><strong><u>SNAGGING</u></strong> (ASTM D3512-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST)</td>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SNAGGING</u></strong> (ASTM D3512-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST)</td>
         </tr>
         <!-- BURSTING STRENGTH END -->
         <tr>
@@ -1044,12 +1047,12 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">AFTER 50 CYCLES</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['wash_cotton']!="" AND $rcek1['wash_cotton'] < 3){echo "color:red;";}?>" width="33%"><?php if($rcek1['wash_cotton']!=""){echo $rcek1['wash_cotton'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['sb_l1']!="" AND $rcek1['sb_l1'] < 3){echo "color:red;";}?>" width="33%"><?php if($rcek1['sb_l1']!=""){echo $rcek1['sb_l1'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">AFTER 75 CYCLES</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['wash_nylon']!="" AND $rcek1['wash_nylon'] < 3){echo "color:red;";}?>" width="33%"><?php if($rcek1['wash_nylon']!=""){echo $rcek1['wash_nylon'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['sb_w1']!="" AND $rcek1['sb_w1'] < 3){echo "color:red;";}?>" width="33%"><?php if($rcek1['sb_w1']!=""){echo $rcek1['sb_w1'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 3.5</td>
         </tr>
         <tr>
