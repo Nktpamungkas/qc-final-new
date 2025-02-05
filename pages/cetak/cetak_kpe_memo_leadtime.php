@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['excel'])) {
 header("Content-type: application/octet-stream");
-header("Content-Disposition: attachment; filename=kpestatus.xls");//ganti nama sesuai keperluan
+header("Content-Disposition: attachment; filename=kpeleadtime.xls");//ganti nama sesuai keperluan
 header("Pragma: no-cache");
 header("Expires: 0");
 } 
@@ -111,7 +111,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
 ?>
 
 <div align="center">
-<strong><font size="+1">LAPORAN LEADTIME KPE</font></strong><br />
+<strong><font size="+1">LAPORAN LEADTIME UPDATE EMAIL</font></strong><br />
 <font size="-1">Periode: <?php echo date("d/m/Y", strtotime($Awal));?> s/d <?php echo date("d/m/Y", strtotime($Akhir));?></font>
  </div>    
 		 
@@ -132,7 +132,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <td><font size="-2">PIC</font></td>
 			<td><font size="-2">Tgl Email</font></td>
 			<td><font size="-2">Tgl Jawab</font></td>
-			<td><font size="-2">Tgl Update</font></td>
+			<td><font size="-2">Tgl Leadtime Update</font></td>
 			
 			<td><font size="-2">HOD</font></td>
 			<td><font size="-2">Langganan</font></td>
@@ -165,12 +165,27 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
   $Pejabat=$_GET['pejabat'];
   if($Awal!=""){ $Where =" AND DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' "; }
   if($Awal!="" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!=""){
-		$sql_cek = "SELECT * FROM tbl_aftersales_now WHERE ( solusi is null or solusi = '' ) and  no_order LIKE '%$Order%' AND po LIKE '%$PO%' AND no_hanger LIKE '%$Hanger%' AND langganan LIKE '%$Langganan%' AND nodemand LIKE '%$Demand%' AND nokk LIKE '%$Prodorder%' AND pejabat LIKE '%$Pejabat%' $Where ORDER BY tgl_email ASC";
+		$sql_cek = "SELECT 
+                    * 
+                  FROM tbl_aftersales_now 
+                  WHERE 
+                    ( solusi is null or solusi = '' ) 
+                  and  no_order LIKE '%$Order%' 
+                  AND po LIKE '%$PO%' 
+                  AND no_hanger LIKE '%$Hanger%' 
+                  AND langganan LIKE '%$Langganan%' 
+                  AND nodemand LIKE '%$Demand%' 
+                  AND nokk LIKE '%$Prodorder%' 
+                  AND pejabat LIKE '%$Pejabat%' 
+                  and leadtime_email IN ('3 Hari Kerja', '4 Hari Kerja', '5 Hari Kerja', '6 Hari Kerja')
+                  $Where ORDER BY tgl_email ASC";
   $qry1=mysqli_query($con,$sql_cek);
+
   }else{
 	  $sql_cek = "SELECT * FROM tbl_aftersales_now WHERE ( solusi is null or solusi = '' ) and  no_order LIKE '$Order' AND po LIKE '$PO' AND no_hanger LIKE '$Hanger' AND langganan LIKE '$Langganan' AND nodemand LIKE '$Demand' AND nokk LIKE '$Prodorder' AND pejabat LIKE '%$Pejabat%' $Where ORDER BY tgl_email ASC";
   $qry1=mysqli_query($con,$sql_cek);
   } ;
+  $total2= mysqli_num_rows($qry1);
   $total_qty_order = 0;
   $total_qty_kirim = 0;
   $total_qty_claim = 0;
@@ -298,12 +313,56 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
     </tr>
 	</tbody>
     <tr>
-      <td><table width="100%" border="0" class="table-list1">
-      <tr align="center">
-        <td>&nbsp;</td>
-        <td>Diserahkan Oleh :</td>
-        <td>Diketahui Oleh :</td>
-        <td> Diketahui Oleh :</td>
+      <td>
+        <table width="100%" border="0" class="table-list1">
+        <tr>
+            <!-- <td>Target : <input name="target" type="text" placeholder="Ketik" style="font-size: 11px; margin-left: 40px;" /></td> -->
+            <td>Target : 95%</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+            <tr>
+            <!-- <td>Total Lot : <input name="totallot" type="text" placeholder="Ketik" style="font-size: 11px; margin-left: 29px;" /></td> -->
+             <?php
+            $rowlot = mysqli_query($con, "SELECT 
+                                              * 
+                                            FROM tbl_aftersales_now 
+                                            WHERE 
+                                              ( solusi is null or solusi = '' ) 
+                                            and  no_order LIKE '%$Order%' 
+                                            AND po LIKE '%$PO%' 
+                                            AND no_hanger LIKE '%$Hanger%' 
+                                            AND langganan LIKE '%$Langganan%' 
+                                            AND nodemand LIKE '%$Demand%' 
+                                            AND nokk LIKE '%$Prodorder%' 
+                                            AND pejabat LIKE '%$Pejabat%' 
+                                            $Where 
+                                            ORDER BY tgl_email ASC");
+            $jumlot = mysqli_fetch_array($rowlot);
+            $total= mysqli_num_rows($rowlot);
+            ?>
+            <td>Total Lot : <?php echo $total; ?></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>
+            <tr>
+            <!-- <td width="19%">Total Lot>2 Hari : <input name="totallot>2" type="text" placeholder="Ketik" style="font-size: 11px; margin-left: -7px;" /></td> -->
+            <td width="19%">Total Lot>2 Hari : <?php echo $total2; ?></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <?php 
+              $kurang = $total-$total2;
+              $persen = $kurang/$total;
+              $ld = $kurang/$total *100;
+            ?>
+      <tr>
+        <td>%:  &nbsp&nbsp&nbsp&nbsp&nbsp <?=number_format($ld).'%'?> </td>
+        <td align="center">Diserahkan Oleh :</td>
+        <td align="center">Diketahui Oleh :</td>
+        <td align="center"> Diketahui Oleh :</td>
       </tr>
       <tr>
         <td>Nama</td>

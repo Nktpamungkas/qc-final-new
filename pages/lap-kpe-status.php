@@ -23,6 +23,7 @@ $PO	= isset($_POST['po']) ? $_POST['po'] : '';
 $GShift	= isset($_POST['gshift']) ? $_POST['gshift'] : '';	
 $Fs		= isset($_POST['fasilitas']) ? $_POST['fasilitas'] : '';
 $sts_red = isset($_POST['sts_red']) ? $_POST['sts_red'] : '';
+$lt_up = isset($_POST['lt_up']) ? $_POST['lt_up'] : '';
 $sts_claim = isset($_POST['sts_claim']) ? $_POST['sts_claim'] : '';
 $Langganan	= isset($_POST['langganan']) ? $_POST['langganan'] : '';
 $Demand	= isset($_POST['demand']) ? $_POST['demand'] : '';
@@ -100,22 +101,36 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             </select>
         </div>
       </div>
+
+  <!-- Checkbox untuk Red Category Email -->
+    <!-- <div class="form-group">
+		  <label for="status_red" class="col-sm-0 control-label"></label>		  
+        <div class="col-sm-3">
+          <input type="checkbox" name="sts_red" id="sts_red" value="1" <?php  if($sts_red=="1"){ echo "checked";} ?>>  
+          <label> Red Category Email</label>
+        </div>		  	
+		</div> -->
+  <!-- End Checkbox Red Category Email -->
+
+  <!-- Chcekbox Untuk Leadtime Email -->
     <div class="form-group">
 		  <label for="status_red" class="col-sm-0 control-label"></label>		  
         <div class="col-sm-3">
-        <input type="checkbox" name="sts_red" id="sts_red" value="1" <?php  if($sts_red=="1"){ echo "checked";} ?>>  
-        <label> Red Category Email</label>
-          
+          <input type="checkbox" name="lt_up" id="lt_up" value="1" <?php  if($lt_up=="1"){ echo "checked";} ?>>  
+          <label> Leadtime Update Email</label>
         </div>		  	
-		  </div>
-      <div class="form-group">
+		</div>
+  <!-- End Checkbox Email -->
+
+  <!-- Checkbox untuk Claim -->
+    <!-- <div class="form-group">
 		  <label for="status_claim" class="col-sm-0 control-label"></label>		  
         <div class="col-sm-3">
-        <input type="checkbox" name="sts_claim" id="sts_claim" value="1" <?php  if($sts_claim=="1"){ echo "checked";} ?>>  
-        <label> Claim</label>
-          
+        <input type="checkbox" name="sts_claim" id="sts_claim" value="1" <?php  //if($sts_claim=="1"){ echo "checked";} ?>>  
+        <label> Claim</label>      
         </div>		  	
-		  </div>
+		</div> -->
+  <!-- End Checkbox Claim -->
     <!-- /.input group -->	
     </div>
     <!-- /.box-body -->
@@ -137,6 +152,9 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 		  
 		  
 		<div class="pull-right">
+      <?php if($lt_up=="1"){ ?>
+        <a href="pages/cetak/cetak_kpe_memo_leadtime.php?awal=<?php echo $Awal; ?>&akhir=<?php echo $Akhir; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>" class="btn btn-primary <?php if($Awal=="") { echo "disabled"; }?>" target="_blank">Cetak Leadtime Update</a>
+      <?php }?>
 			<a href="pages/cetak/cetak_kpe_memo_all.php?awal=<?php echo $Awal; ?>&akhir=<?php echo $Akhir; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>" class="btn btn-warning <?php if($Awal=="") { echo "disabled"; }?>" target="_blank">Cetak KPE All</a>
 			<a href="pages/cetak/cetak_kpe_memo_all.php?awal=<?php echo $Awal; ?>&akhir=<?php echo $Akhir; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>&excel=1" class="btn btn-warning <?php if($Awal=="") { echo "disabled"; }?>" target="_blank">Cetak KPE All Excel</a>
 			<a href="pages/cetak/cetak_kpe_memo.php?awal=<?php echo $Awal; ?>&akhir=<?php echo $Akhir; ?>&order=<?php echo $_POST['order']; ?>&po=<?php echo $_POST['po']; ?>&hanger=<?php echo $_POST['hanger']; ?>&langganan=<?php echo $_POST['langganan']; ?>&demand=<?php echo $_POST['demand']; ?>&prodorder=<?php echo $_POST['prodorder']; ?>&pejabat=<?php echo $_POST['pejabat']; ?>" class="btn btn-danger <?php if($Awal=="") { echo "disabled"; }?>" target="blank">Cetak KPE All (on progress)</a>
@@ -156,7 +174,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <th>PIC</th>
 			  <th>Tgl Email</th>
 			  <th>Tgl Jawab</th>
-			  <th>Tgl Solusi Akhir</th>
+			  <th>Tgl Update</th>
 			  <th>HOD</th>
 			  <th>Langganan</th>
 			  <th>No Demand</th>
@@ -201,7 +219,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               ORDER BY a.tgl_email ASC";
               $qry1=mysqli_query($con,$sql);
             }
-			
+
 			 
 			
 		

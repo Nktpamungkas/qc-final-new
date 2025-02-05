@@ -733,8 +733,44 @@ $rcek = mysqli_fetch_array($sqlCek);
 						} ?>>6 Hari Kerja</option>
 						</select>
 					</div>
+				</div>
 
 
+				<div class="form-group">
+					<!-- <div class="col-sm-3"> -->
+						<!-- <input type="checkbox" name="sts_red" id="sts_red" value="1" onClick="aktif1();" <?php if ($rcek['sts_red'] == "1") {
+						//echo "checked";
+					} ?>> -->
+						<!-- <label> Red Category Email</label> -->
+					<!-- </div> -->
+					<label for="leadtime_update" class="col-sm-3 control-label">Leadtime Update</label>
+					<div class="col-sm-3">
+						<select class="form-control select2" name="leadtime_update" required <?php if ($rcek['sts_red'] != "1") {
+						//echo "disabled";
+					} else {
+						//echo "enabled";
+					} ?>>
+							<option value="">Pilih</option>
+							<option value="1 Hari Kerja" <?php if ($rcek['leadtime_update'] == "1 Hari Kerja") {
+							//echo "SELECTED";
+						} ?>>1 Hari Kerja</option>
+							<option value="2 Hari Kerja" <?php if ($rcek['leadtime_update'] == "2 Hari Kerja") {
+							//echo "SELECTED";
+						} ?>>2 Hari Kerja</option>
+							<option value="3 Hari Kerja" <?php if ($rcek['leadtime_update'] == "3 Hari Kerja") {
+							//echo "SELECTED";
+						} ?>>3 Hari Kerja</option>
+							<option value="4 Hari Kerja" <?php if ($rcek['leadtime_update'] == "4 Hari Kerja") {
+							//echo "SELECTED";
+						} ?>>4 Hari Kerja</option>
+							<option value="5 Hari Kerja" <?php if ($rcek['leadtime_update'] == "5 Hari Kerja") {
+							//echo "SELECTED";
+						} ?>>5 Hari Kerja</option>
+							<option value="6 Hari Kerja" <?php if ($rcek['leadtime_update'] == "6 Hari Kerja") {
+							//echo "SELECTED";
+						} ?>>6 Hari Kerja</option>
+						</select>
+					</div>
 				</div>
 
 				<div class="form-group">
@@ -765,6 +801,18 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 				</div>
 
+				<div class="form-group">
+					<label for="tgl_email" class="col-sm-3 control-label">Tgl Leadtime Update</label>
+					<div class="col-sm-4">
+						<div class="input-group date">
+							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+							<input name="tgl_leadtime_update" type="text" class="form-control pull-right" id="datepicker"
+								placeholder="0000-00-00" value="<?php if ($cek > 0) {
+								//echo $rcek['tgl_email'];
+							} ?>" required />
+						</div>
+					</div>
+				</div>
 				<div class="form-group">
 					<label for="tgl_email" class="col-sm-3 control-label">Tgl Email / Tgl Jawab</label>
 					<div class="col-sm-4">
@@ -1277,6 +1325,8 @@ if ($_POST['save'] == "save") {
 	}
 
 	$sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET 
+		leadtime_update='$_POST[leadtime_update]',
+		tanggal_leadtime_update='$_POST[tgl_leadtime_update]',
 		status_penghubung='$_POST[status_penghubung]',
 		nokk='$_POST[nokk]',
 		nodemand='$_POST[nodemand]',
