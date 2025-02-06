@@ -22,6 +22,12 @@ GROUP BY a.nodemand
 ORDER BY a.id DESC LIMIT 1");
 $cek=mysqli_num_rows($sqlCek);
 $rcek=mysqli_fetch_array($sqlCek);
+$dt_penghubung = "SELECT 
+					* 
+						FROM tbl_qcf
+					WHERE nodemand ='$rcek[nodemand]' ";
+	$exec = mysqli_query($con,$dt_penghubung );
+	$penghubung = mysqli_fetch_array($exec);
 ?>
 <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form1" id="form1">
  <div class="box box-info">
@@ -54,6 +60,37 @@ $rcek=mysqli_fetch_array($sqlCek);
 			value="<?php if($cek>0){echo $rcek['no_order'];} ?>" readonly="readonly">
 		  </div> <font color="red"><?php if($rcek['masalah_ncp']!=""){ echo "Analisa Kerusakan: ".$rcek['masalah_ncp'];} ?></font>				   
 		</div>
+		<?php if(!empty($penghubung['penghubung_masalah'])||!empty($penghubung['penghubung2_masalah'])||!empty($penghubung['penghubung3_masalah'])){?>
+					<div class="form-group">
+						<label for="pengubung" class="col-sm-3 control-label">Bon Penghubung</label>
+						<div class="col-md-6">
+						<?php if(!empty($penghubung['penghubung_masalah'])){?>
+							<label for="penghubung" class="control-label">Issue 1 / Notes </label>
+							<br><br><?php echo $penghubung['penghubung_masalah'] .' / '. $penghubung['penghubung_keterangan'];?>
+						<?php }?>
+						<?php if(!empty($penghubung['penghubung2_masalah'])){?>
+							<br><br><label for="penghubung" class="control-label">Issue 2 / Notes</label>
+							<br><br><?php echo $penghubung['penghubung2_masalah'] .' / '. $penghubung['penghubung2_keterangan'];?>
+							<?php }?>
+						<?php if(!empty($penghubung['penghubung3_masalah'])){?>
+							<br><br><label for="penghubung" class="control-label">Issue 3 / Notes</label>
+							<br><br><?php echo $penghubung['penghubung3_masalah'] .' / '. $penghubung['penghubung3_keterangan'];?>
+							<?php }?>
+							<br><br>
+							<form id="myForm">
+								<label>
+									<input type="radio" name="status_penghubung" value="terima" required <?php if ($rcek['status_penghubung'] == 'terima') echo 'checked'; ?>> Yes
+								</label>
+								&nbsp;&nbsp;&nbsp;
+								<label>
+									<input type="radio" name="status_penghubung" value="tolak" required <?php if ($rcek['status_penghubung'] == 'tolak') echo 'checked'; ?>> No
+								</label>
+								<br><br>
+							</form>
+
+						</div>
+					</div>
+				<?php }?>
 		<div class="form-group">
 		  <label for="no_po" class="col-sm-3 control-label">Pelanggan</label>
 		  <div class="col-sm-6">
@@ -459,7 +496,42 @@ $rcek=mysqli_fetch_array($sqlCek);
 					</div>
 					
 			</div>
-			
+			<div class="form-group">
+					<!-- <div class="col-sm-3"> -->
+						<!-- <input type="checkbox" name="sts_red" id="sts_red" value="1" onClick="aktif1();" <?php if ($rcek['sts_red'] == "1") {
+						//echo "checked";
+					} ?>> -->
+						<!-- <label> Red Category Email</label> -->
+					<!-- </div> -->
+					<label for="leadtime_update" class="col-sm-3 control-label">Leadtime Update</label>
+					<div class="col-sm-3">
+						<select class="form-control select2" name="leadtime_update" required <?php if ($rcek['sts_red'] != "1") {
+						//echo "disabled";
+					} else {
+						//echo "enabled";
+					} ?>>
+							<option value="">Pilih</option>
+							<option value="1 Hari Kerja" <?php if ($rcek['leadtime_update'] == "1 Hari Kerja") {
+							echo "SELECTED";
+						} ?>>1 Hari Kerja</option>
+							<option value="2 Hari Kerja" <?php if ($rcek['leadtime_update'] == "2 Hari Kerja") {
+							echo "SELECTED";
+						} ?>>2 Hari Kerja</option>
+							<option value="3 Hari Kerja" <?php if ($rcek['leadtime_update'] == "3 Hari Kerja") {
+							echo "SELECTED";
+						} ?>>3 Hari Kerja</option>
+							<option value="4 Hari Kerja" <?php if ($rcek['leadtime_update'] == "4 Hari Kerja") {
+							echo "SELECTED";
+						} ?>>4 Hari Kerja</option>
+							<option value="5 Hari Kerja" <?php if ($rcek['leadtime_update'] == "5 Hari Kerja") {
+							echo "SELECTED";
+						} ?>>5 Hari Kerja</option>
+							<option value="6 Hari Kerja" <?php if ($rcek['leadtime_update'] == "6 Hari Kerja") {
+							echo "SELECTED";
+						} ?>>6 Hari Kerja</option>
+						</select>
+					</div>
+				</div>
 			<div class="form-group">
 							  
 					
@@ -478,6 +550,18 @@ $rcek=mysqli_fetch_array($sqlCek);
 					</div>
 			</div>
 			
+			<div class="form-group">
+					<label for="tgl_email" class="col-sm-3 control-label">Tgl Update</label>
+					<div class="col-sm-4">
+						<div class="input-group date">
+							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+							<input name="tgl_leadtime_update" type="text" class="form-control pull-right" id="datepicker"
+								placeholder="0000-00-00" value="<?php if ($cek > 0) {
+								echo $rcek['tanggal_leadtime_update'];
+							} ?>" required />
+						</div>
+					</div>
+				</div>
 			
 			<div class="form-group">		  	
 				<label for="tgl_email" class="col-sm-3 control-label">Tgl Email / Tgl Jawab</label>
@@ -495,7 +579,6 @@ $rcek=mysqli_fetch_array($sqlCek);
 				</div>
 			
 			</div>
-			
 			
 			<div class="form-group">
 				<div class="col-sm-3">
@@ -786,6 +869,9 @@ if($_POST['save']=="save"){
 	  if($_POST['addpersonil']=="1"){$addpersonil="1";}else{ $addpersonil="0";}
 	  
   	  $sqlData=mysqli_query($con,"UPDATE tbl_aftersales_now SET 
+		leadtime_update='$_POST[leadtime_update]',
+		tanggal_leadtime_update='$_POST[tgl_leadtime_update]',
+		status_penghubung='$_POST[status_penghubung]',	  
 		  nokk='$_POST[nokk]',
 		  langganan='$_POST[pelanggan]',
 		  pelanggan='$_POST[pelanggan1]',

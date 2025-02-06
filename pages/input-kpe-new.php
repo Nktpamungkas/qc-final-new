@@ -235,7 +235,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 				<?php if(!empty($penghubung['penghubung_masalah'])||!empty($penghubung['penghubung2_masalah'])||!empty($penghubung['penghubung3_masalah'])){?>
 					<div class="form-group">
 						<label for="pengubung" class="col-sm-3 control-label">Bon Penghubung</label>
-						<div class="col-md-3">
+						<div class="col-md-6">
 						<?php if(!empty($penghubung['penghubung_masalah'])){?>
 							<label for="penghubung" class="control-label">Issue 1 / Notes </label>
 							<br><br><?php echo $penghubung['penghubung_masalah'] .' / '. $penghubung['penghubung_keterangan'];?>
@@ -802,7 +802,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 				</div>
 
 				<div class="form-group">
-					<label for="tgl_email" class="col-sm-3 control-label">Tgl Leadtime Update</label>
+					<label for="tgl_email" class="col-sm-3 control-label">Tgl Update</label>
 					<div class="col-sm-4">
 						<div class="input-group date">
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
