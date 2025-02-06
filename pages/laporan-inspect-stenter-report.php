@@ -10,6 +10,7 @@ set_time_limit(0);
 <?php
 $Awal = isset($_POST['awal']) ? $_POST['awal'] : '';
 $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
+$shift = isset($_POST['shift']) ? $_POST['shift'] : '';
 // $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
 
 ?>
@@ -55,6 +56,17 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                     </div>
                     <!-- /.input group -->
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <select name="shift" id="shift" class="form-control" placeholder="Shift">
+                            <option value="">Pilih Shift</option>
+                            <option value="ALL">ALL</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                        </select>
+                    </div>
+                </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <div class="pull-right">
@@ -73,15 +85,25 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                     <b>Tanggal Inspeksi :
                         <?php echo $_POST['awal']; ?> s.d.
                         <?php echo $_POST['akhir']; ?>
+                        <?php echo $_POST['shift']; ?>
                     </b> <br><br>
                 </div>
                 <?php
-                $qryb = "SELECT
+                if ($_POST['shift'] == 'ALL') {
+                    $qryb = "SELECT
                             *
                         FROM
                             tbl_lap_stenter
                         WHERE
                             DATE(tanggal_buat) BETWEEN '$Awal' AND '$Akhir'";
+                } else {
+                    $qryb = "SELECT
+                            *
+                        FROM
+                            tbl_lap_stenter
+                        WHERE
+                            DATE(tanggal_buat) BETWEEN '$Awal' AND '$Akhir' AND shift = '$shift'";
+                }
                 $stmt1 = mysqli_query($con, $qryb);
                 if ($stmt1) {
                 ?>
