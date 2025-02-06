@@ -110,7 +110,7 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                     <th>Gramasi</th>
                                     <th>Operator</th>
                                     <th>No Warna</th>
-                                    <th>Proser</th>
+                                    <th>Proses</th>
                                     <th>Shift</th>
                                     <th>Tanggal Buat</th>
                                 </tr>
