@@ -491,12 +491,36 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label for="ket" class="col-sm-3 control-label">Shift</label>
+					<div class="col-sm-5">
+						<select name="shift" class="form-control" id="shift" required>
+							<option value="">Pilih</option>
+							<option value="A">A</option>
+							<option value="B">B</option>
+							<option value="C">C</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="ket" class="col-sm-3 control-label">Proser</label>
+					<div class="col-sm-5">
+						<select name="proses" class="form-control" id="proses" required>
+							<option value="">Pilih</option>
+							<option value="Oven">Oven</option>
+							<option value="Preset">Preset</option>
+							<option value="Fin Jadi">Fin Jadi</option>
+							<option value="Fin 1x">Fin 1x</option>
+							<option value="Fin Ulang">Fin Ulang</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
 					<label for="ket" class="col-sm-3 control-label">Status</label>
 					<div class="col-sm-5">
 						<select name="status" class="form-control" id="status" required>
 							<option value="">Pilih</option>
 							<option value="OK">OK</option>
-							<option value="NotOKE">Not OKE</option>
+							<option value="Reject">Reject</option>
 						</select>
 					</div>
 				</div>
@@ -592,6 +616,8 @@ if (isset($_POST['save'])) {
     $operator = mysqli_real_escape_string($con, $_POST['operator']);
     $roll = mysqli_real_escape_string($con, $_POST['roll']);
     $no_warna = mysqli_real_escape_string($con, $_POST['no_warna']);
+    $shift = mysqli_real_escape_string($con, $_POST['shift']);
+    $proses = mysqli_real_escape_string($con, $_POST['proses']);
 
     // Insert data into tbl_lap_stenter
     $sqlData = mysqli_query($con, "INSERT INTO tbl_lap_stenter SET
@@ -614,6 +640,8 @@ if (isset($_POST['save'])) {
         operator='$operator',
         roll='$roll',
         no_warna='$no_warna',
+        shift='$shift',
+        proses='$proses',
         tanggal_buat=NOW()
     ");
 

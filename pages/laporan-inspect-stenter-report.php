@@ -110,6 +110,8 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                     <th>Gramasi</th>
                                     <th>Operator</th>
                                     <th>No Warna</th>
+                                    <th>Proser</th>
+                                    <th>Shift</th>
                                     <th>Tanggal Buat</th>
                                 </tr>
 
@@ -154,6 +156,8 @@ $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
                                         <td><?php echo $row['gramasi']; ?></td>
                                         <td><?php echo $row['operator']; ?></td>
                                         <td><?php echo $row['no_warna']; ?></td>
+                                        <td><?php echo $row['proses']; ?></td>
+                                        <td><?php echo $row['shift']; ?></td>
                                         <td><?php echo $row['tanggal_buat']; ?></td>
                                     </tr>
                                 <?php
