@@ -132,7 +132,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <td><font size="-2">PIC</font></td>
 			<td><font size="-2">Tgl Email</font></td>
 			<td><font size="-2">Tgl Jawab</font></td>
-			<td><font size="-2">Tgl Leadtime Update</font></td>
+			<td><font size="-2">Tgl Update</font></td>
 			
 			<td><font size="-2">HOD</font></td>
 			<td><font size="-2">Langganan</font></td>
