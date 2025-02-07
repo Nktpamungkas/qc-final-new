@@ -502,7 +502,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="ket" class="col-sm-3 control-label">Proser</label>
+					<label for="ket" class="col-sm-3 control-label">Proses</label>
 					<div class="col-sm-5">
 						<select name="proses" class="form-control" id="proses" required>
 							<option value="">Pilih</option>
