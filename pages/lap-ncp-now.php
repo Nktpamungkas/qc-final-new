@@ -78,63 +78,17 @@ include "koneksi.php";
               <!-- /.input group -->
             </div>
             <div class="form-group">
+                  <?php 
+                 $fil_dept = mysqli_query($con, "SELECT * FROM filter_dept");
+                 $dfil = mysqli_fetch_all($fil_dept, MYSQLI_ASSOC);?>
               <div class="col-sm-10">
                 <select class="form-control select2" name="dept" id="dept" required>
-                  <option value="">Pilih</option>
-                  <option value="ALL" <?php if ($Dept == "ALL") {
-                                        echo "SELECTED";
-                                      } ?>>ALL</option>
-                  <option value="MKT" <?php if ($Dept == "MKT") {
-                                        echo "SELECTED";
-                                      } ?>>MKT</option>
-                  <option value="FIN" <?php if ($Dept == "FIN") {
-                                        echo "SELECTED";
-                                      } ?>>FIN</option>
-                  <option value="DYE" <?php if ($Dept == "DYE") {
-                                        echo "SELECTED";
-                                      } ?>>DYE</option>
-                  <option value="KNT" <?php if ($Dept == "KNT") {
-                                        echo "SELECTED";
-                                      } ?>>KNT</option>
-                  <option value="LAB" <?php if ($Dept == "LAB") {
-                                        echo "SELECTED";
-                                      } ?>>LAB</option>
-                  <option value="PPC" <?php if ($Dept == "PPC") {
-                                        echo "SELECTED";
-                                      } ?>>PPC</option>
-                  <option value="QCF" <?php if ($Dept == "QCF") {
-                                        echo "SELECTED";
-                                      } ?>>QCF</option>
-                  <option value="RMP" <?php if ($Dept == "RMP") {
-                                        echo "SELECTED";
-                                      } ?>>RMP</option>
-                  <option value="KNK" <?php if ($Dept == "KNK") {
-                                        echo "SELECTED";
-                                      } ?>>KNK</option>
-                  <option value="GKG" <?php if ($Dept == "GKG") {
-                                        echo "SELECTED";
-                                      } ?>>GKG</option>
-                  <option value="GKJ" <?php if ($Dept == "GKJ") {
-                                        echo "SELECTED";
-                                      } ?>>GKJ</option>
-                  <option value="GAS" <?php if ($Dept == "GAS") {
-                                        echo "SELECTED";
-                                      } ?>>GAS</option>
-                  <option value="BRS" <?php if ($Dept == "BRS") {
-                                        echo "SELECTED";
-                                      } ?>>BRS</option>
-                  <option value="PRT" <?php if ($Dept == "PRT") {
-                                        echo "SELECTED";
-                                      } ?>>PRT</option>
-                  <option value="YND" <?php if ($Dept == "YND") {
-                                        echo "SELECTED";
-                                      } ?>>YND</option>
-                  <option value="PRO" <?php if ($Dept == "PRO") {
-                                        echo "SELECTED";
-                                      } ?>>PRO</option>
-                  <option value="TAS" <?php if ($Dept == "TAS") {
-                                        echo "SELECTED";
-                                      } ?>>TAS</option>
+                    <option value="">Pilih</option>
+                    <?php foreach ($dfil as $dept_filter): ?>
+                        <option value="<?php echo $dept_filter['nama']; ?>" <?php if ($Dept == $dept_filter['nama']) { echo "SELECTED"; } ?>>
+                            <?php echo $dept_filter['nama']; ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
               </div>
               <!-- /.input group -->
