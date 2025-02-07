@@ -2638,6 +2638,18 @@ $page = strtolower($page);
             format: 'yyyy-mm-dd',
             todayHighlight: true,
         })
+        //Date picker
+        $('#datepicker5').datepicker({
+            autoclose: true,
+            format: 'yyyy-mm-dd',
+            todayHighlight: true,
+        })
+        //Date picker
+        $('#datepicker6').datepicker({
+            autoclose: true,
+            format: 'yyyy-mm-dd',
+            todayHighlight: true,
+        })
     </script>
     <script type="text/javascript">
         $(function () {

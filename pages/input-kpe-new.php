@@ -802,11 +802,11 @@ $rcek = mysqli_fetch_array($sqlCek);
 				</div>
 
 				<div class="form-group">
-					<label for="tgl_email" class="col-sm-3 control-label">Tgl Update</label>
+					<label for="tgl_leadtime_update" class="col-sm-3 control-label">Tgl Update</label>
 					<div class="col-sm-4">
 						<div class="input-group date">
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-							<input name="tgl_leadtime_update" type="text" class="form-control pull-right" id="datepicker"
+							<input name="tgl_leadtime_update" type="text" class="form-control pull-right" id="datepicker5"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
 								//echo $rcek['tgl_email'];
 							} ?>" required />
