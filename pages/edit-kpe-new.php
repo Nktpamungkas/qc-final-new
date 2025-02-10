@@ -494,8 +494,27 @@ $dt_penghubung = "SELECT
 							<option value="6 Hari Kerja" <?php if($rcek['leadtime_email']=="6 Hari Kerja"){echo "SELECTED";}?>>6 Hari Kerja</option>
 						</select>	
 					</div>
-					
-			</div>
+
+					<label for="klasifikasi" class="col-sm-2 control-label">Klasifikasi</label>
+						<div class="col-sm-3">
+							<?php 
+							$fil_penyebab = mysqli_query($con, "SELECT * 
+																FROM tbl_penyebab 
+																WHERE field_name = 'penyebab' ");
+							$dklasifikasi = mysqli_fetch_all($fil_penyebab, MYSQLI_ASSOC);
+							?>
+							<select class="form-control select2" name="klasifikasi">
+								<option value="">Pilih</option>
+								<?php foreach ($dklasifikasi as $penyebab): ?>
+									<option value="<?php echo $penyebab['name']; ?>" <?php if($rcek['klasifikasi'] == $penyebab['name']){ echo "SELECTED"; } ?>>
+										<?php echo $penyebab['name']; ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+
+
 			<div class="form-group">
 					<!-- <div class="col-sm-3"> -->
 						<!-- <input type="checkbox" name="sts_red" id="sts_red" value="1" onClick="aktif1();" <?php if ($rcek['sts_red'] == "1") {
@@ -869,6 +888,7 @@ if($_POST['save']=="save"){
 	  if($_POST['addpersonil']=="1"){$addpersonil="1";}else{ $addpersonil="0";}
 	  
   	  $sqlData=mysqli_query($con,"UPDATE tbl_aftersales_now SET 
+	  	klasifikasi = '$_POST[klasifikasi]',
 		leadtime_update='$_POST[leadtime_update]',
 		tanggal_leadtime_update='$_POST[tgl_leadtime_update]',
 		status_penghubung='$_POST[status_penghubung]',	  

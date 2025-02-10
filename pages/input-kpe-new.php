@@ -733,6 +733,27 @@ $rcek = mysqli_fetch_array($sqlCek);
 						} ?>>6 Hari Kerja</option>
 						</select>
 					</div>
+
+				<label for="klasifikasi" class="col-sm-2 control-label">Klasifikasi</label>
+					<div class="col-sm-3">
+					<?php 
+                 $fil_penyebab = mysqli_query($con, "SELECT * 
+				 									FROM tbl_penyebab 
+													WHERE field_name = 'penyebab' ");
+                 $dklasifikasi = mysqli_fetch_all($fil_penyebab, MYSQLI_ASSOC);?>
+						<select class="form-control select2" name="klasifikasi" <?php if ($rcek['sts_red'] != "1") {
+						//echo "disabled";
+					} else {
+						//echo "enabled";
+					} ?>>
+							<option value="">Pilih</option>
+							<?php foreach ($dklasifikasi as $penyebab): ?>
+                        <option value="<?php echo $penyebab['name']; ?>" <?php if ($rcek['klasifikasi'] == $penyebab['name']) { echo "SELECTED"; } ?>>
+                            <?php echo $penyebab['name']; ?>
+                        </option>
+                    <?php endforeach; ?>
+						</select>
+					</div>
 				</div>
 
 
@@ -745,7 +766,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 					<!-- </div> -->
 					<label for="leadtime_update" class="col-sm-3 control-label">Leadtime Update</label>
 					<div class="col-sm-3">
-						<select class="form-control select2" name="leadtime_update" required <?php if ($rcek['sts_red'] != "1") {
+						<select class="form-control select2" name="leadtime_update" <?php if ($rcek['sts_red'] != "1") {
 						//echo "disabled";
 					} else {
 						//echo "enabled";
@@ -809,7 +830,7 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<input name="tgl_leadtime_update" type="text" class="form-control pull-right" id="datepicker5"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
 								//echo $rcek['tgl_email'];
-							} ?>" required />
+							} ?>" />
 						</div>
 					</div>
 				</div>
@@ -1177,9 +1198,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="penyebab" class="col-sm-3 control-label">Penyebab</label>
+					<label for="penyebab_masalah" class="col-sm-3 control-label">Penyebab</label>
 					<div class="col-sm-6">
-						<input name="penyebab" type="text" class="form-control" id="penyebab" value="<?php if ($cek > 0) {
+						<input name="penyebab_masalah" type="text" class="form-control" id="penyebab_masalah" value="<?php if ($cek > 0) {
 						//echo $rcek['penyebab'];
 					} ?>" placeholder="Penyebab" <?php if ($rcek['sts'] != "1" or $rcek['sts_disposisiqc'] != "1" or $rcek['sts_disposisipro'] != "1") {
 					 //echo "disabled";
@@ -1325,6 +1346,7 @@ if ($_POST['save'] == "save") {
 	}
 
 	$sqlData = mysqli_query($con, "INSERT INTO tbl_aftersales_now SET 
+		klasifikasi = '$_POST[klasifikasi]',
 		leadtime_update='$_POST[leadtime_update]',
 		tanggal_leadtime_update='$_POST[tgl_leadtime_update]',
 		status_penghubung='$_POST[status_penghubung]',
