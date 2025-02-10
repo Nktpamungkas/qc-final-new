@@ -1540,6 +1540,23 @@ $page = strtolower($page);
                                         <span>TOP 5</span></a></li>
                             </ul>
                         </li>
+                        <li class="treeview <?php if ($_GET['p'] == "Top 5 ") {
+                            echo "active";
+                        } ?>">
+                            <a href="#"><i class="fa fa-tag"></i> <span>Laporan Loss </span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<?php if ($_GET['p'] == "LaporanLoss") {
+                                    echo "active";
+                                } ?> <?php if ($_SESSION['akses'] == "biasa") {
+                                      echo "hidden";
+                                  } ?>"><a href="LaporanLoss"><i class="fa fa-file-text"></i>
+                                        <span>Laporan Loss</span></a></li>
+                            </ul>
+                        </li>
                     <?php } ?>
                 </ul>
                 <!-- /.sidebar-menu -->

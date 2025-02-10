@@ -541,4 +541,6 @@ RewriteRule ^LaporanInspeksiStanterReport$ ./index1.php?p=laporan-inspect-stente
 RewriteRule ^Top5Detail$ ./index1.php?p=top5_detail [L]
 RewriteRule ^Top5Detail-([^&]+)&([^&]+)&([^&]+)&([^&]+)$ ./index1.php?p=top5_detail&buyer=$1&awal=$2&akhir=$3&digit=$4 [L]
 
+RewriteRule ^LaporanLoss$ ./index1.php?p=laporan-loss [L]
+
 Options All -Indexes
