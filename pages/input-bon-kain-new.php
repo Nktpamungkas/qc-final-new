@@ -1,7 +1,7 @@
  <?php
 ini_set("error_reporting", 1);
 session_start();
-include"koneksi.php";
+include "koneksi.php";
 	$qryCek=mysqli_query($con,"SELECT * FROM tbl_aftersales_now WHERE `id`='$_GET[id]'");
 	$rCek=mysqli_fetch_array($qryCek);
 ?>

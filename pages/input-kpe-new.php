@@ -566,9 +566,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<option value="">Pilih</option>
 
 							<?php
-							$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
-							foreach ($depts as $dept) {
-								echo "<option value=\"$dept\">$dept</option>";
+							$qryDept = mysqli_query($con, "SELECT * FROM filter_dept");
+							while ($dept = mysqli_fetch_array($qryDept)) {
+								echo "<option value=\"{$dept['nama']}\">{$dept['nama']}</option>";
 							}
 							?>
 
@@ -590,9 +590,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<option value="">Pilih</option>
 
 							<?php
-							$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
-							foreach ($depts as $dept) {
-								echo "<option value=\"$dept\">$dept</option>";
+							$qryDept = mysqli_query($con, "SELECT * FROM filter_dept");
+							while ($dept1 = mysqli_fetch_array($qryDept)) {
+								echo "<option value=\"{$dept1['nama']}\">{$dept1['nama']}</option>";
 							}
 							?>
 
@@ -614,9 +614,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 							<option value="">Pilih</option>
 
 							<?php
-							$depts = ["MKT", "FIN", "DYE", "KNT", "LAB", "PRT", "KNK", "QCF", "GKG", "PRO", "RMP", "PPC", "TAS", "GKJ", "BRS", "CST", "GAS", "YND"];
-							foreach ($depts as $dept) {
-								echo "<option value=\"$dept\">$dept</option>";
+							$qryDept = mysqli_query($con, "SELECT * FROM filter_dept");
+							while ($dept2 = mysqli_fetch_array($qryDept)) {
+								echo "<option value=\"{$dept2['nama']}\">{$dept2['nama']}</option>";
 							}
 							?>
 

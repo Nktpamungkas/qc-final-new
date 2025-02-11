@@ -241,24 +241,11 @@ $rb=mysqli_fetch_array($qryb);
 					<div class="col-sm-2">
 						<select class="form-control select2" name="t_jawab">
 							<option value="">Pilih</option>
-							<option value="MKT" <?php if($rcek['t_jawab']=="MKT"){echo "SELECTED";}?>>MKT</option>
-							<option value="FIN" <?php if($rcek['t_jawab']=="FIN"){echo "SELECTED";}?>>FIN</option>
-							<option value="DYE" <?php if($rcek['t_jawab']=="DYE"){echo "SELECTED";}?>>DYE</option>
-							<option value="KNT" <?php if($rcek['t_jawab']=="KNT"){echo "SELECTED";}?>>KNT</option>
-							<option value="LAB" <?php if($rcek['t_jawab']=="LAB"){echo "SELECTED";}?>>LAB</option>
-							<option value="PRT" <?php if($rcek['t_jawab']=="PRT"){echo "SELECTED";}?>>PRT</option>
-							<option value="KNK" <?php if($rcek['t_jawab']=="KNK"){echo "SELECTED";}?>>KNK</option>
-							<option value="QCF" <?php if($rcek['t_jawab']=="QCF"){echo "SELECTED";}?>>QCF</option>
-							<option value="GKG" <?php if($rcek['t_jawab']=="GKG"){echo "SELECTED";}?>>GKG</option>
-							<option value="PRO" <?php if($rcek['t_jawab']=="PRO"){echo "SELECTED";}?>>PRO</option>
-							<option value="RMP" <?php if($rcek['t_jawab']=="RMP"){echo "SELECTED";}?>>RMP</option>
-							<option value="PPC" <?php if($rcek['t_jawab']=="PPC"){echo "SELECTED";}?>>PPC</option>
-							<option value="TAS" <?php if($rcek['t_jawab']=="TAS"){echo "SELECTED";}?>>TAS</option>
-							<option value="GKJ" <?php if($rcek['t_jawab']=="GKJ"){echo "SELECTED";}?>>GKJ</option>
-							<option value="BRS" <?php if($rcek['t_jawab']=="BRS"){echo "SELECTED";}?>>BRS</option>
-							<option value="CST" <?php if($rcek['t_jawab']=="CST"){echo "SELECTED";}?>>CST</option>
-							<option value="GAS" <?php if($rcek['t_jawab']=="GAS"){echo "SELECTED";}?>>GAS</option>
-							<option value="YND" <?php if($rcek['t_jawab']=="YND"){echo "SELECTED";}?>>YND</option>
+							<?php 
+							$sqlDept = mysqli_query($con, "SELECT * FROM filter_dept");
+							while ($rDept = mysqli_fetch_array($sqlDept)) { ?>
+								<option value="<?php echo $rDept['nama']; ?>" <?php if($rcek['t_jawab'] == $rDept['nama']) { echo "SELECTED"; } ?>><?php echo $rDept['nama']; ?></option>
+							<?php } ?>
 						</select>
 					</div>
 			</div>
@@ -267,24 +254,11 @@ $rb=mysqli_fetch_array($qryb);
 					<div class="col-sm-2">
 						<select class="form-control select2" name="t_jawab1">
 							<option value="">Pilih</option>
-							<option value="MKT" <?php if($rcek['t_jawab1']=="MKT"){echo "SELECTED";}?>>MKT</option>
-							<option value="FIN" <?php if($rcek['t_jawab1']=="FIN"){echo "SELECTED";}?>>FIN</option>
-							<option value="DYE" <?php if($rcek['t_jawab1']=="DYE"){echo "SELECTED";}?>>DYE</option>
-							<option value="KNT" <?php if($rcek['t_jawab1']=="KNT"){echo "SELECTED";}?>>KNT</option>
-							<option value="LAB" <?php if($rcek['t_jawab1']=="LAB"){echo "SELECTED";}?>>LAB</option>
-							<option value="PRT" <?php if($rcek['t_jawab1']=="PRT"){echo "SELECTED";}?>>PRT</option>
-							<option value="KNK" <?php if($rcek['t_jawab1']=="KNK"){echo "SELECTED";}?>>KNK</option>
-							<option value="QCF" <?php if($rcek['t_jawab1']=="QCF"){echo "SELECTED";}?>>QCF</option>
-							<option value="GKG" <?php if($rcek['t_jawab1']=="GKG"){echo "SELECTED";}?>>GKG</option>
-							<option value="PRO" <?php if($rcek['t_jawab1']=="PRO"){echo "SELECTED";}?>>PRO</option>
-							<option value="RMP" <?php if($rcek['t_jawab1']=="RMP"){echo "SELECTED";}?>>RMP</option>
-							<option value="PPC" <?php if($rcek['t_jawab1']=="PPC"){echo "SELECTED";}?>>PPC</option>
-							<option value="TAS" <?php if($rcek['t_jawab1']=="TAS"){echo "SELECTED";}?>>TAS</option>
-							<option value="GKJ" <?php if($rcek['t_jawab1']=="GKJ"){echo "SELECTED";}?>>GKJ</option>
-							<option value="BRS" <?php if($rcek['t_jawab1']=="BRS"){echo "SELECTED";}?>>BRS</option>
-							<option value="CST" <?php if($rcek['t_jawab1']=="CST"){echo "SELECTED";}?>>CST</option>
-							<option value="GAS" <?php if($rcek['t_jawab1']=="GAS"){echo "SELECTED";}?>>GAS</option>
-							<option value="YND" <?php if($rcek['t_jawab1']=="YND"){echo "SELECTED";}?>>YND</option>
+							<?php 
+							$sqlDept1 = mysqli_query($con, "SELECT * FROM filter_dept");
+							while ($rDept1 = mysqli_fetch_array($sqlDept1)) { ?>
+								<option value="<?php echo $rDept1['nama']; ?>" <?php if($rcek['t_jawab1'] == $rDept1['nama']) { echo "SELECTED"; } ?>><?php echo $rDept1['nama']; ?></option>
+							<?php } ?>
 						</select>
 					</div>
 			</div>
@@ -293,24 +267,11 @@ $rb=mysqli_fetch_array($qryb);
 					<div class="col-sm-2">
 						<select class="form-control select2" name="t_jawab2">
 							<option value="">Pilih</option>
-							<option value="MKT" <?php if($rcek['t_jawab2']=="MKT"){echo "SELECTED";}?>>MKT</option>
-							<option value="FIN" <?php if($rcek['t_jawab2']=="FIN"){echo "SELECTED";}?>>FIN</option>
-							<option value="DYE" <?php if($rcek['t_jawab2']=="DYE"){echo "SELECTED";}?>>DYE</option>
-							<option value="KNT" <?php if($rcek['t_jawab2']=="KNT"){echo "SELECTED";}?>>KNT</option>
-							<option value="LAB" <?php if($rcek['t_jawab2']=="LAB"){echo "SELECTED";}?>>LAB</option>
-							<option value="PRT" <?php if($rcek['t_jawab2']=="PRT"){echo "SELECTED";}?>>PRT</option>
-							<option value="KNK" <?php if($rcek['t_jawab2']=="KNK"){echo "SELECTED";}?>>KNK</option>
-							<option value="QCF" <?php if($rcek['t_jawab2']=="QCF"){echo "SELECTED";}?>>QCF</option>
-							<option value="GKG" <?php if($rcek['t_jawab2']=="GKG"){echo "SELECTED";}?>>GKG</option>
-							<option value="PRO" <?php if($rcek['t_jawab2']=="PRO"){echo "SELECTED";}?>>PRO</option>
-							<option value="RMP" <?php if($rcek['t_jawab2']=="RMP"){echo "SELECTED";}?>>RMP</option>
-							<option value="PPC" <?php if($rcek['t_jawab2']=="PPC"){echo "SELECTED";}?>>PPC</option>
-							<option value="TAS" <?php if($rcek['t_jawab2']=="TAS"){echo "SELECTED";}?>>TAS</option>
-							<option value="GKJ" <?php if($rcek['t_jawab2']=="GKJ"){echo "SELECTED";}?>>GKJ</option>
-							<option value="BRS" <?php if($rcek['t_jawab2']=="BRS"){echo "SELECTED";}?>>BRS</option>
-							<option value="CST" <?php if($rcek['t_jawab2']=="CST"){echo "SELECTED";}?>>CST</option>
-							<option value="GAS" <?php if($rcek['t_jawab2']=="GAS"){echo "SELECTED";}?>>GAS</option>
-							<option value="YND" <?php if($rcek['t_jawab2']=="YND"){echo "SELECTED";}?>>YND</option>
+							<?php 
+							$sqlDept2 = mysqli_query($con, "SELECT * FROM filter_dept");
+							while ($rDept2 = mysqli_fetch_array($sqlDept2)) { ?>
+								<option value="<?php echo $rDept2['nama']; ?>" <?php if($rcek['t_jawab2'] == $rDept2['nama']) { echo "SELECTED"; } ?>><?php echo $rDept2['nama']; ?></option>
+							<?php } ?>
 						</select>
 					</div>
 			</div>
