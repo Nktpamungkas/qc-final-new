@@ -1198,9 +1198,9 @@ $rcek = mysqli_fetch_array($sqlCek);
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="penyebab_masalah" class="col-sm-3 control-label">Penyebab</label>
+					<label for="penyebab" class="col-sm-3 control-label">Penyebab</label>
 					<div class="col-sm-6">
-						<input name="penyebab_masalah" type="text" class="form-control" id="penyebab_masalah" value="<?php if ($cek > 0) {
+						<input name="penyebab" type="text" class="form-control" id="penyebab" value="<?php if ($cek > 0) {
 						//echo $rcek['penyebab'];
 					} ?>" placeholder="Penyebab" <?php if ($rcek['sts'] != "1" or $rcek['sts_disposisiqc'] != "1" or $rcek['sts_disposisipro'] != "1") {
 					 //echo "disabled";
