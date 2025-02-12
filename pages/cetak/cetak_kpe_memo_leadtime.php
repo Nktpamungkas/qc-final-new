@@ -177,8 +177,8 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
                   AND nodemand LIKE '%$Demand%' 
                   AND nokk LIKE '%$Prodorder%' 
                   AND pejabat LIKE '%$Pejabat%' 
-                  and leadtime_email IN ('3 Hari Kerja', '4 Hari Kerja', '5 Hari Kerja', '6 Hari Kerja')
-                  $Where ORDER BY tgl_email ASC";
+                  AND leadtime_update IN ('3 Hari Kerja', '4 Hari Kerja', '5 Hari Kerja', '6 Hari Kerja')
+                  $Where ORDER BY tgl_update ASC";
   $qry1=mysqli_query($con,$sql_cek);
 
   }else{
@@ -266,7 +266,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
 						$rounded_angka = round($persentase,2);
 						echo $rounded_angka;
 					} else {
-					echo $persentase;
+					echo $persentase ;
 					}
 				?>%</font></td>
 			<td align="center"><font size="-2"><?=$tjawab;?></font></td>
@@ -294,7 +294,10 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
 			 <td align="center"><?=$total_qty_kirim?></td>
 			 <td align="center"><?=$total_qty_claim?></td>
 			 <td align="center">
-			 <?php $total_persentase_claim = ($total_qty_claim/$total_qty_kirim)*100;
+			 <?php $total_persentase_claim = 100;
+       if(!empty($total_qty_claim) && !empty($total_qty_kirim)){
+        $total_persentase_claim = ($total_qty_claim/$total_qty_kirim)*100;
+       }
 			 if (is_float($total_persentase_claim)) {
 						$rounded_angka = round($total_persentase_claim,2);
 						echo $rounded_angka;
@@ -354,8 +357,12 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <td></td>
             <td></td>
             <?php 
+            $kurang = 0;
+            $persen = 100;
+            if(!empty($total) && !empty($total2) ){
               $kurang = $total-$total2;
               $persen = ($kurang/$total)*100;
+            }
               
               if (is_float($persen)) {
                 $angka_ = round($persen,2);
