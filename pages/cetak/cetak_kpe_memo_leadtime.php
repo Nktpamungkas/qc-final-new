@@ -328,20 +328,10 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <tr>
             <!-- <td>Total Lot : <input name="totallot" type="text" placeholder="Ketik" style="font-size: 11px; margin-left: 29px;" /></td> -->
              <?php
-            $rowlot = mysqli_query($con, "SELECT 
-                                              * 
-                                            FROM tbl_aftersales_now 
-                                            WHERE 
-                                              ( solusi is null or solusi = '' ) 
-                                            and  no_order LIKE '%$Order%' 
-                                            AND po LIKE '%$PO%' 
-                                            AND no_hanger LIKE '%$Hanger%' 
-                                            AND langganan LIKE '%$Langganan%' 
-                                            AND nodemand LIKE '%$Demand%' 
-                                            AND nokk LIKE '%$Prodorder%' 
-                                            AND pejabat LIKE '%$Pejabat%' 
-                                            $Where 
-                                            ORDER BY tgl_email ASC");
+            $rowlot = mysqli_query($con, "SELECT * FROM tbl_aftersales_now
+              WHERE DATE_FORMAT(tgl_buat, '%Y-%m-%d') BETWEEN '$Awal' AND '$Akhir' 
+              -- AND sts_red='1' 
+              AND (leadtime_email = '1 Hari Kerja' OR leadtime_email = '2 Hari Kerja' OR leadtime_email = '3 Hari Kerja' OR leadtime_email = '4 Hari Kerja' OR leadtime_email = '5 Hari Kerja' OR leadtime_email = '6 Hari Kerja')");
             $jumlot = mysqli_fetch_array($rowlot);
             $total= mysqli_num_rows($rowlot);
             ?>
