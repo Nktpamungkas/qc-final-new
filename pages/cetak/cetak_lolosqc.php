@@ -162,7 +162,7 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
         <thead>
 
           <tr align="center">
-            <td colspan="17">
+            <td colspan="19">
               <strong>
                 <font size="+1">LAPORAN KELUHAN PELANGGAN EKSTERNAL &quot;LOLOS QC&quot;</font><br />
                 <font size="-1">Periode: <?php echo date("d/m/Y", strtotime($Awal)); ?> s/d
@@ -206,6 +206,9 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
             </td>
             <td>
               <font size="-2"><strong>MASALAH</strong></font>
+            </td>
+            <td>
+              <font size="-2"><strong>MASALAH DOMINAN</strong></font>
             </td>
             <td>
               <font size="-2"><strong>TGL PROSES</strong></font>
@@ -308,7 +311,7 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
             } else if ($row1['t_jawab'] == "" and $row1['t_jawab1'] == "" and $row1['t_jawab2'] == "") {
               $tjawab = "";
             }
-            ?>
+          ?>
             <tr valign="top">
               <td align="center">
                 <font size="-2"><?php echo $no; ?></font>
@@ -347,6 +350,11 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
               </td>
               <td valign="top">
                 <font size="-2">
+                  <?php echo $row1['masalah_dominan']; ?> <!-- MASALAH DOMINAN -->
+                </font>
+              </td>
+              <td valign="top">
+                <font size="-2">
                   <?php if ($row1['masalah_dominan'] == "Salah Sticker" or $row1['masalah_dominan'] == "Salah Proses" or $row1['masalah_dominan'] == "Short Yard") {
                     echo $rPACK['TGL_PACK'];
                   } else if ($row1['masalah_dominan'] == "Beda Warna") {
@@ -357,12 +365,12 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
                 </font>
               </td>
               <!-- <?php if (strpos($rQCF['ket'], 'AKJ') !== false) {
-                echo $rQCF['tgl_masuk'];
-              } else if ($rQCF['masalah_dominan'] == "Beda Warna") {
-                echo $rQCF['tgl_fin'];
-              } else if ($rQCF['masalah_dominan'] != "Beda Warna") {
-                echo $rQCF['tgl_ins'];
-              } ?> -->
+                      echo $rQCF['tgl_masuk'];
+                    } else if ($rQCF['masalah_dominan'] == "Beda Warna") {
+                      echo $rQCF['tgl_fin'];
+                    } else if ($rQCF['masalah_dominan'] != "Beda Warna") {
+                      echo $rQCF['tgl_ins'];
+                    } ?> -->
               <td valign="top">
                 <font size="-2"><?php echo $row1['solusi']; ?></font>
               </td>
@@ -402,13 +410,13 @@ $nmBln = array(1 => "JANUARI", "FEBUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI
               </td>
               <td valign="top">
                 <font size="-2"><?php if ($row1['sts_check'] == "Ceklis") {
-                  echo "&#10004";
-                } else {
-                  echo "X";
-                } ?></font>
+                                  echo "&#10004";
+                                } else {
+                                  echo "X";
+                                } ?></font>
               </td>
             </tr>
-            <?php $no++;
+          <?php $no++;
             $tkirim = $tkirim + $row1['qty_kirim'];
             $tclaim = $tclaim + $row1['qty_claim'];
           } ?>
