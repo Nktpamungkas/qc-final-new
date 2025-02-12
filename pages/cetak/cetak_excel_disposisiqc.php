@@ -51,6 +51,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
         <td><font size="-2"><strong>QTY KELUHAN</strong></font></td>
 		<td><font size="-2"><strong>QTY DISPOSISI QC</strong></font></td>
         <td><font size="-2"><strong>MASALAH</strong></font></td>
+        <td><font size="-2"><strong>MASALAH DOMINAN</strong></font></td>
         <td><font size="-2"><strong>SOLUSI</strong></font></td>
         <td><font size="-2"><strong>PENYEBAB</strong></font></td>
         <td><font size="-2"><strong>PEJABAT</strong></font></td>
@@ -103,6 +104,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             <td align="right"><font size="-2"><?php echo strtoupper($row1['qty_claim']);?></font></td>
 			<td align="right"><font size="-2"><?php if($row1['sts_disposisiqc']=="1"){ echo $lolos=$row1['qty_lolos']; }else{ echo $lolos="0"; } ?></font></td> 
             <td valign="top"><font size="-2"><?php echo $row1['masalah'];?></font></td>
+            <td valign="top"><font size="-2"><?php echo $row1['masalah_dominan'];?></font></td>
             <td valign="top"><font size="-2"><?php echo $row1['solusi'];?></font></td>
             <td valign="top"><font size="-2"><?php echo $row1['penyebab'];?></font></td>
             <td valign="top"><font size="-2"><?php echo $row1['pejabat'];?></font></td>
@@ -382,7 +384,7 @@ $nmBln=array(1 => "JANUARI","FEBUARI","MARET","APRIL","MEI","JUNI","JULI","AGUST
             
             <tr>
                 <td align="left"><strong>Total Kirim</strong></td>
-                <td align="right"><strong><?php echo number_format($TotalKirim,2)." Kg"; ?></strong></td>
+                <td align="right"><strong><?php echo !empty($TotalKirim) ? number_format($TotalKirim, 2) . " Kg" : "0.00 Kg"; ?></strong></td>
             </tr>
             <tr>
                 <td align="left"><strong>Total Lot Kain</strong></td>
