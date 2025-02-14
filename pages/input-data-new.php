@@ -1515,6 +1515,7 @@ if($_POST['save']=="save"){
 		$penghubung3_roll2 =  $_POST['penghubung3_roll2'];
 		$penghubung3_roll3 =  $_POST['penghubung3_roll3'];
 		$penghubung3_roll4 =  $_POST['penghubung3_roll4'];
+		$bonorder =  $_POST['no_order'];
 		
 		$array_penghubung_dep3=$_POST['penghubung3_dep'];
 		if (isset($array_penghubung_dep3)) {
@@ -1563,7 +1564,8 @@ if($_POST['save']=="save"){
 		$mail->Subject = 'Approve Bon Penghubung QCF-'.$_POST['pelanggan'];
 		$mail->isHTML(true);
 		$mail->Body = "<p>Dear MKT Teams,</p>
-						<p>Mohon ditindaklanjuti terkait Approval Bon Penghubung.</p>
+						<p>Mohon ditindaklanjuti terkait Approval Bon Penghubung</p>
+						<p>Bon Order: $bonorder</p>
 						<p>&nbsp;</p>
 						<p>&nbsp; Dengan detail masalah $penghubung_masalah - $penghubung_keterangan pada roll $penghubung_roll1 </p>
 						<p>&nbsp;</p>";
