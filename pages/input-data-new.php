@@ -1547,7 +1547,7 @@ if($_POST['save']=="save"){
 		$mail->Port       = 587;
 
 		$mail->setFrom('dept.it@indotaichen.com', 'DEPT IT');
-		$mail->addAddress('qcf.adm@indotaichen.com', 'ADM QCF');
+		// $mail->addAddress('qcf.adm@indotaichen.com', 'ADM QCF');
 		// $mail->addAddress('adm.mkt@indotaichen.com', 'ADM MKT');
 		// $mail->addAddress('arif.efendi@indotaichen.com', 'Arif Efendi');
 		$mail->addAddress('tobias.sulistiyo@indotaichen.com', 'TOBIAS');
@@ -1560,7 +1560,7 @@ if($_POST['save']=="save"){
 				$mail->addAddress($data_email['email'], $data_email['user']);
 			}
 		}
-		$mail->Subject = 'Approve Bon Penghubung QCF';
+		$mail->Subject = 'Approve Bon Penghubung QCF-'.$_POST['pelanggan'];
 		$mail->isHTML(true);
 		$mail->Body = "<p>Dear MKT Teams,</p>
 						<p>Mohon ditindaklanjuti terkait Approval Bon Penghubung.</p>
