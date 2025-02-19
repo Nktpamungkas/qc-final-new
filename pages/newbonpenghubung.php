@@ -133,6 +133,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
          <th colspan=2 ><div align="center" valign="middle">QTY-FOC</div></th>
          <th colspan=2 ><div align="center" valign="middle">ESTIMASI FOC</div></th>
          <th colspan=3 ><div align="center" valign="middle">QTY-BERMASALAH</div></th>
+         <th colspan=4 ><div align="center" valign="middle">NCP</div></th>
 
 			   <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
@@ -163,6 +164,11 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         <th><div align="center" valign="middle">ROLL</div></th>
 				<th><div align="center" valign="middle">KG</div></th>
 				<th><div align="center" valign="middle">YARD</div></th>
+        <!-- NCP -->
+        <th><div align="center" valign="middle">NO. NCP</div></th>
+        <th><div align="center" valign="middle">MASALAH UTAMA</div></th>
+        <th><div align="center" valign="middle">AKAR MASALAH</div></th>
+        <th><div align="center" valign="middle">SOLUSI JANGKA PANJANG</div></th>
 				
 				
 				
@@ -213,13 +219,23 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             $default_fields = " AND tq.sts_pbon!='10' AND (tq.penghubung_masalah !='' or tq.penghubung_keterangan !='' or tq.penghubung_roll1 !='' or tq.penghubung_roll2 !='' or tq.penghubung_roll3 !=''  or tq.penghubung_dep !='' or tq.penghubung_dep_persen !='') ";
             $group_by_fields = " GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan, tq.tgl_masuk, tq.nodemand; ";
 
-            $sql_code = "SELECT  tq.*, tli.qty_loss AS qty_sisa, tli.satuan AS satuan_sisa FROM tbl_qcf tq 
-                      LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand and tq.no_order = tli.no_order ";
+            $sql_code = "SELECT
+                          tq.*,
+                          GROUP_CONCAT( DISTINCT b.no_ncp_gabungan SEPARATOR ', ' ) AS no_ncp,
+                          GROUP_CONCAT( DISTINCT b.masalah_dominan SEPARATOR ', ' ) AS masalah_utama,
+                          GROUP_CONCAT( DISTINCT b.akar_masalah SEPARATOR ', ' ) AS akar_masalah,
+                          GROUP_CONCAT( DISTINCT b.solusi_panjang SEPARATOR ', ' ) AS solusi_panjang,
+                          tli.qty_loss AS qty_sisa,
+                          tli.satuan AS satuan_sisa 
+                        FROM
+                          tbl_qcf tq
+                          LEFT JOIN tbl_lap_inspeksi tli ON tq.nodemand = tli.nodemand 
+                          AND tq.no_order = tli.no_order
+                          LEFT JOIN tbl_ncp_qcf_now b ON tq.nodemand = b.nodemand ";
 
             if(count($fields) > 0) {
               $sql_code .= "WHERE " . implode("AND", $fields) . $default_fields . $group_by_fields;
             }
-            
             $sql=mysqli_query($con,$sql_code);
             
 			/*
@@ -303,6 +319,11 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
         <td align="center"><?php echo $row1['penghubung_roll1'];?></td>
 			  <td align="center"><?php echo $row1['penghubung_roll2'];?></td>
 			  <td align="center"><?php echo $row1['penghubung_roll3'];?></td>
+
+        <td align="center"><?php echo $row1['no_ncp'];?></td>
+			  <td align="center"><?php echo $row1['masalah_utama'];?></td>
+			  <td align="center"><?php echo $row1['akar_masalah'];?></td>
+			  <td align="center"><?php echo $row1['solusi_panjang'];?></td>
 
 			   <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
@@ -412,6 +433,11 @@ echo $row_actual_delivery['ACTUAL_DELIVERY'];?></td>
 			  
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
+			  <td align="center"><?php echo $row1['no_ncp'];?></td>
+			  <td align="center"><?php echo $row1['masalah_utama'];?></td>
+			  <td align="center"><?php echo $row1['akar_masalah'];?></td>
+			  <td align="center"><?php echo $row1['solusi_panjang'];?></td>
+
 			   <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
 			    <td align="center"><?php echo $row1['advice2'];?></td>
@@ -518,6 +544,11 @@ echo $row_actual_delivery['ACTUAL_DELIVERY'];?></td>
       <td align="center"><?php echo $row1['penghubung3_roll2'];?></td>
       <td align="center"><?php echo $row1['penghubung3_roll3'];?></td>
         
+      <td align="center"><?php echo $row1['no_ncp'];?></td>
+			  <td align="center"><?php echo $row1['masalah_utama'];?></td>
+			  <td align="center"><?php echo $row1['akar_masalah'];?></td>
+			  <td align="center"><?php echo $row1['solusi_panjang'];?></td>
+
 			   <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>
 			    <td align="center"><?php echo $row1['advice3'];?></td>

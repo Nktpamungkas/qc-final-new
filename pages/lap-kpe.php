@@ -309,7 +309,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
                           GROUP_CONCAT( distinct b.akar_masalah separator ', ' ) as akar_masalah,
                           GROUP_CONCAT( distinct b.solusi_panjang separator ', ' ) as solusi_panjang 
               FROM tbl_aftersales_now a 
-              LEFT JOIN tbl_ncp_qcf_new b ON a.nodemand=b.nodemand 
+              LEFT JOIN tbl_ncp_qcf_now b ON a.nodemand=b.nodemand 
               WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $WhereKategori $stsclaim 
               -- WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $WhereKategori $stsred $stsclaim 
               GROUP BY a.nodemand, a.masalah_dominan
@@ -403,9 +403,9 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               echo '';
             }?></td>
             <td><?php echo $row1['no_ncp'];?></td>
-            <td><?php echo $row1['masalah_ncp'];?></td>
-            <td><?php echo $row1['no_ncp'];?></td>
-            <td><?php echo $row1['masalah_ncp'];?></td>
+            <td><?php echo $row1['masalah_utama'];?></td>
+            <td><?php echo $row1['akar_masalah'];?></td>
+            <td><?php echo $row1['solusi_panjang'];?></td>
             <td><?php echo $row1['ket'];?></td>
             </tr>
           <?php	$no++;  }} ?>
