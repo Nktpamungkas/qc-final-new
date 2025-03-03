@@ -83,7 +83,7 @@ if (isset($_POST['nodemand']) && isset($_POST['action'])) {
                     }
                 }
 
-                $mail->Subject = 'Closed Bon Penghubung QCF';
+                $mail->Subject = 'Closed Bon Penghubung QCF-'.htmlspecialchars($nodemand);
                 $mail->isHTML(true);
                 $mail->Body = "<p>Dear PPC Teams,</p>
                                <p>Mohon ditindaklanjuti terkait Approval Bon Penghubung.</p>
