@@ -133,7 +133,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
          <th colspan=2 ><div align="center" valign="middle">QTY-FOC</div></th>
          <th colspan=2 ><div align="center" valign="middle">ESTIMASI FOC</div></th>
          <th colspan=3 ><div align="center" valign="middle">QTY-BERMASALAH</div></th>
-         <th colspan=4 ><div align="center" valign="middle">NCP</div></th>
+         <!-- <th colspan=4 ><div align="center" valign="middle">NCP</div></th> -->
 
 			   <th  rowspan=2><div align="center" valign="middle">ISSUE</div></th>
 			   <th  rowspan=2><div align="center" valign="middle">NOTES</div></th>
@@ -165,10 +165,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 				<th><div align="center" valign="middle">KG</div></th>
 				<th><div align="center" valign="middle">YARD</div></th>
         <!-- NCP -->
-        <th><div align="center" valign="middle">NO. NCP</div></th>
+        <!-- <th><div align="center" valign="middle">NO. NCP</div></th>
         <th><div align="center" valign="middle">MASALAH UTAMA</div></th>
         <th><div align="center" valign="middle">AKAR MASALAH</div></th>
-        <th><div align="center" valign="middle">SOLUSI JANGKA PANJANG</div></th>
+        <th><div align="center" valign="middle">SOLUSI JANGKA PANJANG</div></th> -->
 				
 				
 				
@@ -320,10 +320,11 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 			  <td align="center"><?php echo $row1['penghubung_roll2'];?></td>
 			  <td align="center"><?php echo $row1['penghubung_roll3'];?></td>
 
-        <td align="center"><?php echo $row1['no_ncp'];?></td>
+        <!-- NCP -->
+        <!-- <td align="center"><?php echo $row1['no_ncp'];?></td>
 			  <td align="center"><?php echo $row1['masalah_utama'];?></td>
 			  <td align="center"><?php echo $row1['akar_masalah'];?></td>
-			  <td align="center"><?php echo $row1['solusi_panjang'];?></td>
+			  <td align="center"><?php echo $row1['solusi_panjang'];?></td> -->
 
 			   <td align="center"><?php echo $row1['penghubung_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung_keterangan'];?></td>
@@ -433,10 +434,11 @@ echo $row_actual_delivery['ACTUAL_DELIVERY'];?></td>
 			  
 			  <!-- <td align="center"><?php echo $row1['penghubung_foc3'];?></td> -->
 
-			  <td align="center"><?php echo $row1['no_ncp'];?></td>
+        <!-- NCP -->
+			  <!-- <td align="center"><?php echo $row1['no_ncp'];?></td>
 			  <td align="center"><?php echo $row1['masalah_utama'];?></td>
 			  <td align="center"><?php echo $row1['akar_masalah'];?></td>
-			  <td align="center"><?php echo $row1['solusi_panjang'];?></td>
+			  <td align="center"><?php echo $row1['solusi_panjang'];?></td> -->
 
 			   <td align="center"><?php echo $row1['penghubung2_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung2_keterangan'];?></td>
@@ -544,10 +546,11 @@ echo $row_actual_delivery['ACTUAL_DELIVERY'];?></td>
       <td align="center"><?php echo $row1['penghubung3_roll2'];?></td>
       <td align="center"><?php echo $row1['penghubung3_roll3'];?></td>
         
-      <td align="center"><?php echo $row1['no_ncp'];?></td>
+      <!-- NCP -->
+      <!-- <td align="center"><?php echo $row1['no_ncp'];?></td>
 			  <td align="center"><?php echo $row1['masalah_utama'];?></td>
 			  <td align="center"><?php echo $row1['akar_masalah'];?></td>
-			  <td align="center"><?php echo $row1['solusi_panjang'];?></td>
+			  <td align="center"><?php echo $row1['solusi_panjang'];?></td> -->
 
 			   <td align="center"><?php echo $row1['penghubung3_masalah'];?></td>
 			    <td align="center"><?php echo $row1['penghubung3_keterangan'];?></td>
