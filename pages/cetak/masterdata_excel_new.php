@@ -547,8 +547,8 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
       <th bgcolor="#99FF99">Dry</th>
       <th bgcolor="#99FF99">Wet</th>
     </tr>
-    <tr>
-      <td colspan="16" style="text-align: center;">Standar</td>
+    <tr style="text-align: center; background-color: yellow;">
+      <td colspan="16">Standar</td>
       <td></td>
       <td></td>
       <td></td>
