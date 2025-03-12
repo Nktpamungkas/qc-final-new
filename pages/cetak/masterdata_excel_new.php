@@ -61,8 +61,8 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
       <th rowspan="4" bgcolor="#99FF99">Color</th>
       <th rowspan="4" bgcolor="#99FF99">No KK Legacy</th>
       <th rowspan="4" bgcolor="#99FF99">Lot Legacy</th>
-      <th rowspan="4" bgcolor="#99FF99">Rol (Bruto)</th>
-      <th rowspan="4" bgcolor="#99FF99">Netto (Bruto)</th>
+      <th rowspan="4" bgcolor="#99FF99">Rol</th>
+      <th rowspan="4" bgcolor="#99FF99">Bruto</th>
       <th rowspan="4" bgcolor="#99FF99">Proses (Fin/PB/AP/DLL)</th>
       <th colspan="4" rowspan="2" bgcolor="#99FF99">Fabric Weight</th>
       <th rowspan="4" bgcolor="#99FF99">Note Fabric Weight</th>
