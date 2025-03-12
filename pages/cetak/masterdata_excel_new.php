@@ -50,7 +50,6 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
     <tr>
       <th rowspan="4" bgcolor="#99FF99">NO.</th>
       <th rowspan="4" bgcolor="#99FF99">No Demand</th>
-      <th rowspan="4" bgcolor="#99FF99">No Demand New</th>
       <th rowspan="4" bgcolor="#99FF99">Tgl</th>
       <th rowspan="4" bgcolor="#99FF99">No Test</th>
       <th rowspan="4" bgcolor="#99FF99">No Hanger/Item</th>
@@ -59,12 +58,11 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
       <th rowspan="4" bgcolor="#99FF99">Order</th>
       <th rowspan="4" bgcolor="#99FF99">Description</th>
       <th rowspan="4" bgcolor="#99FF99">Prod.Order/Lot</th>
-      <th rowspan="4" bgcolor="#99FF99">Lot New</th>
       <th rowspan="4" bgcolor="#99FF99">Color</th>
       <th rowspan="4" bgcolor="#99FF99">No KK Legacy</th>
       <th rowspan="4" bgcolor="#99FF99">Lot Legacy</th>
-      <th rowspan="4" bgcolor="#99FF99">Rol</th>
-      <th rowspan="4" bgcolor="#99FF99">Netto</th>
+      <th rowspan="4" bgcolor="#99FF99">Rol (Bruto)</th>
+      <th rowspan="4" bgcolor="#99FF99">Netto (Bruto)</th>
       <th rowspan="4" bgcolor="#99FF99">Proses (Fin/PB/AP/DLL)</th>
       <th colspan="4" rowspan="2" bgcolor="#99FF99">Fabric Weight</th>
       <th rowspan="4" bgcolor="#99FF99">Note Fabric Weight</th>
@@ -549,19 +547,332 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
       <th bgcolor="#99FF99">Dry</th>
       <th bgcolor="#99FF99">Wet</th>
     </tr>
+    <tr>
+      <td colspan="16" style="text-align: center;">Standar</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td colspan='2'></td>
+      <td></td>
+    </tr>
     <?php
     $no = 1;
     $sql = "SELECT *,a.id as idkk, c.bleeding_root
-	FROM tbl_tq_nokk a 
-	JOIN tbl_tq_test b ON (a.id=b.id_nokk) 
-	LEFT JOIN tbl_tq_test_2 c ON (a.id = c.id_nokk)
-	WHERE a.tgl_masuk BETWEEN '$Awal' AND '$Akhir'  
-	";
-
-
-
-
-
+          FROM tbl_tq_nokk a 
+          JOIN tbl_tq_test b ON (a.id=b.id_nokk) 
+          LEFT JOIN tbl_tq_test_2 c ON (a.id = c.id_nokk)
+          WHERE a.tgl_masuk BETWEEN '$Awal' AND '$Akhir'";
     //backup 
     // -- ORDER BY a.tgl_masuk ASC, a.no_test ASC
     
@@ -594,7 +905,6 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
 
     $sql .= " ORDER BY a.tgl_masuk ASC, a.no_test ASC";
 
-
     //penambahan no demand multiple
     $sql_demand = "SELECT *, a.id as idkk, c.nodemand as nodemand_multiple 
 	  FROM tbl_tq_nokk a 
@@ -622,9 +932,6 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
         <td>'
           <?php echo $r['nodemand']; ?>
         </td>
-        <td>'
-          <?php echo $r['nodemand_new']; ?>
-        </td>
         <td>
           <?php echo $r['tgl_masuk']; ?>
         </td>
@@ -649,9 +956,6 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
         <td>'
           <?php echo $r['lot']; ?>
         </td>
-        <td>'
-          <?php echo $r['lot_new']; ?>
-        </td>
         <td>
           <?php echo $r['warna']; ?>
         </td>
@@ -662,10 +966,57 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
           <?php echo $r['lot_legacy']; ?>
         </td>
         <td>
-          <?php echo $rR['rol']; ?>
+          <?php 
+            $q_roll_tdk_gabung  = db2_exec($conn1, "SELECT count(*) AS ROLL, s2.PRODUCTIONORDERCODE
+                                                    FROM STOCKTRANSACTION s2 
+                                                    WHERE s2.ITEMTYPECODE ='KGF' AND s2.PRODUCTIONORDERCODE = '$r[lot]'
+                                                    GROUP BY s2.PRODUCTIONORDERCODE");
+            $d_roll_tdk_gabung  = db2_fetch_assoc($q_roll_tdk_gabung);
+            echo $roll   = $d_roll_tdk_gabung['ROLL'];
+          ?>
         </td>
         <td>
-          <?php echo $rR['netto']; ?>
+          <?php
+            $q_qtysalinan = db2_exec($conn1, "SELECT * FROM PRODUCTIONDEMAND WHERE CODE = '$r[nodemand]'");
+            $d_qtysalinan = db2_fetch_assoc($q_qtysalinan);
+
+            $dataMain = "SELECT
+                              p.ORDERCODE,
+                              p.USEDUSERPRIMARYQUANTITY AS QTY_BAGIKAIN,
+                              p.USEDUSERSECONDARYQUANTITY AS QTY_BAGIKAIN_YD_MTR
+                          FROM
+                              ITXVIEW_RESERVATION_KK p
+                          WHERE
+                              p.ORDERCODE = '$r[nodemand]'";
+            $queryMain = db2_exec($conn1, $dataMain);
+            $rowdb2 = db2_fetch_assoc($queryMain);
+
+            $q_orig_pd_code     = db2_exec($conn1, "SELECT 
+                                                        *, a.VALUESTRING AS ORIGINALPDCODE
+                                                    FROM 
+                                                        PRODUCTIONDEMAND p 
+                                                    LEFT JOIN ADSTORAGE a ON a.UNIQUEID = p.ABSUNIQUEID AND a.FIELDNAME = 'OriginalPDCode'
+                                                    WHERE p.CODE = '$r[nodemand]'");
+            $d_orig_pd_code     = db2_fetch_assoc($q_orig_pd_code);
+
+            $q_cek_salinan     = db2_exec($conn1, "SELECT 
+                                                        a2.VALUESTRING AS SALINAN_058
+                                                    FROM 
+                                                        PRODUCTIONDEMAND p 
+                                                    LEFT JOIN ADSTORAGE a2 ON a2.UNIQUEID = p.ABSUNIQUEID AND a2.FIELDNAME = 'DefectTypeCode'
+                                                    LEFT JOIN USERGENERICGROUP u ON u.CODE = a2.VALUESTRING AND u.USERGENERICGROUPTYPECODE = '006'
+                                                    WHERE p.CODE = '$r[nodemand]'");
+            $d_cek_salinan     = db2_fetch_assoc($q_cek_salinan);
+            ?>
+            <?php if ($d_orig_pd_code['ORIGINALPDCODE']) : ?>
+                <?php if ($d_cek_salinan['SALINAN_058'] == '058') : ?>
+                    <?= number_format($rowdb2['QTY_BAGIKAIN'], 2); ?>
+                <?php else : ?>
+                    <?= number_format($d_qtysalinan['USERPRIMARYQUANTITY'], 3) ?>
+                <?php endif; ?>
+            <?php else : ?>
+                <?= number_format($rowdb2['QTY_BAGIKAIN'], 2); ?>
+            <?php endif; ?>
         </td>
         <td>
           <?php echo $r['proses_fin']; ?>
@@ -1666,9 +2017,6 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
             <td>'
               <?php echo $d; ?>
             </td>
-            <td>'
-              <?php echo $r['nodemand_new']; ?>
-            </td>
             <td>
               <?php echo $r['tgl_masuk']; ?>
             </td>
@@ -1692,9 +2040,6 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
             </td>
             <td>'
               <?php echo $r['lot']; ?>
-            </td>
-            <td>'
-              <?php echo $r['lot_new']; ?>
             </td>
             <td>
               <?php echo $r['warna']; ?>
