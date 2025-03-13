@@ -211,6 +211,7 @@ if ($_POST['simpan'] == "simpan") {
     qty_kf = '$_POST[qty_kf]',
     note_kf = '$_POST[note_kf]',
     qty_bf = '$_POST[qty_bf]',
+    speed = '$_POST[speed]',
     note_bf = '$_POST[note_bf]'
     ");
         if ($sql) {
@@ -897,6 +898,16 @@ $rowtoBS = db2_fetch_assoc($stmt2BS);
                             <?php }
                             ?>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="speed" class="col-sm-3 control-label">Speed</label>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <input name="speed" type="text" class="form-control" id="speed" value="<?php if ($crow > 0) {
+                                                                                                        echo $row['speed'];
+                                                                                                    } ?>" placeholder="0" required onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13 || event.charCode == 44 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57">
+                        </div>
                     </div>
                 </div>
                 <div class="form-group"> 

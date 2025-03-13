@@ -123,6 +123,11 @@ No MC :
         <font color="#FFFFFF">Operator</font>
       </strong>
     </th>
+    <th rowspan="2" valign="middle" bgcolor="#006699">
+      <strong>
+        <font color="#FFFFFF">Speed</font>
+      </strong>
+    </th>
     <th colspan="2" valign="middle" bgcolor="#006699">
       <strong>
         <font color="#FFFFFF">KQ</font>
@@ -294,6 +299,7 @@ No MC :
         echo implode(' & ', $ops_name);
         ?>
       </td>
+      <td><?= $row['speed']; ?></td>
       <td><?= $row['qty_kq']; ?></td>
       <td><?= $row['note_kq']; ?></td>
       <td><?= $row['qty_bq']; ?></td>
