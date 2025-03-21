@@ -82,19 +82,11 @@ include "../../koneksi.php";
         <th align="center" bgcolor="#729FCF">Roll</th>
         <th align="center" bgcolor="#729FCF">Kg</th>
         <th align="center" bgcolor="#729FCF">Yard</th>
-        <th align="center" bgcolor="#729FCF">2500</th>
+        <th align="center" bgcolor="#729FCF">1800</th>
         <th align="center" bgcolor="#729FCF">Roll</th>
         <th align="center" bgcolor="#729FCF">Kg</th>
         <th align="center" bgcolor="#729FCF">Yard</th>
-        <th align="center" bgcolor="#729FCF">3000</th>
-        <th align="center" bgcolor="#729FCF">Roll</th>
-        <th align="center" bgcolor="#729FCF">Kg</th>
-        <th align="center" bgcolor="#729FCF">Yard</th>
-        <th align="center" bgcolor="#729FCF">1500</th>
-        <th align="center" bgcolor="#729FCF">Roll</th>
-        <th align="center" bgcolor="#729FCF">Kg</th>
-        <th align="center" bgcolor="#729FCF">Yard</th>
-        <th align="center" bgcolor="#729FCF">2100</th>
+        <th align="center" bgcolor="#729FCF">1800</th>
         <th align="center" bgcolor="#729FCF">Roll</th>
         <th align="center" bgcolor="#729FCF">Kg</th>
         <th align="center" bgcolor="#729FCF">Yard</th>
@@ -102,7 +94,15 @@ include "../../koneksi.php";
         <th align="center" bgcolor="#729FCF">Roll</th>
         <th align="center" bgcolor="#729FCF">Kg</th>
         <th align="center" bgcolor="#729FCF">Yard</th>
-        <th align="center" bgcolor="#729FCF">2000</th>
+        <th align="center" bgcolor="#729FCF">1000</th>
+        <th align="center" bgcolor="#729FCF">Roll</th>
+        <th align="center" bgcolor="#729FCF">Kg</th>
+        <th align="center" bgcolor="#729FCF">Yard</th>
+        <th align="center" bgcolor="#729FCF">1300</th>
+        <th align="center" bgcolor="#729FCF">Roll</th>
+        <th align="center" bgcolor="#729FCF">Kg</th>
+        <th align="center" bgcolor="#729FCF">Yard</th>
+        <th align="center" bgcolor="#729FCF">1300</th>
         <th align="center" bgcolor="#729FCF">5000</th>
         <th align="center" bgcolor="#729FCF">1800</th>
         <th align="center" bgcolor="#729FCF">6000</th>
@@ -112,8 +112,8 @@ include "../../koneksi.php";
         <th align="center" bgcolor="#729FCF">8000</th>
     </tr>
     <?php 
-    if($_GET['shift']=="ALL"){		
-        $Wshift=" ";	
+    if ($_GET['shift'] == "ALL") {		
+        $Wshift = " ";	
     }else{	
         $Wshift=" AND b.shift='$_GET[shift]' ";	
     }
@@ -127,11 +127,35 @@ include "../../koneksi.php";
     }else{	
         $Wnama=" AND a.personil='$_GET[personil]'  ";	
     }
-        $sql=mysqli_query($con,"SELECT a.personil,b.shift,GROUP_CONCAT(DISTINCT b.t_jawab SEPARATOR ',') AS t_jawab, b.t_jawab_buyer,
-        COUNT(DISTINCT(DATE_FORMAT( a.tgl_update, '%Y-%m-%d' ))) AS hari_kerja FROM tbl_inspection a LEFT JOIN tbl_schedule b 
-        ON a.id_schedule=b.id WHERE a.status='selesai' AND DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' 
-        AND '$_GET[akhir]' $Wnama $Wshift $WGshift GROUP BY a.personil,b.shift,b.t_jawab_buyer,b.t_jawab
-        ORDER BY a.personil ASC");
+        $sql = mysqli_query($con, 
+                "SELECT 
+                    a.personil, 
+                    b.shift, 
+                    GROUP_CONCAT(DISTINCT b.t_jawab SEPARATOR ',') AS t_jawab, 
+                    b.t_jawab_buyer,
+                    COUNT(DISTINCT(DATE_FORMAT(a.tgl_update, '%Y-%m-%d'))) AS hari_kerja 
+                FROM 
+                    tbl_inspection a 
+                LEFT JOIN 
+                    tbl_schedule b 
+                ON 
+                    a.id_schedule = b.id 
+                WHERE 
+                    a.status = 'selesai' 
+                    AND DATE_FORMAT(a.tgl_update, '%Y-%m-%d %H:%i') BETWEEN '$_GET[awal]' AND '$_GET[akhir]' 
+                    $Wnama 
+                    $Wshift 
+                    $WGshift 
+                    -- and b.t_jawab_buyer = 'Lululemon'
+                    -- and b.t_jawab_buyer = 'Adidas atau Lain-Lain'
+                GROUP BY 
+                    a.personil, 
+                    b.shift, 
+                    b.t_jawab_buyer, 
+                    b.t_jawab 
+                ORDER BY 
+                    a.personil ASC
+            ");
         while($r=mysqli_fetch_array($sql)){
              //Inspect
              $sqlIns=mysqli_query($con,"SELECT
@@ -322,11 +346,11 @@ include "../../koneksi.php";
         <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $rIns['rolIns'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $rIns['brutoIns'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $rIns['panjangIns'];}else{echo '0';}?></td>
-        <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $targetInsLulu= number_format(($rIns['panjangIns']/2500*100)/$r['hari_kerja'],2);}else{echo '0';} ?></td>
+        <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $targetInsLulu= number_format(($rIns['panjangIns']/1800*100)/$r['hari_kerja'],2);}else{echo '0';} ?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $rIns['rolIns'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $rIns['brutoIns'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $rIns['panjangIns'];}else{echo '0';}?></td>
-        <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $targetInsAds= number_format(($rIns['panjangIns']/3000*100)/$r['hari_kerja'],2);}else{echo '0';} ?></td>
+        <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $targetInsAds= number_format(($rIns['panjangIns']/1800*100)/$r['hari_kerja'],2);}else{echo '0';} ?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $rIQK['rolIQK'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $rIQK['brutoIQK'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $rIQK['panjangIQK'];}else{echo '0';}?></td>
@@ -334,15 +358,15 @@ include "../../koneksi.php";
         <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $rIQK['rolIQK'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $rIQK['brutoIQK'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $rIQK['panjangIQK'];}else{echo '0';}?></td>
-        <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $targetIQKAds= number_format(($rIQK['panjangIQK']/2100*100)/$r['hari_kerja'],2);}else{echo '0';} ?></td>
+        <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $targetIQKAds= number_format(($rIQK['panjangIQK']/1000*100)/$r['hari_kerja'],2);}else{echo '0';} ?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $rW['rolW'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $rW['brutoW'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $rW['panjangW'];}else{echo '0';}?></td>
-        <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $targetIWLulu= number_format(($rW['panjangW']/1500*100)/$r['hari_kerja'],2);}else{echo '0';} ?></td>
+        <td align="right"><?php if($r['t_jawab_buyer']=='Lululemon'){echo $targetIWLulu= number_format(($rW['panjangW']/1300*100)/$r['hari_kerja'],2);}else{echo '0';} ?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $rW['rolW'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $rW['brutoW'];}else{echo '0';}?></td>
         <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $rW['panjangW'];}else{echo '0';}?></td>
-        <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $targetIWAds= number_format(($rW['panjangW']/2000*100)/$r['hari_kerja'],2);}else{echo '0';} ?></td>
+        <td align="right"><?php if($r['t_jawab_buyer']=='Adidas atau Lain-Lain'){echo $targetIWAds= number_format(($rW['panjangW']/1300*100)/$r['hari_kerja'],2);}else{echo '0';} ?></td>
         <td align="right"><?php echo $rO['rolO'];?></td>
         <td align="right"><?php echo $rO['brutoO'];?></td>
         <td align="right"><?php echo $rO['panjangO'];?></td>
