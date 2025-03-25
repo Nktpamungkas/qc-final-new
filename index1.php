@@ -848,7 +848,6 @@ $page = strtolower($page);
                                 
                             </ul>
                         </li>
-                            <!--Yulianto-->
                             <?php $sub_menu_fl = 'FL'; ?>
                             <li class="treeview <?php if ($_GET['p'] == "xxx" or $_GET['p'] == "xxx") {
                                                     echo "active";
@@ -889,8 +888,6 @@ $page = strtolower($page);
                                                     Operan FL</span></a></li>
                                 </ul>
                             </li>
-                            <!--End Yulianto-->
-                            <!-- end jika username marketing hidden-->
                     <?php } ?>
 
 
