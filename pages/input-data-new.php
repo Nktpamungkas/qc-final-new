@@ -1857,129 +1857,309 @@ if($_POST['update']=="update"){
 		};
 		
 		$penghubung3_dep_persen =  $_POST['penghubung3_dep_persen'];
-	
 		
-	  
-	  $warna=str_replace("'","''",$_POST['warna']);
-	  $nowarna=str_replace("'","''",$_POST['no_warna']);	
-	  $jns=str_replace("'","''",$_POST['jns_kain']);
-	  $styl=str_replace("'","''",$_POST['styl']);
-	  $sales=str_replace("'","''",trim($_POST['sales']));	
-	  $po=str_replace("'","''",$_POST['no_po']);
-	  $masalah=str_replace("'","''",$_POST['masalah']);
-	  $cekwarna=str_replace("'","''",$_POST['cekwarna']);
-	  $ket1=str_replace("'","''",$_POST['ket']);
-	  $lot=trim($_POST['lot']);
-	  $t_jawab=$_POST['t_jawab'];
-	  $multijawab="";
-	  $persen=$_POST['persen'];
-	  foreach($t_jawab as $t_jawab1)  
-   		{  
-      		$multijawab .= $t_jawab1.",";  
+		$cek_data_email = mysqli_query($con, "SELECT * FROM tbl_bonpenghubung_mail WHERE nodemand='$_POST[nodemand]' LIMIT 1");
+		$cek_mail=mysqli_num_rows($cek_data_email);
+		if ($cek_mail < 1 && (!empty($penghubung_masalah) || !empty($penghubung2_masalah) || !empty($penghubung3_masalah))) {
+			require 'C:/xampp/htdocs/QC-Final-New/vendor/autoload.php';
+		$mail = new PHPMailer\PHPMailer\PHPMailer();
+		$mail->isSMTP();
+		$mail->Host       = 'mail.indotaichen.com';
+		$mail->SMTPAuth   = true;
+		$mail->Username   = 'dept.it@indotaichen.com';
+		$mail->Password   = 'Xr7PzUWoyPA';
+		$mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+		$mail->Port       = 587;
+
+		$mail->setFrom('dept.it@indotaichen.com', 'DEPT IT');
+		// $mail->addAddress('qcf.adm@indotaichen.com', 'ADM QCF');
+		// $mail->addAddress('adm.mkt@indotaichen.com', 'ADM MKT');
+		// $mail->addAddress('arif.efendi@indotaichen.com', 'Arif Efendi');
+		$mail->addAddress('tobias.sulistiyo@indotaichen.com', 'TOBIAS');
+
+		$user_email = mysqli_query($con, "SELECT * FROM email_user_penghubung WHERE dept='MKT'");
+		$listmail   = [];
+		while ($data_email = mysqli_fetch_array($user_email)) {
+			if (stripos($_POST['pelanggan'], $data_email['sales_detail']) !== false) {
+				$listmail[] = $data_email;
+				$mail->addAddress($data_email['email'], $data_email['user']);
+			}
 		}
-	if($_POST['sts_pbon']=="1"){$sts_pbon="1";}else{ $sts_pbon="0";}
-	if($_POST['sts_nodelay']=="1"){$sts_nodelay="1";}else{ $sts_nodelay="0";}
-	if($_POST['sts_tembakdok']=="1"){$sts_tembakdok="1";}else{ $sts_tembakdok="0";}
-  	  $sqlData=mysqli_query($con,"UPDATE tbl_qcf SET 
-		  pelanggan='$_POST[pelanggan]',
-		  no_order='$_POST[no_order]',
-		  no_hanger='$_POST[no_hanger]',
-		  no_item='$_POST[no_item]',
-		  no_po='$po',
-		  no_ko='$_POST[no_ko]',
-		  jenis_kain='$jns',
-		  styl='$styl',
-		  berat_order='$_POST[qty1]',
-		  panjang_order='$_POST[qty2]',
-		  satuan_order='$_POST[satuan1]',
-		  rol_bruto='$_POST[qty3]',
-		  berat_bruto='$_POST[qty4]',
-		  lebar='$_POST[lebar]',
-		  gramasi='$_POST[grms]',
-		  lebar_ins='$_POST[inslebar]',
-		  gramasi_ins='$_POST[insgrms]',
-		  lebar_fin='$_POST[finlebar]',
-		  gramasi_fin='$_POST[fingrms]',
-		  susut_p='$_POST[pp]',
-		  susut_l='$_POST[pl]',
-		  susut_s='$_POST[ps]',
-		  berat_extra='$_POST[extra]',
-		  panjang_extra='$_POST[extra_p]',
-		  estimasi='$_POST[estimasi]',
-		  panjang_estimasi='$_POST[estimasi_p]',
-		  lot='$lot',
-		  rol='$_POST[rol]',
-		  warna='$warna',
-		  no_warna='$nowarna',
-		  cek_warna='$cekwarna',
-		  netto='$_POST[netto]',
-		  panjang='$_POST[panjang]',
-		  satuan='$_POST[satuan2]',
-		  sisa='$_POST[sisa]',
-		  tgl_masuk='$_POST[tglmsk]',
-		  tgl_pack='$_POST[tglpk]',
-		  jam_pack='$_POST[jam_pack]',
-		  tglcwarna='$_POST[tglcwarna]',
-		  jam_cwarna='$_POST[jam_cwarna]',
-		  tgl_ins='$_POST[tglins]',
-		  tgl_fin='$_POST[tglfin]',
-		  tgl_delivery='$_POST[tgl_delivery]',
-		  qty_mslh='$_POST[qty_mslh]',
-		  rol_mslh='$_POST[rol_mslh]',
-		  t_jawab='$multijawab',
-		  persen='$persen',
-		  sts_pbon='$sts_pbon',
-		  sts_nodelay='$sts_nodelay',
-		  sts_tembakdok='$sts_tembakdok',
-		  masalah='$masalah',
-		  ket='$ket1',
-		  sales='$sales',
-		  tgl_update=now(),
-		  penghubung_masalah = '$penghubung_masalah',
-		  penghubung_keterangan = '$penghubung_keterangan',
-		  advice1          = '$advice1',
-		  penghubung_roll1 = '$penghubung_roll1',
-		  penghubung_roll2 = '$penghubung_roll2',
-		  penghubung_roll3 = '$penghubung_roll3',
-		  penghubung_dep = '$penghubung_dep',
-		  penghubung_dep_persen = '$penghubung_dep_persen',
-		  
-		  penghubung2_masalah = '$penghubung2_masalah',
-		  penghubung2_keterangan = '$penghubung2_keterangan',
-		  advice2           = '$advice2',
-		  penghubung2_roll1 = '$penghubung2_roll1',
-		  penghubung2_roll2 = '$penghubung2_roll2',
-		  penghubung2_roll3 = '$penghubung2_roll3',
-		  penghubung2_dep = '$penghubung2_dep',
-		  penghubung2_dep_persen = '$penghubung2_dep_persen',
-		  
-		  penghubung3_masalah = '$penghubung3_masalah',
-		  penghubung3_keterangan = '$penghubung3_keterangan',
-		  advice3           = '$advice3',
-		  penghubung3_roll1 = '$penghubung3_roll1',
-		  penghubung3_roll2 = '$penghubung3_roll2',
-		  penghubung3_roll3 = '$penghubung3_roll3',
-		  penghubung3_dep = '$penghubung3_dep',
-		  penghubung3_dep_persen = '$penghubung3_dep_persen'
-		  
-		  WHERE nodemand='$_POST[nodemand]' ");	 	  
-	  
-		if($sqlData){
-		    // echo "<script>alert('Data Telah DiUbah');</script>";
-			// echo "<script>swal('Data Telah DiUbah!', 'You clicked the button!', 'success');</script>";
-			// echo "<script>window.location.href='?p=Input-Data';</script>";
-			echo "<script>swal({
-  title: 'Data Telah DiUbah',   
-  text: 'Klik Ok untuk input data kembali',
-  type: 'success',
-  }).then((result) => {
-  if (result.value) {
-    
-	 window.location.href='InputDataNew'; 
-  }
-});</script>";
+		$mail->Subject = 'Approve Bon Penghubung QCF-'.$_POST['pelanggan'];
+		$mail->isHTML(true);
+		$mail->Body = "<p>Dear MKT Teams,</p>
+						<p>Mohon ditindaklanjuti terkait Approval Bon Penghubung</p>
+						<p>Bon Order: $bonorder</p>
+						<p>&nbsp;</p>
+						<p>&nbsp; Dengan detail masalah $penghubung_masalah - $penghubung_keterangan pada roll $penghubung_roll1 </p>
+						<p>&nbsp;</p>";
+						if (!empty($penghubung2_masalah)) {
+							$mail->Body .= "<p>&nbsp; Dengan detail masalah $penghubung2_masalah - $penghubung2_keterangan pada roll $penghubung2_roll1 </p>
+							<p>&nbsp;</p>";
+						}
+						if (!empty($penghubung3_masalah)) {
+							$mail->Body .= "<p>&nbsp; Dengan detail masalah $penghubung3_masalah - $penghubung3_keterangan pada roll $penghubung3_roll1 </p>
+							<p>&nbsp;</p>";
+						}
+						$mail->Body .= "<p>&nbsp;</p>
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sebelum melakukan APPROVE, Mohon untuk login terlebih dahulu <a href='online.indotaichen.com/Qc-Final-New'>Login</a></p>
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Anda dapat melakukan approval pada link berikut: <a href='online.indotaichen.com/Qc-Final-New/ApproveBonPenghubung-" . htmlspecialchars($_POST['nodemand']) . "'>Approve Bon Penghubung</a></p>
+						<p>&nbsp;</p>";
+
+		$emailList   = '';
+		$salesDetail = '';
+		foreach ($listmail as $det) {
+			if ($emailList) {
+				$emailList .= ',' . $det['email'];
+			} else {
+				$emailList .= $det['email'];
+			}
+			if ($salesDetail === '') {
+				$salesDetail = $det['sales_detail'];
+			}
+		}
+		$insert_to = mysqli_query($con, "INSERT INTO tbl_bonpenghubung_mail SET nodemand='$_POST[nodemand]', mail_to='$emailList', team='$salesDetail', status_approve=0, `status`=1");
+		$mail->send();
+		$warna=str_replace("'","''",$_POST['warna']);
+			$nowarna=str_replace("'","''",$_POST['no_warna']);	
+			$jns=str_replace("'","''",$_POST['jns_kain']);
+			$styl=str_replace("'","''",$_POST['styl']);
+			$sales=str_replace("'","''",trim($_POST['sales']));	
+			$po=str_replace("'","''",$_POST['no_po']);
+			$masalah=str_replace("'","''",$_POST['masalah']);
+			$cekwarna=str_replace("'","''",$_POST['cekwarna']);
+			$ket1=str_replace("'","''",$_POST['ket']);
+			$lot=trim($_POST['lot']);
+			$t_jawab=$_POST['t_jawab'];
+			$multijawab="";
+			$persen=$_POST['persen'];
+			foreach($t_jawab as $t_jawab1)  
+				{  
+					$multijawab .= $t_jawab1.",";  
+				}
+			if($_POST['sts_pbon']=="1"){$sts_pbon="1";}else{ $sts_pbon="0";}
+			if($_POST['sts_nodelay']=="1"){$sts_nodelay="1";}else{ $sts_nodelay="0";}
+			if($_POST['sts_tembakdok']=="1"){$sts_tembakdok="1";}else{ $sts_tembakdok="0";}
+			$sqlData=mysqli_query($con,"UPDATE tbl_qcf SET 
+				pelanggan='$_POST[pelanggan]',
+				no_order='$_POST[no_order]',
+				no_hanger='$_POST[no_hanger]',
+				no_item='$_POST[no_item]',
+				no_po='$po',
+				no_ko='$_POST[no_ko]',
+				jenis_kain='$jns',
+				styl='$styl',
+				berat_order='$_POST[qty1]',
+				panjang_order='$_POST[qty2]',
+				satuan_order='$_POST[satuan1]',
+				rol_bruto='$_POST[qty3]',
+				berat_bruto='$_POST[qty4]',
+				lebar='$_POST[lebar]',
+				gramasi='$_POST[grms]',
+				lebar_ins='$_POST[inslebar]',
+				gramasi_ins='$_POST[insgrms]',
+				lebar_fin='$_POST[finlebar]',
+				gramasi_fin='$_POST[fingrms]',
+				susut_p='$_POST[pp]',
+				susut_l='$_POST[pl]',
+				susut_s='$_POST[ps]',
+				berat_extra='$_POST[extra]',
+				panjang_extra='$_POST[extra_p]',
+				estimasi='$_POST[estimasi]',
+				panjang_estimasi='$_POST[estimasi_p]',
+				lot='$lot',
+				rol='$_POST[rol]',
+				warna='$warna',
+				no_warna='$nowarna',
+				cek_warna='$cekwarna',
+				netto='$_POST[netto]',
+				panjang='$_POST[panjang]',
+				satuan='$_POST[satuan2]',
+				sisa='$_POST[sisa]',
+				tgl_masuk='$_POST[tglmsk]',
+				tgl_pack='$_POST[tglpk]',
+				jam_pack='$_POST[jam_pack]',
+				tglcwarna='$_POST[tglcwarna]',
+				jam_cwarna='$_POST[jam_cwarna]',
+				tgl_ins='$_POST[tglins]',
+				tgl_fin='$_POST[tglfin]',
+				tgl_delivery='$_POST[tgl_delivery]',
+				qty_mslh='$_POST[qty_mslh]',
+				rol_mslh='$_POST[rol_mslh]',
+				t_jawab='$multijawab',
+				persen='$persen',
+				sts_pbon='$sts_pbon',
+				sts_nodelay='$sts_nodelay',
+				sts_tembakdok='$sts_tembakdok',
+				masalah='$masalah',
+				ket='$ket1',
+				sales='$sales',
+				tgl_update=now(),
+				penghubung_masalah = '$penghubung_masalah',
+				penghubung_keterangan = '$penghubung_keterangan',
+				advice1          = '$advice1',
+				penghubung_roll1 = '$penghubung_roll1',
+				penghubung_roll2 = '$penghubung_roll2',
+				penghubung_roll3 = '$penghubung_roll3',
+				penghubung_dep = '$penghubung_dep',
+				penghubung_dep_persen = '$penghubung_dep_persen',
+				
+				penghubung2_masalah = '$penghubung2_masalah',
+				penghubung2_keterangan = '$penghubung2_keterangan',
+				advice2           = '$advice2',
+				penghubung2_roll1 = '$penghubung2_roll1',
+				penghubung2_roll2 = '$penghubung2_roll2',
+				penghubung2_roll3 = '$penghubung2_roll3',
+				penghubung2_dep = '$penghubung2_dep',
+				penghubung2_dep_persen = '$penghubung2_dep_persen',
+				
+				penghubung3_masalah = '$penghubung3_masalah',
+				penghubung3_keterangan = '$penghubung3_keterangan',
+				advice3           = '$advice3',
+				penghubung3_roll1 = '$penghubung3_roll1',
+				penghubung3_roll2 = '$penghubung3_roll2',
+				penghubung3_roll3 = '$penghubung3_roll3',
+				penghubung3_dep = '$penghubung3_dep',
+				penghubung3_dep_persen = '$penghubung3_dep_persen'
+				
+				WHERE nodemand='$_POST[nodemand]' ");	 	  
 			
+				if($sqlData){
+					// echo "<script>alert('Data Telah DiUbah');</script>";
+					// echo "<script>swal('Data Telah DiUbah!', 'You clicked the button!', 'success');</script>";
+					// echo "<script>window.location.href='?p=Input-Data';</script>";
+					echo "<script>swal({
+		title: 'Data Telah DiUbah',   
+		text: 'Klik Ok untuk input data kembali',
+		type: 'success',
+		}).then((result) => {
+		if (result.value) {
+			
+			window.location.href='InputDataNew'; 
+		}
+		});</script>";
+		}
+		}else{
+			$warna=str_replace("'","''",$_POST['warna']);
+			$nowarna=str_replace("'","''",$_POST['no_warna']);	
+			$jns=str_replace("'","''",$_POST['jns_kain']);
+			$styl=str_replace("'","''",$_POST['styl']);
+			$sales=str_replace("'","''",trim($_POST['sales']));	
+			$po=str_replace("'","''",$_POST['no_po']);
+			$masalah=str_replace("'","''",$_POST['masalah']);
+			$cekwarna=str_replace("'","''",$_POST['cekwarna']);
+			$ket1=str_replace("'","''",$_POST['ket']);
+			$lot=trim($_POST['lot']);
+			$t_jawab=$_POST['t_jawab'];
+			$multijawab="";
+			$persen=$_POST['persen'];
+			foreach($t_jawab as $t_jawab1)  
+				{  
+					$multijawab .= $t_jawab1.",";  
+				}
+			if($_POST['sts_pbon']=="1"){$sts_pbon="1";}else{ $sts_pbon="0";}
+			if($_POST['sts_nodelay']=="1"){$sts_nodelay="1";}else{ $sts_nodelay="0";}
+			if($_POST['sts_tembakdok']=="1"){$sts_tembakdok="1";}else{ $sts_tembakdok="0";}
+			$sqlData=mysqli_query($con,"UPDATE tbl_qcf SET 
+				pelanggan='$_POST[pelanggan]',
+				no_order='$_POST[no_order]',
+				no_hanger='$_POST[no_hanger]',
+				no_item='$_POST[no_item]',
+				no_po='$po',
+				no_ko='$_POST[no_ko]',
+				jenis_kain='$jns',
+				styl='$styl',
+				berat_order='$_POST[qty1]',
+				panjang_order='$_POST[qty2]',
+				satuan_order='$_POST[satuan1]',
+				rol_bruto='$_POST[qty3]',
+				berat_bruto='$_POST[qty4]',
+				lebar='$_POST[lebar]',
+				gramasi='$_POST[grms]',
+				lebar_ins='$_POST[inslebar]',
+				gramasi_ins='$_POST[insgrms]',
+				lebar_fin='$_POST[finlebar]',
+				gramasi_fin='$_POST[fingrms]',
+				susut_p='$_POST[pp]',
+				susut_l='$_POST[pl]',
+				susut_s='$_POST[ps]',
+				berat_extra='$_POST[extra]',
+				panjang_extra='$_POST[extra_p]',
+				estimasi='$_POST[estimasi]',
+				panjang_estimasi='$_POST[estimasi_p]',
+				lot='$lot',
+				rol='$_POST[rol]',
+				warna='$warna',
+				no_warna='$nowarna',
+				cek_warna='$cekwarna',
+				netto='$_POST[netto]',
+				panjang='$_POST[panjang]',
+				satuan='$_POST[satuan2]',
+				sisa='$_POST[sisa]',
+				tgl_masuk='$_POST[tglmsk]',
+				tgl_pack='$_POST[tglpk]',
+				jam_pack='$_POST[jam_pack]',
+				tglcwarna='$_POST[tglcwarna]',
+				jam_cwarna='$_POST[jam_cwarna]',
+				tgl_ins='$_POST[tglins]',
+				tgl_fin='$_POST[tglfin]',
+				tgl_delivery='$_POST[tgl_delivery]',
+				qty_mslh='$_POST[qty_mslh]',
+				rol_mslh='$_POST[rol_mslh]',
+				t_jawab='$multijawab',
+				persen='$persen',
+				sts_pbon='$sts_pbon',
+				sts_nodelay='$sts_nodelay',
+				sts_tembakdok='$sts_tembakdok',
+				masalah='$masalah',
+				ket='$ket1',
+				sales='$sales',
+				tgl_update=now(),
+				penghubung_masalah = '$penghubung_masalah',
+				penghubung_keterangan = '$penghubung_keterangan',
+				advice1          = '$advice1',
+				penghubung_roll1 = '$penghubung_roll1',
+				penghubung_roll2 = '$penghubung_roll2',
+				penghubung_roll3 = '$penghubung_roll3',
+				penghubung_dep = '$penghubung_dep',
+				penghubung_dep_persen = '$penghubung_dep_persen',
+				
+				penghubung2_masalah = '$penghubung2_masalah',
+				penghubung2_keterangan = '$penghubung2_keterangan',
+				advice2           = '$advice2',
+				penghubung2_roll1 = '$penghubung2_roll1',
+				penghubung2_roll2 = '$penghubung2_roll2',
+				penghubung2_roll3 = '$penghubung2_roll3',
+				penghubung2_dep = '$penghubung2_dep',
+				penghubung2_dep_persen = '$penghubung2_dep_persen',
+				
+				penghubung3_masalah = '$penghubung3_masalah',
+				penghubung3_keterangan = '$penghubung3_keterangan',
+				advice3           = '$advice3',
+				penghubung3_roll1 = '$penghubung3_roll1',
+				penghubung3_roll2 = '$penghubung3_roll2',
+				penghubung3_roll3 = '$penghubung3_roll3',
+				penghubung3_dep = '$penghubung3_dep',
+				penghubung3_dep_persen = '$penghubung3_dep_persen'
+				
+				WHERE nodemand='$_POST[nodemand]' ");	 	  
+			
+				if($sqlData){
+					// echo "<script>alert('Data Telah DiUbah');</script>";
+					// echo "<script>swal('Data Telah DiUbah!', 'You clicked the button!', 'success');</script>";
+					// echo "<script>window.location.href='?p=Input-Data';</script>";
+					echo "<script>swal({
+		title: 'Data Telah DiUbah',   
+		text: 'Klik Ok untuk input data kembali',
+		type: 'success',
+		}).then((result) => {
+		if (result.value) {
+			
+			window.location.href='InputDataNew'; 
+		}
+		});</script>";
 		}
 
 	}
+}
 ?>
