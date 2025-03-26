@@ -1569,6 +1569,9 @@ $rowPST = mysqli_fetch_array($qryPST);
               <th rowspan="2">
                 <div align="center">Operator</div>
               </th>
+              <th rowspan="2">
+                <div align="center">Speed</div>
+              </th>
               <th colspan="2"><div align="center">KQ</div></th>
               <th colspan="2"><div align="center">BQ</div></th>
               <th colspan="2"><div align="center">KF</div></th>
@@ -1673,6 +1676,7 @@ $rowPST = mysqli_fetch_array($qryPST);
                                                       echo implode(' & ', $ops_name);
                                                       ?>
                                                       </td>
+                                                      <td align="center"><?= $row1['speed']; ?></td>
                                                       <td><?= $row1['qty_kq']; ?></td>
                                                       <td><?= $row1['note_kq']; ?></td>
                                                       <td><?= $row1['qty_bq']; ?></td>

@@ -195,7 +195,7 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                         <table id="example3" class="table table-bordered table-hover table-striped display nowrap" width="100%">
                             <thead class="bg-blue">
                                 <tr>
-                                    <th width="24">
+                                    <th width="23">
                                         <div align="center">No</div>
                                     </th>
                                     <th width="78">
@@ -207,6 +207,15 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                                     <th width="78">
                                         <div align="center">UOM</div>
                                     </th>
+                                    <td align="center">
+                                        <div align="center">GRADE A</div>
+                                    </td>
+                                    <td align="center">
+                                        <div align="center">GRADE B</div>
+                                    </td>
+                                    <td align="center">
+                                        <div align="center">GRADE C</div>
+                                    </td>
                                     <th width="78">
                                         <div align="center">Total Point</div>
                                     </th>
@@ -214,13 +223,344 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                             </thead>
                             <tbody>
                                 <?php
+                                
                                 $no = 1;
 
-                                // yang membuat data tidak muncul karena tidak menggunakan assoc
-                                // ini sebelum di ganti assoc
-                                // while ($row = db2_fetch_array($stmt1)) {
+                                
                                     
                                 while ($row = db2_fetch_assoc($stmt1)) {
+                                    if (!empty($row['BUYERS'])) {
+                                        $qty_a = "SELECT 
+                                            BUYER_TERDEPAN AS BUYERS,
+                                            SUM(POINTS) AS POINTSS,
+                                            SUM(LENGTHGROSS) AS QTY_A,
+                                            SUM(LENGHTCALC) AS LENGHTCALCS
+                                        FROM(
+                                            SELECT 
+                                                CASE 
+                                                    WHEN LOCATE(',', BUYER) > 0 THEN TRIM(SUBSTR(BUYER, 1, LOCATE(',', BUYER) - 1))
+                                                    ELSE BUYER
+                                                END AS BUYER_TERDEPAN,
+                                                SUM(POINTS) AS POINTS,
+                                                ORIGDLVSALORDLINESALORDERCODE,
+                                                ORIGDLVSALORDERLINEORDERLINE,
+                                                ELEMENTCODE,
+                                                INSPECTIONINDEX,
+                                                DEMANDCODE,
+                                                LENGTHGROSS,
+                                                LENGHTCALC,
+                                                INSPECTIONSTARTDATETIME,
+                                                INSPECTIONSTATION,
+                                                ABSUNIQUEID,
+                                                JENISKAIN,
+                                                SHORTDESCRIPTION
+                                            FROM  (
+                                                SELECT DISTINCT
+                                                    LISTAGG(DISTINCT ORDERPARTNERBRAND.LONGDESCRIPTION,',') AS BUYER,
+                                                    (c.POINTS),
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDLINESALORDERCODE,
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDERLINEORDERLINE,
+                                                    ELEMENTSINSPECTION.ELEMENTCODE,
+                                                    ELEMENTSINSPECTION.INSPECTIONINDEX,
+                                                    ELEMENTSINSPECTION.DEMANDCODE,
+                                                    ELEMENTSINSPECTION.LENGTHGROSS,
+                                                    a.VALUEDECIMAL AS LENGHTCALC,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTARTDATETIME,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTATION,
+                                                    ELEMENTSINSPECTION.ABSUNIQUEID,
+                                                    FULLITEMKEYDECODER.SUMMARIZEDDESCRIPTION AS JENISKAIN,
+                                                    ITXVIEWORDERITEMLINKACTIVE.SHORTDESCRIPTION
+                                                FROM
+                                                    PRODUCTIONDEMAND PRODUCTIONDEMAND
+                                                LEFT JOIN ORDERPARTNER ORDERPARTNER ON PRODUCTIONDEMAND.CUSTOMERCODE = ORDERPARTNER.CUSTOMERSUPPLIERCODE 
+                                                LEFT JOIN BUSINESSPARTNER BUSINESSPARTNER ON	ORDERPARTNER.ORDERBUSINESSPARTNERNUMBERID = BUSINESSPARTNER.NUMBERID 
+                                                LEFT JOIN ELEMENTSINSPECTION ELEMENTSINSPECTION ON PRODUCTIONDEMAND.CODE = ELEMENTSINSPECTION.DEMANDCODE
+                                                    AND PRODUCTIONDEMAND.COUNTERCODE = ELEMENTSINSPECTION.DEMANDCOUNTERCODE AND ELEMENTSINSPECTION.QUALITYCODE = 1
+                                                LEFT JOIN INITIALS INITIALS ON ELEMENTSINSPECTION.OPERATORCODE = INITIALS.CODE 
+                                                LEFT JOIN FULLITEMKEYDECODER FULLITEMKEYDECODER ON PRODUCTIONDEMAND.FULLITEMIDENTIFIER = FULLITEMKEYDECODER.IDENTIFIER 
+                                                LEFT JOIN ITXVIEWORDERITEMLINKACTIVE ITXVIEWORDERITEMLINKACTIVE ON
+                                                    PRODUCTIONDEMAND.CUSTOMERCODE = ITXVIEWORDERITEMLINKACTIVE.ORDPRNCUSTOMERSUPPLIERCODE
+                                                    AND PRODUCTIONDEMAND.ITEMTYPEAFICODE = ITXVIEWORDERITEMLINKACTIVE.ITEMTYPEAFICODE
+                                                    AND PRODUCTIONDEMAND.SUBCODE01 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE01
+                                                    AND PRODUCTIONDEMAND.SUBCODE02 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE02
+                                                    AND PRODUCTIONDEMAND.SUBCODE03 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE03
+                                                    AND PRODUCTIONDEMAND.SUBCODE04 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE04
+                                                    AND PRODUCTIONDEMAND.SUBCODE05 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE05
+                                                    AND PRODUCTIONDEMAND.SUBCODE06 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE06
+                                                    AND PRODUCTIONDEMAND.SUBCODE07 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE07
+                                                    AND PRODUCTIONDEMAND.SUBCODE08 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE08
+                                                    AND PRODUCTIONDEMAND.SUBCODE09 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE09
+                                                    AND PRODUCTIONDEMAND.SUBCODE10 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE10
+                                                LEFT JOIN ADSTORAGE a ON a.UNIQUEID = ELEMENTSINSPECTION.ABSUNIQUEID AND FIELDNAME = 'CalculatedLength'
+                                                LEFT JOIN SALESORDER b ON b.CODE = PRODUCTIONDEMAND.ORIGDLVSALORDLINESALORDERCODE
+                                                LEFT JOIN ORDERPARTNERBRAND ORDERPARTNERBRAND ON b.ORDERPARTNERBRANDCODE = ORDERPARTNERBRAND.CODE
+                                                LEFT JOIN ELEMENTSINSPECTIONEVENT c ON c.ELEMENTSINSPECTIONELEMENTCODE = ELEMENTSINSPECTION.ELEMENTCODE
+                                                WHERE
+                                                    ELEMENTSINSPECTION.INSPECTIONSTARTDATETIME BETWEEN '$Awal ' AND '$Akhir'
+                                                    AND ORDERPARTNER.CUSTOMERSUPPLIERTYPE = '1'
+                                                    AND ORDERPARTNERBRAND.LONGDESCRIPTION IS NOT NULL
+                                                    AND ELEMENTSINSPECTION.ELEMENTITEMTYPECODE = 'KFF' 
+                                                    AND c.POINTS IS NOT NULL
+                                                GROUP BY 
+                                                    c.POINTS,
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDLINESALORDERCODE,
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDERLINEORDERLINE,
+                                                    ELEMENTSINSPECTION.ELEMENTCODE,
+                                                    ELEMENTSINSPECTION.INSPECTIONINDEX,
+                                                    DEMANDCODE,
+                                                    LENGTHGROSS,
+                                                    a.VALUEDECIMAL,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTARTDATETIME,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTATION,
+                                                    ELEMENTSINSPECTION.ABSUNIQUEID,
+                                                    FULLITEMKEYDECODER.SUMMARIZEDDESCRIPTION,
+                                                    ITXVIEWORDERITEMLINKACTIVE.SHORTDESCRIPTION
+                                            )
+                                            GROUP BY 
+                                                BUYER,
+                                                ORIGDLVSALORDLINESALORDERCODE,
+                                                ORIGDLVSALORDERLINEORDERLINE,
+                                                ELEMENTCODE,
+                                                INSPECTIONINDEX,
+                                                DEMANDCODE,
+                                                LENGTHGROSS,
+                                                LENGHTCALC,
+                                                INSPECTIONSTARTDATETIME,
+                                                INSPECTIONSTATION,
+                                                ABSUNIQUEID,
+                                                JENISKAIN,
+                                                SHORTDESCRIPTION) WHERE BUYER_TERDEPAN = '{$row['BUYERS']}'
+                                        GROUP BY 
+                                            BUYER_TERDEPAN
+                                        ORDER BY POINTSS DESC
+                                        FETCH FIRST 5 ROWS ONLY";
+
+                                        $qty_a_stmt = db2_exec($conn1, $qty_a); // Eksekusi query
+                                        if ($qty_a_stmt) {
+                                            $rowqty_a = db2_fetch_assoc($qty_a_stmt); // Ambil hasil query
+                                        } else {
+                                            echo "Query execution failed: " . db2_stmt_errormsg();
+                                        }
+                                    } else {
+                                        echo "Error: BUYERS value is empty.";
+                                    }
+
+                                    $qty_b = "SELECT 
+                                            BUYER_TERDEPAN AS BUYERS,
+                                            SUM(POINTS) AS POINTSS,
+                                            SUM(LENGTHGROSS) AS QTY_B,
+                                            SUM(LENGHTCALC) AS LENGHTCALCS
+                                        FROM(
+                                            SELECT 
+                                                CASE 
+                                                    WHEN LOCATE(',', BUYER) > 0 THEN TRIM(SUBSTR(BUYER, 1, LOCATE(',', BUYER) - 1))
+                                                    ELSE BUYER
+                                                END AS BUYER_TERDEPAN,
+                                                SUM(POINTS) AS POINTS,
+                                                ORIGDLVSALORDLINESALORDERCODE,
+                                                ORIGDLVSALORDERLINEORDERLINE,
+                                                ELEMENTCODE,
+                                                INSPECTIONINDEX,
+                                                DEMANDCODE,
+                                                LENGTHGROSS,
+                                                LENGHTCALC,
+                                                INSPECTIONSTARTDATETIME,
+                                                INSPECTIONSTATION,
+                                                ABSUNIQUEID,
+                                                JENISKAIN,
+                                                SHORTDESCRIPTION
+                                            FROM  (
+                                                SELECT DISTINCT
+                                                    LISTAGG(DISTINCT ORDERPARTNERBRAND.LONGDESCRIPTION,',') AS BUYER,
+                                                    (c.POINTS),
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDLINESALORDERCODE,
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDERLINEORDERLINE,
+                                                    ELEMENTSINSPECTION.ELEMENTCODE,
+                                                    ELEMENTSINSPECTION.INSPECTIONINDEX,
+                                                    ELEMENTSINSPECTION.DEMANDCODE,
+                                                    ELEMENTSINSPECTION.LENGTHGROSS,
+                                                    a.VALUEDECIMAL AS LENGHTCALC,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTARTDATETIME,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTATION,
+                                                    ELEMENTSINSPECTION.ABSUNIQUEID,
+                                                    FULLITEMKEYDECODER.SUMMARIZEDDESCRIPTION AS JENISKAIN,
+                                                    ITXVIEWORDERITEMLINKACTIVE.SHORTDESCRIPTION
+                                                FROM
+                                                    PRODUCTIONDEMAND PRODUCTIONDEMAND
+                                                LEFT JOIN ORDERPARTNER ORDERPARTNER ON PRODUCTIONDEMAND.CUSTOMERCODE = ORDERPARTNER.CUSTOMERSUPPLIERCODE 
+                                                LEFT JOIN BUSINESSPARTNER BUSINESSPARTNER ON	ORDERPARTNER.ORDERBUSINESSPARTNERNUMBERID = BUSINESSPARTNER.NUMBERID 
+                                                LEFT JOIN ELEMENTSINSPECTION ELEMENTSINSPECTION ON PRODUCTIONDEMAND.CODE = ELEMENTSINSPECTION.DEMANDCODE
+                                                    AND PRODUCTIONDEMAND.COUNTERCODE = ELEMENTSINSPECTION.DEMANDCOUNTERCODE AND ELEMENTSINSPECTION.QUALITYCODE = 2
+                                                LEFT JOIN INITIALS INITIALS ON ELEMENTSINSPECTION.OPERATORCODE = INITIALS.CODE 
+                                                LEFT JOIN FULLITEMKEYDECODER FULLITEMKEYDECODER ON PRODUCTIONDEMAND.FULLITEMIDENTIFIER = FULLITEMKEYDECODER.IDENTIFIER 
+                                                LEFT JOIN ITXVIEWORDERITEMLINKACTIVE ITXVIEWORDERITEMLINKACTIVE ON
+                                                    PRODUCTIONDEMAND.CUSTOMERCODE = ITXVIEWORDERITEMLINKACTIVE.ORDPRNCUSTOMERSUPPLIERCODE
+                                                    AND PRODUCTIONDEMAND.ITEMTYPEAFICODE = ITXVIEWORDERITEMLINKACTIVE.ITEMTYPEAFICODE
+                                                    AND PRODUCTIONDEMAND.SUBCODE01 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE01
+                                                    AND PRODUCTIONDEMAND.SUBCODE02 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE02
+                                                    AND PRODUCTIONDEMAND.SUBCODE03 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE03
+                                                    AND PRODUCTIONDEMAND.SUBCODE04 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE04
+                                                    AND PRODUCTIONDEMAND.SUBCODE05 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE05
+                                                    AND PRODUCTIONDEMAND.SUBCODE06 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE06
+                                                    AND PRODUCTIONDEMAND.SUBCODE07 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE07
+                                                    AND PRODUCTIONDEMAND.SUBCODE08 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE08
+                                                    AND PRODUCTIONDEMAND.SUBCODE09 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE09
+                                                    AND PRODUCTIONDEMAND.SUBCODE10 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE10
+                                                LEFT JOIN ADSTORAGE a ON a.UNIQUEID = ELEMENTSINSPECTION.ABSUNIQUEID AND FIELDNAME = 'CalculatedLength'
+                                                LEFT JOIN SALESORDER b ON b.CODE = PRODUCTIONDEMAND.ORIGDLVSALORDLINESALORDERCODE
+                                                LEFT JOIN ORDERPARTNERBRAND ORDERPARTNERBRAND ON b.ORDERPARTNERBRANDCODE = ORDERPARTNERBRAND.CODE
+                                                LEFT JOIN ELEMENTSINSPECTIONEVENT c ON c.ELEMENTSINSPECTIONELEMENTCODE = ELEMENTSINSPECTION.ELEMENTCODE
+                                                WHERE
+                                                    ELEMENTSINSPECTION.INSPECTIONSTARTDATETIME BETWEEN '$Awal ' AND '$Akhir'
+                                                    AND ORDERPARTNER.CUSTOMERSUPPLIERTYPE = '1'
+                                                    AND ORDERPARTNERBRAND.LONGDESCRIPTION IS NOT NULL
+                                                    AND ELEMENTSINSPECTION.ELEMENTITEMTYPECODE = 'KFF' 
+                                                    AND c.POINTS IS NOT NULL
+                                                GROUP BY 
+                                                    c.POINTS,
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDLINESALORDERCODE,
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDERLINEORDERLINE,
+                                                    ELEMENTSINSPECTION.ELEMENTCODE,
+                                                    ELEMENTSINSPECTION.INSPECTIONINDEX,
+                                                    DEMANDCODE,
+                                                    LENGTHGROSS,
+                                                    a.VALUEDECIMAL,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTARTDATETIME,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTATION,
+                                                    ELEMENTSINSPECTION.ABSUNIQUEID,
+                                                    FULLITEMKEYDECODER.SUMMARIZEDDESCRIPTION,
+                                                    ITXVIEWORDERITEMLINKACTIVE.SHORTDESCRIPTION
+                                            )
+                                            GROUP BY 
+                                                BUYER,
+                                                ORIGDLVSALORDLINESALORDERCODE,
+                                                ORIGDLVSALORDERLINEORDERLINE,
+                                                ELEMENTCODE,
+                                                INSPECTIONINDEX,
+                                                DEMANDCODE,
+                                                LENGTHGROSS,
+                                                LENGHTCALC,
+                                                INSPECTIONSTARTDATETIME,
+                                                INSPECTIONSTATION,
+                                                ABSUNIQUEID,
+                                                JENISKAIN,
+                                                SHORTDESCRIPTION) WHERE BUYER_TERDEPAN = '{$row['BUYERS']}'
+                                        GROUP BY 
+                                            BUYER_TERDEPAN
+                                        ORDER BY POINTSS DESC
+                                        FETCH FIRST 5 ROWS ONLY";
+                                          $qty_b_stmt = db2_exec($conn1, $qty_b);
+                                          $rowqty_b = db2_fetch_assoc($qty_b_stmt);
+
+
+
+
+                                          $qty_c = "SELECT 
+                                            BUYER_TERDEPAN AS BUYERS,
+                                            SUM(POINTS) AS POINTSS,
+                                            SUM(LENGTHGROSS) AS QTY_C,
+                                            SUM(LENGHTCALC) AS LENGHTCALCS
+                                        FROM(
+                                            SELECT 
+                                                CASE 
+                                                    WHEN LOCATE(',', BUYER) > 0 THEN TRIM(SUBSTR(BUYER, 1, LOCATE(',', BUYER) - 1))
+                                                    ELSE BUYER
+                                                END AS BUYER_TERDEPAN,
+                                                SUM(POINTS) AS POINTS,
+                                                ORIGDLVSALORDLINESALORDERCODE,
+                                                ORIGDLVSALORDERLINEORDERLINE,
+                                                ELEMENTCODE,
+                                                INSPECTIONINDEX,
+                                                DEMANDCODE,
+                                                LENGTHGROSS,
+                                                LENGHTCALC,
+                                                INSPECTIONSTARTDATETIME,
+                                                INSPECTIONSTATION,
+                                                ABSUNIQUEID,
+                                                JENISKAIN,
+                                                SHORTDESCRIPTION
+                                            FROM  (
+                                                SELECT DISTINCT
+                                                    LISTAGG(DISTINCT ORDERPARTNERBRAND.LONGDESCRIPTION,',') AS BUYER,
+                                                    (c.POINTS),
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDLINESALORDERCODE,
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDERLINEORDERLINE,
+                                                    ELEMENTSINSPECTION.ELEMENTCODE,
+                                                    ELEMENTSINSPECTION.INSPECTIONINDEX,
+                                                    ELEMENTSINSPECTION.DEMANDCODE,
+                                                    ELEMENTSINSPECTION.LENGTHGROSS,
+                                                    a.VALUEDECIMAL AS LENGHTCALC,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTARTDATETIME,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTATION,
+                                                    ELEMENTSINSPECTION.ABSUNIQUEID,
+                                                    FULLITEMKEYDECODER.SUMMARIZEDDESCRIPTION AS JENISKAIN,
+                                                    ITXVIEWORDERITEMLINKACTIVE.SHORTDESCRIPTION
+                                                FROM
+                                                    PRODUCTIONDEMAND PRODUCTIONDEMAND
+                                                LEFT JOIN ORDERPARTNER ORDERPARTNER ON PRODUCTIONDEMAND.CUSTOMERCODE = ORDERPARTNER.CUSTOMERSUPPLIERCODE 
+                                                LEFT JOIN BUSINESSPARTNER BUSINESSPARTNER ON	ORDERPARTNER.ORDERBUSINESSPARTNERNUMBERID = BUSINESSPARTNER.NUMBERID 
+                                                LEFT JOIN ELEMENTSINSPECTION ELEMENTSINSPECTION ON PRODUCTIONDEMAND.CODE = ELEMENTSINSPECTION.DEMANDCODE
+                                                    AND PRODUCTIONDEMAND.COUNTERCODE = ELEMENTSINSPECTION.DEMANDCOUNTERCODE AND ELEMENTSINSPECTION.QUALITYCODE = 3
+                                                LEFT JOIN INITIALS INITIALS ON ELEMENTSINSPECTION.OPERATORCODE = INITIALS.CODE 
+                                                LEFT JOIN FULLITEMKEYDECODER FULLITEMKEYDECODER ON PRODUCTIONDEMAND.FULLITEMIDENTIFIER = FULLITEMKEYDECODER.IDENTIFIER 
+                                                LEFT JOIN ITXVIEWORDERITEMLINKACTIVE ITXVIEWORDERITEMLINKACTIVE ON
+                                                    PRODUCTIONDEMAND.CUSTOMERCODE = ITXVIEWORDERITEMLINKACTIVE.ORDPRNCUSTOMERSUPPLIERCODE
+                                                    AND PRODUCTIONDEMAND.ITEMTYPEAFICODE = ITXVIEWORDERITEMLINKACTIVE.ITEMTYPEAFICODE
+                                                    AND PRODUCTIONDEMAND.SUBCODE01 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE01
+                                                    AND PRODUCTIONDEMAND.SUBCODE02 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE02
+                                                    AND PRODUCTIONDEMAND.SUBCODE03 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE03
+                                                    AND PRODUCTIONDEMAND.SUBCODE04 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE04
+                                                    AND PRODUCTIONDEMAND.SUBCODE05 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE05
+                                                    AND PRODUCTIONDEMAND.SUBCODE06 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE06
+                                                    AND PRODUCTIONDEMAND.SUBCODE07 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE07
+                                                    AND PRODUCTIONDEMAND.SUBCODE08 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE08
+                                                    AND PRODUCTIONDEMAND.SUBCODE09 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE09
+                                                    AND PRODUCTIONDEMAND.SUBCODE10 = ITXVIEWORDERITEMLINKACTIVE.SUBCODE10
+                                                LEFT JOIN ADSTORAGE a ON a.UNIQUEID = ELEMENTSINSPECTION.ABSUNIQUEID AND FIELDNAME = 'CalculatedLength'
+                                                LEFT JOIN SALESORDER b ON b.CODE = PRODUCTIONDEMAND.ORIGDLVSALORDLINESALORDERCODE
+                                                LEFT JOIN ORDERPARTNERBRAND ORDERPARTNERBRAND ON b.ORDERPARTNERBRANDCODE = ORDERPARTNERBRAND.CODE
+                                                LEFT JOIN ELEMENTSINSPECTIONEVENT c ON c.ELEMENTSINSPECTIONELEMENTCODE = ELEMENTSINSPECTION.ELEMENTCODE
+                                                WHERE
+                                                    ELEMENTSINSPECTION.INSPECTIONSTARTDATETIME BETWEEN '$Awal ' AND '$Akhir'
+                                                    AND ORDERPARTNER.CUSTOMERSUPPLIERTYPE = '1'
+                                                    AND ORDERPARTNERBRAND.LONGDESCRIPTION IS NOT NULL
+                                                    AND ELEMENTSINSPECTION.ELEMENTITEMTYPECODE = 'KFF' 
+                                                    AND c.POINTS IS NOT NULL
+                                                GROUP BY 
+                                                    c.POINTS,
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDLINESALORDERCODE,
+                                                    PRODUCTIONDEMAND.ORIGDLVSALORDERLINEORDERLINE,
+                                                    ELEMENTSINSPECTION.ELEMENTCODE,
+                                                    ELEMENTSINSPECTION.INSPECTIONINDEX,
+                                                    DEMANDCODE,
+                                                    LENGTHGROSS,
+                                                    a.VALUEDECIMAL,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTARTDATETIME,
+                                                    ELEMENTSINSPECTION.INSPECTIONSTATION,
+                                                    ELEMENTSINSPECTION.ABSUNIQUEID,
+                                                    FULLITEMKEYDECODER.SUMMARIZEDDESCRIPTION,
+                                                    ITXVIEWORDERITEMLINKACTIVE.SHORTDESCRIPTION
+                                            )
+                                            GROUP BY 
+                                                BUYER,
+                                                ORIGDLVSALORDLINESALORDERCODE,
+                                                ORIGDLVSALORDERLINEORDERLINE,
+                                                ELEMENTCODE,
+                                                INSPECTIONINDEX,
+                                                DEMANDCODE,
+                                                LENGTHGROSS,
+                                                LENGHTCALC,
+                                                INSPECTIONSTARTDATETIME,
+                                                INSPECTIONSTATION,
+                                                ABSUNIQUEID,
+                                                JENISKAIN,
+                                                SHORTDESCRIPTION) WHERE BUYER_TERDEPAN = '{$row['BUYERS']}'
+                                        GROUP BY 
+                                            BUYER_TERDEPAN
+                                        ORDER BY POINTSS DESC
+                                        FETCH FIRST 5 ROWS ONLY";
+                                          $qty_c_stmt = db2_exec($conn1, $qty_c);
+                                          $rowqty_c = db2_fetch_assoc($qty_c_stmt);
                                     ?>
                                     <tr>
                                         <td align="center"><?php echo $no; ?></td>
@@ -248,6 +588,27 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                                             }
                                             ?>
                                         </td>
+                                        <td align="center"> <?php
+                                            if ($Digit == '11') {
+                                                echo number_format($rowqty_a['QTY_A'], 2);
+                                            } elseif ($Digit == '13') {
+                                                echo number_format($rowqty_a['QTY_A'], 2);
+                                            }
+                                            ?></td>
+                                        <td align="center"> <?php
+                                            if ($Digit == '11') {
+                                                echo number_format($rowqty_b['QTY_B'], 2);
+                                            } elseif ($Digit == '13') {
+                                                echo number_format($rowqty_b['QTY_B'], 2);
+                                            }
+                                            ?></td>
+                                        <td align="center"> <?php
+                                            if ($Digit == '11') {
+                                                echo number_format($rowqty_c['QTY_C'], 2);
+                                            } elseif ($Digit == '13') {
+                                                echo number_format($rowqty_c['QTY_C'], 2);
+                                            }
+                                            ?></td>
                                         <td align="center"><?php echo rtrim(rtrim(number_format($row['POINTSS'], 2), '0'), '.'); ?></td>
                                     </tr>
                                     <?php
@@ -268,6 +629,15 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                                     </td>
                                     <td align="center">
                                         <div align="center">UOM</div>
+                                    </td>
+                                    <td align="center">
+                                        <div align="center">GRADE A</div>
+                                    </td>
+                                    <td align="center">
+                                        <div align="center">GRADE B</div>
+                                    </td>
+                                    <td align="center">
+                                        <div align="center">GRADE C</div>
                                     </td>
                                     <td align="center">
                                         <div align="center">Total Point</div>

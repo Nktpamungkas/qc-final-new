@@ -745,6 +745,152 @@ $page = strtolower($page);
                             <!-- end jika username marketing hidden-->
                         <?php } ?>
                     <?php } ?>
+
+                    <!-- OPERATORTQ AKSES -->
+
+                    <?php if ($_SESSION['lvl_id'] == "TQ" or $_SESSION['lvl_id'] == "OPERATORTQ") { ?>
+                        <li class="treeview <?php if ($_GET['p'] == "Kain-Masuk-New" or $_GET['p'] == "Result-New" or $_GET['p'] == "Result-KK-New" or $_GET['p'] == "Result-NoTest-New" or $_GET['p'] == "Testing-New" or $_GET['p'] == "Testing-NewNoTes" or $_GET['p'] == "StatusTQ-New" or $_GET['p'] == "SummaryTQ-New" or $_GET['p'] == "SummaryTQ-Nokk-New" or $_GET['p'] == "Report-New" or $_GET['p'] == "Random" or $_GET['p'] == "CetakRandom" or $_GET['p'] == "Random-New" or $_GET['p'] == "Randomh-New" or $_GET['p'] == "EditTQ-New" or $_GET['p'] == "Master-Data-New" or $_GET['p'] == "Final-StatusTQ-New" or $_GET['p'] == "MasterTest-New" or $_GET['p'] == "Testing-Operan" or $_GET['p'] == "Testing-OperanNoTes" or $_GET['p'] == "Rumus-Hitung" or $_GET['p'] == "Lihat-Grafik-DT" or $_GET['p'] == "Report-FLLululemon" or $_GET['p'] == "Report-FLLululemonNoTes" or $_GET['p'] == "Master-Hangtag" or $_GET['p'] == "Std-Tq-UA" or $_GET['p'] == "Report-UA" or $_GET['p'] == "Report-UANoTes") {
+                                                echo "active";
+                                            } ?>">
+                            <a href="#"><i class="fa fa-cube"></i> <span>Test Quality New</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+
+                                <li class="<?php if ($_GET['p'] == "Kain-Masuk-New") {
+                                                echo "active";
+                                            } ?> "><a href="KainInNew"><i
+                                            class="fa fa-calendar text-aqua"></i> <span>Kain Masuk</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "Testing-New" or $_GET['p'] == "Testing-NewNoTes") {
+                                                echo "active";
+                                            } ?>"><a href="TestingNew"><i class="fa fa-file-text text-aqua"></i>
+                                        <span>Testing</span></a></li>
+
+                                <li class="<?php if ($_GET['p'] == "Result-New" or $_GET['p'] == "Result-KK-New" or $_GET['p'] == "Result-NoTest-New") {
+                                                echo "active";
+                                            } ?>"><a href="ResultNew"><i class="fa fa-check-circle-o text-aqua"></i>
+                                        <span>Result</span></a></li>
+
+
+
+                                <li class="<?php if ($_GET['p'] == "StatusTQ-New") {
+                                                echo "active";
+                                            } ?>"><a href="StatusTQNew"><i class="fa fa-list-alt text-aqua"></i>
+                                        <span>Status Test Quality</span>
+                                        <span class="pull-right-container">
+                                            <?php
+                                            $delay = date('Y-m-d');
+                                            $sqldt = mysqli_query($con, "SELECT
+                                                                                    COUNT(*) AS cnt 
+                                                                                FROM
+                                                                                    tbl_tq_nokk a
+                                                                                    LEFT JOIN tbl_tq_test b ON a.id = b.id_nokk 
+                                                                                WHERE
+                                                                                    ( `status` = '' OR `status` IS NULL ) 
+                                                                                    AND tgl_masuk BETWEEN date_sub( now(), INTERVAL 30 DAY ) 
+                                                                                    AND now() 
+                                                                                    AND tgl_target < '$delay' 
+                                                                                ORDER BY
+                                                                                    no_test DESC");
+                                            $row = mysqli_fetch_array($sqldt);
+                                            ?>
+                                            <small class="label pull-right bg-red"><?php echo $row['cnt']; ?></small>
+                                        </span>
+                                    </a></li>
+
+
+
+                                <li class="<?php if ($_GET['p'] == "Random" or $_GET['p'] == "CetakRandom" or $_GET['p'] == "Random-New" or $_GET['p'] == "Randomh-New") {
+                                                echo "active";
+                                            } ?>"><a href="Random"><i class="fa fa-random text-aqua"></i>
+                                        <span>Random</span></a></li>
+
+
+                                <li class="<?php if ($_GET['p'] == "Rumus-Hitung" or $_GET['p'] == "Lihat-Grafik-DT") {
+                                                echo "active";
+                                            } ?>"><a href="RumusHitung"><i class="fa fa-gear text-aqua"></i>
+                                        <span>Rumus Hitung</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "Master-Data-New") {
+                                                echo "active";
+                                            } ?>"><a href="MasterDataNew"><i class="fa fa-database text-aqua"></i>
+                                        <span>Master Data</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview <?php if ($_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "Testing-Lab" or $_GET['p'] == "Result-Lab" or $_GET['p'] == "EditTQ-Lab" or $_GET['p'] == "Master-Data-Lab" or $_GET['p'] == "Master-Test-Lab") {
+                                                echo "active";
+                                            } ?>">
+                            <a href="#"><i class="fa fa-cube"></i> <span>Test Quality LAB</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                    <li class="<?php if ($_GET['p'] == "Kain-Masuk-Lab") {
+                                                    echo "active";
+                                                } ?>"><a href="KainInLab"><i
+                                                class="fa fa-calendar text-aqua"></i> <span>Kain Masuk</span></a></li>
+                                    <li class="<?php if ($_GET['p'] == "Testing-Lab") {
+                                                    echo "active";
+                                                } ?>"><a href="TestingLab"><i class="fa fa-file-text text-aqua"></i>
+                                            <span>Testing</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "Result-Lab") {
+                                                echo "active";
+                                            } ?>"><a href="ResultLab"><i class="fa fa-check-circle-o text-aqua"></i>
+                                        <span>Result</span></a></li>
+                               
+                               
+                                <li class="<?php if ($_GET['p'] == "Master-Data-Lab") {
+                                                echo "active";
+                                            } ?>"><a href="MasterDataLab"><i class="fa fa-database text-aqua"></i>
+                                        <span>Master Data</span></a></li>
+                                
+                            </ul>
+                        </li>
+                            <?php $sub_menu_fl = 'FL'; ?>
+                            <li class="treeview <?php if ($_GET['p'] == "xxx" or $_GET['p'] == "xxx") {
+                                                    echo "active";
+                                                } ?>">
+                                <a href="#"><i class="fa fa-cube"></i> <span>First Lot</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="<?php if ($_GET['p'] == "xxx") {
+                                                    echo "active";
+                                                } ?>">
+                                        <a href="KainInNewFL"><i
+                                                class="fa fa-calendar text-aqua"></i> <span>Kain Masuk
+                                                <?= $sub_menu_fl ?></span></a>
+                                    </li>
+                                    <li class="<?php if ($_GET['p'] == "xxx") {
+                                                    echo "active";
+                                                } ?>"><a href="TestingNewFL"><i class="fa fa-file-text text-aqua"></i>
+                                            <span>Testing <?= $sub_menu_fl ?></span></a></li>
+                                       
+                                        <li class="<?php if ($_GET['p'] == "xxx") {
+                                                        echo "active";
+                                                    } ?>"><a href="StatusTQNewFL"><i
+                                                    class="fa fa-list-alt text-aqua"></i> <span>Status
+                                                    <?= $sub_menu_fl ?></span></a></li>
+                                        
+                                        
+                                        <li class="<?php if ($_GET['p'] == "xxx") {
+                                                        echo "active";
+                                                    } ?>"><a href="MasterDataNewFL"><i
+                                                    class="fa fa-cube text-aqua"></i> <span>Master Data
+                                                    <?= $sub_menu_fl ?></span></a></li>
+
+                                       
+                                        <li class=""><a href="TestingOperanFL"><i class="fa fa-list text-aqua"></i> <span>Testing
+                                                    Operan FL</span></a></li>
+                                </ul>
+                            </li>
+                    <?php } ?>
+
+
                     <?php if ($_SESSION['lvl_id'] == "AFTERSALES" && strtolower($_SESSION['usrid']) != "kpe") { ?>
 
 

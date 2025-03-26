@@ -163,6 +163,7 @@ border:hidden;
             <td rowspan="2" bgcolor="#F5F5F5">Proses</td>
             <td rowspan="2" bgcolor="#F5F5F5">Status</td>
             <td rowspan="2" bgcolor="#F5F5F5">Jam Mutasi</td>
+            <td rowspan="2" bgcolor="#F5F5F5">Speed</td>
             <td rowspan="2" bgcolor="#F5F5F5">Catatan</td>
         </tr>
         <tr align="center" bgcolor="#CCCCCC">
@@ -206,6 +207,7 @@ border:hidden;
                 <td align="center"><?php echo $row['proses'];?></td>
                 <td align="center"><?php echo $row['status'];?></td>
                 <td align="center"><?php echo $row['jam_mutasi'];?></td>
+                <td align="center"><?php echo $row['speed'];?></td>
                 <td><?php echo $row['catatan'];?></td>
             </tr>
  
