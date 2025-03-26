@@ -417,7 +417,7 @@ $page = strtolower($page);
         <?php } ?>
 
       <?php } ?>
-      <?php if ($_SESSION['lvl_id'] == "PACKING" or $_SESSION['lvl_id'] == "LEADERTQ" or $_SESSION['lvl_id'] == "NCP" or $_SESSION['lvl_id'] == "INSPEKSI" or $_SESSION['lvl_id'] == "TQ") { ?>
+      <?php if ($_SESSION['lvl_id'] == "PACKING" or $_SESSION['lvl_id'] == "LEADERTQ" or $_SESSION['lvl_id'] == "NCP" or $_SESSION['lvl_id'] == "INSPEKSI" or $_SESSION['lvl_id'] == "TQ" or $_SESSION['lvl_id'] == "OPERATORTQ") { ?>
 
 
         <!-- jika username marketing hidden -->
