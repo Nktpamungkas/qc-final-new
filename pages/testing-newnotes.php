@@ -1330,6 +1330,33 @@
 			$("#rancr").css("display", "none");  // To hide
 			$("#marcr").css("display", "none");  // To hide
 		}
+		if (document.forms['form2']['jns_test2'].value == "FIBER SHEDDING") {
+			if (document.forms['form2']['stat_cr'].value == "RANDOM") {
+				$("#rancr").css("display", "");  // To unhide
+			} else {
+				$("#rancr").css("display", "none");  // To hide
+			}
+			if (document.forms['form2']['stat_cr'].value == "DISPOSISI") {
+				$("#discr").css("display", "");  // To unhide
+			} else {
+				$("#discr").css("display", "none");  // To hide
+			}
+			if (document.forms['form2']['stat_cr'].value == "MARGINAL PASS") {
+				$("#marcr").css("display", "");  // To unhide
+			} else {
+				$("#marcr").css("display", "none");  // To hide
+			}
+			$("#c16").css("display", "");  // To unhide
+			$("#stat_rub").css("display", "");  // To unhide
+			$("#nama_fiber").css("display", "");  // To unhide
+		} else {
+			$("#c16").css("display", "none");  // To hide
+			$("#stat_rub").css("display", "none");  // To hide
+			$("#nama_fiber").css("display", "none");  // To hide
+			$("#discr").css("display", "none");  // To hide
+			$("#rancr").css("display", "none");  // To hide
+			$("#marcr").css("display", "none");  // To hide
+		}
 		if (document.forms['form2']['jns_test2'].value == "PHENOLIC YELLOWING") {
 			if (document.forms['form2']['stat_py'].value == "RANDOM") {
 				$("#ranpy").css("display", "");  // To unhide
@@ -1946,9 +1973,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							<tbody>
 								<?php
 								//$no_test=$_GET[no_test];
-								$sql = "SELECT a.*, b.*, c.* From tbl_tq_nokk a
+								$sql = "SELECT a.*, b.*, c.*, c2.* From tbl_tq_nokk a
                                 INNER JOIN tbl_master_test b ON a.no_test=b.no_testmaster
                                 INNER JOIN tbl_tq_test c ON a.id=c.id_nokk
+                                INNER JOIN tbl_tq_test_2 c2 ON a.id=c2.id_nokk
                                 WHERE no_test='$notes'";
 								$result = mysqli_query($con, $sql);
 								$no = "1";
@@ -3762,6 +3790,34 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											</td>
 										</tr>
 									<?php } ?>
+									<?php if (in_array("FIBER SHEDDING", $detail3)) { ?>
+										<tr>
+											<td align="left">
+												<?php if (in_array("FIBER SHEDDING", $detail3)) {
+													echo "FIBER SHEDDING";
+												} ?>
+											</td>
+											<td align="center">
+												<?php if ($row['status_rub'] == "DISPOSISI") { ?> <span
+														class='label label-bg-red blink_me'>
+														<?php echo "DISPOSISI"; ?>
+													</span>
+												<?php } else if ($row['status_rub'] == "FAIL") { ?> <span
+															class='label bg-red blink_me'>
+														<?php echo "FAIL"; ?>
+														</span>
+												<?php } else if ($row['status_rub'] == "PASS") { ?> <span class='label bg-green'>
+														<?php echo "PASS"; ?>
+																	</span>
+												<?php } else if ($row['status_rub'] == "A") { ?> <span class='label bg-teal'>
+														<?php echo "A"; ?>
+																				</span>
+												<?php } ?>
+											</td>
+											<td align="center">
+											</td>
+										</tr>
+									<?php } ?>
 								<?php } ?>
 							</tbody>
 						</table>
@@ -3872,15 +3928,6 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									</div>
 								</div>
 								<!-- FLAMMABILITY END-->
-								<!--<div class="form-group" id="fib2" style="display:none;">
-								<label for="fibercontent" class="col-sm-2 control-label">FIBER CONTENT</label>
-								<div class="col-sm-6">
-									<input name="fibercontent" type="text" class="form-control" id="fibercontent" value="<?php echo $rcek1['fibercontent']; ?>" placeholder="COTT/MODAL/RAYON %, POLYESTER %, ELASTANE %">
-								</div>
-								<div class="col-sm-2">
-									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="fiber_note" maxlength="50" rows="1"><?php echo $rcek1['fiber_note']; ?></textarea>
-								</div>
-							</div>-->
 								<!-- FIBER CONTENT BEGIN-->
 								<div class="form-group" id="fib1" style="display:none;">
 									<label for="fibercontent" class="col-sm-2 control-label">FIBER CONTENT</label>
@@ -4058,8 +4105,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											placeholder="COTT/MODAL/RAYON %, POLYESTER %, ELASTANE %" readonly>
 									</div>
 									<!--<div class="col-sm-2">
-									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dfiber_note " maxlength="50" rows="1"><?php echo $rcekD['dfiber_note']; ?></textarea>
-								</div>-->
+										<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dfiber_note " maxlength="50" rows="1"><?php echo $rcekD['dfiber_note']; ?></textarea>
+									</div>-->
 								</div>
 								<div class="form-group" id="disfib" style="display:none;">
 									<label for="dfibercontent" class="col-sm-2 control-label"></label>
@@ -4578,6 +4625,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								<!-- BOW & SKEW BEGIN-->
 								<div class="form-group" id="fc6" style="display:none;">
 									<label for="bow_skew" class="col-sm-2 control-label">BOW &amp; SKEW</label>
+									<!-- <div class="col-sm-2">
+										<input name="nama" type="text" class="form-control" id="nama"
+											value="<?php echo $rcek1['bow']; ?>" placeholder="NAMA" readonly>
+									</div> -->
 									<div class="col-sm-2">
 										<input name="bow" type="text" class="form-control" id="bow"
 											value="<?php echo $rcek1['bow']; ?>" placeholder="BOW">
@@ -6118,52 +6169,52 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									</div>
 								</div>
 								<!-- PILLING RANDOM TUMBLER END-->
-								<!-- ABRATION BEGIN-->
-								<div class="form-group" id="fc11" style="display:none;">
-									<label for="abr" class="col-sm-2 control-label">ABRATION</label>
-									<div class="col-sm-2">
-										<input name="abr" type="text" class="form-control" id="abr"
-											value="<?php echo $rcek1['abration']; ?>" placeholder="ABRATION">
-									</div>
-									<div class="col-sm-2">
-										<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-											name="abr_note" maxlength="50"
-											rows="1"><?php echo $rcek1['abr_note']; ?></textarea>
-									</div>
-								</div>
-								<div class="form-group" id="stat_abr" style="display:none;">
-									<label for="stat_abr" class="col-sm-2 control-label">STATUS</label>
-									<div class="col-sm-2">
-										<select name="stat_abr" class="form-control select2" id="stat_abr"
-											onChange="tampil();" style="width: 100%;">
-											<option <?php if ($rcek1['stat_abr'] == "") { ?> selected=selected <?php }
-											; ?>value="">Pilih</option>
-											<option <?php if ($rcek1['stat_abr'] == "DISPOSISI") { ?> selected=selected <?php }
-											; ?>value="DISPOSISI">DISPOSISI</option>
-											<option <?php if ($rcek1['stat_abr'] == "A") { ?> selected=selected <?php }
-											; ?>value="A">A</option>
-											<option <?php if ($rcek1['stat_abr'] == "R") { ?> selected=selected <?php }
-											; ?>value="R">R</option>
-											<option <?php if ($rcek1['stat_abr'] == "PASS") { ?> selected=selected <?php }
-											; ?>value="PASS">PASS</option>
-											<option <?php if ($rcek1['stat_abr'] == "FAIL") { ?> selected=selected <?php }
-											; ?>value="FAIL">FAIL</option>
-											<option <?php if ($rcek1['stat_abr'] == "RANDOM") { ?> selected=selected <?php }
-											; ?>value="RANDOM">RANDOM</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group" id="disabr" style="display:none;">
-									<label for="abr" class="col-sm-2 control-label">ABRATION (DIS)</label>
-									<<div class="col-sm-2">
-										<input name="dabr" type="text" class="form-control" id="dabr"
-											value="<?php echo $rcekD['dabration']; ?>" placeholder="ABRATION">
-								</div>
-								<div class="col-sm-2">
-									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-										name="dabr_note" maxlength="50"
-										rows="1"><?php echo $rcekD['dabr_note']; ?></textarea>
-								</div>
+						<!-- ABRATION BEGIN-->
+						<div class="form-group" id="fc11" style="display:none;">
+							<label for="abr" class="col-sm-2 control-label">ABRATION</label>
+							<div class="col-sm-2">
+								<input name="abr" type="text" class="form-control" id="abr"
+									value="<?php echo $rcek1['abration']; ?>" placeholder="ABRATION">
+							</div>
+							<div class="col-sm-2">
+								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+									name="abr_note" maxlength="50"
+									rows="1"><?php echo $rcek1['abr_note']; ?></textarea>
+							</div>
+						</div>
+						<div class="form-group" id="stat_abr" style="display:none;">
+							<label for="stat_abr" class="col-sm-2 control-label">STATUS</label>
+							<div class="col-sm-2">
+								<select name="stat_abr" class="form-control select2" id="stat_abr"
+									onChange="tampil();" style="width: 100%;">
+									<option <?php if ($rcek1['stat_abr'] == "") { ?> selected=selected <?php }
+									; ?>value="">Pilih</option>
+									<option <?php if ($rcek1['stat_abr'] == "DISPOSISI") { ?> selected=selected <?php }
+									; ?>value="DISPOSISI">DISPOSISI</option>
+									<option <?php if ($rcek1['stat_abr'] == "A") { ?> selected=selected <?php }
+									; ?>value="A">A</option>
+									<option <?php if ($rcek1['stat_abr'] == "R") { ?> selected=selected <?php }
+									; ?>value="R">R</option>
+									<option <?php if ($rcek1['stat_abr'] == "PASS") { ?> selected=selected <?php }
+									; ?>value="PASS">PASS</option>
+									<option <?php if ($rcek1['stat_abr'] == "FAIL") { ?> selected=selected <?php }
+									; ?>value="FAIL">FAIL</option>
+									<option <?php if ($rcek1['stat_abr'] == "RANDOM") { ?> selected=selected <?php }
+									; ?>value="RANDOM">RANDOM</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group" id="disabr" style="display:none;">
+							<label for="abr" class="col-sm-2 control-label">ABRATION (DIS)</label>
+							<<div class="col-sm-2">
+								<input name="dabr" type="text" class="form-control" id="dabr"
+									value="<?php echo $rcekD['dabration']; ?>" placeholder="ABRATION">
+						</div>
+						<div class="col-sm-2">
+							<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+								name="dabr_note" maxlength="50"
+								rows="1"><?php echo $rcekD['dabr_note']; ?></textarea>
+						</div>
 						</div>
 						<div class="form-group" id="ranabr" style="display:none;">
 							<label for="ranabr" class="col-sm-2 control-label">ABRATION (RAN)</label>
@@ -6914,7 +6965,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							</div>
 						</div>
 						<!-- THICKNESS END-->
-						<!-- STRECTH & RECOVERY BEGIN-->
+						<!-- STRECTH & RECOVERY BEGIN-->						 
 						<div class="form-group" id="fc17" style="display:none;">
 							<label for="stretch" class="col-sm-2 control-label">STRETCH</label>
 							<div class="col-sm-1">
@@ -8244,7 +8295,6 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								</select>
 							</div>
 						</div>
-
 						<!-- WRINKLE END -->
 						<div class="form-group">
 							<?php if ($notes != "") { ?>
@@ -8254,6 +8304,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 						</div>
 						</form>
 					</div>
+				<!-- Untuk Kolom Colorfastness -->
 					<div class="tab-pane" id="tab_2">
 						<form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form2"
 							id="form2">
@@ -10157,6 +10208,65 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								</div>
 							</div>
 							<!-- DYE TRANSFER END-->
+							<!-- FIBER SHEDDING BEGIN-->
+							<div class="form-group" id="c16" style="display:none;">
+								<label for="fiber_shed" class="col-sm-2 control-label">FIBER SHEDDING</label>
+								<div class="col-sm-2">Classification
+									<input name="classification_shedding" type="text" class="form-control" id="classification_shedding"
+										value="<?php echo $rcek1['classification_shedding']; ?>" placeholder="Classification">
+								</div>
+								<div class="col-sm-2">Syringe Value
+									<input name="syringe_shedding" type="text" class="form-control" id="syringe_shedding"
+										value="<?php echo $rcek1['syringe_shedding']; ?>" placeholder="Syringe">
+								</div>
+								<div class="col-sm-2">Observation
+									<input name="observation_shedding" type="text" class="form-control" id="observation_shedding"
+										value="<?php echo $rcek1['observation_shedding']; ?>" placeholder="Observation">
+								</div>
+								<div class="col-sm-2">Ave. Fiber loss in gram
+									<input name="avg_gr_shedding" type="text" class="form-control" id="avg_gr_shedding"
+										value="<?php echo $rcek1['avg_gr_shedding']; ?>" placeholder="Avg Gr">
+								</div>
+								<div class="col-sm-2">Ave. Fiber loss in %
+									<input name="avg_per_shedding" type="text" class="form-control" id="avg_per_shedding"
+										value="<?php echo $rcek1['avg_per_shedding']; ?>" placeholder="Avg % ">
+								</div>
+								<!-- <div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="crock_note" maxlength="50"><?php echo $rcek1['crock_note']; ?></textarea>
+								</div> -->
+							</div>
+							<div class="form-group" id="stat_rub" style="display:none;">
+								<label for="stat_rub" class="col-sm-2 control-label">RUB TEST</label>
+									<div class="col-sm-2">NAMA
+										<?php
+										$id_user = $rcek1['nama_rub'] ?? $_SESSION['user_id'] ?? '';
+										$sql_user = "SELECT nama FROM user_login WHERE id='$id_user'";
+										$query_user = mysqli_query($con, $sql_user) or die("error: " . mysqli_error($con));
+										$user = mysqli_fetch_array($query_user);
+										?>
+										<input name="user_id" type="text" class="form-control" id="user_id" value="<?= $user['nama']; ?>" placeholder="nama" readonly>
+										<input type="hidden" name="nama_rub" value="<?= $id_user; ?>">
+									</div>
+									
+
+
+								<div class="col-sm-2"> STATUS
+									<select name="status_rub" class="form-control select2" id="status_rub" onChange="tampil2();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['status_rub'] == "") { ?> selected=selected <?php }
+										; ?>value="">Pilih</option>
+										<option <?php if ($rcek1['status_rub'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['status_rub'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">PASS</option>
+										<option <?php if ($rcek1['status_rub'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">FAIL</option>
+									</select>
+								</div>
+							</div>
+							<!-- FIBER SHEDDING END-->
 							<div class="form-group">
 								<?php if ($notes != "") { ?>
 									<button type="submit" class="btn btn-primary pull-right" name="colorfastness_save"
@@ -10966,7 +11076,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							<!--<div class="form-group" id="stat_wp" style="display:none;">
 							<label for="stat_wp" class="col-sm-2 control-label">STATUS</label>
 
-						</div>-->
+							</div>-->
 							<div class="form-group" id="diswp" style="display:none;">
 								<label for="diswp" class="col-sm-2 control-label">WATER REPPELENT ORIGINAL (DIS)</label>
 								<div class="col-sm-2">
@@ -10996,13 +11106,13 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								</div>
 								<!--<div class="col-sm-2">
 								<input name="rrepp2" type="text" class="form-control" id="rrepp2" value="<?php echo $rcekR['rrepp2']; ?>" placeholder="After Wash" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rrepp3" type="text" class="form-control" id="rrepp3" value="<?php echo $rcekR['rrepp3']; ?>" placeholder="3" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rrepp4" type="text" class="form-control" id="rrepp4" value="<?php echo $rcekR['rrepp4']; ?>" placeholder="4" readonly>
-							</div>-->
+								</div>
+								<div class="col-sm-2">
+									<input name="rrepp3" type="text" class="form-control" id="rrepp3" value="<?php echo $rcekR['rrepp3']; ?>" placeholder="3" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rrepp4" type="text" class="form-control" id="rrepp4" value="<?php echo $rcekR['rrepp4']; ?>" placeholder="4" readonly>
+								</div>-->
 								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
 										name="rrepp_note" maxlength="50" rows="1"
@@ -11017,13 +11127,13 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								</div>
 								<!--<div class="col-sm-2">
 								<input name="repp2" type="text" class="form-control" id="repp2" value="<?php echo $rcek1['repp2']; ?>" placeholder="After Wash">
-							</div>
-							<div class="col-sm-2">
-								<input name="repp3" type="text" class="form-control" id="repp3" value="<?php echo $rcek1['repp3']; ?>" placeholder="3">
-							</div>
-							<div class="col-sm-2">
-								<input name="repp4" type="text" class="form-control" id="repp4" value="<?php echo $rcek1['repp4']; ?>" placeholder="4">
-							</div>-->
+								</div>
+								<div class="col-sm-2">
+									<input name="repp3" type="text" class="form-control" id="repp3" value="<?php echo $rcek1['repp3']; ?>" placeholder="3">
+								</div>
+								<div class="col-sm-2">
+									<input name="repp4" type="text" class="form-control" id="repp4" value="<?php echo $rcek1['repp4']; ?>" placeholder="4">
+								</div>-->
 								<div class="col-sm-2">
 									<select name="stat_wp1" class="form-control select2" id="stat_wp1" onChange="tampil1();"
 										style="width: 100%;">
@@ -11050,7 +11160,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							<!--<div class="form-group" id="stat_wp" style="display:none;">
 							<label for="stat_wp" class="col-sm-2 control-label">STATUS</label>
 
-						</div>-->
+							</div>-->
 							<div class="form-group" id="diswp1" style="display:none;">
 								<label for="diswp1" class="col-sm-2 control-label">WATER REPPELENT AFTERWASH (DIS)</label>
 								<div class="col-sm-2">
@@ -14385,21 +14495,38 @@ if ($_POST['colorfastness_save'] == "save") {  // bleeding_root save
 			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk,bleeding_root) VALUES ('$id_tq_test_2','$bleeding_root')");
 		}
 	}
-
 	if ($dbleeding_root != '') {
 		$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_disptest_2 SET dbleeding_root = '$dbleeding_root'  WHERE id_nokk='$id_tq_test_2'");
-		$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_disptest_2 (id_nokk,dbleeding_root) VALUES ('$id_tq_test_2','$dbleeding_root')");
-
 	} else {
-		$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_disptest_2 SET dbleeding_root = null  WHERE id_nokk='$id_tq_test_2'");
-		$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_disptest_2 (id_nokk,dbleeding_root) VALUES ('$id_tq_test_2','$dbleeding_root')");
-
+		if ($_POST['dbleeding_root'] != '') { 
+			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_disptest_2 (id_nokk,dbleeding_root) VALUES ('$id_tq_test_2','$dbleeding_root')");
+		}else{
+			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_disptest_2 SET dbleeding_root = null  WHERE id_nokk='$id_tq_test_2'");
+		}
 	}
 
+	$fields = array('classification_shedding', 'syringe_shedding', 'observation_shedding', 'avg_gr_shedding', 'avg_per_shedding', 'nama_rub', 'status_rub', 'bleeding_root');
+    
+    foreach ($fields as $field) {
+        $value = trim($_POST[$field]);
+        
+        if ($value != "0" && $value != "") {
+            $selectSql = "SELECT * FROM tbl_tq_test_2 WHERE id_nokk = '$id_tq_test_2'";
+            $result = mysqli_query($con, $selectSql);
 
-
-
-
+            if (mysqli_num_rows($result) > 0) {
+                // Data sudah ada, lakukan UPDATE
+                $updateSql = "UPDATE tbl_tq_test_2 SET $field = '$value' WHERE id_nokk = '$id_tq_test_2'";
+                $sqlPHY = mysqli_query($con, $updateSql);
+            } else {
+                // Data belum ada, lakukan INSERT
+                $insertSql = "INSERT INTO tbl_tq_test_2 (id_nokk, $field) VALUES ('$id_tq_test_2','$value')";
+                $sqlPHY = mysqli_query($con, $insertSql);
+            }
+        } else {
+            $sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET $field = null WHERE id_nokk = '$id_tq_test_2'");
+        }
+    }
 }
 
 ?>
@@ -14966,8 +15093,270 @@ if ($_POST['physical_save'] == "save" and $cek1 > 0) {
 		`dnedle_note`='$_POST[dnedle_note]',
 		`tgl_update`=now()
 		WHERE `id_nokk`='$rcek[id]'");
+		$sqlPHYM = mysqli_query($con, "UPDATE tbl_tq_marginal SET
+				`mflamability`='$_POST[mflamability]',
+				`mfla_note`='$_POST[mfla_note]',
+				`mfc_cott`='$_POST[mfc_cott]',
+				`mfc_poly`='$_POST[mfc_poly]',
+				`mfc_elastane`='$_POST[mfc_ela]',
+				`mfc_cott1`='$_POST[mfc_cott1]',
+				`mfc_poly1`='$_POST[mfc_poly1]',
+				`mfc_elastane1`='$_POST[mfc_ela1]',
+				`std_mfc_cott1`='$_POST[std_mfc_cott1]',
+				`std_mfc_poly1`='$_POST[std_mfc_poly1]',
+				`std_mfc_elastane1`='$_POST[std_mfc_elastane1]',
+				`mfibercontent`='$_POST[mfibercontent]',
+				`mfiber_note`='$_POST[mfiber_note]',
+				`mfc_wpi`='$_POST[mwpi]',
+				`mfc_cpi`='$_POST[mcpi]',
+				`mfc_note`='$_POST[mfc_note]',
+				`mf_weight`='$_POST[mfabric_weight]',
+				`mfwe_note`='$_POST[mfwe_note]',
+				`mf_width`='$_POST[mfabric_width]',
+				`mfwi_note`='$_POST[mfwi_note]',
+				`mbow`='$_POST[mbow]',
+				`mskew`='$_POST[mskew]',
+				`mbas_note`='$_POST[mbas_note]',
+				`mh_shrinkage_temp`='$_POST[mh_shrinkage_temp]',
+				`mh_shrinkage_l1`='$_POST[mh_shrinkage_l1]',
+				`mh_shrinkage_w1`='$_POST[mh_shrinkage_w1]',
+				`mh_shrinkage_grd`='$_POST[mh_shrinkage_grd]',
+				`mh_shrinkage_app`='$_POST[mh_shrinkage_app]',
+				`mh_shrinkage_note`='$_POST[mh_shrinkage_note]',
+				`mss_temp`='$_POST[mss_temp]',
+				`mss_washes3`='$_POST[mss_washes3]',
+				`mss_washes10`='$_POST[mss_washes10]',
+				`mss_washes15`='$_POST[mss_washes15]',
+				`mss_cmt`='$_POST[mss_cmt]',
+				`mshrinkage_l1`='$_POST[mshrinkage_len1]',
+				`mshrinkage_l2`='$_POST[mshrinkage_len2]',
+				`mshrinkage_l3`='$_POST[mshrinkage_len3]',
+				`mshrinkage_l4`='$_POST[mshrinkage_len4]',
+				`mshrinkage_l5`='$_POST[mshrinkage_len5]',
+				`mshrinkage_l6`='$_POST[mshrinkage_len6]',
+				`mshrinkage_w1`='$_POST[mshrinkage_wid1]',
+				`mshrinkage_w2`='$_POST[mshrinkage_wid2]',
+				`mshrinkage_w3`='$_POST[mshrinkage_wid3]',
+				`mshrinkage_w4`='$_POST[mshrinkage_wid4]',
+				`mshrinkage_w5`='$_POST[mshrinkage_wid5]',
+				`mshrinkage_w6`='$_POST[mshrinkage_wid6]',
+				`mspirality1`='$_POST[mspirality1]',
+				`mspirality2`='$_POST[mspirality2]',
+				`mspirality3`='$_POST[mspirality3]',
+				`mspirality4`='$_POST[mspirality4]',
+				`mspirality5`='$_POST[mspirality5]',
+				`mspirality6`='$_POST[mspirality6]',
+				`mss_linedry`='$_POST[mss_linedry]',
+				`mss_tumbledry`='$_POST[mss_tumbledry]',
+				`msns_note`='$_POST[msns_note]',
+				`mapperss_ch1`='$_POST[mapperss_ch1]',
+				`mapperss_ch2`='$_POST[mapperss_ch2]',
+				`mapperss_ch3`='$_POST[mapperss_ch3]',
+				`mapperss_ch4`='$_POST[mapperss_ch4]',
+				`mapperss_cc1`='$_POST[mapperss_cc1]',
+				`mapperss_cc2`='$_POST[mapperss_cc2]',
+				`mapperss_cc3`='$_POST[mapperss_cc3]',
+				`mapperss_cc4`='$_POST[mapperss_cc4]',
+				`mapperss_st`='$_POST[mapperss_st]',
+				`mapperss_pf1`='$_POST[mapperss_pf1]',
+				`mapperss_pf2`='$_POST[mapperss_pf2]',
+				`mapperss_pf3`='$_POST[mapperss_pf3]',
+				`mapperss_pf4`='$_POST[mapperss_pf4]',
+				`mapperss_pb1`='$_POST[mapperss_pb1]',
+				`mapperss_pb2`='$_POST[mapperss_pb2]',
+				`mapperss_pb3`='$_POST[mapperss_pb3]',
+				`mapperss_pb4`='$_POST[mapperss_pb4]',
+				`mapperss_sf1`='$_POST[mapperss_sf1]',
+				`mapperss_sf2`='$_POST[mapperss_sf2]',
+				`mapperss_sf3`='$_POST[mapperss_sf3]',
+				`mapperss_sf4`='$_POST[mapperss_sf4]',
+				`mapperss_sb1`='$_POST[mapperss_sb1]',
+				`mapperss_sb2`='$_POST[mapperss_sb2]',
+				`mapperss_sb3`='$_POST[mapperss_sb3]',
+				`mapperss_sb4`='$_POST[mapperss_sb4]',
+				`mapperss_note`='$_POST[mapperss_note]',
+				`mpm_f1`='$_POST[mpillingm_f1]',
+				`mpm_b1`='$_POST[mpillingm_b1]',
+				`mpm_f2`='$_POST[mpillingm_f2]',
+				`mpm_b2`='$_POST[mpillingm_b2]',
+				`mpm_f3`='$_POST[mpillingm_f3]',
+				`mpm_b3`='$_POST[mpillingm_b3]',
+				`mpm_f4`='$_POST[mpillingm_f4]',
+				`mpm_b4`='$_POST[mpillingm_b4]',
+				`mpm_f5`='$_POST[mpillingm_f5]',
+				`mpm_b5`='$_POST[mpillingm_b5]',
+				`mpillm_note`='$_POST[mpillm_note]',
+				`mpl_f1`='$_POST[mpillingl_f1]',
+				`mpl_b1`='$_POST[mpillingl_b1]',
+				`mpl_f2`='$_POST[mpillingl_f2]',
+				`mpl_b2`='$_POST[mpillingl_b2]',
+				`mpl_f3`='$_POST[mpillingl_f3]',
+				`mpl_b3`='$_POST[mpillingl_b3]',
+				`mpl_f4`='$_POST[mpillingl_f4]',
+				`mpl_b4`='$_POST[mpillingl_b4]',
+				`mpl_f5`='$_POST[mpillingl_f5]',
+				`mpl_b5`='$_POST[mpillingl_b5]',
+				`mpilll_note`='$_POST[mpilll_note]',
+				`mpb_f1`='$_POST[mpillingb_f1]',
+				`mpb_b1`='$_POST[mpillingb_b1]',
+				`mpb_f2`='$_POST[mpillingb_f2]',
+				`mpb_b2`='$_POST[mpillingb_b2]',
+				`mpb_f3`='$_POST[mpillingb_f3]',
+				`mpb_b3`='$_POST[mpillingb_b3]',
+				`mpb_f4`='$_POST[mpillingb_f4]',
+				`mpb_b4`='$_POST[mpillingb_b4]',
+				`mpb_f5`='$_POST[mpillingb_f5]',
+				`mpb_b5`='$_POST[mpillingb_b5]',
+				`mpillb_note`='$_POST[mpillb_note]',
+				`mprt_f1`='$_POST[mpillingrt_f1]',
+				`mprt_b1`='$_POST[mpillingrt_b1]',
+				`mprt_f2`='$_POST[mpillingrt_f2]',
+				`mprt_b2`='$_POST[mpillingrt_b2]',
+				`mprt_f3`='$_POST[mpillingrt_f3]',
+				`mprt_b3`='$_POST[mpillingrt_b3]',
+				`mprt_f4`='$_POST[mpillingrt_f4]',
+				`mprt_b4`='$_POST[mpillingrt_b4]',
+				`mprt_f5`='$_POST[mpillingrt_f5]',
+				`mprt_b5`='$_POST[mpillingrt_b5]',
+				`mpillr_note`='$_POST[mpillr_note]',
+				`mabration`='$_POST[mabr]',
+				`mabr_note`='$_POST[mabr_note]',
+				`msm_l1`='$_POST[msnaggingm_l1]',
+				`msm_w1`='$_POST[msnaggingm_w1]',
+				`msm_l2`='$_POST[msnaggingm_l2]',
+				`msm_w2`='$_POST[msnaggingm_w2]',
+				`msm_l3`='$_POST[msnaggingm_l3]',
+				`msm_w3`='$_POST[msnaggingm_w3]',
+				`msm_l4`='$_POST[msnaggingm_l4]',
+				`msm_w4`='$_POST[msnaggingm_w4]',
+				`msnam_note`='$_POST[msnam_note]',
+				`msp_grdl1` ='$_POST[msp_grdl1]',
+				`msp_clsl1` ='$_POST[msp_clsl1]',
+				`msp_shol1` ='$_POST[msp_shol1]',
+				`msp_medl1` ='$_POST[msp_medl1]',
+				`msp_lonl1` ='$_POST[msp_lonl1]',
+				`msp_grdw1` ='$_POST[msp_grdw1]',
+				`msp_clsw1` ='$_POST[msp_clsw1]',
+				`msp_show1` ='$_POST[msp_show1]',
+				`msp_medw1` ='$_POST[msp_medw1]',
+				`msp_lonw1` ='$_POST[msp_lonw1]',
+				`msp_grdl2` ='$_POST[msp_grdl2]',
+				`msp_clsl2` ='$_POST[msp_clsl2]',
+				`msp_shol2` ='$_POST[msp_shol2]',
+				`msp_medl2` ='$_POST[msp_medl2]',
+				`msp_lonl2` ='$_POST[msp_lonl2]',
+				`msp_grdw2` ='$_POST[msp_grdw2]',
+				`msp_clsw2` ='$_POST[msp_clsw2]',
+				`msp_show2` ='$_POST[msp_show2]',
+				`msp_medw2` ='$_POST[msp_medw2]',
+				`msp_lonw2` ='$_POST[msp_lonw2]',
+				`msnap_note`='$_POST[msnap_note]',
+				`msb_l1`='$_POST[msnaggingb_l1]',
+				`msb_w1`='$_POST[msnaggingb_w1]',
+				`msb_l2`='$_POST[msnaggingb_l2]',
+				`msb_w2`='$_POST[msnaggingb_w2]',
+				`msb_l3`='$_POST[msnaggingb_l3]',
+				`msb_w3`='$_POST[msnaggingb_w3]',
+				`msb_l4`='$_POST[msnaggingb_l4]',
+				`msb_w4`='$_POST[msnaggingb_w4]',
+				`msnab_note`='$_POST[msnab_note]',
+				`mbs_instron`='$_POST[minstron]',
+				`mbs_mullen`='$_POST[mmullen]',
+				`mbs_tru`='$_POST[mtru_burst]',
+				`mbs_tru2`='$_POST[mtru_burst2]',
+				`mburs_note`='$_POST[mburs_note]',
+				`mthick1`='$_POST[mthick1]',
+				`mthick2`='$_POST[mthick2]',
+				`mthick3`='$_POST[mthick3]',
+				`mthickav`='$_POST[mthickav]',
+				`mthick_note`='$_POST[mthick_note]',
+				`mstretch_l1`='$_POST[mstretch_l1]',
+				`mstretch_w1`='$_POST[mstretch_w1]',
+				`mstretch_l2`='$_POST[mstretch_l2]',
+				`mstretch_w2`='$_POST[mstretch_w2]',
+				`mstretch_l3`='$_POST[mstretch_l3]',
+				`mstretch_w3`='$_POST[mstretch_w3]',
+				`mstretch_l4`='$_POST[mstretch_l4]',
+				`mstretch_w4`='$_POST[mstretch_w4]',
+				`mstretch_l5`='$_POST[mstretch_l5]',
+				`mstretch_w5`='$_POST[mstretch_w5]',
+				`mload_stretch`='$_POST[mload_stretch]',
+				`mstretch_note`='$_POST[mstretch_note]',
+				`mrecover_l1`='$_POST[mrecover_l1]',
+				`mrecover_w1`='$_POST[mrecover_w1]',
+				`mrecover_l2`='$_POST[mrecover_l2]',
+				`mrecover_w2`='$_POST[mrecover_w2]',
+				`mrecover_l3`='$_POST[mrecover_l3]',
+				`mrecover_w3`='$_POST[mrecover_w3]',
+				`mrecover_l4`='$_POST[mrecover_l4]',
+				`mrecover_w4`='$_POST[mrecover_w4]',
+				`mrecover_l5`='$_POST[mrecover_l5]',
+				`mrecover_w5`='$_POST[mrecover_w5]',
+				`mrecover_l11`='$_POST[mrecover_l11]',
+				`mrecover_w11`='$_POST[mrecover_w11]',
+				`mrecover_l21`='$_POST[mrecover_l21]',
+				`mrecover_w21`='$_POST[mrecover_w21]',
+				`mrecover_l31`='$_POST[mrecover_l31]',
+				`mrecover_w31`='$_POST[mrecover_w31]',
+				`mrecover_l41`='$_POST[mrecover_l41]',
+				`mrecover_w41`='$_POST[mrecover_w41]',
+				`mrecover_l51`='$_POST[mrecover_l51]',
+				`mrecover_w51`='$_POST[mrecover_w51]',
+				`mrecover_note`='$_POST[mrecover_note]',
+				`mgrowth_l1`='$_POST[mgrowth_l1]',
+				`mgrowth_w1`='$_POST[mgrowth_w1]',
+				`mgrowth_l2`='$_POST[mgrowth_l2]',
+				`mgrowth_w2`='$_POST[mgrowth_w2]',
+				`mrec_growth_l1`='$_POST[mrec_growth_l1]',
+				`mrec_growth_w1`='$_POST[mrec_growth_w1]',
+				`mrec_growth_l2`='$_POST[mrec_growth_l2]',
+				`mrec_growth_w2`='$_POST[mrec_growth_w2]',
+				`mgrowth_note`='$_POST[mgrowth_note]',
+				`mapper_ch1`='$_POST[mapper_ch1]',
+				`mapper_ch2`='$_POST[mapper_ch2]',
+				`mapper_ch3`='$_POST[mapper_ch3]',
+				`mapper_cc1`='$_POST[mapper_cc1]',
+				`mapper_cc2`='$_POST[mapper_cc2]',
+				`mapper_cc3`='$_POST[mapper_cc3]',
+				`mapper_st`='$_POST[mapper_st]',
+				`mapper_st2`='$_POST[mapper_st2]',
+				`mapper_st3`='$_POST[mapper_st3]',
+				`mapper_pf1`='$_POST[mapper_pf1]',
+				`mapper_pf2`='$_POST[mapper_pf2]',
+				`mapper_pf3`='$_POST[mapper_pf3]',
+				`mapper_pb1`='$_POST[mapper_pb1]',
+				`mapper_pb2`='$_POST[mapper_pb2]',
+				`mapper_pb3`='$_POST[mapper_pb3]',
+				`mapper_acetate`='$_POST[mapper_acetate]',
+				`mapper_cotton`='$_POST[mapper_cotton]',
+				`mapper_nylon`='$_POST[mapper_nylon]',
+				`mapper_poly`='$_POST[mapper_poly]',
+				`mapper_acrylic`='$_POST[mapper_acrylic]',
+				`mapper_wool`='$_POST[mapper_wool]',
+				`mapper_note`='$_POST[mapper_note]',
+				`mfibre_transfer`='$_POST[mfibre_transfer]',
+				`mfibre_grade`='$_POST[mfibre_grade]',
+				`mfibre_note`='$_POST[mfibre_note]',
+				`modour`='$_POST[modour]',
+				`modour_note`='$_POST[modour_note]',
+				`tgl_update`=now()
+				WHERE `id_nokk`='$rcek[id]'");
 
-		$sqlPHYDI = mysqli_query($con, "INSERT INTO tbl_tq_disptest SET
+
+
+		echo "<script>swal({
+		title: 'Data Physical Telah Berhasil di Update',
+		text: 'Klik Ok untuk input data kembali',
+		type: 'success',
+		}).then((result) => {
+		if (result.value) {
+
+			window.location.href='TestingNewNoTes-$notes';
+		}
+		});</script>";
+	}
+} else if ($_POST['physical_save'] == "save") {
+	$sqlPHYDI = mysqli_query($con, "INSERT INTO tbl_tq_disptest SET
 		`id_nokk`='$rcek[id]',
 		`dflamability`='$_POST[dflamability]',
 		`dfla_note`='$_POST[dfla_note]',
@@ -15220,255 +15609,6 @@ if ($_POST['physical_save'] == "save" and $cek1 > 0) {
 		`tgl_buat`=now(),
 		`tgl_update`=now()");
 
-		$sqlPHYM = mysqli_query($con, "UPDATE tbl_tq_marginal SET
-`mflamability`='$_POST[mflamability]',
-`mfla_note`='$_POST[mfla_note]',
-`mfc_cott`='$_POST[mfc_cott]',
-`mfc_poly`='$_POST[mfc_poly]',
-`mfc_elastane`='$_POST[mfc_ela]',
-`mfc_cott1`='$_POST[mfc_cott1]',
-`mfc_poly1`='$_POST[mfc_poly1]',
-`mfc_elastane1`='$_POST[mfc_ela1]',
-`std_mfc_cott1`='$_POST[std_mfc_cott1]',
-`std_mfc_poly1`='$_POST[std_mfc_poly1]',
-`std_mfc_elastane1`='$_POST[std_mfc_elastane1]',
-`mfibercontent`='$_POST[mfibercontent]',
-`mfiber_note`='$_POST[mfiber_note]',
-`mfc_wpi`='$_POST[mwpi]',
-`mfc_cpi`='$_POST[mcpi]',
-`mfc_note`='$_POST[mfc_note]',
-`mf_weight`='$_POST[mfabric_weight]',
-`mfwe_note`='$_POST[mfwe_note]',
-`mf_width`='$_POST[mfabric_width]',
-`mfwi_note`='$_POST[mfwi_note]',
-`mbow`='$_POST[mbow]',
-`mskew`='$_POST[mskew]',
-`mbas_note`='$_POST[mbas_note]',
-`mh_shrinkage_temp`='$_POST[mh_shrinkage_temp]',
-`mh_shrinkage_l1`='$_POST[mh_shrinkage_l1]',
-`mh_shrinkage_w1`='$_POST[mh_shrinkage_w1]',
-`mh_shrinkage_grd`='$_POST[mh_shrinkage_grd]',
-`mh_shrinkage_app`='$_POST[mh_shrinkage_app]',
-`mh_shrinkage_note`='$_POST[mh_shrinkage_note]',
-`mss_temp`='$_POST[mss_temp]',
-`mss_washes3`='$_POST[mss_washes3]',
-`mss_washes10`='$_POST[mss_washes10]',
-`mss_washes15`='$_POST[mss_washes15]',
-`mss_cmt`='$_POST[mss_cmt]',
-`mshrinkage_l1`='$_POST[mshrinkage_len1]',
-`mshrinkage_l2`='$_POST[mshrinkage_len2]',
-`mshrinkage_l3`='$_POST[mshrinkage_len3]',
-`mshrinkage_l4`='$_POST[mshrinkage_len4]',
-`mshrinkage_l5`='$_POST[mshrinkage_len5]',
-`mshrinkage_l6`='$_POST[mshrinkage_len6]',
-`mshrinkage_w1`='$_POST[mshrinkage_wid1]',
-`mshrinkage_w2`='$_POST[mshrinkage_wid2]',
-`mshrinkage_w3`='$_POST[mshrinkage_wid3]',
-`mshrinkage_w4`='$_POST[mshrinkage_wid4]',
-`mshrinkage_w5`='$_POST[mshrinkage_wid5]',
-`mshrinkage_w6`='$_POST[mshrinkage_wid6]',
-`mspirality1`='$_POST[mspirality1]',
-`mspirality2`='$_POST[mspirality2]',
-`mspirality3`='$_POST[mspirality3]',
-`mspirality4`='$_POST[mspirality4]',
-`mspirality5`='$_POST[mspirality5]',
-`mspirality6`='$_POST[mspirality6]',
-`mss_linedry`='$_POST[mss_linedry]',
-`mss_tumbledry`='$_POST[mss_tumbledry]',
-`msns_note`='$_POST[msns_note]',
-`mapperss_ch1`='$_POST[mapperss_ch1]',
-`mapperss_ch2`='$_POST[mapperss_ch2]',
-`mapperss_ch3`='$_POST[mapperss_ch3]',
-`mapperss_ch4`='$_POST[mapperss_ch4]',
-`mapperss_cc1`='$_POST[mapperss_cc1]',
-`mapperss_cc2`='$_POST[mapperss_cc2]',
-`mapperss_cc3`='$_POST[mapperss_cc3]',
-`mapperss_cc4`='$_POST[mapperss_cc4]',
-`mapperss_st`='$_POST[mapperss_st]',
-`mapperss_pf1`='$_POST[mapperss_pf1]',
-`mapperss_pf2`='$_POST[mapperss_pf2]',
-`mapperss_pf3`='$_POST[mapperss_pf3]',
-`mapperss_pf4`='$_POST[mapperss_pf4]',
-`mapperss_pb1`='$_POST[mapperss_pb1]',
-`mapperss_pb2`='$_POST[mapperss_pb2]',
-`mapperss_pb3`='$_POST[mapperss_pb3]',
-`mapperss_pb4`='$_POST[mapperss_pb4]',
-`mapperss_sf1`='$_POST[mapperss_sf1]',
-`mapperss_sf2`='$_POST[mapperss_sf2]',
-`mapperss_sf3`='$_POST[mapperss_sf3]',
-`mapperss_sf4`='$_POST[mapperss_sf4]',
-`mapperss_sb1`='$_POST[mapperss_sb1]',
-`mapperss_sb2`='$_POST[mapperss_sb2]',
-`mapperss_sb3`='$_POST[mapperss_sb3]',
-`mapperss_sb4`='$_POST[mapperss_sb4]',
-`mapperss_note`='$_POST[mapperss_note]',
-`mpm_f1`='$_POST[mpillingm_f1]',
-`mpm_b1`='$_POST[mpillingm_b1]',
-`mpm_f2`='$_POST[mpillingm_f2]',
-`mpm_b2`='$_POST[mpillingm_b2]',
-`mpm_f3`='$_POST[mpillingm_f3]',
-`mpm_b3`='$_POST[mpillingm_b3]',
-`mpm_f4`='$_POST[mpillingm_f4]',
-`mpm_b4`='$_POST[mpillingm_b4]',
-`mpm_f5`='$_POST[mpillingm_f5]',
-`mpm_b5`='$_POST[mpillingm_b5]',
-`mpillm_note`='$_POST[mpillm_note]',
-`mpl_f1`='$_POST[mpillingl_f1]',
-`mpl_b1`='$_POST[mpillingl_b1]',
-`mpl_f2`='$_POST[mpillingl_f2]',
-`mpl_b2`='$_POST[mpillingl_b2]',
-`mpl_f3`='$_POST[mpillingl_f3]',
-`mpl_b3`='$_POST[mpillingl_b3]',
-`mpl_f4`='$_POST[mpillingl_f4]',
-`mpl_b4`='$_POST[mpillingl_b4]',
-`mpl_f5`='$_POST[mpillingl_f5]',
-`mpl_b5`='$_POST[mpillingl_b5]',
-`mpilll_note`='$_POST[mpilll_note]',
-`mpb_f1`='$_POST[mpillingb_f1]',
-`mpb_b1`='$_POST[mpillingb_b1]',
-`mpb_f2`='$_POST[mpillingb_f2]',
-`mpb_b2`='$_POST[mpillingb_b2]',
-`mpb_f3`='$_POST[mpillingb_f3]',
-`mpb_b3`='$_POST[mpillingb_b3]',
-`mpb_f4`='$_POST[mpillingb_f4]',
-`mpb_b4`='$_POST[mpillingb_b4]',
-`mpb_f5`='$_POST[mpillingb_f5]',
-`mpb_b5`='$_POST[mpillingb_b5]',
-`mpillb_note`='$_POST[mpillb_note]',
-`mprt_f1`='$_POST[mpillingrt_f1]',
-`mprt_b1`='$_POST[mpillingrt_b1]',
-`mprt_f2`='$_POST[mpillingrt_f2]',
-`mprt_b2`='$_POST[mpillingrt_b2]',
-`mprt_f3`='$_POST[mpillingrt_f3]',
-`mprt_b3`='$_POST[mpillingrt_b3]',
-`mprt_f4`='$_POST[mpillingrt_f4]',
-`mprt_b4`='$_POST[mpillingrt_b4]',
-`mprt_f5`='$_POST[mpillingrt_f5]',
-`mprt_b5`='$_POST[mpillingrt_b5]',
-`mpillr_note`='$_POST[mpillr_note]',
-`mabration`='$_POST[mabr]',
-`mabr_note`='$_POST[mabr_note]',
-`msm_l1`='$_POST[msnaggingm_l1]',
-`msm_w1`='$_POST[msnaggingm_w1]',
-`msm_l2`='$_POST[msnaggingm_l2]',
-`msm_w2`='$_POST[msnaggingm_w2]',
-`msm_l3`='$_POST[msnaggingm_l3]',
-`msm_w3`='$_POST[msnaggingm_w3]',
-`msm_l4`='$_POST[msnaggingm_l4]',
-`msm_w4`='$_POST[msnaggingm_w4]',
-`msnam_note`='$_POST[msnam_note]',
-`msp_grdl1` ='$_POST[msp_grdl1]',
-`msp_clsl1` ='$_POST[msp_clsl1]',
-`msp_shol1` ='$_POST[msp_shol1]',
-`msp_medl1` ='$_POST[msp_medl1]',
-`msp_lonl1` ='$_POST[msp_lonl1]',
-`msp_grdw1` ='$_POST[msp_grdw1]',
-`msp_clsw1` ='$_POST[msp_clsw1]',
-`msp_show1` ='$_POST[msp_show1]',
-`msp_medw1` ='$_POST[msp_medw1]',
-`msp_lonw1` ='$_POST[msp_lonw1]',
-`msp_grdl2` ='$_POST[msp_grdl2]',
-`msp_clsl2` ='$_POST[msp_clsl2]',
-`msp_shol2` ='$_POST[msp_shol2]',
-`msp_medl2` ='$_POST[msp_medl2]',
-`msp_lonl2` ='$_POST[msp_lonl2]',
-`msp_grdw2` ='$_POST[msp_grdw2]',
-`msp_clsw2` ='$_POST[msp_clsw2]',
-`msp_show2` ='$_POST[msp_show2]',
-`msp_medw2` ='$_POST[msp_medw2]',
-`msp_lonw2` ='$_POST[msp_lonw2]',
-`msnap_note`='$_POST[msnap_note]',
-`msb_l1`='$_POST[msnaggingb_l1]',
-`msb_w1`='$_POST[msnaggingb_w1]',
-`msb_l2`='$_POST[msnaggingb_l2]',
-`msb_w2`='$_POST[msnaggingb_w2]',
-`msb_l3`='$_POST[msnaggingb_l3]',
-`msb_w3`='$_POST[msnaggingb_w3]',
-`msb_l4`='$_POST[msnaggingb_l4]',
-`msb_w4`='$_POST[msnaggingb_w4]',
-`msnab_note`='$_POST[msnab_note]',
-`mbs_instron`='$_POST[minstron]',
-`mbs_mullen`='$_POST[mmullen]',
-`mbs_tru`='$_POST[mtru_burst]',
-`mbs_tru2`='$_POST[mtru_burst2]',
-`mburs_note`='$_POST[mburs_note]',
-`mthick1`='$_POST[mthick1]',
-`mthick2`='$_POST[mthick2]',
-`mthick3`='$_POST[mthick3]',
-`mthickav`='$_POST[mthickav]',
-`mthick_note`='$_POST[mthick_note]',
-`mstretch_l1`='$_POST[mstretch_l1]',
-`mstretch_w1`='$_POST[mstretch_w1]',
-`mstretch_l2`='$_POST[mstretch_l2]',
-`mstretch_w2`='$_POST[mstretch_w2]',
-`mstretch_l3`='$_POST[mstretch_l3]',
-`mstretch_w3`='$_POST[mstretch_w3]',
-`mstretch_l4`='$_POST[mstretch_l4]',
-`mstretch_w4`='$_POST[mstretch_w4]',
-`mstretch_l5`='$_POST[mstretch_l5]',
-`mstretch_w5`='$_POST[mstretch_w5]',
-`mload_stretch`='$_POST[mload_stretch]',
-`mstretch_note`='$_POST[mstretch_note]',
-`mrecover_l1`='$_POST[mrecover_l1]',
-`mrecover_w1`='$_POST[mrecover_w1]',
-`mrecover_l2`='$_POST[mrecover_l2]',
-`mrecover_w2`='$_POST[mrecover_w2]',
-`mrecover_l3`='$_POST[mrecover_l3]',
-`mrecover_w3`='$_POST[mrecover_w3]',
-`mrecover_l4`='$_POST[mrecover_l4]',
-`mrecover_w4`='$_POST[mrecover_w4]',
-`mrecover_l5`='$_POST[mrecover_l5]',
-`mrecover_w5`='$_POST[mrecover_w5]',
-`mrecover_l11`='$_POST[mrecover_l11]',
-`mrecover_w11`='$_POST[mrecover_w11]',
-`mrecover_l21`='$_POST[mrecover_l21]',
-`mrecover_w21`='$_POST[mrecover_w21]',
-`mrecover_l31`='$_POST[mrecover_l31]',
-`mrecover_w31`='$_POST[mrecover_w31]',
-`mrecover_l41`='$_POST[mrecover_l41]',
-`mrecover_w41`='$_POST[mrecover_w41]',
-`mrecover_l51`='$_POST[mrecover_l51]',
-`mrecover_w51`='$_POST[mrecover_w51]',
-`mrecover_note`='$_POST[mrecover_note]',
-`mgrowth_l1`='$_POST[mgrowth_l1]',
-`mgrowth_w1`='$_POST[mgrowth_w1]',
-`mgrowth_l2`='$_POST[mgrowth_l2]',
-`mgrowth_w2`='$_POST[mgrowth_w2]',
-`mrec_growth_l1`='$_POST[mrec_growth_l1]',
-`mrec_growth_w1`='$_POST[mrec_growth_w1]',
-`mrec_growth_l2`='$_POST[mrec_growth_l2]',
-`mrec_growth_w2`='$_POST[mrec_growth_w2]',
-`mgrowth_note`='$_POST[mgrowth_note]',
-`mapper_ch1`='$_POST[mapper_ch1]',
-`mapper_ch2`='$_POST[mapper_ch2]',
-`mapper_ch3`='$_POST[mapper_ch3]',
-`mapper_cc1`='$_POST[mapper_cc1]',
-`mapper_cc2`='$_POST[mapper_cc2]',
-`mapper_cc3`='$_POST[mapper_cc3]',
-`mapper_st`='$_POST[mapper_st]',
-`mapper_st2`='$_POST[mapper_st2]',
-`mapper_st3`='$_POST[mapper_st3]',
-`mapper_pf1`='$_POST[mapper_pf1]',
-`mapper_pf2`='$_POST[mapper_pf2]',
-`mapper_pf3`='$_POST[mapper_pf3]',
-`mapper_pb1`='$_POST[mapper_pb1]',
-`mapper_pb2`='$_POST[mapper_pb2]',
-`mapper_pb3`='$_POST[mapper_pb3]',
-`mapper_acetate`='$_POST[mapper_acetate]',
-`mapper_cotton`='$_POST[mapper_cotton]',
-`mapper_nylon`='$_POST[mapper_nylon]',
-`mapper_poly`='$_POST[mapper_poly]',
-`mapper_acrylic`='$_POST[mapper_acrylic]',
-`mapper_wool`='$_POST[mapper_wool]',
-`mapper_note`='$_POST[mapper_note]',
-`mfibre_transfer`='$_POST[mfibre_transfer]',
-`mfibre_grade`='$_POST[mfibre_grade]',
-`mfibre_note`='$_POST[mfibre_note]',
-`modour`='$_POST[modour]',
-`modour_note`='$_POST[modour_note]',
-`tgl_update`=now()
-WHERE `id_nokk`='$rcek[id]'");
-
 		$sqlPHYMI = mysqli_query($con, "INSERT INTO tbl_tq_marginal SET
 `id_nokk`='$rcek[id]',
 `mflamability`='$_POST[mflamability]',
@@ -15717,19 +15857,6 @@ WHERE `id_nokk`='$rcek[id]'");
 `modour`='$_POST[modour]',
 `modour_note`='$_POST[modour_note]',
 `tgl_update`=now()");
-
-		echo "<script>swal({
-		title: 'Data Physical Telah Tersimpan',
-		text: 'Klik Ok untuk input data kembali',
-		type: 'success',
-		}).then((result) => {
-		if (result.value) {
-
-			window.location.href='TestingNewNoTes-$notes';
-		}
-		});</script>";
-	}
-} else if ($_POST['physical_save'] == "save") {
 	$sqlPHY = mysqli_query($con, "INSERT INTO tbl_tq_test SET
 		  `id_nokk`='$rcek[id]',
 		  `flamability`='$_POST[flamability]',
@@ -16250,88 +16377,7 @@ if ($_POST['colorfastness_save'] == "save" and $cek1 > 0) {
 	`tgl_update`=now()
 	WHERE `id_nokk`='$rcek[id]'
 	");
-
-		$sqlCLRDI = mysqli_query($con, "INSERT INTO tbl_tq_disptest SET
-`id_nokk`='$rcek[id]',
-`dwash_temp`='$_POST[dwash_temp]',
-`dwash_colorchange`='$_POST[dwash_colorchange]',
-`dwash_acetate`='$_POST[dwash_acetate]',
-`dwash_cotton`='$_POST[dwash_cotton]',
-`dwash_nylon`='$_POST[dwash_nylon]',
-`dwash_poly`='$_POST[dwash_poly]',
-`dwash_acrylic`='$_POST[dwash_acrylic]',
-`dwash_wool`='$_POST[dwash_wool]',
-`dwash_staining`='$_POST[dwash_staining]',
-`dwash_note`='$_POST[dwash_note]',
-`dwater_colorchange`='$_POST[dwater_colorchange]',
-`dwater_acetate`='$_POST[dwater_acetate]',
-`dwater_cotton`='$_POST[dwater_cotton]',
-`dwater_nylon`='$_POST[dwater_nylon]',
-`dwater_poly`='$_POST[dwater_poly]',
-`dwater_acrylic`='$_POST[dwater_acrylic]',
-`dwater_wool`='$_POST[dwater_wool]',
-`dwater_staining`='$_POST[dwater_staining]',
-`dwater_note`='$_POST[dwater_note]',
-`dacid_colorchange`='$_POST[dacid_colorchange]',
-`dacid_acetate`='$_POST[dacid_acetate]',
-`dacid_cotton`='$_POST[dacid_cotton]',
-`dacid_nylon`='$_POST[dacid_nylon]',
-`dacid_poly`='$_POST[dacid_poly]',
-`dacid_acrylic`='$_POST[dacid_acrylic]',
-`dacid_wool`='$_POST[dacid_wool]',
-`dacid_staining`='$_POST[dacid_staining]',
-`dacid_note`='$_POST[dacid_note]',
-`dalkaline_colorchange`='$_POST[dalkaline_colorchange]',
-`dalkaline_acetate`='$_POST[dalkaline_acetate]',
-`dalkaline_cotton`='$_POST[dalkaline_cotton]',
-`dalkaline_nylon`='$_POST[dalkaline_nylon]',
-`dalkaline_poly`='$_POST[dalkaline_poly]',
-`dalkaline_acrylic`='$_POST[dalkaline_acrylic]',
-`dalkaline_wool`='$_POST[dalkaline_wool]',
-`dalkaline_staining`='$_POST[dalkaline_staining]',
-`dalkaline_note`='$_POST[dalkaline_note]',
-`dcrock_len1`='$_POST[dcrock_len1]',
-`dcrock_wid1`='$_POST[dcrock_wid1]',
-`dcrock_len2`='$_POST[dcrock_len2]',
-`dcrock_wid2`='$_POST[dcrock_wid2]',
-`dcrock_note`='$_POST[dcrock_note]',
-`dphenolic_colorchange`='$_POST[dphenolic_colorchange]',
-`dphenolic_note`='$_POST[dphenolic_note]',
-`dcm_printing_colorchange`='$_POST[dcm_printing_colorchange]',
-`dcm_printing_staining`='$_POST[dcm_printing_staining]',
-`dcm_printing_note`='$_POST[dcm_printing_note]',
-`dcm_dye_temp`='$_POST[dcm_dye_temp]',
-`dcm_dye_colorchange`='$_POST[dcm_dye_colorchange]',
-`dcm_dye_stainingface`='$_POST[dcm_dye_stainingface]',
-`dcm_dye_stainingback`='$_POST[dcm_dye_stainingback]',
-`dcm_dye_note`='$_POST[dcm_dye_note]',
-`dlight_rating1`='$_POST[dlight_rating1]',
-`dlight_rating2`='$_POST[dlight_rating2]',
-`dlight_note`='$_POST[dlight_note]',
-`dlight_pers_colorchange`='$_POST[dlight_pers_colorchange]',
-`dlight_pers_note`='$_POST[dlight_pers_note]',
-`dsaliva_staining`='$_POST[dsaliva_staining]',
-`dsaliva_note`='$_POST[dsaliva_note]',
-`dbleeding`='$_POST[dbleeding]',
-`dbleeding_note`='$_POST[dbleeding_note]',
-`dchlorin`='$_POST[dchlorin]',
-`dnchlorin1`='$_POST[dnchlorin1]',
-`dnchlorin2`='$_POST[dnchlorin2]',
-`dchlorin_note`='$_POST[dchlorin_note]',
-`ddye_tf_sstaining`='$_POST[ddye_tf_sstaining]',
-`ddye_tf_cstaining`='$_POST[ddye_tf_cstaining]',
-`ddye_tf_acetate`='$_POST[ddye_tf_acetate]',
-`ddye_tf_cotton`='$_POST[ddye_tf_cotton]',
-`ddye_tf_nylon`='$_POST[ddye_tf_nylon]',
-`ddye_tf_poly`='$_POST[ddye_tf_poly]',
-`ddye_tf_acrylic`='$_POST[ddye_tf_acrylic]',
-`ddye_tf_wool`='$_POST[ddye_tf_wool]',
-`ddye_tf_note`='$_POST[ddye_tf_note]',
-`tgl_buat`=now(),
-`tgl_update`=now()
-");
-
-		$sqlCLRM = mysqli_query($con, "UPDATE tbl_tq_marginal SET
+	$sqlCLRM = mysqli_query($con, "UPDATE tbl_tq_marginal SET
 	`mwash_temp`='$_POST[mwash_temp]',
 	`mwash_colorchange`='$_POST[mwash_colorchange]',
 	`mwash_acetate`='$_POST[mwash_acetate]',
@@ -16409,87 +16455,8 @@ if ($_POST['colorfastness_save'] == "save" and $cek1 > 0) {
 	`tgl_update`=now()
 	WHERE `id_nokk`='$rcek[id]'
 	");
-
-		$sqlCLRMI = mysqli_query($con, "INSERT INTO tbl_tq_marginal SET
-`id_nokk`='$rcek[id]',
-`mwash_temp`='$_POST[mwash_temp]',
-`mwash_colorchange`='$_POST[mwash_colorchange]',
-`mwash_acetate`='$_POST[mwash_acetate]',
-`mwash_cotton`='$_POST[mwash_cotton]',
-`mwash_nylon`='$_POST[mwash_nylon]',
-`mwash_poly`='$_POST[mwash_poly]',
-`mwash_acrylic`='$_POST[mwash_acrylic]',
-`mwash_wool`='$_POST[mwash_wool]',
-`mwash_staining`='$_POST[mwash_staining]',
-`mwash_note`='$_POST[mwash_note]',
-`mwater_colorchange`='$_POST[mwater_colorchange]',
-`mwater_acetate`='$_POST[mwater_acetate]',
-`mwater_cotton`='$_POST[mwater_cotton]',
-`mwater_nylon`='$_POST[mwater_nylon]',
-`mwater_poly`='$_POST[mwater_poly]',
-`mwater_acrylic`='$_POST[mwater_acrylic]',
-`mwater_wool`='$_POST[mwater_wool]',
-`mwater_staining`='$_POST[mwater_staining]',
-`mwater_note`='$_POST[mwater_note]',
-`macid_colorchange`='$_POST[macid_colorchange]',
-`macid_acetate`='$_POST[macid_acetate]',
-`macid_cotton`='$_POST[macid_cotton]',
-`macid_nylon`='$_POST[macid_nylon]',
-`macid_poly`='$_POST[macid_poly]',
-`macid_acrylic`='$_POST[macid_acrylic]',
-`macid_wool`='$_POST[macid_wool]',
-`macid_staining`='$_POST[macid_staining]',
-`macid_note`='$_POST[macid_note]',
-`malkaline_colorchange`='$_POST[malkaline_colorchange]',
-`malkaline_acetate`='$_POST[malkaline_acetate]',
-`malkaline_cotton`='$_POST[malkaline_cotton]',
-`malkaline_nylon`='$_POST[malkaline_nylon]',
-`malkaline_poly`='$_POST[malkaline_poly]',
-`malkaline_acrylic`='$_POST[malkaline_acrylic]',
-`malkaline_wool`='$_POST[malkaline_wool]',
-`malkaline_staining`='$_POST[malkaline_staining]',
-`malkaline_note`='$_POST[malkaline_note]',
-`mcrock_len1`='$_POST[mcrock_len1]',
-`mcrock_wid1`='$_POST[mcrock_wid1]',
-`mcrock_len2`='$_POST[mcrock_len2]',
-`mcrock_wid2`='$_POST[mcrock_wid2]',
-`mcrock_note`='$_POST[mcrock_note]',
-`mphenolic_colorchange`='$_POST[mphenolic_colorchange]',
-`mphenolic_note`='$_POST[mphenolic_note]',
-`mcm_printing_colorchange`='$_POST[mcm_printing_colorchange]',
-`mcm_printing_staining`='$_POST[mcm_printing_staining]',
-`mcm_printing_note`='$_POST[mcm_printing_note]',
-`mcm_dye_temp`='$_POST[mcm_dye_temp]',
-`mcm_dye_colorchange`='$_POST[mcm_dye_colorchange]',
-`mcm_dye_stainingface`='$_POST[mcm_dye_stainingface]',
-`mcm_dye_stainingback`='$_POST[mcm_dye_stainingback]',
-`mcm_dye_note`='$_POST[mcm_dye_note]',
-`mlight_rating1`='$_POST[mlight_rating1]',
-`mlight_rating2`='$_POST[mlight_rating2]',
-`mlight_note`='$_POST[mlight_note]',
-`mlight_pers_colorchange`='$_POST[mlight_pers_colorchange]',
-`mlight_pers_note`='$_POST[mlight_pers_note]',
-`msaliva_staining`='$_POST[msaliva_staining]',
-`msaliva_note`='$_POST[msaliva_note]',
-`mbleeding`='$_POST[mbleeding]',
-`mbleeding_note`='$_POST[mbleeding_note]',
-`mchlorin`='$_POST[mchlorin]',
-`mnchlorin1`='$_POST[mnchlorin1]',
-`mnchlorin2`='$_POST[mnchlorin2]',
-`mchlorin_note`='$_POST[mchlorin_note]',
-`mdye_tf_sstaining`='$_POST[mdye_tf_sstaining]',
-`mdye_tf_cstaining`='$_POST[mdye_tf_cstaining]',
-`mdye_tf_acetate`='$_POST[mdye_tf_acetate]',
-`mdye_tf_cotton`='$_POST[mdye_tf_cotton]',
-`mdye_tf_nylon`='$_POST[mdye_tf_nylon]',
-`mdye_tf_poly`='$_POST[mdye_tf_poly]',
-`mdye_tf_acrylic`='$_POST[mdye_tf_acrylic]',
-`mdye_tf_wool`='$_POST[mdye_tf_wool]',
-`mdye_tf_note`='$_POST[mdye_tf_note]',
-`tgl_update`=now()");
-
 		echo "<script>swal({
-	title: 'Colorfastness save',
+	title: 'Colorfastness Berhasil di Update',
 	text: 'Klik Ok untuk input data kembali',
 	type: 'success',
 	}).then((result) => {
@@ -16603,9 +16570,165 @@ if ($_POST['colorfastness_save'] == "save" and $cek1 > 0) {
 	`sca_alkaline_status` = '$_POST[sca_alkaline_status]',
 	`sc_note` =  '$_POST[sc_note]'
 	");
+	$sqlCLRMI = mysqli_query($con, "INSERT INTO tbl_tq_marginal SET
+	`id_nokk`='$rcek[id]',
+	`mwash_temp`='$_POST[mwash_temp]',
+	`mwash_colorchange`='$_POST[mwash_colorchange]',
+	`mwash_acetate`='$_POST[mwash_acetate]',
+	`mwash_cotton`='$_POST[mwash_cotton]',
+	`mwash_nylon`='$_POST[mwash_nylon]',
+	`mwash_poly`='$_POST[mwash_poly]',
+	`mwash_acrylic`='$_POST[mwash_acrylic]',
+	`mwash_wool`='$_POST[mwash_wool]',
+	`mwash_staining`='$_POST[mwash_staining]',
+	`mwash_note`='$_POST[mwash_note]',
+	`mwater_colorchange`='$_POST[mwater_colorchange]',
+	`mwater_acetate`='$_POST[mwater_acetate]',
+	`mwater_cotton`='$_POST[mwater_cotton]',
+	`mwater_nylon`='$_POST[mwater_nylon]',
+	`mwater_poly`='$_POST[mwater_poly]',
+	`mwater_acrylic`='$_POST[mwater_acrylic]',
+	`mwater_wool`='$_POST[mwater_wool]',
+	`mwater_staining`='$_POST[mwater_staining]',
+	`mwater_note`='$_POST[mwater_note]',
+	`macid_colorchange`='$_POST[macid_colorchange]',
+	`macid_acetate`='$_POST[macid_acetate]',
+	`macid_cotton`='$_POST[macid_cotton]',
+	`macid_nylon`='$_POST[macid_nylon]',
+	`macid_poly`='$_POST[macid_poly]',
+	`macid_acrylic`='$_POST[macid_acrylic]',
+	`macid_wool`='$_POST[macid_wool]',
+	`macid_staining`='$_POST[macid_staining]',
+	`macid_note`='$_POST[macid_note]',
+	`malkaline_colorchange`='$_POST[malkaline_colorchange]',
+	`malkaline_acetate`='$_POST[malkaline_acetate]',
+	`malkaline_cotton`='$_POST[malkaline_cotton]',
+	`malkaline_nylon`='$_POST[malkaline_nylon]',
+	`malkaline_poly`='$_POST[malkaline_poly]',
+	`malkaline_acrylic`='$_POST[malkaline_acrylic]',
+	`malkaline_wool`='$_POST[malkaline_wool]',
+	`malkaline_staining`='$_POST[malkaline_staining]',
+	`malkaline_note`='$_POST[malkaline_note]',
+	`mcrock_len1`='$_POST[mcrock_len1]',
+	`mcrock_wid1`='$_POST[mcrock_wid1]',
+	`mcrock_len2`='$_POST[mcrock_len2]',
+	`mcrock_wid2`='$_POST[mcrock_wid2]',
+	`mcrock_note`='$_POST[mcrock_note]',
+	`mphenolic_colorchange`='$_POST[mphenolic_colorchange]',
+	`mphenolic_note`='$_POST[mphenolic_note]',
+	`mcm_printing_colorchange`='$_POST[mcm_printing_colorchange]',
+	`mcm_printing_staining`='$_POST[mcm_printing_staining]',
+	`mcm_printing_note`='$_POST[mcm_printing_note]',
+	`mcm_dye_temp`='$_POST[mcm_dye_temp]',
+	`mcm_dye_colorchange`='$_POST[mcm_dye_colorchange]',
+	`mcm_dye_stainingface`='$_POST[mcm_dye_stainingface]',
+	`mcm_dye_stainingback`='$_POST[mcm_dye_stainingback]',
+	`mcm_dye_note`='$_POST[mcm_dye_note]',
+	`mlight_rating1`='$_POST[mlight_rating1]',
+	`mlight_rating2`='$_POST[mlight_rating2]',
+	`mlight_note`='$_POST[mlight_note]',
+	`mlight_pers_colorchange`='$_POST[mlight_pers_colorchange]',
+	`mlight_pers_note`='$_POST[mlight_pers_note]',
+	`msaliva_staining`='$_POST[msaliva_staining]',
+	`msaliva_note`='$_POST[msaliva_note]',
+	`mbleeding`='$_POST[mbleeding]',
+	`mbleeding_note`='$_POST[mbleeding_note]',
+	`mchlorin`='$_POST[mchlorin]',
+	`mnchlorin1`='$_POST[mnchlorin1]',
+	`mnchlorin2`='$_POST[mnchlorin2]',
+	`mchlorin_note`='$_POST[mchlorin_note]',
+	`mdye_tf_sstaining`='$_POST[mdye_tf_sstaining]',
+	`mdye_tf_cstaining`='$_POST[mdye_tf_cstaining]',
+	`mdye_tf_acetate`='$_POST[mdye_tf_acetate]',
+	`mdye_tf_cotton`='$_POST[mdye_tf_cotton]',
+	`mdye_tf_nylon`='$_POST[mdye_tf_nylon]',
+	`mdye_tf_poly`='$_POST[mdye_tf_poly]',
+	`mdye_tf_acrylic`='$_POST[mdye_tf_acrylic]',
+	`mdye_tf_wool`='$_POST[mdye_tf_wool]',
+	`mdye_tf_note`='$_POST[mdye_tf_note]',
+	`tgl_update`=now()");
+	$sqlCLRDI = mysqli_query($con, "INSERT INTO tbl_tq_disptest SET
+	`id_nokk`='$rcek[id]',
+	`dwash_temp`='$_POST[dwash_temp]',
+	`dwash_colorchange`='$_POST[dwash_colorchange]',
+	`dwash_acetate`='$_POST[dwash_acetate]',
+	`dwash_cotton`='$_POST[dwash_cotton]',
+	`dwash_nylon`='$_POST[dwash_nylon]',
+	`dwash_poly`='$_POST[dwash_poly]',
+	`dwash_acrylic`='$_POST[dwash_acrylic]',
+	`dwash_wool`='$_POST[dwash_wool]',
+	`dwash_staining`='$_POST[dwash_staining]',
+	`dwash_note`='$_POST[dwash_note]',
+	`dwater_colorchange`='$_POST[dwater_colorchange]',
+	`dwater_acetate`='$_POST[dwater_acetate]',
+	`dwater_cotton`='$_POST[dwater_cotton]',
+	`dwater_nylon`='$_POST[dwater_nylon]',
+	`dwater_poly`='$_POST[dwater_poly]',
+	`dwater_acrylic`='$_POST[dwater_acrylic]',
+	`dwater_wool`='$_POST[dwater_wool]',
+	`dwater_staining`='$_POST[dwater_staining]',
+	`dwater_note`='$_POST[dwater_note]',
+	`dacid_colorchange`='$_POST[dacid_colorchange]',
+	`dacid_acetate`='$_POST[dacid_acetate]',
+	`dacid_cotton`='$_POST[dacid_cotton]',
+	`dacid_nylon`='$_POST[dacid_nylon]',
+	`dacid_poly`='$_POST[dacid_poly]',
+	`dacid_acrylic`='$_POST[dacid_acrylic]',
+	`dacid_wool`='$_POST[dacid_wool]',
+	`dacid_staining`='$_POST[dacid_staining]',
+	`dacid_note`='$_POST[dacid_note]',
+	`dalkaline_colorchange`='$_POST[dalkaline_colorchange]',
+	`dalkaline_acetate`='$_POST[dalkaline_acetate]',
+	`dalkaline_cotton`='$_POST[dalkaline_cotton]',
+	`dalkaline_nylon`='$_POST[dalkaline_nylon]',
+	`dalkaline_poly`='$_POST[dalkaline_poly]',
+	`dalkaline_acrylic`='$_POST[dalkaline_acrylic]',
+	`dalkaline_wool`='$_POST[dalkaline_wool]',
+	`dalkaline_staining`='$_POST[dalkaline_staining]',
+	`dalkaline_note`='$_POST[dalkaline_note]',
+	`dcrock_len1`='$_POST[dcrock_len1]',
+	`dcrock_wid1`='$_POST[dcrock_wid1]',
+	`dcrock_len2`='$_POST[dcrock_len2]',
+	`dcrock_wid2`='$_POST[dcrock_wid2]',
+	`dcrock_note`='$_POST[dcrock_note]',
+	`dphenolic_colorchange`='$_POST[dphenolic_colorchange]',
+	`dphenolic_note`='$_POST[dphenolic_note]',
+	`dcm_printing_colorchange`='$_POST[dcm_printing_colorchange]',
+	`dcm_printing_staining`='$_POST[dcm_printing_staining]',
+	`dcm_printing_note`='$_POST[dcm_printing_note]',
+	`dcm_dye_temp`='$_POST[dcm_dye_temp]',
+	`dcm_dye_colorchange`='$_POST[dcm_dye_colorchange]',
+	`dcm_dye_stainingface`='$_POST[dcm_dye_stainingface]',
+	`dcm_dye_stainingback`='$_POST[dcm_dye_stainingback]',
+	`dcm_dye_note`='$_POST[dcm_dye_note]',
+	`dlight_rating1`='$_POST[dlight_rating1]',
+	`dlight_rating2`='$_POST[dlight_rating2]',
+	`dlight_note`='$_POST[dlight_note]',
+	`dlight_pers_colorchange`='$_POST[dlight_pers_colorchange]',
+	`dlight_pers_note`='$_POST[dlight_pers_note]',
+	`dsaliva_staining`='$_POST[dsaliva_staining]',
+	`dsaliva_note`='$_POST[dsaliva_note]',
+	`dbleeding`='$_POST[dbleeding]',
+	`dbleeding_note`='$_POST[dbleeding_note]',
+	`dchlorin`='$_POST[dchlorin]',
+	`dnchlorin1`='$_POST[dnchlorin1]',
+	`dnchlorin2`='$_POST[dnchlorin2]',
+	`dchlorin_note`='$_POST[dchlorin_note]',
+	`ddye_tf_sstaining`='$_POST[ddye_tf_sstaining]',
+	`ddye_tf_cstaining`='$_POST[ddye_tf_cstaining]',
+	`ddye_tf_acetate`='$_POST[ddye_tf_acetate]',
+	`ddye_tf_cotton`='$_POST[ddye_tf_cotton]',
+	`ddye_tf_nylon`='$_POST[ddye_tf_nylon]',
+	`ddye_tf_poly`='$_POST[ddye_tf_poly]',
+	`ddye_tf_acrylic`='$_POST[ddye_tf_acrylic]',
+	`ddye_tf_wool`='$_POST[ddye_tf_wool]',
+	`ddye_tf_note`='$_POST[ddye_tf_note]',
+	`tgl_buat`=now(),
+	`tgl_update`=now()
+	");
 	if ($sqlCLR) {
 		echo "<script>swal({
-		  title: 'Colorfastness Save',
+		  title: 'Colorfastness Berhasil di Input',
 		  text: 'Klik Ok untuk input data kembali',
 		  type: 'success',
 		  }).then((result) => {
@@ -16707,45 +16830,7 @@ if ($_POST['functional_save'] == "save" and $cek1 > 0) {
 	`tgl_update`=now()
 	WHERE `id_nokk`='$rcek[id]'
 	");
-		$sqlFPHDI = mysqli_query($con, "INSERT INTO tbl_tq_disptest SET
-	`id_nokk`='$rcek[id]',
-	`dwick_l1` = '$_POST[dwick_l1]',
-	`dwick_w1` = '$_POST[dwick_w1]',
-	`dwick_l2` = '$_POST[dwick_l2]',
-	`dwick_w2` = '$_POST[dwick_w2]',
-	`dwick_l3` = '$_POST[dwick_l3]',
-	`dwick_w3` = '$_POST[dwick_w3]',
-	`dwick_l4` = '$_POST[dwick_l4]',
-	`dwick_w4` = '$_POST[dwick_w4]',
-	`dwick_note` = '$_POST[dwick_note]',
-	`dabsor_f1` = '$_POST[dabsor_f1]',
-	`dabsor_f2` = '$_POST[dabsor_f2]',
-	`dabsor_f3` = '$_POST[dabsor_f3]',
-	`dabsor_b1` = '$_POST[dabsor_b1]',
-	`dabsor_b2` = '$_POST[dabsor_b2]',
-	`dabsor_b3` = '$_POST[dabsor_b3]',
-	`dabsor_note` = '$_POST[dabsor_note]',
-	`ddry1` = '$_POST[ddry1]',
-	`ddry2` = '$_POST[ddry2]',
-	`ddry3` = '$_POST[ddry3]',
-	`ddryaf1` = '$_POST[ddryaf1]',
-	`ddryaf2` = '$_POST[ddryaf2]',
-	`ddryaf3` = '$_POST[ddryaf3]',
-	`ddry_note` = '$_POST[ddry_note]',
-	`drepp1` = '$_POST[drepp1]',
-	`drepp2` = '$_POST[drepp2]',
-	`drepp3` = '$_POST[drepp3]',
-	`drepp4` = '$_POST[drepp4]',
-	`drepp_note` = '$_POST[drepp_note]',
-	`dph` = '$_POST[dph]',
-	`dph_note` = '$_POST[dph_note]',
-	`dsoil` = '$_POST[dsoil]',
-	`dsoil_note` = '$_POST[dsoil_note]',
-	`dhumidity` = '$_POST[dhumidity]',
-	`dhumidity_note` = '$_POST[dhumidity_note]',
-	`tgl_buat`=now(),
-	`tgl_update`=now()
-	");
+		
 
 		$sqlFPHM = mysqli_query($con, "UPDATE tbl_tq_marginal SET
 `mwick_l1` = '$_POST[mwick_l1]',
@@ -16785,47 +16870,8 @@ if ($_POST['functional_save'] == "save" and $cek1 > 0) {
 `tgl_update`=now()
 WHERE `id_nokk`='$rcek[id]'
 ");
-
-		$sqlFPHMI = mysqli_query($con, "INSERT INTO tbl_tq_marginal SET
-`id_nokk`='$rcek[id]',
-`mwick_l1` = '$_POST[mwick_l1]',
-`mwick_w1` = '$_POST[mwick_w1]',
-`mwick_l2` = '$_POST[mwick_l2]',
-`mwick_w2` = '$_POST[mwick_w2]',
-`mwick_l3` = '$_POST[mwick_l3]',
-`mwick_w3` = '$_POST[mwick_w3]',
-`mwick_l4` = '$_POST[mwick_l4]',
-`mwick_w4` = '$_POST[mwick_w4]',
-`mwick_note` = '$_POST[mwick_note]',
-`mabsor_f1` = '$_POST[mabsor_f1]',
-`mabsor_f2` = '$_POST[mabsor_f2]',
-`mabsor_f3` = '$_POST[mabsor_f3]',
-`mabsor_b1` = '$_POST[mabsor_b1]',
-`mabsor_b2` = '$_POST[mabsor_b2]',
-`mabsor_b3` = '$_POST[mabsor_b3]',
-`mabsor_note` = '$_POST[mabsor_note]',
-`mdry1` = '$_POST[mdry1]',
-`mdry2` = '$_POST[mdry2]',
-`mdry3` = '$_POST[mdry3]',
-`mdryaf1` = '$_POST[mdryaf1]',
-`mdryaf2` = '$_POST[mdryaf2]',
-`mdryaf3` = '$_POST[mdryaf3]',
-`mdry_note` = '$_POST[mdry_note]',
-`mrepp1` = '$_POST[mrepp1]',
-`mrepp2` = '$_POST[mrepp2]',
-`mrepp3` = '$_POST[mrepp3]',
-`mrepp4` = '$_POST[mrepp4]',
-`mrepp_note` = '$_POST[mrepp_note]',
-`mph` = '$_POST[mph]',
-`mph_note` = '$_POST[mph_note]',
-`msoil` = '$_POST[msoil]',
-`msoil_note` = '$_POST[msoil_note]',
-`mhumidity` = '$_POST[mhumidity]',
-`mhumidity_note` = '$_POST[mhumidity_note]',
-`tgl_update`=now()");
-
 		echo "<script>swal({
-	title: 'Functional Save',
+	title: 'Functional Berhasil di Update',
 	text: 'Klik Ok untuk input data kembali',
 	type: 'success',
 	}).then((result) => {
@@ -16888,9 +16934,87 @@ WHERE `id_nokk`='$rcek[id]'
 	`tgl_buat`=now(),
 	`tgl_update`=now()
 	");
+	
+$sqlFPHDI = mysqli_query($con, "INSERT INTO tbl_tq_disptest SET
+`id_nokk`='$rcek[id]',
+`dwick_l1` = '$_POST[dwick_l1]',
+`dwick_w1` = '$_POST[dwick_w1]',
+`dwick_l2` = '$_POST[dwick_l2]',
+`dwick_w2` = '$_POST[dwick_w2]',
+`dwick_l3` = '$_POST[dwick_l3]',
+`dwick_w3` = '$_POST[dwick_w3]',
+`dwick_l4` = '$_POST[dwick_l4]',
+`dwick_w4` = '$_POST[dwick_w4]',
+`dwick_note` = '$_POST[dwick_note]',
+`dabsor_f1` = '$_POST[dabsor_f1]',
+`dabsor_f2` = '$_POST[dabsor_f2]',
+`dabsor_f3` = '$_POST[dabsor_f3]',
+`dabsor_b1` = '$_POST[dabsor_b1]',
+`dabsor_b2` = '$_POST[dabsor_b2]',
+`dabsor_b3` = '$_POST[dabsor_b3]',
+`dabsor_note` = '$_POST[dabsor_note]',
+`ddry1` = '$_POST[ddry1]',
+`ddry2` = '$_POST[ddry2]',
+`ddry3` = '$_POST[ddry3]',
+`ddryaf1` = '$_POST[ddryaf1]',
+`ddryaf2` = '$_POST[ddryaf2]',
+`ddryaf3` = '$_POST[ddryaf3]',
+`ddry_note` = '$_POST[ddry_note]',
+`drepp1` = '$_POST[drepp1]',
+`drepp2` = '$_POST[drepp2]',
+`drepp3` = '$_POST[drepp3]',
+`drepp4` = '$_POST[drepp4]',
+`drepp_note` = '$_POST[drepp_note]',
+`dph` = '$_POST[dph]',
+`dph_note` = '$_POST[dph_note]',
+`dsoil` = '$_POST[dsoil]',
+`dsoil_note` = '$_POST[dsoil_note]',
+`dhumidity` = '$_POST[dhumidity]',
+`dhumidity_note` = '$_POST[dhumidity_note]',
+`tgl_buat`=now(),
+`tgl_update`=now()
+");
+	$sqlFPHMI = mysqli_query($con, "INSERT INTO tbl_tq_marginal SET
+`id_nokk`='$rcek[id]',
+`mwick_l1` = '$_POST[mwick_l1]',
+`mwick_w1` = '$_POST[mwick_w1]',
+`mwick_l2` = '$_POST[mwick_l2]',
+`mwick_w2` = '$_POST[mwick_w2]',
+`mwick_l3` = '$_POST[mwick_l3]',
+`mwick_w3` = '$_POST[mwick_w3]',
+`mwick_l4` = '$_POST[mwick_l4]',
+`mwick_w4` = '$_POST[mwick_w4]',
+`mwick_note` = '$_POST[mwick_note]',
+`mabsor_f1` = '$_POST[mabsor_f1]',
+`mabsor_f2` = '$_POST[mabsor_f2]',
+`mabsor_f3` = '$_POST[mabsor_f3]',
+`mabsor_b1` = '$_POST[mabsor_b1]',
+`mabsor_b2` = '$_POST[mabsor_b2]',
+`mabsor_b3` = '$_POST[mabsor_b3]',
+`mabsor_note` = '$_POST[mabsor_note]',
+`mdry1` = '$_POST[mdry1]',
+`mdry2` = '$_POST[mdry2]',
+`mdry3` = '$_POST[mdry3]',
+`mdryaf1` = '$_POST[mdryaf1]',
+`mdryaf2` = '$_POST[mdryaf2]',
+`mdryaf3` = '$_POST[mdryaf3]',
+`mdry_note` = '$_POST[mdry_note]',
+`mrepp1` = '$_POST[mrepp1]',
+`mrepp2` = '$_POST[mrepp2]',
+`mrepp3` = '$_POST[mrepp3]',
+`mrepp4` = '$_POST[mrepp4]',
+`mrepp_note` = '$_POST[mrepp_note]',
+`mph` = '$_POST[mph]',
+`mph_note` = '$_POST[mph_note]',
+`msoil` = '$_POST[msoil]',
+`msoil_note` = '$_POST[msoil_note]',
+`mhumidity` = '$_POST[mhumidity]',
+`mhumidity_note` = '$_POST[mhumidity_note]',
+`tgl_update`=now()");
+
 	if ($sqlFPH) {
 		echo "<script>swal({
-	title: 'Functional Save',
+	title: 'Functional Berhasil di Save',
 	text: 'Klik Ok untuk input data kembali',
 	type: 'success',
 	}).then((result) => {

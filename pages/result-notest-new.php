@@ -40,7 +40,11 @@ $sqlCek1 = mysqli_query($con, "SELECT a.*, b.*,
 $cek1 = mysqli_num_rows($sqlCek1);
 $rcek1 = mysqli_fetch_array($sqlCek1);
 $sqlCekR = mysqli_query($con, "SELECT *,
-	CONCAT_WS(' ',rfc_note,rph_note, rabr_note, rbas_note, rdry_note, rfla_note, rfwe_note, rfwi_note, rburs_note,rrepp_note,rwick_note,rabsor_note,rapper_note,rfiber_note,rpillb_note,rpillm_note,rpillr_note,rthick_note,rgrowth_note,rrecover_note,rstretch_note,rsns_note,rsnab_note,rsnam_note,rsnap_note,rwash_note,rwater_note,racid_note,ralkaline_note,rcrock_note,rphenolic_note,rcm_printing_note,rcm_dye_note,rlight_note,rlight_pers_note,rsaliva_note,rh_shrinkage_note,rfibre_note,rpilll_note,rsoil_note,rapperss_note,rbleeding_note,rchlorin_note,rdye_tf_note) AS rnote_g FROM tbl_tq_randomtest WHERE no_item='$rNoKK[no_item]' OR no_hanger='$rNoKK[no_hanger]'");
+								CONCAT_WS(' ',rfc_note,rph_note, rabr_note, rbas_note, rdry_note, rfla_note, rfwe_note, rfwi_note, rburs_note,rrepp_note,rwick_note,rabsor_note,rapper_note,rfiber_note,rpillb_note,rpillm_note,rpillr_note,rthick_note,rgrowth_note,rrecover_note,rstretch_note,rsns_note,rsnab_note,rsnam_note,rsnap_note,rwash_note,rwater_note,racid_note,ralkaline_note,rcrock_note,rphenolic_note,rcm_printing_note,rcm_dye_note,rlight_note,rlight_pers_note,rsaliva_note,rh_shrinkage_note,rfibre_note,rpilll_note,rsoil_note,rapperss_note,rbleeding_note,rchlorin_note,rdye_tf_note) AS rnote_g 
+								FROM 
+									tbl_tq_randomtest 
+								WHERE 
+									no_item='$rNoKK[no_item]' OR no_hanger='$rNoKK[no_hanger]'");
 $cekR = mysqli_num_rows($sqlCekR);
 $rcekR = mysqli_fetch_array($sqlCekR);
 $sqlCekD = mysqli_query($con, "SELECT *,
@@ -2924,6 +2928,73 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 									echo $rcekR['rsaliva_staining'];
 								} ?>
 							</td>
+						</tr>
+					<?php } ?>
+					<?php if ($rcek1['classification_shedding'] != "" or $rcek1['syringe_shedding'] != "" or $rcek1['observation_shedding'] != "" or $rcek1['avg_gr_shedding'] != "" or $rcek1['avg_per_shedding'] != "" or $rcek1['acid_wool'] != "" or $rcek1['acid_staining'] != "") { ?>
+						<tr>
+							<th rowspan="4" colspan="2">Fiber Shedding</th>
+							<td><strong>Classification</strong></td>
+							<td colspan="2"><strong>Syringe Value</strong></td>
+							<td><strong>Observation</strong></td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<!-- <td ><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['rclassification_shedding'];}else{echo $rcek1['classification_shedding'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['rsyringe_shedding'];}else{echo $rcek1['syringe_shedding'];}  ?></td>
+			<td><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['robservation_shedding'];}else{echo $rcek1['observation_shedding'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_nylon'];}else{echo $rcek1['acid_nylon'];}  ?></td>
+			  <td>&nbsp;</td> -->
+							<td>
+								<?php if ($rcek1['classification_shedding'] != "") {
+									echo $rcek1['classification_shedding'];
+								} else {
+									echo '-';
+								} ?>
+							</td>
+							<td colspan="2">
+								<?php if ($rcek1['syringe_shedding'] != "") {
+									echo $rcek1['syringe_shedding'];
+								} else {
+									echo '-';
+								} ?>
+							</td>
+							<td>
+								<?php if ($rcek1['observation_shedding'] != "") {
+									echo $rcek1['observation_shedding'];
+								} else {
+									echo '-';
+								} ?>
+							</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td><strong>Average Fiber Loss</strong></td>
+							<td colspan="2"><strong>Average Fiber Loss</strong></td>
+							<!-- <td><strong>Wool</strong></td>
+							<td colspan="2"><strong>Sta</strong></td> -->
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<!-- <td><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['ravg_gr_shedding'];}else{echo $rcek1['avg_gr_shedding'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['ravg_per_shedding'];}else{echo $rcek1['avg_per_shedding'];}  ?></td>
+			<td><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_wool'];}else{echo $rcek1['acid_wool'];}  ?></td>
+			<td colspan="2"><?php //if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_staining'];}else{echo $rcek1['acid_staining'];}  ?></td> -->
+
+							<td>
+								<?php if ($rcek1['avg_gr_shedding'] != "") {
+									echo $rcek1['avg_gr_shedding']. ' grm';
+								} else {
+									echo '-';
+								} ?>
+							</td>
+							<td colspan="2">
+								<?php if ($rcek1['avg_per_shedding'] != "") {
+									echo $rcek1['avg_per_shedding'] . ' %';
+								} else {
+									echo '-';
+								} ?>
+							</td>
+							<td>&nbsp;</td>
 						</tr>
 					<?php } ?>
 					<?php if ($rcek1['bleeding'] != "") { ?>

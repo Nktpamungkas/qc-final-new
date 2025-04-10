@@ -136,6 +136,7 @@ if($_POST){ //login user
   $r = mysqli_fetch_array($query);
   $_SESSION['lvl_id']=$r['level'];
   $_SESSION['status']=$r['status'];
+  $_SESSION['user_id']=$r['id'];
   $_SESSION['mamber']=$r['mamber'];
   $_SESSION['foto']=$r['foto'];
   $_SESSION['dept']=$r['dept'];

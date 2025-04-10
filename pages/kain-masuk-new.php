@@ -1,6 +1,6 @@
 <?php
 ini_set("error_reporting", 1);
-include"koneksi.php";
+include "koneksi.php";
 $nodemand=$_GET['nodemand'];
 $sqlDB2="SELECT 
 	A.CODE AS DEMANDNO, 
@@ -755,6 +755,10 @@ $cekNoTes=mysqli_num_rows($sqlcekNoTes);
 						<label><input type="checkbox" class="minimal" name="colorfastness[]" value="SWEAT CONCEAL" <?php if(in_array("SWEAT CONCEAL",$detail2)){echo "checked";} ?>> Sweat Conceal  
 						</label>
 					</div>
+					<div class="form-group">
+						<label><input type="checkbox" class="minimal" name="colorfastness[]" value="FIBER SHEDDING" <?php if(in_array("FIBER SHEDDING",$detail2)){echo "checked";} ?>> Fiber Shedding
+						</label>
+					</div>
                     <?php } ?>
 				</form>
                 
@@ -889,6 +893,10 @@ $cekNoTes=mysqli_num_rows($sqlcekNoTes);
 						<label><input type="checkbox" class="minimal" name="colorfastness[]" value="DYE TRANSFER"> Dye Transfer &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 
 						</label>
 						<label><input type="checkbox" class="minimal" name="colorfastness[]" value="SWEAT CONCEAL"> Sweat Conceal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+						</label>
+					</div>
+					<div class="form-group">
+						<label><input type="checkbox" class="minimal" name="colorfastness[]" value="FIBER SHEDDING"> Fiber Shedding &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 						</label>
 					</div>
 				</form>
