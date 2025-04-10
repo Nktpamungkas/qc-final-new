@@ -3065,7 +3065,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<th>&nbsp;</th>
+							<!-- <th>&nbsp;</th> -->
 							<!-- <td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acetate'];}else{echo $rcek1['dye_tf_acetate'];}  ?></td>
 			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cotton'];}else{echo $rcek1['dye_tf_cotton'];}  ?></td>
 			<td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_nylon'];}else{echo $rcek1['dye_tf_nylon'];}  ?></td>
@@ -3102,7 +3102,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<th>&nbsp;</th>
+							<!-- <th>&nbsp;</th> -->
 							<td><strong>Acr</strong></td>
 							<td colspan="2"><strong>Wool</strong></td>
 							<td><strong>C.Sta</strong></td>
@@ -3110,7 +3110,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<th>&nbsp;</th>
+							<!-- <th>&nbsp;</th> -->
 							<!-- <td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acrylic'];}else{echo $rcek1['dye_tf_acrylic'];}  ?></td>
 			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_wool'];}else{echo $rcek1['dye_tf_wool'];}  ?></td>
 			<td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cstaining'];}else{echo $rcek1['dye_tf_cstaining'];}  ?></td>

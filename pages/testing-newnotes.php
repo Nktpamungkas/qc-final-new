@@ -11424,7 +11424,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 		<div class="row">
 			<div class="col-xs-12">
 				<h2 class="page-header">
-					<i class="fa fa-globe"></i> Result.
+					<i class="fa fa-globe"></i> Result. asdf
 					<small class="pull-right">Date:
 						<?php echo $rcek1['tgl_buat']; ?>
 					</small>
@@ -14260,12 +14260,6 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<th>&nbsp;</th>
-							<!-- <td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acetate'];}else{echo $rcek1['dye_tf_acetate'];}  ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cotton'];}else{echo $rcek1['dye_tf_cotton'];}  ?></td>
-			<td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_nylon'];}else{echo $rcek1['dye_tf_nylon'];}  ?></td>
-			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_poly'];}else{echo $rcek1['dye_tf_poly'];}  ?></td> -->
-
 							<td>
 								<?php if ($rcek1['dye_tf_acetate'] != "") {
 									echo $rcek1['dye_tf_acetate'];
@@ -14297,7 +14291,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<th>&nbsp;</th>
+							<!-- <th>&nbsp;</th> -->
 							<td><strong>Acr</strong></td>
 							<td colspan="2"><strong>Wool</strong></td>
 							<td><strong>C.Sta</strong></td>
@@ -14305,7 +14299,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<th>&nbsp;</th>
+							<!-- <th>&nbsp;</th> -->
 							<!-- <td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acrylic'];}else{echo $rcek1['dye_tf_acrylic'];}  ?></td>
 			<td colspan="2"><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_wool'];}else{echo $rcek1['dye_tf_wool'];}  ?></td>
 			<td><?php //if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cstaining'];}else{echo $rcek1['dye_tf_cstaining'];}  ?></td>
