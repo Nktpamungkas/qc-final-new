@@ -1913,10 +1913,11 @@ if ($nokk_demand_data > 0) {
 	</div>
 </form>
 <?php
-$sqlCek1 = mysqli_query($con, "SELECT a.*, b.*,
+$sqlCek1 = mysqli_query($con, "SELECT a.*, b.*, c.*,
 CONCAT_WS(' ',a.fc_note, a.ph_note, a.abr_note, a.bas_note, a.dry_note, a.fla_note, a.fwe_note, a.fwi_note, a.burs_note, a.repp_note, a.wick_note, a.wick_note, a.absor_note, a.apper_note, a.fiber_note, a.pillb_note, a.pillm_note, a.pillr_note, a.thick_note, a.growth_note, a.recover_note, a.stretch_note, a.sns_note, a.snab_note, a.snam_note, a.snap_note, a.wash_note, a.water_note, a.acid_note, a.alkaline_note, a.crock_note, a.phenolic_note, a.cm_printing_note, a.cm_dye_note, a.light_note, a.light_pers_note, a.saliva_note, a.h_shrinkage_note, a.fibre_note, a.pilll_note, a.soil_note, a.bleeding_note, a.chlorin_note, a.dye_tf_note, a.humidity_note, a.odour_note, a.curling_note, a.nedle_note, b.wrinkle_note) AS note_g 
 FROM tbl_tq_test a 
 LEFT JOIN tbl_tq_test_2 b ON a.id_nokk = b.id_nokk
+LEFT JOIN tbl_user_update_tq c ON a.id_nokk = c.id_nokk
 WHERE a.id_nokk='$rcek[id]' 
 ORDER BY a.id DESC 
 LIMIT 1");
@@ -3844,6 +3845,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 						<li><a href="#tab_3" data-toggle="tab">FUNCTIONAL &amp; PH</a></li>
 						<li><a href="#tab_2" data-toggle="tab">COLORFASTNESS</a></li>
 					</ul>
+				<!-- Kolom Phisical -->
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab_1">
 							<form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form1"
@@ -3867,7 +3869,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										</select>
 									</div>
 								</div>
-								<!-- FLAMMABILITY BEGIN-->
+						<!-- FLAMMABILITY BEGIN-->
 								<div class="form-group" id="fla1" style="display:none;">
 									<label for="flamability" class="col-sm-2 control-label">FLAMMABILITY</label>
 									<div class="col-sm-2">
@@ -3901,6 +3903,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="RANDOM">RANDOM</option>
 										</select>
 									</div>
+									<div class="col-sm-2">
+										<input name="user_fla" type="text" class="form-control" id="user_fla" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_fla" type="hidden" class="form-control" id="nama_fla" value="<?php echo $rcek1['nama_fla']; ?>" placeholder="Nama">
+									</div>
 								</div>
 								<div class="form-group" id="disfla" style="display:none;">
 									<label for="disfla" class="col-sm-2 control-label">FLAMMABILITY (DIS)</label>
@@ -3927,8 +3933,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											readonly><?php echo $rcekR['rfla_note']; ?></textarea>
 									</div>
 								</div>
-								<!-- FLAMMABILITY END-->
-								<!-- FIBER CONTENT BEGIN-->
+						<!-- FLAMMABILITY END-->
+						<!-- FIBER CONTENT BEGIN-->
 								<div class="form-group" id="fib1" style="display:none;">
 									<label for="fibercontent" class="col-sm-2 control-label">FIBER CONTENT</label>
 									<div class="col-sm-6">
@@ -4096,6 +4102,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="RANDOM">RANDOM</option>
 										</select>
 									</div>
+									<div class="col-sm-2">
+										<input name="user_fiber" type="text" class="form-control" id="user_fiber" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_fiber" type="hidden" class="form-control" id="nama_fiber" value="<?php echo $rcek1['nama_fiber']; ?>" placeholder="Nama">
+									</div>
 								</div>
 								<div class="form-group" id="disfib1" style="display:none;">
 									<label for="dfibercontent" class="col-sm-2 control-label">FIBER CONTENT (DIS)</label>
@@ -4104,9 +4114,6 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											value="<?php echo $rcekD['dfibercontent']; ?>"
 											placeholder="COTT/MODAL/RAYON %, POLYESTER %, ELASTANE %" readonly>
 									</div>
-									<!--<div class="col-sm-2">
-										<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dfiber_note " maxlength="50" rows="1"><?php echo $rcekD['dfiber_note']; ?></textarea>
-									</div>-->
 								</div>
 								<div class="form-group" id="disfib" style="display:none;">
 									<label for="dfibercontent" class="col-sm-2 control-label"></label>
@@ -4257,9 +4264,6 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											value="<?php echo $rcekR['rfibercontent']; ?>"
 											placeholder="COTT/MODAL/RAYON %, POLYESTER %, ELASTANE %" readonly>
 									</div>
-									<!--<div class="col-sm-2">
-									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rfiber_note" maxlength="50" rows="1"><?php echo $rcekR['rfiber_note']; ?></textarea>
-								</div>-->
 								</div>
 								<div class="form-group" id="ranfib" style="display:none;">
 									<label for="rfibercontent" class="col-sm-2 control-label"></label>
@@ -4397,8 +4401,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											readonly><?php echo $rcekR['rfiber_note']; ?></textarea>
 									</div>
 								</div>
-								<!-- FIBER CONTENT END-->
-								<!-- FABRIC COUNT BEGIN-->
+						<!-- FIBER CONTENT END-->
+						<!-- FABRIC COUNT BEGIN-->
 								<div class="form-group" id="fc3" style="display:none;">
 									<label for="fabric_count" class="col-sm-2 control-label">FABRIC COUNT</label>
 									<div class="col-sm-2">
@@ -4438,6 +4442,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 
 										</select>
 									</div>
+									<div class="col-sm-2">
+										<input name="user_fc" type="text" class="form-control" id="user_fc" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_fc" type="hidden" class="form-control" id="nama_fc" value="<?php echo $rcek1['nama_fc']; ?>" placeholder="Nama BOW">
+									</div>
 								</div>
 								<div class="form-group" id="disfc" style="display:none;">
 									<label for="disfc" class="col-sm-2 control-label">FABRIC COUNT (DIS)</label>
@@ -4471,8 +4479,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											readonly><?php echo $rcekR['rfc_note']; ?></textarea>
 									</div>
 								</div>
-								<!-- FABRIC COUNT END-->
-								<!-- FABRIC WEIGHT BEGIN-->
+						<!-- FABRIC COUNT END-->
+						<!-- FABRIC WEIGHT BEGIN-->
 								<div class="form-group" id="fc4" style="display:none;">
 									<label for="fabric_weight" class="col-sm-2 control-label">FABRIC WEIGHT</label>
 									<div class="col-sm-2">
@@ -4508,6 +4516,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											<option <?php if ($rcek1['stat_fwss2'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
 										</select>
+									</div>
+									<div class="col-sm-2">
+										<input name="user_weight" type="text" class="form-control" id="user_weight" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_weight" type="hidden" class="form-control" id="nama_weight" value="<?php echo $rcek1['nama_weight']; ?>" placeholder="Nama BOW">
 									</div>
 								</div>
 								<div class="form-group" id="disfw" style="display:none;">
@@ -4546,8 +4558,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											readonly><?php echo $rcekR['rfwe_note']; ?></textarea>
 									</div>
 								</div>
-								<!-- FABRIC WEIGHT END-->
-								<!-- FABRIC WIDTH BEGIN-->
+						<!-- FABRIC WEIGHT END-->
+						<!-- FABRIC WIDTH BEGIN-->
 								<div class="form-group" id="fc5" style="display:none;">
 									<label for="fabric_width" class="col-sm-2 control-label">FABRIC WIDTH</label>
 									<div class="col-sm-2">
@@ -4583,6 +4595,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											<option <?php if ($rcek1['stat_fwss3'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
 										</select>
+									</div>
+									<div class="col-sm-2">
+										<input name="user_width" type="text" class="form-control" id="user_width" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_width" type="hidden" class="form-control" id="nama_width" value="<?php echo $rcek1['nama_width']; ?>" placeholder="Nama BOW">
 									</div>
 								</div>
 								<div class="form-group" id="disfwi" style="display:none;">
@@ -4621,8 +4637,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											readonly><?php echo $rcekR['rfwi_note']; ?></textarea>
 									</div>
 								</div>
-								<!-- FABRIC WIDTH END-->
-								<!-- BOW & SKEW BEGIN-->
+						<!-- FABRIC WIDTH END-->
+						<!-- BOW & SKEW BEGIN-->
 								<div class="form-group" id="fc6" style="display:none;">
 									<label for="bow_skew" class="col-sm-2 control-label">BOW &amp; SKEW</label>
 									<!-- <div class="col-sm-2">
@@ -4668,6 +4684,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											<option <?php if ($rcek1['stat_bsk'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
 										</select>
+									</div>
+									<div class="col-sm-2">
+										<input name="user_bow" type="text" class="form-control" id="user_bow" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_bow" type="hidden" class="form-control" id="nama_bow" value="<?php echo $rcek1['nama_bow']; ?>" placeholder="Nama BOW">
 									</div>
 								</div>
 								<div class="form-group" id="disbsk" style="display:none;">
@@ -4718,8 +4738,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											readonly><?php echo $rcekR['rbas_note']; ?></textarea>
 									</div>
 								</div>
-								<!-- BOW & SKEW END-->
-								<!-- SHRINKAGE & SPIRALITY & APPEARANCE BEGIN-->
+						<!-- BOW & SKEW END-->
+						<!-- SHRINKAGE & SPIRALITY & APPEARANCE BEGIN-->
 								<div class="form-group" id="fc7" style="display:none;">
 									<label for="shrinkage_len" class="col-sm-2 control-label">SHRINKAGE &amp;
 										SPIRALITY</label>
@@ -4869,7 +4889,6 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											value="<?php echo $rcekD['dspirality6']; ?>" type="text" class="form-control">
 									</div>
 								</div>
-
 								<div class="form-group" id="fc24" style="display:none;">
 									<label for="apperss" class="col-sm-2 control-label">APPEARANCE</label>
 									<div class="col-sm-1">
@@ -4968,6 +4987,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											<option <?php if ($rcek1['stat_fwss'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
 										</select>
+									</div>
+									<div class="col-sm-2">
+										<input name="user_fwss" type="text" class="form-control" id="user_fwss" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_fwss" type="hidden" class="form-control" id="nama_fwss" value="<?php echo $rcek1['nama_fwss']; ?>" placeholder="Nama BOW">
 									</div>
 								</div>
 								<div class="form-group" id="dis_ss" style="display:none;">
@@ -5089,9 +5112,6 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											rows="3"><?php echo $rcekD['dsns_note']; ?></textarea>
 									</div>
 								</div>
-
-
-
 								<div class="form-group" id="mar_ss" style="display:none;">
 									<label for="mar_ss" class="col-sm-2 control-label">SHRINKAGE &amp; SPIRALITY
 										(MARGINAL)</label>
@@ -5555,8 +5575,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										</label>
 									</div>
 								</div>
-								<!-- SHRINKAGE & SPIRALITY & APPEARANCE END-->
-								<!-- PILLING MARTINDLE BEGIN-->
+						<!-- SHRINKAGE & SPIRALITY & APPEARANCE END-->
+						<!-- PILLING MARTINDLE BEGIN-->
 								<div class="form-group" id="fc8" style="display:none;">
 									<label for="pillingm" class="col-sm-2 control-label">PILLING MARTINDLE</label>
 									<div class="col-sm-1">
@@ -5620,6 +5640,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											<option <?php if ($rcek1['stat_pm'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
 										</select>
+									</div>
+									<div class="col-sm-2">
+										<input name="user_pil" type="text" class="form-control" id="user_pil" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_pil" type="hidden" class="form-control" id="nama_pil" value="<?php echo $rcek1['nama_pil']; ?>" placeholder="Nama BOW">
 									</div>
 								</div>
 								<div class="form-group" id="dispm" style="display:none;">
@@ -5736,8 +5760,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											readonly><?php echo $rcekR['rpillm_note']; ?></textarea>
 									</div>
 								</div>
-								<!-- PILLING MARTINDLE END-->
-								<!-- PILLING LOCUS BEGIN-->
+						<!-- PILLING MARTINDLE END-->
+						<!-- PILLING LOCUS BEGIN-->
 								<div class="form-group" id="fc23" style="display:none;">
 									<label for="pillingl" class="col-sm-2 control-label">PILLING LOCUS</label>
 									<div class="col-sm-1">
@@ -5796,6 +5820,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											<option <?php if ($rcek1['stat_pl'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
 										</select>
+									</div>
+									<div class="col-sm-2">
+										<input name="user_locus" type="text" class="form-control" id="user_locus" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_locus" type="hidden" class="form-control" id="nama_locus" value="<?php echo $rcek1['nama_locus']; ?>" placeholder="Nama BOW">
 									</div>
 								</div>
 								<div class="form-group" id="displ" style="display:none;">
@@ -5874,8 +5902,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											readonly><?php echo $rcekR['rpilll_note']; ?></textarea>
 									</div>
 								</div>
-								<!-- PILLING LOCUS END-->
-								<!-- PILLING BOX BEGIN-->
+						<!-- PILLING LOCUS END-->
+						<!-- PILLING BOX BEGIN-->	
 								<div class="form-group" id="fc9" style="display:none;">
 									<label for="pillingb" class="col-sm-2 control-label">PILLING BOX</label>
 									<div class="col-sm-2">
@@ -5933,6 +5961,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											<option <?php if ($rcek1['stat_pb'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
 										</select>
+									</div>
+									<div class="col-sm-2">
+										<input name="user_box" type="text" class="form-control" id="user_box" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_box" type="hidden" class="form-control" id="nama_box" value="<?php echo $rcek1['nama_box']; ?>" placeholder="Nama BOW">
 									</div>
 								</div>
 								<div class="form-group" id="dispb" style="display:none;">
@@ -6031,8 +6063,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											readonly><?php echo $rcekR['rpillb_note']; ?></textarea>
 									</div>
 								</div>
-								<!-- PILLING BOX END-->
-								<!-- PILLING RANDOM TUMBLER BEGIN-->
+						<!-- PILLING BOX END-->
+						<!-- PILLING RANDOM TUMBLER BEGIN-->
 								<div class="form-group" id="fc10" style="display:none;">
 									<label for="pillingrt" class="col-sm-2 control-label">PILLING RANDOM TUMBLER</label>
 									<div class="col-sm-1">
@@ -6090,6 +6122,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											<option <?php if ($rcek1['stat_prt'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
 										</select>
+									</div>
+									<div class="col-sm-2">
+										<input name="user_random" type="text" class="form-control" id="user_random" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_random" type="hidden" class="form-control" id="nama_random" value="<?php echo $rcek1['nama_random']; ?>" placeholder="Nama BOW">
 									</div>
 								</div>
 								<div class="form-group" id="disprt" style="display:none;">
@@ -6168,2133 +6204,2207 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											readonly><?php echo $rcekR['rpillr_note']; ?></textarea>
 									</div>
 								</div>
-								<!-- PILLING RANDOM TUMBLER END-->
+						<!-- PILLING RANDOM TUMBLER END-->
 						<!-- ABRATION BEGIN-->
-						<div class="form-group" id="fc11" style="display:none;">
-							<label for="abr" class="col-sm-2 control-label">ABRATION</label>
-							<div class="col-sm-2">
-								<input name="abr" type="text" class="form-control" id="abr"
-									value="<?php echo $rcek1['abration']; ?>" placeholder="ABRATION">
+							<div class="form-group" id="fc11" style="display:none;">
+								<label for="abr" class="col-sm-2 control-label">ABRATION</label>
+								<div class="col-sm-2">
+									<input name="abr" type="text" class="form-control" id="abr"
+										value="<?php echo $rcek1['abration']; ?>" placeholder="ABRATION">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="abr_note" maxlength="50"
+										rows="1"><?php echo $rcek1['abr_note']; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="stat_abr" style="display:none;">
+								<label for="stat_abr" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_abr" class="form-control select2" id="stat_abr"
+										onChange="tampil();" style="width: 100%;">
+										<option <?php if ($rcek1['stat_abr'] == "") { ?> selected=selected <?php }
+										; ?>value="">Pilih</option>
+										<option <?php if ($rcek1['stat_abr'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_abr'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A</option>
+										<option <?php if ($rcek1['stat_abr'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R</option>
+										<option <?php if ($rcek1['stat_abr'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">PASS</option>
+										<option <?php if ($rcek1['stat_abr'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">FAIL</option>
+										<option <?php if ($rcek1['stat_abr'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+										<input name="user_abr" type="text" class="form-control" id="user_abr" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_abr" type="hidden" class="form-control" id="nama_abr" value="<?php echo $rcek1['nama_abr']; ?>" placeholder="Nama BOW">
+									</div>
+							</div>
+							<div class="form-group" id="disabr" style="display:none;">
+								<label for="abr" class="col-sm-2 control-label">ABRATION (DIS)</label>
+								<<div class="col-sm-2">
+									<input name="dabr" type="text" class="form-control" id="dabr"
+										value="<?php echo $rcekD['dabration']; ?>" placeholder="ABRATION">
 							</div>
 							<div class="col-sm-2">
 								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="abr_note" maxlength="50"
-									rows="1"><?php echo $rcek1['abr_note']; ?></textarea>
+									name="dabr_note" maxlength="50"
+									rows="1"><?php echo $rcekD['dabr_note']; ?></textarea>
 							</div>
-						</div>
-						<div class="form-group" id="stat_abr" style="display:none;">
-							<label for="stat_abr" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_abr" class="form-control select2" id="stat_abr"
-									onChange="tampil();" style="width: 100%;">
-									<option <?php if ($rcek1['stat_abr'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih</option>
-									<option <?php if ($rcek1['stat_abr'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_abr'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A</option>
-									<option <?php if ($rcek1['stat_abr'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R</option>
-									<option <?php if ($rcek1['stat_abr'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">PASS</option>
-									<option <?php if ($rcek1['stat_abr'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">FAIL</option>
-									<option <?php if ($rcek1['stat_abr'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
 							</div>
-						</div>
-						<div class="form-group" id="disabr" style="display:none;">
-							<label for="abr" class="col-sm-2 control-label">ABRATION (DIS)</label>
-							<<div class="col-sm-2">
-								<input name="dabr" type="text" class="form-control" id="dabr"
-									value="<?php echo $rcekD['dabration']; ?>" placeholder="ABRATION">
-						</div>
-						<div class="col-sm-2">
-							<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-								name="dabr_note" maxlength="50"
-								rows="1"><?php echo $rcekD['dabr_note']; ?></textarea>
-						</div>
-						</div>
-						<div class="form-group" id="ranabr" style="display:none;">
-							<label for="ranabr" class="col-sm-2 control-label">ABRATION (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rabr" type="text" class="form-control" id="rabr"
-									value="<?php echo $rcekR['rabration']; ?>" placeholder="ABRATION" readonly>
+							<div class="form-group" id="ranabr" style="display:none;">
+								<label for="ranabr" class="col-sm-2 control-label">ABRATION (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rabr" type="text" class="form-control" id="rabr"
+										value="<?php echo $rcekR['rabration']; ?>" placeholder="ABRATION" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rabr_note"
+										maxlength="50" rows="1" readonly><?php echo $rcekR['rabr_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rabr_note"
-									maxlength="50" rows="1" readonly><?php echo $rcekR['rabr_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- ABRATION END-->
 						<!-- SNAGGING MACE BEGIN-->
-						<div class="form-group" id="fc12" style="display:none;">
-							<label for="snaggingm" class="col-sm-2 control-label">SNAGGING MACE</label>
-							<div class="col-sm-1">
-								<input name="snaggingm_l1" type="text" class="form-control" id="snaggingm_l1"
-									value="<?php echo $rcek1['sm_l1']; ?>" placeholder="LEN 1">
-								<input name="snaggingm_w1" type="text" class="form-control" id="snaggingm_w1"
-									value="<?php echo $rcek1['sm_w1']; ?>" placeholder="WID 1">
+							<div class="form-group" id="fc12" style="display:none;">
+								<label for="snaggingm" class="col-sm-2 control-label">SNAGGING MACE</label>
+								<div class="col-sm-1">
+									<input name="snaggingm_l1" type="text" class="form-control" id="snaggingm_l1"
+										value="<?php echo $rcek1['sm_l1']; ?>" placeholder="LEN 1">
+									<input name="snaggingm_w1" type="text" class="form-control" id="snaggingm_w1"
+										value="<?php echo $rcek1['sm_w1']; ?>" placeholder="WID 1">
+								</div>
+								<div class="col-sm-1">
+									<input name="snaggingm_l2" type="text" class="form-control" id="snaggingm_l2"
+										value="<?php echo $rcek1['sm_l2']; ?>" placeholder="LEN 2">
+									<input name="snaggingm_w2" type="text" class="form-control" id="snaggingm_w2"
+										value="<?php echo $rcek1['sm_w2']; ?>" placeholder="WID 2">
+								</div>
+								<div class="col-sm-1">
+									<input name="snaggingm_l3" type="text" class="form-control" id="snaggingm_l3"
+										value="<?php echo $rcek1['sm_l3']; ?>" placeholder="LEN 3">
+									<input name="snaggingm_w3" type="text" class="form-control" id="snaggingm_w3"
+										value="<?php echo $rcek1['sm_w3']; ?>" placeholder="WID 3">
+								</div>
+								<div class="col-sm-1">
+									<input name="snaggingm_l4" type="text" class="form-control" id="snaggingm_l4"
+										value="<?php echo $rcek1['sm_l4']; ?>" placeholder="LEN 4">
+									<input name="snaggingm_w4" type="text" class="form-control" id="snaggingm_w4"
+										value="<?php echo $rcek1['sm_w4']; ?>" placeholder="WID 4">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="snam_note"
+										maxlength="50"><?php echo $rcek1['snam_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="snaggingm_l2" type="text" class="form-control" id="snaggingm_l2"
-									value="<?php echo $rcek1['sm_l2']; ?>" placeholder="LEN 2">
-								<input name="snaggingm_w2" type="text" class="form-control" id="snaggingm_w2"
-									value="<?php echo $rcek1['sm_w2']; ?>" placeholder="WID 2">
+							<div class="form-group" id="stat_sm" style="display:none;">
+								<label for="stat_sm" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_sm" class="form-control select2" id="stat_sm" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_sm'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_sm'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_sm'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_sm'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_sm'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">
+											PASS</option>
+										<option <?php if ($rcek1['stat_sm'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">
+											FAIL</option>
+										<option <?php if ($rcek1['stat_sm'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+										<input name="user_mace" type="text" class="form-control" id="user_mace" placeholder="nama" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_mace" type="hidden" class="form-control" id="nama_mace" value="<?php echo $rcek1['nama_mace']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="snaggingm_l3" type="text" class="form-control" id="snaggingm_l3"
-									value="<?php echo $rcek1['sm_l3']; ?>" placeholder="LEN 3">
-								<input name="snaggingm_w3" type="text" class="form-control" id="snaggingm_w3"
-									value="<?php echo $rcek1['sm_w3']; ?>" placeholder="WID 3">
+							<div class="form-group" id="dissm" style="display:none;">
+								<label for="dissm" class="col-sm-2 control-label">SNAGGING MACE (DIS)</label>
+								<div class="col-sm-1">
+									<input name="dsnaggingm_l1" type="text" class="form-control" id="dsnaggingm_l1"
+										value="<?php echo $rcekD['dsm_l1']; ?>" placeholder="LEN 1">
+									<input name="dsnaggingm_w1" type="text" class="form-control" id="dsnaggingm_w1"
+										value="<?php echo $rcekD['dsm_w1']; ?>" placeholder="WID 1">
+								</div>
+								<div class="col-sm-1">
+									<input name="dsnaggingm_l2" type="text" class="form-control" id="dsnaggingm_l2"
+										value="<?php echo $rcekD['dsm_l2']; ?>" placeholder="LEN 2">
+									<input name="dsnaggingm_w2" type="text" class="form-control" id="dsnaggingm_w2"
+										value="<?php echo $rcekD['dsm_w2']; ?>" placeholder="WID 2">
+								</div>
+								<div class="col-sm-1">
+									<input name="dsnaggingm_l3" type="text" class="form-control" id="dsnaggingm_l3"
+										value="<?php echo $rcekD['dsm_l3']; ?>" placeholder="LEN 3">
+									<input name="dsnaggingm_w3" type="text" class="form-control" id="dsnaggingm_w3"
+										value="<?php echo $rcekD['dsm_w3']; ?>" placeholder="WID 3">
+								</div>
+								<div class="col-sm-1">
+									<input name="dsnaggingm_l4" type="text" class="form-control" id="dsnaggingm_l4"
+										value="<?php echo $rcekD['dsm_l4']; ?>" placeholder="LEN 4">
+									<input name="dsnaggingm_w4" type="text" class="form-control" id="dsnaggingm_w4"
+										value="<?php echo $rcekD['dsm_w4']; ?>" placeholder="WID 4">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dsnam_note" maxlength="50"><?php echo $rcekD['dsnam_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="snaggingm_l4" type="text" class="form-control" id="snaggingm_l4"
-									value="<?php echo $rcek1['sm_l4']; ?>" placeholder="LEN 4">
-								<input name="snaggingm_w4" type="text" class="form-control" id="snaggingm_w4"
-									value="<?php echo $rcek1['sm_w4']; ?>" placeholder="WID 4">
+							<div class="form-group" id="ransm" style="display:none;">
+								<label for="ransm" class="col-sm-2 control-label">SNAGGING MACE (RAN)</label>
+								<div class="col-sm-1">
+									<input name="rsnaggingm_l1" type="text" class="form-control" id="rsnaggingm_l1"
+										value="<?php echo $rcekR['rsm_l1']; ?>" placeholder="LEN 1" readonly>
+									<input name="rsnaggingm_w1" type="text" class="form-control" id="rsnaggingm_w1"
+										value="<?php echo $rcekR['rsm_w1']; ?>" placeholder="WID 1" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rsnaggingm_l2" type="text" class="form-control" id="rsnaggingm_l2"
+										value="<?php echo $rcekR['rsm_l2']; ?>" placeholder="LEN 2" readonly>
+									<input name="rsnaggingm_w2" type="text" class="form-control" id="rsnaggingm_w2"
+										value="<?php echo $rcekR['rsm_w2']; ?>" placeholder="WID 2" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rsnaggingm_l3" type="text" class="form-control" id="rsnaggingm_l3"
+										value="<?php echo $rcekR['rsm_l3']; ?>" placeholder="LEN 3" readonly>
+									<input name="rsnaggingm_w3" type="text" class="form-control" id="rsnaggingm_w3"
+										value="<?php echo $rcekR['rsm_w3']; ?>" placeholder="WID 3" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rsnaggingm_l4" type="text" class="form-control" id="rsnaggingm_l4"
+										value="<?php echo $rcekR['rsm_l4']; ?>" placeholder="LEN 4" readonly>
+									<input name="rsnaggingm_w4" type="text" class="form-control" id="rsnaggingm_w4"
+										value="<?php echo $rcekR['rsm_w4']; ?>" placeholder="WID 4" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rsnam_note" maxlength="50" readonly><?php echo $rcekR['rsnam_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="snam_note"
-									maxlength="50"><?php echo $rcek1['snam_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_sm" style="display:none;">
-							<label for="stat_sm" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_sm" class="form-control select2" id="stat_sm" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_sm'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_sm'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_sm'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_sm'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_sm'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">
-										PASS</option>
-									<option <?php if ($rcek1['stat_sm'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">
-										FAIL</option>
-									<option <?php if ($rcek1['stat_sm'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="dissm" style="display:none;">
-							<label for="dissm" class="col-sm-2 control-label">SNAGGING MACE (DIS)</label>
-							<div class="col-sm-1">
-								<input name="dsnaggingm_l1" type="text" class="form-control" id="dsnaggingm_l1"
-									value="<?php echo $rcekD['dsm_l1']; ?>" placeholder="LEN 1">
-								<input name="dsnaggingm_w1" type="text" class="form-control" id="dsnaggingm_w1"
-									value="<?php echo $rcekD['dsm_w1']; ?>" placeholder="WID 1">
-							</div>
-							<div class="col-sm-1">
-								<input name="dsnaggingm_l2" type="text" class="form-control" id="dsnaggingm_l2"
-									value="<?php echo $rcekD['dsm_l2']; ?>" placeholder="LEN 2">
-								<input name="dsnaggingm_w2" type="text" class="form-control" id="dsnaggingm_w2"
-									value="<?php echo $rcekD['dsm_w2']; ?>" placeholder="WID 2">
-							</div>
-							<div class="col-sm-1">
-								<input name="dsnaggingm_l3" type="text" class="form-control" id="dsnaggingm_l3"
-									value="<?php echo $rcekD['dsm_l3']; ?>" placeholder="LEN 3">
-								<input name="dsnaggingm_w3" type="text" class="form-control" id="dsnaggingm_w3"
-									value="<?php echo $rcekD['dsm_w3']; ?>" placeholder="WID 3">
-							</div>
-							<div class="col-sm-1">
-								<input name="dsnaggingm_l4" type="text" class="form-control" id="dsnaggingm_l4"
-									value="<?php echo $rcekD['dsm_l4']; ?>" placeholder="LEN 4">
-								<input name="dsnaggingm_w4" type="text" class="form-control" id="dsnaggingm_w4"
-									value="<?php echo $rcekD['dsm_w4']; ?>" placeholder="WID 4">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dsnam_note" maxlength="50"><?php echo $rcekD['dsnam_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ransm" style="display:none;">
-							<label for="ransm" class="col-sm-2 control-label">SNAGGING MACE (RAN)</label>
-							<div class="col-sm-1">
-								<input name="rsnaggingm_l1" type="text" class="form-control" id="rsnaggingm_l1"
-									value="<?php echo $rcekR['rsm_l1']; ?>" placeholder="LEN 1" readonly>
-								<input name="rsnaggingm_w1" type="text" class="form-control" id="rsnaggingm_w1"
-									value="<?php echo $rcekR['rsm_w1']; ?>" placeholder="WID 1" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rsnaggingm_l2" type="text" class="form-control" id="rsnaggingm_l2"
-									value="<?php echo $rcekR['rsm_l2']; ?>" placeholder="LEN 2" readonly>
-								<input name="rsnaggingm_w2" type="text" class="form-control" id="rsnaggingm_w2"
-									value="<?php echo $rcekR['rsm_w2']; ?>" placeholder="WID 2" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rsnaggingm_l3" type="text" class="form-control" id="rsnaggingm_l3"
-									value="<?php echo $rcekR['rsm_l3']; ?>" placeholder="LEN 3" readonly>
-								<input name="rsnaggingm_w3" type="text" class="form-control" id="rsnaggingm_w3"
-									value="<?php echo $rcekR['rsm_w3']; ?>" placeholder="WID 3" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rsnaggingm_l4" type="text" class="form-control" id="rsnaggingm_l4"
-									value="<?php echo $rcekR['rsm_l4']; ?>" placeholder="LEN 4" readonly>
-								<input name="rsnaggingm_w4" type="text" class="form-control" id="rsnaggingm_w4"
-									value="<?php echo $rcekR['rsm_w4']; ?>" placeholder="WID 4" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rsnam_note" maxlength="50" readonly><?php echo $rcekR['rsnam_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- SNAGGING MACE END-->
 						<!-- SNAGGING POD BEGIN-->
-						<div class="form-group" id="fc13" style="display:none;">
-							<label for="snaggingp" class="col-sm-2 control-label">SNAGGING POD</label>
-							<div class="col-sm-1">LEN(Face) 1
-								<input name="sp_grdl1" type="text" class="form-control" id="sp_grdl1"
-									value="<?php echo $rcek1['sp_grdl1']; ?>" placeholder="GRAD 1">
-								<input name="sp_clsl1" type="text" class="form-control" id="sp_clsl1"
-									value="<?php echo $rcek1['sp_clsl1']; ?>" placeholder="CLAS 1">
-								<input name="sp_shol1" type="text" class="form-control" id="sp_shol1"
-									value="<?php echo $rcek1['sp_shol1']; ?>" placeholder="SHO 1">
-								<input name="sp_medl1" type="text" class="form-control" id="sp_medl1"
-									value="<?php echo $rcek1['sp_medl1']; ?>" placeholder="MED 1">
-								<input name="sp_lonl1" type="text" class="form-control" id="sp_lonl1"
-									value="<?php echo $rcek1['sp_lonl1']; ?>" placeholder="LONG 1">
+							<div class="form-group" id="fc13" style="display:none;">
+								<label for="snaggingp" class="col-sm-2 control-label">SNAGGING POD</label>
+								<div class="col-sm-1">LEN(Face) 1
+									<input name="sp_grdl1" type="text" class="form-control" id="sp_grdl1"
+										value="<?php echo $rcek1['sp_grdl1']; ?>" placeholder="GRAD 1">
+									<input name="sp_clsl1" type="text" class="form-control" id="sp_clsl1"
+										value="<?php echo $rcek1['sp_clsl1']; ?>" placeholder="CLAS 1">
+									<input name="sp_shol1" type="text" class="form-control" id="sp_shol1"
+										value="<?php echo $rcek1['sp_shol1']; ?>" placeholder="SHO 1">
+									<input name="sp_medl1" type="text" class="form-control" id="sp_medl1"
+										value="<?php echo $rcek1['sp_medl1']; ?>" placeholder="MED 1">
+									<input name="sp_lonl1" type="text" class="form-control" id="sp_lonl1"
+										value="<?php echo $rcek1['sp_lonl1']; ?>" placeholder="LONG 1">
+								</div>
+								<div class="col-sm-1">WID(Face) 1
+									<input name="sp_grdw1" type="text" class="form-control" id="sp_grdw1"
+										value="<?php echo $rcek1['sp_grdw1']; ?>" placeholder="GRAD 1">
+									<input name="sp_clsw1" type="text" class="form-control" id="sp_clsw1"
+										value="<?php echo $rcek1['sp_clsw1']; ?>" placeholder="CLAS 1">
+									<input name="sp_show1" type="text" class="form-control" id="sp_show1"
+										value="<?php echo $rcek1['sp_show1']; ?>" placeholder="SHO 1">
+									<input name="sp_medw1" type="text" class="form-control" id="sp_medw1"
+										value="<?php echo $rcek1['sp_medw1']; ?>" placeholder="MED 1">
+									<input name="sp_lonw1" type="text" class="form-control" id="sp_lonw1"
+										value="<?php echo $rcek1['sp_lonw1']; ?>" placeholder="LONG 1">
+								</div>
+								<div class="col-sm-1">LEN(Back) 2
+									<input name="sp_grdl2" type="text" class="form-control" id="sp_grdl2"
+										value="<?php echo $rcek1['sp_grdl2']; ?>" placeholder="GRAD 2">
+									<input name="sp_clsl2" type="text" class="form-control" id="sp_clsl2"
+										value="<?php echo $rcek1['sp_clsl2']; ?>" placeholder="CLAS 2">
+									<input name="sp_shol2" type="text" class="form-control" id="sp_shol2"
+										value="<?php echo $rcek1['sp_shol2']; ?>" placeholder="SHO 2">
+									<input name="sp_medl2" type="text" class="form-control" id="sp_medl2"
+										value="<?php echo $rcek1['sp_medl2']; ?>" placeholder="MED 2">
+									<input name="sp_lonl2" type="text" class="form-control" id="sp_lonl2"
+										value="<?php echo $rcek1['sp_lonl2']; ?>" placeholder="LONG 2">
+								</div>
+								<div class="col-sm-1">WID(Back) 2
+									<input name="sp_grdw2" type="text" class="form-control" id="sp_grdw2"
+										value="<?php echo $rcek1['sp_grdw2']; ?>" placeholder="GRAD 2">
+									<input name="sp_clsw2" type="text" class="form-control" id="sp_clsw2"
+										value="<?php echo $rcek1['sp_clsw2']; ?>" placeholder="CLAS 2">
+									<input name="sp_show2" type="text" class="form-control" id="sp_show2"
+										value="<?php echo $rcek1['sp_show2']; ?>" placeholder="SHO 2">
+									<input name="sp_medw2" type="text" class="form-control" id="sp_medw2"
+										value="<?php echo $rcek1['sp_medw2']; ?>" placeholder="MED 2">
+									<input name="sp_lonw2" type="text" class="form-control" id="sp_lonw2"
+										value="<?php echo $rcek1['sp_lonw2']; ?>" placeholder="LONG 2">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="snap_note"
+										maxlength="50"><?php echo $rcek1['snap_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">WID(Face) 1
-								<input name="sp_grdw1" type="text" class="form-control" id="sp_grdw1"
-									value="<?php echo $rcek1['sp_grdw1']; ?>" placeholder="GRAD 1">
-								<input name="sp_clsw1" type="text" class="form-control" id="sp_clsw1"
-									value="<?php echo $rcek1['sp_clsw1']; ?>" placeholder="CLAS 1">
-								<input name="sp_show1" type="text" class="form-control" id="sp_show1"
-									value="<?php echo $rcek1['sp_show1']; ?>" placeholder="SHO 1">
-								<input name="sp_medw1" type="text" class="form-control" id="sp_medw1"
-									value="<?php echo $rcek1['sp_medw1']; ?>" placeholder="MED 1">
-								<input name="sp_lonw1" type="text" class="form-control" id="sp_lonw1"
-									value="<?php echo $rcek1['sp_lonw1']; ?>" placeholder="LONG 1">
+							<div class="form-group" id="stat_sp" style="display:none;">
+								<label for="stat_sp" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_sp" class="form-control select2" id="stat_sp" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_sp'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_sp'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_sp'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_sp'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_sp'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">
+											PASS</option>
+										<option <?php if ($rcek1['stat_sp'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">
+											FAIL</option>
+										<option <?php if ($rcek1['stat_sp'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+										<input name="user_pod" type="text" class="form-control" id="user_pod" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_pod" type="hidden" class="form-control" id="nama_pod" value="<?php echo $rcek1['nama_pod']; ?>" placeholder="Nama BOW">
+									</div>
 							</div>
-							<div class="col-sm-1">LEN(Back) 2
-								<input name="sp_grdl2" type="text" class="form-control" id="sp_grdl2"
-									value="<?php echo $rcek1['sp_grdl2']; ?>" placeholder="GRAD 2">
-								<input name="sp_clsl2" type="text" class="form-control" id="sp_clsl2"
-									value="<?php echo $rcek1['sp_clsl2']; ?>" placeholder="CLAS 2">
-								<input name="sp_shol2" type="text" class="form-control" id="sp_shol2"
-									value="<?php echo $rcek1['sp_shol2']; ?>" placeholder="SHO 2">
-								<input name="sp_medl2" type="text" class="form-control" id="sp_medl2"
-									value="<?php echo $rcek1['sp_medl2']; ?>" placeholder="MED 2">
-								<input name="sp_lonl2" type="text" class="form-control" id="sp_lonl2"
-									value="<?php echo $rcek1['sp_lonl2']; ?>" placeholder="LONG 2">
+							<div class="form-group" id="dissp" style="display:none;">
+								<label for="dissp" class="col-sm-2 control-label">SNAGGING POD (DIS)</label>
+								<div class="col-sm-1">LEN(Face) 1
+									<input name="dsp_grdl1" type="text" class="form-control" id="dsp_grdl1"
+										value="<?php echo $rcekD['dsp_grdl1']; ?>" placeholder="GRAD 1">
+									<input name="dsp_clsl1" type="text" class="form-control" id="dsp_clsl1"
+										value="<?php echo $rcekD['dsp_clsl1']; ?>" placeholder="CLAS 1">
+									<input name="dsp_shol1" type="text" class="form-control" id="dsp_shol1"
+										value="<?php echo $rcekD['dsp_shol1']; ?>" placeholder="SHO 1">
+									<input name="dsp_medl1" type="text" class="form-control" id="dsp_medl1"
+										value="<?php echo $rcekD['dsp_medl1']; ?>" placeholder="MED 1">
+									<input name="dsp_lonl" type="text" class="form-control" id="dsp_lonl"
+										value="<?php echo $rcekD['dsp_lonl']; ?>" placeholder="LONG 1">
+								</div>
+								<div class="col-sm-1">WID(Face) 1
+									<input name="dsp_grdw1" type="text" class="form-control" id="dsp_grdw1"
+										value="<?php echo $rcekD['dsp_grdw1']; ?>" placeholder="GRAD 1">
+									<input name="dsp_clsw1" type="text" class="form-control" id="dsp_clsw1"
+										value="<?php echo $rcekD['dsp_clsw1']; ?>" placeholder="CLAS 1">
+									<input name="dsp_show1" type="text" class="form-control" id="dsp_show1"
+										value="<?php echo $rcekD['dsp_show1']; ?>" placeholder="SHO 1">
+									<input name="dsp_medw1" type="text" class="form-control" id="dsp_medw1"
+										value="<?php echo $rcekD['dsp_medw1']; ?>" placeholder="MED 1">
+									<input name="dsp_lonw1" type="text" class="form-control" id="dsp_lonw1"
+										value="<?php echo $rcekD['dsp_lonw1']; ?>" placeholder="LONG 1">
+								</div>
+								<div class="col-sm-1">LEN(Back) 2
+									<input name="dsp_grdl2" type="text" class="form-control" id="dsp_grdl2"
+										value="<?php echo $rcekD['dsp_grdl2']; ?>" placeholder="GRAD 2">
+									<input name="dsp_clsl2" type="text" class="form-control" id="dsp_clsl2"
+										value="<?php echo $rcekD['dsp_clsl2']; ?>" placeholder="CLAS 2">
+									<input name="dsp_shol2" type="text" class="form-control" id="dsp_shol2"
+										value="<?php echo $rcekD['dsp_shol2']; ?>" placeholder="SHO 2">
+									<input name="dsp_medl2" type="text" class="form-control" id="dsp_medl2"
+										value="<?php echo $rcekD['dsp_medl2']; ?>" placeholder="MED 2">
+									<input name="dsp_lonl2" type="text" class="form-control" id="dsp_lonl2"
+										value="<?php echo $rcekD['dsp_lonl2']; ?>" placeholder="LONG 2">
+								</div>
+								<div class="col-sm-1">WID(Back) 2
+									<input name="dsp_grdw2" type="text" class="form-control" id="dsp_grdw2"
+										value="<?php echo $rcekD['dsp_grdw2']; ?>" placeholder="GRAD 2">
+									<input name="dsp_clsw2" type="text" class="form-control" id="dsp_clsw2"
+										value="<?php echo $rcekD['dsp_clsw2']; ?>" placeholder="CLAS 2">
+									<input name="dsp_show2" type="text" class="form-control" id="dsp_show2"
+										value="<?php echo $rcekD['dsp_show2']; ?>" placeholder="SHO 2">
+									<input name="dsp_medw2" type="text" class="form-control" id="dsp_medw2"
+										value="<?php echo $rcekD['dsp_medw2']; ?>" placeholder="MED 2">
+									<input name="dsp_lonw2" type="text" class="form-control" id="dsp_lonw2"
+										value="<?php echo $rcekD['dsp_lonw2']; ?>" placeholder="LONG 2">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dsnap_note" maxlength="50"><?php echo $rcekD['dsnap_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">WID(Back) 2
-								<input name="sp_grdw2" type="text" class="form-control" id="sp_grdw2"
-									value="<?php echo $rcek1['sp_grdw2']; ?>" placeholder="GRAD 2">
-								<input name="sp_clsw2" type="text" class="form-control" id="sp_clsw2"
-									value="<?php echo $rcek1['sp_clsw2']; ?>" placeholder="CLAS 2">
-								<input name="sp_show2" type="text" class="form-control" id="sp_show2"
-									value="<?php echo $rcek1['sp_show2']; ?>" placeholder="SHO 2">
-								<input name="sp_medw2" type="text" class="form-control" id="sp_medw2"
-									value="<?php echo $rcek1['sp_medw2']; ?>" placeholder="MED 2">
-								<input name="sp_lonw2" type="text" class="form-control" id="sp_lonw2"
-									value="<?php echo $rcek1['sp_lonw2']; ?>" placeholder="LONG 2">
+							<div class="form-group" id="ransp" style="display:none;">
+								<label for="ransp" class="col-sm-2 control-label">SNAGGING POD (RAN)</label>
+								<div class="col-sm-1">LEN(Face) 1
+									<input name="rsp_grdl1" type="text" class="form-control" id="rsp_grdl1"
+										value="<?php echo $rcekR['rsp_grdl1']; ?>" placeholder="GRAD 1" readonly>
+									<input name="rsp_clsl1" type="text" class="form-control" id="rsp_clsl1"
+										value="<?php echo $rcekR['rsp_clsl1']; ?>" placeholder="CLAS 1" readonly>
+									<input name="rsp_shol1" type="text" class="form-control" id="rsp_shol1"
+										value="<?php echo $rcekR['rsp_shol1']; ?>" placeholder="SHO 1" readonly>
+									<input name="rsp_medl1" type="text" class="form-control" id="rsp_medl1"
+										value="<?php echo $rcekR['rsp_medl1']; ?>" placeholder="MED 1" readonly>
+									<input name="rsp_lonl" type="text" class="form-control" id="rsp_lonl"
+										value="<?php echo $rcekR['rsp_lonl']; ?>" placeholder="LONG 1" readonly>
+								</div>
+								<div class="col-sm-1">WID(Face) 1
+									<input name="rsp_grdw1" type="text" class="form-control" id="rsp_grdw1"
+										value="<?php echo $rcekR['rsp_grdw1']; ?>" placeholder="GRAD 1" readonly>
+									<input name="rsp_clsw1" type="text" class="form-control" id="rsp_clsw1"
+										value="<?php echo $rcekR['rsp_clsw1']; ?>" placeholder="CLAS 1" readonly>
+									<input name="rsp_show1" type="text" class="form-control" id="rsp_show1"
+										value="<?php echo $rcekR['rsp_show1']; ?>" placeholder="SHO 1" readonly>
+									<input name="rsp_medw1" type="text" class="form-control" id="rsp_medw1"
+										value="<?php echo $rcekR['rsp_medw1']; ?>" placeholder="MED 1" readonly>
+									<input name="rsp_lonw1" type="text" class="form-control" id="rsp_lonw1"
+										value="<?php echo $rcekR['rsp_lonw1']; ?>" placeholder="LONG 1" readonly>
+								</div>
+								<div class="col-sm-1">LEN(Back) 2
+									<input name="rsp_grdl2" type="text" class="form-control" id="rsp_grdl2"
+										value="<?php echo $rcekR['rsp_grdl2']; ?>" placeholder="GRAD 2" readonly>
+									<input name="rsp_clsl2" type="text" class="form-control" id="rsp_clsl2"
+										value="<?php echo $rcekR['rsp_clsl2']; ?>" placeholder="CLAS 2" readonly>
+									<input name="rsp_shol2" type="text" class="form-control" id="rsp_shol2"
+										value="<?php echo $rcekR['rsp_shol2']; ?>" placeholder="SHO 2" readonly>
+									<input name="rsp_medl2" type="text" class="form-control" id="rsp_medl2"
+										value="<?php echo $rcekR['rsp_medl2']; ?>" placeholder="MED 2" readonly>
+									<input name="rsp_lonl2" type="text" class="form-control" id="rsp_lonl2"
+										value="<?php echo $rcekR['rsp_lonl2']; ?>" placeholder="LONG 2" readonly>
+								</div>
+								<div class="col-sm-1">WID(Back) 2
+									<input name="rsp_grdw2" type="text" class="form-control" id="rsp_grdw2"
+										value="<?php echo $rcekR['rsp_grdw2']; ?>" placeholder="GRAD 2" readonly>
+									<input name="rsp_clsw2" type="text" class="form-control" id="rsp_clsw2"
+										value="<?php echo $rcekR['rsp_clsw2']; ?>" placeholder="CLAS 2" readonly>
+									<input name="rsp_show2" type="text" class="form-control" id="rsp_show2"
+										value="<?php echo $rcekR['rsp_show2']; ?>" placeholder="SHO 2" readonly>
+									<input name="rsp_medw2" type="text" class="form-control" id="rsp_medw2"
+										value="<?php echo $rcekR['rsp_medw2']; ?>" placeholder="MED 2" readonly>
+									<input name="rsp_lonw2" type="text" class="form-control" id="rsp_lonw2"
+										value="<?php echo $rcekR['rsp_lonw2']; ?>" placeholder="LONG 2" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rsnap_note" maxlength="50" readonly><?php echo $rcekR['rsnap_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="snap_note"
-									maxlength="50"><?php echo $rcek1['snap_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_sp" style="display:none;">
-							<label for="stat_sp" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_sp" class="form-control select2" id="stat_sp" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_sp'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_sp'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_sp'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_sp'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_sp'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">
-										PASS</option>
-									<option <?php if ($rcek1['stat_sp'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">
-										FAIL</option>
-									<option <?php if ($rcek1['stat_sp'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="dissp" style="display:none;">
-							<label for="dissp" class="col-sm-2 control-label">SNAGGING POD (DIS)</label>
-							<div class="col-sm-1">LEN(Face) 1
-								<input name="dsp_grdl1" type="text" class="form-control" id="dsp_grdl1"
-									value="<?php echo $rcekD['dsp_grdl1']; ?>" placeholder="GRAD 1">
-								<input name="dsp_clsl1" type="text" class="form-control" id="dsp_clsl1"
-									value="<?php echo $rcekD['dsp_clsl1']; ?>" placeholder="CLAS 1">
-								<input name="dsp_shol1" type="text" class="form-control" id="dsp_shol1"
-									value="<?php echo $rcekD['dsp_shol1']; ?>" placeholder="SHO 1">
-								<input name="dsp_medl1" type="text" class="form-control" id="dsp_medl1"
-									value="<?php echo $rcekD['dsp_medl1']; ?>" placeholder="MED 1">
-								<input name="dsp_lonl" type="text" class="form-control" id="dsp_lonl"
-									value="<?php echo $rcekD['dsp_lonl']; ?>" placeholder="LONG 1">
-							</div>
-							<div class="col-sm-1">WID(Face) 1
-								<input name="dsp_grdw1" type="text" class="form-control" id="dsp_grdw1"
-									value="<?php echo $rcekD['dsp_grdw1']; ?>" placeholder="GRAD 1">
-								<input name="dsp_clsw1" type="text" class="form-control" id="dsp_clsw1"
-									value="<?php echo $rcekD['dsp_clsw1']; ?>" placeholder="CLAS 1">
-								<input name="dsp_show1" type="text" class="form-control" id="dsp_show1"
-									value="<?php echo $rcekD['dsp_show1']; ?>" placeholder="SHO 1">
-								<input name="dsp_medw1" type="text" class="form-control" id="dsp_medw1"
-									value="<?php echo $rcekD['dsp_medw1']; ?>" placeholder="MED 1">
-								<input name="dsp_lonw1" type="text" class="form-control" id="dsp_lonw1"
-									value="<?php echo $rcekD['dsp_lonw1']; ?>" placeholder="LONG 1">
-							</div>
-							<div class="col-sm-1">LEN(Back) 2
-								<input name="dsp_grdl2" type="text" class="form-control" id="dsp_grdl2"
-									value="<?php echo $rcekD['dsp_grdl2']; ?>" placeholder="GRAD 2">
-								<input name="dsp_clsl2" type="text" class="form-control" id="dsp_clsl2"
-									value="<?php echo $rcekD['dsp_clsl2']; ?>" placeholder="CLAS 2">
-								<input name="dsp_shol2" type="text" class="form-control" id="dsp_shol2"
-									value="<?php echo $rcekD['dsp_shol2']; ?>" placeholder="SHO 2">
-								<input name="dsp_medl2" type="text" class="form-control" id="dsp_medl2"
-									value="<?php echo $rcekD['dsp_medl2']; ?>" placeholder="MED 2">
-								<input name="dsp_lonl2" type="text" class="form-control" id="dsp_lonl2"
-									value="<?php echo $rcekD['dsp_lonl2']; ?>" placeholder="LONG 2">
-							</div>
-							<div class="col-sm-1">WID(Back) 2
-								<input name="dsp_grdw2" type="text" class="form-control" id="dsp_grdw2"
-									value="<?php echo $rcekD['dsp_grdw2']; ?>" placeholder="GRAD 2">
-								<input name="dsp_clsw2" type="text" class="form-control" id="dsp_clsw2"
-									value="<?php echo $rcekD['dsp_clsw2']; ?>" placeholder="CLAS 2">
-								<input name="dsp_show2" type="text" class="form-control" id="dsp_show2"
-									value="<?php echo $rcekD['dsp_show2']; ?>" placeholder="SHO 2">
-								<input name="dsp_medw2" type="text" class="form-control" id="dsp_medw2"
-									value="<?php echo $rcekD['dsp_medw2']; ?>" placeholder="MED 2">
-								<input name="dsp_lonw2" type="text" class="form-control" id="dsp_lonw2"
-									value="<?php echo $rcekD['dsp_lonw2']; ?>" placeholder="LONG 2">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dsnap_note" maxlength="50"><?php echo $rcekD['dsnap_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ransp" style="display:none;">
-							<label for="ransp" class="col-sm-2 control-label">SNAGGING POD (RAN)</label>
-							<div class="col-sm-1">LEN(Face) 1
-								<input name="rsp_grdl1" type="text" class="form-control" id="rsp_grdl1"
-									value="<?php echo $rcekR['rsp_grdl1']; ?>" placeholder="GRAD 1" readonly>
-								<input name="rsp_clsl1" type="text" class="form-control" id="rsp_clsl1"
-									value="<?php echo $rcekR['rsp_clsl1']; ?>" placeholder="CLAS 1" readonly>
-								<input name="rsp_shol1" type="text" class="form-control" id="rsp_shol1"
-									value="<?php echo $rcekR['rsp_shol1']; ?>" placeholder="SHO 1" readonly>
-								<input name="rsp_medl1" type="text" class="form-control" id="rsp_medl1"
-									value="<?php echo $rcekR['rsp_medl1']; ?>" placeholder="MED 1" readonly>
-								<input name="rsp_lonl" type="text" class="form-control" id="rsp_lonl"
-									value="<?php echo $rcekR['rsp_lonl']; ?>" placeholder="LONG 1" readonly>
-							</div>
-							<div class="col-sm-1">WID(Face) 1
-								<input name="rsp_grdw1" type="text" class="form-control" id="rsp_grdw1"
-									value="<?php echo $rcekR['rsp_grdw1']; ?>" placeholder="GRAD 1" readonly>
-								<input name="rsp_clsw1" type="text" class="form-control" id="rsp_clsw1"
-									value="<?php echo $rcekR['rsp_clsw1']; ?>" placeholder="CLAS 1" readonly>
-								<input name="rsp_show1" type="text" class="form-control" id="rsp_show1"
-									value="<?php echo $rcekR['rsp_show1']; ?>" placeholder="SHO 1" readonly>
-								<input name="rsp_medw1" type="text" class="form-control" id="rsp_medw1"
-									value="<?php echo $rcekR['rsp_medw1']; ?>" placeholder="MED 1" readonly>
-								<input name="rsp_lonw1" type="text" class="form-control" id="rsp_lonw1"
-									value="<?php echo $rcekR['rsp_lonw1']; ?>" placeholder="LONG 1" readonly>
-							</div>
-							<div class="col-sm-1">LEN(Back) 2
-								<input name="rsp_grdl2" type="text" class="form-control" id="rsp_grdl2"
-									value="<?php echo $rcekR['rsp_grdl2']; ?>" placeholder="GRAD 2" readonly>
-								<input name="rsp_clsl2" type="text" class="form-control" id="rsp_clsl2"
-									value="<?php echo $rcekR['rsp_clsl2']; ?>" placeholder="CLAS 2" readonly>
-								<input name="rsp_shol2" type="text" class="form-control" id="rsp_shol2"
-									value="<?php echo $rcekR['rsp_shol2']; ?>" placeholder="SHO 2" readonly>
-								<input name="rsp_medl2" type="text" class="form-control" id="rsp_medl2"
-									value="<?php echo $rcekR['rsp_medl2']; ?>" placeholder="MED 2" readonly>
-								<input name="rsp_lonl2" type="text" class="form-control" id="rsp_lonl2"
-									value="<?php echo $rcekR['rsp_lonl2']; ?>" placeholder="LONG 2" readonly>
-							</div>
-							<div class="col-sm-1">WID(Back) 2
-								<input name="rsp_grdw2" type="text" class="form-control" id="rsp_grdw2"
-									value="<?php echo $rcekR['rsp_grdw2']; ?>" placeholder="GRAD 2" readonly>
-								<input name="rsp_clsw2" type="text" class="form-control" id="rsp_clsw2"
-									value="<?php echo $rcekR['rsp_clsw2']; ?>" placeholder="CLAS 2" readonly>
-								<input name="rsp_show2" type="text" class="form-control" id="rsp_show2"
-									value="<?php echo $rcekR['rsp_show2']; ?>" placeholder="SHO 2" readonly>
-								<input name="rsp_medw2" type="text" class="form-control" id="rsp_medw2"
-									value="<?php echo $rcekR['rsp_medw2']; ?>" placeholder="MED 2" readonly>
-								<input name="rsp_lonw2" type="text" class="form-control" id="rsp_lonw2"
-									value="<?php echo $rcekR['rsp_lonw2']; ?>" placeholder="LONG 2" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rsnap_note" maxlength="50" readonly><?php echo $rcekR['rsnap_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- SNAGGING POD END-->
 						<!-- BEAN BAG BEGIN-->
-						<div class="form-group" id="fc14" style="display:none;">
-							<label for="snaggingb" class="col-sm-2 control-label">BEAN BAG</label>
-							<div class="col-sm-1">
-								<input name="snaggingb_l1" type="text" class="form-control" id="snaggingb_l1"
-									value="<?php echo $rcek1['sb_l1']; ?>" placeholder="LEN 1">
-								<input name="snaggingb_w1" type="text" class="form-control" id="snaggingb_w1"
-									value="<?php echo $rcek1['sb_w1']; ?>" placeholder="WID 1">
+							<div class="form-group" id="fc14" style="display:none;">
+								<label for="snaggingb" class="col-sm-2 control-label">BEAN BAG</label>
+								<div class="col-sm-1">
+									<input name="snaggingb_l1" type="text" class="form-control" id="snaggingb_l1"
+										value="<?php echo $rcek1['sb_l1']; ?>" placeholder="LEN 1">
+									<input name="snaggingb_w1" type="text" class="form-control" id="snaggingb_w1"
+										value="<?php echo $rcek1['sb_w1']; ?>" placeholder="WID 1">
+								</div>
+								<!--
+									<div class="col-sm-1">
+										<input name="snaggingb_l2" type="text" class="form-control" id="snaggingb_l2" value="<?php echo $rcek1['sb_l2']; ?>" placeholder="LEN 2">
+										<input name="snaggingb_w2" type="text" class="form-control" id="snaggingb_w2" value="<?php echo $rcek1['sb_w2']; ?>" placeholder="WID 2">
+									</div>
+									<div class="col-sm-1">
+										<input name="snaggingb_l3" type="text" class="form-control" id="snaggingb_l3" value="<?php echo $rcek1['sb_l3']; ?>" placeholder="LEN 3">
+										<input name="snaggingb_w3" type="text" class="form-control" id="snaggingb_w3" value="<?php echo $rcek1['sb_w3']; ?>" placeholder="WID 3">
+									</div>
+									<div class="col-sm-1">
+										<input name="snaggingb_l4" type="text" class="form-control" id="snaggingb_l4" value="<?php echo $rcek1['sb_l4']; ?>" placeholder="LEN 4">
+										<input name="snaggingb_w4" type="text" class="form-control" id="snaggingb_w4" value="<?php echo $rcek1['sb_w4']; ?>" placeholder="WID 4">
+									</div>
+									-->
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="snab_note"
+										maxlength="50"><?php echo $rcek1['snab_note']; ?></textarea>
+								</div>
 							</div>
-							<!--
-								<div class="col-sm-1">
-									<input name="snaggingb_l2" type="text" class="form-control" id="snaggingb_l2" value="<?php echo $rcek1['sb_l2']; ?>" placeholder="LEN 2">
-									<input name="snaggingb_w2" type="text" class="form-control" id="snaggingb_w2" value="<?php echo $rcek1['sb_w2']; ?>" placeholder="WID 2">
+							<div class="form-group" id="stat_sb" style="display:none;">
+								<label for="stat_sb" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_sb" class="form-control select2" id="stat_sb" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_sb'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_sb'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_sb'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_sb'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_sb'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">
+											PASS</option>
+										<option <?php if ($rcek1['stat_sb'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">
+											FAIL</option>
+										<option <?php if ($rcek1['stat_sb'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
 								</div>
-								<div class="col-sm-1">
-									<input name="snaggingb_l3" type="text" class="form-control" id="snaggingb_l3" value="<?php echo $rcek1['sb_l3']; ?>" placeholder="LEN 3">
-									<input name="snaggingb_w3" type="text" class="form-control" id="snaggingb_w3" value="<?php echo $rcek1['sb_w3']; ?>" placeholder="WID 3">
+								<div class="col-sm-2">
+									<input name="user_bean" type="text" class="form-control" id="user_bean" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_bean" type="hidden" class="form-control" id="nama_bean" value="<?php echo $rcek1['nama_bean']; ?>" placeholder="Nama BOW">
 								</div>
-								<div class="col-sm-1">
-									<input name="snaggingb_l4" type="text" class="form-control" id="snaggingb_l4" value="<?php echo $rcek1['sb_l4']; ?>" placeholder="LEN 4">
-									<input name="snaggingb_w4" type="text" class="form-control" id="snaggingb_w4" value="<?php echo $rcek1['sb_w4']; ?>" placeholder="WID 4">
-								</div>
-								-->
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="snab_note"
-									maxlength="50"><?php echo $rcek1['snab_note']; ?></textarea>
 							</div>
-						</div>
-						<div class="form-group" id="stat_sb" style="display:none;">
-							<label for="stat_sb" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_sb" class="form-control select2" id="stat_sb" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_sb'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_sb'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_sb'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_sb'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_sb'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">
-										PASS</option>
-									<option <?php if ($rcek1['stat_sb'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">
-										FAIL</option>
-									<option <?php if ($rcek1['stat_sb'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
+							<div class="form-group" id="dissb" style="display:none;">
+								<label for="dissb" class="col-sm-2 control-label">BEAN BAG (DIS)</label>
+								<div class="col-sm-1">
+									<input name="dsnaggingb_l1" type="text" class="form-control" id="dsnaggingb_l1"
+										value="<?php echo $rcekD['dsb_l1']; ?>" placeholder="LEN 1">
+									<input name="dsnaggingb_w1" type="text" class="form-control" id="dsnaggingb_w1"
+										value="<?php echo $rcekD['dsb_w1']; ?>" placeholder="WID 1">
+								</div>
+								<!--
+									<div class="col-sm-1">
+										<input name="snaggingb_l2" type="text" class="form-control" id="snaggingb_l2" value="<?php echo $rcek1['sb_l2']; ?>" placeholder="LEN 2">
+										<input name="snaggingb_w2" type="text" class="form-control" id="snaggingb_w2" value="<?php echo $rcek1['sb_w2']; ?>" placeholder="WID 2">
+									</div>
+									<div class="col-sm-1">
+										<input name="snaggingb_l3" type="text" class="form-control" id="snaggingb_l3" value="<?php echo $rcek1['sb_l3']; ?>" placeholder="LEN 3">
+										<input name="snaggingb_w3" type="text" class="form-control" id="snaggingb_w3" value="<?php echo $rcek1['sb_w3']; ?>" placeholder="WID 3">
+									</div>
+									<div class="col-sm-1">
+										<input name="snaggingb_l4" type="text" class="form-control" id="snaggingb_l4" value="<?php echo $rcek1['sb_l4']; ?>" placeholder="LEN 4">
+										<input name="snaggingb_w4" type="text" class="form-control" id="snaggingb_w4" value="<?php echo $rcek1['sb_w4']; ?>" placeholder="WID 4">
+									</div>
+									-->
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dsnab_note" maxlength="50"><?php echo $rcekD['dsnab_note']; ?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="dissb" style="display:none;">
-							<label for="dissb" class="col-sm-2 control-label">BEAN BAG (DIS)</label>
-							<div class="col-sm-1">
-								<input name="dsnaggingb_l1" type="text" class="form-control" id="dsnaggingb_l1"
-									value="<?php echo $rcekD['dsb_l1']; ?>" placeholder="LEN 1">
-								<input name="dsnaggingb_w1" type="text" class="form-control" id="dsnaggingb_w1"
-									value="<?php echo $rcekD['dsb_w1']; ?>" placeholder="WID 1">
+							<div class="form-group" id="ransb" style="display:none;">
+								<label for="ransb" class="col-sm-2 control-label">BEAN BAG (RAN)</label>
+								<div class="col-sm-1">
+									<input name="rsnaggingb_l1" type="text" class="form-control" id="rsnaggingb_l1"
+										value="<?php echo $rcekR['rsb_l1']; ?>" placeholder="LEN 1" readonly>
+									<input name="rsnaggingb_w1" type="text" class="form-control" id="rsnaggingb_w1"
+										value="<?php echo $rcekR['rsb_w1']; ?>" placeholder="WID 1" readonly>
+								</div>
+								<!--
+									<div class="col-sm-1">
+										<input name="snaggingb_l2" type="text" class="form-control" id="snaggingb_l2" value="<?php echo $rcek1['sb_l2']; ?>" placeholder="LEN 2">
+										<input name="snaggingb_w2" type="text" class="form-control" id="snaggingb_w2" value="<?php echo $rcek1['sb_w2']; ?>" placeholder="WID 2">
+									</div>
+									<div class="col-sm-1">
+										<input name="snaggingb_l3" type="text" class="form-control" id="snaggingb_l3" value="<?php echo $rcek1['sb_l3']; ?>" placeholder="LEN 3">
+										<input name="snaggingb_w3" type="text" class="form-control" id="snaggingb_w3" value="<?php echo $rcek1['sb_w3']; ?>" placeholder="WID 3">
+									</div>
+									<div class="col-sm-1">
+										<input name="snaggingb_l4" type="text" class="form-control" id="snaggingb_l4" value="<?php echo $rcek1['sb_l4']; ?>" placeholder="LEN 4">
+										<input name="snaggingb_w4" type="text" class="form-control" id="snaggingb_w4" value="<?php echo $rcek1['sb_w4']; ?>" placeholder="WID 4">
+									</div>
+									-->
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rsnab_note" maxlength="50" readonly><?php echo $rcekR['rsnab_note']; ?></textarea>
+								</div>
 							</div>
-							<!--
-								<div class="col-sm-1">
-									<input name="snaggingb_l2" type="text" class="form-control" id="snaggingb_l2" value="<?php echo $rcek1['sb_l2']; ?>" placeholder="LEN 2">
-									<input name="snaggingb_w2" type="text" class="form-control" id="snaggingb_w2" value="<?php echo $rcek1['sb_w2']; ?>" placeholder="WID 2">
-								</div>
-								<div class="col-sm-1">
-									<input name="snaggingb_l3" type="text" class="form-control" id="snaggingb_l3" value="<?php echo $rcek1['sb_l3']; ?>" placeholder="LEN 3">
-									<input name="snaggingb_w3" type="text" class="form-control" id="snaggingb_w3" value="<?php echo $rcek1['sb_w3']; ?>" placeholder="WID 3">
-								</div>
-								<div class="col-sm-1">
-									<input name="snaggingb_l4" type="text" class="form-control" id="snaggingb_l4" value="<?php echo $rcek1['sb_l4']; ?>" placeholder="LEN 4">
-									<input name="snaggingb_w4" type="text" class="form-control" id="snaggingb_w4" value="<?php echo $rcek1['sb_w4']; ?>" placeholder="WID 4">
-								</div>
-								-->
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dsnab_note" maxlength="50"><?php echo $rcekD['dsnab_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ransb" style="display:none;">
-							<label for="ransb" class="col-sm-2 control-label">BEAN BAG (RAN)</label>
-							<div class="col-sm-1">
-								<input name="rsnaggingb_l1" type="text" class="form-control" id="rsnaggingb_l1"
-									value="<?php echo $rcekR['rsb_l1']; ?>" placeholder="LEN 1" readonly>
-								<input name="rsnaggingb_w1" type="text" class="form-control" id="rsnaggingb_w1"
-									value="<?php echo $rcekR['rsb_w1']; ?>" placeholder="WID 1" readonly>
-							</div>
-							<!--
-								<div class="col-sm-1">
-									<input name="snaggingb_l2" type="text" class="form-control" id="snaggingb_l2" value="<?php echo $rcek1['sb_l2']; ?>" placeholder="LEN 2">
-									<input name="snaggingb_w2" type="text" class="form-control" id="snaggingb_w2" value="<?php echo $rcek1['sb_w2']; ?>" placeholder="WID 2">
-								</div>
-								<div class="col-sm-1">
-									<input name="snaggingb_l3" type="text" class="form-control" id="snaggingb_l3" value="<?php echo $rcek1['sb_l3']; ?>" placeholder="LEN 3">
-									<input name="snaggingb_w3" type="text" class="form-control" id="snaggingb_w3" value="<?php echo $rcek1['sb_w3']; ?>" placeholder="WID 3">
-								</div>
-								<div class="col-sm-1">
-									<input name="snaggingb_l4" type="text" class="form-control" id="snaggingb_l4" value="<?php echo $rcek1['sb_l4']; ?>" placeholder="LEN 4">
-									<input name="snaggingb_w4" type="text" class="form-control" id="snaggingb_w4" value="<?php echo $rcek1['sb_w4']; ?>" placeholder="WID 4">
-								</div>
-								-->
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rsnab_note" maxlength="50" readonly><?php echo $rcekR['rsnab_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- BEAN BAG END-->
 						<!-- BURSTING STRENGTH BEGIN-->
-						<div class="form-group" id="fc15" style="display:none;">
-							<label for="burs_str" class="col-sm-2 control-label">INSTRON</label>
-							<div class="col-sm-2">
-								<input name="instron" type="text" class="form-control" id="instron"
-									value="<?php echo $rcek1['bs_instron']; ?>" placeholder="INSTRON">
-							</div>
-							<div class="col-sm-2">
-								<select name="stat_bs2" class="form-control select2" id="stat_bs2" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_bs2'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_bs2'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_bs2'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">
-										A
-									</option>
-									<option <?php if ($rcek1['stat_bs2'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">
-										R
-									</option>
-									<option <?php if ($rcek1['stat_bs2'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">PASS</option>
-									<option <?php if ($rcek1['stat_bs2'] == "MARGINAL PASS") { ?> selected=selected <?php }
-									; ?>value="MARGINAL PASS">MARGINAL PASS</option>
-									<option <?php if ($rcek1['stat_bs2'] == "DATA") { ?> selected=selected <?php }
-									; ?>value="DATA">DATA</option>
-									<option <?php if ($rcek1['stat_bs2'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">FAIL</option>
-									<option <?php if ($rcek1['stat_bs2'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="burs_note"
-									maxlength="50" rows="1"><?php echo $rcek1['burs_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="disbs2" style="display:none;">
-							<label for="disbs2" class="col-sm-2 control-label">INSTRON (DIS) </label>
-							<div class="col-sm-2">
-								<input name="dinstron" type="text" class="form-control" id="dinstron"
-									value="<?php echo $rcekD['dbs_instron']; ?>" placeholder="INSTRON">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dburs_note" maxlength="50" rows="1"><?php echo $rcekD['dburs_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="marbs2" style="display:none;">
-							<label for="marbs2" class="col-sm-2 control-label">INSTRON (MARGINAL) </label>
-							<div class="col-sm-2">
-								<input name="minstron" type="text" class="form-control" id="minstron"
-									value="<?php echo $rcekM['mbs_instron']; ?>" placeholder="INSTRON">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="mburs_note" maxlength="50" rows="1"><?php echo $rcekM['mburs_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranbs2" style="display:none;">
-							<label for="ranbs2" class="col-sm-2 control-label">INSTRON (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rinstron" type="text" class="form-control" id="rinstron"
-									value="<?php echo $rcekR['rbs_instron']; ?>" placeholder="INSTRON" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rburs_note" maxlength="50" rows="1"
-									readonly><?php echo $rcekR['rburs_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="fc26" style="display:none;">
-							<label for="burs_str" class="col-sm-2 control-label">MULLEN</label>
-							<div class="col-sm-2">
-								<input name="mullen" type="text" class="form-control" id="mullen"
-									value="<?php echo $rcek1['bs_mullen']; ?>" placeholder="MULLEN">
-							</div>
-							<div class="col-sm-2">
-								<select name="stat_bs3" class="form-control select2" id="stat_bs3" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_bs3'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_bs3'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_bs3'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">
-										A
-									</option>
-									<option <?php if ($rcek1['stat_bs3'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">
-										R
-									</option>
-									<option <?php if ($rcek1['stat_bs3'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">PASS</option>
-									<option <?php if ($rcek1['stat_bs3'] == "MARGINAL PASS") { ?> selected=selected <?php }
-									; ?>value="MARGINAL PASS">MARGINAL PASS</option>
-									<option <?php if ($rcek1['stat_bs3'] == "DATA") { ?> selected=selected <?php }
-									; ?>value="DATA">DATA</option>
-									<option <?php if ($rcek1['stat_bs3'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">FAIL</option>
-									<option <?php if ($rcek1['stat_bs3'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="disbs3" style="display:none;">
-							<label for="disbs3" class="col-sm-2 control-label">MULLEN (DIS) </label>
-							<div class="col-sm-2">
-								<input name="dmullen" type="text" class="form-control" id="dmullen"
-									value="<?php echo $rcekD['dbs_mullen']; ?>" placeholder="MULLEN">
-							</div>
-						</div>
-						<div class="form-group" id="marbs3" style="display:none;">
-							<label for="marbs3" class="col-sm-2 control-label">MULLEN (MARGINAL) </label>
-							<div class="col-sm-2">
-								<input name="mmullen" type="text" class="form-control" id="mmullen"
-									value="<?php echo $rcekM['mbs_mullen']; ?>" placeholder="MULLEN">
-							</div>
-						</div>
-						<div class="form-group" id="ranbs3" style="display:none;">
-							<label for="ranbs3" class="col-sm-2 control-label">MULLEN (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rmullen" type="text" class="form-control" id="rmullen"
-									value="<?php echo $rcekR['rbs_mullen']; ?>" placeholder="MULLEN" readonly>
-							</div>
-						</div>
-						<div class="form-group" id="fc25" style="display:none;">
-							<label for="burs_str" class="col-sm-2 control-label">TRU BURST</label>
-							<div class="col-sm-2">
-								<input name="tru_burst" type="text" class="form-control" id="tru_burst"
-									value="<?php echo $rcek1['bs_tru']; ?>" placeholder="TRU BURST">
-							</div>
-							<div class="col-sm-2">
-								<input name="tru_burst2" type="text" class="form-control" id="tru_burst2"
-									value="<?php echo $rcek1['bs_tru2']; ?>" placeholder="TRU BURST 2">
-							</div>
-							<div class="col-sm-2">
-								<select name="stat_bs" class="form-control select2" id="stat_bs" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_bs'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_bs'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_bs'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_bs'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_bs'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">
-										PASS</option>
-									<option <?php if ($rcek1['stat_bs'] == "MARGINAL PASS") { ?> selected=selected <?php }
-									; ?>value="MARGINAL PASS">MARGINAL PASS</option>
-									<option <?php if ($rcek1['stat_bs'] == "DATA") { ?> selected=selected <?php }
-									; ?>value="DATA">
-										DATA</option>
-									<option <?php if ($rcek1['stat_bs'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">
-										FAIL</option>
-									<option <?php if ($rcek1['stat_bs'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="disbs" style="display:none;">
-							<label for="disbs" class="col-sm-2 control-label">TRU BURST (DIS) </label>
-							<div class="col-sm-2">
-								<input name="dtru_burst" type="text" class="form-control" id="dtru_burst"
-									value="<?php echo $rcekD['dbs_tru']; ?>" placeholder="TRU BURST">
-							</div>
-							<div class="col-sm-2">
-								<input name="dtru_burst2" type="text" class="form-control" id="dtru_burst2"
-									value="<?php echo $rcekD['dbs_tru2']; ?>" placeholder="TRU BURST 2">
-							</div>
-						</div>
-						<div class="form-group" id="marbs" style="display:none;">
-							<label for="marbs" class="col-sm-2 control-label">TRU BURST (MARGINAL) </label>
-							<div class="col-sm-2">
-								<input name="mtru_burst" type="text" class="form-control" id="mtru_burst"
-									value="<?php echo $rcekM['mbs_tru']; ?>" placeholder="TRU BURST">
-							</div>
-							<div class="col-sm-2">
-								<input name="mtru_burst2" type="text" class="form-control" id="mtru_burst2"
-									value="<?php echo $rcekM['mbs_tru2']; ?>" placeholder="TRU BURST 2">
-							</div>
-						</div>
-						<div class="form-group" id="ranbs" style="display:none;">
-							<label for="ranbs" class="col-sm-2 control-label">TRU BURST (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rtru_burst" type="text" class="form-control" id="rtru_burst"
-									value="<?php echo $rcekR['rbs_tru']; ?>" placeholder="TRU BURST" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rtru_burst2" type="text" class="form-control" id="rtru_burst2"
-									value="<?php echo $rcekR['rbs_tru2']; ?>" placeholder="TRU BURST 2" readonly>
-							</div>
-						</div>
+							<div class="form-group" id="fc15" style="display:none;">
+							<!-- Instorn -->
+									<label for="burs_str" class="col-sm-2 control-label">INSTRON</label>
+									<div class="col-sm-2">
+										<input name="instron" type="text" class="form-control" id="instron"
+											value="<?php echo $rcek1['bs_instron']; ?>" placeholder="INSTRON">
+									</div>
+									<div class="col-sm-2">
+										<select name="stat_bs2" class="form-control select2" id="stat_bs2" onChange="tampil();"
+											style="width: 100%;">
+											<option <?php if ($rcek1['stat_bs2'] == "") { ?> selected=selected <?php }
+											; ?>value="">
+												Pilih
+											</option>
+											<option <?php if ($rcek1['stat_bs2'] == "DISPOSISI") { ?> selected=selected <?php }
+											; ?>value="DISPOSISI">DISPOSISI</option>
+											<option <?php if ($rcek1['stat_bs2'] == "A") { ?> selected=selected <?php }
+											; ?>value="A">
+												A
+											</option>
+											<option <?php if ($rcek1['stat_bs2'] == "R") { ?> selected=selected <?php }
+											; ?>value="R">
+												R
+											</option>
+											<option <?php if ($rcek1['stat_bs2'] == "PASS") { ?> selected=selected <?php }
+											; ?>value="PASS">PASS</option>
+											<option <?php if ($rcek1['stat_bs2'] == "MARGINAL PASS") { ?> selected=selected <?php }
+											; ?>value="MARGINAL PASS">MARGINAL PASS</option>
+											<option <?php if ($rcek1['stat_bs2'] == "DATA") { ?> selected=selected <?php }
+											; ?>value="DATA">DATA</option>
+											<option <?php if ($rcek1['stat_bs2'] == "FAIL") { ?> selected=selected <?php }
+											; ?>value="FAIL">FAIL</option>
+											<option <?php if ($rcek1['stat_bs2'] == "RANDOM") { ?> selected=selected <?php }
+											; ?>value="RANDOM">RANDOM</option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+										<input name="user_brust" type="text" class="form-control" id="user_brust" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_brust" type="hidden" class="form-control" id="nama_brust" value="<?php echo $rcek1['nama_brust']; ?>" placeholder="Nama BOW">
+									</div>
+									<div class="col-sm-2">
+										<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="burs_note"
+											maxlength="50" rows="1"><?php echo $rcek1['burs_note']; ?></textarea>
+									</div>
+								</div>
+									<div class="form-group" id="disbs2" style="display:none;">
+										<label for="disbs2" class="col-sm-2 control-label">INSTRON (DIS) </label>
+										<div class="col-sm-2">
+											<input name="dinstron" type="text" class="form-control" id="dinstron"
+												value="<?php echo $rcekD['dbs_instron']; ?>" placeholder="INSTRON">
+										</div>
+										<div class="col-sm-2">
+											<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+												name="dburs_note" maxlength="50" rows="1"><?php echo $rcekD['dburs_note']; ?></textarea>
+										</div>
+									</div>
+									<div class="form-group" id="marbs2" style="display:none;">
+										<label for="marbs2" class="col-sm-2 control-label">INSTRON (MARGINAL) </label>
+										<div class="col-sm-2">
+											<input name="minstron" type="text" class="form-control" id="minstron"
+												value="<?php echo $rcekM['mbs_instron']; ?>" placeholder="INSTRON">
+										</div>
+										<div class="col-sm-2">
+											<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+												name="mburs_note" maxlength="50" rows="1"><?php echo $rcekM['mburs_note']; ?></textarea>
+										</div>
+									</div>
+									<div class="form-group" id="ranbs2" style="display:none;">
+										<label for="ranbs2" class="col-sm-2 control-label">INSTRON (RAN)</label>
+										<div class="col-sm-2">
+											<input name="rinstron" type="text" class="form-control" id="rinstron"
+												value="<?php echo $rcekR['rbs_instron']; ?>" placeholder="INSTRON" readonly>
+										</div>
+										<div class="col-sm-2">
+											<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+												name="rburs_note" maxlength="50" rows="1"
+												readonly><?php echo $rcekR['rburs_note']; ?></textarea>
+										</div>
+									</div>
+							<!-- End -->
+							<!-- Mullen -->
+								<div class="form-group" id="fc26" style="display:none;">
+									<label for="burs_str" class="col-sm-2 control-label">MULLEN</label>
+									<div class="col-sm-2">
+										<input name="mullen" type="text" class="form-control" id="mullen"
+											value="<?php echo $rcek1['bs_mullen']; ?>" placeholder="MULLEN">
+									</div>
+									<div class="col-sm-2">
+										<select name="stat_bs3" class="form-control select2" id="stat_bs3" onChange="tampil();"
+											style="width: 100%;">
+											<option <?php if ($rcek1['stat_bs3'] == "") { ?> selected=selected <?php }
+											; ?>value="">
+												Pilih
+											</option>
+											<option <?php if ($rcek1['stat_bs3'] == "DISPOSISI") { ?> selected=selected <?php }
+											; ?>value="DISPOSISI">DISPOSISI</option>
+											<option <?php if ($rcek1['stat_bs3'] == "A") { ?> selected=selected <?php }
+											; ?>value="A">
+												A
+											</option>
+											<option <?php if ($rcek1['stat_bs3'] == "R") { ?> selected=selected <?php }
+											; ?>value="R">
+												R
+											</option>
+											<option <?php if ($rcek1['stat_bs3'] == "PASS") { ?> selected=selected <?php }
+											; ?>value="PASS">PASS</option>
+											<option <?php if ($rcek1['stat_bs3'] == "MARGINAL PASS") { ?> selected=selected <?php }
+											; ?>value="MARGINAL PASS">MARGINAL PASS</option>
+											<option <?php if ($rcek1['stat_bs3'] == "DATA") { ?> selected=selected <?php }
+											; ?>value="DATA">DATA</option>
+											<option <?php if ($rcek1['stat_bs3'] == "FAIL") { ?> selected=selected <?php }
+											; ?>value="FAIL">FAIL</option>
+											<option <?php if ($rcek1['stat_bs3'] == "RANDOM") { ?> selected=selected <?php }
+											; ?>value="RANDOM">RANDOM</option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+											<input name="user_mullen" type="text" class="form-control" id="user_mullen" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+											<input name="nama_mullen" type="hidden" class="form-control" id="nama_mullen" value="<?php echo $rcek1['nama_mullen']; ?>" placeholder="Nama BOW">
+										</div>
+								</div>
+								<div class="form-group" id="disbs3" style="display:none;">
+									<label for="disbs3" class="col-sm-2 control-label">MULLEN (DIS) </label>
+									<div class="col-sm-2">
+										<input name="dmullen" type="text" class="form-control" id="dmullen"
+											value="<?php echo $rcekD['dbs_mullen']; ?>" placeholder="MULLEN">
+									</div>
+								</div>
+								<div class="form-group" id="marbs3" style="display:none;">
+									<label for="marbs3" class="col-sm-2 control-label">MULLEN (MARGINAL) </label>
+									<div class="col-sm-2">
+										<input name="mmullen" type="text" class="form-control" id="mmullen"
+											value="<?php echo $rcekM['mbs_mullen']; ?>" placeholder="MULLEN">
+									</div>
+								</div>
+								<div class="form-group" id="ranbs3" style="display:none;">
+									<label for="ranbs3" class="col-sm-2 control-label">MULLEN (RAN)</label>
+									<div class="col-sm-2">
+										<input name="rmullen" type="text" class="form-control" id="rmullen"
+											value="<?php echo $rcekR['rbs_mullen']; ?>" placeholder="MULLEN" readonly>
+									</div>
+								</div>
+							<!-- End -->
+							<!-- Tru Burst -->
+								<div class="form-group" id="fc25" style="display:none;">
+									<label for="burs_str" class="col-sm-2 control-label">TRU BURST</label>
+									<div class="col-sm-2">
+										<input name="tru_burst" type="text" class="form-control" id="tru_burst"
+											value="<?php echo $rcek1['bs_tru']; ?>" placeholder="TRU BURST">
+									</div>
+									<div class="col-sm-2">
+										<input name="tru_burst2" type="text" class="form-control" id="tru_burst2"
+											value="<?php echo $rcek1['bs_tru2']; ?>" placeholder="TRU BURST 2">
+									</div>
+									<div class="col-sm-2">
+										<select name="stat_bs" class="form-control select2" id="stat_bs" onChange="tampil();"
+											style="width: 100%;">
+											<option <?php if ($rcek1['stat_bs'] == "") { ?> selected=selected <?php }
+											; ?>value="">
+												Pilih
+											</option>
+											<option <?php if ($rcek1['stat_bs'] == "DISPOSISI") { ?> selected=selected <?php }
+											; ?>value="DISPOSISI">DISPOSISI</option>
+											<option <?php if ($rcek1['stat_bs'] == "A") { ?> selected=selected <?php }
+											; ?>value="A">A
+											</option>
+											<option <?php if ($rcek1['stat_bs'] == "R") { ?> selected=selected <?php }
+											; ?>value="R">R
+											</option>
+											<option <?php if ($rcek1['stat_bs'] == "PASS") { ?> selected=selected <?php }
+											; ?>value="PASS">
+												PASS</option>
+											<option <?php if ($rcek1['stat_bs'] == "MARGINAL PASS") { ?> selected=selected <?php }
+											; ?>value="MARGINAL PASS">MARGINAL PASS</option>
+											<option <?php if ($rcek1['stat_bs'] == "DATA") { ?> selected=selected <?php }
+											; ?>value="DATA">
+												DATA</option>
+											<option <?php if ($rcek1['stat_bs'] == "FAIL") { ?> selected=selected <?php }
+											; ?>value="FAIL">
+												FAIL</option>
+											<option <?php if ($rcek1['stat_bs'] == "RANDOM") { ?> selected=selected <?php }
+											; ?>value="RANDOM">RANDOM</option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+										<input name="user_burst" type="text" class="form-control" id="user_burst" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+										<input name="nama_burst" type="hidden" class="form-control" id="nama_burst" value="<?php echo $rcek1['nama_burst']; ?>" placeholder="Nama BOW">
+									</div>
+								</div>
+								<div class="form-group" id="disbs" style="display:none;">
+									<label for="disbs" class="col-sm-2 control-label">TRU BURST (DIS) </label>
+									<div class="col-sm-2">
+										<input name="dtru_burst" type="text" class="form-control" id="dtru_burst"
+											value="<?php echo $rcekD['dbs_tru']; ?>" placeholder="TRU BURST">
+									</div>
+									<div class="col-sm-2">
+										<input name="dtru_burst2" type="text" class="form-control" id="dtru_burst2"
+											value="<?php echo $rcekD['dbs_tru2']; ?>" placeholder="TRU BURST 2">
+									</div>
+								</div>
+								<div class="form-group" id="marbs" style="display:none;">
+									<label for="marbs" class="col-sm-2 control-label">TRU BURST (MARGINAL) </label>
+									<div class="col-sm-2">
+										<input name="mtru_burst" type="text" class="form-control" id="mtru_burst"
+											value="<?php echo $rcekM['mbs_tru']; ?>" placeholder="TRU BURST">
+									</div>
+									<div class="col-sm-2">
+										<input name="mtru_burst2" type="text" class="form-control" id="mtru_burst2"
+											value="<?php echo $rcekM['mbs_tru2']; ?>" placeholder="TRU BURST 2">
+									</div>
+								</div>
+								<div class="form-group" id="ranbs" style="display:none;">
+									<label for="ranbs" class="col-sm-2 control-label">TRU BURST (RAN)</label>
+									<div class="col-sm-2">
+										<input name="rtru_burst" type="text" class="form-control" id="rtru_burst"
+											value="<?php echo $rcekR['rbs_tru']; ?>" placeholder="TRU BURST" readonly>
+									</div>
+									<div class="col-sm-2">
+										<input name="rtru_burst2" type="text" class="form-control" id="rtru_burst2"
+											value="<?php echo $rcekR['rbs_tru2']; ?>" placeholder="TRU BURST 2" readonly>
+									</div>
+								</div>
+							<!-- End -->
 						<!-- BURSTING STRENGTH END-->
 						<!-- THICKNESS BEGIN-->
-						<div class="form-group" id="fc16" style="display:none;">
-							<label for="thickn" class="col-sm-2 control-label">THICKNESS</label>
-							<div class="col-sm-2">
-								<input name="thick1" type="text" class="form-control" id="thick1"
-									value="<?php echo $rcek1['thick1']; ?>" placeholder="1">
+							<div class="form-group" id="fc16" style="display:none;">
+								<label for="thickn" class="col-sm-2 control-label">THICKNESS</label>
+								<div class="col-sm-2">
+									<input name="thick1" type="text" class="form-control" id="thick1"
+										value="<?php echo $rcek1['thick1']; ?>" placeholder="1">
+								</div>
+								<div class="col-sm-2">
+									<input name="thick2" type="text" class="form-control" id="thick2"
+										value="<?php echo $rcek1['thick2']; ?>" placeholder="2">
+								</div>
+								<div class="col-sm-2">
+									<input name="thick3" type="text" class="form-control" id="thick3"
+										value="<?php echo $rcek1['thick3']; ?>" placeholder="3">
+								</div>
+								<div class="col-sm-2">
+									<input name="thickav" type="text" class="form-control" id="thickav"
+										value="<?php echo $rcek1['thickav']; ?>" placeholder="AV">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="thick_note" maxlength="50" rows="1"><?php echo $rcek1['thick_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="thick2" type="text" class="form-control" id="thick2"
-									value="<?php echo $rcek1['thick2']; ?>" placeholder="2">
+							<div class="form-group" id="stat_th" style="display:none;">
+								<label for="stat_th" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_th" class="form-control select2" id="stat_th" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_th'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_th'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_th'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_th'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_th'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">
+											PASS</option>
+										<option <?php if ($rcek1['stat_th'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">
+											FAIL</option>
+										<option <?php if ($rcek1['stat_th'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_thick" type="text" class="form-control" id="user_thick" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_thick" type="hidden" class="form-control" id="nama_thick" value="<?php echo $rcek1['nama_thick']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="thick3" type="text" class="form-control" id="thick3"
-									value="<?php echo $rcek1['thick3']; ?>" placeholder="3">
+							<div class="form-group" id="disth" style="display:none;">
+								<label for="disth" class="col-sm-2 control-label">THICKNESS (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dthick1" type="text" class="form-control" id="dthick1"
+										value="<?php echo $rcekD['dthick1']; ?>" placeholder="1">
+								</div>
+								<div class="col-sm-2">
+									<input name="dthick2" type="text" class="form-control" id="dthick2"
+										value="<?php echo $rcekD['dthick2']; ?>" placeholder="2">
+								</div>
+								<div class="col-sm-2">
+									<input name="dthick3" type="text" class="form-control" id="dthick3"
+										value="<?php echo $rcekD['dthick3']; ?>" placeholder="3">
+								</div>
+								<div class="col-sm-2">
+									<input name="dthickav" type="text" class="form-control" id="dthickav"
+										value="<?php echo $rcekD['dthickav']; ?>" placeholder="AV">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dthick_note" maxlength="50"
+										rows="1"><?php echo $rcekD['dthick_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="thickav" type="text" class="form-control" id="thickav"
-									value="<?php echo $rcek1['thickav']; ?>" placeholder="AV">
+							<div class="form-group" id="ranth" style="display:none;">
+								<label for="ranth" class="col-sm-2 control-label">THICKNESS (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rthick1" type="text" class="form-control" id="rthick1"
+										value="<?php echo $rcekR['rthick1']; ?>" placeholder="1" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rthick2" type="text" class="form-control" id="rthick2"
+										value="<?php echo $rcekR['rthick2']; ?>" placeholder="2" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rthick3" type="text" class="form-control" id="rthick3"
+										value="<?php echo $rcekR['rthick3']; ?>" placeholder="3" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rthickav" type="text" class="form-control" id="rthickav"
+										value="<?php echo $rcekR['rthickav']; ?>" placeholder="AV" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rthick_note" maxlength="50" rows="1"
+										readonly><?php echo $rcekR['rthick_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="thick_note" maxlength="50" rows="1"><?php echo $rcek1['thick_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_th" style="display:none;">
-							<label for="stat_th" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_th" class="form-control select2" id="stat_th" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_th'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_th'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_th'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_th'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_th'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">
-										PASS</option>
-									<option <?php if ($rcek1['stat_th'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">
-										FAIL</option>
-									<option <?php if ($rcek1['stat_th'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="disth" style="display:none;">
-							<label for="disth" class="col-sm-2 control-label">THICKNESS (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dthick1" type="text" class="form-control" id="dthick1"
-									value="<?php echo $rcekD['dthick1']; ?>" placeholder="1">
-							</div>
-							<div class="col-sm-2">
-								<input name="dthick2" type="text" class="form-control" id="dthick2"
-									value="<?php echo $rcekD['dthick2']; ?>" placeholder="2">
-							</div>
-							<div class="col-sm-2">
-								<input name="dthick3" type="text" class="form-control" id="dthick3"
-									value="<?php echo $rcekD['dthick3']; ?>" placeholder="3">
-							</div>
-							<div class="col-sm-2">
-								<input name="dthickav" type="text" class="form-control" id="dthickav"
-									value="<?php echo $rcekD['dthickav']; ?>" placeholder="AV">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dthick_note" maxlength="50"
-									rows="1"><?php echo $rcekD['dthick_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranth" style="display:none;">
-							<label for="ranth" class="col-sm-2 control-label">THICKNESS (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rthick1" type="text" class="form-control" id="rthick1"
-									value="<?php echo $rcekR['rthick1']; ?>" placeholder="1" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rthick2" type="text" class="form-control" id="rthick2"
-									value="<?php echo $rcekR['rthick2']; ?>" placeholder="2" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rthick3" type="text" class="form-control" id="rthick3"
-									value="<?php echo $rcekR['rthick3']; ?>" placeholder="3" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rthickav" type="text" class="form-control" id="rthickav"
-									value="<?php echo $rcekR['rthickav']; ?>" placeholder="AV" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rthick_note" maxlength="50" rows="1"
-									readonly><?php echo $rcekR['rthick_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- THICKNESS END-->
 						<!-- STRECTH & RECOVERY BEGIN-->						 
-						<div class="form-group" id="fc17" style="display:none;">
-							<label for="stretch" class="col-sm-2 control-label">STRETCH</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="load_stretch" id="load_stretch" class="minimal"
-										value="60" <?php if ($rcek1['load_stretch'] == '60') {
-											echo "checked";
-										} ?>> 60N
-									&nbsp;
-									&nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="load_stretch" id="load_stretch" class="minimal"
-										value="22" <?php if ($rcek1['load_stretch'] == '22') {
-											echo "checked";
-										} ?>> 22N
-								</label>
+							<div class="form-group" id="fc17" style="display:none;">
+								<label for="stretch" class="col-sm-2 control-label">STRETCH</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="load_stretch" id="load_stretch" class="minimal"
+											value="60" <?php if ($rcek1['load_stretch'] == '60') {
+												echo "checked";
+											} ?>> 60N
+										&nbsp;
+										&nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="load_stretch" id="load_stretch" class="minimal"
+											value="22" <?php if ($rcek1['load_stretch'] == '22') {
+												echo "checked";
+											} ?>> 22N
+									</label>
+								</div>
+								<div class="col-sm-1">
+									<input name="stretch_l1" type="text" class="form-control" id="stretch_l1"
+										value="<?php echo $rcek1['stretch_l1']; ?>" placeholder="LEN 1">
+									<input name="stretch_w1" type="text" class="form-control" id="stretch_w1"
+										value="<?php echo $rcek1['stretch_w1']; ?>" placeholder="WID 1">
+								</div>
+								<div class="col-sm-1">
+									<input name="stretch_l2" type="text" class="form-control" id="stretch_l2"
+										value="<?php echo $rcek1['stretch_l2']; ?>" placeholder="LEN 2">
+									<input name="stretch_w2" type="text" class="form-control" id="stretch_w2"
+										value="<?php echo $rcek1['stretch_w2']; ?>" placeholder="WID 2">
+								</div>
+								<div class="col-sm-1">
+									<input name="stretch_l3" type="text" class="form-control" id="stretch_l3"
+										value="<?php echo $rcek1['stretch_l3']; ?>" placeholder="LEN 3">
+									<input name="stretch_w3" type="text" class="form-control" id="stretch_w3"
+										value="<?php echo $rcek1['stretch_w3']; ?>" placeholder="WID 3">
+								</div>
+								<div class="col-sm-1">
+									<input name="stretch_l4" type="text" class="form-control" id="stretch_l4"
+										value="<?php echo $rcek1['stretch_l4']; ?>" placeholder="LEN 4">
+									<input name="stretch_w4" type="text" class="form-control" id="stretch_w4"
+										value="<?php echo $rcek1['stretch_w4']; ?>" placeholder="WID 4">
+								</div>
+								<div class="col-sm-1">
+									<input name="stretch_l5" type="text" class="form-control" id="stretch_l5"
+										value="<?php echo $rcek1['stretch_l5']; ?>" placeholder="LEN 5">
+									<input name="stretch_w5" type="text" class="form-control" id="stretch_w5"
+										value="<?php echo $rcek1['stretch_w5']; ?>" placeholder="WID 5">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="stretch_note" maxlength="50"><?php echo $rcek1['stretch_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="stretch_l1" type="text" class="form-control" id="stretch_l1"
-									value="<?php echo $rcek1['stretch_l1']; ?>" placeholder="LEN 1">
-								<input name="stretch_w1" type="text" class="form-control" id="stretch_w1"
-									value="<?php echo $rcek1['stretch_w1']; ?>" placeholder="WID 1">
+							<div class="form-group" id="fc18" style="display:none;">
+								<label for="recover" class="col-sm-2 control-label">RECOVERY</label>
+								<div class="col-sm-1">
+									<input name="recover_l1" type="text" class="form-control" id="recover_l1"
+										value="<?php echo $rcek1['recover_l1']; ?>" placeholder="LEN1 1">
+									<input name="recover_l2" type="text" class="form-control" id="recover_l2"
+										value="<?php echo $rcek1['recover_l2']; ?>" placeholder="LEN30 1">
+									<input name="recover_w1" type="text" class="form-control" id="recover_w1"
+										value="<?php echo $rcek1['recover_w1']; ?>" placeholder="WID1 1">
+									<input name="recover_w2" type="text" class="form-control" id="recover_w2"
+										value="<?php echo $rcek1['recover_w2']; ?>" placeholder="WID30 1">
+								</div>
+								<div class="col-sm-1">
+									<input name="recover_l11" type="text" class="form-control" id="recover_l11"
+										value="<?php echo $rcek1['recover_l11']; ?>" placeholder="LEN1 2">
+									<input name="recover_l21" type="text" class="form-control" id="recover_l21"
+										value="<?php echo $rcek1['recover_l21']; ?>" placeholder="LEN30 2">
+									<input name="recover_w11" type="text" class="form-control" id="recover_w11"
+										value="<?php echo $rcek1['recover_w11']; ?>" placeholder="WID1 2">
+									<input name="recover_w21" type="text" class="form-control" id="recover_w21"
+										value="<?php echo $rcek1['recover_w21']; ?>" placeholder="WID30 2">
+								</div>
+								<div class="col-sm-1">
+									<input name="recover_l3" type="text" class="form-control" id="recover_l3"
+										value="<?php echo $rcek1['recover_l3']; ?>" placeholder="LEN1 3">
+									<input name="recover_l31" type="text" class="form-control" id="recover_l31"
+										value="<?php echo $rcek1['recover_l31']; ?>" placeholder="LEN30 3">
+									<input name="recover_w3" type="text" class="form-control" id="recover_w3"
+										value="<?php echo $rcek1['recover_w3']; ?>" placeholder="WID1 3">
+									<input name="recover_w31" type="text" class="form-control" id="recover_w31"
+										value="<?php echo $rcek1['recover_w31']; ?>" placeholder="WID30 3">
+								</div>
+								<div class="col-sm-1">
+									<input name="recover_l4" type="text" class="form-control" id="recover_l4"
+										value="<?php echo $rcek1['recover_l4']; ?>" placeholder="LEN1 4">
+									<input name="recover_l41" type="text" class="form-control" id="recover_l41"
+										value="<?php echo $rcek1['recover_l41']; ?>" placeholder="LEN30 4">
+									<input name="recover_w4" type="text" class="form-control" id="recover_w4"
+										value="<?php echo $rcek1['recover_w4']; ?>" placeholder="WID1 4">
+									<input name="recover_w41" type="text" class="form-control" id="recover_w41"
+										value="<?php echo $rcek1['recover_w41']; ?>" placeholder="WID30 4">
+								</div>
+								<div class="col-sm-1">
+									<input name="recover_l5" type="text" class="form-control" id="recover_l5"
+										value="<?php echo $rcek1['recover_l5']; ?>" placeholder="LEN1 5">
+									<input name="recover_l51" type="text" class="form-control" id="recover_l51"
+										value="<?php echo $rcek1['recover_l51']; ?>" placeholder="LEN30 5">
+									<input name="recover_w5" type="text" class="form-control" id="recover_w5"
+										value="<?php echo $rcek1['recover_w5']; ?>" placeholder="WID1 5">
+									<input name="recover_w51" type="text" class="form-control" id="recover_w51"
+										value="<?php echo $rcek1['recover_w51']; ?>" placeholder="WID30 5">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="recover_note" maxlength="50"><?php echo $rcek1['recover_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="stretch_l2" type="text" class="form-control" id="stretch_l2"
-									value="<?php echo $rcek1['stretch_l2']; ?>" placeholder="LEN 2">
-								<input name="stretch_w2" type="text" class="form-control" id="stretch_w2"
-									value="<?php echo $rcek1['stretch_w2']; ?>" placeholder="WID 2">
+							<div class="form-group" id="stat_sr" style="display:none;">
+								<label for="stat_sr" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_sr" class="form-control select2" id="stat_sr" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_sr'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_sr'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_sr'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_sr'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_sr'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">
+											PASS</option>
+										<option <?php if ($rcek1['stat_sr'] == "MARGINAL PASS") { ?> selected=selected <?php }
+										; ?>value="MARGINAL PASS">MARGINAL PASS</option>
+										<option <?php if ($rcek1['stat_sr'] == "DATA") { ?> selected=selected <?php }
+										; ?>value="DATA">
+											DATA</option>
+										<option <?php if ($rcek1['stat_sr'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">
+											FAIL</option>
+										<option <?php if ($rcek1['stat_sr'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_stretch" type="text" class="form-control" id="user_stretch" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_stretch" type="hidden" class="form-control" id="nama_stretch" value="<?php echo $rcek1['nama_stretch']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="stretch_l3" type="text" class="form-control" id="stretch_l3"
-									value="<?php echo $rcek1['stretch_l3']; ?>" placeholder="LEN 3">
-								<input name="stretch_w3" type="text" class="form-control" id="stretch_w3"
-									value="<?php echo $rcek1['stretch_w3']; ?>" placeholder="WID 3">
+							<div class="form-group" id="disst" style="display:none;">
+								<label for="disst" class="col-sm-2 control-label">STRETCH (DIS)</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="dload_stretch" id="dload_stretch" class="minimal"
+											value="60" <?php if ($rcekD['dload_stretch'] == '60') {
+												echo "checked";
+											} ?>> 60N
+										&nbsp;
+										&nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="dload_stretch" id="dload_stretch" class="minimal"
+											value="22" <?php if ($rcekD['dload_stretch'] == '22') {
+												echo "checked";
+											} ?>> 22N
+									</label>
+								</div>
+								<div class="col-sm-1">
+									<input name="dstretch_l1" type="text" class="form-control" id="dstretch_l1"
+										value="<?php echo $rcekD['dstretch_l1']; ?>" placeholder="LEN 1">
+									<input name="dstretch_w1" type="text" class="form-control" id="dstretch_w1"
+										value="<?php echo $rcekD['dstretch_w1']; ?>" placeholder="WID 1">
+								</div>
+								<div class="col-sm-1">
+									<input name="dstretch_l2" type="text" class="form-control" id="dstretch_l2"
+										value="<?php echo $rcekD['dstretch_l2']; ?>" placeholder="LEN 2">
+									<input name="dstretch_w2" type="text" class="form-control" id="dstretch_w2"
+										value="<?php echo $rcekD['dstretch_w2']; ?>" placeholder="WID 2">
+								</div>
+								<div class="col-sm-1">
+									<input name="dstretch_l3" type="text" class="form-control" id="dstretch_l3"
+										value="<?php echo $rcekD['dstretch_l3']; ?>" placeholder="LEN 3">
+									<input name="dstretch_w3" type="text" class="form-control" id="dstretch_w3"
+										value="<?php echo $rcekD['dstretch_w3']; ?>" placeholder="WID 3">
+								</div>
+								<div class="col-sm-1">
+									<input name="dstretch_l4" type="text" class="form-control" id="dstretch_l4"
+										value="<?php echo $rcekD['dstretch_l4']; ?>" placeholder="LEN 4">
+									<input name="dstretch_w4" type="text" class="form-control" id="dstretch_w4"
+										value="<?php echo $rcekD['dstretch_w4']; ?>" placeholder="WID 4">
+								</div>
+								<div class="col-sm-1">
+									<input name="dstretch_l5" type="text" class="form-control" id="dstretch_l5"
+										value="<?php echo $rcekD['dstretch_l5']; ?>" placeholder="LEN 5">
+									<input name="dstretch_w5" type="text" class="form-control" id="dstretch_w5"
+										value="<?php echo $rcekD['dstretch_w5']; ?>" placeholder="WID 5">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dstretch_note" maxlength="50"><?php echo $rcekD['dstretch_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="stretch_l4" type="text" class="form-control" id="stretch_l4"
-									value="<?php echo $rcek1['stretch_l4']; ?>" placeholder="LEN 4">
-								<input name="stretch_w4" type="text" class="form-control" id="stretch_w4"
-									value="<?php echo $rcek1['stretch_w4']; ?>" placeholder="WID 4">
+							<div class="form-group" id="marst" style="display:none;">
+								<label for="marst" class="col-sm-2 control-label">STRETCH (MARGINAL)</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="mload_stretch" id="mload_stretch" class="minimal"
+											value="60" <?php if ($rcekM['mload_stretch'] == '60') {
+												echo "checked";
+											} ?>> 60N
+										&nbsp;
+										&nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="mload_stretch" id="mload_stretch" class="minimal"
+											value="22" <?php if ($rcekM['mload_stretch'] == '22') {
+												echo "checked";
+											} ?>> 22N
+									</label>
+								</div>
+								<div class="col-sm-1">
+									<input name="mstretch_l1" type="text" class="form-control" id="mstretch_l1"
+										value="<?php echo $rcekM['mstretch_l1']; ?>" placeholder="LEN 1">
+									<input name="mstretch_w1" type="text" class="form-control" id="mstretch_w1"
+										value="<?php echo $rcekM['mstretch_w1']; ?>" placeholder="WID 1">
+								</div>
+								<div class="col-sm-1">
+									<input name="mstretch_l2" type="text" class="form-control" id="mstretch_l2"
+										value="<?php echo $rcekM['mstretch_l2']; ?>" placeholder="LEN 2">
+									<input name="mstretch_w2" type="text" class="form-control" id="mstretch_w2"
+										value="<?php echo $rcekM['mstretch_w2']; ?>" placeholder="WID 2">
+								</div>
+								<div class="col-sm-1">
+									<input name="mstretch_l3" type="text" class="form-control" id="mstretch_l3"
+										value="<?php echo $rcekM['mstretch_l3']; ?>" placeholder="LEN 3">
+									<input name="mstretch_w3" type="text" class="form-control" id="mstretch_w3"
+										value="<?php echo $rcekM['mstretch_w3']; ?>" placeholder="WID 3">
+								</div>
+								<div class="col-sm-1">
+									<input name="mstretch_l4" type="text" class="form-control" id="mstretch_l4"
+										value="<?php echo $rcekM['mstretch_l4']; ?>" placeholder="LEN 4">
+									<input name="mstretch_w4" type="text" class="form-control" id="mstretch_w4"
+										value="<?php echo $rcekM['mstretch_w4']; ?>" placeholder="WID 4">
+								</div>
+								<div class="col-sm-1">
+									<input name="mstretch_l5" type="text" class="form-control" id="mstretch_l5"
+										value="<?php echo $rcekM['mstretch_l5']; ?>" placeholder="LEN 5">
+									<input name="mstretch_w5" type="text" class="form-control" id="mstretch_w5"
+										value="<?php echo $rcekM['mstretch_w5']; ?>" placeholder="WID 5">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="mstretch_note" maxlength="50"><?php echo $rcekM['mstretch_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="stretch_l5" type="text" class="form-control" id="stretch_l5"
-									value="<?php echo $rcek1['stretch_l5']; ?>" placeholder="LEN 5">
-								<input name="stretch_w5" type="text" class="form-control" id="stretch_w5"
-									value="<?php echo $rcek1['stretch_w5']; ?>" placeholder="WID 5">
+							<div class="form-group" id="ranst" style="display:none;">
+								<label for="ranst" class="col-sm-2 control-label">STRETCH (RAN)</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="rload_stretch" id="rload_stretch" class="minimal"
+											value="60" <?php if ($rcekR['rload_stretch'] == '60') {
+												echo "checked";
+											} ?>> 60N
+										&nbsp;
+										&nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="rload_stretch" id="rload_stretch" class="minimal"
+											value="22" <?php if ($rcekR['rload_stretch'] == '22') {
+												echo "checked";
+											} ?>> 22N
+									</label>
+								</div>
+								<div class="col-sm-1">
+									<input name="rstretch_l1" type="text" class="form-control" id="rstretch_l1"
+										value="<?php echo $rcekR['rstretch_l1']; ?>" placeholder="LEN 1" readonly>
+									<input name="rstretch_w1" type="text" class="form-control" id="rstretch_w1"
+										value="<?php echo $rcekR['rstretch_w1']; ?>" placeholder="WID 1" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rstretch_l2" type="text" class="form-control" id="rstretch_l2"
+										value="<?php echo $rcekR['rstretch_l2']; ?>" placeholder="LEN 2" readonly>
+									<input name="rstretch_w2" type="text" class="form-control" id="rstretch_w2"
+										value="<?php echo $rcekR['rstretch_w2']; ?>" placeholder="WID 2" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rstretch_l3" type="text" class="form-control" id="rstretch_l3"
+										value="<?php echo $rcekR['rstretch_l3']; ?>" placeholder="LEN 3" readonly>
+									<input name="rstretch_w3" type="text" class="form-control" id="rstretch_w3"
+										value="<?php echo $rcekR['rstretch_w3']; ?>" placeholder="WID 3" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rstretch_l4" type="text" class="form-control" id="rstretch_l4"
+										value="<?php echo $rcekR['rstretch_l4']; ?>" placeholder="LEN 4" readonly>
+									<input name="rstretch_w4" type="text" class="form-control" id="rstretch_w4"
+										value="<?php echo $rcekR['rstretch_w4']; ?>" placeholder="WID 4" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rstretch_l5" type="text" class="form-control" id="rstretch_l5"
+										value="<?php echo $rcekR['rstretch_l5']; ?>" placeholder="LEN 5" readonly>
+									<input name="rstretch_w5" type="text" class="form-control" id="rstretch_w5"
+										value="<?php echo $rcekR['rstretch_w5']; ?>" placeholder="WID 5" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rstretch_note" maxlength="50"
+										readonly><?php echo $rcekR['rstretch_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="stretch_note" maxlength="50"><?php echo $rcek1['stretch_note']; ?></textarea>
+							<div class="form-group" id="disrc" style="display:none;">
+								<label for="disrc" class="col-sm-2 control-label">RECOVERY (DIS)</label>
+								<div class="col-sm-1">
+									<input name="drecover_l1" type="text" class="form-control" id="drecover_l1"
+										value="<?php echo $rcekD['drecover_l1']; ?>" placeholder="LEN1 1">
+									<input name="drecover_l2" type="text" class="form-control" id="drecover_l2"
+										value="<?php echo $rcekD['drecover_l2']; ?>" placeholder="LEN30 1">
+									<input name="drecover_w1" type="text" class="form-control" id="drecover_w1"
+										value="<?php echo $rcekD['drecover_w1']; ?>" placeholder="WID1 1">
+									<input name="drecover_w2" type="text" class="form-control" id="drecover_w2"
+										value="<?php echo $rcekD['drecover_w2']; ?>" placeholder="WID30 1">
+								</div>
+								<div class="col-sm-1">
+									<input name="drecover_l11" type="text" class="form-control" id="drecover_l11"
+										value="<?php echo $rcekD['drecover_l11']; ?>" placeholder="LEN1 2">
+									<input name="drecover_l21" type="text" class="form-control" id="drecover_l21"
+										value="<?php echo $rcekD['drecover_l21']; ?>" placeholder="LEN30 2">
+									<input name="drecover_w11" type="text" class="form-control" id="drecover_w11"
+										value="<?php echo $rcekD['drecover_w11']; ?>" placeholder="WID1 2">
+									<input name="drecover_w21" type="text" class="form-control" id="drecover_w21"
+										value="<?php echo $rcekD['drecover_w21']; ?>" placeholder="WID30 2">
+								</div>
+								<div class="col-sm-1">
+									<input name="drecover_l3" type="text" class="form-control" id="drecover_l3"
+										value="<?php echo $rcekD['drecover_l3']; ?>" placeholder="LEN1 3">
+									<input name="drecover_l31" type="text" class="form-control" id="drecover_l31"
+										value="<?php echo $rcekD['drecover_l31']; ?>" placeholder="LEN30 3">
+									<input name="drecover_w3" type="text" class="form-control" id="drecover_w3"
+										value="<?php echo $rcekD['drecover_w3']; ?>" placeholder="WID1 3">
+									<input name="drecover_w31" type="text" class="form-control" id="drecover_w31"
+										value="<?php echo $rcekD['drecover_w31']; ?>" placeholder="WID30 3">
+								</div>
+								<div class="col-sm-1">
+									<input name="drecover_l4" type="text" class="form-control" id="drecover_l4"
+										value="<?php echo $rcekD['drecover_l4']; ?>" placeholder="LEN1 4">
+									<input name="drecover_l41" type="text" class="form-control" id="drecover_l41"
+										value="<?php echo $rcekD['drecover_l41']; ?>" placeholder="LEN30 4">
+									<input name="drecover_w4" type="text" class="form-control" id="drecover_w4"
+										value="<?php echo $rcekD['drecover_w4']; ?>" placeholder="WID1 4">
+									<input name="drecover_w41" type="text" class="form-control" id="drecover_w41"
+										value="<?php echo $rcekD['drecover_w41']; ?>" placeholder="WID30 4">
+								</div>
+								<div class="col-sm-1">
+									<input name="drecover_l5" type="text" class="form-control" id="drecover_l5"
+										value="<?php echo $rcekD['drecover_l5']; ?>" placeholder="LEN1 5">
+									<input name="drecover_l51" type="text" class="form-control" id="drecover_l51"
+										value="<?php echo $rcekD['drecover_l51']; ?>" placeholder="LEN30 5">
+									<input name="drecover_w5" type="text" class="form-control" id="drecover_w5"
+										value="<?php echo $rcekD['drecover_w5']; ?>" placeholder="WID1 5">
+									<input name="drecover_w51" type="text" class="form-control" id="drecover_w51"
+										value="<?php echo $rcekD['drecover_w51']; ?>" placeholder="WID30 5">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="drecover_note" maxlength="50"><?php echo $rcekD['drecover_note']; ?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="fc18" style="display:none;">
-							<label for="recover" class="col-sm-2 control-label">RECOVERY</label>
-							<div class="col-sm-1">
-								<input name="recover_l1" type="text" class="form-control" id="recover_l1"
-									value="<?php echo $rcek1['recover_l1']; ?>" placeholder="LEN1 1">
-								<input name="recover_l2" type="text" class="form-control" id="recover_l2"
-									value="<?php echo $rcek1['recover_l2']; ?>" placeholder="LEN30 1">
-								<input name="recover_w1" type="text" class="form-control" id="recover_w1"
-									value="<?php echo $rcek1['recover_w1']; ?>" placeholder="WID1 1">
-								<input name="recover_w2" type="text" class="form-control" id="recover_w2"
-									value="<?php echo $rcek1['recover_w2']; ?>" placeholder="WID30 1">
+							<div class="form-group" id="marrc" style="display:none;">
+								<label for="marrc" class="col-sm-2 control-label">RECOVERY (MARGINAL)</label>
+								<div class="col-sm-1">
+									<input name="mrecover_l1" type="text" class="form-control" id="mrecover_l1"
+										value="<?php echo $rcekM['mrecover_l1']; ?>" placeholder="LEN1 1">
+									<input name="mrecover_l2" type="text" class="form-control" id="mrecover_l2"
+										value="<?php echo $rcekM['mrecover_l2']; ?>" placeholder="LEN30 1">
+									<input name="mrecover_w1" type="text" class="form-control" id="mrecover_w1"
+										value="<?php echo $rcekM['mrecover_w1']; ?>" placeholder="WID1 1">
+									<input name="mrecover_w2" type="text" class="form-control" id="mrecover_w2"
+										value="<?php echo $rcekM['mrecover_w2']; ?>" placeholder="WID30 1">
+								</div>
+								<div class="col-sm-1">
+									<input name="mrecover_l11" type="text" class="form-control" id="mrecover_l11"
+										value="<?php echo $rcekM['mrecover_l11']; ?>" placeholder="LEN1 2">
+									<input name="mrecover_l21" type="text" class="form-control" id="mrecover_l21"
+										value="<?php echo $rcekM['mrecover_l21']; ?>" placeholder="LEN30 2">
+									<input name="mrecover_w11" type="text" class="form-control" id="mrecover_w11"
+										value="<?php echo $rcekM['mrecover_w11']; ?>" placeholder="WID1 2">
+									<input name="mrecover_w21" type="text" class="form-control" id="mrecover_w21"
+										value="<?php echo $rcekM['mrecover_w21']; ?>" placeholder="WID30 2">
+								</div>
+								<div class="col-sm-1">
+									<input name="mrecover_l3" type="text" class="form-control" id="mrecover_l3"
+										value="<?php echo $rcekM['mrecover_l3']; ?>" placeholder="LEN1 3">
+									<input name="mrecover_l31" type="text" class="form-control" id="mrecover_l31"
+										value="<?php echo $rcekM['mrecover_l31']; ?>" placeholder="LEN30 3">
+									<input name="mrecover_w3" type="text" class="form-control" id="mrecover_w3"
+										value="<?php echo $rcekM['mrecover_w3']; ?>" placeholder="WID1 3">
+									<input name="mrecover_w31" type="text" class="form-control" id="mrecover_w31"
+										value="<?php echo $rcekM['mrecover_w31']; ?>" placeholder="WID30 3">
+								</div>
+								<div class="col-sm-1">
+									<input name="mrecover_l4" type="text" class="form-control" id="mrecover_l4"
+										value="<?php echo $rcekM['mrecover_l4']; ?>" placeholder="LEN1 4">
+									<input name="mrecover_l41" type="text" class="form-control" id="mrecover_l41"
+										value="<?php echo $rcekM['mrecover_l41']; ?>" placeholder="LEN30 4">
+									<input name="mrecover_w4" type="text" class="form-control" id="mrecover_w4"
+										value="<?php echo $rcekM['mrecover_w4']; ?>" placeholder="WID1 4">
+									<input name="mrecover_w41" type="text" class="form-control" id="mrecover_w41"
+										value="<?php echo $rcekM['mrecover_w41']; ?>" placeholder="WID30 4">
+								</div>
+								<div class="col-sm-1">
+									<input name="mrecover_l5" type="text" class="form-control" id="mrecover_l5"
+										value="<?php echo $rcekM['mrecover_l5']; ?>" placeholder="LEN1 5">
+									<input name="mrecover_l51" type="text" class="form-control" id="mrecover_l51"
+										value="<?php echo $rcekM['mrecover_l51']; ?>" placeholder="LEN30 5">
+									<input name="mrecover_w5" type="text" class="form-control" id="mrecover_w5"
+										value="<?php echo $rcekM['mrecover_w5']; ?>" placeholder="WID1 5">
+									<input name="mrecover_w51" type="text" class="form-control" id="mrecover_w51"
+										value="<?php echo $rcekM['mrecover_w51']; ?>" placeholder="WID30 5">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="mrecover_note" maxlength="50"><?php echo $rcekM['mrecover_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="recover_l11" type="text" class="form-control" id="recover_l11"
-									value="<?php echo $rcek1['recover_l11']; ?>" placeholder="LEN1 2">
-								<input name="recover_l21" type="text" class="form-control" id="recover_l21"
-									value="<?php echo $rcek1['recover_l21']; ?>" placeholder="LEN30 2">
-								<input name="recover_w11" type="text" class="form-control" id="recover_w11"
-									value="<?php echo $rcek1['recover_w11']; ?>" placeholder="WID1 2">
-								<input name="recover_w21" type="text" class="form-control" id="recover_w21"
-									value="<?php echo $rcek1['recover_w21']; ?>" placeholder="WID30 2">
+							<div class="form-group" id="ranrc" style="display:none;">
+								<label for="ranrc" class="col-sm-2 control-label">RECOVERY (RAN)</label>
+								<div class="col-sm-1">
+									<input name="rrecover_l1" type="text" class="form-control" id="rrecover_l1"
+										value="<?php echo $rcekR['rrecover_l1']; ?>" placeholder="LEN1 1" readonly>
+									<input name="rrecover_l1" type="text" class="form-control" id="rrecover_l1"
+										value="<?php echo $rcekR['rrecover_l1']; ?>" placeholder="LEN30 1" readonly>
+									<input name="rrecover_w1" type="text" class="form-control" id="rrecover_w1"
+										value="<?php echo $rcekR['rrecover_w1']; ?>" placeholder="WID1 1" readonly>
+									<input name="rrecover_w11" type="text" class="form-control" id="rrecover_w11"
+										value="<?php echo $rcekR['rrecover_w11']; ?>" placeholder="WID30 1" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rrecover_l2" type="text" class="form-control" id="rrecover_l2"
+										value="<?php echo $rcekR['rrecover_l2']; ?>" placeholder="LEN1 2" readonly>
+									<input name="rrecover_l21" type="text" class="form-control" id="rrecover_l21"
+										value="<?php echo $rcekR['rrecover_l21']; ?>" placeholder="LEN30 2" readonly>
+									<input name="rrecover_w2" type="text" class="form-control" id="rrecover_w2"
+										value="<?php echo $rcekR['rrecover_w2']; ?>" placeholder="WID1 2" readonly>
+									<input name="rrecover_w21" type="text" class="form-control" id="rrecover_w21"
+										value="<?php echo $rcekR['rrecover_w21']; ?>" placeholder="WID30 2" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rrecover_l3" type="text" class="form-control" id="rrecover_l3"
+										value="<?php echo $rcekR['rrecover_l3']; ?>" placeholder="LEN1 3" readonly>
+									<input name="rrecover_l31" type="text" class="form-control" id="rrecover_l31"
+										value="<?php echo $rcekR['rrecover_l31']; ?>" placeholder="LEN30 3" readonly>
+									<input name="rrecover_w3" type="text" class="form-control" id="rrecover_w3"
+										value="<?php echo $rcekR['rrecover_w3']; ?>" placeholder="WID1 3" readonly>
+									<input name="rrecover_w31" type="text" class="form-control" id="rrecover_w31"
+										value="<?php echo $rcekR['rrecover_w31']; ?>" placeholder="WID30 3" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rrecover_l4" type="text" class="form-control" id="rrecover_l4"
+										value="<?php echo $rcekR['rrecover_l4']; ?>" placeholder="LEN1 4" readonly>
+									<input name="rrecover_l41" type="text" class="form-control" id="rrecover_l41"
+										value="<?php echo $rcekR['rrecover_l41']; ?>" placeholder="LEN30 4" readonly>
+									<input name="rrecover_w4" type="text" class="form-control" id="rrecover_w4"
+										value="<?php echo $rcekR['rrecover_w4']; ?>" placeholder="WID1 4" readonly>
+									<input name="rrecover_w41" type="text" class="form-control" id="rrecover_w41"
+										value="<?php echo $rcekR['rrecover_w41']; ?>" placeholder="WID30 4" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rrecover_l5" type="text" class="form-control" id="rrecover_l5"
+										value="<?php echo $rcekR['rrecover_l5']; ?>" placeholder="LEN1 5" readonly>
+									<input name="rrecover_l51" type="text" class="form-control" id="rrecover_l51"
+										value="<?php echo $rcekR['rrecover_l51']; ?>" placeholder="LEN30 5" readonly>
+									<input name="rrecover_w5" type="text" class="form-control" id="rrecover_w5"
+										value="<?php echo $rcekR['rrecover_w5']; ?>" placeholder="WID1 5" readonly>
+									<input name="rrecover_w51" type="text" class="form-control" id="rrecover_w51"
+										value="<?php echo $rcekR['rrecover_w51']; ?>" placeholder="WID30 5" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rrecover_note" maxlength="50"
+										readonly><?php echo $rcekR['rrecover_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="recover_l3" type="text" class="form-control" id="recover_l3"
-									value="<?php echo $rcek1['recover_l3']; ?>" placeholder="LEN1 3">
-								<input name="recover_l31" type="text" class="form-control" id="recover_l31"
-									value="<?php echo $rcek1['recover_l31']; ?>" placeholder="LEN30 3">
-								<input name="recover_w3" type="text" class="form-control" id="recover_w3"
-									value="<?php echo $rcek1['recover_w3']; ?>" placeholder="WID1 3">
-								<input name="recover_w31" type="text" class="form-control" id="recover_w31"
-									value="<?php echo $rcek1['recover_w31']; ?>" placeholder="WID30 3">
-							</div>
-							<div class="col-sm-1">
-								<input name="recover_l4" type="text" class="form-control" id="recover_l4"
-									value="<?php echo $rcek1['recover_l4']; ?>" placeholder="LEN1 4">
-								<input name="recover_l41" type="text" class="form-control" id="recover_l41"
-									value="<?php echo $rcek1['recover_l41']; ?>" placeholder="LEN30 4">
-								<input name="recover_w4" type="text" class="form-control" id="recover_w4"
-									value="<?php echo $rcek1['recover_w4']; ?>" placeholder="WID1 4">
-								<input name="recover_w41" type="text" class="form-control" id="recover_w41"
-									value="<?php echo $rcek1['recover_w41']; ?>" placeholder="WID30 4">
-							</div>
-							<div class="col-sm-1">
-								<input name="recover_l5" type="text" class="form-control" id="recover_l5"
-									value="<?php echo $rcek1['recover_l5']; ?>" placeholder="LEN1 5">
-								<input name="recover_l51" type="text" class="form-control" id="recover_l51"
-									value="<?php echo $rcek1['recover_l51']; ?>" placeholder="LEN30 5">
-								<input name="recover_w5" type="text" class="form-control" id="recover_w5"
-									value="<?php echo $rcek1['recover_w5']; ?>" placeholder="WID1 5">
-								<input name="recover_w51" type="text" class="form-control" id="recover_w51"
-									value="<?php echo $rcek1['recover_w51']; ?>" placeholder="WID30 5">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="recover_note" maxlength="50"><?php echo $rcek1['recover_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_sr" style="display:none;">
-							<label for="stat_sr" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_sr" class="form-control select2" id="stat_sr" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_sr'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_sr'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_sr'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_sr'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_sr'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">
-										PASS</option>
-									<option <?php if ($rcek1['stat_sr'] == "MARGINAL PASS") { ?> selected=selected <?php }
-									; ?>value="MARGINAL PASS">MARGINAL PASS</option>
-									<option <?php if ($rcek1['stat_sr'] == "DATA") { ?> selected=selected <?php }
-									; ?>value="DATA">
-										DATA</option>
-									<option <?php if ($rcek1['stat_sr'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">
-										FAIL</option>
-									<option <?php if ($rcek1['stat_sr'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="disst" style="display:none;">
-							<label for="disst" class="col-sm-2 control-label">STRETCH (DIS)</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="dload_stretch" id="dload_stretch" class="minimal"
-										value="60" <?php if ($rcekD['dload_stretch'] == '60') {
-											echo "checked";
-										} ?>> 60N
-									&nbsp;
-									&nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="dload_stretch" id="dload_stretch" class="minimal"
-										value="22" <?php if ($rcekD['dload_stretch'] == '22') {
-											echo "checked";
-										} ?>> 22N
-								</label>
-							</div>
-							<div class="col-sm-1">
-								<input name="dstretch_l1" type="text" class="form-control" id="dstretch_l1"
-									value="<?php echo $rcekD['dstretch_l1']; ?>" placeholder="LEN 1">
-								<input name="dstretch_w1" type="text" class="form-control" id="dstretch_w1"
-									value="<?php echo $rcekD['dstretch_w1']; ?>" placeholder="WID 1">
-							</div>
-							<div class="col-sm-1">
-								<input name="dstretch_l2" type="text" class="form-control" id="dstretch_l2"
-									value="<?php echo $rcekD['dstretch_l2']; ?>" placeholder="LEN 2">
-								<input name="dstretch_w2" type="text" class="form-control" id="dstretch_w2"
-									value="<?php echo $rcekD['dstretch_w2']; ?>" placeholder="WID 2">
-							</div>
-							<div class="col-sm-1">
-								<input name="dstretch_l3" type="text" class="form-control" id="dstretch_l3"
-									value="<?php echo $rcekD['dstretch_l3']; ?>" placeholder="LEN 3">
-								<input name="dstretch_w3" type="text" class="form-control" id="dstretch_w3"
-									value="<?php echo $rcekD['dstretch_w3']; ?>" placeholder="WID 3">
-							</div>
-							<div class="col-sm-1">
-								<input name="dstretch_l4" type="text" class="form-control" id="dstretch_l4"
-									value="<?php echo $rcekD['dstretch_l4']; ?>" placeholder="LEN 4">
-								<input name="dstretch_w4" type="text" class="form-control" id="dstretch_w4"
-									value="<?php echo $rcekD['dstretch_w4']; ?>" placeholder="WID 4">
-							</div>
-							<div class="col-sm-1">
-								<input name="dstretch_l5" type="text" class="form-control" id="dstretch_l5"
-									value="<?php echo $rcekD['dstretch_l5']; ?>" placeholder="LEN 5">
-								<input name="dstretch_w5" type="text" class="form-control" id="dstretch_w5"
-									value="<?php echo $rcekD['dstretch_w5']; ?>" placeholder="WID 5">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dstretch_note" maxlength="50"><?php echo $rcekD['dstretch_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="marst" style="display:none;">
-							<label for="marst" class="col-sm-2 control-label">STRETCH (MARGINAL)</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="mload_stretch" id="mload_stretch" class="minimal"
-										value="60" <?php if ($rcekM['mload_stretch'] == '60') {
-											echo "checked";
-										} ?>> 60N
-									&nbsp;
-									&nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="mload_stretch" id="mload_stretch" class="minimal"
-										value="22" <?php if ($rcekM['mload_stretch'] == '22') {
-											echo "checked";
-										} ?>> 22N
-								</label>
-							</div>
-							<div class="col-sm-1">
-								<input name="mstretch_l1" type="text" class="form-control" id="mstretch_l1"
-									value="<?php echo $rcekM['mstretch_l1']; ?>" placeholder="LEN 1">
-								<input name="mstretch_w1" type="text" class="form-control" id="mstretch_w1"
-									value="<?php echo $rcekM['mstretch_w1']; ?>" placeholder="WID 1">
-							</div>
-							<div class="col-sm-1">
-								<input name="mstretch_l2" type="text" class="form-control" id="mstretch_l2"
-									value="<?php echo $rcekM['mstretch_l2']; ?>" placeholder="LEN 2">
-								<input name="mstretch_w2" type="text" class="form-control" id="mstretch_w2"
-									value="<?php echo $rcekM['mstretch_w2']; ?>" placeholder="WID 2">
-							</div>
-							<div class="col-sm-1">
-								<input name="mstretch_l3" type="text" class="form-control" id="mstretch_l3"
-									value="<?php echo $rcekM['mstretch_l3']; ?>" placeholder="LEN 3">
-								<input name="mstretch_w3" type="text" class="form-control" id="mstretch_w3"
-									value="<?php echo $rcekM['mstretch_w3']; ?>" placeholder="WID 3">
-							</div>
-							<div class="col-sm-1">
-								<input name="mstretch_l4" type="text" class="form-control" id="mstretch_l4"
-									value="<?php echo $rcekM['mstretch_l4']; ?>" placeholder="LEN 4">
-								<input name="mstretch_w4" type="text" class="form-control" id="mstretch_w4"
-									value="<?php echo $rcekM['mstretch_w4']; ?>" placeholder="WID 4">
-							</div>
-							<div class="col-sm-1">
-								<input name="mstretch_l5" type="text" class="form-control" id="mstretch_l5"
-									value="<?php echo $rcekM['mstretch_l5']; ?>" placeholder="LEN 5">
-								<input name="mstretch_w5" type="text" class="form-control" id="mstretch_w5"
-									value="<?php echo $rcekM['mstretch_w5']; ?>" placeholder="WID 5">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="mstretch_note" maxlength="50"><?php echo $rcekM['mstretch_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranst" style="display:none;">
-							<label for="ranst" class="col-sm-2 control-label">STRETCH (RAN)</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="rload_stretch" id="rload_stretch" class="minimal"
-										value="60" <?php if ($rcekR['rload_stretch'] == '60') {
-											echo "checked";
-										} ?>> 60N
-									&nbsp;
-									&nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="rload_stretch" id="rload_stretch" class="minimal"
-										value="22" <?php if ($rcekR['rload_stretch'] == '22') {
-											echo "checked";
-										} ?>> 22N
-								</label>
-							</div>
-							<div class="col-sm-1">
-								<input name="rstretch_l1" type="text" class="form-control" id="rstretch_l1"
-									value="<?php echo $rcekR['rstretch_l1']; ?>" placeholder="LEN 1" readonly>
-								<input name="rstretch_w1" type="text" class="form-control" id="rstretch_w1"
-									value="<?php echo $rcekR['rstretch_w1']; ?>" placeholder="WID 1" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rstretch_l2" type="text" class="form-control" id="rstretch_l2"
-									value="<?php echo $rcekR['rstretch_l2']; ?>" placeholder="LEN 2" readonly>
-								<input name="rstretch_w2" type="text" class="form-control" id="rstretch_w2"
-									value="<?php echo $rcekR['rstretch_w2']; ?>" placeholder="WID 2" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rstretch_l3" type="text" class="form-control" id="rstretch_l3"
-									value="<?php echo $rcekR['rstretch_l3']; ?>" placeholder="LEN 3" readonly>
-								<input name="rstretch_w3" type="text" class="form-control" id="rstretch_w3"
-									value="<?php echo $rcekR['rstretch_w3']; ?>" placeholder="WID 3" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rstretch_l4" type="text" class="form-control" id="rstretch_l4"
-									value="<?php echo $rcekR['rstretch_l4']; ?>" placeholder="LEN 4" readonly>
-								<input name="rstretch_w4" type="text" class="form-control" id="rstretch_w4"
-									value="<?php echo $rcekR['rstretch_w4']; ?>" placeholder="WID 4" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rstretch_l5" type="text" class="form-control" id="rstretch_l5"
-									value="<?php echo $rcekR['rstretch_l5']; ?>" placeholder="LEN 5" readonly>
-								<input name="rstretch_w5" type="text" class="form-control" id="rstretch_w5"
-									value="<?php echo $rcekR['rstretch_w5']; ?>" placeholder="WID 5" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rstretch_note" maxlength="50"
-									readonly><?php echo $rcekR['rstretch_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="disrc" style="display:none;">
-							<label for="disrc" class="col-sm-2 control-label">RECOVERY (DIS)</label>
-							<div class="col-sm-1">
-								<input name="drecover_l1" type="text" class="form-control" id="drecover_l1"
-									value="<?php echo $rcekD['drecover_l1']; ?>" placeholder="LEN1 1">
-								<input name="drecover_l2" type="text" class="form-control" id="drecover_l2"
-									value="<?php echo $rcekD['drecover_l2']; ?>" placeholder="LEN30 1">
-								<input name="drecover_w1" type="text" class="form-control" id="drecover_w1"
-									value="<?php echo $rcekD['drecover_w1']; ?>" placeholder="WID1 1">
-								<input name="drecover_w2" type="text" class="form-control" id="drecover_w2"
-									value="<?php echo $rcekD['drecover_w2']; ?>" placeholder="WID30 1">
-							</div>
-							<div class="col-sm-1">
-								<input name="drecover_l11" type="text" class="form-control" id="drecover_l11"
-									value="<?php echo $rcekD['drecover_l11']; ?>" placeholder="LEN1 2">
-								<input name="drecover_l21" type="text" class="form-control" id="drecover_l21"
-									value="<?php echo $rcekD['drecover_l21']; ?>" placeholder="LEN30 2">
-								<input name="drecover_w11" type="text" class="form-control" id="drecover_w11"
-									value="<?php echo $rcekD['drecover_w11']; ?>" placeholder="WID1 2">
-								<input name="drecover_w21" type="text" class="form-control" id="drecover_w21"
-									value="<?php echo $rcekD['drecover_w21']; ?>" placeholder="WID30 2">
-							</div>
-							<div class="col-sm-1">
-								<input name="drecover_l3" type="text" class="form-control" id="drecover_l3"
-									value="<?php echo $rcekD['drecover_l3']; ?>" placeholder="LEN1 3">
-								<input name="drecover_l31" type="text" class="form-control" id="drecover_l31"
-									value="<?php echo $rcekD['drecover_l31']; ?>" placeholder="LEN30 3">
-								<input name="drecover_w3" type="text" class="form-control" id="drecover_w3"
-									value="<?php echo $rcekD['drecover_w3']; ?>" placeholder="WID1 3">
-								<input name="drecover_w31" type="text" class="form-control" id="drecover_w31"
-									value="<?php echo $rcekD['drecover_w31']; ?>" placeholder="WID30 3">
-							</div>
-							<div class="col-sm-1">
-								<input name="drecover_l4" type="text" class="form-control" id="drecover_l4"
-									value="<?php echo $rcekD['drecover_l4']; ?>" placeholder="LEN1 4">
-								<input name="drecover_l41" type="text" class="form-control" id="drecover_l41"
-									value="<?php echo $rcekD['drecover_l41']; ?>" placeholder="LEN30 4">
-								<input name="drecover_w4" type="text" class="form-control" id="drecover_w4"
-									value="<?php echo $rcekD['drecover_w4']; ?>" placeholder="WID1 4">
-								<input name="drecover_w41" type="text" class="form-control" id="drecover_w41"
-									value="<?php echo $rcekD['drecover_w41']; ?>" placeholder="WID30 4">
-							</div>
-							<div class="col-sm-1">
-								<input name="drecover_l5" type="text" class="form-control" id="drecover_l5"
-									value="<?php echo $rcekD['drecover_l5']; ?>" placeholder="LEN1 5">
-								<input name="drecover_l51" type="text" class="form-control" id="drecover_l51"
-									value="<?php echo $rcekD['drecover_l51']; ?>" placeholder="LEN30 5">
-								<input name="drecover_w5" type="text" class="form-control" id="drecover_w5"
-									value="<?php echo $rcekD['drecover_w5']; ?>" placeholder="WID1 5">
-								<input name="drecover_w51" type="text" class="form-control" id="drecover_w51"
-									value="<?php echo $rcekD['drecover_w51']; ?>" placeholder="WID30 5">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="drecover_note" maxlength="50"><?php echo $rcekD['drecover_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="marrc" style="display:none;">
-							<label for="marrc" class="col-sm-2 control-label">RECOVERY (MARGINAL)</label>
-							<div class="col-sm-1">
-								<input name="mrecover_l1" type="text" class="form-control" id="mrecover_l1"
-									value="<?php echo $rcekM['mrecover_l1']; ?>" placeholder="LEN1 1">
-								<input name="mrecover_l2" type="text" class="form-control" id="mrecover_l2"
-									value="<?php echo $rcekM['mrecover_l2']; ?>" placeholder="LEN30 1">
-								<input name="mrecover_w1" type="text" class="form-control" id="mrecover_w1"
-									value="<?php echo $rcekM['mrecover_w1']; ?>" placeholder="WID1 1">
-								<input name="mrecover_w2" type="text" class="form-control" id="mrecover_w2"
-									value="<?php echo $rcekM['mrecover_w2']; ?>" placeholder="WID30 1">
-							</div>
-							<div class="col-sm-1">
-								<input name="mrecover_l11" type="text" class="form-control" id="mrecover_l11"
-									value="<?php echo $rcekM['mrecover_l11']; ?>" placeholder="LEN1 2">
-								<input name="mrecover_l21" type="text" class="form-control" id="mrecover_l21"
-									value="<?php echo $rcekM['mrecover_l21']; ?>" placeholder="LEN30 2">
-								<input name="mrecover_w11" type="text" class="form-control" id="mrecover_w11"
-									value="<?php echo $rcekM['mrecover_w11']; ?>" placeholder="WID1 2">
-								<input name="mrecover_w21" type="text" class="form-control" id="mrecover_w21"
-									value="<?php echo $rcekM['mrecover_w21']; ?>" placeholder="WID30 2">
-							</div>
-							<div class="col-sm-1">
-								<input name="mrecover_l3" type="text" class="form-control" id="mrecover_l3"
-									value="<?php echo $rcekM['mrecover_l3']; ?>" placeholder="LEN1 3">
-								<input name="mrecover_l31" type="text" class="form-control" id="mrecover_l31"
-									value="<?php echo $rcekM['mrecover_l31']; ?>" placeholder="LEN30 3">
-								<input name="mrecover_w3" type="text" class="form-control" id="mrecover_w3"
-									value="<?php echo $rcekM['mrecover_w3']; ?>" placeholder="WID1 3">
-								<input name="mrecover_w31" type="text" class="form-control" id="mrecover_w31"
-									value="<?php echo $rcekM['mrecover_w31']; ?>" placeholder="WID30 3">
-							</div>
-							<div class="col-sm-1">
-								<input name="mrecover_l4" type="text" class="form-control" id="mrecover_l4"
-									value="<?php echo $rcekM['mrecover_l4']; ?>" placeholder="LEN1 4">
-								<input name="mrecover_l41" type="text" class="form-control" id="mrecover_l41"
-									value="<?php echo $rcekM['mrecover_l41']; ?>" placeholder="LEN30 4">
-								<input name="mrecover_w4" type="text" class="form-control" id="mrecover_w4"
-									value="<?php echo $rcekM['mrecover_w4']; ?>" placeholder="WID1 4">
-								<input name="mrecover_w41" type="text" class="form-control" id="mrecover_w41"
-									value="<?php echo $rcekM['mrecover_w41']; ?>" placeholder="WID30 4">
-							</div>
-							<div class="col-sm-1">
-								<input name="mrecover_l5" type="text" class="form-control" id="mrecover_l5"
-									value="<?php echo $rcekM['mrecover_l5']; ?>" placeholder="LEN1 5">
-								<input name="mrecover_l51" type="text" class="form-control" id="mrecover_l51"
-									value="<?php echo $rcekM['mrecover_l51']; ?>" placeholder="LEN30 5">
-								<input name="mrecover_w5" type="text" class="form-control" id="mrecover_w5"
-									value="<?php echo $rcekM['mrecover_w5']; ?>" placeholder="WID1 5">
-								<input name="mrecover_w51" type="text" class="form-control" id="mrecover_w51"
-									value="<?php echo $rcekM['mrecover_w51']; ?>" placeholder="WID30 5">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="mrecover_note" maxlength="50"><?php echo $rcekM['mrecover_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranrc" style="display:none;">
-							<label for="ranrc" class="col-sm-2 control-label">RECOVERY (RAN)</label>
-							<div class="col-sm-1">
-								<input name="rrecover_l1" type="text" class="form-control" id="rrecover_l1"
-									value="<?php echo $rcekR['rrecover_l1']; ?>" placeholder="LEN1 1" readonly>
-								<input name="rrecover_l1" type="text" class="form-control" id="rrecover_l1"
-									value="<?php echo $rcekR['rrecover_l1']; ?>" placeholder="LEN30 1" readonly>
-								<input name="rrecover_w1" type="text" class="form-control" id="rrecover_w1"
-									value="<?php echo $rcekR['rrecover_w1']; ?>" placeholder="WID1 1" readonly>
-								<input name="rrecover_w11" type="text" class="form-control" id="rrecover_w11"
-									value="<?php echo $rcekR['rrecover_w11']; ?>" placeholder="WID30 1" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rrecover_l2" type="text" class="form-control" id="rrecover_l2"
-									value="<?php echo $rcekR['rrecover_l2']; ?>" placeholder="LEN1 2" readonly>
-								<input name="rrecover_l21" type="text" class="form-control" id="rrecover_l21"
-									value="<?php echo $rcekR['rrecover_l21']; ?>" placeholder="LEN30 2" readonly>
-								<input name="rrecover_w2" type="text" class="form-control" id="rrecover_w2"
-									value="<?php echo $rcekR['rrecover_w2']; ?>" placeholder="WID1 2" readonly>
-								<input name="rrecover_w21" type="text" class="form-control" id="rrecover_w21"
-									value="<?php echo $rcekR['rrecover_w21']; ?>" placeholder="WID30 2" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rrecover_l3" type="text" class="form-control" id="rrecover_l3"
-									value="<?php echo $rcekR['rrecover_l3']; ?>" placeholder="LEN1 3" readonly>
-								<input name="rrecover_l31" type="text" class="form-control" id="rrecover_l31"
-									value="<?php echo $rcekR['rrecover_l31']; ?>" placeholder="LEN30 3" readonly>
-								<input name="rrecover_w3" type="text" class="form-control" id="rrecover_w3"
-									value="<?php echo $rcekR['rrecover_w3']; ?>" placeholder="WID1 3" readonly>
-								<input name="rrecover_w31" type="text" class="form-control" id="rrecover_w31"
-									value="<?php echo $rcekR['rrecover_w31']; ?>" placeholder="WID30 3" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rrecover_l4" type="text" class="form-control" id="rrecover_l4"
-									value="<?php echo $rcekR['rrecover_l4']; ?>" placeholder="LEN1 4" readonly>
-								<input name="rrecover_l41" type="text" class="form-control" id="rrecover_l41"
-									value="<?php echo $rcekR['rrecover_l41']; ?>" placeholder="LEN30 4" readonly>
-								<input name="rrecover_w4" type="text" class="form-control" id="rrecover_w4"
-									value="<?php echo $rcekR['rrecover_w4']; ?>" placeholder="WID1 4" readonly>
-								<input name="rrecover_w41" type="text" class="form-control" id="rrecover_w41"
-									value="<?php echo $rcekR['rrecover_w41']; ?>" placeholder="WID30 4" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rrecover_l5" type="text" class="form-control" id="rrecover_l5"
-									value="<?php echo $rcekR['rrecover_l5']; ?>" placeholder="LEN1 5" readonly>
-								<input name="rrecover_l51" type="text" class="form-control" id="rrecover_l51"
-									value="<?php echo $rcekR['rrecover_l51']; ?>" placeholder="LEN30 5" readonly>
-								<input name="rrecover_w5" type="text" class="form-control" id="rrecover_w5"
-									value="<?php echo $rcekR['rrecover_w5']; ?>" placeholder="WID1 5" readonly>
-								<input name="rrecover_w51" type="text" class="form-control" id="rrecover_w51"
-									value="<?php echo $rcekR['rrecover_w51']; ?>" placeholder="WID30 5" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rrecover_note" maxlength="50"
-									readonly><?php echo $rcekR['rrecover_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- STRECTH & RECOVERY END-->
 						<!-- GROWTH BEGIN-->
-						<div class="form-group" id="fc19" style="display:none;">
-							<label for="growth" class="col-sm-2 control-label">GROWTH</label>
-							<div class="col-sm-2">
-								<input name="growth_l1" type="text" class="form-control" id="growth_l1"
-									value="<?php echo $rcek1['growth_l1']; ?>" placeholder="LENGTH 1">
-								<input name="growth_w1" type="text" class="form-control" id="growth_w1"
-									value="<?php echo $rcek1['growth_w1']; ?>" placeholder="WIDTH 1">
+							<div class="form-group" id="fc19" style="display:none;">
+								<label for="growth" class="col-sm-2 control-label">GROWTH</label>
+								<div class="col-sm-2">
+									<input name="growth_l1" type="text" class="form-control" id="growth_l1"
+										value="<?php echo $rcek1['growth_l1']; ?>" placeholder="LENGTH 1">
+									<input name="growth_w1" type="text" class="form-control" id="growth_w1"
+										value="<?php echo $rcek1['growth_w1']; ?>" placeholder="WIDTH 1">
+								</div>
+								<div class="col-sm-2">
+									<input name="growth_l2" type="text" class="form-control" id="growth_l2"
+										value="<?php echo $rcek1['growth_l2']; ?>" placeholder="LENGTH 2">
+									<input name="growth_w2" type="text" class="form-control" id="growth_w2"
+										value="<?php echo $rcek1['growth_w2']; ?>" placeholder="WIDTH 2">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="growth_note" maxlength="50"><?php echo $rcek1['growth_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="growth_l2" type="text" class="form-control" id="growth_l2"
-									value="<?php echo $rcek1['growth_l2']; ?>" placeholder="LENGTH 2">
-								<input name="growth_w2" type="text" class="form-control" id="growth_w2"
-									value="<?php echo $rcek1['growth_w2']; ?>" placeholder="WIDTH 2">
+							<div class="form-group" id="fc27" style="display:none;">
+								<label for="rec_growth" class="col-sm-2 control-label">RECOVERY</label>
+								<div class="col-sm-2">
+									<input name="rec_growth_l1" type="text" class="form-control" id="rec_growth_l1"
+										value="<?php echo $rcek1['rec_growth_l1']; ?>" placeholder="LENGTH 1">
+									<input name="rec_growth_w1" type="text" class="form-control" id="rec_growth_w1"
+										value="<?php echo $rcek1['rec_growth_w1']; ?>" placeholder="WIDTH 1">
+								</div>
+								<div class="col-sm-2">
+									<input name="rec_growth_l2" type="text" class="form-control" id="rec_growth_l2"
+										value="<?php echo $rcek1['rec_growth_l2']; ?>" placeholder="LENGTH 2">
+									<input name="rec_growth_w2" type="text" class="form-control" id="rec_growth_w2"
+										value="<?php echo $rcek1['rec_growth_w2']; ?>" placeholder="WIDTH 2">
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="growth_note" maxlength="50"><?php echo $rcek1['growth_note']; ?></textarea>
+							<div class="form-group" id="stat_gr" style="display:none;">
+								<label for="stat_gr" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_gr" class="form-control select2" id="stat_gr" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_gr'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_gr'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_gr'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_gr'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_gr'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">
+											PASS</option>
+										<option <?php if ($rcek1['stat_gr'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">
+											FAIL</option>
+										<option <?php if ($rcek1['stat_gr'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_growth" type="text" class="form-control" id="user_growth" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_growth" type="hidden" class="form-control" id="nama_growth" value="<?php echo $rcek1['nama_growth']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="fc27" style="display:none;">
-							<label for="rec_growth" class="col-sm-2 control-label">RECOVERY</label>
-							<div class="col-sm-2">
-								<input name="rec_growth_l1" type="text" class="form-control" id="rec_growth_l1"
-									value="<?php echo $rcek1['rec_growth_l1']; ?>" placeholder="LENGTH 1">
-								<input name="rec_growth_w1" type="text" class="form-control" id="rec_growth_w1"
-									value="<?php echo $rcek1['rec_growth_w1']; ?>" placeholder="WIDTH 1">
+							<div class="form-group" id="disgr" style="display:none;">
+								<label for="disgr" class="col-sm-2 control-label">GROWTH (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dgrowth_l1" type="text" class="form-control" id="dgrowth_l1"
+										value="<?php echo $rcekD['dgrowth_l1']; ?>" placeholder="LENGTH 1">
+									<input name="dgrowth_w1" type="text" class="form-control" id="dgrowth_w1"
+										value="<?php echo $rcekD['dgrowth_w1']; ?>" placeholder="WIDTH 1">
+								</div>
+								<div class="col-sm-2">
+									<input name="dgrowth_l2" type="text" class="form-control" id="dgrowth_l2"
+										value="<?php echo $rcekD['dgrowth_l2']; ?>" placeholder="LENGTH 2">
+									<input name="dgrowth_w2" type="text" class="form-control" id="dgrowth_w2"
+										value="<?php echo $rcekD['dgrowth_w2']; ?>" placeholder="WIDTH 2">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dgrowth_note" maxlength="50"><?php echo $rcekD['dgrowth_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="rec_growth_l2" type="text" class="form-control" id="rec_growth_l2"
-									value="<?php echo $rcek1['rec_growth_l2']; ?>" placeholder="LENGTH 2">
-								<input name="rec_growth_w2" type="text" class="form-control" id="rec_growth_w2"
-									value="<?php echo $rcek1['rec_growth_w2']; ?>" placeholder="WIDTH 2">
+							<div class="form-group" id="disgr1" style="display:none;">
+								<label for="disgr1" class="col-sm-2 control-label">RECOVERY (DIS)</label>
+								<div class="col-sm-2">
+									<input name="drec_growth_l1" type="text" class="form-control" id="drec_growth_l1"
+										value="<?php echo $rcekD['drec_growth_l1']; ?>" placeholder="LENGTH 1">
+									<input name="drec_growth_w1" type="text" class="form-control" id="drec_growth_w1"
+										value="<?php echo $rcekD['drec_growth_w1']; ?>" placeholder="WIDTH 1">
+								</div>
+								<div class="col-sm-2">
+									<input name="drec_growth_l2" type="text" class="form-control" id="drec_growth_l2"
+										value="<?php echo $rcekD['drec_growth_l2']; ?>" placeholder="LENGTH 2">
+									<input name="drec_growth_w2" type="text" class="form-control" id="drec_growth_w2"
+										value="<?php echo $rcekD['drec_growth_w2']; ?>" placeholder="WIDTH 2">
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="stat_gr" style="display:none;">
-							<label for="stat_gr" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_gr" class="form-control select2" id="stat_gr" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_gr'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_gr'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_gr'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_gr'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_gr'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">
-										PASS</option>
-									<option <?php if ($rcek1['stat_gr'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">
-										FAIL</option>
-									<option <?php if ($rcek1['stat_gr'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
+							<div class="form-group" id="rangr" style="display:none;">
+								<label for="rangr" class="col-sm-2 control-label">GROWTH (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rgrowth_l1" type="text" class="form-control" id="rgrowth_l1"
+										value="<?php echo $rcekR['rgrowth_l1']; ?>" placeholder="LENGTH 1" readonly>
+									<input name="rgrowth_w1" type="text" class="form-control" id="rgrowth_w1"
+										value="<?php echo $rcekR['rgrowth_w1']; ?>" placeholder="WIDTH 1" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rgrowth_l2" type="text" class="form-control" id="rgrowth_l2"
+										value="<?php echo $rcekR['rgrowth_l2']; ?>" placeholder="LENGTH 2" readonly>
+									<input name="rgrowth_w2" type="text" class="form-control" id="rgrowth_w2"
+										value="<?php echo $rcekR['rgrowth_w2']; ?>" placeholder="WIDTH 2" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rgrowth_note" maxlength="50"
+										readonly><?php echo $rcekR['rgrowth_note']; ?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="disgr" style="display:none;">
-							<label for="disgr" class="col-sm-2 control-label">GROWTH (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dgrowth_l1" type="text" class="form-control" id="dgrowth_l1"
-									value="<?php echo $rcekD['dgrowth_l1']; ?>" placeholder="LENGTH 1">
-								<input name="dgrowth_w1" type="text" class="form-control" id="dgrowth_w1"
-									value="<?php echo $rcekD['dgrowth_w1']; ?>" placeholder="WIDTH 1">
+							<div class="form-group" id="rangr1" style="display:none;">
+								<label for="rangr1" class="col-sm-2 control-label">RECOVERY (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rrec_growth_l1" type="text" class="form-control" id="rrec_growth_l1"
+										value="<?php echo $rcekR['rrec_growth_l1']; ?>" placeholder="LENGTH 1" readonly>
+									<input name="rrec_growth_w1" type="text" class="form-control" id="rrec_growth_w1"
+										value="<?php echo $rcekR['rrec_growth_w1']; ?>" placeholder="WIDTH 1" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rrec_growth_l2" type="text" class="form-control" id="rrec_growth_l2"
+										value="<?php echo $rcekR['rrec_growth_l2']; ?>" placeholder="LENGTH 2" readonly>
+									<input name="rrec_growth_w2" type="text" class="form-control" id="rrec_growth_w2"
+										value="<?php echo $rcekR['rrec_growth_w2']; ?>" placeholder="WIDTH 2" readonly>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="dgrowth_l2" type="text" class="form-control" id="dgrowth_l2"
-									value="<?php echo $rcekD['dgrowth_l2']; ?>" placeholder="LENGTH 2">
-								<input name="dgrowth_w2" type="text" class="form-control" id="dgrowth_w2"
-									value="<?php echo $rcekD['dgrowth_w2']; ?>" placeholder="WIDTH 2">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dgrowth_note" maxlength="50"><?php echo $rcekD['dgrowth_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="disgr1" style="display:none;">
-							<label for="disgr1" class="col-sm-2 control-label">RECOVERY (DIS)</label>
-							<div class="col-sm-2">
-								<input name="drec_growth_l1" type="text" class="form-control" id="drec_growth_l1"
-									value="<?php echo $rcekD['drec_growth_l1']; ?>" placeholder="LENGTH 1">
-								<input name="drec_growth_w1" type="text" class="form-control" id="drec_growth_w1"
-									value="<?php echo $rcekD['drec_growth_w1']; ?>" placeholder="WIDTH 1">
-							</div>
-							<div class="col-sm-2">
-								<input name="drec_growth_l2" type="text" class="form-control" id="drec_growth_l2"
-									value="<?php echo $rcekD['drec_growth_l2']; ?>" placeholder="LENGTH 2">
-								<input name="drec_growth_w2" type="text" class="form-control" id="drec_growth_w2"
-									value="<?php echo $rcekD['drec_growth_w2']; ?>" placeholder="WIDTH 2">
-							</div>
-						</div>
-						<div class="form-group" id="rangr" style="display:none;">
-							<label for="rangr" class="col-sm-2 control-label">GROWTH (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rgrowth_l1" type="text" class="form-control" id="rgrowth_l1"
-									value="<?php echo $rcekR['rgrowth_l1']; ?>" placeholder="LENGTH 1" readonly>
-								<input name="rgrowth_w1" type="text" class="form-control" id="rgrowth_w1"
-									value="<?php echo $rcekR['rgrowth_w1']; ?>" placeholder="WIDTH 1" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rgrowth_l2" type="text" class="form-control" id="rgrowth_l2"
-									value="<?php echo $rcekR['rgrowth_l2']; ?>" placeholder="LENGTH 2" readonly>
-								<input name="rgrowth_w2" type="text" class="form-control" id="rgrowth_w2"
-									value="<?php echo $rcekR['rgrowth_w2']; ?>" placeholder="WIDTH 2" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rgrowth_note" maxlength="50"
-									readonly><?php echo $rcekR['rgrowth_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="rangr1" style="display:none;">
-							<label for="rangr1" class="col-sm-2 control-label">RECOVERY (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rrec_growth_l1" type="text" class="form-control" id="rrec_growth_l1"
-									value="<?php echo $rcekR['rrec_growth_l1']; ?>" placeholder="LENGTH 1" readonly>
-								<input name="rrec_growth_w1" type="text" class="form-control" id="rrec_growth_w1"
-									value="<?php echo $rcekR['rrec_growth_w1']; ?>" placeholder="WIDTH 1" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rrec_growth_l2" type="text" class="form-control" id="rrec_growth_l2"
-									value="<?php echo $rcekR['rrec_growth_l2']; ?>" placeholder="LENGTH 2" readonly>
-								<input name="rrec_growth_w2" type="text" class="form-control" id="rrec_growth_w2"
-									value="<?php echo $rcekR['rrec_growth_w2']; ?>" placeholder="WIDTH 2" readonly>
-							</div>
-						</div>
 						<!-- GROWTH END-->
 						<!-- APPEARANCE BEGIN-->
-						<div class="form-group" id="fc20" style="display:none;">
-							<label for="apper" class="col-sm-2 control-label">APPEARANCE</label>
-							<div class="col-sm-2">
-								<input name="apper_pf1" type="text" class="form-control" id="apper_pf1"
-									value="<?php echo $rcek1['apper_pf1']; ?>" placeholder="PILLING FACE 1">
-								<input name="apper_pb1" type="text" class="form-control" id="apper_pb1"
-									value="<?php echo $rcek1['apper_pb1']; ?>" placeholder="PILLING BACK 1">
-								<input name="apper_ch1" type="text" class="form-control" id="apper_ch1"
-									value="<?php echo $rcek1['apper_ch1']; ?>" placeholder="PASS/FAIL 1">
-								<input name="apper_cc1" type="text" class="form-control" id="apper_cc1"
-									value="<?php echo $rcek1['apper_cc1']; ?>" placeholder="C.CHANGE 1">
-								<input name="apper_st" type="text" class="form-control" id="apper_st"
-									value="<?php echo $rcek1['apper_st']; ?>" placeholder="S.STAINING 1">
-								<input name="apper_acetate" type="text" class="form-control" id="apper_acetate"
-									value="<?php echo $rcek1['apper_acetate']; ?>" placeholder="ACETATE">
-								<input name="apper_cotton" type="text" class="form-control" id="apper_cotton"
-									value="<?php echo $rcek1['apper_cotton']; ?>" placeholder="COTTON">
-								<input name="apper_nylon" type="text" class="form-control" id="apper_nylon"
-									value="<?php echo $rcek1['apper_nylon']; ?>" placeholder="NYLON">
-								<input name="apper_poly" type="text" class="form-control" id="apper_poly"
-									value="<?php echo $rcek1['apper_poly']; ?>" placeholder="POLYESTER">
-								<input name="apper_acrylic" type="text" class="form-control" id="apper_acrylic"
-									value="<?php echo $rcek1['apper_acrylic']; ?>" placeholder="ACRYLIC">
-								<input name="apper_wool" type="text" class="form-control" id="apper_wool"
-									value="<?php echo $rcek1['apper_wool']; ?>" placeholder="WOOL">
+							<div class="form-group" id="fc20" style="display:none;">
+								<label for="apper" class="col-sm-2 control-label">APPEARANCE</label>
+								<div class="col-sm-2">
+									<input name="apper_pf1" type="text" class="form-control" id="apper_pf1"
+										value="<?php echo $rcek1['apper_pf1']; ?>" placeholder="PILLING FACE 1">
+									<input name="apper_pb1" type="text" class="form-control" id="apper_pb1"
+										value="<?php echo $rcek1['apper_pb1']; ?>" placeholder="PILLING BACK 1">
+									<input name="apper_ch1" type="text" class="form-control" id="apper_ch1"
+										value="<?php echo $rcek1['apper_ch1']; ?>" placeholder="PASS/FAIL 1">
+									<input name="apper_cc1" type="text" class="form-control" id="apper_cc1"
+										value="<?php echo $rcek1['apper_cc1']; ?>" placeholder="C.CHANGE 1">
+									<input name="apper_st" type="text" class="form-control" id="apper_st"
+										value="<?php echo $rcek1['apper_st']; ?>" placeholder="S.STAINING 1">
+									<input name="apper_acetate" type="text" class="form-control" id="apper_acetate"
+										value="<?php echo $rcek1['apper_acetate']; ?>" placeholder="ACETATE">
+									<input name="apper_cotton" type="text" class="form-control" id="apper_cotton"
+										value="<?php echo $rcek1['apper_cotton']; ?>" placeholder="COTTON">
+									<input name="apper_nylon" type="text" class="form-control" id="apper_nylon"
+										value="<?php echo $rcek1['apper_nylon']; ?>" placeholder="NYLON">
+									<input name="apper_poly" type="text" class="form-control" id="apper_poly"
+										value="<?php echo $rcek1['apper_poly']; ?>" placeholder="POLYESTER">
+									<input name="apper_acrylic" type="text" class="form-control" id="apper_acrylic"
+										value="<?php echo $rcek1['apper_acrylic']; ?>" placeholder="ACRYLIC">
+									<input name="apper_wool" type="text" class="form-control" id="apper_wool"
+										value="<?php echo $rcek1['apper_wool']; ?>" placeholder="WOOL">
+								</div>
+								<div class="col-sm-2">
+									<input name="apper_pf2" type="text" class="form-control" id="apper_pf2"
+										value="<?php echo $rcek1['apper_pf2']; ?>" placeholder="PILLING FACE 2">
+									<input name="apper_pb2" type="text" class="form-control" id="apper_pb2"
+										value="<?php echo $rcek1['apper_pb2']; ?>" placeholder="PILLING BACK 2">
+									<input name="apper_ch2" type="text" class="form-control" id="apper_ch2"
+										value="<?php echo $rcek1['apper_ch2']; ?>" placeholder="PASS/FAIL 2">
+									<input name="apper_cc2" type="text" class="form-control" id="apper_cc2"
+										value="<?php echo $rcek1['apper_cc2']; ?>" placeholder="C.CHANGE 2">
+									<input name="apper_st2" type="text" class="form-control" id="apper_st2"
+										value="<?php echo $rcek1['apper_st2']; ?>" placeholder="S.STAINING 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="apper_pf3" type="text" class="form-control" id="apper_pf3"
+										value="<?php echo $rcek1['apper_pf3']; ?>" placeholder="PILLING FACE 3">
+									<input name="apper_pb3" type="text" class="form-control" id="apper_pb3"
+										value="<?php echo $rcek1['apper_pb3']; ?>" placeholder="PILLING BACK 3">
+									<input name="apper_ch3" type="text" class="form-control" id="apper_ch3"
+										value="<?php echo $rcek1['apper_ch3']; ?>" placeholder="PASS/FAIL 3">
+									<input name="apper_cc3" type="text" class="form-control" id="apper_cc3"
+										value="<?php echo $rcek1['apper_cc3']; ?>" placeholder="C.CHANGE 3">
+									<input name="apper_st3" type="text" class="form-control" id="apper_st3"
+										value="<?php echo $rcek1['apper_st3']; ?>" placeholder="S.STAINING 3">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="apper_note" maxlength="50"><?php echo $rcek1['apper_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="apper_pf2" type="text" class="form-control" id="apper_pf2"
-									value="<?php echo $rcek1['apper_pf2']; ?>" placeholder="PILLING FACE 2">
-								<input name="apper_pb2" type="text" class="form-control" id="apper_pb2"
-									value="<?php echo $rcek1['apper_pb2']; ?>" placeholder="PILLING BACK 2">
-								<input name="apper_ch2" type="text" class="form-control" id="apper_ch2"
-									value="<?php echo $rcek1['apper_ch2']; ?>" placeholder="PASS/FAIL 2">
-								<input name="apper_cc2" type="text" class="form-control" id="apper_cc2"
-									value="<?php echo $rcek1['apper_cc2']; ?>" placeholder="C.CHANGE 2">
-								<input name="apper_st2" type="text" class="form-control" id="apper_st2"
-									value="<?php echo $rcek1['apper_st2']; ?>" placeholder="S.STAINING 2">
+							<div class="form-group" id="stat_ap" style="display:none;">
+								<label for="stat_ap" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_ap" class="form-control select2" id="stat_ap" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_ap'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_ap'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_ap'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_ap'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_ap'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">
+											PASS</option>
+										<option <?php if ($rcek1['stat_ap'] == "MARGINAL PASS") { ?> selected=selected <?php }
+										; ?>value="MARGINAL PASS">MARGINAL PASS</option>
+										<option <?php if ($rcek1['stat_ap'] == "DATA") { ?> selected=selected <?php }
+										; ?>value="DATA">
+											DATA</option>
+										<option <?php if ($rcek1['stat_ap'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">
+											FAIL</option>
+										<option <?php if ($rcek1['stat_ap'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_apper" type="text" class="form-control" id="user_apper" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_apper" type="hidden" class="form-control" id="nama_apper" value="<?php echo $rcek1['nama_apper']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="apper_pf3" type="text" class="form-control" id="apper_pf3"
-									value="<?php echo $rcek1['apper_pf3']; ?>" placeholder="PILLING FACE 3">
-								<input name="apper_pb3" type="text" class="form-control" id="apper_pb3"
-									value="<?php echo $rcek1['apper_pb3']; ?>" placeholder="PILLING BACK 3">
-								<input name="apper_ch3" type="text" class="form-control" id="apper_ch3"
-									value="<?php echo $rcek1['apper_ch3']; ?>" placeholder="PASS/FAIL 3">
-								<input name="apper_cc3" type="text" class="form-control" id="apper_cc3"
-									value="<?php echo $rcek1['apper_cc3']; ?>" placeholder="C.CHANGE 3">
-								<input name="apper_st3" type="text" class="form-control" id="apper_st3"
-									value="<?php echo $rcek1['apper_st3']; ?>" placeholder="S.STAINING 3">
+							<div class="form-group" id="disap" style="display:none;">
+								<label for="disap" class="col-sm-2 control-label">APPEARANCE (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dapper_pf1" type="text" class="form-control" id="dapper_pf1"
+										value="<?php echo $rcekD['dapper_pf1']; ?>" placeholder="PILLING FACE 1">
+									<input name="dapper_pb1" type="text" class="form-control" id="dapper_pb1"
+										value="<?php echo $rcekD['dapper_pb1']; ?>" placeholder="PILLING BACK 1">
+									<input name="dapper_ch1" type="text" class="form-control" id="dapper_ch1"
+										value="<?php echo $rcekD['dapper_ch1']; ?>" placeholder="PASS/FAIL 1">
+									<input name="dapper_cc1" type="text" class="form-control" id="dapper_cc1"
+										value="<?php echo $rcekD['dapper_cc1']; ?>" placeholder="C.CHANGE 1">
+									<input name="dapper_st" type="text" class="form-control" id="dapper_st"
+										value="<?php echo $rcekD['dapper_st']; ?>" placeholder="S.STAINING 1">
+									<input name="dapper_acetate" type="text" class="form-control" id="dapper_acetate"
+										value="<?php echo $rcekD['dapper_acetate']; ?>" placeholder="ACETATE">
+									<input name="dapper_cotton" type="text" class="form-control" id="dapper_cotton"
+										value="<?php echo $rcekD['dapper_cotton']; ?>" placeholder="COTTON">
+									<input name="dapper_nylon" type="text" class="form-control" id="dapper_nylon"
+										value="<?php echo $rcekD['dapper_nylon']; ?>" placeholder="NYLON">
+									<input name="dapper_poly" type="text" class="form-control" id="dapper_poly"
+										value="<?php echo $rcekD['dapper_poly']; ?>" placeholder="POLYESTER">
+									<input name="dapper_acrylic" type="text" class="form-control" id="dapper_acrylic"
+										value="<?php echo $rcekD['dapper_acrylic']; ?>" placeholder="ACRYLIC">
+									<input name="dapper_wool" type="text" class="form-control" id="dapper_wool"
+										value="<?php echo $rcekD['dapper_wool']; ?>" placeholder="WOOL">
+								</div>
+								<div class="col-sm-2">
+									<input name="dapper_pf2" type="text" class="form-control" id="dapper_pf2"
+										value="<?php echo $rcekD['dapper_pf2']; ?>" placeholder="PILLING FACE 2">
+									<input name="dapper_pb2" type="text" class="form-control" id="dapper_pb2"
+										value="<?php echo $rcekD['dapper_pb2']; ?>" placeholder="PILLING BACK 2">
+									<input name="dapper_ch2" type="text" class="form-control" id="dapper_ch2"
+										value="<?php echo $rcekD['dapper_ch2']; ?>" placeholder="PASS/FAIL 2">
+									<input name="dapper_cc2" type="text" class="form-control" id="dapper_cc2"
+										value="<?php echo $rcekD['dapper_cc2']; ?>" placeholder="C.CHANGE 2">
+									<input name="dapper_st2" type="text" class="form-control" id="dapper_st2"
+										value="<?php echo $rcekD['dapper_st2']; ?>" placeholder="S.STAINING 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="dapper_pf3" type="text" class="form-control" id="dapper_pf3"
+										value="<?php echo $rcekD['dapper_pf3']; ?>" placeholder="PILLING FACE 3">
+									<input name="dapper_pb3" type="text" class="form-control" id="dapper_pb3"
+										value="<?php echo $rcekD['dapper_pb3']; ?>" placeholder="PILLING BACK 3">
+									<input name="dapper_ch3" type="text" class="form-control" id="dapper_ch3"
+										value="<?php echo $rcekD['dapper_ch3']; ?>" placeholder="PASS/FAIL 3">
+									<input name="dapper_cc3" type="text" class="form-control" id="dapper_cc3"
+										value="<?php echo $rcekD['dapper_cc3']; ?>" placeholder="C.CHANGE 3">
+									<input name="dapper_st3" type="text" class="form-control" id="dapper_st3"
+										value="<?php echo $rcekD['dapper_st3']; ?>" placeholder="S.STAINING 3">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dapper_note" maxlength="50"><?php echo $rcekD['dapper_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="apper_note" maxlength="50"><?php echo $rcek1['apper_note']; ?></textarea>
+							<div class="form-group" id="marap" style="display:none;">
+								<label for="marap" class="col-sm-2 control-label">APPEARANCE (MARGINAL)</label>
+								<div class="col-sm-2">
+									<input name="mapper_pf1" type="text" class="form-control" id="mapper_pf1"
+										value="<?php echo $rcekM['mapper_pf1']; ?>" placeholder="PILLING FACE 1">
+									<input name="mapper_pb1" type="text" class="form-control" id="mapper_pb1"
+										value="<?php echo $rcekM['mapper_pb1']; ?>" placeholder="PILLING BACK 1">
+									<input name="mapper_ch1" type="text" class="form-control" id="mapper_ch1"
+										value="<?php echo $rcekM['mapper_ch1']; ?>" placeholder="PASS/FAIL 1">
+									<input name="mapper_cc1" type="text" class="form-control" id="mapper_cc1"
+										value="<?php echo $rcekM['mapper_cc1']; ?>" placeholder="C.CHANGE 1">
+									<input name="mapper_st" type="text" class="form-control" id="mapper_st"
+										value="<?php echo $rcekM['mapper_st']; ?>" placeholder="S.STAINING 1">
+									<input name="mapper_acetate" type="text" class="form-control" id="mapper_acetate"
+										value="<?php echo $rcekM['mapper_acetate']; ?>" placeholder="ACETATE">
+									<input name="mapper_cotton" type="text" class="form-control" id="mapper_cotton"
+										value="<?php echo $rcekM['mapper_cotton']; ?>" placeholder="COTTON">
+									<input name="mapper_nylon" type="text" class="form-control" id="mapper_nylon"
+										value="<?php echo $rcekM['mapper_nylon']; ?>" placeholder="NYLON">
+									<input name="mapper_poly" type="text" class="form-control" id="mapper_poly"
+										value="<?php echo $rcekM['mapper_poly']; ?>" placeholder="POLYESTER">
+									<input name="mapper_acrylic" type="text" class="form-control" id="mapper_acrylic"
+										value="<?php echo $rcekM['mapper_acrylic']; ?>" placeholder="ACRYLIC">
+									<input name="mapper_wool" type="text" class="form-control" id="mapper_wool"
+										value="<?php echo $rcekM['mapper_wool']; ?>" placeholder="WOOL">
+								</div>
+								<div class="col-sm-2">
+									<input name="mapper_pf2" type="text" class="form-control" id="mapper_pf2"
+										value="<?php echo $rcekM['mapper_pf2']; ?>" placeholder="PILLING FACE 2">
+									<input name="mapper_pb2" type="text" class="form-control" id="mapper_pb2"
+										value="<?php echo $rcekM['mapper_pb2']; ?>" placeholder="PILLING BACK 2">
+									<input name="mapper_ch2" type="text" class="form-control" id="mapper_ch2"
+										value="<?php echo $rcekM['mapper_ch2']; ?>" placeholder="PASS/FAIL 2">
+									<input name="mapper_cc2" type="text" class="form-control" id="mapper_cc2"
+										value="<?php echo $rcekM['mapper_cc2']; ?>" placeholder="C.CHANGE 2">
+									<input name="mapper_st2" type="text" class="form-control" id="mapper_st2"
+										value="<?php echo $rcekM['mapper_st2']; ?>" placeholder="S.STAINING 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="mapper_pf3" type="text" class="form-control" id="mapper_pf3"
+										value="<?php echo $rcekM['mapper_pf3']; ?>" placeholder="PILLING FACE 3">
+									<input name="mapper_pb3" type="text" class="form-control" id="mapper_pb3"
+										value="<?php echo $rcekM['mapper_pb3']; ?>" placeholder="PILLING BACK 3">
+									<input name="mapper_ch3" type="text" class="form-control" id="mapper_ch3"
+										value="<?php echo $rcekM['mapper_ch3']; ?>" placeholder="PASS/FAIL 3">
+									<input name="mapper_cc3" type="text" class="form-control" id="mapper_cc3"
+										value="<?php echo $rcekM['mapper_cc3']; ?>" placeholder="C.CHANGE 3">
+									<input name="mapper_st3" type="text" class="form-control" id="mapper_st3"
+										value="<?php echo $rcekM['mapper_st3']; ?>" placeholder="S.STAINING 3">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="mapper_note" maxlength="50"><?php echo $rcekM['mapper_note']; ?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="stat_ap" style="display:none;">
-							<label for="stat_ap" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_ap" class="form-control select2" id="stat_ap" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_ap'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_ap'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_ap'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_ap'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_ap'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">
-										PASS</option>
-									<option <?php if ($rcek1['stat_ap'] == "MARGINAL PASS") { ?> selected=selected <?php }
-									; ?>value="MARGINAL PASS">MARGINAL PASS</option>
-									<option <?php if ($rcek1['stat_ap'] == "DATA") { ?> selected=selected <?php }
-									; ?>value="DATA">
-										DATA</option>
-									<option <?php if ($rcek1['stat_ap'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">
-										FAIL</option>
-									<option <?php if ($rcek1['stat_ap'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
+							<div class="form-group" id="ranap" style="display:none;">
+								<label for="ranap" class="col-sm-2 control-label">APPEARANCE (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rapper_pf1" type="text" class="form-control" id="rapper_pf1"
+										value="<?php echo $rcekR['rapper_pf1']; ?>" placeholder="PILLING FACE 1" readonly>
+									<input name="rapper_pb1" type="text" class="form-control" id="rapper_pb1"
+										value="<?php echo $rcekR['rapper_pb1']; ?>" placeholder="PILLING BACK 1" readonly>
+									<input name="rapper_ch1" type="text" class="form-control" id="rapper_ch1"
+										value="<?php echo $rcekR['rapper_ch1']; ?>" placeholder="PASS/FAIL 1" readonly>
+									<input name="rapper_cc1" type="text" class="form-control" id="rapper_cc1"
+										value="<?php echo $rcekR['rapper_cc1']; ?>" placeholder="C.CHANGE 1" readonly>
+									<input name="rapper_st" type="text" class="form-control" id="rapper_st"
+										value="<?php echo $rcekR['rapper_st']; ?>" placeholder="S.STAINING 1" readonly>
+									<input name="rapper_acetate" type="text" class="form-control" id="rapper_acetate"
+										value="<?php echo $rcekR['rapper_acetate']; ?>" placeholder="ACETATE" readonly>
+									<input name="rapper_cotton" type="text" class="form-control" id="rapper_cotton"
+										value="<?php echo $rcekR['rapper_cotton']; ?>" placeholder="COTTON" readonly>
+									<input name="rapper_nylon" type="text" class="form-control" id="rapper_nylon"
+										value="<?php echo $rcekR['rapper_nylon']; ?>" placeholder="NYLON" readonly>
+									<input name="rapper_poly" type="text" class="form-control" id="rapper_poly"
+										value="<?php echo $rcekR['rapper_poly']; ?>" placeholder="POLYESTER" readonly>
+									<input name="rapper_acrylic" type="text" class="form-control" id="rapper_acrylic"
+										value="<?php echo $rcekR['rapper_acrylic']; ?>" placeholder="ACRYLIC" readonly>
+									<input name="rapper_wool" type="text" class="form-control" id="rapper_wool"
+										value="<?php echo $rcekR['rapper_wool']; ?>" placeholder="WOOL" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rapper_pf2" type="text" class="form-control" id="rapper_pf2"
+										value="<?php echo $rcekR['rapper_pf2']; ?>" placeholder="PILLING FACE 2" readonly>
+									<input name="rapper_pb2" type="text" class="form-control" id="rapper_pb2"
+										value="<?php echo $rcekR['rapper_pb2']; ?>" placeholder="PILLING BACK 2" readonly>
+									<input name="rapper_ch2" type="text" class="form-control" id="rapper_ch2"
+										value="<?php echo $rcekR['rapper_ch2']; ?>" placeholder="PASS/FAIL 2" readonly>
+									<input name="rapper_cc2" type="text" class="form-control" id="rapper_cc2"
+										value="<?php echo $rcekR['rapper_cc2']; ?>" placeholder="C.CHANGE 2" readonly>
+									<input name="rapper_st2" type="text" class="form-control" id="rapper_st2"
+										value="<?php echo $rcekR['rapper_st2']; ?>" placeholder="S.STAINING 2" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rapper_pf3" type="text" class="form-control" id="rapper_pf3"
+										value="<?php echo $rcekR['rapper_pf3']; ?>" placeholder="PILLING FACE 3" readonly>
+									<input name="rapper_pb3" type="text" class="form-control" id="rapper_pb3"
+										value="<?php echo $rcekR['rapper_pb3']; ?>" placeholder="PILLING BACK 3" readonly>
+									<input name="rapper_ch3" type="text" class="form-control" id="rapper_ch3"
+										value="<?php echo $rcekR['rapper_ch3']; ?>" placeholder="PASS/FAIL 3" readonly>
+									<input name="rapper_cc3" type="text" class="form-control" id="rapper_cc3"
+										value="<?php echo $rcekR['rapper_cc3']; ?>" placeholder="C.CHANGE 3" readonly>
+									<input name="rapper_st3" type="text" class="form-control" id="rapper_st3"
+										value="<?php echo $rcekR['rapper_st3']; ?>" placeholder="S.STAINING 3" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rapper_note" maxlength="50"
+										readonly><?php echo $rcekR['rapper_note']; ?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="disap" style="display:none;">
-							<label for="disap" class="col-sm-2 control-label">APPEARANCE (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dapper_pf1" type="text" class="form-control" id="dapper_pf1"
-									value="<?php echo $rcekD['dapper_pf1']; ?>" placeholder="PILLING FACE 1">
-								<input name="dapper_pb1" type="text" class="form-control" id="dapper_pb1"
-									value="<?php echo $rcekD['dapper_pb1']; ?>" placeholder="PILLING BACK 1">
-								<input name="dapper_ch1" type="text" class="form-control" id="dapper_ch1"
-									value="<?php echo $rcekD['dapper_ch1']; ?>" placeholder="PASS/FAIL 1">
-								<input name="dapper_cc1" type="text" class="form-control" id="dapper_cc1"
-									value="<?php echo $rcekD['dapper_cc1']; ?>" placeholder="C.CHANGE 1">
-								<input name="dapper_st" type="text" class="form-control" id="dapper_st"
-									value="<?php echo $rcekD['dapper_st']; ?>" placeholder="S.STAINING 1">
-								<input name="dapper_acetate" type="text" class="form-control" id="dapper_acetate"
-									value="<?php echo $rcekD['dapper_acetate']; ?>" placeholder="ACETATE">
-								<input name="dapper_cotton" type="text" class="form-control" id="dapper_cotton"
-									value="<?php echo $rcekD['dapper_cotton']; ?>" placeholder="COTTON">
-								<input name="dapper_nylon" type="text" class="form-control" id="dapper_nylon"
-									value="<?php echo $rcekD['dapper_nylon']; ?>" placeholder="NYLON">
-								<input name="dapper_poly" type="text" class="form-control" id="dapper_poly"
-									value="<?php echo $rcekD['dapper_poly']; ?>" placeholder="POLYESTER">
-								<input name="dapper_acrylic" type="text" class="form-control" id="dapper_acrylic"
-									value="<?php echo $rcekD['dapper_acrylic']; ?>" placeholder="ACRYLIC">
-								<input name="dapper_wool" type="text" class="form-control" id="dapper_wool"
-									value="<?php echo $rcekD['dapper_wool']; ?>" placeholder="WOOL">
-							</div>
-							<div class="col-sm-2">
-								<input name="dapper_pf2" type="text" class="form-control" id="dapper_pf2"
-									value="<?php echo $rcekD['dapper_pf2']; ?>" placeholder="PILLING FACE 2">
-								<input name="dapper_pb2" type="text" class="form-control" id="dapper_pb2"
-									value="<?php echo $rcekD['dapper_pb2']; ?>" placeholder="PILLING BACK 2">
-								<input name="dapper_ch2" type="text" class="form-control" id="dapper_ch2"
-									value="<?php echo $rcekD['dapper_ch2']; ?>" placeholder="PASS/FAIL 2">
-								<input name="dapper_cc2" type="text" class="form-control" id="dapper_cc2"
-									value="<?php echo $rcekD['dapper_cc2']; ?>" placeholder="C.CHANGE 2">
-								<input name="dapper_st2" type="text" class="form-control" id="dapper_st2"
-									value="<?php echo $rcekD['dapper_st2']; ?>" placeholder="S.STAINING 2">
-							</div>
-							<div class="col-sm-2">
-								<input name="dapper_pf3" type="text" class="form-control" id="dapper_pf3"
-									value="<?php echo $rcekD['dapper_pf3']; ?>" placeholder="PILLING FACE 3">
-								<input name="dapper_pb3" type="text" class="form-control" id="dapper_pb3"
-									value="<?php echo $rcekD['dapper_pb3']; ?>" placeholder="PILLING BACK 3">
-								<input name="dapper_ch3" type="text" class="form-control" id="dapper_ch3"
-									value="<?php echo $rcekD['dapper_ch3']; ?>" placeholder="PASS/FAIL 3">
-								<input name="dapper_cc3" type="text" class="form-control" id="dapper_cc3"
-									value="<?php echo $rcekD['dapper_cc3']; ?>" placeholder="C.CHANGE 3">
-								<input name="dapper_st3" type="text" class="form-control" id="dapper_st3"
-									value="<?php echo $rcekD['dapper_st3']; ?>" placeholder="S.STAINING 3">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dapper_note" maxlength="50"><?php echo $rcekD['dapper_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="marap" style="display:none;">
-							<label for="marap" class="col-sm-2 control-label">APPEARANCE (MARGINAL)</label>
-							<div class="col-sm-2">
-								<input name="mapper_pf1" type="text" class="form-control" id="mapper_pf1"
-									value="<?php echo $rcekM['mapper_pf1']; ?>" placeholder="PILLING FACE 1">
-								<input name="mapper_pb1" type="text" class="form-control" id="mapper_pb1"
-									value="<?php echo $rcekM['mapper_pb1']; ?>" placeholder="PILLING BACK 1">
-								<input name="mapper_ch1" type="text" class="form-control" id="mapper_ch1"
-									value="<?php echo $rcekM['mapper_ch1']; ?>" placeholder="PASS/FAIL 1">
-								<input name="mapper_cc1" type="text" class="form-control" id="mapper_cc1"
-									value="<?php echo $rcekM['mapper_cc1']; ?>" placeholder="C.CHANGE 1">
-								<input name="mapper_st" type="text" class="form-control" id="mapper_st"
-									value="<?php echo $rcekM['mapper_st']; ?>" placeholder="S.STAINING 1">
-								<input name="mapper_acetate" type="text" class="form-control" id="mapper_acetate"
-									value="<?php echo $rcekM['mapper_acetate']; ?>" placeholder="ACETATE">
-								<input name="mapper_cotton" type="text" class="form-control" id="mapper_cotton"
-									value="<?php echo $rcekM['mapper_cotton']; ?>" placeholder="COTTON">
-								<input name="mapper_nylon" type="text" class="form-control" id="mapper_nylon"
-									value="<?php echo $rcekM['mapper_nylon']; ?>" placeholder="NYLON">
-								<input name="mapper_poly" type="text" class="form-control" id="mapper_poly"
-									value="<?php echo $rcekM['mapper_poly']; ?>" placeholder="POLYESTER">
-								<input name="mapper_acrylic" type="text" class="form-control" id="mapper_acrylic"
-									value="<?php echo $rcekM['mapper_acrylic']; ?>" placeholder="ACRYLIC">
-								<input name="mapper_wool" type="text" class="form-control" id="mapper_wool"
-									value="<?php echo $rcekM['mapper_wool']; ?>" placeholder="WOOL">
-							</div>
-							<div class="col-sm-2">
-								<input name="mapper_pf2" type="text" class="form-control" id="mapper_pf2"
-									value="<?php echo $rcekM['mapper_pf2']; ?>" placeholder="PILLING FACE 2">
-								<input name="mapper_pb2" type="text" class="form-control" id="mapper_pb2"
-									value="<?php echo $rcekM['mapper_pb2']; ?>" placeholder="PILLING BACK 2">
-								<input name="mapper_ch2" type="text" class="form-control" id="mapper_ch2"
-									value="<?php echo $rcekM['mapper_ch2']; ?>" placeholder="PASS/FAIL 2">
-								<input name="mapper_cc2" type="text" class="form-control" id="mapper_cc2"
-									value="<?php echo $rcekM['mapper_cc2']; ?>" placeholder="C.CHANGE 2">
-								<input name="mapper_st2" type="text" class="form-control" id="mapper_st2"
-									value="<?php echo $rcekM['mapper_st2']; ?>" placeholder="S.STAINING 2">
-							</div>
-							<div class="col-sm-2">
-								<input name="mapper_pf3" type="text" class="form-control" id="mapper_pf3"
-									value="<?php echo $rcekM['mapper_pf3']; ?>" placeholder="PILLING FACE 3">
-								<input name="mapper_pb3" type="text" class="form-control" id="mapper_pb3"
-									value="<?php echo $rcekM['mapper_pb3']; ?>" placeholder="PILLING BACK 3">
-								<input name="mapper_ch3" type="text" class="form-control" id="mapper_ch3"
-									value="<?php echo $rcekM['mapper_ch3']; ?>" placeholder="PASS/FAIL 3">
-								<input name="mapper_cc3" type="text" class="form-control" id="mapper_cc3"
-									value="<?php echo $rcekM['mapper_cc3']; ?>" placeholder="C.CHANGE 3">
-								<input name="mapper_st3" type="text" class="form-control" id="mapper_st3"
-									value="<?php echo $rcekM['mapper_st3']; ?>" placeholder="S.STAINING 3">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="mapper_note" maxlength="50"><?php echo $rcekM['mapper_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranap" style="display:none;">
-							<label for="ranap" class="col-sm-2 control-label">APPEARANCE (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rapper_pf1" type="text" class="form-control" id="rapper_pf1"
-									value="<?php echo $rcekR['rapper_pf1']; ?>" placeholder="PILLING FACE 1" readonly>
-								<input name="rapper_pb1" type="text" class="form-control" id="rapper_pb1"
-									value="<?php echo $rcekR['rapper_pb1']; ?>" placeholder="PILLING BACK 1" readonly>
-								<input name="rapper_ch1" type="text" class="form-control" id="rapper_ch1"
-									value="<?php echo $rcekR['rapper_ch1']; ?>" placeholder="PASS/FAIL 1" readonly>
-								<input name="rapper_cc1" type="text" class="form-control" id="rapper_cc1"
-									value="<?php echo $rcekR['rapper_cc1']; ?>" placeholder="C.CHANGE 1" readonly>
-								<input name="rapper_st" type="text" class="form-control" id="rapper_st"
-									value="<?php echo $rcekR['rapper_st']; ?>" placeholder="S.STAINING 1" readonly>
-								<input name="rapper_acetate" type="text" class="form-control" id="rapper_acetate"
-									value="<?php echo $rcekR['rapper_acetate']; ?>" placeholder="ACETATE" readonly>
-								<input name="rapper_cotton" type="text" class="form-control" id="rapper_cotton"
-									value="<?php echo $rcekR['rapper_cotton']; ?>" placeholder="COTTON" readonly>
-								<input name="rapper_nylon" type="text" class="form-control" id="rapper_nylon"
-									value="<?php echo $rcekR['rapper_nylon']; ?>" placeholder="NYLON" readonly>
-								<input name="rapper_poly" type="text" class="form-control" id="rapper_poly"
-									value="<?php echo $rcekR['rapper_poly']; ?>" placeholder="POLYESTER" readonly>
-								<input name="rapper_acrylic" type="text" class="form-control" id="rapper_acrylic"
-									value="<?php echo $rcekR['rapper_acrylic']; ?>" placeholder="ACRYLIC" readonly>
-								<input name="rapper_wool" type="text" class="form-control" id="rapper_wool"
-									value="<?php echo $rcekR['rapper_wool']; ?>" placeholder="WOOL" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rapper_pf2" type="text" class="form-control" id="rapper_pf2"
-									value="<?php echo $rcekR['rapper_pf2']; ?>" placeholder="PILLING FACE 2" readonly>
-								<input name="rapper_pb2" type="text" class="form-control" id="rapper_pb2"
-									value="<?php echo $rcekR['rapper_pb2']; ?>" placeholder="PILLING BACK 2" readonly>
-								<input name="rapper_ch2" type="text" class="form-control" id="rapper_ch2"
-									value="<?php echo $rcekR['rapper_ch2']; ?>" placeholder="PASS/FAIL 2" readonly>
-								<input name="rapper_cc2" type="text" class="form-control" id="rapper_cc2"
-									value="<?php echo $rcekR['rapper_cc2']; ?>" placeholder="C.CHANGE 2" readonly>
-								<input name="rapper_st2" type="text" class="form-control" id="rapper_st2"
-									value="<?php echo $rcekR['rapper_st2']; ?>" placeholder="S.STAINING 2" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rapper_pf3" type="text" class="form-control" id="rapper_pf3"
-									value="<?php echo $rcekR['rapper_pf3']; ?>" placeholder="PILLING FACE 3" readonly>
-								<input name="rapper_pb3" type="text" class="form-control" id="rapper_pb3"
-									value="<?php echo $rcekR['rapper_pb3']; ?>" placeholder="PILLING BACK 3" readonly>
-								<input name="rapper_ch3" type="text" class="form-control" id="rapper_ch3"
-									value="<?php echo $rcekR['rapper_ch3']; ?>" placeholder="PASS/FAIL 3" readonly>
-								<input name="rapper_cc3" type="text" class="form-control" id="rapper_cc3"
-									value="<?php echo $rcekR['rapper_cc3']; ?>" placeholder="C.CHANGE 3" readonly>
-								<input name="rapper_st3" type="text" class="form-control" id="rapper_st3"
-									value="<?php echo $rcekR['rapper_st3']; ?>" placeholder="S.STAINING 3" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rapper_note" maxlength="50"
-									readonly><?php echo $rcekR['rapper_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- APPEARANCE END-->
 						<!-- HEAT SHRINKAGE BEGIN-->
-						<div class="form-group" id="fc21" style="display:none;">
-							<label for="h_shrinkage" class="col-sm-2 control-label">HEAT SHRINKAGE</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="h_shrinkage_temp" id="h_shrinkage_temp" class="minimal"
-										value="170" <?php if ($rcek1['h_shrinkage_temp'] == '170') {
-											echo "checked";
-										} ?>>
-									170&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="h_shrinkage_temp" id="h_shrinkage_temp" class="minimal"
-										value="180" <?php if ($rcek1['h_shrinkage_temp'] == '180') {
-											echo "checked";
-										} ?>>
-									180&deg;C
-								</label>
-								<label><input type="checkbox" name="h_shrinkage_temp" id="h_shrinkage_temp" class="minimal"
-										value="200" <?php if ($rcek1['h_shrinkage_temp'] == '200') {
-											echo "checked";
-										} ?>>
-									200&deg;C
-								</label>
+							<div class="form-group" id="fc21" style="display:none;">
+								<label for="h_shrinkage" class="col-sm-2 control-label">HEAT SHRINKAGE</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="h_shrinkage_temp" id="h_shrinkage_temp" class="minimal"
+											value="170" <?php if ($rcek1['h_shrinkage_temp'] == '170') {
+												echo "checked";
+											} ?>>
+										170&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="h_shrinkage_temp" id="h_shrinkage_temp" class="minimal"
+											value="180" <?php if ($rcek1['h_shrinkage_temp'] == '180') {
+												echo "checked";
+											} ?>>
+										180&deg;C
+									</label>
+									<label><input type="checkbox" name="h_shrinkage_temp" id="h_shrinkage_temp" class="minimal"
+											value="200" <?php if ($rcek1['h_shrinkage_temp'] == '200') {
+												echo "checked";
+											} ?>>
+										200&deg;C
+									</label>
+								</div>
+								<div class="col-sm-1">
+									<input name="h_shrinkage_l1" type="text" class="form-control" id="h_shrinkage_l1"
+										value="<?php echo $rcek1['h_shrinkage_l1']; ?>" placeholder="LEN 1">
+									<input name="h_shrinkage_w1" type="text" class="form-control" id="h_shrinkage_w1"
+										value="<?php echo $rcek1['h_shrinkage_w1']; ?>" placeholder="WID 1">
+								</div>
+								<div class="col-sm-1">
+									<input name="h_shrinkage_grd" type="text" class="form-control" id="h_shrinkage_grd"
+										value="<?php echo $rcek1['h_shrinkage_grd']; ?>" placeholder="GRADE">
+								</div>
+								<div class="col-sm-2">
+									<input name="h_shrinkage_app" type="text" class="form-control" id="h_shrinkage_app"
+										value="<?php echo $rcek1['h_shrinkage_app']; ?>" placeholder="PASS/FAIL">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="h_shrinkage_note"
+										maxlength="50"><?php echo $rcek1['h_shrinkage_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="h_shrinkage_l1" type="text" class="form-control" id="h_shrinkage_l1"
-									value="<?php echo $rcek1['h_shrinkage_l1']; ?>" placeholder="LEN 1">
-								<input name="h_shrinkage_w1" type="text" class="form-control" id="h_shrinkage_w1"
-									value="<?php echo $rcek1['h_shrinkage_w1']; ?>" placeholder="WID 1">
+							<div class="form-group" id="stat_hs" style="display:none;">
+								<label for="stat_hs" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_hs" class="form-control select2" id="stat_hs" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_hs'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_hs'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_hs'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_hs'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_hs'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">
+											PASS</option>
+										<option <?php if ($rcek1['stat_hs'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">
+											FAIL</option>
+										<option <?php if ($rcek1['stat_hs'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_shr" type="text" class="form-control" id="user_shr" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_shr" type="hidden" class="form-control" id="nama_shr" value="<?php echo $rcek1['nama_shr']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="h_shrinkage_grd" type="text" class="form-control" id="h_shrinkage_grd"
-									value="<?php echo $rcek1['h_shrinkage_grd']; ?>" placeholder="GRADE">
+							<div class="form-group" id="dishs" style="display:none;">
+								<label for="dishs" class="col-sm-2 control-label">HEAT SHRINKAGE (DIS)</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="dh_shrinkage_temp" id="dh_shrinkage_temp"
+											class="minimal" value="170" <?php if ($rcekD['dh_shrinkage_temp'] == '170') {
+												echo "checked";
+											} ?>> 170&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="dh_shrinkage_temp" id="dh_shrinkage_temp"
+											class="minimal" value="180" <?php if ($rcekD['dh_shrinkage_temp'] == '180') {
+												echo "checked";
+											} ?>> 180&deg;C
+									</label>
+									<label><input type="checkbox" name="dh_shrinkage_temp" id="dh_shrinkage_temp"
+											class="minimal" value="200" <?php if ($rcekD['dh_shrinkage_temp'] == '200') {
+												echo "checked";
+											} ?>> 200&deg;C
+									</label>
+								</div>
+								<div class="col-sm-1">
+									<input name="dh_shrinkage_l1" type="text" class="form-control" id="dh_shrinkage_l1"
+										value="<?php echo $rcekD['dh_shrinkage_l1']; ?>" placeholder="LEN 1">
+									<input name="dh_shrinkage_w1" type="text" class="form-control" id="dh_shrinkage_w1"
+										value="<?php echo $rcekD['dh_shrinkage_w1']; ?>" placeholder="WID 1">
+								</div>
+								<div class="col-sm-1">
+									<input name="dh_shrinkage_grd" type="text" class="form-control" id="dh_shrinkage_grd"
+										value="<?php echo $rcekD['dh_shrinkage_grd']; ?>" placeholder="GRADE">
+								</div>
+								<div class="col-sm-2">
+									<input name="dh_shrinkage_app" type="text" class="form-control" id="dh_shrinkage_app"
+										value="<?php echo $rcekD['dh_shrinkage_app']; ?>" placeholder="PASS/FAIL">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dh_shrinkage_note"
+										maxlength="50"><?php echo $rcekD['dh_shrinkage_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="h_shrinkage_app" type="text" class="form-control" id="h_shrinkage_app"
-									value="<?php echo $rcek1['h_shrinkage_app']; ?>" placeholder="PASS/FAIL">
+							<div class="form-group" id="ranhs" style="display:none;">
+								<label for="ranhs" class="col-sm-2 control-label">HEAT SHRINKAGE (RAN)</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="rh_shrinkage_temp" id="rh_shrinkage_temp"
+											class="minimal" value="170" <?php if ($rcekR['rh_shrinkage_temp'] == '170') {
+												echo "checked";
+											} ?>> 170&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="rh_shrinkage_temp" id="rh_shrinkage_temp"
+											class="minimal" value="180" <?php if ($rcekR['rh_shrinkage_temp'] == '180') {
+												echo "checked";
+											} ?>> 180&deg;C
+									</label>
+									<label><input type="checkbox" name="rh_shrinkage_temp" id="rh_shrinkage_temp"
+											class="minimal" value="200" <?php if ($rcekR['rh_shrinkage_temp'] == '200') {
+												echo "checked";
+											} ?>> 200&deg;C
+									</label>
+								</div>
+								<div class="col-sm-1">
+									<input name="rh_shrinkage_l1" type="text" class="form-control" id="rh_shrinkage_l1"
+										value="<?php echo $rcekR['rh_shrinkage_l1']; ?>" placeholder="LEN 1" readonly>
+									<input name="rh_shrinkage_w1" type="text" class="form-control" id="rh_shrinkage_w1"
+										value="<?php echo $rcekR['rh_shrinkage_w1']; ?>" placeholder="WID 1" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rh_shrinkage_grd" type="text" class="form-control" id="rh_shrinkage_grd"
+										value="<?php echo $rcekR['rh_shrinkage_grd']; ?>" placeholder="GRADE" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rh_shrinkage_app" type="text" class="form-control" id="rh_shrinkage_app"
+										value="<?php echo $rcek1['rh_shrinkage_app']; ?>" placeholder="PASS/FAIL" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rh_shrinkage_note" maxlength="50"
+										readonly><?php echo $rcekR['rh_shrinkage_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="h_shrinkage_note"
-									maxlength="50"><?php echo $rcek1['h_shrinkage_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_hs" style="display:none;">
-							<label for="stat_hs" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_hs" class="form-control select2" id="stat_hs" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_hs'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_hs'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_hs'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_hs'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_hs'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">
-										PASS</option>
-									<option <?php if ($rcek1['stat_hs'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">
-										FAIL</option>
-									<option <?php if ($rcek1['stat_hs'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="dishs" style="display:none;">
-							<label for="dishs" class="col-sm-2 control-label">HEAT SHRINKAGE (DIS)</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="dh_shrinkage_temp" id="dh_shrinkage_temp"
-										class="minimal" value="170" <?php if ($rcekD['dh_shrinkage_temp'] == '170') {
-											echo "checked";
-										} ?>> 170&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="dh_shrinkage_temp" id="dh_shrinkage_temp"
-										class="minimal" value="180" <?php if ($rcekD['dh_shrinkage_temp'] == '180') {
-											echo "checked";
-										} ?>> 180&deg;C
-								</label>
-								<label><input type="checkbox" name="dh_shrinkage_temp" id="dh_shrinkage_temp"
-										class="minimal" value="200" <?php if ($rcekD['dh_shrinkage_temp'] == '200') {
-											echo "checked";
-										} ?>> 200&deg;C
-								</label>
-							</div>
-							<div class="col-sm-1">
-								<input name="dh_shrinkage_l1" type="text" class="form-control" id="dh_shrinkage_l1"
-									value="<?php echo $rcekD['dh_shrinkage_l1']; ?>" placeholder="LEN 1">
-								<input name="dh_shrinkage_w1" type="text" class="form-control" id="dh_shrinkage_w1"
-									value="<?php echo $rcekD['dh_shrinkage_w1']; ?>" placeholder="WID 1">
-							</div>
-							<div class="col-sm-1">
-								<input name="dh_shrinkage_grd" type="text" class="form-control" id="dh_shrinkage_grd"
-									value="<?php echo $rcekD['dh_shrinkage_grd']; ?>" placeholder="GRADE">
-							</div>
-							<div class="col-sm-2">
-								<input name="dh_shrinkage_app" type="text" class="form-control" id="dh_shrinkage_app"
-									value="<?php echo $rcekD['dh_shrinkage_app']; ?>" placeholder="PASS/FAIL">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dh_shrinkage_note"
-									maxlength="50"><?php echo $rcekD['dh_shrinkage_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranhs" style="display:none;">
-							<label for="ranhs" class="col-sm-2 control-label">HEAT SHRINKAGE (RAN)</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="rh_shrinkage_temp" id="rh_shrinkage_temp"
-										class="minimal" value="170" <?php if ($rcekR['rh_shrinkage_temp'] == '170') {
-											echo "checked";
-										} ?>> 170&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="rh_shrinkage_temp" id="rh_shrinkage_temp"
-										class="minimal" value="180" <?php if ($rcekR['rh_shrinkage_temp'] == '180') {
-											echo "checked";
-										} ?>> 180&deg;C
-								</label>
-								<label><input type="checkbox" name="rh_shrinkage_temp" id="rh_shrinkage_temp"
-										class="minimal" value="200" <?php if ($rcekR['rh_shrinkage_temp'] == '200') {
-											echo "checked";
-										} ?>> 200&deg;C
-								</label>
-							</div>
-							<div class="col-sm-1">
-								<input name="rh_shrinkage_l1" type="text" class="form-control" id="rh_shrinkage_l1"
-									value="<?php echo $rcekR['rh_shrinkage_l1']; ?>" placeholder="LEN 1" readonly>
-								<input name="rh_shrinkage_w1" type="text" class="form-control" id="rh_shrinkage_w1"
-									value="<?php echo $rcekR['rh_shrinkage_w1']; ?>" placeholder="WID 1" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rh_shrinkage_grd" type="text" class="form-control" id="rh_shrinkage_grd"
-									value="<?php echo $rcekR['rh_shrinkage_grd']; ?>" placeholder="GRADE" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rh_shrinkage_app" type="text" class="form-control" id="rh_shrinkage_app"
-									value="<?php echo $rcek1['rh_shrinkage_app']; ?>" placeholder="PASS/FAIL" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rh_shrinkage_note" maxlength="50"
-									readonly><?php echo $rcekR['rh_shrinkage_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- HEAT SHRINKAGE END-->
 						<!-- FIBRE/FUZZ BEGIN-->
-						<div class="form-group" id="fc22" style="display:none;">
-							<label for="fibre" class="col-sm-2 control-label">FIBRE/FUZZ</label>
-							<div class="col-sm-2">
-								<input name="fibre_transfer" type="text" class="form-control" id="fibre_transfer"
-									value="<?php echo $rcek1['fibre_transfer']; ?>" placeholder="FIBRE TRANSFER">
+							<div class="form-group" id="fc22" style="display:none;">
+								<label for="fibre" class="col-sm-2 control-label">FIBRE/FUZZ</label>
+								<div class="col-sm-2">
+									<input name="fibre_transfer" type="text" class="form-control" id="fibre_transfer"
+										value="<?php echo $rcek1['fibre_transfer']; ?>" placeholder="FIBRE TRANSFER">
+								</div>
+								<div class="col-sm-1">
+									<input name="fibre_grade" type="text" class="form-control" id="fibre_grade"
+										value="<?php echo $rcek1['fibre_grade']; ?>" placeholder="GRADE">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="fibre_note" maxlength="50"><?php echo $rcek1['fibre_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">
-								<input name="fibre_grade" type="text" class="form-control" id="fibre_grade"
-									value="<?php echo $rcek1['fibre_grade']; ?>" placeholder="GRADE">
+							<div class="form-group" id="stat_ff" style="display:none;">
+								<label for="stat_ff" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_ff" class="form-control select2" id="stat_ff" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_ff'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_ff'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_ff'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_ff'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_ff'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">
+											PASS</option>
+										<option <?php if ($rcek1['stat_ff'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">
+											FAIL</option>
+										<option <?php if ($rcek1['stat_ff'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_fuzz" type="text" class="form-control" id="user_fuzz" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_fuzz" type="hidden" class="form-control" id="nama_fuzz" value="<?php echo $rcek1['nama_fuzz']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="fibre_note" maxlength="50"><?php echo $rcek1['fibre_note']; ?></textarea>
+							<div class="form-group" id="disff" style="display:none;">
+								<label for="disff" class="col-sm-2 control-label">FIBRE/FUZZ (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dfibre_transfer" type="text" class="form-control" id="dfibre_transfer"
+										value="<?php echo $rcekD['dfibre_transfer']; ?>" placeholder="FIBRE TRANSFER">
+								</div>
+								<div class="col-sm-1">
+									<input name="dfibre_grade" type="text" class="form-control" id="dfibre_grade"
+										value="<?php echo $rcekD['dfibre_grade']; ?>" placeholder="GRADE">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dfibre_note" maxlength="50"><?php echo $rcekD['dfibre_note']; ?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="stat_ff" style="display:none;">
-							<label for="stat_ff" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_ff" class="form-control select2" id="stat_ff" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_ff'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_ff'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_ff'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_ff'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_ff'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">
-										PASS</option>
-									<option <?php if ($rcek1['stat_ff'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">
-										FAIL</option>
-									<option <?php if ($rcek1['stat_ff'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
+							<div class="form-group" id="ranff" style="display:none;">
+								<label for="ranff" class="col-sm-2 control-label">FIBRE/FUZZ (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rfibre_transfer" type="text" class="form-control" id="rfibre_transfer"
+										value="<?php echo $rcekR['rfibre_transfer']; ?>" placeholder="FIBRE TRANSFER" readonly>
+								</div>
+								<div class="col-sm-1">
+									<input name="rfibre_grade" type="text" class="form-control" id="rfibre_grade"
+										value="<?php echo $rcekR['rfibre_grade']; ?>" placeholder="GRADE" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rfibre_note" maxlength="50"
+										readonly><?php echo $rcekR['rfibre_note']; ?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="disff" style="display:none;">
-							<label for="disff" class="col-sm-2 control-label">FIBRE/FUZZ (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dfibre_transfer" type="text" class="form-control" id="dfibre_transfer"
-									value="<?php echo $rcekD['dfibre_transfer']; ?>" placeholder="FIBRE TRANSFER">
-							</div>
-							<div class="col-sm-1">
-								<input name="dfibre_grade" type="text" class="form-control" id="dfibre_grade"
-									value="<?php echo $rcekD['dfibre_grade']; ?>" placeholder="GRADE">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dfibre_note" maxlength="50"><?php echo $rcekD['dfibre_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranff" style="display:none;">
-							<label for="ranff" class="col-sm-2 control-label">FIBRE/FUZZ (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rfibre_transfer" type="text" class="form-control" id="rfibre_transfer"
-									value="<?php echo $rcekR['rfibre_transfer']; ?>" placeholder="FIBRE TRANSFER" readonly>
-							</div>
-							<div class="col-sm-1">
-								<input name="rfibre_grade" type="text" class="form-control" id="rfibre_grade"
-									value="<?php echo $rcekR['rfibre_grade']; ?>" placeholder="GRADE" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rfibre_note" maxlength="50"
-									readonly><?php echo $rcekR['rfibre_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- FIBRE/FUZZ END-->
 						<!-- ODOUR BEGIN -->
-						<div class="form-group" id="fc28" style="display:none;">
-							<label for="odour" class="col-sm-2 control-label">ODOUR</label>
-							<div class="col-sm-2">
-								<input name="odour" type="text" class="form-control" id="odour"
-									value="<?php echo $rcek1['odour']; ?>" placeholder="ODOUR">
+							<div class="form-group" id="fc28" style="display:none;">
+								<label for="odour" class="col-sm-2 control-label">ODOUR</label>
+								<div class="col-sm-2">
+									<input name="odour" type="text" class="form-control" id="odour"
+										value="<?php echo $rcek1['odour']; ?>" placeholder="ODOUR">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="odour_note" maxlength="50"><?php echo $rcek1['odour_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="odour_note" maxlength="50"><?php echo $rcek1['odour_note']; ?></textarea>
+							<div class="form-group" id="stat_odour" style="display:none;">
+								<label for="stat_odour" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_odour" class="form-control select2" id="stat_odour" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_odour'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_odour'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_odour'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_odour'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_odour'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">PASS</option>
+										<option <?php if ($rcek1['stat_odour'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">FAIL</option>
+										<option <?php if ($rcek1['stat_odour'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_odour" type="text" class="form-control" id="user_odour" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_odour" type="hidden" class="form-control" id="nama_odour" value="<?php echo $rcek1['nama_odour']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="stat_odour" style="display:none;">
-							<label for="stat_odour" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_odour" class="form-control select2" id="stat_odour" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_odour'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_odour'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_odour'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_odour'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_odour'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">PASS</option>
-									<option <?php if ($rcek1['stat_odour'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">FAIL</option>
-									<option <?php if ($rcek1['stat_odour'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
+							<div class="form-group" id="disod" style="display:none;">
+								<label for="disod" class="col-sm-2 control-label">ODOUR (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dodour" type="text" class="form-control" id="dodour"
+										value="<?php echo $rcekD['dodour']; ?>" placeholder="ODOUR">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dodour_note" maxlength="50"><?php echo $rcekD['dodour_note']; ?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="disod" style="display:none;">
-							<label for="disod" class="col-sm-2 control-label">ODOUR (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dodour" type="text" class="form-control" id="dodour"
-									value="<?php echo $rcekD['dodour']; ?>" placeholder="ODOUR">
+							<div class="form-group" id="ranod" style="display:none;">
+								<label for="ranod" class="col-sm-2 control-label">ODOUR (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rodour" type="text" class="form-control" id="rodour"
+										value="<?php echo $rcekR['rodour']; ?>" placeholder="ODOUR" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rodour_note" maxlength="50"
+										readonly><?php echo $rcekR['rodour_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dodour_note" maxlength="50"><?php echo $rcekD['dodour_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranod" style="display:none;">
-							<label for="ranod" class="col-sm-2 control-label">ODOUR (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rodour" type="text" class="form-control" id="rodour"
-									value="<?php echo $rcekR['rodour']; ?>" placeholder="ODOUR" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rodour_note" maxlength="50"
-									readonly><?php echo $rcekR['rodour_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- ODOUR END-->
 						<!-- CURLING BEGIN -->
-						<div class="form-group" id="fc29" style="display:none;">
-							<label for="curling" class="col-sm-2 control-label">CURLING</label>
-							<div class="col-sm-2">
-								<input name="curling" type="text" class="form-control" id="curling"
-									value="<?php echo $rcek1['curling']; ?>" placeholder="CURLING">
+							<div class="form-group" id="fc29" style="display:none;">
+								<label for="curling" class="col-sm-2 control-label">CURLING</label>
+								<div class="col-sm-2">
+									<input name="curling" type="text" class="form-control" id="curling"
+										value="<?php echo $rcek1['curling']; ?>" placeholder="CURLING">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="curling_note" maxlength="50"><?php echo $rcek1['curling_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="curling_note" maxlength="50"><?php echo $rcek1['curling_note']; ?></textarea>
+							<div class="form-group" id="stat_curling" style="display:none;">
+								<label for="stat_curling" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_curling" class="form-control select2" id="stat_curling"
+										onChange="tampil();" style="width: 100%;">
+										<option <?php if ($rcek1['stat_curling'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih</option>
+										<option <?php if ($rcek1['stat_curling'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_curling'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_curling'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_curling'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">PASS</option>
+										<option <?php if ($rcek1['stat_curling'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">FAIL</option>
+										<option <?php if ($rcek1['stat_curling'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_curling" type="text" class="form-control" id="user_curling" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_curling" type="hidden" class="form-control" id="nama_curling" value="<?php echo $rcek1['nama_curling']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="stat_curling" style="display:none;">
-							<label for="stat_curling" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_curling" class="form-control select2" id="stat_curling"
-									onChange="tampil();" style="width: 100%;">
-									<option <?php if ($rcek1['stat_curling'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih</option>
-									<option <?php if ($rcek1['stat_curling'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_curling'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_curling'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_curling'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">PASS</option>
-									<option <?php if ($rcek1['stat_curling'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">FAIL</option>
-									<option <?php if ($rcek1['stat_curling'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
+							<div class="form-group" id="discur" style="display:none;">
+								<label for="discur" class="col-sm-2 control-label">CURLING (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dcurling" type="text" class="form-control" id="dcurling"
+										value="<?php echo $rcekD['dcurling']; ?>" placeholder="CURLING">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dcurling_note" maxlength="50"><?php echo $rcekD['dcurling_note']; ?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="discur" style="display:none;">
-							<label for="discur" class="col-sm-2 control-label">CURLING (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dcurling" type="text" class="form-control" id="dcurling"
-									value="<?php echo $rcekD['dcurling']; ?>" placeholder="CURLING">
+							<div class="form-group" id="rancur" style="display:none;">
+								<label for="rancur" class="col-sm-2 control-label">CURLING (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rcurling" type="text" class="form-control" id="rcurling"
+										value="<?php echo $rcekR['rcurling']; ?>" placeholder="CURLING" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rcurling_note" maxlength="50"
+										readonly><?php echo $rcekR['rcurling_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dcurling_note" maxlength="50"><?php echo $rcekD['dcurling_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="rancur" style="display:none;">
-							<label for="rancur" class="col-sm-2 control-label">CURLING (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rcurling" type="text" class="form-control" id="rcurling"
-									value="<?php echo $rcekR['rcurling']; ?>" placeholder="CURLING" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rcurling_note" maxlength="50"
-									readonly><?php echo $rcekR['rcurling_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- CURLING END-->
 						<!-- NEDLE BEGIN -->
-						<div class="form-group" id="fc30" style="display:none;">
-							<label for="nedle" class="col-sm-2 control-label">NEDLE HOLES &amp; CRACKING</label>
-							<div class="col-sm-2">
-								<input name="nedle" type="text" class="form-control" id="nedle"
-									value="<?php echo $rcek1['nedle']; ?>" placeholder="NEDLE">
+							<div class="form-group" id="fc30" style="display:none;">
+								<label for="nedle" class="col-sm-2 control-label">NEDLE HOLES &amp; CRACKING</label>
+								<div class="col-sm-2">
+									<input name="nedle" type="text" class="form-control" id="nedle"
+										value="<?php echo $rcek1['nedle']; ?>" placeholder="NEDLE">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="nedle_note" maxlength="50"><?php echo $rcek1['nedle_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="nedle_note" maxlength="50"><?php echo $rcek1['nedle_note']; ?></textarea>
+							<div class="form-group" id="stat_nedle" style="display:none;">
+								<label for="stat_nedle" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_nedle" class="form-control select2" id="stat_nedle" onChange="tampil();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_nedle'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_nedle'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_nedle'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_nedle'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_nedle'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">PASS</option>
+										<option <?php if ($rcek1['stat_nedle'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">FAIL</option>
+										<option <?php if ($rcek1['stat_nedle'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_nedle" type="text" class="form-control" id="user_nedle" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_nedle" type="hidden" class="form-control" id="nama_nedle" value="<?php echo $rcek1['nama_nedle']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="stat_nedle" style="display:none;">
-							<label for="stat_nedle" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_nedle" class="form-control select2" id="stat_nedle" onChange="tampil();"
-									style="width: 100%;">
-									<option <?php if ($rcek1['stat_nedle'] == "") { ?> selected=selected <?php }
-									; ?>value="">
-										Pilih
-									</option>
-									<option <?php if ($rcek1['stat_nedle'] == "DISPOSISI") { ?> selected=selected <?php }
-									; ?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if ($rcek1['stat_nedle'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A
-									</option>
-									<option <?php if ($rcek1['stat_nedle'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R
-									</option>
-									<option <?php if ($rcek1['stat_nedle'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">PASS</option>
-									<option <?php if ($rcek1['stat_nedle'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">FAIL</option>
-									<option <?php if ($rcek1['stat_nedle'] == "RANDOM") { ?> selected=selected <?php }
-									; ?>value="RANDOM">RANDOM</option>
-								</select>
+							<div class="form-group" id="disned" style="display:none;">
+								<label for="disned" class="col-sm-2 control-label">NEDLE HOLES &amp; CRACKING (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dnedle" type="text" class="form-control" id="dnedle"
+										value="<?php echo $rcekD['dnedle']; ?>" placeholder="NEDLE">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dnedle_note" maxlength="50"><?php echo $rcekD['dnedle_note']; ?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="disned" style="display:none;">
-							<label for="disned" class="col-sm-2 control-label">NEDLE HOLES &amp; CRACKING (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dnedle" type="text" class="form-control" id="dnedle"
-									value="<?php echo $rcekD['dnedle']; ?>" placeholder="NEDLE">
+							<div class="form-group" id="ranned" style="display:none;">
+								<label for="ranned" class="col-sm-2 control-label">NEDLE HOLES &amp; CRACKING (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rnedle" type="text" class="form-control" id="rnedle"
+										value="<?php echo $rcekR['rnedle']; ?>" placeholder="NEDLE" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rnedle_note" maxlength="50"
+										readonly><?php echo $rcekR['rnedle_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="dnedle_note" maxlength="50"><?php echo $rcekD['dnedle_note']; ?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranned" style="display:none;">
-							<label for="ranned" class="col-sm-2 control-label">NEDLE HOLES &amp; CRACKING (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rnedle" type="text" class="form-control" id="rnedle"
-									value="<?php echo $rcekR['rnedle']; ?>" placeholder="NEDLE" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="rnedle_note" maxlength="50"
-									readonly><?php echo $rcekR['rnedle_note']; ?></textarea>
-							</div>
-						</div>
 						<!-- NEDLE END-->
 						<!-- WRINKLE BEGIN -->
-						<div class="form-group" id="fc31" style="display:none;">
-							<label for="wrinkle" class="col-sm-2 control-label">WRINKLE ORIGINAL</label>
-							<div class="col-sm-2">
-								<input name="wrinkle" type="text" class="form-control" id="wrinkle"
-									value="<?php echo $tq_test_2_array['wrinkle']; ?>" placeholder="Before Wash">
+							<div class="form-group" id="fc31" style="display:none;">
+								<label for="wrinkle" class="col-sm-2 control-label">WRINKLE ORIGINAL</label>
+								<div class="col-sm-2">
+									<input name="wrinkle" type="text" class="form-control" id="wrinkle"
+										value="<?php echo $tq_test_2_array['wrinkle']; ?>" placeholder="Before Wash">
+								</div>
+								<div class="col-sm-2">
+									<select name="stat_wrinkle" class="form-control select2" id="stat_wrinkle"
+										onChange="tampil();" style="width: 100%;">
+										<option <?php if ($tq_test_2_array['stat_wrinkle'] == "") { ?> selected=selected <?php }
+										; ?>value="">Pilih</option>
+										<!-- <option <?php //if($tq_test_2_array['stat_wrinkle']=="DISPOSISI"){       ?> selected=selected <?php //};       ?>value="DISPOSISI">DISPOSISI</option> -->
+										<option <?php if ($tq_test_2_array['stat_wrinkle'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A</option>
+										<option <?php if ($tq_test_2_array['stat_wrinkle'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R</option>
+										<option <?php if ($tq_test_2_array['stat_wrinkle'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">PASS</option>
+										<option <?php if ($tq_test_2_array['stat_wrinkle'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">FAIL</option>
+										<!-- <option <?php //if($tq_test_2_array['stat_wrinkle']=="RANDOM"){       ?> selected=selected <?php //};       ?>value="RANDOM">RANDOM</option> -->
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_wrinkle" type="text" class="form-control" id="user_wrinkle" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_wrinkle" type="hidden" class="form-control" id="nama_wrinkle" value="<?php echo $rcek1['nama_wrinkle']; ?>" placeholder="Nama BOW">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="wrinkle_note" maxlength="50"
+										rows="1"><?php echo $tq_test_2_array['wrinkle_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<select name="stat_wrinkle" class="form-control select2" id="stat_wrinkle"
-									onChange="tampil();" style="width: 100%;">
-									<option <?php if ($tq_test_2_array['stat_wrinkle'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih</option>
-									<!-- <option <?php //if($tq_test_2_array['stat_wrinkle']=="DISPOSISI"){       ?> selected=selected <?php //};       ?>value="DISPOSISI">DISPOSISI</option> -->
-									<option <?php if ($tq_test_2_array['stat_wrinkle'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A</option>
-									<option <?php if ($tq_test_2_array['stat_wrinkle'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R</option>
-									<option <?php if ($tq_test_2_array['stat_wrinkle'] == "PASS") { ?> selected=selected <?php }
-									; ?>value="PASS">PASS</option>
-									<option <?php if ($tq_test_2_array['stat_wrinkle'] == "FAIL") { ?> selected=selected <?php }
-									; ?>value="FAIL">FAIL</option>
-									<!-- <option <?php //if($tq_test_2_array['stat_wrinkle']=="RANDOM"){       ?> selected=selected <?php //};       ?>value="RANDOM">RANDOM</option> -->
-								</select>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
-									name="wrinkle_note" maxlength="50"
-									rows="1"><?php echo $tq_test_2_array['wrinkle_note']; ?></textarea>
-							</div>
-						</div>
 
-						<div class="form-group" id="fc32" style="display:none;">
-							<label for="waterr" class="col-sm-2 control-label">WRINKLE AFTERWASH</label>
-							<div class="col-sm-2">
-								<input name="wrinkle1" type="text" class="form-control" id="wrinkle1"
-									value="<?php echo $tq_test_2_array['wrinkle1']; ?>" placeholder="After Wash">
+							<div class="form-group" id="fc32" style="display:none;">
+								<label for="waterr" class="col-sm-2 control-label">WRINKLE AFTERWASH</label>
+								<div class="col-sm-2">
+									<input name="wrinkle1" type="text" class="form-control" id="wrinkle1"
+										value="<?php echo $tq_test_2_array['wrinkle1']; ?>" placeholder="After Wash">
+								</div>
+								<div class="col-sm-2">
+									<input name="wrinkle2" type="text" class="form-control" id="wrinkle2"
+										value="<?php echo $tq_test_2_array['wrinkle2']; ?>" placeholder="After Wash">
+								</div>
+								<div class="col-sm-2">
+									<select name="stat_wrinkle1" class="form-control select2" id="stat_wrinkle1"
+										onChange="tampil();" style="width: 100%;">
+										<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "") { ?> selected=selected <?php }
+										; ?>value="">Pilih</option>
+										<!-- <option <?php //if($tq_test_2_array['stat_wrinkle1']=="DISPOSISI"){       ?> selected=selected <?php //};       ?>value="DISPOSISI">DISPOSISI</option> -->
+										<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A</option>
+										<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R</option>
+										<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "PASS") { ?> selected=selected
+											<?php }
+										; ?>value="PASS">PASS</option>
+										<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "FAIL") { ?> selected=selected
+											<?php }
+										; ?>value="FAIL">FAIL</option>
+										<!-- <option <?php //if($tq_test_2_array['stat_wrinkle1']=="RANDOM"){       ?> selected=selected <?php //};       ?>value="RANDOM">RANDOM</option> -->
+									</select>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="wrinkle2" type="text" class="form-control" id="wrinkle2"
-									value="<?php echo $tq_test_2_array['wrinkle2']; ?>" placeholder="After Wash">
-							</div>
-							<div class="col-sm-2">
-								<select name="stat_wrinkle1" class="form-control select2" id="stat_wrinkle1"
-									onChange="tampil();" style="width: 100%;">
-									<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "") { ?> selected=selected <?php }
-									; ?>value="">Pilih</option>
-									<!-- <option <?php //if($tq_test_2_array['stat_wrinkle1']=="DISPOSISI"){       ?> selected=selected <?php //};       ?>value="DISPOSISI">DISPOSISI</option> -->
-									<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "A") { ?> selected=selected <?php }
-									; ?>value="A">A</option>
-									<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "R") { ?> selected=selected <?php }
-									; ?>value="R">R</option>
-									<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "PASS") { ?> selected=selected
-										<?php }
-									; ?>value="PASS">PASS</option>
-									<option <?php if ($tq_test_2_array['stat_wrinkle1'] == "FAIL") { ?> selected=selected
-										<?php }
-									; ?>value="FAIL">FAIL</option>
-									<!-- <option <?php //if($tq_test_2_array['stat_wrinkle1']=="RANDOM"){       ?> selected=selected <?php //};       ?>value="RANDOM">RANDOM</option> -->
-								</select>
-							</div>
-						</div>
 						<!-- WRINKLE END -->
 						<div class="form-group">
 							<?php if ($notes != "") { ?>
@@ -8327,7 +8437,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									</select>
 								</div>
 							</div>
-							<!-- WASHING BEGIN-->
+						<!-- WASHING BEGIN-->
 							<div class="form-group" id="c1" style="display:none;">
 								<label for="washing" class="col-sm-2 control-label">WASHING FASTNESS</label>
 								<div class="col-sm-1">
@@ -8407,6 +8517,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<!-- <div class="col-sm-2">
+									<input name="user_washing" type="text" class="form-control" id="user_washing" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_washing" type="hidden" class="form-control" id="nama_washing" value="<?php echo $rcek1['nama_washing']; ?>" placeholder="Nama BOW">
+								</div> -->
 							</div>
 							<div class="form-group" id="diswf" style="display:none;">
 								<label for="diswf" class="col-sm-2 control-label">WASHING FASTNESS (DIS)</label>
@@ -8552,7 +8666,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rwash_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- WASHING END-->
+						<!-- WASHING END-->
 							<!-- WATER BEGIN-->
 							<div class="form-group" id="c2" style="display:none;">
 								<label for="water" class="col-sm-2 control-label">WATER</label>
@@ -11424,7 +11538,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 		<div class="row">
 			<div class="col-xs-12">
 				<h2 class="page-header">
-					<i class="fa fa-globe"></i> Result. asdf
+					<i class="fa fa-globe"></i> Result.
 					<small class="pull-right">Date:
 						<?php echo $rcek1['tgl_buat']; ?>
 					</small>
@@ -14529,7 +14643,6 @@ if ($_POST['colorfastness_save'] == "save") {  // bleeding_root save
 
 if ($_POST['physical_save'] == "save") {
     $fields = array('wrinkle', 'wrinkle1', 'wrinkle2', 'stat_wrinkle', 'stat_wrinkle1', 'wrinkle_note');
-    
     foreach ($fields as $field) {
         $value = trim($_POST[$field]);
         
@@ -14548,6 +14661,31 @@ if ($_POST['physical_save'] == "save") {
             }
         } else {
             $sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET $field = null WHERE id_nokk = '$id_tq_test_2'");
+        }
+    }
+
+    $fields_nama = array('nama_fla','nama_bow','nama_pil','nama_fiber','nama_fc','nama_width','nama_weight','nama_fwss',
+	'nama_locus','nama_box','nama_random','nama_abr','nama_mace','nama_pod','nama_bean',
+	'nama_burst','nama_mullen',	'nama_thick',	'nama_stretch',	'nama_growth',	'nama_apper',
+	'nama_shr',	'nama_fuzz',	'nama_odour',	'nama_curling',	'nama_nedle',	'nama_wrinkle',	'nama_washing',);
+    foreach ($fields_nama as $field_nama) {
+        $value_nama = trim($_POST[$field_nama]);
+        
+        if ($value_nama != "0" && $value_nama != "") {
+            $selectSql_nama = "SELECT * FROM tbl_user_update_tq WHERE id_nokk = '$id_tq_test_2'";
+            $result_nama = mysqli_query($con, $selectSql_nama);
+
+            if (mysqli_num_rows($result_nama) > 0) {
+                // Data sudah ada, lakukan UPDATE
+                $updateSql_nama = "UPDATE tbl_user_update_tq SET $field_nama = '$value_nama' WHERE id_nokk = '$id_tq_test_2'";
+                $sqlPHY_nama = mysqli_query($con, $updateSql_nama);
+            } else {
+                // Data belum ada, lakukan INSERT
+                $insertSql_nama = "INSERT INTO tbl_user_update_tq (id_nokk, $field_nama) VALUES ('$id_tq_test_2','$value_nama')";
+                $sqlPHY_nama = mysqli_query($con, $insertSql_nama);
+            }
+        } else {
+            $sqlPHY_nama = mysqli_query($con, "UPDATE tbl_user_update_tq SET $field_nama = null WHERE id_nokk = '$id_tq_test_2'");
         }
     }
 }
@@ -17034,3 +17172,2026 @@ if ($notes != "" and $cek == 0) {
 ?>
 <div id="PosisiKKTQ" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 	aria-hidden="true"></div>
+
+<!-- SCRIPT USER Flamability -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'flamability',
+			'fla_note',
+			'stat_fla',
+			'dflamability',
+			'dfla_note',
+			'rflamability',
+			'rfla_note',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_fla"]');
+		const userIdInput = document.getElementById('user_fla');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT USER Fibercontent -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'fibercontent','stat_fib','fc_cott','fc_cott1','fc_poly','fc_poly1','fc_ela','fc_ela1','fc_total','std_fc_cott1','std_fc_poly1',
+			'std_fc_elastane1','fiber_note','dfibercontent','dfc_cott','dfc_poly','dfc_ela','dfc_total',
+			'std_dfc_cott1','std_dfc_poly1','std_dfc_elastane1','dfc_cott1','dfc_poly1','dfc_ela1',
+			'dfiber_note','rfibercontent','rfc_cott','std_rfc_cott1','rfc_cott1','rfc_poly',
+			'std_rfc_poly1','rfc_poly1','rfc_ela','std_rfc_elastane1','rfc_ela1','rfiber_note',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_fiber"]');
+		const userIdInput = document.getElementById('user_fiber');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT USER Bow -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'bow', 'skew', 'bas_note', 'stat_bsk',
+			'dbow', 'dskew', 'dbas_note',
+			'mbow', 'mskew', 'mbas_note'
+		];
+		const namaBowInput = document.querySelector('input[name="nama_bow"]');
+		const userIdInput = document.getElementById('user_bow');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT USER Fabric Count -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'wpi',
+			'cpi',
+			'fc_note',
+			'stat_fc',
+			'dwpi',
+			'dcpi',
+			'dfc_note',
+			'rwpi',
+			'rcpi',
+			'rfc_note',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_fc"]');
+		const userIdInput = document.getElementById('user_fc');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT USER Pilling -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'pillingm_f1',
+			'mpillingm_f1',
+			'fpillingm_f1',
+			'dpillingm_f1',
+			'pillingm_b1',
+			'mpillingm_b1',
+			'fpillingm_b1',
+			'dpillingm_b1',
+			'pillingm_f2',
+			'mpillingm_f2',
+			'fpillingm_f2',
+			'dpillingm_f2',
+			'pillingm_b2',
+			'mpillingm_b2',
+			'fpillingm_b2',
+			'dpillingm_b2',
+			'pillingm_f3',
+			'mpillingm_f3',
+			'fpillingm_f3',
+			'dpillingm_f3',
+			'pillingm_b3',
+			'mpillingm_b3',
+			'fpillingm_b3',
+			'dpillingm_b3',
+			'pillingm_f4',
+			'mpillingm_f4',
+			'fpillingm_f4',
+			'dpillingm_f4',
+			'pillingm_b4',
+			'mpillingm_b4',
+			'fpillingm_b4',
+			'dpillingm_b4',
+			'pillingm_f5',
+			'mpillingm_f5',
+			'fpillingm_f5',
+			'dpillingm_f5',
+			'pillingm_b5',
+			'mpillingm_b5',
+			'fpillingm_b5',
+			'dpillingm_b5',
+			'pillm_note',
+			'mpillm_note',
+			'fpillm_note',
+			'dpillm_note',
+			'stat_pm',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_pil"]');
+		const userIdInput = document.getElementById('user_pil');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Fabric Weight -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'fabric_weight',
+			'fwe_note',
+			'stat_fwss2',
+			'dfabric_weight',
+			'dfwe_note',
+			'mfabric_weight',
+			'mfwe_note',
+			'rfabric_weight',
+			'rfwe_note',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_weight"]');
+		const userIdInput = document.getElementById('user_weight');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Fabric Width -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'fabric_width',
+			'fwi_note',
+			'stat_fwss3',
+			'dfabric_width',
+			'dfwi_note',
+			'mfabric_width',
+			'mfwi_note',
+			'rfabric_width',
+			'rfwi_note'
+		];
+		const namaBowInput = document.querySelector('input[name="nama_width"]');
+		const userIdInput = document.getElementById('user_width');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Fabric Srinkage and Spirality -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'ss_temp',			'ss_washes3','ss_washes10','ss_washes15','ss_linedry','ss_tumbledry','apperss_pf1','apperss_pb1','apperss_ch1',
+			'apperss_cc1',
+			'apperss_sf1',
+			'apperss_sb1',
+			'apperss_st',
+			'apperss_pf2',
+			'apperss_pb2',
+			'apperss_ch2',
+			'apperss_cc2',
+			'apperss_sf2',
+			'apperss_sb2',
+			'apperss_pf3',
+			'apperss_pb3',
+			'apperss_ch3',
+			'apperss_cc3',
+			'apperss_sf3',
+			'apperss_sb3',
+			'apperss_pf4',
+			'apperss_pb4',
+			'apperss_ch4',
+			'apperss_cc4',
+			'apperss_sf4',
+			'apperss_sb4',
+			'shrinkage_len1',
+			'shrinkage_wid1',
+			'shrinkage_len2',
+			'shrinkage_wid2',
+			'shrinkage_len3',
+			'shrinkage_wid3',
+			'shrinkage_len4',
+			'shrinkage_wid4',
+			'shrinkage_len5',
+			'shrinkage_wid5',
+			'shrinkage_len6',
+			'shrinkage_wid6',
+			'sns_note',
+			'ss_cmt',
+			'mss_temp','mss_washes3','mss_washes10','mss_washes15','mss_linedry','mss_tumbledry','mapperss_pf1','mapperss_pb1',
+			'mapperss_ch1','mapperss_cc1','mapperss_sf1','mapperss_sb1',
+			'mapperss_st','mapperss_pf2','mapperss_pb2','mapperss_ch2','mapperss_cc2','mapperss_sf2','mapperss_sb2','mapperss_pf3',
+			'mapperss_pb3','mapperss_ch3','mapperss_cc3','mapperss_sf3','mapperss_sb3','mapperss_pf4','mapperss_pb4','mapperss_ch4',
+			'mapperss_cc4','mapperss_sf4','mapperss_sb4','mshrinkage_len1','mshrinkage_wid1','mshrinkage_len2',
+			'mshrinkage_wid2','mshrinkage_len3','mshrinkage_wid3','mshrinkage_len4','mshrinkage_wid4','mshrinkage_len5','mshrinkage_wid5',
+			'mshrinkage_len6','mshrinkage_wid6','msns_note','mss_cmt','mss_temp','mss_washes3','mss_washes10','mss_washes15','mss_linedry','mss_tumbledry','mapperss_pf1',
+			'mapperss_pb1','mapperss_ch1','mapperss_cc1','mapperss_sf1','mapperss_sb1','mapperss_st','mapperss_pf2','mapperss_pb2','mapperss_ch2','mapperss_cc2',
+			'mapperss_sf2','mapperss_sb2','mapperss_pf3','mapperss_pb3','mapperss_ch3','mapperss_cc3','mapperss_sf3','mapperss_sb3','mapperss_pf4','mapperss_pb4',
+			'mapperss_ch4','mapperss_cc4','mapperss_sf4','mapperss_sb4','mshrinkage_len1','mshrinkage_wid1','mshrinkage_len2','mshrinkage_wid2','mshrinkage_len3',
+			'mshrinkage_wid3','mshrinkage_len4','mshrinkage_wid4','mshrinkage_len5','mshrinkage_wid5','mshrinkage_len6','mshrinkage_wid6','msns_note','mss_cmt',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_fwss"]');
+		const userIdInput = document.getElementById('user_fwss');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Locus -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'pillingl_f1','pillingl_b1','pillingl_f2','pillingl_b2','pillingl_f3','pillingl_b3','pillingl_f4','pillingl_b4','pillingl_f5',
+			'pillingl_b5','pilll_note','dpillingl_f1','rpillingl_f1','dpillingl_b1','rpillingl_b1','dpillingl_f2','rpillingl_f2','dpillingl_b2',
+			'rpillingl_b2','dpillingl_f3','rpillingl_f3','dpillingl_b3','rpillingl_b3','dpillingl_f4','rpillingl_f4','dpillingl_b4','rpillingl_b4',
+			'dpillingl_f5','rpillingl_f5','dpillingl_b5','rpillingl_b5','dpilll_note','rpilll_note','stat_pl',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_locus"]');
+		const userIdInput = document.getElementById('user_locus');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Box -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'pillingb_f1','pillingb_b1','pillingb_f2','pillingb_f3','pillb_note','stat_pb',
+			'dpillingb_f1','dpillingb_b1','dpillingb_f2','dpillingb_f3','dpillb_note','mpillingb_f1',
+			'mpillingb_b1','mpillingb_f2','mpillingb_f3','mpillb_note','rpillingb_f1','rpillingb_b1','rpillingb_f2','rpillingb_f3','rpillb_note',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_box"]');
+		const userIdInput = document.getElementById('user_box');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Random -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dpillingrt_f1',
+			'dpillingrt_b1',
+			'dpillingrt_f2',
+			'dpillingrt_b2',
+			'dpillingrt_f3',
+			'dpillingrt_b3',
+			'dpillingrt_f4',
+			'dpillingrt_b4',
+			'dpillingrt_f5',
+			'dpillingrt_b5',
+			'dpillr_note',
+			'rpillingrt_f1',
+			'rpillingrt_b1',
+			'rpillingrt_f2',
+			'rpillingrt_b2',
+			'rpillingrt_f3',
+			'rpillingrt_b3',
+			'rpillingrt_f4',
+			'rpillingrt_b4',
+			'rpillingrt_f5',
+			'rpillingrt_b5',
+			'rpillr_note',
+			'pillingrt_f1',
+			'pillingrt_b1',
+			'pillingrt_f2',
+			'pillingrt_b2',
+			'pillingrt_f3',
+			'pillingrt_b3',
+			'pillingrt_f4',
+			'pillingrt_b4',
+			'pillingrt_f5',
+			'pillingrt_b5',
+			'pillr_note',
+			'stat_prt',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_random"]');
+		const userIdInput = document.getElementById('user_random');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Abration -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'abr',
+			'abr_note',
+			'stat_abr',
+			'dabr',
+			'dabr_note',
+			'rabr',
+			'rabr_note',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_abr"]');
+		const userIdInput = document.getElementById('user_abr');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Snagging Mace -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dsnaggingm_l1',
+			'dsnaggingm_w1',
+			'dsnaggingm_l2',
+			'dsnaggingm_w2',
+			'dsnaggingm_l3',
+			'dsnaggingm_w3',
+			'dsnaggingm_l4',
+			'dsnaggingm_w4',
+			'dsnam_note',
+			'rsnaggingm_l1',
+			'rsnaggingm_w1',
+			'rsnaggingm_l2',
+			'rsnaggingm_w2',
+			'rsnaggingm_l3',
+			'rsnaggingm_w3',
+			'rsnaggingm_l4',
+			'rsnaggingm_w4',
+			'rsnam_note',
+			'snaggingm_l1',
+			'snaggingm_w1',
+			'snaggingm_l2',
+			'snaggingm_w2',
+			'snaggingm_l3',
+			'snaggingm_w3',
+			'snaggingm_l4',
+			'snaggingm_w4',
+			'snam_note',
+			'stat_sm',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_mace"]');
+		const userIdInput = document.getElementById('user_mace');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Snagging Pod -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dsp_grdl1',
+			'dsp_clsl1',
+			'dsp_shol1',
+			'dsp_medl1',
+			'dsp_lonl1',
+			'dsp_grdw1',
+			'dsp_clsw1',
+			'dsp_show1',
+			'dsp_medw1',
+			'dsp_lonw1',
+			'dsp_grdl2',
+			'dsp_clsl2',
+			'dsp_shol2',
+			'dsp_medl2',
+			'dsp_lonl2',
+			'dsp_grdw2',
+			'dsp_clsw2',
+			'dsp_show2',
+			'dsp_medw2',
+			'dsp_lonw2',
+			'dsnap_note',
+			'rsp_grdl1',
+			'rsp_clsl1',
+			'rsp_shol1',
+			'rsp_medl1',
+			'rsp_lonl1',
+			'rsp_grdw1',
+			'rsp_clsw1',
+			'rsp_show1',
+			'rsp_medw1',
+			'rsp_lonw1',
+			'rsp_grdl2',
+			'rsp_clsl2',
+			'rsp_shol2',
+			'rsp_medl2',
+			'rsp_lonl2',
+			'rsp_grdw2',
+			'rsp_clsw2',
+			'rsp_show2',
+			'rsp_medw2',
+			'rsp_lonw2',
+			'rsnap_note',
+			'sp_grdl1',
+			'sp_clsl1',
+			'sp_shol1',
+			'sp_medl1',
+			'sp_lonl1',
+			'sp_grdw1',
+			'sp_clsw1',
+			'sp_show1',
+			'sp_medw1',
+			'sp_lonw1',
+			'sp_grdl2',
+			'sp_clsl2',
+			'sp_shol2',
+			'sp_medl2','sp_lonl2','sp_grdw2','sp_clsw2','sp_show2','sp_medw2','sp_lonw2','snap_note','stat_sp',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_pod"]');
+		const userIdInput = document.getElementById('user_pod');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Bean Bag -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'snaggingb_l1',
+			'snaggingb_w1',
+			'snab_note',
+			'stat_sb',
+			'dsnaggingb_l1',
+			'dsnaggingb_w1',
+			'dsnab_note',
+			'rsnaggingb_l1',
+			'rsnaggingb_w1',
+			'rsnab_note',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_bean"]');
+		const userIdInput = document.getElementById('user_bean');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Brust -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'instron',
+			'stat_bs2',
+			'burs_note',
+			'dinstron',
+			'dburs_note',
+			'minstron',
+			'mburs_note',
+			'rinstron',
+			'rburs_note',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_brust"]');
+		const userIdInput = document.getElementById('user_brust');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Mullen -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'mullen',
+			'stat_bs3',
+			'dmullen',
+			'mmullen',
+			'rmullen',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_mullen"]');
+		const userIdInput = document.getElementById('user_mullen');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Burst -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'tru_burst',
+			'tru_burst2',
+			'rtru_burst',
+			'rtru_burst2',
+			'dtru_burst',
+			'dtru_burst2',
+			'stat_bs',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_burst"]');
+		const userIdInput = document.getElementById('user_burst');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Thickness -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dthick1',
+			'dthick2',
+			'dthick3',
+			'dthickav',
+			'dthick_note',
+			'rthick1',
+			'rthick2',
+			'rthick3',
+			'rthickav',
+			'rthick_note',
+			'thick1',
+			'thick2',
+			'thick3',
+			'thickav',
+			'thick_note',
+			'stat_th',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_thick"]');
+		const userIdInput = document.getElementById('user_thick');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Stretch -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dload_stretch',
+			'rload_stretch',
+			'mload_stretch',
+			'load_stretch',
+			'dstretch_l1',
+			'rstretch_l1',
+			'mstretch_l1',
+			'stretch_l1',
+			'dstretch_w1',
+			'rstretch_w1',
+			'mstretch_w1',
+			'stretch_w1',
+			'dstretch_l2',
+			'rstretch_l2',
+			'mstretch_l2',
+			'stretch_l2',
+			'dstretch_w2',
+			'rstretch_w2',
+			'mstretch_w2',
+			'stretch_w2',
+			'dstretch_l3',
+			'rstretch_l3',
+			'mstretch_l3',
+			'stretch_l3',
+			'dstretch_w3',
+			'rstretch_w3',
+			'mstretch_w3',
+			'stretch_w3',
+			'dstretch_l4',
+			'rstretch_l4',
+			'mstretch_l4',
+			'stretch_l4',
+			'dstretch_w4',
+			'rstretch_w4',
+			'mstretch_w4',
+			'stretch_w4',
+			'dstretch_l5',
+			'rstretch_l5',
+			'mstretch_l5',
+			'stretch_l5',
+			'dstretch_w5',
+			'rstretch_w5',
+			'mstretch_w5',
+			'stretch_w5',
+			'dstretch_note',
+			'rstretch_note',
+			'mstretch_note',
+			'stretch_note',
+			'drecover_l1',
+			'rrecover_l1',
+			'mrecover_l1',
+			'recover_l1',
+			'drecover_l2',
+			'rrecover_l2',
+			'mrecover_l2',
+			'recover_l2',
+			'drecover_w1',
+			'rrecover_w1',
+			'mrecover_w1',
+			'recover_w1',
+			'drecover_w2',
+			'rrecover_w2',
+			'mrecover_w2',
+			'recover_w2',
+			'drecover_l11',
+			'rrecover_l11',
+			'mrecover_l11',
+			'recover_l11',
+			'drecover_l21',
+			'rrecover_l21',
+			'mrecover_l21',
+			'recover_l21',
+			'drecover_w11',
+			'rrecover_w11',
+			'mrecover_w11',
+			'recover_w11',
+			'drecover_w21',
+			'rrecover_w21',
+			'mrecover_w21',
+			'recover_w21',
+			'drecover_l3',
+			'rrecover_l3',
+			'mrecover_l3',
+			'recover_l3',
+			'drecover_l31',
+			'rrecover_l31',
+			'mrecover_l31',
+			'recover_l31',
+			'drecover_w3',
+			'rrecover_w3',
+			'mrecover_w3',
+			'recover_w3',
+			'drecover_w31',
+			'rrecover_w31',
+			'mrecover_w31',
+			'recover_w31',
+			'drecover_l4',
+			'rrecover_l4',
+			'mrecover_l4',
+			'recover_l4',
+			'drecover_l41',
+			'rrecover_l41',
+			'mrecover_l41',
+			'recover_l41',
+			'drecover_w4',
+			'rrecover_w4',
+			'mrecover_w4',
+			'recover_w4',
+			'drecover_w41',
+			'rrecover_w41',
+			'mrecover_w41',
+			'recover_w41',
+			'drecover_l5',
+			'rrecover_l5',
+			'mrecover_l5',
+			'recover_l5',
+			'drecover_l51',
+			'rrecover_l51',
+			'mrecover_l51',
+			'recover_l51',
+			'drecover_w5',
+			'rrecover_w5',
+			'mrecover_w5',
+			'recover_w5',
+			'drecover_w51',
+			'rrecover_w51',
+			'mrecover_w51',
+			'recover_w51',
+			'drecover_note',
+			'rrecover_note',
+			'mrecover_note',
+			'recover_note',
+			'stat_sr',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_stretch"]');
+		const userIdInput = document.getElementById('user_stretch');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Growth -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dgrowth_l1',
+			'dgrowth_w1',
+			'dgrowth_l2',
+			'dgrowth_w2',
+			'dgrowth_note',
+			'drec_growth_l1',
+			'drec_growth_w1',
+			'drec_growth_l2',
+			'drec_growth_w2',
+			'rgrowth_l1',
+			'rgrowth_w1',
+			'rgrowth_l2',
+			'rgrowth_w2',
+			'rgrowth_note',
+			'rrec_growth_l1',
+			'rrec_growth_w1',
+			'rrec_growth_l2',
+			'rrec_growth_w2',
+			'growth_l1',
+			'growth_w1',
+			'growth_l2',
+			'growth_w2',
+			'growth_note',
+			'rec_growth_l1',
+			'rec_growth_w1',
+			'rec_growth_l2',
+			'rec_growth_w2',
+			'stat_gr',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_growth"]');
+		const userIdInput = document.getElementById('user_growth');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Apperance -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dapper_pf1',
+			'dapper_pb1',
+			'dapper_ch1',
+			'dapper_cc1',
+			'dapper_st',
+			'dapper_acetate',
+			'dapper_cotton',
+			'dapper_nylon',
+			'dapper_poly',
+			'dapper_acrylic',
+			'dapper_wool',
+			'dapper_pf2',
+			'dapper_pb2',
+			'dapper_ch2',
+			'dapper_cc2',
+			'dapper_st2',
+			'dapper_pf3',
+			'dapper_pb3',
+			'dapper_ch3',
+			'dapper_cc3',
+			'dapper_st3',
+			'dapper_note',
+			'mapper_pf1',
+			'mapper_pb1',
+			'mapper_ch1',
+			'mapper_cc1',
+			'mapper_st',
+			'mapper_acetate',
+			'mapper_cotton',
+			'mapper_nylon',
+			'mapper_poly',
+			'mapper_acrylic',
+			'mapper_wool',
+			'mapper_pf2',
+			'mapper_pb2',
+			'mapper_ch2',
+			'mapper_cc2',
+			'mapper_st2',
+			'mapper_pf3',
+			'mapper_pb3',
+			'mapper_ch3',
+			'mapper_cc3',
+			'mapper_st3',
+			'mapper_note',
+			'rapper_pf1',
+			'apper_pf1',
+			'rapper_pb1',
+			'apper_pb1',
+			'rapper_ch1',
+			'apper_ch1',
+			'rapper_cc1',
+			'apper_cc1',
+			'rapper_st',
+			'apper_st',
+			'rapper_acetate',
+			'apper_acetate',
+			'rapper_cotton',
+			'apper_cotton',
+			'rapper_nylon',
+			'apper_nylon',
+			'rapper_poly',
+			'apper_poly',
+			'rapper_acrylic',
+			'apper_acrylic',
+			'rapper_wool',
+			'apper_wool',
+			'rapper_pf2',
+			'apper_pf2',
+			'rapper_pb2',
+			'apper_pb2',
+			'rapper_ch2',
+			'apper_ch2',
+			'rapper_cc2',
+			'apper_cc2',
+			'rapper_st2',
+			'apper_st2',
+			'rapper_pf3',
+			'apper_pf3',
+			'rapper_pb3',
+			'apper_pb3',
+			'rapper_ch3',
+			'apper_ch3',
+			'rapper_cc3',
+			'apper_cc3',
+			'rapper_st3',
+			'apper_st3',
+			'rapper_note',
+			'apper_note',
+			'stat_ap',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_apper"]');
+		const userIdInput = document.getElementById('user_apper');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Shrinkage -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dh_shrinkage_temp',
+			'dh_shrinkage_l1',
+			'dh_shrinkage_w1',
+			'dh_shrinkage_grd',
+			'dh_shrinkage_app',
+			'dh_shrinkage_note',
+			'rh_shrinkage_temp',
+			'rh_shrinkage_l1',
+			'rh_shrinkage_w1',
+			'rh_shrinkage_grd',
+			'rh_shrinkage_app',
+			'rh_shrinkage_note',
+			'h_shrinkage_temp',
+			'h_shrinkage_l1',
+			'h_shrinkage_w1',
+			'h_shrinkage_grd',
+			'h_shrinkage_app',
+			'h_shrinkage_note',
+			'stat_hs',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_shr"]');
+		const userIdInput = document.getElementById('user_shr');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Fuzz -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dfibre_transfer',
+			'dfibre_grade',
+			'dfibre_note',
+			'rfibre_transfer',
+			'rfibre_grade',
+			'rfibre_note',
+			'fibre_transfer',
+			'fibre_grade',
+			'fibre_note',
+			'stat_ff',
+
+		];
+		const namaBowInput = document.querySelector('input[name="nama_fuzz"]');
+		const userIdInput = document.getElementById('user_fuzz');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Odour -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dodour',
+			'dodour_note',
+			'rodour',
+			'rodour_note',
+			'odour',
+			'odour_note',
+			'stat_odour',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_odour"]');
+		const userIdInput = document.getElementById('user_odour');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Curling -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dcurling',
+			'dcurling_note',
+			'rcurling',
+			'rcurling_note',
+			'curling',
+			'curling_note',
+			'stat_curling',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_curling"]');
+		const userIdInput = document.getElementById('user_curling');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Nedle -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dnedle',
+			'dnedle_note',
+			'rnedle',
+			'rnedle_note',
+			'nedle',
+			'nedle_note',
+			'stat_nedle',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_nedle"]');
+		const userIdInput = document.getElementById('user_nedle');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Wrinkle -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'wrinkle',
+			'stat_wrinkle',
+			'wrinkle_note',
+			'wrinkle1',
+			'wrinkle2',
+			'stat_wrinkle1',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_wrinkle"]');
+		const userIdInput = document.getElementById('user_wrinkle');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->

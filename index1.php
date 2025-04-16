@@ -748,7 +748,7 @@ $page = strtolower($page);
 
                     <!-- OPERATORTQ AKSES -->
 
-                    <?php if ($_SESSION['lvl_id'] == "TQ" or $_SESSION['lvl_id'] == "OPERATORTQ") { ?>
+                    <?php if ($_SESSION['lvl_id'] == "OPERATORTQ") { ?>
                         <li class="treeview <?= ($_GET['p'] == "Kain-Masuk-New" || $_GET['p'] == "Result-New" || $_GET['p'] == "Result-KK-New" || $_GET['p'] == "Result-NoTest-New" || $_GET['p'] == "Testing-New" || $_GET['p'] == "Testing-NewNoTes" || $_GET['p'] == "StatusTQ-New" || $_GET['p'] == "SummaryTQ-New" || $_GET['p'] == "SummaryTQ-Nokk-New" || $_GET['p'] == "Report-New" || $_GET['p'] == "Random" || $_GET['p'] == "CetakRandom" || $_GET['p'] == "Random-New" || $_GET['p'] == "Randomh-New" || $_GET['p'] == "EditTQ-New" || $_GET['p'] == "Master-Data-New" || $_GET['p'] == "Final-StatusTQ-New" || $_GET['p'] == "MasterTest-New" || $_GET['p'] == "Testing-Operan" || $_GET['p'] == "Testing-OperanNoTes" || $_GET['p'] == "Rumus-Hitung" || $_GET['p'] == "Lihat-Grafik-DT" || $_GET['p'] == "Report-FLLululemon" || $_GET['p'] == "Report-FLLululemonNoTes" || $_GET['p'] == "Master-Hangtag" || $_GET['p'] == "Std-Tq-UA" || $_GET['p'] == "Report-UA" || $_GET['p'] == "Report-UANoTes") ? "active" : ""; ?>">
                             <a href="#"><i class="fa fa-cube"></i> <span>Test Quality New</span>
                                 <span class="pull-right-container">
