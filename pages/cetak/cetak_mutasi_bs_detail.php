@@ -94,18 +94,18 @@ if ($Awal != "") {
                 </strong></td>
               <td align="center" valign="middle">
                 <table width="100%" border="0">
-                  <tbody>
-                    <tr>
-                      <td>No. Form</td>
-                      <td>:13-01</td>
+                    <tbody>
+                    <tr style="border: none;">
+                      <td style="border: none;">No. Form</td>
+                      <td style="border: none;">:13-01</td>
                     </tr>
-                    <tr>
-                      <td>No. Revisi</td>
-                      <td>: 00</td>
+                    <tr style="border: none;">
+                      <td style="border: none;">No. Revisi</td>
+                      <td style="border: none;">: 00</td>
                     </tr>
-                    <tr>
-                      <td>Tgl. Terbit</td>
-                      <td>: 23-jan-18</td>
+                    <tr style="border: none;">
+                      <td style="border: none;">Tgl. Terbit</td>
+                      <td style="border: none;">: 23-jan-18</td>
                     </tr>
                   </tbody>
                 </table>
@@ -193,10 +193,20 @@ if ($Awal != "") {
                 <?php echo $no; ?>
               </td>
               <td align="center" valign="top"><strong>
-                  <?php echo $rowd['jns_limbah']; ?>
+                  <?php 
+                  if ($no == 1) {
+                    echo $rowd['jns_limbah']; 
+                  } 
+                  ?>
                 </strong></td>
-              <td align="center" valign="top">
-                <?php echo $rowd['qty'] . " " . $rowd['satuan']; ?>
+              <td align="left" valign="top">
+                <table width="100%" style="border: none;">
+                  <tr>
+                    <td style="border: none;" width="30%" align="right"><?php echo $rowd['qty']; ?></td>
+                    <td style="border: none;" width="20%" align="right"><?php echo $rowd['satuan']; ?></td>
+                    <td style="border: none;" width="50%" align="left"><?php echo $rowd['catatan']; ?></td>
+                  </tr>
+                </table>
               </td>
             </tr>
             <?php $no++;
@@ -223,9 +233,9 @@ if ($Awal != "") {
             <td width="39%">
               <font size="+2">TOTAL</font>
             </td>
-            <td width="61%" align="right">
+            <td width="61%" align="center">
               <font size="+4"> <strong>
-                  <?php echo number_format($Tqty, 2, '.', ''); ?> KG
+                  <?php echo number_format($Tqty, 2, '.', ''); ?> &nbsp;&nbsp;&nbsp;KG
                 </strong></font>
             </td>
           </tr>
@@ -261,8 +271,8 @@ if ($Awal != "") {
         </tr>
         <tr>
           <td>Jabatan</td>
-          <td align="center">Leader</td>
-          <td align="center">Staff</td>
+          <td align="center"> <?php echo $r['jabatan1']; ?></td>
+          <td align="center"> <?php echo $r['jabatan2']; ?></td>
         </tr>
         <tr>
           <td>Tanggal</td>

@@ -1935,9 +1935,21 @@ $page = strtolower($page);
                 disabled: false,
                 showbuttons: false
             });
+            $('.jabatan1').editable({
+                type: 'text',
+                url: 'pages/editable/editable_jabatan1.php',
+                disabled: false,
+                showbuttons: false
+            });
             $('.diterima').editable({
                 type: 'text',
                 url: 'pages/editable/editable_diterima.php',
+                disabled: false,
+                showbuttons: false
+            });
+            $('.jabatan2').editable({
+                type: 'text',
+                url: 'pages/editable/editable_jabatan2.php',
                 disabled: false,
                 showbuttons: false
             });
