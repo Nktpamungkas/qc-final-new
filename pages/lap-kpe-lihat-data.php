@@ -392,22 +392,22 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td><?php echo $row1['masalah'];?></td>
             <td><?php echo $row1['penyebab'];?></td>
             <td><?php echo $row1['kategori'];?></td> <!-- route cause -->
-            <td>
-                <?php if($row1['solusi'] == "PERBAIKAN GARMENT") { ?>
+            <!-- <td> -->
+                <!-- <?php if($row1['solusi'] == "PERBAIKAN GARMENT") { ?> -->
 
-                  <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="detail_solusi_perbaikan_garment"><?php echo $row1['solusi'];?></a>
-                  <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="edit_detail_solusi_perbaikan_garment btn btn-info btn-xs">Edit</a>
+                  <!-- <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="detail_solusi_perbaikan_garment"><?php echo $row1['solusi'];?></a> -->
+                  <!-- <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="edit_detail_solusi_perbaikan_garment btn btn-info btn-xs">Edit</a> -->
                   <!-- <a href="#" id='' class="detail_solusi_perbaikan_garment" data-toggle="modal" data-target="#DataSolusi" data-no_item="<?php echo $row1['no_item']; ?>"><?php echo $row1['solusi'];?></a> -->
                 
-                <?php }elseif($row1['solusi'] == "DEBIT NOTE"){?>
-                  <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="detail_solusi_debit_note"><?php echo $row1['solusi'];?></a>
-                  <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="edit_detail_solusi_debit_note btn btn-info btn-xs">Edit</a>
+                <!-- <?php }elseif($row1['solusi'] == "DEBIT NOTE"){?> -->
+                  <!-- <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="detail_solusi_debit_note"><?php echo $row1['solusi'];?></a> -->
+                  <!-- <a href="#" id='' nsp-id="<?=$row1['id'];?>" class="edit_detail_solusi_debit_note btn btn-info btn-xs">Edit</a> -->
                   
-                <?php }else{?>
-                  <?php echo $row1['solusi'];?>
-                <?php }?>
-            </td>
-            
+                <!-- <?php }else{?> -->
+                  <!-- <?php echo $row1['solusi'];?> -->
+                <!-- <?php }?> -->
+            <!-- </td> -->
+            <td><?php echo $row1['solusi']; ?></td>
                   <!-- <td><?php //echo $row1['solusi'];?></td> -->
                   <td><?php echo $row1['klasifikasi'];?></td>
             <td><?php if($row1['personil2']!=""){echo $row1['personil'].",".$row1['personil2'];}else{echo $row1['personil'];}?></td>
