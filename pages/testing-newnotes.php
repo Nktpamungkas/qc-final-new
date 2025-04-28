@@ -1682,9 +1682,9 @@ if ($nokk_demand_data > 0) {
 									echo $rcek['nodemand'];
 								} else {
 									echo $_GET['nodemand'];
-								} ?>" placeholder="No Demand" required <?php if ($_SESSION['lvl_id'] == "TQ") {
-									 echo "readonly";
-								 } ?>>
+								} ?>" placeholder="No Demand" required <?php if ($_SESSION['lvl_id'] == "TQ" || $_SESSION['lvl_id'] == "OPERATORTQ") {
+									echo "readonly";
+								} ?>>
 						</div>
 					</div>
 
@@ -1948,7 +1948,7 @@ $id_tq_test_2 = $rcek['id'];
 $tq_test_2_sql = mysqli_query($con, "select id_nokk, spirality_status, bleeding_root, wrinkle, wrinkle1, wrinkle2, stat_wrinkle, stat_wrinkle1, wrinkle_note from tbl_tq_test_2 where id_nokk = '$id_tq_test_2'");
 $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 ?>
-<?php if ($_SESSION['lvl_id'] == "TQ" and $cek > 0) { ?>
+<?php if (($_SESSION['lvl_id'] == "TQ"|| $_SESSION['lvl_id'] == "OPERATORTQ") and $cek > 0) { ?>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box">
@@ -6642,6 +6642,9 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										<option <?php if ($rcek1['stat_sb'] == "PASS") { ?> selected=selected <?php }
 										; ?>value="PASS">
 											PASS</option>
+										<option <?php if ($rcek1['stat_sb'] == "MARGINAL PASS") { ?> selected=selected <?php }
+										; ?>value="MARGINAL PASS">
+											MARGINAL PASS</option>
 										<option <?php if ($rcek1['stat_sb'] == "FAIL") { ?> selected=selected <?php }
 										; ?>value="FAIL">
 											FAIL</option>
@@ -8517,10 +8520,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
-								<!-- <div class="col-sm-2">
+								<div class="col-sm-2">
 									<input name="user_washing" type="text" class="form-control" id="user_washing" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
 									<input name="nama_washing" type="hidden" class="form-control" id="nama_washing" value="<?php echo $rcek1['nama_washing']; ?>" placeholder="Nama BOW">
-								</div> -->
+								</div>
 							</div>
 							<div class="form-group" id="diswf" style="display:none;">
 								<label for="diswf" class="col-sm-2 control-label">WASHING FASTNESS (DIS)</label>
@@ -8667,7 +8670,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								</div>
 							</div>
 						<!-- WASHING END-->
-							<!-- WATER BEGIN-->
+						<!-- WATER BEGIN-->
 							<div class="form-group" id="c2" style="display:none;">
 								<label for="water" class="col-sm-2 control-label">WATER</label>
 								<div class="col-sm-2">
@@ -8727,6 +8730,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										<option <?php if ($rcek1['stat_wtr'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_water" type="text" class="form-control" id="user_water" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_water" type="hidden" class="form-control" id="nama_water" value="<?php echo $rcek1['nama_water']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<div class="form-group" id="diswtr" style="display:none;">
@@ -8828,8 +8835,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rwater_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- WATER END-->
-							<!-- PERSPIRATION ACID BEGIN-->
+						<!-- WATER END-->
+						<!-- PERSPIRATION ACID BEGIN-->
 							<div class="form-group" id="c3" style="display:none;">
 								<label for="acid" class="col-sm-2 control-label">PERSPIRATION ACID</label>
 								<div class="col-sm-2">
@@ -8889,6 +8896,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										<option <?php if ($rcek1['stat_pac'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_acid" type="text" class="form-control" id="user_acid" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_acid" type="hidden" class="form-control" id="nama_acid" value="<?php echo $rcek1['nama_acid']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<div class="form-group" id="dispac" style="display:none;">
@@ -8988,8 +8999,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['racid_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- PERSPIRATION ACID END-->
-							<!-- PERSPIRATION ALKALINE BEGIN-->
+						<!-- PERSPIRATION ACID END-->
+						<!-- PERSPIRATION ALKALINE BEGIN-->
 							<div class="form-group" id="c4" style="display:none;">
 								<label for="alkaline" class="col-sm-2 control-label">PERSPIRATION ALKALINE</label>
 								<div class="col-sm-2">
@@ -9050,6 +9061,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										<option <?php if ($rcek1['stat_pal'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_alkaline" type="text" class="form-control" id="user_alkaline" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_alkaline" type="hidden" class="form-control" id="nama_alkaline" value="<?php echo $rcek1['nama_alkaline']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<div class="form-group" id="dispal" style="display:none;">
@@ -9154,8 +9169,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['ralkaline_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- PERSPIRATION ALKALINE END-->
-							<!-- CROCKING BEGIN-->
+						<!-- PERSPIRATION ALKALINE END-->
+						<!-- CROCKING BEGIN-->
 							<div class="form-group" id="c5" style="display:none;">
 								<label for="crocking" class="col-sm-2 control-label">CROCKING</label>
 								<div class="col-sm-1">LEN 1
@@ -9206,6 +9221,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										<option <?php if ($rcek1['stat_cr'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_crocking" type="text" class="form-control" id="user_crocking" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_crocking" type="hidden" class="form-control" id="nama_crocking" value="<?php echo $rcek1['nama_crocking']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<div class="form-group" id="discr" style="display:none;">
@@ -9278,8 +9297,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rcrock_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- CROCKING END-->
-							<!-- PHENOLIC YELLOWING BEGIN-->
+						<!-- CROCKING END-->
+						<!-- PHENOLIC YELLOWING BEGIN-->
 							<div class="form-group" id="c6" style="display:none;">
 								<label for="phenolic" class="col-sm-2 control-label">PHENOLIC YELLOWING</label>
 								<div class="col-sm-2">
@@ -9321,6 +9340,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_phenolic" type="text" class="form-control" id="user_phenolic" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_phenolic" type="hidden" class="form-control" id="nama_phenolic" value="<?php echo $rcek1['nama_phenolic']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="dispy" style="display:none;">
 								<label for="dispy" class="col-sm-2 control-label">PHENOLIC YELLOWING (DIS)</label>
@@ -9361,8 +9384,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rphenolic_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- PHENOLIC YELLOWING END-->
-							<!-- COLOR MIGRATION - OVEN TEST BEGIN-->
+						<!-- PHENOLIC YELLOWING END-->
+						<!-- COLOR MIGRATION - OVEN TEST BEGIN-->
 							<div class="form-group" id="c7" style="display:none;">
 								<label for="cm_printing" class="col-sm-2 control-label">COLOR MIGRATION - OVEN TEST</label>
 								<div class="col-sm-2">
@@ -9400,6 +9423,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_cmo" type="text" class="form-control" id="user_cmo" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_cmo" type="hidden" class="form-control" id="nama_cmo" value="<?php echo $rcek1['nama_cmo']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="discmo" style="display:none;">
 								<label for="discmo" class="col-sm-2 control-label">COLOR MIGRATION - OVEN TEST (DIS)</label>
@@ -9428,7 +9455,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rcm_printing_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- COLOR MIGRATION - OVEN TEST END-->
+						<!-- COLOR MIGRATION - OVEN TEST END-->
 
 							<div class="form-group" id="conceal" style="display:none;">
 
@@ -9575,7 +9602,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 
 
 							</div>
-							<!-- COLOR MIGRATION BEGIN-->
+						<!-- COLOR MIGRATION BEGIN-->
 							<div class="form-group" id="c8" style="display:none;">
 								<label for="cm_dye" class="col-sm-2 control-label">COLOR MIGRATION FASTNESS</label>
 								<div class="col-sm-2">
@@ -9637,6 +9664,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										<option <?php if ($rcek1['stat_cm'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_cm" type="text" class="form-control" id="user_cm" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_cm" type="hidden" class="form-control" id="nama_cm" value="<?php echo $rcek1['nama_cm']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<div class="form-group" id="discm" style="display:none;">
@@ -9716,8 +9747,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rcm_dye_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- COLOR MIGRATION END-->
-							<!-- LIGHT FASTNESS BEGIN-->
+						<!-- COLOR MIGRATION END-->
+						<!-- LIGHT FASTNESS BEGIN-->
 							<div class="form-group" id="c9" style="display:none;">
 								<label for="light" class="col-sm-2 control-label">LIGHT FASTNESS</label>
 								<div class="col-sm-2">
@@ -9763,6 +9794,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										<option <?php if ($rcek1['stat_lg'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_light" type="text" class="form-control" id="user_light" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_light" type="hidden" class="form-control" id="nama_light" value="<?php echo $rcek1['nama_light']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<div class="form-group" id="dislg" style="display:none;">
@@ -9819,8 +9854,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rlight_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- LIGHT FASTNESS END-->
-							<!-- LIGHT PERSPIRATION BEGIN-->
+						<!-- LIGHT FASTNESS END-->
+						<!-- LIGHT PERSPIRATION BEGIN-->
 							<div class="form-group" id="c10" style="display:none;">
 								<label for="light_pers" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS</label>
 								<div class="col-sm-2">
@@ -9861,6 +9896,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										<option <?php if ($rcek1['stat_lp'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_lp" type="text" class="form-control" id="user_lp" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_lp" type="hidden" class="form-control" id="nama_lp" value="<?php echo $rcek1['nama_lp']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<div class="form-group" id="dislp" style="display:none;">
@@ -9906,8 +9945,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rlight_pers_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- LIGHT PERSPIRATION END-->
-							<!-- SALIVA BEGIN-->
+						<!-- LIGHT PERSPIRATION END-->
+						<!-- SALIVA BEGIN-->
 							<div class="form-group" id="c11" style="display:none;">
 								<label for="saliva" class="col-sm-2 control-label">SALIVA FASTNESS</label>
 								<div class="col-sm-2">
@@ -9944,6 +9983,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_saliva" type="text" class="form-control" id="user_saliva" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_saliva" type="hidden" class="form-control" id="nama_saliva" value="<?php echo $rcek1['nama_saliva']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="disslv" style="display:none;">
 								<label for="disslv" class="col-sm-2 control-label">SALIVA FASTNESS (DIS)</label>
@@ -9970,11 +10013,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rsaliva_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- SALIVA END-->
-							<!-- BLEEDING BEGIN-->
+						<!-- SALIVA END-->
+						<!-- BLEEDING BEGIN-->
 							<div class="form-group" id="c12" style="display:none;">
 								<label for="bleeding" class="col-sm-2 control-label">BLEEDING</label>
-
 								<div class="col-sm-2">
 									<input name="bleeding" type="text" class="form-control" id="bleeding"
 										value="<?php echo $rcek1['bleeding']; ?>" placeholder="Watermark">
@@ -10014,6 +10056,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_bleeding" type="text" class="form-control" id="user_bleeding" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_bleeding" type="hidden" class="form-control" id="nama_bleeding" value="<?php echo $rcek1['nama_bleeding']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="disbld" style="display:none;">
 								<label for="disbld" class="col-sm-2 control-label">BLEEDING (DIS)</label>
@@ -10043,8 +10089,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rbleeding_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- BLEEDING END-->
-							<!-- CHLORIN BEGIN-->
+						<!-- BLEEDING END-->
+						<!-- CHLORIN BEGIN-->
 							<div class="form-group" id="c13" style="display:none;">
 								<label for="chlorin" class="col-sm-2 control-label">CHLORIN</label>
 								<div class="col-sm-2">
@@ -10081,6 +10127,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_chlorin" type="text" class="form-control" id="user_chlorin" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_chlorin" type="hidden" class="form-control" id="nama_chlorin" value="<?php echo $rcek1['nama_chlorin']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="dischl" style="display:none;">
 								<label for="dischl" class="col-sm-2 control-label">CHLORIN (DIS)</label>
@@ -10106,8 +10156,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rchlorin_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- CHLORIN END-->
-							<!-- NON CHLORIN BEGIN-->
+						<!-- CHLORIN END-->
+						<!-- NON CHLORIN BEGIN-->
 							<div class="form-group" id="c14" style="display:none;">
 								<label for="nchlorin" class="col-sm-2 control-label">NON-CHLORIN</label>
 								<div class="col-sm-2">
@@ -10141,6 +10191,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_nchl" type="text" class="form-control" id="user_nchl" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_nchl" type="hidden" class="form-control" id="nama_nchl" value="<?php echo $rcek1['nama_nchl']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="disnchl" style="display:none;">
 								<label for="disnchl" class="col-sm-2 control-label">NON CHLORIN (DIS)</label>
@@ -10160,8 +10214,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										value="<?php echo $rcekR['rnchlorin2']; ?>" placeholder="" readonly>
 								</div>
 							</div>
-							<!-- NON CHLORIN END-->
-							<!-- DYE TRANSFER BEGIN-->
+						<!-- NON CHLORIN END-->
+						<!-- DYE TRANSFER BEGIN-->
 							<div class="form-group" id="c15" style="display:none;">
 								<label for="dye_tf" class="col-sm-2 control-label">DYE TRANSFER</label>
 								<div class="col-sm-2">
@@ -10221,6 +10275,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										<option <?php if ($rcek1['stat_dye'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_transfer" type="text" class="form-control" id="user_transfer" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_transfer" type="hidden" class="form-control" id="nama_transfer" value="<?php echo $rcek1['nama_transfer']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<div class="form-group" id="disdye" style="display:none;">
@@ -10321,8 +10379,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rdye_tf_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- DYE TRANSFER END-->
-							<!-- FIBER SHEDDING BEGIN-->
+						<!-- DYE TRANSFER END-->
+						<!-- FIBER SHEDDING BEGIN-->
 							<div class="form-group" id="c16" style="display:none;">
 								<label for="fiber_shed" class="col-sm-2 control-label">FIBER SHEDDING</label>
 								<div class="col-sm-2">Classification
@@ -10352,19 +10410,6 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							</div>
 							<div class="form-group" id="stat_rub" style="display:none;">
 								<label for="stat_rub" class="col-sm-2 control-label">RUB TEST</label>
-									<div class="col-sm-2">NAMA
-										<?php
-										$id_user = $rcek1['nama_rub'] ?? $_SESSION['user_id'] ?? '';
-										$sql_user = "SELECT nama FROM user_login WHERE id='$id_user'";
-										$query_user = mysqli_query($con, $sql_user) or die("error: " . mysqli_error($con));
-										$user = mysqli_fetch_array($query_user);
-										?>
-										<input name="user_id" type="text" class="form-control" id="user_id" value="<?= $user['nama']; ?>" placeholder="nama" readonly>
-										<input type="hidden" name="nama_rub" value="<?= $id_user; ?>">
-									</div>
-									
-
-
 								<div class="col-sm-2"> STATUS
 									<select name="status_rub" class="form-control select2" id="status_rub" onChange="tampil2();"
 										style="width: 100%;">
@@ -10379,8 +10424,12 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_fibershe" type="text" class="form-control" id="user_fibershe" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_fibershe" type="hidden" class="form-control" id="nama_fibershe" value="<?php echo $rcek1['nama_fibershe']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
-							<!-- FIBER SHEDDING END-->
+						<!-- FIBER SHEDDING END-->
 							<div class="form-group">
 								<?php if ($notes != "") { ?>
 									<button type="submit" class="btn btn-primary pull-right" name="colorfastness_save"
@@ -10389,6 +10438,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							</div>
 						</form>
 					</div>
+				<!-- Untuk Kolom Functional & PH  -->
 					<div class="tab-pane" id="tab_3">
 						<form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="form3"
 							id="form3">
@@ -10411,7 +10461,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									</select>
 								</div>
 							</div>
-							<!-- WICKING BEGIN-->
+						<!-- WICKING BEGIN-->
 							<div class="form-group" id="f1" style="display:none;">
 								<label for="wicking" class="col-sm-2 control-label">WICKING LENGTH</label>
 								<div class="col-sm-2">
@@ -10457,6 +10507,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
 										name="wick_note" maxlength="50"><?php echo $rcek1['wick_note']; ?></textarea>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_wick_l" type="text" class="form-control" id="user_wick_l" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_wick_l" type="hidden" class="form-control" id="nama_wick_l" value="<?php echo $rcek1['nama_wick_l']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<div class="form-group" id="diswic" style="display:none;">
@@ -10565,6 +10619,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_wick_l2" type="text" class="form-control" id="user_wick_l2" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_wick_l2" type="hidden" class="form-control" id="nama_wick_l2" value="<?php echo $rcek1['nama_wick_l2']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<!--<div class="form-group" id="stat_wic" style="display:none;">
 								<label for="stat_wic" class="col-sm-2 control-label">STATUS</label>
@@ -10663,6 +10721,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_wick_w" type="text" class="form-control" id="user_wick_w" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_wick_w" type="hidden" class="form-control" id="nama_wick_w" value="<?php echo $rcek1['nama_wick_w']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="diswic1" style="display:none;">
 								<label for="diswic1" class="col-sm-2 control-label">WICKING WIDTH (DIS)</label>
@@ -10757,6 +10819,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_wick_w2" type="text" class="form-control" id="user_wick_w2" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_wick_w2" type="hidden" class="form-control" id="nama_wick_w2" value="<?php echo $rcek1['nama_wick_w2']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<!--<div class="form-group" id="stat_wic" style="display:none;">
 								<label for="stat_wic" class="col-sm-2 control-label">STATUS</label>
@@ -10814,8 +10880,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									<input name="rwick_w3" type="text" class="form-control" id="rwick_w3" value="<?php echo $rcekR['rwick_w3']; ?>" placeholder="WID 3"> -->
 								</div>
 							</div>
-							<!-- WICKING END-->
-							<!-- ABSORBENCY BEGIN-->
+						<!-- WICKING END-->
+						<!-- ABSORBENCY BEGIN-->
 							<div class="form-group" id="f2" style="display:none;">
 								<label for="absor" class="col-sm-2 control-label">ABSORBENCY ORIGINAL</label>
 								<div class="col-sm-2">
@@ -10854,6 +10920,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
 										name="absor_note" maxlength="50"><?php echo $rcek1['absor_note']; ?></textarea>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_absor1" type="text" class="form-control" id="user_absor1" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_absor1" type="hidden" class="form-control" id="nama_absor1" value="<?php echo $rcek1['nama_absor1']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<div class="form-group" id="disabs" style="display:none;">
@@ -10928,6 +10998,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_absor2" type="text" class="form-control" id="user_absor2" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_absor2" type="hidden" class="form-control" id="nama_absor2" value="<?php echo $rcek1['nama_absor2']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="disabs1" style="display:none;">
 								<label for="disabs1" class="col-sm-2 control-label">ABSORBENCY AFTERWASH (DIS)</label>
@@ -10957,8 +11031,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									<input name="rabsor_b3" type="text" class="form-control" id="rabsor_b3" value="<?php echo $rcekR['rabsor_b3']; ?>" placeholder="AFTERWASH 3">
 								</div>-->
 							</div>
-							<!-- ABSORBENCY END-->
-							<!-- DRYING TIME BEGIN-->
+						<!-- ABSORBENCY END-->
+						<!-- DRYING TIME BEGIN-->
 							<div class="form-group" id="f3" style="display:none;">
 								<label for="dryingt" class="col-sm-2 control-label">DRYING TIME ORIGINAL</label>
 								<div class="col-sm-2">
@@ -11000,6 +11074,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
 										name="dry_note" maxlength="50" rows="1"><?php echo $rcek1['dry_note']; ?></textarea>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_dry" type="text" class="form-control" id="user_dry" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_dry" type="hidden" class="form-control" id="nama_dry" value="<?php echo $rcek1['nama_dry']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<!--<div class="form-group" id="stat_dry" style="display:none;">
@@ -11098,6 +11176,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_dry2" type="text" class="form-control" id="user_dry2" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_dry2" type="hidden" class="form-control" id="nama_dry2" value="<?php echo $rcek1['nama_dry2']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<!--<div class="form-group" id="stat_dry1" style="display:none;">
 								<label for="stat_dry1" class="col-sm-2 control-label">STATUS</label>
@@ -11142,8 +11224,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									<input name="rdryaf3" type="text" class="form-control" id="rdryaf3" value="<?php echo $rcekR['rdryaf3']; ?>" placeholder="3">
 								</div>-->
 							</div>
-							<!-- DRYING TIME END-->
-							<!-- WATER REPPELENT BEGIN-->
+						<!-- DRYING TIME END-->
+						<!-- WATER REPPELENT BEGIN-->
 							<div class="form-group" id="f4" style="display:none;">
 								<label for="waterr" class="col-sm-2 control-label">WATER REPPELENT ORIGINAL</label>
 								<div class="col-sm-2">
@@ -11185,6 +11267,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
 										name="repp_note" maxlength="50"
 										rows="1"><?php echo $rcek1['repp_note']; ?></textarea>
+								</div>
+								<div class="col-sm-2">
+									<input name="user_repp" type="text" class="form-control" id="user_repp" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_repp" type="hidden" class="form-control" id="nama_repp" value="<?php echo $rcek1['nama_repp']; ?>" placeholder="Nama BOW">
 								</div>
 							</div>
 							<!--<div class="form-group" id="stat_wp" style="display:none;">
@@ -11270,6 +11356,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_repp2" type="text" class="form-control" id="user_repp2" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_repp2" type="hidden" class="form-control" id="nama_repp2" value="<?php echo $rcek1['nama_repp2']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<!--<div class="form-group" id="stat_wp" style="display:none;">
 							<label for="stat_wp" class="col-sm-2 control-label">STATUS</label>
@@ -11307,8 +11397,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								<input name="rrepp4" type="text" class="form-control" id="rrepp4" value="<?php echo $rcekR['rrepp4']; ?>" placeholder="4" readonly>
 							</div>-->
 							</div>
-							<!-- WATER REPPELENT END-->
-							<!-- PH BEGIN-->
+						<!-- WATER REPPELENT END-->
+						<!-- PH BEGIN-->
 							<div class="form-group" id="f5" style="display:none;">
 								<label for="ph" class="col-sm-2 control-label">Ph</label>
 								<div class="col-sm-2">
@@ -11348,6 +11438,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_ph" type="text" class="form-control" id="user_ph" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_ph" type="hidden" class="form-control" id="nama_ph" value="<?php echo $rcek1['nama_ph']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="disph" style="display:none;">
 								<label for="disph" class="col-sm-2 control-label">Ph (DIS)</label>
@@ -11383,8 +11477,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rph_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- PH END-->
-							<!-- SOIL RELEASE BEGIN-->
+						<!-- PH END-->
+						<!-- SOIL RELEASE BEGIN-->
 							<div class="form-group" id="f24" style="display:none;">
 								<label for="soil" class="col-sm-2 control-label">SOIL RELEASE</label>
 								<div class="col-sm-2">
@@ -11421,6 +11515,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_soil" type="text" class="form-control" id="user_soil" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_soil" type="hidden" class="form-control" id="nama_soil" value="<?php echo $rcek1['nama_soil']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="dissor" style="display:none;">
 								<label for="dissor" class="col-sm-2 control-label">SOIL RELEASE (DIS)</label>
@@ -11446,8 +11544,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rsoil_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- SOIL RELEASE END-->
-							<!-- HUMIDITY BEGIN-->
+						<!-- SOIL RELEASE END-->
+						<!-- HUMIDITY BEGIN-->
 							<div class="form-group" id="f25" style="display:none;">
 								<label for="humidity" class="col-sm-2 control-label">HUMIDITY</label>
 								<div class="col-sm-2">
@@ -11484,6 +11582,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="RANDOM">RANDOM</option>
 									</select>
 								</div>
+								<div class="col-sm-2">
+									<input name="user_humidity" type="text" class="form-control" id="user_humidity" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_humidity" type="hidden" class="form-control" id="nama_humidity" value="<?php echo $rcek1['nama_humidity']; ?>" placeholder="Nama BOW">
+								</div>
 							</div>
 							<div class="form-group" id="dishum" style="display:none;">
 								<label for="dishum" class="col-sm-2 control-label">HUMIDITY (DIS)</label>
@@ -11509,7 +11611,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										readonly><?php echo $rcekR['rhumidity_note']; ?></textarea>
 								</div>
 							</div>
-							<!-- HUMIDITY END-->
+						<!-- HUMIDITY END-->
 							<div class="form-group">
 								<?php if ($notes != "") { ?>
 									<button type="submit" class="btn btn-primary pull-right" name="functional_save"
@@ -14612,35 +14714,13 @@ if ($_POST['colorfastness_save'] == "save") {  // bleeding_root save
 			$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_disptest_2 SET dbleeding_root = null  WHERE id_nokk='$id_tq_test_2'");
 		}
 	}
-
-	$fields = array('classification_shedding', 'syringe_shedding', 'observation_shedding', 'avg_gr_shedding', 'avg_per_shedding', 'nama_rub', 'status_rub', 'bleeding_root');
-    
-    foreach ($fields as $field) {
-        $value = trim($_POST[$field]);
-        
-        if ($value != "0" && $value != "") {
-            $selectSql = "SELECT * FROM tbl_tq_test_2 WHERE id_nokk = '$id_tq_test_2'";
-            $result = mysqli_query($con, $selectSql);
-
-            if (mysqli_num_rows($result) > 0) {
-                // Data sudah ada, lakukan UPDATE
-                $updateSql = "UPDATE tbl_tq_test_2 SET $field = '$value' WHERE id_nokk = '$id_tq_test_2'";
-                $sqlPHY = mysqli_query($con, $updateSql);
-            } else {
-                // Data belum ada, lakukan INSERT
-                $insertSql = "INSERT INTO tbl_tq_test_2 (id_nokk, $field) VALUES ('$id_tq_test_2','$value')";
-                $sqlPHY = mysqli_query($con, $insertSql);
-            }
-        } else {
-            $sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET $field = null WHERE id_nokk = '$id_tq_test_2'");
-        }
-    }
 }
 
 ?>
 
 <?php
 
+// Save Untuk Physical Save
 if ($_POST['physical_save'] == "save") {
     $fields = array('wrinkle', 'wrinkle1', 'wrinkle2', 'stat_wrinkle', 'stat_wrinkle1', 'wrinkle_note');
     foreach ($fields as $field) {
@@ -14665,9 +14745,9 @@ if ($_POST['physical_save'] == "save") {
     }
 
     $fields_nama = array('nama_fla','nama_bow','nama_pil','nama_fiber','nama_fc','nama_width','nama_weight','nama_fwss',
-	'nama_locus','nama_box','nama_random','nama_abr','nama_mace','nama_pod','nama_bean',
-	'nama_burst','nama_mullen',	'nama_thick',	'nama_stretch',	'nama_growth',	'nama_apper',
-	'nama_shr',	'nama_fuzz',	'nama_odour',	'nama_curling',	'nama_nedle',	'nama_wrinkle',	'nama_washing',);
+		'nama_locus','nama_box','nama_random','nama_abr','nama_mace','nama_pod','nama_bean',
+		'nama_burst','nama_mullen',	'nama_thick',	'nama_stretch',	'nama_growth',	'nama_apper',
+		'nama_shr',	'nama_fuzz',	'nama_odour',	'nama_curling',	'nama_nedle',	'nama_wrinkle',);
     foreach ($fields_nama as $field_nama) {
         $value_nama = trim($_POST[$field_nama]);
         
@@ -14690,6 +14770,93 @@ if ($_POST['physical_save'] == "save") {
     }
 }
 
+
+// Save Untuk Functional Save
+if ($_POST['functional_save'] == "save") {
+    $fields_nama = array('nama_wick_l',
+	'nama_wick_l2',
+	'nama_wick_w',
+	'nama_wick_w2',
+	'nama_absor1',
+	'nama_absor2',
+	'nama_dry',
+	'nama_dry2',
+	'nama_repp',
+	'nama_repp2',
+	'nama_ph',
+	'nama_soil',
+	'nama_humidity',);
+    foreach ($fields_nama as $field_nama) {
+        $value_nama = trim($_POST[$field_nama]);
+        
+        if ($value_nama != "0" && $value_nama != "") {
+            $selectSql_nama = "SELECT * FROM tbl_user_update_tq WHERE id_nokk = '$id_tq_test_2'";
+            $result_nama = mysqli_query($con, $selectSql_nama);
+
+            if (mysqli_num_rows($result_nama) > 0) {
+                // Data sudah ada, lakukan UPDATE
+                $updateSql_nama = "UPDATE tbl_user_update_tq SET $field_nama = '$value_nama' WHERE id_nokk = '$id_tq_test_2'";
+                $sqlPHY_nama = mysqli_query($con, $updateSql_nama);
+            } else {
+                // Data belum ada, lakukan INSERT
+                $insertSql_nama = "INSERT INTO tbl_user_update_tq (id_nokk, $field_nama) VALUES ('$id_tq_test_2','$value_nama')";
+                $sqlPHY_nama = mysqli_query($con, $insertSql_nama);
+            }
+        } else {
+            $sqlPHY_nama = mysqli_query($con, "UPDATE tbl_user_update_tq SET $field_nama = null WHERE id_nokk = '$id_tq_test_2'");
+        }
+    }
+}
+
+// Save Colorfatness
+if ($_POST['colorfastness_save'] == "save") {
+	$fields = array('classification_shedding', 'syringe_shedding', 'observation_shedding', 'avg_gr_shedding', 'avg_per_shedding', 'nama_rub', 'status_rub', 'bleeding_root');
+    
+    foreach ($fields as $field) {
+        $value = trim($_POST[$field]);
+        
+        if ($value != "0" && $value != "") {
+            $selectSql = "SELECT * FROM tbl_tq_test_2 WHERE id_nokk = '$id_tq_test_2'";
+            $result = mysqli_query($con, $selectSql);
+
+            if (mysqli_num_rows($result) > 0) {
+                // Data sudah ada, lakukan UPDATE
+                $updateSql = "UPDATE tbl_tq_test_2 SET $field = '$value' WHERE id_nokk = '$id_tq_test_2'";
+                $sqlPHY = mysqli_query($con, $updateSql);
+            } else {
+                // Data belum ada, lakukan INSERT
+                $insertSql = "INSERT INTO tbl_tq_test_2 (id_nokk, $field) VALUES ('$id_tq_test_2','$value')";
+                $sqlPHY = mysqli_query($con, $insertSql);
+            }
+        } else {
+            $sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET $field = null WHERE id_nokk = '$id_tq_test_2'");
+        }
+    }
+
+	$fields_nama = array('nama_washing','nama_water','nama_acid','nama_alkaline','nama_crocking','nama_phenolic','nama_cmo','nama_cm','nama_light',
+	'nama_saliva','nama_bleeding','nama_chlorin','nama_nchl','nama_transfer','nama_fibershe',);
+
+    foreach ($fields_nama as $field_nama) {
+        $value_nama = trim($_POST[$field_nama]);
+        
+        if ($value_nama != "0" && $value_nama != "") {
+            $selectSql_nama = "SELECT * FROM tbl_user_update_tq WHERE id_nokk = '$id_tq_test_2'";
+            $result_nama = mysqli_query($con, $selectSql_nama);
+
+            if (mysqli_num_rows($result_nama) > 0) {
+                // Data sudah ada, lakukan UPDATE
+                $updateSql_nama = "UPDATE tbl_user_update_tq SET $field_nama = '$value_nama' WHERE id_nokk = '$id_tq_test_2'";
+                $sqlPHY_nama = mysqli_query($con, $updateSql_nama);
+            } else {
+                // Data belum ada, lakukan INSERT
+                $insertSql_nama = "INSERT INTO tbl_user_update_tq (id_nokk, $field_nama) VALUES ('$id_tq_test_2','$value_nama')";
+                $sqlPHY_nama = mysqli_query($con, $insertSql_nama);
+            }
+        } else {
+            $sqlPHY_nama = mysqli_query($con, "UPDATE tbl_user_update_tq SET $field_nama = null WHERE id_nokk = '$id_tq_test_2'");
+        }
+    }
+}
 ?>
 
 <?php
@@ -19195,3 +19362,1853 @@ if ($notes != "" and $cek == 0) {
 	});
 	</script>
 <!-- End -->
+<!-- SCRIPT Washing -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'wash_temp',
+			'dwash_temp',
+			'rwash_temp',
+			'mwash_temp',
+			'wash_colorchange',
+			'dwash_colorchange',
+			'rwash_colorchange',
+			'mwash_colorchange',
+			'wash_acetate',
+			'dwash_acetate',
+			'rwash_acetate',
+			'mwash_acetate',
+			'wash_cotton',
+			'dwash_cotton',
+			'rwash_cotton',
+			'mwash_cotton',
+			'wash_nylon',
+			'dwash_nylon',
+			'rwash_nylon',
+			'mwash_nylon',
+			'wash_poly',
+			'dwash_poly',
+			'rwash_poly',
+			'mwash_poly',
+			'wash_acrylic',
+			'dwash_acrylic',
+			'rwash_acrylic',
+			'mwash_acrylic',
+			'wash_wool',
+			'dwash_wool',
+			'rwash_wool',
+			'mwash_wool',
+			'wash_staining',
+			'dwash_staining',
+			'rwash_staining',
+			'mwash_staining',
+			'wash_note',
+			'dwash_note',
+			'rwash_note',
+			'mwash_note',
+			'stat_wf',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_washing"]');
+		const userIdInput = document.getElementById('user_washing');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Water -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'water_colorchange',
+			'dwater_colorchange',
+			'mwater_colorchange',
+			'rwater_colorchange',
+			'water_acetate',
+			'dwater_acetate',
+			'mwater_acetate',
+			'rwater_acetate',
+			'water_cotton',
+			'dwater_cotton',
+			'mwater_cotton',
+			'rwater_cotton',
+			'water_nylon',
+			'dwater_nylon',
+			'mwater_nylon',
+			'rwater_nylon',
+			'water_poly',
+			'dwater_poly',
+			'mwater_poly',
+			'rwater_poly',
+			'water_acrylic',
+			'dwater_acrylic',
+			'mwater_acrylic',
+			'rwater_acrylic',
+			'water_wool',
+			'dwater_wool',
+			'mwater_wool',
+			'rwater_wool',
+			'water_staining',
+			'dwater_staining',
+			'mwater_staining',
+			'rwater_staining',
+			'water_note',
+			'dwater_note',
+			'mwater_note',
+			'rwater_note',
+			'stat_wtr',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_water"]');
+		const userIdInput = document.getElementById('user_water');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Acid -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dacid_colorchange',
+			'dacid_acetate',
+			'dacid_cotton',
+			'dacid_nylon',
+			'dacid_poly',
+			'dacid_acrylic',
+			'dacid_wool',
+			'dacid_staining',
+			'dacid_note',
+			'macid_colorchange',
+			'macid_acetate',
+			'macid_cotton',
+			'macid_nylon',
+			'macid_poly',
+			'macid_acrylic',
+			'macid_wool',
+			'macid_staining',
+			'macid_note',
+			'racid_colorchange',
+			'racid_acetate',
+			'racid_cotton',
+			'racid_nylon',
+			'racid_poly',
+			'racid_acrylic',
+			'racid_wool',
+			'racid_staining',
+			'racid_note',
+			'stat_pac',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_acid"]');
+		const userIdInput = document.getElementById('user_acid');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Alkaline -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'alkaline_colorchange',
+			'dalkaline_colorchange',
+			'ralkaline_colorchange',
+			'malkaline_colorchange',
+			'alkaline_acetate',
+			'dalkaline_acetate',
+			'ralkaline_acetate',
+			'malkaline_acetate',
+			'alkaline_cotton',
+			'dalkaline_cotton',
+			'ralkaline_cotton',
+			'malkaline_cotton',
+			'alkaline_nylon',
+			'dalkaline_nylon',
+			'ralkaline_nylon',
+			'malkaline_nylon',
+			'alkaline_poly',
+			'dalkaline_poly',
+			'ralkaline_poly',
+			'malkaline_poly',
+			'alkaline_acrylic',
+			'dalkaline_acrylic',
+			'ralkaline_acrylic',
+			'malkaline_acrylic',
+			'alkaline_wool',
+			'dalkaline_wool',
+			'ralkaline_wool',
+			'malkaline_wool',
+			'alkaline_staining',
+			'dalkaline_staining',
+			'ralkaline_staining',
+			'malkaline_staining',
+			'alkaline_note',
+			'dalkaline_note',
+			'ralkaline_note',
+			'malkaline_note',
+			'stat_pal',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_alkaline"]');
+		const userIdInput = document.getElementById('user_alkaline');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Crocking -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'crock_len1',
+			'dcrock_len1',
+			'rcrock_len1',
+			'mcrock_len1',
+			'crock_wid1',
+			'dcrock_wid1',
+			'rcrock_wid1',
+			'mcrock_wid1',
+			'crock_len2',
+			'dcrock_len2',
+			'rcrock_len2',
+			'mcrock_len2',
+			'crock_wid2',
+			'dcrock_wid2',
+			'rcrock_wid2',
+			'mcrock_wid2',
+			'crock_note',
+			'dcrock_note',
+			'rcrock_note',
+			'mcrock_note',
+			'stat_cr',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_crocking"]');
+		const userIdInput = document.getElementById('user_crocking');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Phenolic -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dphenolic_colorchange',
+			'dphenolic_note',
+			'rphenolic_colorchange',
+			'rphenolic_note',
+			'mphenolic_colorchange',
+			'mphenolic_note',
+			'phenolic_colorchange',
+			'phenolic_note',
+			'stat_py',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_phenolic"]');
+		const userIdInput = document.getElementById('user_phenolic');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT COLOR MIGRATION - OVEN TEST -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'cm_printing_colorchange',
+			'rcm_printing_colorchange',
+			'dcm_printing_colorchange',
+			'cm_printing_note',
+			'rcm_printing_note',
+			'dcm_printing_note',
+			'stat_cmo',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_cmo"]');
+		const userIdInput = document.getElementById('user_cmo');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT COLOR MIGRATION -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dcm_dye_temp',
+			'dcm_dye_colorchange',
+			'dcm_dye_stainingface',
+			'dcm_dye_stainingback',
+			'dcm_dye_note',
+			'rcm_dye_temp',
+			'rcm_dye_colorchange',
+			'rcm_dye_stainingface',
+			'rcm_dye_stainingback',
+			'rcm_dye_note',
+			'cm_dye_temp',
+			'cm_dye_colorchange',
+			'cm_dye_stainingface',
+			'cm_dye_stainingback',
+			'cm_dye_note',
+			'stat_cm',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_cm"]');
+		const userIdInput = document.getElementById('user_cm');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT LIGHT -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dlight_rating1',
+			'dlight_rating2',
+			'dlight_note',
+			'mlight_rating1',
+			'mlight_rating2',
+			'mlight_note',
+			'rlight_rating1',
+			'rlight_rating2',
+			'rlight_note',
+			'light_rating1',
+			'light_rating2',
+			'light_note',
+			'stat_lg',
+
+		];
+		const namaBowInput = document.querySelector('input[name="nama_light"]');
+		const userIdInput = document.getElementById('user_light');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT LIGHT PRES  -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dlight_pers_colorchange',
+			'dlight_pers_note',
+			'mlight_pers_colorchange',
+			'mlight_pers_note',
+			'rlight_pers_colorchange',
+			'rlight_pers_note',
+			'light_pers_colorchange',
+			'light_pers_note',
+			'stat_lp',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_lp"]');
+		const userIdInput = document.getElementById('user_lp');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT SALIVA -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dsaliva_staining',
+			'dsaliva_note',
+			'rsaliva_staining',
+			'rsaliva_note',
+			'saliva_staining',
+			'saliva_note',
+			'stat_slv',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_saliva"]');
+		const userIdInput = document.getElementById('user_saliva');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT BLEEDING -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dsaliva_staining',
+			'dsaliva_note',
+			'rsaliva_staining',
+			'rsaliva_note',
+			'saliva_staining',
+			'saliva_note',
+			'stat_slv',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_saliva"]');
+		const userIdInput = document.getElementById('user_saliva');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT CHLORIN -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dchlorin',
+			'dchlorin_note',
+			'rchlorin',
+			'rchlorin_note',
+			'chlorin',
+			'chlorin_note',
+			'stat_chl',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_chlorin"]');
+		const userIdInput = document.getElementById('user_chlorin');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT NON-CHLORIN -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dnchlorin1',
+			'dnchlorin2',
+			'rnchlorin1',
+			'rnchlorin2',
+			'nchlorin1',
+			'nchlorin2',
+			'stat_nchl',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_nchl"]');
+		const userIdInput = document.getElementById('user_nchl');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT TRANSFER -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dye_tf_acetate',
+			'mdye_tf_acetate',
+			'ddye_tf_acetate',
+			'rdye_tf_acetate',
+			'dye_tf_cotton',
+			'mdye_tf_cotton',
+			'ddye_tf_cotton',
+			'rdye_tf_cotton',
+			'dye_tf_nylon',
+			'mdye_tf_nylon',
+			'ddye_tf_nylon',
+			'rdye_tf_nylon',
+			'dye_tf_poly',
+			'mdye_tf_poly',
+			'ddye_tf_poly',
+			'rdye_tf_poly',
+			'dye_tf_acrylic',
+			'mdye_tf_acrylic',
+			'ddye_tf_acrylic',
+			'rdye_tf_acrylic',
+			'dye_tf_wool',
+			'mdye_tf_wool',
+			'ddye_tf_wool',
+			'rdye_tf_wool',
+			'dye_tf_sstaining',
+			'mdye_tf_sstaining',
+			'ddye_tf_sstaining',
+			'rdye_tf_sstaining',
+			'dye_tf_cstaining',
+			'mdye_tf_cstaining',
+			'ddye_tf_cstaining',
+			'rdye_tf_cstaining',
+			'dye_tf_note',
+			'mdye_tf_note',
+			'ddye_tf_note',
+			'rdye_tf_note',
+			'stat_dye',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_transfer"]');
+		const userIdInput = document.getElementById('user_transfer');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Fiber Shedding -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'classification_shedding',
+			'syringe_shedding',
+			'observation_shedding',
+			'avg_gr_shedding',
+			'avg_per_shedding',
+			'status_rub',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_fibershe"]');
+		const userIdInput = document.getElementById('user_fibershe');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Wicking Length -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dwick_l1',
+			'dwick_l3',
+			'dwick_note',
+			'mwick_l1',
+			'mwick_l3',
+			'mwick_note',
+			'rwick_l1',
+			'rwick_l3',
+			'rwick_note',
+			'wick_l1',
+			'wick_l3',
+			'wick_note',
+			'stat_wic',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_wick_l"]');
+		const userIdInput = document.getElementById('user_wick_l');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Wicking Length2 -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dwick_l2',
+			'dwick_l4',
+			'dwick_note',
+			'mwick_l2',
+			'mwick_l4',
+			'mwick_note',
+			'rwick_l2',
+			'rwick_l4',
+			'rwick_note',
+			'wick_l2',
+			'wick_l4',
+			'wick_note',
+			'stat_wic2',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_wick_l2"]');
+		const userIdInput = document.getElementById('user_wick_l2');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Wicking Weight -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dwick_w1',
+			'dwick_w3',
+			'mwick_w1',
+			'mwick_w3',
+			'rwick_w1',
+			'rwick_w3',
+			'wick_w1',
+			'wick_w3',
+			'stat_wic1',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_wick_w"]');
+		const userIdInput = document.getElementById('user_wick_w');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT Wicking Weight2 -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dwick_w2',
+			'dwick_w4',
+			'mwick_w2',
+			'mwick_w4',
+			'rwick_w2',
+			'rwick_w4',
+			'wick_w2',
+			'wick_w4',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_wick_w2"]');
+		const userIdInput = document.getElementById('user_wick_w2');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT ABSORBENCY1 -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dabsor_f2',
+			'dabsor_f1',
+			'dabsor_note',
+			'rabsor_f2',
+			'rabsor_f1',
+			'rabsor_note',
+			'absor_f2',
+			'absor_f1',
+			'absor_note',
+			'stat_abs',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_absor1"]');
+		const userIdInput = document.getElementById('user_absor1');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT ABSORBENCY2 -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dabsor_b2',
+			'dabsor_b1',
+			'rabsor_b2',
+			'rabsor_b1',
+			'absor_b2',
+			'absor_b1',
+			'stat_abs1',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_absor2"]');
+		const userIdInput = document.getElementById('user_absor2');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT DRYING -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'ddry1',
+			'ddry_note',
+			'mdry1',
+			'mdry_note',
+			'rdry1',
+			'rdry_note',
+			'dry1',
+			'dry_note',
+			'stat_dry',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_dry"]');
+		const userIdInput = document.getElementById('user_dry');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT DRYING2 -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'ddryaf1',
+			'mdryaf1',
+			'rdryaf1',
+			'dryaf1',
+			'stat_dry1',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_dry2"]');
+		const userIdInput = document.getElementById('user_dry2');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT WATER REPPELENT -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'ddryaf1',
+			'mdryaf1',
+			'rdryaf1',
+			'dryaf1',
+			'stat_dry1',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_repp"]');
+		const userIdInput = document.getElementById('user_repp');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT WATER REPPELENT2 -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'drepp2',
+			'drepp_note',
+			'rrepp2',
+			'rrepp_note',
+			'repp2',
+			'repp_note',
+			'stat_wp1',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_repp"]');
+		const userIdInput = document.getElementById('user_repp');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT PH -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dph',
+			'dph_note',
+			'mph',
+			'mph_note',
+			'rph',
+			'rph_note',
+			'ph',
+			'ph_note',
+			'stat_ph',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_ph"]');
+		const userIdInput = document.getElementById('user_ph');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT SOIL -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dsoil',
+			'dsoil_note',
+			'rsoil',
+			'rsoil_note',
+			'soil',
+			'soil_note',
+			'stat_sor',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_soil"]');
+		const userIdInput = document.getElementById('user_soil');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+<!-- SCRIPT HUMIDITY -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const fieldNames = [
+			'dhumidity',
+			'dhumidity_note',
+			'rhumidity',
+			'rhumidity_note',
+			'humidity',
+			'humidity_note',
+			'stat_hum',
+		];
+		const namaBowInput = document.querySelector('input[name="nama_humidity"]');
+		const userIdInput = document.getElementById('user_humidity');
+		const sessionUserId = '<?= $_SESSION['user_id']; ?>';
+		function fetchUserName(namaBow) {
+			fetch('pages/ajax/get_user.php?nama_bow=' + encodeURIComponent(namaBow))
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						userIdInput.value = data.nama_user;
+					} else {
+						userIdInput.value = 'User tidak ditemukan';
+					}
+				})
+				.catch(err => {
+					console.error('AJAX Error:', err);
+					userIdInput.value = 'Error';
+				});
+		}
+		function forceUpdateNamaBow() {
+			namaBowInput.value = sessionUserId;
+			namaBowInput.dispatchEvent(new Event('input'));
+			fetchUserName(sessionUserId);
+		}
+		fieldNames.forEach(name => {
+			const field = document.querySelector(`[name="${name}"]`);
+			if (field) {
+				field.addEventListener('input', forceUpdateNamaBow);
+				field.addEventListener('change', forceUpdateNamaBow);
+			}
+		});
+		namaBowInput.addEventListener('input', function () {
+			const namaBow = namaBowInput.value.trim();
+			if (namaBow !== '') {
+				fetchUserName(namaBow);
+			} else {
+				userIdInput.value = '';
+			}
+		});
+		const initialNamaBow = namaBowInput.value.trim();
+		if (initialNamaBow !== '') {
+			fetchUserName(initialNamaBow);
+		}
+	});
+	</script>
+<!-- End -->
+ 

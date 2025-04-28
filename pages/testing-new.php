@@ -1615,7 +1615,7 @@ if (!isset($nodemand)) { ?>
 							<div class="input-group">
 								<input name="nodemand" type="text" class="form-control" id="nodemand"
 									onchange="window.location='TestingNew-'+this.value" placeholder="No Demand" required
-									<?php if ($_SESSION['lvl_id'] == "TQ") {
+									<?php if ($_SESSION['lvl_id'] == "TQ" || $_SESSION['lvl_id'] == "OPERATORTQ") {
 										echo "readonly";
 									} ?>>
 							</div>
