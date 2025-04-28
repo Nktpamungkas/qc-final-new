@@ -786,6 +786,9 @@ $page = strtolower($page);
                                 <li class="<?= ($_GET['p'] == "Master-Data-New") ? "active" : ""; ?>">
                                     <a href="MasterDataNew"><i class="fa fa-database text-aqua"></i> <span>Master Data</span></a>
                                 </li>
+                                <li class="<?= ($_GET['p'] == "Testing-Operan" || $_GET['p'] == "Testing-OperanNoTes") ? "active" : ""; ?>">
+                                    <a href="TestingOperan"><i class="fa fa-file-text text-aqua"></i> <span>Testing Operan</span></a>
+                                </li>
                             </ul>
                         </li>
                         <li class="treeview <?= ($_GET['p'] == "Kain-Masuk-Lab" || $_GET['p'] == "Testing-Lab" || $_GET['p'] == "Result-Lab" || $_GET['p'] == "EditTQ-Lab" || $_GET['p'] == "Master-Data-Lab" || $_GET['p'] == "Master-Test-Lab") ? "active" : ""; ?>">
@@ -807,9 +810,7 @@ $page = strtolower($page);
                                 <li class="<?= ($_GET['p'] == "Master-Data-Lab") ? "active" : ""; ?>">
                                     <a href="MasterDataLab"><i class="fa fa-database text-aqua"></i> <span>Master Data</span></a>
                                 </li>
-                                <li class="<?= ($_GET['p'] == "Testing-Operan" || $_GET['p'] == "Testing-OperanNoTes") ? "active" : ""; ?>">
-                                    <a href="TestingOperan"><i class="fa fa-file-text text-aqua"></i> <span>Testing Operan</span></a>
-                                </li>
+                               
                             </ul>
                         </li>
                         <?php $sub_menu_fl = 'FL'; ?>
@@ -1935,9 +1936,21 @@ $page = strtolower($page);
                 disabled: false,
                 showbuttons: false
             });
+            $('.jabatan1').editable({
+                type: 'text',
+                url: 'pages/editable/editable_jabatan1.php',
+                disabled: false,
+                showbuttons: false
+            });
             $('.diterima').editable({
                 type: 'text',
                 url: 'pages/editable/editable_diterima.php',
+                disabled: false,
+                showbuttons: false
+            });
+            $('.jabatan2').editable({
+                type: 'text',
+                url: 'pages/editable/editable_jabatan2.php',
                 disabled: false,
                 showbuttons: false
             });

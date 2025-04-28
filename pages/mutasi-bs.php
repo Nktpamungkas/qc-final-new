@@ -56,7 +56,9 @@ order by
               <th width="122"><div align="center">Tgl Buat</div></th>
               <th width="86"><div align="center">Jam Penyerahan</div></th>
               <th width="38"><div align="center">Diserahkan</div></th>
+              <th width="38"><div align="center">Jabatan</div></th>
               <th width="38"><div align="center">Diterima</div></th>
+              <th width="38"><div align="center">Jabatan</div></th>
               <th width="46"><div align="center">Rol</div></th>
               <th width="48"><div align="center">Kg</div></th>
             </tr>
@@ -84,7 +86,9 @@ order by
               <td align="center"><?php echo $rowd['tgl_buat'];?></td>
               <td align="center"><?php echo $rowd['jam_penyerahan'];?></td>
               <td align="center"><a data-pk="<?php echo $rowd['id'] ?>" data-value="<?php echo $rowd['serah'] ?>" class="diserah" href="javascipt:void(0)"><?php echo $rowd['serah'] ?></a></td>
+              <td align="center"><a data-pk="<?php echo $rowd['id'] ?>" data-value="<?php echo $rowd['jabatan1'] ?>" class="jabatan1" href="javascipt:void(0)"><?php echo $rowd['jabatan1'] ?></a></td>
               <td align="center"><a data-pk="<?php echo $rowd['id'] ?>" data-value="<?php echo $rowd['terima'] ?>" class="diterima" href="javascipt:void(0)"><?php echo $rowd['terima'] ?></a></td>
+              <td align="center"><a data-pk="<?php echo $rowd['id'] ?>" data-value="<?php echo $rowd['jabatan2'] ?>" class="jabatan2" href="javascipt:void(0)"><?php echo $rowd['jabatan2'] ?></a></td>
               <td align="center"><?php echo $rowd['rol'];?></td>
               <td align="right"><?php echo $rowd['qty'];?></td>
             </tr>

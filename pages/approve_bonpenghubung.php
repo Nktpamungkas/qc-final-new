@@ -44,6 +44,7 @@
 				<th  rowspan=2><div align="center" valign="middle">HANGER</div></th>
 				<th  rowspan=2><div align="center" valign="middle">ITEM</div></th>
 				<th  rowspan=2><div align="center" valign="middle">COLOR</div></th>
+                <th  rowspan=2><div align="center" valign="middle">LOT-LEGACY</div></th>
 			   	<th  rowspan=2><div align="center" valign="middle">LOT</div></th>
          		<th  rowspan=2><div align="center" valign="middle">DEMAND</div></th>
 			   	<th  colspan=3 ><div align="center" valign="middle">QTY</div></th>
@@ -198,6 +199,7 @@
 			 <td align="center"><?php echo $row1['no_hanger']; ?></td>
 			  <td align="center"><?php echo $row1['no_item']; ?></td>
 			  <td align="center"><?php echo $row1['warna']; ?></td>
+              <td align="center"><?php echo $row1['lot_legacy'];?></td>
 			  <td align="center"><?php echo $row1['lot']; ?></td>
         <td align="center"><?php echo $row1['nodemand']; ?></td>
 
