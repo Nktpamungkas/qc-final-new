@@ -573,6 +573,21 @@ $page = strtolower($page);
           </a>
           <!-- /.info-box -->
         </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="LapKPE-LihatData">
+            <div class="info-box">
+              <span class="info-box-icon bg-blue"><i class="fa fa-file-text-o"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Laporan KPE</span>
+                <span class="info-box-number">&nbsp;</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+          </a>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
         <!-- /.col -->
         <?php } ?>
 
