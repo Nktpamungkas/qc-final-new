@@ -1330,33 +1330,35 @@
 			$("#rancr").css("display", "none");  // To hide
 			$("#marcr").css("display", "none");  // To hide
 		}
-		if (document.forms['form2']['jns_test2'].value == "FIBER SHEDDING") {
-			if (document.forms['form2']['stat_cr'].value == "RANDOM") {
-				$("#rancr").css("display", "");  // To unhide
-			} else {
-				$("#rancr").css("display", "none");  // To hide
-			}
-			if (document.forms['form2']['stat_cr'].value == "DISPOSISI") {
-				$("#discr").css("display", "");  // To unhide
-			} else {
-				$("#discr").css("display", "none");  // To hide
-			}
-			if (document.forms['form2']['stat_cr'].value == "MARGINAL PASS") {
-				$("#marcr").css("display", "");  // To unhide
-			} else {
-				$("#marcr").css("display", "none");  // To hide
-			}
-			$("#c16").css("display", "");  // To unhide
-			$("#stat_rub").css("display", "");  // To unhide
-			$("#nama_fiber").css("display", "");  // To unhide
-		} else {
-			$("#c16").css("display", "none");  // To hide
-			$("#stat_rub").css("display", "none");  // To hide
-			$("#nama_fiber").css("display", "none");  // To hide
-			$("#discr").css("display", "none");  // To hide
-			$("#rancr").css("display", "none");  // To hide
-			$("#marcr").css("display", "none");  // To hide
-		}
+	// Ini untuk nampilin formnya
+		// if (document.forms['form2']['jns_test2'].value == "FIBER SHEDDING") {
+		// 	if (document.forms['form2']['stat_cr'].value == "RANDOM") {
+		// 		$("#rancr").css("display", "");  // To unhide
+		// 	} else {
+		// 		$("#rancr").css("display", "none");  // To hide
+		// 	}
+		// 	if (document.forms['form2']['stat_cr'].value == "DISPOSISI") {
+		// 		$("#discr").css("display", "");  // To unhide
+		// 	} else {
+		// 		$("#discr").css("display", "none");  // To hide
+		// 	}
+		// 	if (document.forms['form2']['stat_cr'].value == "MARGINAL PASS") {
+		// 		$("#marcr").css("display", "");  // To unhide
+		// 	} else {
+		// 		$("#marcr").css("display", "none");  // To hide
+		// 	}
+		// 	$("#c16").css("display", "");  // To unhide
+		// 	$("#stat_rub").css("display", "");  // To unhide
+		// 	$("#nama_fiber").css("display", "");  // To unhide
+		// } else {
+		// 	$("#c16").css("display", "none");  // To hide
+		// 	$("#stat_rub").css("display", "none");  // To hide
+		// 	$("#nama_fiber").css("display", "none");  // To hide
+		// 	$("#discr").css("display", "none");  // To hide
+		// 	$("#rancr").css("display", "none");  // To hide
+		// 	$("#marcr").css("display", "none");  // To hide
+		// }
+	// End
 		if (document.forms['form2']['jns_test2'].value == "PHENOLIC YELLOWING") {
 			if (document.forms['form2']['stat_py'].value == "RANDOM") {
 				$("#ranpy").css("display", "");  // To unhide
