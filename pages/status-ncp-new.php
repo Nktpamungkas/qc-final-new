@@ -441,6 +441,9 @@ include "koneksi.php";
                 <th width="11%">
                   <div align="center">Status 3</div>
                 </th>
+                <th width="11%">
+                  <div align="center">Status 4</div>
+                </th>
                 <th width="6%">
                   <div align="center">Buyer</div>
                 </th>
@@ -665,6 +668,15 @@ include "koneksi.php";
                       <?php } ?>
                       <!-- endinistart -->
                   </td>
+                    <td>
+                    <?php
+                      if (!empty($row1['sts_kembali'])) {
+                        echo "<span class='label label-info'>Sudah</span>";
+                        } else {
+                        echo "<span class='label label-default'>Belum</span>";
+                      }
+                    ?>
+                    </td>
                   <td>
                     <font size="-1">
                       <?php echo $row1['buyer']; ?>
