@@ -29,6 +29,9 @@ if ($Awal != "") {
   <link href="styles_cetak.css" rel="stylesheet" type="text/css">
   <title>Cetak Mutasi BS</title>
   <style>
+    body, table, td, th, input, select, textarea {
+      font-family: 'Times New Roman', Times, serif !important;
+    }
     .hurufvertical {
       writing-mode: tb-rl;
       -webkit-transform: rotate(-90deg);
@@ -82,7 +85,7 @@ if ($Awal != "") {
 </head>
 
 <body>
-  <table width="100%">
+  <table width="100%" style="font-family: 'Times New Roman', Times, serif;">
     <thead>
       <tr>
         <td>
