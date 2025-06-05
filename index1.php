@@ -74,7 +74,7 @@ $page = strtolower($page);
     page. However, you can choose any other skin. Make sure you
     apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-    <?php if ($_GET['p'] == "Lap-GantiKainDisposisi" or $_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-Retur" or $_GET['p'] == "Summary-Order" or $_GET['p'] == "Lihat-Data-Cwarna-Dye-New" or $_GET['p'] == "Lihat-Data-Cwarna-Fin-New" or $_GET['p'] == "Lihat-Data-Jahit" or $_GET['p'] == "Lap-Potong" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Lihat-Data-Beda-Roll" or $_GET['p'] == "Mutasi-BS" or $_GET['p'] == "Mutasi-BS-Detail" or $_GET['p'] == "CetakRandom" or $_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "LihatTempelBedaRoll" or $_GET['p'] == "Lap-PotongNew"): ?>
+    <?php if ($_GET['p'] == "Lap-GantiKainDisposisi" or $_GET['p'] == "Lap-GantiKain" or $_GET['p'] == "Lap-Retur" or $_GET['p'] == "Summary-Order" or $_GET['p'] == "Lihat-Data-Cwarna-Dye-New" or $_GET['p'] == "Lihat-Data-Cwarna-Fin-New" or $_GET['p'] == "Lihat-Data-Jahit" or $_GET['p'] == "Lap-Potong" or $_GET['p'] == "Input-Sisa-Lap-Packing" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Lihat-Data-Beda-Roll" or $_GET['p'] == "Mutasi-BS" or $_GET['p'] == "Mutasi-BS-Detail" or $_GET['p'] == "CetakRandom" or $_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "LihatTempelBedaRoll" or $_GET['p'] == "Lap-PotongNew" or $_GET['p'] == "Lap-PotongNew"): ?>
         <!-- X Editable -->
         <link href="bower_components/xeditable/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
     <?php endif; ?>
@@ -436,7 +436,7 @@ $page = strtolower($page);
                     } ?>"><a href="Home"><i class="fa fa-dashboard text-gray"></i>
                             <span>DashBoard</span></a></li>
                     <?php if ($_SESSION['lvl_id'] == "PACKING" or $_SESSION['lvl_id'] == "MKT") { ?>
-                        <li class="treeview <?php if ($_GET['p'] == "Input-Data-New" or $_GET['p'] == "Input-Data-KJ-New" or $_GET['p'] == "Detail-Data" or $_GET['p'] == "Label-QCF" or $_GET['p'] == "Detail-Data-KJ" or $_GET['p'] == "Rekap-Data" or $_GET['p'] == "Rekap-Email" or $_GET['p'] == "Rekap-Bon" or $_GET['p'] == "Grafik") {
+                        <li class="treeview <?php if ($_GET['p'] == "Input-Data-New" or $_GET['p'] == "Input-Data-KJ-New" or $_GET['p'] == "Detail-Data" or $_GET['p'] == "Label-QCF" or $_GET['p'] == "Detail-Data-KJ" or $_GET['p'] == "Rekap-Data" or $_GET['p'] == "Rekap-Email" or $_GET['p'] == "Rekap-Bon" or $_GET['p'] == "Grafik" or $_GET['p'] == "Laporanconfrom"or $_GET['p'] == "Reportconfrom") {
                             echo "active";
                         } ?>">
                             <a href="#"><i class="fa fa-cubes"></i> <span>QCF</span>
@@ -467,6 +467,9 @@ $page = strtolower($page);
                                     echo "active";
                                 } ?>"><a href="LabelQCF"><i class="fa fa-file-text-o"></i> <span>Label
                                             QCF</span></a></li>
+                                <li class="<?php if ($_GET['p'] == "Laporanconfrom") {
+                                    echo "active";
+                                } ?>"><a href="Laporanconfrom"><i class="fa fa-file-text-o"></i> <span>Laporan Confrom QCF</span></a></li>
                                 <!-- <li class="<?php if ($_GET['p'] == "Rekap-Data") {
                                     echo "active";
                                 } ?>"><a href="RekapData"><i class="fa fa-line-chart"></i> <span>Rekap-Data</span></a></li>
@@ -4213,6 +4216,54 @@ $page = strtolower($page);
             var m = $(this).attr("id");
             $.ajax({
                 url: "pages/pic_disposisi2.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function (ajaxData) {
+                    $("#PicDisp2").html(ajaxData);
+                    $("#PicDisp2").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+        $(document).on('click', '.gambarconform', function (e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/pic_confrom.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function (ajaxData) {
+                    $("#PicDisp").html(ajaxData);
+                    $("#PicDisp").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+        $(document).on('click', '.gambarconform2', function (e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/pic_confrom2.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function (ajaxData) {
+                    $("#PicDisp2").html(ajaxData);
+                    $("#PicDisp2").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+          $(document).on('click', '.gambarconform3', function (e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/pic_confrom3.php",
                 type: "GET",
                 data: {
                     id: m,
