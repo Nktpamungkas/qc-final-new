@@ -469,7 +469,7 @@ $page = strtolower($page);
                                             QCF</span></a></li>
                                 <li class="<?php if ($_GET['p'] == "Laporanconfrom") {
                                     echo "active";
-                                } ?>"><a href="Laporanconfrom"><i class="fa fa-file-text-o"></i> <span>Laporan Confrom QCF</span></a></li>
+                                } ?>"><a href="Laporanconfrom"><i class="fa fa-file-text-o"></i> <span>Laporan Conform QCF</span></a></li>
                                 <!-- <li class="<?php if ($_GET['p'] == "Rekap-Data") {
                                     echo "active";
                                 } ?>"><a href="RekapData"><i class="fa fa-line-chart"></i> <span>Rekap-Data</span></a></li>

@@ -104,132 +104,105 @@ include "koneksi.php";
           <table class="table table-bordered table-hover table-striped nowrap" id="example3" style="width:100%">
             <thead class="bg-blue">
               <tr>
-                <th rowspan="3">
-                  <div align="center">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </div>
-                </th>
-                <th rowspan="3">
+              </tr>
+              <th rowspan="1">
+                <div align="center">No</div>
+              </th>
+              <th rowspan="1">
+                <div align="center">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aksi
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+              </th>
+                <th rowspan="1">
                   <div align="center">No Demand</div>
                 </th>
-                <th rowspan="3">
+                <th rowspan="1">
                   <div align="center">No Production Order</div>
                 </th>
-                <th rowspan="3">
+                <th rowspan="1">
                   <div align="center">Langganan</div>
                 </th>
-                <th rowspan="3">
+                <th rowspan="1">
                   <div align="center">Buyer</div>
                 </th>
-                <th rowspan="3">
+                <th rowspan="1">
                   <div align="center">No PO</div>
                 </th>
-                <th rowspan="3">
+                <th rowspan="1">
                   <div align="center">No Order</div>
                 </th>
-                <th rowspan="3">
+                <th rowspan="1">
                   <div align="center">No Item</div>
                 </th>
-                <th colspan="2">
-                  <div align="center">Hanger</div>
-                </th>
-                <th rowspan="3">
-                  <div align="center">Jenis Kain</div>
-                </th>
-                <th rowspan="3">
-                  <div align="center">Lebar</div>
-                </th>
-                <th rowspan="3">
-                  <div align="center">Gramasi</div>
-                </th>
-                <th rowspan="3">
-                  <div align="center">Warna</div>
-                </th>
-                <th colspan="2">
-                  <div align="center">Qty Bruto</div>
-                </th>
-                <th colspan="11">
-                  <div align="center">Conform</div>
-                </th>
-                <th colspan="4">
-                  <div align="center">Keluhan Pelanggan External</div>
-                </th>
-                <!-- <th rowspan="3">
-                  <div align="center">Lot</div>
-                </th> -->
-              </tr>
-              <tr>
-                <th rowspan="2">
+                <th rowspan="1">
                   <div align="center">Article Group</div>
                 </th>
-                <th rowspan="2">
+                <th rowspan="1">
                   <div align="center">Article Code</div>
                 </th>
-                <th rowspan="2">
-                  <div align="center">User Primary Qty (KG)</div>
+                <th rowspan="1">
+                  <div align="center">Jenis Kain</div>
                 </th>
-                <th rowspan="2">
-                  <div align="center">User Secondary Qty (Yard)</div>
+                <th rowspan="1">
+                  <div align="center">Lebar</div>
                 </th>
-                <th rowspan="2">
-                  <div align="center">Tgl Conform</div>
+                <th rowspan="1">
+                  <div align="center">Gramasi</div>
                 </th>
-                <th rowspan="2">
-                  <div align="center">Tgl  MKT Terima</div>
+                <th rowspan="1">
+                  <div align="center">Warna</div>
                 </th>
-                <th rowspan="2">
-                  <div align="center">Tgl Feedback</div>
-                </th>
-                <th rowspan="2">
+                <th rowspan="1">
                   <div align="center">Masalah</div>
                 </th>
-                <th rowspan="2">
-                  <div align="center">Keputusan</div>
+                <th>
+                  <div align="center">Pejabat QC 1</div>
                 </th>
-                <th colspan="3">
-                  <div align="center">Pejabat QC</div>
+                <th>
+                  <div align="center">Pejabat QC 2</div>
                 </th>
-                <th rowspan="2">
+                <th>
+                  <div align="center">Pejabat QC 3</div>
+                </th>
+                <th rowspan="1">
                   <div align="center">Produksi</div>
                 </th>
-                <th rowspan="2">
+                <th rowspan="1">
                   <div align="center">Marketing</div>
                 </th>
-                <th rowspan="2">
+                <th rowspan="1">
+                  <div align="center">Tgl Conform</div>
+                </th>
+                <th rowspan="1">
+                  <div align="center">Tgl MKT Terima</div>
+                </th>
+                <th rowspan="1">
+                  <div align="center">Tgl Feedback</div>
+                </th>
+                <th rowspan="1">
+                  <div align="center">Keputusan</div>
+                </th>
+                <th rowspan="1">
                   <div align="center">Foto Confrom</div>
                 </th>
-                <!-- <th rowspan="2"><div align="center">Delete File Foto 1</div></th> -->
-                <th rowspan="2">
+                <th rowspan="1">
                   <div align="center">Foto Feedback</div>
                 </th>
-                <!-- <th rowspan="2"><div align="center">Delete File Foto 2</div></th> -->
-                <th rowspan="2">
+                <th rowspan="1">
                   <div align="center">Inspect Report
                   </div>
                 </th>
-                <th rowspan="2">
-                  <div align="center">Masalah</div>
+                <th rowspan="1">
+                  <div align="center">lot</div>
                 </th>
-                <th rowspan="2">
-                    <div align="center">lot</div>
-                </th>
+
               </tr>
-              <tr>
-                <th>
-                  <div align="center">1</div>
-                </th>
-                <th>
-                  <div align="center">2</div>
-                </th>
-                <th>
-                  <div align="center">3</div>
-                </th>
-              </tr>
+
             </thead>
             <tbody>
               <?php
-
+              $no = 1;
 
               if ($Awal != '' || $Demand != '' || $Lot != '' || $Order != '' || $Langganan != '' || $PO != '' || $ArticleGrup != '' || $ArticleCode != '' || $Warna != '') {
                 $Where = " AND 1=1 ";
@@ -270,15 +243,10 @@ include "koneksi.php";
                 $noorder = str_replace("/", "&", $row1['no_order']);
               ?>
                 <tr bgcolor="<?php echo $bgcolor; ?>">
+                  <td align="center"><?php echo $no; ?></td>
                   <td align="center">
                     <div class="btn-group">
-
-                      <!-- <a href="TambahBonDisposisi-<?php echo $row1['id']; ?>-<?php echo $noorder; ?>" class="btn btn-warning btn-xs" target="_blank"><i class="fa fa-plus" data-toggle="tooltip" data-placement="top" title="Ganti Kain"></i> </a> -->
-                      <!-- <a href="TambahDetailReturDisposisi-<?php echo $row1['id']; ?>" class="btn btn-success btn-xs" target="_blank"><i class="fa fa-plus" data-toggle="tooltip" data-placement="top" title="Retur"></i> </a>
-                      <a href="TambahTPUKPEDisposisi-<?php echo $row1['id']; ?>" class="btn btn-primary btn-xs" target="_blank"><i class="fa fa-plus" data-toggle="tooltip" data-placement="top" title="TPUKPE"></i> </a>-->
-
-
-                      <a href="Editconform-<?php echo $row1['id']; ?>" class="btn btn-warning btn-xs" target="_blank"><i class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="Edit Disposisi"></i> </a>
+                      <a href="Editconform-<?php echo $row1['id']; ?>" class="btn btn-warning btn-xs" target="_blank"><i class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="Edit Data"></i> </a>
                       <a href="#" class="btn btn-danger btn-xs" onclick="confirm_delete('./HapusDataConform-<?php echo $row1['id'] ?>');"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Hapus"></i> </a>
                     </div>
                   </td>
@@ -295,18 +263,18 @@ include "koneksi.php";
                   <td align="center"><?php echo $row1['lebar']; ?></td>
                   <td align="center"><?php echo $row1['gramasi']; ?></td>
                   <td align="center"><?php echo $row1['warna']; ?></td>
-                  <td align="center"><?php echo $row1['qty_kg']; ?></td>
-                  <td align="center"><?php echo $row1['qty_yard']; ?></td>
-                  <td align="center"><?php echo($row1['tgl_conform']); ?></td>
-                  <td align="center"><?php echo $row1['tgl_mkt_terima']; ?></td>
-                  <td align="center"><?php echo $row1['tgl_feedback']; ?></td>
                   <td align="center"><?php echo $row1['masalah']; ?></td>
-                  <td align="center"><?php echo $row1['keputusan']; ?></td>
+                  <!-- <td align="center"><?php echo $row1['qty_kg']; ?></td>
+                  <td align="center"><?php echo $row1['qty_yard']; ?></td> -->
                   <td align="center"><?php echo $row1['pejabat1']; ?></td>
                   <td align="center"><?php echo $row1['pejabat2']; ?></td>
                   <td align="center"><?php echo $row1['pejabat3']; ?></td>
                   <td align="center"><?php echo $row1['produksi']; ?></td>
                   <td align="center"><?php echo $row1['marketing']; ?></td>
+                  <td align="center"><?php echo ($row1['tgl_conform']); ?></td>
+                  <td align="center"><?php echo $row1['tgl_mkt_terima']; ?></td>
+                  <td align="center"><?php echo $row1['tgl_feedback']; ?></td>
+                  <td align="center"><?php echo $row1['keputusan']; ?></td>
                   <td align="center"><a href="#" class="gambarconform" id="<?php echo $row1['file_foto']; ?>"><?php echo $row1['file_foto']; ?></a></td>
                   <!-- <td align="center"><a href="#" class="btn btn-danger btn-xs <?php if ($_SESSION['akses'] == 'biasa' or $row1['file_foto'] == NULL or $row1['file_foto'] == "") {
                                                                                       echo "disabled";
@@ -318,7 +286,6 @@ include "koneksi.php";
                   <!-- <td align="center"><?php echo $row1['ext_ref']; ?></td>
                   <td align="center"><?php echo $row1['int_ref']; ?></td> -->
                   <td align="center"><a href="#" class="gambarconform3" id="<?php echo $row1['file_foto3']; ?>"><?php echo $row1['file_foto3']; ?></a></td>
-                  <td align="center"><?php echo $row1['masalah']; ?></td>
                   <td align="center"><?php echo $row1['lot']; ?></td>
                 </tr>
               <?php $no++;

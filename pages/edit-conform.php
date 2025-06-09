@@ -253,7 +253,7 @@ $rdis = mysqli_fetch_array($sqldis);
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label for="pejabat3" class="col-sm-2 control-label">Pejabat QC 3</label>
 					<div class="col-sm-6">
 						<div class="input-group">
@@ -272,7 +272,7 @@ $rdis = mysqli_fetch_array($sqldis);
 							<?php } ?>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="form-group">
 					<label for="produksi" class="col-sm-2 control-label">Produksi</label>
 					<div class="col-sm-6">

@@ -473,7 +473,7 @@
                          </div>
                      </div>
                  </div>
-                 <div class="form-group">
+                 <!-- <div class="form-group">
                      <label for="pejabat3" class="col-sm-2 control-label">Pejabat QC 3</label>
                      <div class="col-sm-6">
                          <div class="input-group">
@@ -491,7 +491,7 @@
                              <?php } ?>
                             </div>
                      </div>
-                 </div>
+                 </div> -->
                  <div class="form-group">
                      <label for="produksi" class="col-sm-2 control-label">Produksi</label>
                      <div class="col-sm-6">
@@ -559,7 +559,7 @@
                             </div>
                         </div>
                     <div class="form-group">
-                        <label for="file_foto" class="col-md-2 control-label">Upload Foto Confrom </label>
+                        <label for="file_foto" class="col-md-2 control-label">Upload Foto Conform </label>
                         <div class="col-sm-5">
                             <input type="file" id="file_foto" name="file_foto">
                             <span class="help-block with-errors"></span>
