@@ -852,9 +852,11 @@
 				$("#marned").css("display", "none");  // To hide
 			}
 			$("#fc30").css("display", "");  // To unhide
+			$("#fc301").css("display", "");  // To unhide
 			$("#stat_nedle").css("display", "");  // To unhide
 		} else {
 			$("#fc30").css("display", "none");  // To hide
+			$("#fc301").css("display", "none");  // To hide
 			$("#stat_nedle").css("display", "none");  // To hide
 			$("#disned").css("display", "none");  // To hide
 			$("#ranned").css("display", "none");  // To hide
@@ -8281,7 +8283,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 						<!-- CURLING END-->
 						<!-- NEDLE BEGIN -->
 							<div class="form-group" id="fc30" style="display:none;">
-								<label for="nedle" class="col-sm-2 control-label">NEDLE HOLES &amp; CRACKING</label>
+								<label for="nedle" class="col-sm-2 control-label">NEDLE HOLES</label>
 								<div class="col-sm-2">
 									<input name="nedle" type="text" class="form-control" id="nedle"
 										value="<?php echo $rcek1['nedle']; ?>" placeholder="NEDLE">
@@ -8289,6 +8291,13 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
 										name="nedle_note" maxlength="50"><?php echo $rcek1['nedle_note']; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="fc301" style="display:none;">
+								<label for="cracking" class="col-sm-2 control-label">CRACKING</label>
+								<div class="col-sm-2">
+									<input name="cracking" type="text" class="form-control" id="cracking"
+										value="<?php echo $rcek1['cracking']; ?>" placeholder="cracking">
 								</div>
 							</div>
 							<div class="form-group" id="stat_nedle" style="display:none;">
@@ -14724,7 +14733,7 @@ if ($_POST['colorfastness_save'] == "save") {  // bleeding_root save
 
 // Save Untuk Physical Save
 if ($_POST['physical_save'] == "save") {
-    $fields = array('wrinkle', 'wrinkle1', 'wrinkle2', 'stat_wrinkle', 'stat_wrinkle1', 'wrinkle_note');
+    $fields = array('wrinkle', 'wrinkle1', 'wrinkle2', 'stat_wrinkle', 'stat_wrinkle1', 'wrinkle_note','cracking');
     foreach ($fields as $field) {
         $value = trim($_POST[$field]);
         
