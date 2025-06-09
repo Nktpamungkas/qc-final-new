@@ -235,6 +235,12 @@
         WHERE A.CODE='$no_demand'";
     $stmt = db2_exec($conn1, $sqlDB2, array('cursor' => DB2_SCROLLABLE));
     $row1 = db2_fetch_assoc($stmt);
+
+    // JIKA PROD.ORDER GUNAKAN QUERY INI UNTUK MENGAMBIL RODUCTION ORDER
+    $sqlDB2 = "SELECT PRODUCTIONORDERCODE FROM ITXVIEWKK WHERE DEAMAND ='$no_demand'";
+    $stmt = db2_exec($conn1, $sqlDB2, array('cursor' => DB2_SCROLLABLE));
+    $row2 = db2_fetch_assoc($stmt);
+
     //GRAMASI
     $posg = strpos($row1['GRAMASI'], ".");
     $valgramasi = substr($row1['GRAMASI'], 0, $posg);
@@ -330,7 +336,7 @@
                      <div class="col-sm-6">
                          <input name="no_demand" type="text" class="form-control" id="no_demand"
                              onchange="window.location='Laporanconfrom-'+this.value" value="<?php echo $_GET['no_demand']; ?>" placeholder="No Demand" required>
-                         <input name="prod_order" type="hidden" class="form-control" id="prod_order" value="<?php echo $row1['PRODUCTIONORDERCODE']; ?>">
+                         <input name="prod_order" type="hidden" class="form-control" id="prod_order" value="<?php echo !empty($row1['PRODUCTIONORDERCODE']) ? $row1['PRODUCTIONORDERCODE'] : $row2['PRODUCTIONORDERCODE']; ?>">
                          <input name="langganan" type="hidden" class="form-control" id="langganan" value="<?php echo $row1['LANGGANAN']; ?>">
                          <input name="buyer" type="hidden" class="form-control" id="buyer" value="<?php echo $row1['BUYER']; ?>">
                          <input name="no_po" type="hidden" class="form-control" id="no_po" value="<?php echo $row1['PO_NUMBER']; ?>">
@@ -346,7 +352,7 @@
                          <input name="qty_yard" type="hidden" class="form-control" id="qty_yard" value="<?php echo number_format($row1['QTY_BRUTO_YARD'], 2); ?>">
                          <input name="ext_ref" type="hidden" class="form-control" id="ext_ref" value="<?php echo $row1['EXTERNAL_REFERENCE']; ?>">
                          <input name="int_ref" type="hidden" class="form-control" id="int_ref" value="<?php echo $row1['INTERNAL_REFERENCE']; ?>">
-                         <input name="lot" type="hidden" class="from-control" id="lot" value="<?php echo $row1['PRODUCTIONORDERCODE']; ?>">
+                         <input name="lot" type="hidden" class="from-control" id="lot" value="<?php echo !empty($row1['PRODUCTIONORDERCODE']) ? $row1['PRODUCTIONORDERCODE'] : $row2['PRODUCTIONORDERCODE']; ?>">
                      </div>
                      <font color="red"><?php if ($cekdis > 0) {
                                             echo "Sudah Input Pada Tgl: " . $rdis['tgl_buat'] . " | ";
@@ -363,7 +369,7 @@
                  <div class="form-group">
                      <label for="text2" class="col-sm-2 control-label">Prod. Order</label>
                      <div class="col-sm-6">
-                         <input name="prodorder1" type="text" readonly class="form-control" id="prodorder1" value="<?php echo $row1['PRODUCTIONORDERCODE']; ?>">
+                        <input name="prodorder1" type="text" readonly class="form-control" id="prodorder1" value="<?php echo !empty($row1['PRODUCTIONORDERCODE']) ? $row1['PRODUCTIONORDERCODE'] : $row2['PRODUCTIONORDERCODE']; ?>">
                      </div>
                  </div>
                  <div class="form-group">
@@ -410,7 +416,7 @@
                      <label for="lot" class="col-sm-2 control-label">Lot</label>
                      <div class="col-sm-3">
                          <input readonly name="lot" type="text" class="form-control" id="lot"
-                             value="<?php echo $row1['PRODUCTIONORDERCODE'];  ?>" placeholder="Lot">
+                             value="<?php echo !empty($row1['PRODUCTIONORDERCODE']) ? $row1['PRODUCTIONORDERCODE'] : $row2['PRODUCTIONORDERCODE']; ?>" placeholder="Lot">
                      </div>
                  </div>
              </div>
@@ -445,15 +451,15 @@
                                     while ($rp = mysqli_fetch_array($qryp)) {
                                     ?>
                                      <option value="<?php echo $rp['nama']; ?>"><?php echo $rp['nama']; ?></option>
-                                     <?php } ?>
-                                    </select>
+                                 <?php } ?>
+                             </select>
                              <?php if (@strtoupper($_SESSION['usrid']) != "INSPEKSI") { ?>
-                                <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataPejabat"> ...</button></span>
+                                 <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataPejabat"> ...</button></span>
                              <?php } ?>
                          </div>
-                        </div>
-                    </div>
-                    
+                     </div>
+                 </div>
+
                  <div class="form-group">
                      <label for="pejabat2" class="col-sm-2 control-label">Pejabat QC 2</label>
                      <div class="col-sm-6">
@@ -501,10 +507,10 @@
                                  <?php
                                     $qrypr = mysqli_query($con, "SELECT nama FROM tbl_personil_produksi_conform ORDER BY nama ASC");
                                     while ($rpr = mysqli_fetch_array($qrypr)) {
-                                        ?>
+                                    ?>
                                      <option value="<?php echo $rpr['nama']; ?>"><?php echo $rpr['nama']; ?></option>
                                  <?php } ?>
-                                </select>
+                             </select>
                              <?php if (@strtoupper($_SESSION['usrid']) != "INSPEKSI") { ?>
                                  <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataProduksi"> ...</button></span>
                              <?php } ?>
@@ -520,51 +526,53 @@
                                  <?php
                                     $qrypm = mysqli_query($con, "SELECT nama FROM tbl_personil_mkt ORDER BY nama ASC");
                                     while ($rpm = mysqli_fetch_array($qrypm)) {
-                                        ?>
+                                    ?>
                                      <option value="<?php echo $rpm['nama']; ?>"><?php echo $rpm['nama']; ?></option>
-                                     <?php } ?>
+                                 <?php } ?>
                              </select>
-                                        <?php if (@strtoupper($_SESSION['usrid']) != "INSPEKSI") { ?>
-                                            <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataMKT"> ...</button></span>
-                                            <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tgl_conform" class="col-sm-2 control-label">Tgl Conform</label>
-                            <div class="col-sm-2">
-                                 <input name="tgl_conform" type="date"  class="form-control" id="tgl_conform">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tgl_mkt_terima" class="col-sm-2 control-label">Tgl MKT Terima</label>
-                            <div class="col-sm-2">
-                                 <input name="tgl_mkt_terima" type="date"  class="form-control" id="tgl_mkt_terima">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tgl_feedback" class="col-sm-2 control-label">Tgl Feedback</label>
-                            <div class="col-sm-2">
-                                 <input name="tgl_feedback" type="date"  class="form-control" id="tgl_feedback">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="keputusan" class="col-sm-2 control-label">Keputusan</label>
-                            <div class="col-sm-6">
-                                <select name="keputusan" id="keputusan" placeholder="Keputusan" required class="form-control select2">
-                                    <option value="">-</option>
-                                    <option value="Approved">Approved</option>
-                                    <option value="Reject">Reject</option>
-                                </select>
-                            </div>
-                        </div>
-                    <div class="form-group">
-                        <label for="file_foto" class="col-md-2 control-label">Upload Foto Conform </label>
-                        <div class="col-sm-5">
-                            <input type="file" id="file_foto" name="file_foto">
-                            <span class="help-block with-errors"></span>
+                             <?php if (@strtoupper($_SESSION['usrid']) != "INSPEKSI") { ?>
+                                 <span class="input-group-btn"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#DataMKT"> ...</button></span>
+                             <?php } ?>
+                         </div>
                      </div>
-                    </div>
+                 </div>
+                 <div class="form-group">
+                     <label for="tgl_conform" class="col-sm-2 control-label">Tgl Conform</label>
+                     <div class="col-sm-3">
+                         <input name="tgl_conform" type="date" class="form-control" id="tgl_conform">
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label for="tgl_mkt_terima" class="col-sm-2 control-label">Tgl MKT Terima</label>
+                     <div class="col-sm-3">
+                         <input name="tgl_mkt_terima" type="date" class="form-control" id="tgl_mkt_terima">
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label for="tgl_feedback" class="col-sm-2 control-label">Tgl Feedback</label>
+                     <div class="col-sm-3">
+                         <input name="tgl_feedback" type="date" class="form-control" id="tgl_feedback">
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label for="keputusan" class="col-sm-2 control-label">Keputusan</label>
+                     <div class="col-sm-6">
+                         <select name="keputusan" id="keputusan" placeholder="Keputusan" required class="form-control select2">
+                             <option value="">-</option>
+                             <option value="Approved">Approved</option>
+                             <option value="Conditional Approved">Conditional Approved</option>
+                             <option value="Limited Approved">Limited Approved</option>
+                             <option value="Reject">Reject</option>
+                         </select>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label for="file_foto" class="col-md-2 control-label">Upload Foto Conform </label>
+                     <div class="col-sm-5">
+                         <input type="file" id="file_foto" name="file_foto">
+                         <span class="help-block with-errors"></span>
+                     </div>
+                 </div>
                  <div class="form-group">
                      <label for="file_foto2" class="col-md-2 control-label">Upload Foto Feedback Langganan</label>
                      <div class="col-sm-5">
@@ -577,20 +585,20 @@
                      <div class="col-sm-5">
                          <input type="file" id="file_foto3" name="file_foto3">
                          <span class="help-block with-errors"></span>
-                        </div>
-                    </div>
+                     </div>
+                 </div>
              </div>
              <br><br><br>
-             
+
              <div class="box-footer">
                  <?php if ($_GET['no_demand'] != "") { ?>
-                    <button type="submit" class="btn btn-primary pull-right" name="save" value="save"><i class="fa fa-save"></i> Simpan</button>
-                    <?php } ?>
-                </div>
-               <div class="box-footer">
+                     <button type="submit" class="btn btn-primary pull-right" name="save" value="save"><i class="fa fa-save"></i> Simpan</button>
+                 <?php } ?>
+             </div>
+             <div class="box-footer">
                  <a href="Reportconfrom" class="btn btn-warning pull-left" target="_blank"> Lihat Data</a>
-                </div>
-            </form>
+             </div>
+     </form>
  </div>
 
  <?php if ($no_demand != '') { ?>
@@ -677,7 +685,7 @@
                  </form>
              </div>
          </div>
-     <?php } ?>
+     <?php } ?> -->
 
      <div class="modal fade" id="modal_del" tabindex="-1">
          <div class="modal-dialog modal-sm">
@@ -719,9 +727,7 @@
                      </div>
                  </form>
              </div>
-             <!-- /.modal-content -->
-         </div>
-         <!-- /.modal-dialog -->
+     </div>
      </div>
      <?php
         if ($_POST['simpan_pejabat'] == "Simpan") {

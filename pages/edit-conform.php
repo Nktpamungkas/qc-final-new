@@ -315,19 +315,19 @@ $rdis = mysqli_fetch_array($sqldis);
 				</div>
 				<div class="form-group">
 					<label for="tgl_conform" class="col-sm-2 control-label">Tgl Conform</label>
-					<div class="col-sm-2">
+					<div class="col-sm-4">
 						<input name="tgl_conform" type="date" class="form-control" id="tgl_conform" value="<?php echo $row1['tgl_conform']; ?>">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="tgl_mkt_terima" class="col-sm-2 control-label">Tgl MKT Terima</label>
-					<div class="col-sm-2">
+					<div class="col-sm-4">
 						<input name="tgl_mkt_terima" type="date" class="form-control" id="tgl_mkt_terima" value="<?php echo $row1['tgl_mkt_terima']; ?>">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="tgl_feedback" class="col-sm-2 control-label">Tgl Feedback</label>
-					<div class="col-sm-2">
+					<div class="col-sm-4">
 						<input name="tgl_feedback" type="date" class="form-control" id="tgl_feedback" value="<?php echo $row1['tgl_feedback']; ?>">
 					</div>
 				</div>
@@ -337,6 +337,8 @@ $rdis = mysqli_fetch_array($sqldis);
 						<select name="keputusan" id="keputusan" placeholder="Keputusan" required class="form-control select2">
 							<option value="">-</option>
 							<option value="Approved" <?php echo ($row1['keputusan'] == 'Approved') ? 'selected' : ''; ?>>Approved</option>
+							<option value="Conditional Approved" <?php echo ($row1['keputusan'] == 'Conditional Approved') ? 'selected' : ''; ?>>Conditional Approved</option>
+							<option value="Limited Approved" <?php echo ($row1['keputusan'] == 'Limited Approved') ? 'selected' : ''; ?>>Limited Approved</option>
 							<option value="Reject" <?php echo ($row1['keputusan'] == 'Reject') ? 'selected' : ''; ?>>Reject</option>
 						</select>
 					</div>
