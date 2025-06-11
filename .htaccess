@@ -549,4 +549,6 @@ RewriteRule ^Reportconfrom$ ./index1.php?p=report-confrom [L]
 RewriteRule ^HapusDataConform-([a-zA-Z0-9_-]+)$ ./index1.php?p=hapusdataconform&id=$1 [L]
 RewriteRule ^Editconform-([a-zA-Z0-9_-]+)$ ./index1.php?p=edit-conform&id=$1 [L]
 
+RewriteRule ^SummaryReplacementItem$ ./index1.php?p=Summary-Replacement-Item [L]
+
 Options All -Indexes
