@@ -51,6 +51,7 @@
                                 $queryMain = "SELECT
                                                 tq.no_order,
                                                 tq.no_item,
+                                                tq.no_warna,
                                                 SUM(tq.netto) AS netto,
                                                 SUM(CASE WHEN m.status_approve = 1 THEN tq.estimasi ELSE 0 END) AS estimasi_approve,
                                                 SUM(CASE WHEN m.status_approve = 99 THEN tq.estimasi ELSE 0 END) AS estimasi_reject
@@ -73,7 +74,8 @@
                                             --     AND tq.no_order = 'DOM2500004'
                                             GROUP BY
                                                 tq.no_order,
-                                                tq.no_item
+                                                tq.no_item,
+                                                tq.no_warna
                                             ORDER BY
                                                 tq.no_order";
                                 $resultMain = mysqli_query($con, $queryMain); 
@@ -82,7 +84,7 @@
                                 <tr>
                                     <td><?php echo $no++; ?></td>
                                     <td><?php echo $row['no_order']; ?></td>
-                                    <td><?php echo $row['no_item']; ?></td>
+                                    <td><?php echo $row['no_item']; ?>-<?php echo $row['no_warna']; ?></td>
                                     <td><?php echo number_format($row['netto'], 2); ?></td>
                                     <td><?php echo number_format($row['estimasi_approve'], 2); ?></td>
                                     <td><?php echo number_format($row['estimasi_reject'], 2); ?></td>
