@@ -1673,6 +1673,7 @@ if($_POST['save']=="save"){
 	// Folder tujuan
 	$targetDir = "upload_files/";
 	$uploadOk = 1;
+	
 
 	// Ambil info file
 	$originalName = basename($_FILES["upload_file"]["name"]);
@@ -1795,16 +1796,104 @@ if($_POST['save']=="save"){
 				});</script>";
 		}		
 	}else{
-		echo "<script>swal({
-			title: 'Proses upload gagal',
-			text: 'Klik Ok untuk input data kembali',
-			type: 'error',
-			}).then((result) => {
-			if (result.value) {
-
-				window.location.href='InputDataNew';
-			}
-			});</script>";
+		$sqlData	=	mysqli_query($con,"INSERT INTO tbl_qcf SET 
+														nokk='$_POST[nokk]',
+														nodemand='$_POST[nodemand]',
+														bpp='$nou',
+														pelanggan='$_POST[pelanggan]',
+														no_order='$_POST[no_order]',
+														no_hanger='$_POST[no_hanger]',
+														no_item='$_POST[no_item]',
+														no_po='$po',
+														no_ko='$_POST[no_ko]',
+														jenis_kain='$jns',
+														styl='$styl',
+														berat_order='$_POST[qty1]',
+														panjang_order='$_POST[qty2]',
+														satuan_order='$_POST[satuan1]',
+														rol_bruto='$_POST[qty3]',
+														berat_bruto='$_POST[qty4]',
+														lebar='$_POST[lebar]',
+														gramasi='$_POST[grms]',
+														lebar_ins='$_POST[inslebar]',
+														gramasi_ins='$_POST[insgrms]',
+														lebar_fin='$_POST[finlebar]',
+														gramasi_fin='$_POST[fingrms]',
+														susut_p='$_POST[pp]',
+														susut_l='$_POST[pl]',
+														susut_s='$_POST[ps]',
+														berat_extra='$_POST[extra]',
+														panjang_extra='$_POST[extra_p]',
+														estimasi='$_POST[estimasi]',
+														panjang_estimasi='$_POST[estimasi_p]',
+														lot='$lot',
+														rol='$_POST[rol]',
+														warna='$warna',
+														no_warna='$nowarna',
+														cek_warna='$cekwarna',
+														netto='$_POST[netto]',
+														panjang='$_POST[panjang]',
+														satuan='$_POST[satuan2]',
+														lot_legacy='$_POST[lot_legacy]',
+														sisa='$_POST[sisa]',
+														tgl_masuk='$_POST[tglmsk]',
+														tgl_pack='$_POST[tglpk]',
+														jam_pack='$_POST[jam_pack]',
+														tglcwarna='$_POST[tglcwarna]',
+														jam_cwarna='$_POST[jam_cwarna]',
+														tgl_ins='$_POST[tglins]',
+														tgl_fin='$_POST[tglfin]',
+														tgl_delivery='$_POST[tgl_delivery]',
+														qty_mslh='$_POST[qty_mslh]',
+														rol_mslh='$_POST[rol_mslh]',
+														t_jawab='$multijawab',
+														persen='$persen',
+														sts_pbon='$sts_pbon',
+														sts_nodelay='$sts_nodelay',
+														sts_tembakdok='$sts_tembakdok',
+														masalah='$masalah',
+														ket='$ket1',
+														sales='$sales',
+														tgl_update=now(),
+														penghubung_masalah = '$penghubung_masalah',
+														penghubung_keterangan = '$penghubung_keterangan',
+														advice1          = '$advice1',
+														penghubung_roll1 = '$penghubung_roll1',
+														penghubung_roll2 = '$penghubung_roll2',
+														penghubung_roll3 = '$penghubung_roll3',
+														penghubung_dep = '$penghubung_dep',
+														penghubung_dep_persen = '$penghubung_dep_persen',
+														
+														penghubung2_masalah = '$penghubung2_masalah',
+														penghubung2_keterangan = '$penghubung2_keterangan',
+														advice2           = '$advice2',
+														penghubung2_roll1 = '$penghubung2_roll1',
+														penghubung2_roll2 = '$penghubung2_roll2',
+														penghubung2_roll3 = '$penghubung2_roll3',
+														penghubung2_dep = '$penghubung2_dep',
+														penghubung2_dep_persen = '$penghubung2_dep_persen',
+														
+														penghubung3_masalah = '$penghubung3_masalah',
+														penghubung3_keterangan = '$penghubung3_keterangan',
+														advice3           = '$advice3',
+														penghubung3_roll1 = '$penghubung3_roll1',
+														penghubung3_roll2 = '$penghubung3_roll2',
+														penghubung3_roll3 = '$penghubung3_roll3',
+														penghubung3_dep = '$penghubung3_dep',
+														penghubung3_dep_persen = '$penghubung3_dep_persen'");	 	  
+	  
+		if($sqlData){
+			echo "<script>swal({
+				title: 'Data Tersimpan, Tanpa File Upload',   
+				text: 'Klik Ok untuk input data kembali',
+				type: 'success',
+				}).then((result) => {
+				if (result.value) {
+					
+					window.location.href='InputDataNew'; 
+				}
+				});</script>";
+		}	
 	}
 }
 if($_POST['update']=="update"){
