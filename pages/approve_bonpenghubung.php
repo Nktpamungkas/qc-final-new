@@ -253,7 +253,7 @@ include "koneksi.php";
                                                                     or tq.penghubung_roll3 !=''  
                                                                     or tq.penghubung_dep !='' 
                                                                     or tq.penghubung_dep_persen !='') 
-                                                        GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan, tq.tgl_masuk LIMIT 15";
+                                                        GROUP BY tq.no_order, tq.no_po, tq.no_hanger, tq.no_item, tq.warna, tq.pelanggan, tq.tgl_masuk";
                                 }
                                 $sql = mysqli_query($con, $sql_code); 
                             ?>
