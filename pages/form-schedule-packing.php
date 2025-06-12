@@ -2,11 +2,12 @@
 	function roundToTwo(num) {
 		return +(Math.round(num + "e+2") + "e-2");
 	}
+
 	function angka(e) {
 		if (!/^[0-9 .]+$/.test(e.value)) {
 			e.value = e.value.substring(0, e.value.length - 1);
 		}
-	}	
+	}
 </script>
 <?php
 // ini_set("error_reporting", 1);
@@ -299,22 +300,22 @@ $cek1 = mysqli_num_rows($sqlCek1);
 $sqlDB21  = " SELECT DISTINCT 
 				x.INITIALUSERPRIMARYQUANTITY AS KG_BAGIKAIN 
 				FROM DB2ADMIN.ITXVIEW_RESERVATION x 
-			WHERE x.PRODUCTIONORDERCODE='".$rcek['nokk']."'";
-$stmt1   = db2_exec($conn1, $sqlDB21, array('cursor' => DB2_SCROLLABLE));	
+			WHERE x.PRODUCTIONORDERCODE='" . $rcek['nokk'] . "'";
+$stmt1   = db2_exec($conn1, $sqlDB21, array('cursor' => DB2_SCROLLABLE));
 $rowdb21 = db2_fetch_assoc($stmt1);
 // echo $sqlDB21;
-	
+
 $sqlDB21S  = " SELECT 
 					x.USEDUSERPRIMARYQUANTITY AS KG_BAGIKAIN,
 					x.USERPRIMARYQUANTITY AS KG_BAGIKAIN1  FROM DB2ADMIN.PRODUCTIONRESERVATION x
-				WHERE x.ORDERCODE = '". $_GET['nodemand'] ."' ";
-$stmt1S   = db2_exec($conn1, $sqlDB21S, array('cursor' => DB2_SCROLLABLE));	
-$rowdb21S = db2_fetch_assoc($stmt1S);	
+				WHERE x.ORDERCODE = '" . $_GET['nodemand'] . "' ";
+$stmt1S   = db2_exec($conn1, $sqlDB21S, array('cursor' => DB2_SCROLLABLE));
+$rowdb21S = db2_fetch_assoc($stmt1S);
 // var_dump($sqlDB21S);
-if($rowdb21['KG_BAGIKAIN']>0){
-	$KGBAGI=$rowdb21['KG_BAGIKAIN'];
-}else if($rowdb21S['KG_BAGIKAIN1']>0){
-	$KGBAGI=$rowdb21S['KG_BAGIKAIN1'];
+if ($rowdb21['KG_BAGIKAIN'] > 0) {
+	$KGBAGI = $rowdb21['KG_BAGIKAIN'];
+} else if ($rowdb21S['KG_BAGIKAIN1'] > 0) {
+	$KGBAGI = $rowdb21S['KG_BAGIKAIN1'];
 }
 
 ?>
@@ -348,87 +349,87 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 					<label for="nokk" class="col-sm-3 control-label">No Production Order</label>
 					<div class="col-sm-8">
 						<input name="nokk" type="text" class="form-control" id="nokk" value="<?php if ($cek > 0) {
-							echo $rcek['nokk'];
-						} else {
-							echo $rowdb2['PRODUCTIONORDERCODE'];
-						} ?>" placeholder="No Production Order">
+																									echo $rcek['nokk'];
+																								} else {
+																									echo $rowdb2['PRODUCTIONORDERCODE'];
+																								} ?>" placeholder="No Production Order">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="langganan" class="col-sm-3 control-label">Langganan</label>
 					<div class="col-sm-8">
 						<input name="langganan" type="text" class="form-control" id="langganan" value="<?php if ($cek > 0) {
-							echo $rcek['langganan'];
-						} else {
-							echo $rowdb2['LANGGANAN'];
-						} ?>" placeholder="Langganan">
+																											echo $rcek['langganan'];
+																										} else {
+																											echo $rowdb2['LANGGANAN'];
+																										} ?>" placeholder="Langganan">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="buyer" class="col-sm-3 control-label">Buyer</label>
 					<div class="col-sm-8">
 						<input name="buyer" type="text" class="form-control" id="buyer" value="<?php if ($cek > 0) {
-							echo $rcek['buyer'];
-						} else {
-							echo $rowdb20['ORDERPARTNERBRANDCODE'];
-						} ?>" placeholder="Buyer">
+																									echo $rcek['buyer'];
+																								} else {
+																									echo $rowdb20['ORDERPARTNERBRANDCODE'];
+																								} ?>" placeholder="Buyer">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="no_order" class="col-sm-3 control-label">No Order</label>
 					<div class="col-sm-4">
 						<input name="no_order" type="text" class="form-control" id="no_order" value="<?php if ($cek > 0) {
-							echo $rcek['no_order'];
-						} else {
-							if ($rowdb2['PRO_ORDER'] != "") {
-								echo $rowdb2['PRO_ORDER'];
-							}
-						} ?>" placeholder="No Order">
+																											echo $rcek['no_order'];
+																										} else {
+																											if ($rowdb2['PRO_ORDER'] != "") {
+																												echo $rowdb2['PRO_ORDER'];
+																											}
+																										} ?>" placeholder="No Order">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="no_po" class="col-sm-3 control-label">PO</label>
 					<div class="col-sm-5">
 						<input name="no_po" type="text" class="form-control" id="no_po" value="<?php if ($cek > 0) {
-							echo $rcek['po'];
-						} else {
-							echo $rowdb20['PO_NUMBER'];
-						} ?>" placeholder="PO">
+																									echo $rcek['po'];
+																								} else {
+																									echo $rowdb20['PO_NUMBER'];
+																								} ?>" placeholder="PO">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="no_hanger" class="col-sm-3 control-label">No Hanger / No Item</label>
 					<div class="col-sm-3">
 						<input name="no_hanger" type="text" class="form-control" id="no_hanger" value="<?php if ($cek > 0) {
-							echo $rcek['no_hanger'];
-						} else {
-							if ($rowdb2['SUBCODE02'] != "") {
-								echo trim($rowdb2['SUBCODE02']) . '-' . trim($rowdb2['SUBCODE03']);
-							}
-						} ?>" placeholder="No Hanger">
+																											echo $rcek['no_hanger'];
+																										} else {
+																											if ($rowdb2['SUBCODE02'] != "") {
+																												echo trim($rowdb2['SUBCODE02']) . '-' . trim($rowdb2['SUBCODE03']);
+																											}
+																										} ?>" placeholder="No Hanger">
 					</div>
 					<div class="col-sm-3">
 						<input name="no_item" type="text" class="form-control" id="no_item" value="<?php if ($rcek['no_item'] != "") {
-							echo $rcek['no_item'];
-						} else if ($rowdb20['NO_ITEM'] != "") {
-							echo $rowdb20['NO_ITEM'];
-						} else {
-							if ($rowdb2['SUBCODE02'] != "") {
-								echo trim($rowdb2['SUBCODE02']) . '-' . trim($rowdb2['SUBCODE03']);
-							}
-						} ?>" placeholder="No Item">
+																										echo $rcek['no_item'];
+																									} else if ($rowdb20['NO_ITEM'] != "") {
+																										echo $rowdb20['NO_ITEM'];
+																									} else {
+																										if ($rowdb2['SUBCODE02'] != "") {
+																											echo trim($rowdb2['SUBCODE02']) . '-' . trim($rowdb2['SUBCODE03']);
+																										}
+																									} ?>" placeholder="No Item">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="jns_kain" class="col-sm-3 control-label">Jenis Kain</label>
 					<div class="col-sm-8">
 						<textarea name="jns_kain" class="form-control" id="jns_kain" placeholder="Jenis Kain"><?php if ($cek > 0) {
-							echo $rcek['jenis_kain'];
-						} else {
-							if ($rowdb20['ITEMDESCRIPTION'] != "") {
-								echo $rowdb20['ITEMDESCRIPTION'];
-							}
-						} ?></textarea>
+																													echo $rcek['jenis_kain'];
+																												} else {
+																													if ($rowdb20['ITEMDESCRIPTION'] != "") {
+																														echo $rowdb20['ITEMDESCRIPTION'];
+																													}
+																												} ?></textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -438,12 +439,12 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 							<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 							<input name="tgl_delivery" type="text" class="form-control pull-right" id="datepicker2"
 								placeholder="0000-00-00" value="<?php if ($cek > 0) {
-									echo $rcek['tgl_delivery'];
-								} else {
-									if ($rowdb20['DELIVERYDATE'] != "") {
-										echo date('Y-m-d', strtotime($rowdb20['DELIVERYDATE']));
-									}
-								} ?>" required />
+																	echo $rcek['tgl_delivery'];
+																} else {
+																	if ($rowdb20['DELIVERYDATE'] != "") {
+																		echo date('Y-m-d', strtotime($rowdb20['DELIVERYDATE']));
+																	}
+																} ?>" required />
 						</div>
 					</div>
 				</div>
@@ -451,30 +452,30 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 					<label for="l_g" class="col-sm-3 control-label">Lebar X Gramasi</label>
 					<div class="col-sm-2">
 						<input name="lebar" type="text" class="form-control" id="lebar" value="<?php if ($cek > 0) {
-							echo $rcek['lebar'];
-						} else {
-							echo round($rowdb211['WIDTH']);
-						}
-						 ?>" placeholder="0" required>
+																									echo $rcek['lebar'];
+																								} else {
+																									echo round($rowdb211['WIDTH']);
+																								}
+																								?>" placeholder="0" required>
 					</div>
 					<div class="col-sm-2">
 						<input name="grms" type="text" class="form-control" id="grms" value="<?php if ($cek > 0) {
-							echo $rcek['gramasi'];
-						} else {
-							echo round($rowdb211['GSM']);
-						} ?>" placeholder="0" required>
+																									echo $rcek['gramasi'];
+																								} else {
+																									echo round($rowdb211['GSM']);
+																								} ?>" placeholder="0" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="warna" class="col-sm-3 control-label">Warna</label>
 					<div class="col-sm-8">
 						<input name="warna" type="text" class="form-control" id="warna" value="<?php if ($cek > 0) {
-							echo $rcek['warna'];
-						} else {
-							if ($rowdb2['WARNA'] != "") {
-								echo $rowdb2['WARNA'];
-							}
-						} ?>" placeholder="Warna">
+																									echo $rcek['warna'];
+																								} else {
+																									if ($rowdb2['WARNA'] != "") {
+																										echo $rowdb2['WARNA'];
+																									}
+																								} ?>" placeholder="Warna">
 					</div>
 				</div>
 
@@ -486,12 +487,12 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 					<label for="no_warna" class="col-sm-3 control-label">No Warna</label>
 					<div class="col-sm-8">
 						<input name="no_warna" type="text" class="form-control" id="no_warna" value="<?php if ($cek > 0) {
-							echo $rcek['no_warna'];
-						} else {
-							if ($rowdb2['NO_WARNA'] != "") {
-								echo $rowdb2['NO_WARNA'];
-							}
-						} ?>" placeholder="No Warna">
+																											echo $rcek['no_warna'];
+																										} else {
+																											if ($rowdb2['NO_WARNA'] != "") {
+																												echo $rowdb2['NO_WARNA'];
+																											}
+																										} ?>" placeholder="No Warna">
 					</div>
 				</div>
 				<div class="form-group">
@@ -499,62 +500,62 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input name="qty1" type="text" class="form-control" id="qty1" value="<?php if ($cek > 0) {
-								echo $rcek['qty_order'];
-							} else {
-								echo round($rowdb20['QTY_ORDER'], 2);
-							} ?>" placeholder="0.00" required>
+																										echo $rcek['qty_order'];
+																									} else {
+																										echo round($rowdb20['QTY_ORDER'], 2);
+																									} ?>" placeholder="0.00" required>
 							<span class="input-group-addon">KGs</span>
 						</div>
 					</div>
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="qty2" type="text" class="form-control" id="qty2" value="<?php if ($cek > 0) {
-								echo $rcek['pjng_order'];
-							} else {
-								echo round($rowdb20['QTY_PANJANG_ORDER'], 2);
-							} ?>" placeholder="0.00" style="text-align: right;" required>
+																										echo $rcek['pjng_order'];
+																									} else {
+																										echo round($rowdb20['QTY_PANJANG_ORDER'], 2);
+																									} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">
 								<select name="satuan1" style="font-size: 12px;" id="satuan1">
 									<option value="">Pilih</option>
 									<option value="Yard" <?php if (trim($rowdb20['QTY_PANJANG_ORDER_UOM']) == "yd") {
-										echo "SELECTED";
-									} ?>>Yard</option>
+																echo "SELECTED";
+															} ?>>Yard</option>
 									<option value="Meter" <?php if (trim($rowdb20['QTY_PANJANG_ORDER_UOM']) == "m") {
-										echo "SELECTED";
-									} ?>>Meter</option>
+																echo "SELECTED";
+															} ?>>Meter</option>
 									<option value="PCS" <?php if (trim($rowdb20['QTY_PANJANG_ORDER_UOM']) == "un") {
-										echo "SELECTED";
-									} ?>>PCS</option>
+															echo "SELECTED";
+														} ?>>PCS</option>
 								</select>
 							</span>
 						</div>
 					</div>
 					<div class="col-sm-2">
 						<input name="lot" type="text" class="form-control" id="lot" value="<?php if ($cek > 0) {
-							echo $rcek['lot'];
-						} else {
-							echo $rowdb2['DESCRIPTION'];
-						} ?>" placeholder="Lot">
+																								echo $rcek['lot'];
+																							} else {
+																								echo $rowdb2['DESCRIPTION'];
+																							} ?>" placeholder="Lot">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="jml_bruto" class="col-sm-3 control-label">Roll &amp; Qty</label>
 					<div class="col-sm-2">
 						<input name="qty3" type="text" class="form-control" id="qty3" value="<?php if ($cek > 0) {
-							echo $rcek['rol'];
-						} else {
-							if ($rowr['JML_ROLL'] != 0) {
-								echo $rowr['JML_ROLL'];
-							}
-						} ?>" placeholder="0.00" required>
+																									echo $rcek['rol'];
+																								} else {
+																									if ($rowr['JML_ROLL'] != 0) {
+																										echo $rowr['JML_ROLL'];
+																									}
+																								} ?>" placeholder="0.00" required>
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input name="qty4" type="text" class="form-control" id="qty4" value="<?php if ($cek > 0) {
-								echo $rcek['bruto'];
-							} else {
-								echo round($KGBAGI,2); //disini
-							} ?>" placeholder="0.00" style="text-align: right;" required>
+																										echo $rcek['bruto'];
+																									} else {
+																										echo round($KGBAGI, 2); //disini
+																									} ?>" placeholder="0.00" style="text-align: right;" required>
 							<span class="input-group-addon">KGs</span>
 						</div>
 					</div>
@@ -563,8 +564,8 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 					<label for="no_urut" class="col-sm-3 control-label">Total Gerobak</label>
 					<div class="col-sm-3">
 						<input name="total_gerobak" type="text" class="form-control" id="total_gerobak" value="<?php if ($cek > 0) {
-							echo $rcek['total_gerobak'];
-						} ?>" placeholder="0" required>
+																													echo $rcek['total_gerobak'];
+																												} ?>" placeholder="0" required>
 					</div>
 				</div>
 				<div class="form-group" hidden>
@@ -633,12 +634,61 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 							<?php
 							$sqlKap = mysqli_query($con, "SELECT proses FROM tbl_proses_packing WHERE `status`='1' ORDER BY proses ASC");
 							while ($rK = mysqli_fetch_array($sqlKap)) {
-								?>
+							?>
 								<option value="<?php echo $rK['proses']; ?>">
 									<?php echo $rK['proses']; ?>
 								</option>
 							<?php } ?>
 						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="jenis_packing" class="col-sm-3 control-label">Jenis Packing</label>
+					<div class="col-sm-5">
+						<select name="jenis_packing" class="form-control" id="jenis_packing">
+							<option value="">Pilih</option>
+							<option value="Normal">Normal</option>
+							<option value="Development">Development</option>
+							<option value="BS">BS</option>
+						</select>
+					</div>
+				</div>
+				<?php
+				$desc = strtoupper($rowdb20['ITEMDESCRIPTION']);
+
+				if (
+					strpos($desc, '100% COTTON') !== false ||
+					strpos($desc, '100% TENCEL') !== false ||
+					strpos($desc, '100% MODAL') !== false ||
+					strpos($desc, '100% RAYON') !== false ||
+					// Cek jika ada COTTON dan SPANDEX di mana saja dalam string
+					(strpos($desc, 'COTTON') !== false && strpos($desc, 'SPANDEX') !== false) ||
+					(strpos($desc, 'POLYESTER') !== false && strpos($desc, 'SPANDEX') !== false) ||
+					(strpos($desc, 'TENCEL') !== false && strpos($desc, 'SPANDEX') !== false) ||
+					(strpos($desc, 'MODAL') !== false && strpos($desc, 'SPANDEX') !== false) ||
+					(strpos($desc, 'RAYON') !== false && strpos($desc, 'SPANDEX') !== false)
+				) {
+					$speed = "50 Yds/Menit";
+				} elseif (
+					// Cek jika ada POLYESTER dan COTTON/MODAL/TENCEL/RAYON di mana saja dalam string
+					(strpos($desc, 'POLYESTER') !== false && strpos($desc, 'COTTON') !== false) ||
+					(strpos($desc, 'COTTON') !== false && strpos($desc, 'POLYESTER') !== false) ||
+					(strpos($desc, 'MODAL') !== false && strpos($desc, 'POLYESTER') !== false) ||
+					(strpos($desc, 'TENCEL') !== false && strpos($desc, 'POLYESTER') !== false) ||
+					(strpos($desc, 'POLYESTER') !== false && strpos($desc, 'RAYON') !== false)
+				) {
+					$speed = "60 Yds/Menit";
+				} elseif (
+					strpos($desc, '100% POLYESTER') !== false || strpos($desc, '100% RECYCLED') !== false
+				) {
+					$speed = "70 Yds/Menit";
+				}
+				?>
+				<div class="form-group">
+					<label for="speed" class="col-sm-3 control-label">Speed</label>
+					<div class="col-sm-2">
+						<input name="speed" type="text" class="form-control" id="speed" value="<?php echo $speed; ?>"
+							placeholder="Speed" readonly>
 					</div>
 				</div>
 				<div class="form-group" hidden>
@@ -692,18 +742,18 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 																			WHERE nodemand = '$nodemand'");
 					$num_row_cek_potong_tq = mysqli_num_rows($stmt_cek_potong_tq);
 					$row_row_cek_potong_tq = mysqli_fetch_assoc($stmt_cek_potong_tq);
-					?>
-				<div class="form-group">
-					<label for="catatan" class="col-sm-3 control-label">Catatan</label>
-					<div class="col-sm-8">
-						<?php if($num_row_cek_potong_tq > 0):?>
-							<textarea name="catatan" class="form-control" id="catatan" placeholder="catatan..."><?php echo $row_row_cek_potong_tq['catatan'];?></textarea>
-						<?php else:?>
-							<textarea name="catatan" class="form-control" id="catatan" placeholder="catatan..."></textarea>
-						<?php endif; ?>
-					</div>
+				?>
+					<div class="form-group">
+						<label for="catatan" class="col-sm-3 control-label">Catatan</label>
+						<div class="col-sm-8">
+							<?php if ($num_row_cek_potong_tq > 0): ?>
+								<textarea name="catatan" class="form-control" id="catatan" placeholder="catatan..."><?php echo $row_row_cek_potong_tq['catatan']; ?></textarea>
+							<?php else: ?>
+								<textarea name="catatan" class="form-control" id="catatan" placeholder="catatan..."></textarea>
+							<?php endif; ?>
+						</div>
 
-				</div>
+					</div>
 					<div class="form-group">
 						<div class="col-sm-3">&nbsp;</div>
 						<div class="col-sm-8">
@@ -728,17 +778,17 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 						</div>
 
 					</div>
-					<?php
+				<?php
 				}
 				?>
 			</div>
 
 
 			<input type="hidden" value="<?php if ($cek > 0) {
-				echo $rcek['no_ko'];
-			} else {
-				echo $rKO['KONo'];
-			} ?>" name="no_ko">
+											echo $rcek['no_ko'];
+										} else {
+											echo $rKO['KONo'];
+										} ?>" name="no_ko">
 
 		</div>
 		<div class="box-footer">
@@ -765,46 +815,46 @@ if ($_POST['save'] == "save") {
 	// $rowS = mysqli_num_rows($qryCekS);
 	// if ($cek1> 1) {
 	// 	echo "<script> swal({
-    //         title: 'Tidak bisa simpan! Data sudah diinput di Lap Packing!',
-    //         text: ' Silahkan cek laporan packing',
-    //         type: 'warning'
-    //     }, function(){
-    //         window.location='';
-    //     });</script>";
+	//         title: 'Tidak bisa simpan! Data sudah diinput di Lap Packing!',
+	//         text: ' Silahkan cek laporan packing',
+	//         type: 'warning'
+	//     }, function(){
+	//         window.location='';
+	//     });</script>";
 	// } else if ($rowN > 0) {
 	// 	echo "<script> swal({
-    //         title: 'Tidak bisa input, No Demand sudah di mesin ini',
-    //         text: ' Klik OK untuk Input No Urut kembali',
-    //         type: 'warning'
-    //     }, function(){
-    //         window.location='';
-    //     });</script>";
+	//         title: 'Tidak bisa input, No Demand sudah di mesin ini',
+	//         text: ' Klik OK untuk Input No Urut kembali',
+	//         type: 'warning'
+	//     }, function(){
+	//         window.location='';
+	//     });</script>";
 	// } else if ($rowS > 0) {
 	// 	echo "<script> swal({
-    //         title: 'Tidak bisa input, No Urut sudah di mesin ini',
-    //         text: ' Klik OK untuk Input No Urut kembali',
-    //         type: 'warning'
-    //     }, function(){
-    //         window.location='';
-    //     });</script>";
+	//         title: 'Tidak bisa input, No Urut sudah di mesin ini',
+	//         text: ' Klik OK untuk Input No Urut kembali',
+	//         type: 'warning'
+	//     }, function(){
+	//         window.location='';
+	//     });</script>";
 	// } else {
-		if ($_POST['nokk'] != "") {
-			$kartu = $_POST['nokk'];
-		} else {
-			$kartu = $nou;
-		}
-		$warna = str_replace("'", "''", $_POST['warna']);
-		$nowarna = str_replace("'", "''", $_POST['no_warna']);
-		$jns = str_replace("'", "''", $_POST['jns_kain']);
-		$po = str_replace("'", "''", $_POST['no_po']);
-		$catatan = str_replace("'", "''", $_POST['catatan']);
-		$lot = trim($_POST['lot']);
-		if ($_POST['lembur'] == "1") {
-			$lembur = "1";
-		} else {
-			$lembur = "0";
-		}
-		$sqlData = mysqli_query($con, "INSERT INTO tbl_schedule_packing SET
+	if ($_POST['nokk'] != "") {
+		$kartu = $_POST['nokk'];
+	} else {
+		$kartu = $nou;
+	}
+	$warna = str_replace("'", "''", $_POST['warna']);
+	$nowarna = str_replace("'", "''", $_POST['no_warna']);
+	$jns = str_replace("'", "''", $_POST['jns_kain']);
+	$po = str_replace("'", "''", $_POST['no_po']);
+	$catatan = str_replace("'", "''", $_POST['catatan']);
+	$lot = trim($_POST['lot']);
+	if ($_POST['lembur'] == "1") {
+		$lembur = "1";
+	} else {
+		$lembur = "0";
+	}
+	$sqlData = mysqli_query($con, "INSERT INTO tbl_schedule_packing SET
 		  nokk='$kartu',
 		  nodemand='$_POST[nodemand]',
 		  langganan='$_POST[langganan]',
@@ -837,13 +887,15 @@ if ($_POST['save'] == "save") {
 		  catatan='$catatan',
 		  t_jawab='$_POST[t_jawab]',
 		  lembur='$lembur',
+		  jenis_packing='$_POST[jenis_packing]',
+		  speed='$_POST[speed]',
 		  tgl_update=now(),
 		  total_gerobak='$_POST[total_gerobak]'");
 
-		if ($sqlData) {
-			// echo "<script>alert('Data Tersimpan');</script>";
-			// echo "<script>window.location.href='?p=Input-Data-KJ;</script>";
-			echo "<script>swal({
+	if ($sqlData) {
+		// echo "<script>alert('Data Tersimpan');</script>";
+		// echo "<script>window.location.href='?p=Input-Data-KJ;</script>";
+		echo "<script>swal({
   title: 'Data Tersimpan',   
   text: 'Klik Ok untuk input data kembali',
   type: 'success',
@@ -853,8 +905,8 @@ if ($_POST['save'] == "save") {
 	 window.location.href='SchedulePacking'; 
   }
 });</script>";
-		}
 	}
+}
 // }
 if ($_POST['update'] == "update") {
 	$warna = str_replace("'", "''", $_POST['warna']);
@@ -890,7 +942,5 @@ if (result.value) {
 }
 });</script>";
 	}
-
-
 }
 ?>
