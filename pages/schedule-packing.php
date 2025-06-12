@@ -35,6 +35,7 @@ include "koneksi.php";
 	ket_status,
   total_gerobak,
 	tgl_delivery,
+  tgl_masuk,
   TIMESTAMPDIFF(HOUR, tgl_update, now()) as diff
 FROM
 	tbl_schedule_packing 
@@ -117,6 +118,9 @@ ORDER BY
                   </th>
                   <th width="59">
                     <div align="center">Proses</div>
+                  </th>
+                  <th>
+                    <div align="center">Tanggal Buat</div>
                   </th>
                   <th>
                     <div align="center">Delivery</div>
@@ -247,6 +251,15 @@ ORDER BY
                     </td>
                     <td>
                       <?php echo $rowd['proses']; ?>
+                    </td>
+                    <td align="center">
+                      <?php
+                      echo $rowd['tgl_masuk'];
+                      // Cek jika lebih dari 2 hari (48 jam)
+                      if ($rowd['diff'] > 48) {
+                        echo '<br> <span class="badge bg-red blink_me">Harus Segera packing</span>';
+                      }
+                      ?>
                     </td>
                     <td align="center">
                       <?php echo $rowd['tgl_delivery']; ?>
