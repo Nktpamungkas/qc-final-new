@@ -8286,7 +8286,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								<label for="nedle" class="col-sm-2 control-label">NEDLE HOLES</label>
 								<div class="col-sm-2">
 									<input name="nedle" type="text" class="form-control" id="nedle"
-										value="<?php echo $rcek1['nedle']; ?>" placeholder="NEDLE">
+										value="<?php echo $rcek1['nedle']; ?>" placeholder="NEDLE HOLES">
 								</div>
 								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
@@ -8297,7 +8297,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								<label for="cracking" class="col-sm-2 control-label">CRACKING</label>
 								<div class="col-sm-2">
 									<input name="cracking" type="text" class="form-control" id="cracking"
-										value="<?php echo $rcek1['cracking']; ?>" placeholder="cracking">
+										value="<?php echo $rcek1['cracking']; ?>" placeholder="CRACKING">
 								</div>
 							</div>
 							<div class="form-group" id="stat_nedle" style="display:none;">
@@ -19271,6 +19271,7 @@ if ($notes != "" and $cek == 0) {
 			'nedle',
 			'nedle_note',
 			'stat_nedle',
+			'cracking',
 		];
 		const namaBowInput = document.querySelector('input[name="nama_nedle"]');
 		const userIdInput = document.getElementById('user_nedle');

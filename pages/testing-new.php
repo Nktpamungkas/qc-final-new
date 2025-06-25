@@ -1613,8 +1613,7 @@ if (!isset($nodemand)) { ?>
 						<label for="no_po" class="col-sm-3 control-label">No Demand</label>
 						<div class="col-sm-4">
 							<div class="input-group">
-								<input name="nodemand" type="text" class="form-control" id="nodemand"
-									onchange="window.location='TestingNew-'+this.value" placeholder="No Demand" required
+								<input name="nodemand" type="text" class="form-control" id="nodemand" placeholder="No Demand" required
 									<?php if ($_SESSION['lvl_id'] == "TQ" || $_SESSION['lvl_id'] == "OPERATORTQ") {
 										echo "readonly";
 									} ?>>
@@ -1772,7 +1771,27 @@ if (!isset($nodemand)) { ?>
 	</form>
 
 
+<script>
+document.getElementById('nodemand').addEventListener('change', function() {
+	let nodemand = this.value;
+	console.log('Nodemand changed:', nodemand); // <--- untuk debugging
 
+	fetch('pages/ajax/get_no_test.php?nodemand=' + encodeURIComponent(nodemand))
+		.then(response => response.json())
+		.then(data => {
+			if (data.no_test) {
+				window.location = 'TestingNewNoTes-' + data.no_test;
+			} else {
+				alert('No Test tidak ditemukan untuk No Demand ini.');
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			alert('Terjadi kesalahan saat mengambil data.');
+		});
+});
+
+</script>
 	<?php exit;
 }
 
@@ -1867,7 +1886,6 @@ if ($nokk_demand_data > 0) {
 					<div class="col-sm-4">
 						<div class="input-group">
 							<input name="nodemand" type="text" class="form-control" id="nodemand"
-								onchange="window.location='TestingNew-'+this.value"
 								value="<?php echo $_GET['nodemand']; ?>" placeholder="No Demand" required <?php if ($_SESSION['lvl_id'] == "TQ") {
 									   echo "readonly";
 								   } ?>>
@@ -14964,3 +14982,4 @@ if ($_GET['nodemand'] != "" and $cek == 0) {
 ?>
 <div id="PosisiKKTQ" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 	aria-hidden="true"></div>
+
