@@ -1772,9 +1772,9 @@ if (!isset($nodemand)) { ?>
 
 
 <script>
-document.getElementById('nodemand').addEventListener('change', function() {
+document.getElementById('nodemand').addEventListener('change', function () {
 	let nodemand = this.value;
-	console.log('Nodemand changed:', nodemand); // <--- untuk debugging
+	console.log('Nodemand changed:', nodemand);
 
 	fetch('pages/ajax/get_no_test.php?nodemand=' + encodeURIComponent(nodemand))
 		.then(response => response.json())
@@ -1782,12 +1782,27 @@ document.getElementById('nodemand').addEventListener('change', function() {
 			if (data.no_test) {
 				window.location = 'TestingNewNoTes-' + data.no_test;
 			} else {
-				alert('No Test tidak ditemukan untuk No Demand ini.');
+				Swal.fire({
+					title: 'No Kartu Tidak Ditemukan',
+					text: 'Klik Ok untuk input data kembali',
+					type: 'info',
+					confirmButtonText: 'OK'
+				}).then((result) => {
+					if (result.value) {
+						// Refresh halaman
+						window.location.reload();
+					}
+				});
 			}
 		})
 		.catch(error => {
 			console.error('Error:', error);
-			alert('Terjadi kesalahan saat mengambil data.');
+			Swal.fire({
+				title: 'Terjadi Kesalahan',
+				text: 'Gagal mengambil data dari server.',
+				type: 'error',
+				confirmButtonText: 'Ok'
+			});
 		});
 });
 
