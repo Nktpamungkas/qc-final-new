@@ -2049,6 +2049,16 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 								<td>&nbsp;</td>
 							</tr>
 						<?php } ?>
+						<?php if ($rcek1['cracking'] != "") { ?>
+							<tr>
+								<th colspan="2">Cracking</th>
+								<td colspan="4">
+									<?= $rcek1['cracking'] ?>
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+						<?php } ?>
+
 						<?php if ($rcek1['wrinkle'] != "" || $rcek1['wrinkle1'] != "" || $rcek1['wrinkle2'] != "") { ?>
 							<tr>
 								<th colspan="1">Wrinkle</th>
