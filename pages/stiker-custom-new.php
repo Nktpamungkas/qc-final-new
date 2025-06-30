@@ -1,8 +1,8 @@
 <?php
-include"koneksi.php";
+include "koneksi.php";
 ini_set("error_reporting", 1);
-$demand=$_GET['demand'];
-$sqlDB2="SELECT 
+$demand = $_GET['demand'];
+$sqlDB2 = "SELECT 
 A.CODE AS DEMANDNO, 
 TRIM(B.PRODUCTIONORDERCODE) AS PRODUCTIONORDERCODE,
 TRIM(F.LEGALNAME1) AS LEGALNAME1, 
@@ -122,148 +122,182 @@ A.SUBCODE07=PRODUCT.SUBCODE07 AND
 A.SUBCODE08=PRODUCT.SUBCODE08 AND 
 A.SUBCODE09=PRODUCT.SUBCODE09 AND 
 A.SUBCODE10=PRODUCT.SUBCODE10
-WHERE A.CODE='$demand'";
-$stmt=db2_exec($conn1,$sqlDB2, array('cursor'=>DB2_SCROLLABLE));
-$cekdb2= db2_num_rows($stmt);
+WHERE A.CODE='$demand' 
+ORDER BY B.PRODUCTIONORDERCODE DESC";
+$stmt = db2_exec($conn1, $sqlDB2, array('cursor' => DB2_SCROLLABLE));
+$cekdb2 = db2_num_rows($stmt);
 $rowdb2 = db2_fetch_assoc($stmt);
 //GRAMASI
-$posg=strpos($rowdb2['GRAMASI'],".");
-$valgramasi=substr($rowdb2['GRAMASI'],0,$posg);
+$posg = strpos($rowdb2['GRAMASI'], ".");
+$valgramasi = substr($rowdb2['GRAMASI'], 0, $posg);
 //LEBAR
-$posl=strpos($rowdb2['LEBAR'],".");
-$vallebar=substr($rowdb2['LEBAR'],0,$posl);
+$posl = strpos($rowdb2['LEBAR'], ".");
+$vallebar = substr($rowdb2['LEBAR'], 0, $posl);
 
-$sqlCek=mysqli_query($con,"SELECT * FROM tbl_ncp_qcf WHERE nodemand='$nodemand' and no_ncp='$NCPNO' ORDER BY id DESC LIMIT 1");
-$cek=mysqli_num_rows($sqlCek);
-$rcek=mysqli_fetch_array($sqlCek);
+$sqlCek = mysqli_query($con, "SELECT * FROM tbl_ncp_qcf WHERE nodemand='$nodemand' and no_ncp='$NCPNO' ORDER BY id DESC LIMIT 1");
+$cek = mysqli_num_rows($sqlCek);
+$rcek = mysqli_fetch_array($sqlCek);
 
 ?>
 <div class="row">
 	<div class="col-xs-12">
-  		<div class="box box-info">
-   			<div class="box-header with-border">
-    			<h3 class="box-title">Stiker Custom</h3>
-    			<div class="box-tools pull-right">
-      				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-    			</div>
-  			</div>
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title">Stiker Custom</h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+				</div>
+			</div>
 			<form class="form-horizontal" action="pages/cetak/cetak-stiker-custom-full.php" method="post" enctype="multipart/form-data" name="form1" id="form1" target="_blank">
-				<div class="box-body"> 
-					<div class="col-md-12"> 
+				<div class="box-body">
+					<div class="col-md-12">
 						<div class="form-group">
 							<label for="demand" class="col-sm-2 control-label">No Demand</label>
 							<div class="col-sm-2">
-								<input name="demand" type="text" class="form-control" id="demand" 
-								onchange="window.location='StikerCustomNew-'+this.value" value="<?php echo $_GET['demand'];?>" placeholder="No Demand" required>
+								<input name="demand" type="text" class="form-control" id="demand"
+									onchange="window.location='StikerCustomNew-'+this.value" value="<?php echo $_GET['demand']; ?>" placeholder="No Demand" required>
 							</div>
 							<label for="lotcode" class="col-sm-2 control-label">No KK ERP (LOT)</label>
-							
-<div class="col-sm-2">
-								<input name="lotcode" type="text" class="form-control" id="lotcode" 
-								 value="<?php if($cekdb2>0){echo $rowdb2['PRODUCTIONORDERCODE'];}else{} ?>" placeholder="No KK ERP">
+
+							<div class="col-sm-2">
+								<input name="lotcode" type="text" class="form-control" id="lotcode"
+									value="<?php if ($cekdb2 > 0) {
+												echo $rowdb2['PRODUCTIONORDERCODE'];
+											} else {
+											} ?>" placeholder="No KK ERP">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="pelanggan" class="col-sm-2 control-label">Pelanggan</label>
 							<div class="col-sm-6">
-								<input name="pelanggan" type="text" class="form-control" id="no_po" 
-								value="<?php if($cekdb2>0){echo $rowdb2['LEGALNAME1']."/".$rowdb2['BUYER'];}else{}?>" placeholder="Pelanggan" >
-							</div>				   
+								<input name="pelanggan" type="text" class="form-control" id="no_po"
+									value="<?php if ($cekdb2 > 0) {
+												echo $rowdb2['LEGALNAME1'] . "/" . $rowdb2['BUYER'];
+											} else {
+											} ?>" placeholder="Pelanggan">
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="no_order" class="col-sm-2 control-label">No Order</label>
-								<div class="col-sm-2">
-								<input name="no_order" type="text" class="form-control" id="no_order" 
-								value="<?php if($cekdb2>0){echo $rowdb2['SALESORDERCODE'];}else{} ?>" placeholder="No Order" required>
-							</div>				   
+							<div class="col-sm-2">
+								<input name="no_order" type="text" class="form-control" id="no_order"
+									value="<?php if ($cekdb2 > 0) {
+												echo $rowdb2['SALESORDERCODE'];
+											} else {
+											} ?>" placeholder="No Order" required>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="no_po" class="col-sm-2 control-label">PO</label>
-								<div class="col-sm-3">
-									<input name="no_po" type="text" class="form-control" id="no_po" 
-									value="<?php if($cekdb2>0){echo $rowdb2['PO_NUMBER'];}else{} ?>" placeholder="PO" >
-								</div>				   
+							<div class="col-sm-3">
+								<input name="no_po" type="text" class="form-control" id="no_po"
+									value="<?php if ($cekdb2 > 0) {
+												echo $rowdb2['PO_NUMBER'];
+											} else {
+											} ?>" placeholder="PO">
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="no_hanger" class="col-sm-2 control-label">No Hanger / No Item</label>
-								<div class="col-sm-2">
-									<input name="no_hanger" type="text" class="form-control" id="no_hanger" 
-									value="<?php if($cekdb2>0){echo $rowdb2['SUBCODE02'].''.$rowdb2['SUBCODE03'];}else{}?>" placeholder="No Hanger">  
-								</div>
-								<div class="col-sm-2">
-									<input name="no_item" type="text" class="form-control" id="no_item" 
-									value="<?php if($cekdb2>0){echo $rowdb2['NO_ITEM'];}else{}?>" placeholder="No Item">
-								</div>	
+							<div class="col-sm-2">
+								<input name="no_hanger" type="text" class="form-control" id="no_hanger"
+									value="<?php if ($cekdb2 > 0) {
+												echo $rowdb2['SUBCODE02'] . '' . $rowdb2['SUBCODE03'];
+											} else {
+											} ?>" placeholder="No Hanger">
+							</div>
+							<div class="col-sm-2">
+								<input name="no_item" type="text" class="form-control" id="no_item"
+									value="<?php if ($cekdb2 > 0) {
+												echo $rowdb2['NO_ITEM'];
+											} else {
+											} ?>" placeholder="No Item">
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="jns_kain" class="col-sm-2 control-label">Jenis Kain</label>
-								<div class="col-sm-5">
-									<textarea name="jns_kain" class="form-control" id="jns_kain" placeholder="Jenis Kain"><?php if($cekdb2>0){echo $rowdb2['JENIS_KAIN'];} else{}?></textarea>
-								</div>
-						</div>	 		
+							<div class="col-sm-5">
+								<textarea name="jns_kain" class="form-control" id="jns_kain" placeholder="Jenis Kain"><?php if ($cekdb2 > 0) {
+																															echo $rowdb2['JENIS_KAIN'];
+																														} else {
+																														} ?></textarea>
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="l_g" class="col-sm-2 control-label">Lebar X Gramasi</label>
 							<div class="col-sm-1">
-								<input name="lebar" type="text" class="form-control" id="lebar" 
-								value="<?php if($cekdb2>0){echo $vallebar;} ?>" placeholder="0" required>
+								<input name="lebar" type="text" class="form-control" id="lebar"
+									value="<?php if ($cekdb2 > 0) {
+												echo $vallebar;
+											} ?>" placeholder="0" required>
 							</div>
 							<div class="col-sm-1">
-								<input name="grms" type="text" class="form-control" id="grms" 
-								value="<?php if($cekdb2>0){echo $valgramasi;} ?>" placeholder="0" required>
-							</div>		
+								<input name="grms" type="text" class="form-control" id="grms"
+									value="<?php if ($cekdb2 > 0) {
+												echo $valgramasi;
+											} ?>" placeholder="0" required>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="warna" class="col-sm-2 control-label">Warna</label>
 							<div class="col-sm-5">
-								<textarea name="warna" class="form-control" id="warna" placeholder="Warna"><?php if($cekdb2>0){echo $rowdb2['WARNA'];}else{}?></textarea>
-							</div>				   
+								<textarea name="warna" class="form-control" id="warna" placeholder="Warna"><?php if ($cekdb2 > 0) {
+																												echo $rowdb2['WARNA'];
+																											} else {
+																											} ?></textarea>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="no_warna" class="col-sm-2 control-label">No Warna</label>
 							<div class="col-sm-5">
-								<textarea name="no_warna" class="form-control" id="no_warna" placeholder="No Warna"><?php if($cekdb2>0){echo $rowdb2['NO_WARNA'];}else{}?></textarea>
-							</div>				   
+								<textarea name="no_warna" class="form-control" id="no_warna" placeholder="No Warna"><?php if ($cekdb2 > 0) {
+																														echo $rowdb2['NO_WARNA'];
+																													} else {
+																													} ?></textarea>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="no_element" class="col-sm-2 control-label">No Element</label>
-								<div class="col-sm-2">
-								<input name="no_element" type="text" class="form-control" id="no_element" 
-								value="" placeholder="No Element" required>
-							</div>				   
+							<div class="col-sm-2">
+								<input name="no_element" type="text" class="form-control" id="no_element"
+									value="" placeholder="No Element" required>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="grade" class="col-sm-2 control-label">Grade</label>
-								<div class="col-sm-2">
-								<input name="grade" type="text" class="form-control" id="grade" 
-								value="" placeholder="Grade" required>
-							</div>				   
+							<div class="col-sm-2">
+								<input name="grade" type="text" class="form-control" id="grade"
+									value="" placeholder="Grade" required>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="pjng" class="col-sm-2 control-label">Length</label>
-								<div class="col-sm-2">
-								<input name="pjng" type="text" class="form-control" id="pjng" 
-								value="" placeholder="Length" required>
-							</div>				   
+							<div class="col-sm-2">
+								<input name="pjng" type="text" class="form-control" id="pjng"
+									value="" placeholder="Length" required>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="kg" class="col-sm-2 control-label">Weight</label>
-								<div class="col-sm-2">
-								<input name="kg" type="text" class="form-control" id="kg" 
-								value="" placeholder="Weight" required>
-							</div>				   
+							<div class="col-sm-2">
+								<input name="kg" type="text" class="form-control" id="kg"
+									value="" placeholder="Weight" required>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="box-footer">
-				<?php if($_GET['demand']!=""){ ?> 	
-					<a href="pages/cetak/cetak-stiker-custom3.php?demand=<?php echo $_GET['demand']; ?>" class="btn btn-success <?php if($_GET['demand']=="") { echo "disabled"; }?>" target="_blank">Cetak Stiker</a>
-					<div class="col-sm-1 pull-right">
-					<button type="submit" class="form-control btn btn-danger ">Cetak Stiker Full</button>
-					</div>	
-				<?php } ?>	   
+					<?php if ($_GET['demand'] != "") { ?>
+						<a href="pages/cetak/cetak-stiker-custom3.php?demand=<?php echo $_GET['demand']; ?>" class="btn btn-success <?php if ($_GET['demand'] == "") {
+																																		echo "disabled";
+																																	} ?>" target="_blank">Cetak Stiker</a>
+						<div class="col-sm-1 pull-right">
+							<button type="submit" class="form-control btn btn-danger ">Cetak Stiker Full</button>
+						</div>
+					<?php } ?>
 				</div>
-					<!-- /.box-footer -->
+				<!-- /.box-footer -->
 			</form>
 		</div>
 	</div>
-</div>	
+</div>
