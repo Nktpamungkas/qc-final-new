@@ -650,6 +650,12 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
 							<option value="Normal">Normal</option>
 							<option value="Development">Development</option>
 							<option value="BS">BS</option>
+							<option value="QtyKecil">Qty Kecil</option>
+							<option value="QtyBesar">Qty Besar </option>
+							<option value="KainDragon">Kain Dragon</option>
+							<option value="InspectMeja">Inspect Meja</option>
+							<option value="KKBS">KK BS</option>
+							<option value="KKPreset">KK Preset</option>
 						</select>
 					</div>
 				</div>
