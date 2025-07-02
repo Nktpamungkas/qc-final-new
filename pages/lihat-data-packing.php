@@ -1529,7 +1529,7 @@ $rowPST = mysqli_fetch_array($qryPST);
         </div>
       </div>
       <div class="box-body">
-        <table class="table table-bordered table-hover table-striped nowrap" id="example1" style="width:100%">
+        <table class="table table-bordered table-hover table-striped nowrap" id="example3" style="width:100%">
           <thead class="bg-blue">
             
             <tr>
