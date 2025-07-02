@@ -1677,21 +1677,15 @@ if ($nokk_demand_data > 0) {
 					<input name="no_id" type="hidden" class="form-control" id="no_id"
 						value="<?php echo $rcek['no_id']; ?>" placeholder="No ID">
 					<label for="no_po" class="col-sm-3 control-label">No Demand</label>
-					<div class="col-sm-4">
-						<div class="input-group">
-							<input name="nodemand" type="text" class="form-control" id="nodemand"
-								onchange="window.location='TestingNew-'+this.value" value="<?php if ($rcek['nodemand_new'] != '') {
-									echo $rcek['nodemand_new'];
-								} else if ($rcek['nodemand_new'] == '') {
-									echo $rcek['nodemand'];
-								} else {
-									echo $_GET['nodemand'];
-								} ?>" placeholder="No Demand" required <?php if ($_SESSION['lvl_id'] == "TQ" || $_SESSION['lvl_id'] == "OPERATORTQ") {
-									echo "readonly";
-								} ?>>
+						<div class="col-sm-4">
+							<div class="input-group">
+								<input name="nodemand" type="text" class="form-control" id="nodemand" placeholder="No Demand" required 
+									value="<?php echo isset($rcek['nodemand']) ? $rcek['nodemand'] : ''; ?>"
+									<?php if ($_SESSION['lvl_id'] == "TQ" || $_SESSION['lvl_id'] == "OPERATORTQ") {
+										echo "readonly";
+									} ?>>
+							</div>
 						</div>
-					</div>
-
 					<div class="col-sm-5">
 						<?php foreach ($array_no_demand_other2 as $key => $data_other) {
 							if ($key == 'main') {
@@ -13537,6 +13531,15 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								<td>&nbsp;</td>
 							</tr>
 						<?php } ?>
+						<?php if ($rcek1['cracking'] != "") { ?>
+							<tr>
+								<th colspan="2">Cracking</th>
+								<td colspan="4">
+									<?= $rcek1['cracking'] ?>
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+						<?php } ?>
 						<?php if ($rcek1['wrinkle'] != "" || $rcek1['wrinkle1'] != "" || $rcek1['wrinkle2'] != "") { ?>
 							<tr>
 								<th colspan="1">Wrinkle</th>
@@ -21222,5 +21225,43 @@ if ($notes != "" and $cek == 0) {
 		}
 	});
 	</script>
+	<script>
+	document.getElementById('nodemand').addEventListener('change', function () {
+    let nodemand = this.value;
+    console.log('Nodemand changed:', nodemand);
+
+    fetch('pages/ajax/get_no_test.php?nodemand=' + encodeURIComponent(nodemand))
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response data:', data);  // Log data untuk debugging
+
+            if (data.no_test) {
+                window.location = 'TestingNewNoTes-' + data.no_test;
+            } else {
+                Swal.fire({
+                    title: 'No Kartu Tidak Ditemukan',
+                    text: 'Klik Ok untuk input data kembali',
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.value) {
+                        // Refresh halaman
+                        window.location.reload();
+                    }
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                title: 'Terjadi Kesalahan',
+                text: 'Gagal mengambil data dari server.',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        });
+});
+
+</script>
 <!-- End -->
  
