@@ -145,8 +145,14 @@ $rcek = mysqli_fetch_array($sqlCek);
 								<label><input type="checkbox" class="minimal" name="colorfastness[]"
 										value="PERSPIRATION ALKALINE" <?php if (in_array("PERSPIRATION ALKALINE", $detail2)) {
 											echo "checked";
-										} ?>> Perpiration Fastness Alkaline
+										} ?>> Perpiration Fastness Alkaline &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 								</label>
+								<label><input type="checkbox" class="minimal" name="colorfastness[]" value="APPEARANCE AFTER WASH" <?php if (in_array("APPEARANCE AFTER WASH", $detail2)) {
+																									echo "checked";
+																								} ?>> Appearance After Wash &nbsp;
+									&nbsp;
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+								</label> <br>
 							</div>
 							<div class="form-group">
 								<label><input type="checkbox" class="minimal" name="colorfastness[]" value="WATER" <?php if (in_array("WATER", $detail2)) {
@@ -224,9 +230,10 @@ $rcek = mysqli_fetch_array($sqlCek);
 									echo "checked";
 								} ?>> Sweat Conceal &nbsp;
 									&nbsp;
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
 									&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 								</label>
-
 						</form>
 
 						<?php
@@ -299,6 +306,8 @@ $rcek = mysqli_fetch_array($sqlCek);
 								<label><input type="checkbox" class="minimal" name="colorfastness[]" value="SWEAT CONCEAL"> Sweat Conceal
 								</label>
 							</div>
+							<label><input type="checkbox" class="minimal" name="colorfastness[]" value="APPEARANCE AFTER WASH"> Appearance After Wash
+							</label> <br>
 						</form>
 					<?php } ?>
 				</div>
