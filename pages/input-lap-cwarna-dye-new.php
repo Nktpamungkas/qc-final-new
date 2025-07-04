@@ -271,6 +271,7 @@ if(!empty($nodemand)){
                                         b.no_warna,
                                         b.no_mesin,
                                         c.colorist,
+                                        a.acc_keluar,
                                         a.tgl_buat,
                                         a.nokk,
                                         b.rol,
@@ -400,7 +401,7 @@ if(!empty($nodemand)){
                     <label for="colorist_dye" class="col-sm-3 control-label">Colorist Dye</label>
                     <div class="col-sm-5">
                         <!-- <input name="colorist_dye" type="text" class="form-control" id="colorist_dye" value="<?= $dtSch['colorist']; ?><?= $dtDyeing['colorist']; ?>" placeholder="Colorist Dye"> -->
-                        <input name="colorist_dye" type="text" class="form-control" id="colorist_dye" value="<?= $dtDyeing['colorist']; ?>" placeholder="Colorist Dye">
+                        <input name="colorist_dye" type="text" class="form-control" id="colorist_dye" value="<?= $dtDyeing['acc_keluar']; ?>" placeholder="Colorist Dye">
                     </div>
                 </div>
                 <div class="form-group">
