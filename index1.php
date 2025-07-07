@@ -2827,6 +2827,15 @@ $page = strtolower($page);
                     },
                 ]
             })
+            $('#LapHarianPacking').DataTable({
+                'ordering': false,
+                'scrollX': true,
+                'pageLength': 30, // 👈 ini untuk batas data per page
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel'
+                ]
+            })
             $('#example4').DataTable({
                 'paging': false,
             })
