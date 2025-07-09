@@ -134,6 +134,7 @@ if(strlen($jamAr)==5){
 		  <a href="pages/cetak/inspektor-target-excel.php?&awal=<?php echo $start_date; ?>&akhir=<?php echo $stop_date;?>&personil=<?php echo $Nama;?>&shift=<?php echo $Shift;?>&gshift=<?php echo $GShift;?>" class="btn btn-success" target="_blank" data-toggle="tooltip" data-html="true" title="Laporan Target Inspektor"><i class="fa fa-file-excel-o"></i> Target Inspeksi</a>
 		  <a href="pages/cetak/excel-lap-inspeksinew.php?&awal=<?php echo $start_date; ?>&akhir=<?php echo $stop_date;?>&personil=<?php echo $Nama;?>&shift=<?php echo $Shift;?>&gshift=<?php echo $GShift;?>" class="btn btn-primary" target="_blank" data-toggle="tooltip" data-html="true" title="Laporan Inspektor"><i class="fa fa-file-excel-o"></i> Lap Inspektor</a>
 		  <a href="pages/cetak/excel-lap-inspeksinewnew.php?&awal=<?php echo $start_date; ?>&akhir=<?php echo $stop_date;?>&personil=<?php echo $Nama;?>&shift=<?php echo $Shift;?>&gshift=<?php echo $GShift;?>" class="btn btn-info" target="_blank" data-toggle="tooltip" data-html="true" title="Laporan Inspektor New"><i class="fa fa-file-excel-o"></i> Lap Inspektor New</a>	
+		  <a href="pages/cetak/excel-kpi-inspeksi.php?&awal=<?php echo $start_date; ?>&akhir=<?php echo $stop_date; ?>&personil=<?php echo $Nama ?>&shift=<?php echo $Shift;?>&gshift=<?php echo $GShift;?>" class="btn btn-warning" target="_blank" data-toggle="tooltip" data-html="true" title="Laporan KPI Inspektor"><i class="fa fa-print"></i> Cetak KPI</a>
 		</div>  
 		<?php } ?>
 	  </div>
