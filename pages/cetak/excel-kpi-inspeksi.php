@@ -17,7 +17,7 @@ include "../../koneksi.php";
         <th rowspan="4" align="center" bgcolor="#729FCF">Nama Operator</th>
         <th rowspan="4" align="center" bgcolor="#729FCF">Shift</th>
         
-        <th colspan="24" align="center" bgcolor="#729FCF">Quantity</th>
+        <th colspan="42" align="center" bgcolor="#729FCF">Quantity</th>
         <th rowspan="2" align="center" bgcolor="#729FCF">Quantity</th>
         <th rowspan="4" align="center" bgcolor="#729FCF">Total Yard</th>
     </tr>
@@ -25,6 +25,13 @@ include "../../koneksi.php";
         <th colspan="8" align="center" bgcolor="#729FCF">Inspek</th>
         <th colspan="8" align="center" bgcolor="#729FCF">Inspek Qty Kecil</th>
         <th colspan="8" align="center" bgcolor="#729FCF">Inspek White</th>
+        <th colspan="3" align="center" bgcolor="#729FCF">Inspek Oven</th>
+        <th colspan="3" align="center" bgcolor="#729FCF">Inspek Packing</th>
+        <th colspan="3" align="center" bgcolor="#729FCF">Pisah</th>
+        <th colspan="3" align="center" bgcolor="#729FCF">Perbaikan</th>
+        <th colspan="3" align="center" bgcolor="#729FCF">Perbaikan Grade</th>
+        <!-- <th colspan="3" align="center" bgcolor="#729FCF">Kragh</th> -->
+        <th colspan="3" align="center" bgcolor="#729FCF">Packing</th>
     </tr>
     <tr>
         <th colspan="3" align="center" bgcolor="#729FCF">Lululemon</th>
@@ -39,6 +46,34 @@ include "../../koneksi.php";
         <th align="center" bgcolor="#729FCF">Target</th>
         <th colspan="3" align="center" bgcolor="#729FCF">Adidas dan Lainnya</th>
         <th align="center" bgcolor="#729FCF">Target</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Roll</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Kg</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Yard</th>
+        <!-- <th align="center" bgcolor="#729FCF">Target</th> -->
+        <th rowspan="2" align="center" bgcolor="#729FCF">Roll</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Kg</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Yard</th>
+        <!-- <th align="center" bgcolor="#729FCF">Target</th> -->
+        <th rowspan="2" align="center" bgcolor="#729FCF">Roll</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Kg</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Yard</th>
+        <!-- <th align="center" bgcolor="#729FCF">Target</th> -->
+        <th rowspan="2" align="center" bgcolor="#729FCF">Roll</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Kg</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Yard</th>
+        <!-- <th align="center" bgcolor="#729FCF">Target</th> -->
+        <th rowspan="2" align="center" bgcolor="#729FCF">Roll</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Kg</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Yard</th>
+        <!-- <th align="center" bgcolor="#729FCF">Target</th> -->
+        <!-- <th rowspan="2" align="center" bgcolor="#729FCF">Roll</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Kg</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Yard</th>
+        <th align="center" bgcolor="#729FCF">Target</th> -->
+        <th rowspan="2" align="center" bgcolor="#729FCF">Roll</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Kg</th>
+        <th rowspan="2" align="center" bgcolor="#729FCF">Yard</th>
+        <!-- <th align="center" bgcolor="#729FCF">Target</th> -->
         <th rowspan="2" align="center" bgcolor="#729FCF">100</th>
     </tr>
     <tr>
@@ -241,138 +276,153 @@ include "../../koneksi.php";
     // End Inspect White
 
     //Inspect Oven
-        // $sqlO=mysqli_query($con,"SELECT
-        //     b.g_shift,
-        //     SUM( a.jml_rol ) AS rolO,
-        //     SUM( a.qty ) AS brutoO,
-        //     SUM( a.yard ) AS panjangO,
-        //     TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuO,
-        //     IF(a.yard>0,a.yard,b.pjng_order) AS yardO,
-	    //     IF(b.istirahat='',0,b.istirahat) AS istirahatO   
-        //     FROM
-        //     tbl_inspection a
-        //     LEFT JOIN 
-        //         tbl_schedule b 
-        //     ON 
-        //         a.id_schedule=b.id  
-        //     WHERE
-        //         DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' AND '$_GET[akhir]' 
-        //         AND proses='Inspect Oven' 
-        //         AND a.personil='$r[personil]' 
-        //         AND b.shift='$r[shift]'
-        //         AND b.t_jawab_buyer = 'Lululemon'");
-        //     $rO=mysqli_fetch_array($sqlO);
-        //     $hourdiffO  = (int)$rO['waktuO']-(int)$rO['istirahatO'];
+        $sqlO=mysqli_query($con,"SELECT
+            b.g_shift,
+            SUM( a.jml_rol ) AS rolO,
+            SUM( a.qty ) AS brutoO,
+            SUM( a.yard ) AS panjangO,
+            TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuO,
+            IF(a.yard>0,a.yard,b.pjng_order) AS yardO,
+	        IF(b.istirahat='',0,b.istirahat) AS istirahatO   
+            FROM
+            tbl_inspection a
+            LEFT JOIN 
+                tbl_schedule b 
+            ON 
+                a.id_schedule=b.id  
+            WHERE
+                DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' AND '$_GET[akhir]' 
+                AND proses='Inspect Oven' 
+                AND a.personil='$r[personil]' 
+                -- AND b.shift='$r[shift]'
+                ");
+            $rO=mysqli_fetch_array($sqlO);
+            $hourdiffO  = (int)$rO['waktuO']-(int)$rO['istirahatO'];
     // End Inspect Oven
 
     //Pisah
-            // $sqlP=mysqli_query($con,"SELECT
-            // b.g_shift,
-            // SUM( a.jml_rol ) AS rolP,
-            // SUM( a.qty ) AS brutoP,
-            // SUM( a.yard ) AS panjangP,
-            // TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuP,
-            // IF(a.yard>0,a.yard,b.pjng_order) AS yardP,
-	        // IF(b.istirahat='',0,b.istirahat) AS istirahatP 
-            // FROM
-            // tbl_inspection a
-            // LEFT JOIN 
-            //     tbl_schedule b 
-            // ON 
-            //     a.id_schedule=b.id  
-            // WHERE
-            //     DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' 
-            //     AND '$_GET[akhir]' AND proses='Pisah' AND a.personil='$r[personil]' AND b.shift='$r[shift]'");
-            // $rP=mysqli_fetch_array($sqlP);
-            // $hourdiffP  = (int)$rP['waktuP']-(int)$rP['istirahatP'];
+            $sqlP=mysqli_query($con,"SELECT
+            b.g_shift,
+            SUM( a.jml_rol ) AS rolP,
+            SUM( a.qty ) AS brutoP,
+            SUM( a.yard ) AS panjangP,
+            TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuP,
+            IF(a.yard>0,a.yard,b.pjng_order) AS yardP,
+	        IF(b.istirahat='',0,b.istirahat) AS istirahatP 
+            FROM
+            tbl_inspection a
+            LEFT JOIN 
+                tbl_schedule b 
+            ON 
+                a.id_schedule=b.id  
+            WHERE
+                DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' AND '$_GET[akhir]' 
+                AND proses='Pisah' 
+                AND a.personil='$r[personil]' 
+                -- AND b.shift='$r[shift]'
+                ");
+            $rP=mysqli_fetch_array($sqlP);
+            $hourdiffP  = (int)$rP['waktuP']-(int)$rP['istirahatP'];
     // End Pisah
 
     //Perbaikan
-            // $sqlPb=mysqli_query($con,"SELECT
-            // b.g_shift,
-            // SUM( a.jml_rol ) AS rolPb,
-            // SUM( a.qty ) AS brutoPb,
-            // SUM( a.yard ) AS panjangPb,
-            // TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuPb,
-            // IF(a.yard>0,a.yard,b.pjng_order) AS yardPb,
-	        // IF(b.istirahat='',0,b.istirahat) AS istirahatPb 
-            // FROM
-            // tbl_inspection a
-            // LEFT JOIN 
-            //     tbl_schedule b 
-            // ON 
-            //     a.id_schedule=b.id  
-            // WHERE
-            //     DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' 
-            //     AND '$_GET[akhir]' AND proses='Perbaikan' AND a.personil='$r[personil]' AND b.shift='$r[shift]'");
-            // $rPb=mysqli_fetch_array($sqlPb);
-            // $hourdiffPb  = (int)$rPb['waktuPb']-(int)$rPb['istirahatPb'];
+            $sqlPb=mysqli_query($con,"SELECT
+            b.g_shift,
+            SUM( a.jml_rol ) AS rolPb,
+            SUM( a.qty ) AS brutoPb,
+            SUM( a.yard ) AS panjangPb,
+            TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuPb,
+            IF(a.yard>0,a.yard,b.pjng_order) AS yardPb,
+	        IF(b.istirahat='',0,b.istirahat) AS istirahatPb 
+            FROM
+            tbl_inspection a
+            LEFT JOIN 
+                tbl_schedule b 
+            ON 
+                a.id_schedule=b.id  
+            WHERE
+                DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' AND '$_GET[akhir]' 
+                AND proses='Perbaikan' 
+                AND a.personil='$r[personil]' 
+                -- AND b.shift='$r[shift]'
+                ");
+            $rPb=mysqli_fetch_array($sqlPb);
+            $hourdiffPb  = (int)$rPb['waktuPb']-(int)$rPb['istirahatPb'];
     // End Perbaikan
 
     //Perbaikan Grade
-            // $sqlPG=mysqli_query($con,"SELECT
-            // b.g_shift,
-            // SUM( a.jml_rol ) AS rolPG,
-            // SUM( a.qty ) AS brutoPG,
-            // SUM( a.yard ) AS panjangPG,
-            // TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuPG,
-            // IF(a.yard>0,a.yard,b.pjng_order) AS yardPG,
-	        // IF(b.istirahat='',0,b.istirahat) AS istirahatPG 
-            // FROM
-            // tbl_inspection a
-            // LEFT JOIN 
-            //     tbl_schedule b 
-            // ON 
-            //     a.id_schedule=b.id  
-            // WHERE
-            //     DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' 
-            //     AND '$_GET[akhir]' AND proses='Perbaikan Grade' AND a.personil='$r[personil]' AND b.shift='$r[shift]'");
-            // $rPG=mysqli_fetch_array($sqlPG);
-            // $hourdiffPG  = (int)$rPG['waktuPG']-(int)$rPG['istirahatPG'];
+            $sqlPG=mysqli_query($con,"SELECT
+            b.g_shift,
+            SUM( a.jml_rol ) AS rolPG,
+            SUM( a.qty ) AS brutoPG,
+            SUM( a.yard ) AS panjangPG,
+            TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuPG,
+            IF(a.yard>0,a.yard,b.pjng_order) AS yardPG,
+	        IF(b.istirahat='',0,b.istirahat) AS istirahatPG 
+            FROM
+            tbl_inspection a
+            LEFT JOIN 
+                tbl_schedule b 
+            ON 
+                a.id_schedule=b.id  
+            WHERE
+                DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' AND '$_GET[akhir]' 
+                AND proses='Perbaikan Grade' 
+                AND a.personil='$r[personil]' 
+                -- AND b.shift='$r[shift]'
+                ");
+            $rPG=mysqli_fetch_array($sqlPG);
+            $hourdiffPG  = (int)$rPG['waktuPG']-(int)$rPG['istirahatPG'];
     // End Perbaikan Grade
             
     //Packing
-            // $sqlPack=mysqli_query($con,"SELECT
-            // b.g_shift,
-            // SUM( a.jml_rol ) AS rolPack,
-            // SUM( a.qty ) AS brutoPack,
-            // SUM( a.yard ) AS panjangPack,
-            // TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuPack,
-            // IF(a.yard>0,a.yard,b.pjng_order) AS yardPack,
-	        // IF(b.istirahat='',0,b.istirahat) AS istirahatPack 
-            // FROM
-            // tbl_inspection a
-            // LEFT JOIN 
-            //     tbl_schedule b 
-            // ON 
-            //     a.id_schedule=b.id  
-            // WHERE
-            //     DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' 
-            //     AND '$_GET[akhir]' AND proses='Packing' AND a.personil='$r[personil]' AND b.shift='$r[shift]'");
-            // $rPack=mysqli_fetch_array($sqlPack);
-            // $hourdiffPack  = (int)$rPack['waktuPack']-(int)$rPack['istirahatPack'];
+            $sqlPack=mysqli_query($con,"SELECT
+            b.g_shift,
+            SUM( a.jml_rol ) AS rolPack,
+            SUM( a.qty ) AS brutoPack,
+            SUM( a.yard ) AS panjangPack,
+            TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuPack,
+            IF(a.yard>0,a.yard,b.pjng_order) AS yardPack,
+	        IF(b.istirahat='',0,b.istirahat) AS istirahatPack 
+            FROM
+            tbl_inspection a
+            LEFT JOIN 
+                tbl_schedule b 
+            ON 
+                a.id_schedule=b.id  
+            WHERE
+                DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' AND '$_GET[akhir]' 
+                AND proses='Packing' 
+                AND a.personil='$r[personil]' 
+                -- AND b.shift='$r[shift]'
+                ");
+            $rPack=mysqli_fetch_array($sqlPack);
+            $hourdiffPack  = (int)$rPack['waktuPack']-(int)$rPack['istirahatPack'];
     // End Packing
 
     //Inspect Packing
-            // $sqlIP=mysqli_query($con,"SELECT
-            // b.g_shift,
-            // SUM( a.jml_rol ) AS rolIP,
-            // SUM( a.qty ) AS brutoIP,
-            // SUM( a.yard ) AS panjangIP,
-            // TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuIP,
-            // IF(a.yard>0,a.yard,b.pjng_order) AS yardIP,
-	        // IF(b.istirahat='',0,b.istirahat) AS istirahatIP 
-            // FROM
-            // tbl_inspection a
-            // LEFT JOIN 
-            //     tbl_schedule b 
-            // ON 
-            //     a.id_schedule=b.id  
-            // WHERE
-            //     DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' 
-            //     AND '$_GET[akhir]' AND proses='Inspect Packing' AND a.personil='$r[personil]' AND b.shift='$r[shift]'");
-            // $rIP=mysqli_fetch_array($sqlIP);
-            // $hourdiffIP  = (int)$rIP['waktuIP']-(int)$rIP['istirahatIP'];
+            $sqlIP=mysqli_query($con,"SELECT
+            b.g_shift,
+            SUM( a.jml_rol ) AS rolIP,
+            SUM( a.qty ) AS brutoIP,
+            SUM( a.yard ) AS panjangIP,
+            TIMESTAMPDIFF(MINUTE, b.tgl_mulai,b.tgl_stop) AS waktuIP,
+            IF(a.yard>0,a.yard,b.pjng_order) AS yardIP,
+	        IF(b.istirahat='',0,b.istirahat) AS istirahatIP 
+            FROM
+            tbl_inspection a
+            LEFT JOIN 
+                tbl_schedule b 
+            ON 
+                a.id_schedule=b.id  
+            WHERE
+                DATE_FORMAT( a.tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$_GET[awal]' AND '$_GET[akhir]' 
+                AND proses='Inspect Packing' 
+                AND a.personil='$r[personil]' 
+                -- AND b.shift='$r[shift]'
+                ");
+            $rIP=mysqli_fetch_array($sqlIP);
+            $hourdiffIP  = (int)$rIP['waktuIP']-(int)$rIP['istirahatIP'];
     // End Inspect Packing
 
     ?>
@@ -403,6 +453,28 @@ include "../../koneksi.php";
         <td align="right"><?php echo $rWAd['brutoW'];?></td>
         <td align="right"><?php echo $rWAd['panjangW'];?></td>
         <td align="right"><?php echo $targetIWAds= number_format(($rWAd['panjangW']/1300*100),2); ?></td>
+        <td align="right"><?php echo $rO['rolO'];?></td>
+        <td align="right"><?php echo $rO['brutoO'];?></td>
+        <td align="right"><?php echo $rO['panjangO'];?></td>
+        <td align="right"><?php echo $rIP['rolIP'];?></td>
+        <td align="right"><?php echo $rIP['brutoIP'];?></td>
+        <td align="right"><?php echo $rIP['panjangIP'];?></td>
+        <td align="right"><?php echo $rP['rolP'];?></td>
+        <td align="right"><?php echo $rP['brutoP'];?></td>
+        <td align="right"><?php echo $rP['panjangP'];?></td>
+        <td align="right"><?php echo $rPb['rolPb'];?></td>
+        <td align="right"><?php echo $rPb['brutoPb'];?></td>
+        <td align="right"><?php echo $rPb['panjangPb'];?></td>
+        <td align="right"><?php echo $rPG['rolPG'];?></td>
+        <td align="right"><?php echo $rPG['brutoPG'];?></td>
+        <td align="right"><?php echo $rPG['panjangPG'];?></td>
+        <!-- <td align="right"><?php echo $rK['rolK'];?></td>
+        <td align="right"><?php echo $rK['brutoK'];?></td>
+        <td align="right"><?php echo $rK['panjangK'];?></td>
+        <td align="right">&nbsp;</td> -->
+        <td align="right"><?php echo $rPack['rolPack'];?></td>
+        <td align="right"><?php echo $rPack['brutoPack'];?></td>
+        <td align="right"><?php echo $rPack['panjangPack'];?></td>
         <td align="right"><?php echo $Qty100= number_format(($targetInsLulu+$targetInsAds+$targetIQKLulu+$targetIQKAds+$targetIWLulu+$targetIWAds+$targetO+$targetIP+$targetP+$targetPb+$targetPG+$targetPack)*100/100,2);?></td>
         <td align="right"><?php echo $rInsLu['panjangIns']+$rInsAd['panjangIns']+$rIQKLu['panjangIQK']+$rIQKAd['panjangIQK']+$rWLu['panjangW']+$rWAd['panjangW']+$rO['panjangO']+$rPack['panjangPack']+$rP['panjangP']+$rPb['panjangPb']+$rPG['panjangPG']+$rIP['panjangIP'];?></td>
     </tr>
@@ -495,6 +567,28 @@ include "../../koneksi.php";
         <td align="right"><strong><?php echo number_format($tbruto_WAds,2);?></strong></td>
         <td align="right"><strong><?php echo number_format($tpanjang_WAds,2);?></strong></td>
         <td align="right"><strong><?php //echo number_format($ttargetIWAds,2);?></strong></td>
+        <td align="right"><strong><?php echo $troll_O;?></strong></td>
+        <td align="right"><strong><?php echo $tbruto_O;?></strong></td>
+        <td align="right"><strong><?php echo $tpanjang_O;?></strong></td>
+        <td align="right"><strong><?php echo $troll_IP;?></strong></td>
+        <td align="right"><strong><?php echo $tbruto_IP;?></strong></td>
+        <td align="right"><strong><?php echo $tpanjang_IP;?></strong></td>
+        <td align="right"><strong><?php echo $troll_P;?></strong></td>
+        <td align="right"><strong><?php echo $tbruto_P;?></strong></td>
+        <td align="right"><strong><?php echo $tpanjang_P;?></strong></td>
+        <td align="right"><strong><?php echo $troll_Pb;?></strong></td>
+        <td align="right"><strong><?php echo $tbruto_Pb;?></strong></td>
+        <td align="right"><strong><?php echo $tpanjang_Pb;?></strong></td>
+        <td align="right"><strong><?php echo $troll_PG;?></strong></td>
+        <td align="right"><strong><?php echo $tbruto_PG;?></strong></td>
+        <td align="right"><strong><?php echo $tpanjang_PG;?></strong></td>
+        <!-- <td align="right"><strong><?php echo $troll_K;?></strong></td>
+        <td align="right"><strong><?php echo $tbruto_K;?></strong></td>
+        <td align="right"><strong><?php echo $tpanjang_K;?></strong></td>
+        <td align="right">&nbsp;</td> -->
+        <td align="right"><strong><?php echo $troll_Pack;?></strong></td>
+        <td align="right"><strong><?php echo $tbruto_Pack;?></strong></td>
+        <td align="right"><strong><?php echo $tpanjang_Pack;?></strong></td>
         <td align="right"><strong><?php echo $tQty100;?></strong></td>
         <td align="right"><strong><?php echo $tpanjang_InsLulu+$tpanjang_InsAds+$tpanjang_IQKLulu+$tpanjang_IQKAds+$tpanjang_WLulu+$tpanjang_WAds+$tpanjang_O+$tpanjang_Pack+$tpanjang_P+$tpanjang_Pb+$tpanjang_PG+$tpanjang_IP;?></strong></td>
     </tr>
