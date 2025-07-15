@@ -126,7 +126,7 @@ if($_POST){ //login user
   extract($_POST);
   $username = mysqli_real_escape_string($con,$_POST['username']);
   $password = mysqli_real_escape_string($con,$_POST['password']);
-  $sql="SELECT * FROM user_login WHERE user='$username' AND password='$password' AND (dept = 'QC' OR dept = 'MKT' OR dept = 'DYE' OR dept = 'FIN' OR dept = 'KNT' OR dept = 'BRS' OR dept = 'RMP' OR dept='PRO' OR dept='YND' OR dept='PRT' OR dept='KNT' OR dept='TAS' OR dept='PPC' OR dept='DMF' OR dept='LAB' OR dept='GAS' OR dept='GKG') LIMIT 1";
+  $sql="SELECT * FROM user_login WHERE user='$username' AND password='$password' AND (dept = 'QC' OR dept = 'CQA' OR dept = 'MKT' OR dept = 'DYE' OR dept = 'FIN' OR dept = 'KNT' OR dept = 'BRS' OR dept = 'RMP' OR dept='PRO' OR dept='YND' OR dept='PRT' OR dept='KNT' OR dept='TAS' OR dept='PPC' OR dept='DMF' OR dept='LAB' OR dept='GAS' OR dept='GKG') LIMIT 1";
   $query = mysqli_query($con,$sql) or die ("error: ".mysqli_error());;
   $jml=mysqli_num_rows($query);
   if($jml>0)
