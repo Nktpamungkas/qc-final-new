@@ -126,7 +126,7 @@ border:hidden;
               border-bottom:0px #000000 solid;
               border-left:0px #000000 solid; 
               border-right:0px #000000 solid;"><strong><font size="+1">LAPORAN JAHIT SHADING DEPARTEMEN CQA</font><br />
-              <font size="-1">FW-12-CQA-09/00</font>
+              <font size="-1">FW-12-CQA-11/00</font>
           </tr>
         </table></td>
       </tr>
