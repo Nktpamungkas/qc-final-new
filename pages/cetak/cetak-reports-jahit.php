@@ -115,34 +115,23 @@ border:hidden;
             <td align="center" style="border-top:0px #000000 solid; 
               border-bottom:0px #000000 solid;
               border-left:0px #000000 solid; 
-              border-right:0px #000000 solid;"><strong><font size="+1">LAPORAN JAHIT QC</font><br />
+              border-right:0px #000000 solid;"><strong><font size="+1">LAPORAN JAHIT DEPARTEMEN CQA</font><br />
+              <font size="-1">FW-12-CQA-08/00</font>
           </tr>
         </table></td>
       </tr>
       <tr>
-        <td><table width="100%" border="1" class="table-list1"> 
+        <td>
+          <table width="100%" border="" class="table-list1"> 
+          <!-- <tr>
+            <td align="center"  style="border: 0; padding: 0; margin: 0;" valign="bottom" width="79%"><strong><font size="4">FW-12-CQA-08/00</font></td>
+          </tr> -->
           <tr>
-            <td align="left" valign="bottom" width="79%"><strong><font size="-1">Tanggal : <?php echo date("d F Y",strtotime($_GET['awal']));?> s/d <?php echo date("d F Y",strtotime($_GET['akhir']));?></font><br />
+            <td align="left"  style="border: 0; padding: 0; margin: 0;" valign="bottom" width="79%"><strong><font size="-1">Tanggal : <?php echo date("d F Y",strtotime($_GET['awal']));?> s/d <?php echo date("d F Y",strtotime($_GET['akhir']));?></font><br />
             <font size="-1">Shift : <?php echo $_GET['shift'];?></font></td>
-            <td width="21%"><table width="100%" border="0" class="table-list1">
-                <tr>
-                    <td width="43%" scope="col">No Form</td>
-                    <td width="10%" scope="col">:</td>
-                    <td width="47%" scope="col">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>No. Revisi</td>
-                    <td>:</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>Tgl. Terbit</td>
-                    <td>:</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </table></td>
           </tr>
-        </table></td>
+        </table>
+      </td>
       </tr>
   </thead>
   <tr>
@@ -307,7 +296,7 @@ border:hidden;
         </tr> 
   
   </table>
-   <table width="100%" border="0" class="table-list1"> 
+   <!-- <table width="100%" border="0" class="table-list1"> 
   <tr align="center">
     <td colspan="3">&nbsp;</td>
     <td colspan="12">Departemen QCF</td>
@@ -345,7 +334,7 @@ border:hidden;
     <td colspan="3">&nbsp;</td>
     <td colspan="4">&nbsp;</td>
   </tr>
-</table>
+</table> -->
 <script>
 //alert('cetak');window.print();
 </script>                          

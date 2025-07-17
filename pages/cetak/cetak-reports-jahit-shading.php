@@ -125,7 +125,8 @@ border:hidden;
             <td align="center" style="border-top:0px #000000 solid; 
               border-bottom:0px #000000 solid;
               border-left:0px #000000 solid; 
-              border-right:0px #000000 solid;"><strong><font size="+1">LAPORAN JAHIT SHADING DEPARTEMEN QCF</font><br />
+              border-right:0px #000000 solid;"><strong><font size="+1">LAPORAN JAHIT SHADING DEPARTEMEN CQA</font><br />
+              <font size="-1">FW-12-CQA-09/00</font>
           </tr>
         </table></td>
       </tr>
@@ -380,7 +381,7 @@ border:hidden;
     </table></td>
   </tr>
   </table> <br>
-   <table width="100%" border="0" class="table-list1"> 
+   <!-- <table width="100%" border="0" class="table-list1"> 
   <tr align="center">
     <td colspan="3">&nbsp;</td>
     <td colspan="17">Departemen QCF</td>
@@ -418,7 +419,7 @@ border:hidden;
     <td colspan="3">&nbsp;</td>
     <td colspan="4">&nbsp;</td>
   </tr>
-</table>
+</table> -->
 <script>
 //alert('cetak');window.print();
 </script>                          

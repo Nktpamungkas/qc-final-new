@@ -154,7 +154,7 @@ if(strlen($jamAr)==5){
         <?php if($_POST['awal']!="") { ?><b>Periode: <?php echo $_POST['awal']." to ".$_POST['akhir']; ?></b>
         <?php } ?>
         <div class="pull-right">
-          <a href="pages/cetak/cetak-reports-tempel-beda-roll.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&jam_awal=<?php echo $_POST['jam_awal']; ?>&jam_akhir=<?php echo $_POST['jam_akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&no_po=<?php echo $_POST['no_po']; ?>&no_order=<?php echo $_POST['no_order']; ?>&warna=<?php echo $_POST['warna']; ?>&no_item=<?php echo $_POST['no_item']; ?>&no_hanger=<?php echo $_POST['no_hanger']; ?>" class="btn btn-primary <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank">Cetak</a> 
+          <a href="pages/cetak/cetak-reports-tempel-beda-roll.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&jam_awal=<?php echo $_POST['jam_awal']; ?>&jam_akhir=<?php echo $_POST['jam_akhir']; ?>&langganan=<?php echo $_POST['langganan']; ?>&no_po=<?php echo $_POST['no_po']; ?>&no_order=<?php echo $_POST['no_order']; ?>&warna=<?php echo $_POST['warna']; ?>&no_item=<?php echo $_POST['no_item']; ?>&no_hanger=<?php echo $_POST['no_hanger']; ?>&shift=<?php echo $Shift; ?>" class="btn btn-primary <?php if($_POST['awal']=="") { echo "disabled"; }?>" target="_blank">Cetak</a> 
         </div>
       </div>
       <div class="box-body">

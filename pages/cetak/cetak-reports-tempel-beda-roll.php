@@ -18,7 +18,7 @@ include "../../koneksi.php";
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="styles_cetak.css" rel="stylesheet" type="text/css">
-<title>Cetak Laporan Beda Roll</title>
+<title>Cetak Laporan Tempel Beda Roll</title>
 <script>
 
 // set portrait orientation
@@ -118,7 +118,7 @@ border:hidden;
             <td align="center" style="border-top:0px #000000 solid; 
               border-bottom:0px #000000 solid;
               border-left:0px #000000 solid; 
-              border-right:0px #000000 solid;"><strong><font size="+1">LAPORAN BEDA ROLL DEPARTEMEN CQA</font><br />
+              border-right:0px #000000 solid;"><strong><font size="+1">LAPORAN TEMPEL BEDA ROLL DEPARTEMEN CQA</font><br />
               <font size="-1">FW-12-CQA-10/00</font>
           </tr>
         </table></td>
@@ -165,17 +165,13 @@ border:hidden;
 		    <tbody>  
           <?php
             $no=1;
-            if($Langganan!=""){ $lgn=" AND `pelanggan` LIKE '%$Langganan%' ";}else{$lgn=" ";}
-            if($Item!=""){ $noitem=" AND `no_item` LIKE '%$Item%' ";}else{$noitem=" ";}
-            if($Hanger!=""){ $nohanger=" AND `no_hanger` LIKE '%$Hanger%' ";}else{$nohanger=" ";}
-            if($Warna!=""){ $wn=" AND `warna` LIKE '%$Warna%' ";}else{$wn=" ";}
+            if($Shift!="ALL"){ $shft=" AND `groupshift` LIKE '%$Shift%' ";}else{$shft=" ";}
             if($PO!=""){ $nopo=" AND `no_po` LIKE '%$PO%' ";}else{$nopo=" ";}
             if($Order!=""){ $noorder=" AND `no_order` LIKE '%$Order%' ";}else{$noorder=" ";}
-			      if($GShift1!="ALL"){ $shft=" AND `groupshift`='$GShift1' ";}else{$shft=" ";} 	
-            if($Awal!="" or $Langganan!="" or $Item!="" or $Hanger!="" or $Warna!="" or $PO!="" or $Order!=""){
-              $qry1=mysqli_query($con,"SELECT * FROM tbl_lap_beda_roll WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' $lgn $noitem $nohanger $wn $nopo $noorder $shft ORDER BY id ASC");
+            if($Awal!="" or $PO!="" or $Order!="" or $Shift!=""){
+              $qry1=mysqli_query($con,"SELECT * FROM tbl_tempel_beda_roll WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $nopo $noorder $shft ORDER BY id ASC");
             }else{
-              $qry1=mysqli_query($con,"SELECT * FROM tbl_lap_beda_roll WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d %H:%i' ) BETWEEN '$start_date' AND '$stop_date' $lgn $noitem $nohanger $wn $nopo $noorder $shft ORDER BY id ASC");
+              $qry1=mysqli_query($con,"SELECT * FROM tbl_tempel_beda_roll WHERE DATE_FORMAT( tgl_update, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' $nopo $noorder $shft ORDER BY id ASC");
             }
             while($row1=mysqli_fetch_array($qry1)){
           ?>
