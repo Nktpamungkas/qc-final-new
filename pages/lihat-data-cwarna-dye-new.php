@@ -132,6 +132,7 @@ if (strlen($jamA) == 5) {
               <th><div align="center">Review</div></th>
               <th><div align="center">Remark</div></th>
               <th><div align="center">Keterangan</div></th>
+              <th><div align="center">Spectro</div></th>
             </tr>
           </thead>
           <tbody>
@@ -144,6 +145,7 @@ if (strlen($jamA) == 5) {
             }else{
               $qry1=mysqli_query($con,"SELECT * FROM tbl_cocok_warna_dye WHERE `dept`='QCF' $where $shft ORDER BY id ASC");
             }
+            // echo "SELECT * FROM tbl_cocok_warna_dye WHERE `dept`='QCF' $where $shft ORDER BY id ASC";
                 while($row1=mysqli_fetch_array($qry1)){
               $pos=strpos($row1['pelanggan'],"/");
               if($pos>0) {
@@ -186,6 +188,11 @@ if (strlen($jamA) == 5) {
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['review_qcf'] ?>" class="review_qcf_dye" href="javascipt:void(0)"><?php echo $row1['review_qcf'] ?></a></td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['remark_qcf'] ?>" class="remark_qcf_dye" href="javascipt:void(0)"><?php echo $row1['remark_qcf'] ?></a></td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['ket'] ?>" class="ket_cdye" href="javascipt:void(0)"><?php echo $row1['ket'] ?></a></td>
+            <td align="center"><a data-pk="<?php echo $row1['id']; ?>"data-value="<?php echo ($row1['spectro'] === null ? '' : $row1['spectro']); ?>"class="spectro_fin"href="javascript:void(0)">
+                    <?php 
+                        echo ($row1['spectro'] === null  ? '' : ($row1['spectro'] == 1 ? '✔' : '✖'));
+                      ?>
+                  </a></td>
             </tr>
           <?php	$no++;  } ?>
         </tbody>

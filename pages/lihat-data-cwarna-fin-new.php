@@ -588,6 +588,9 @@ include "koneksi.php";
                 <th>
                   <div align="center">Keterangan</div>
                 </th>
+                <th>
+                  <div align="center">Spectro</div>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -726,6 +729,11 @@ include "koneksi.php";
                       class="ket_fin" href="javascipt:void(0)">
                       <?php echo $row1['catatan'] ?>
                     </a></td>
+                  <td align="center"><a data-pk="<?php echo $row1['id']; ?>"data-value="<?php echo ($row1['spectro'] === null ? '' : $row1['spectro']); ?>"class="spectro_fin"href="javascript:void(0)">
+                    <?php 
+                        echo ($row1['spectro'] === null  ? '' : ($row1['spectro'] == 1 ? '✔' : '✖'));
+                      ?>
+                  </a></td>
                 </tr>
                 <?php $no++; } ?>
             </tbody>

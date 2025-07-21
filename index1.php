@@ -2239,6 +2239,39 @@ $page = strtolower($page);
                 disabled: false,
                 url: 'pages/editable/editable_ket_tbrol.php',
             });
+            $('.spectro_dye').editable({
+                type: 'select',
+                url: 'pages/editable/editable_spectro_dye.php',
+                showbuttons: false,
+                disabled: false,
+                source: [{
+                    value: "",
+                    text: ""
+                }, {
+                    value: "1",
+                    text: '✔'
+                }, {
+                    value: "0",
+                    text: '✖'
+                }]
+            });
+            $('.spectro_fin').editable({
+                type: 'select',
+                disabled: false,
+                url: 'pages/editable/editable_spectro_fin.php',
+                showbuttons: false,
+                disabled: false,
+                source: [{
+                    value: "",
+                    text: ""
+                }, {
+                    value: "1",
+                    text: '✔'
+                }, {
+                    value: "0",
+                    text: '✖'
+                }]
+            });
             $('.colorist_qcf_fin').editable({
                 type: 'select',
                 url: 'pages/editable/editable_colorist_qcf_fin.php',

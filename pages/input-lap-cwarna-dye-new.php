@@ -50,13 +50,14 @@
     if ($_POST['simpan'] == "simpan") {
         $ceksql = mysqli_query($con, "SELECT * FROM `tbl_cocok_warna_dye` WHERE `nodemand`='$_GET[nodemand]' and `shift`='$_POST[shift]' AND DATE_FORMAT(tgl_celup, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d') AND `dept`='QCF' LIMIT 1");
         $cek = mysqli_num_rows($ceksql);
-        if ($$cek > 0) {
+        if ($cek > 0) {
             $pelanggan = str_replace("'", "''", $_POST['pelanggan']);
             $order = str_replace("'", "''", $_POST['no_order']);
             $po = str_replace("'", "''", $_POST['no_po']);
             $jns = str_replace("'", "''", $_POST['jenis_kain']);
             $warna = str_replace("'", "''", $_POST['warna']);
             $ket = str_replace("'", "''", $_POST['ket']);
+            $spectro = str_replace("'", "''", $_POST['spectro']);
             $colorist_dye = str_replace("'", "''", $_POST['colorist_dye']);
             $colorist_qcf = str_replace("'", "''", $_POST['colorist_qcf']);
             $sql1 = mysqli_query($con, "UPDATE `tbl_cocok_warna_dye` SET
@@ -78,6 +79,7 @@
                                                 `disposisi`='$_POST[disposisi]',
                                                 `colorist_qcf`='$colorist_qcf',
                                                 `ket`='$ket',
+                                                `spectro`='$spectro',
                                                 `tgl_update`=now()
                                                 WHERE `nodemand`='$_POST[nodemand]'");
             if ($sql1) {
@@ -100,6 +102,7 @@
             $jns = str_replace("'", "''", $_POST['jenis_kain']);
             $warna = str_replace("'", "''", $_POST['warna']);
             $ket = str_replace("'", "''", $_POST['ket']);
+            $spectro = str_replace("'", "''", $_POST['spectro']);
             $colorist_dye = str_replace("'", "''", $_POST['colorist_dye']);
             $colorist_qcf = str_replace("'", "''", $_POST['colorist_qcf']);
             $sql = mysqli_query($con, "INSERT INTO `tbl_cocok_warna_dye` SET
@@ -118,13 +121,14 @@
             `tgl_celup`='$_POST[tgl_celup]',
             `lot`='$_POST[lot]',
             `shift`='$_POST[shift]',
-                `dept`='QCF',
+            `dept`='QCF',
             `jml_roll`='$_POST[rol]',
             `bruto`='$_POST[bruto]',
             `status_warna`='$_POST[status_warna]',
             `disposisi`='$_POST[disposisi]',
-                `colorist_qcf`='$colorist_qcf',
+            `colorist_qcf`='$colorist_qcf',
             `ket`='$ket',
+            `spectro`='$spectro',
             `tgl_update`=now()");
             if ($sql) {
                 //echo " <script>alert('Data has been saved!');</script>";
@@ -471,6 +475,26 @@ if(!empty($nodemand)){
                         <textarea name="ket" class="form-control" id="ket" placeholder="Keterangan"><?php echo $row['ket']; ?></textarea>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="spectro" class="col-sm-3 control-label">Spectro</label>
+                    <div class="col-sm-8">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="spectro" value="1" 
+                                <?php echo ($row['spectro'] === 1) ? 'checked' : ''; ?>>
+                                Yes
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="spectro" value="0" 
+                                <?php echo ($row['spectro'] === 0 || $row['spectro'] === null) ? 'checked' : ''; ?>>
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <?php print_r($row['spectro']);?>
             </div>
         </div>
         <div class="box-footer">
