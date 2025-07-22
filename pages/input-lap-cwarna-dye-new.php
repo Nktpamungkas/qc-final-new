@@ -494,7 +494,6 @@ if(!empty($nodemand)){
                         </div>
                     </div>
                 </div>
-                <?php print_r($row['spectro']);?>
             </div>
         </div>
         <div class="box-footer">

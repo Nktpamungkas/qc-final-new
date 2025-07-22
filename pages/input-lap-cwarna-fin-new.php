@@ -57,6 +57,7 @@ if ($_POST['simpan'] == "simpan") {
         $jns = str_replace("'", "''", $_POST['jenis_kain']);
         $warna = str_replace("'", "''", $_POST['warna']);
         $lot_lgcy = str_replace("'", "''", $_POST['lot_lgcy']);
+        $spectro = str_replace("'", "''", $_POST['spectro']);
         $kk_lgcy = str_replace("'", "''", $_POST['kk_lgcy']);
         $catatan = str_replace("'", "''", $_POST['catatan']);
         $colorist_qcf = str_replace("'", "''", $_POST['colorist_qcf']);
@@ -75,6 +76,7 @@ if ($_POST['simpan'] == "simpan") {
 	`bruto`='$_POST[bruto]',
 	`proses`='$_POST[proses]',
 	`status`='$_POST[status]',
+    `spectro`='$spectro',
 	`tgl_update`='$_POST[tgl]',
     `disposisi`='$_POST[disposisi]',
     `colorist_qcf`='$colorist_qcf',
@@ -103,6 +105,7 @@ if ($_POST['simpan'] == "simpan") {
         $warna = str_replace("'", "''", $_POST['warna']);
         $lot_lgcy = str_replace("'", "''", $_POST['lot_lgcy']);
         $kk_lgcy = str_replace("'", "''", $_POST['kk_lgcy']);
+        $spectro = str_replace("'", "''", $_POST['spectro']);
         $catatan = str_replace("'", "''", $_POST['catatan']);
         $colorist_qcf = str_replace("'", "''", $_POST['colorist_qcf']);
         $sql = mysqli_query($con, "INSERT INTO `tbl_lap_inspeksi` SET
@@ -127,6 +130,7 @@ if ($_POST['simpan'] == "simpan") {
     `lot_lgcy`='$lot_lgcy',
     `kk_lgcy`='$kk_lgcy',
     `tgl_cwarna`=now(),
+    `spectro`='$spectro',
 	`dept`='QCF',
     `disposisi`='$_POST[disposisi]',
     `colorist_qcf`='$colorist_qcf',
@@ -537,6 +541,25 @@ $d_netto		= db2_fetch_assoc($sql_netto);
                     <label for="catatan" class="col-sm-3 control-label">Ket</label>
                     <div class="col-sm-8">
                         <textarea name="catatan" class="form-control" id="catatan" placeholder="Keterangan"><?php echo $row['catatan']; ?></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="spectro" class="col-sm-3 control-label">Spectro</label>
+                    <div class="col-sm-8">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="spectro" value="1" 
+                                <?php echo ($row['spectro'] === 1) ? 'checked' : ''; ?>>
+                                Yes
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="spectro" value="0" 
+                                <?php echo ($row['spectro'] === 0 || $row['spectro'] === null) ? 'checked' : ''; ?>>
+                                No
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
