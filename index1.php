@@ -1349,6 +1349,10 @@ $page = strtolower($page);
                                     echo "active";
                                 } ?>"><a href="LaporanInspeksiStanter"><i class="fa fa-line-chart text-danger"></i>
                                         <span>Laporan Inspeksi Stanter</span></a></li>
+								<li class="<?php if ($_GET['p'] == "LaporanStoppageMesinIns") {
+                                    echo "active";
+                                } ?>"><a href="LaporanStoppageMesinIns"><i class="fa fa-line-chart text-warning"></i>
+                                        <span>Laporan Stoppage Mesin</span></a></li>
                                 
                             </ul>
                         </li>
