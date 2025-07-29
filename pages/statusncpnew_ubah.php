@@ -176,11 +176,7 @@ $r = mysqli_fetch_array($sqlCek);
 					</div>
 					<label for="disposisiqc" class="col-sm-2 control-label">Disposisi/Peninjau QC</label>
 					<div class="col-sm-2">
-						<select name="disposisiqc" class="form-control select2" <?php if ($r['ck4'] != "Q.C." and ($r['status'] != "Cancel" or $r['status'] != "Disposisi")) {
-							echo "disabled";
-						} else {
-							echo "enabled";
-						} ?>>
+						<select name="disposisiqc" class="form-control select2" <?php if ($r['ck4'] != "Q.C." and ($r['status'] != "Cancel" or $r['status'] != "Disposisi")) {echo "disabled";} else {echo "enabled";} ?>>
 							<option value="">Pilih</option>
 							<option value="Agung C" <?php if ($r['disposisiqc'] == "Agung C") {
 								echo "SELECTED";
@@ -242,6 +238,10 @@ $r = mysqli_fetch_array($sqlCek);
 							<option value="Vivik" <?php if ($r['disposisiqc'] == "Vivik") {
 								echo "SELECTED";
 							} ?>>Vivik
+							</option>
+							<option value="Bayu R" <?php if ($r['disposisiqc'] == "Bayu R") {
+								echo "SELECTED";
+							} ?>>Bayu R
 							</option>
 						</select>
 					</div>

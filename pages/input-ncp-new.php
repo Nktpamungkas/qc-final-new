@@ -723,6 +723,9 @@ $row_cocok_warna_dye = mysqli_fetch_assoc($q_cocok_warna_dye);
 							<option value="Dixih Wahyudin" <?php if ($rcek['dibuat_oleh'] == "Dixih Wahyudin") {
 															echo "SELECTED";
 														} ?>>Dixih Wahyudin</option>
+							<option value="Bayu R" <?php if ($rcek['dibuat_oleh'] == "Bayu R") {
+															echo "SELECTED";
+														} ?>>Bayu R</option>
 						</select>
 					</div>
 				</div>
