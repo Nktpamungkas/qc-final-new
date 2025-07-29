@@ -1288,7 +1288,7 @@ $page = strtolower($page);
                         </li>
                     <?php } ?>
                     <?php if ($_SESSION['lvl_id'] == "INSPEKSI") { ?>
-                        <li class="treeview <?php if ($_GET['p'] == "Schedule" or $_GET['p'] == "Status-Mesin" or $_GET['p'] == "Inspeksi-Kain" or $_GET['p'] == "Line-News" or $_GET['p'] == "Grafik-QCF" or $_GET['p'] == "Lap-Inspektor" or $_GET['p'] == "Lap-Inspeksi" or $_GET['p'] == "Status-Mesin-Gabung" or $_GET['p'] == "SummaryInspeksi" or $_GET['p'] == "Input-Lap-Shading" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Summary-Inspeksi" or $_GET['p'] == "Summary-Inspect-Packing" or $_GET['p'] == "Inspect-Report-Now") {
+                        <li class="treeview <?php if ($_GET['p'] == "Schedule" or $_GET['p'] == "Status-Mesin" or $_GET['p'] == "Inspeksi-Kain" or $_GET['p'] == "Line-News" or $_GET['p'] == "Grafik-QCF" or $_GET['p'] == "Lap-Inspektor" or $_GET['p'] == "Lap-Inspeksi" or $_GET['p'] == "Status-Mesin-Gabung" or $_GET['p'] == "SummaryInspeksi" or $_GET['p'] == "Input-Lap-Shading" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Summary-Inspeksi" or $_GET['p'] == "Summary-Inspect-Packing" or $_GET['p'] == "Inspect-Report-Now" or $_GET['p'] == "Lap-Stoppage-Inspeksi") {
                             echo "active";
                         } ?>">
                             <a href="#"><i class="fa fa-archive text-warning"></i> <span>Inspeksi</span>
@@ -1349,7 +1349,7 @@ $page = strtolower($page);
                                     echo "active";
                                 } ?>"><a href="LaporanInspeksiStanter"><i class="fa fa-line-chart text-danger"></i>
                                         <span>Laporan Inspeksi Stanter</span></a></li>
-								<li class="<?php if ($_GET['p'] == "LaporanStoppageMesinIns") {
+								<li class="<?php if ($_GET['p'] == "Lap-Stoppage-Inspeksi") {
                                     echo "active";
                                 } ?>"><a href="LaporanStoppageMesinIns"><i class="fa fa-line-chart text-warning"></i>
                                         <span>Laporan Stoppage Mesin</span></a></li>
