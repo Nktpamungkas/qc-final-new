@@ -904,6 +904,9 @@ $row_cocok_warna_dye = mysqli_fetch_assoc($q_cocok_warna_dye);
 							<option value="QCF" <?php if ($rcek['dept'] == "QCF") {
 													echo "SELECTED";
 												} ?>>QCF</option>
+							<option value="CQA" <?php if ($rcek['dept'] == "CQA") {
+													echo "SELECTED";
+												} ?>>CQA</option>
 							<option value="RMP" <?php if ($rcek['dept'] == "RMP") {
 													echo "SELECTED";
 												} ?>>RMP</option>
