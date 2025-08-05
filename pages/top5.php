@@ -26,7 +26,7 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
 <body>
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Cari Data Top 5 DEFECT </h3>
+            <h3 class="box-title">Cari Data Top 5 DEFECTT </h3>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
             </div>
@@ -207,15 +207,27 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                                     <th width="78">
                                         <div align="center">UOM</div>
                                     </th>
-                                    <td align="center">
+                                    <th align="center">
                                         <div align="center">GRADE A</div>
-                                    </td>
-                                    <td align="center">
+                                    </th>
+                                    <th align="center">
                                         <div align="center">GRADE B</div>
-                                    </td>
-                                    <td align="center">
+                                    </th>
+                                    <th align="center">
                                         <div align="center">GRADE C</div>
-                                    </td>
+                                    </th>
+                                    <th width="78">
+                                        <div align="center">TOTAL</div>
+                                    </th>
+                                    <th align="center">
+                                        <div align="center">Grade A %</div>
+                                    </th>
+                                    <th align="center">
+                                        <div align="center">Grade B %</div>
+                                    </th>
+                                    <th align="center">
+                                        <div align="center">Grade C %</div>
+                                    </th>
                                     <th width="78">
                                         <div align="center">Total Point</div>
                                     </th>
@@ -225,8 +237,7 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                                 <?php
                                 
                                 $no = 1;
-
-                                
+                                $total = $gradeA = $gradeB = $gradeC = 0;
                                     
                                 while ($row = db2_fetch_assoc($stmt1)) {
                                     if (!empty($row['BUYERS'])) {
@@ -562,6 +573,12 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                                           $qty_c_stmt = db2_exec($conn1, $qty_c);
                                           $rowqty_c = db2_fetch_assoc($qty_c_stmt);
                                     ?>
+                                    <?php 
+                                        $total = ($rowqty_a['QTY_A'] + $rowqty_b['QTY_B'] + $rowqty_c['QTY_C']);
+                                        $gradeA = ($rowqty_a['QTY_A'] / $total * 100);
+                                        $gradeB = ($rowqty_b['QTY_B'] / $total * 100);
+                                        $gradeC = ($rowqty_c['QTY_C'] / $total * 100);
+                                    ?>
                                     <tr>
                                         <td align="center"><?php echo $no; ?></td>
                                         <!-- <td align="center"><?php echo $row['BUYERS']; ?></td> -->
@@ -582,9 +599,19 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                                         <td align="center">
                                             <?php
                                             if ($Digit == '11') {
-                                                echo number_format(($row['POINTSS'] * 100) / $row['LENGTHGROSSS'], 2);
+                                                $pembagi = $row['LENGTHGROSSS'] ?? 0;
                                             } elseif ($Digit == '13') {
-                                                echo number_format(($row['POINTSS'] * 100) / $row['LENGHTCALCS'], 2);
+                                                $pembagi = $row['LENGHTCALCS'] ?? 0;
+                                            } else {
+                                                $pembagi = 0;
+                                            }
+
+                                            $point = $row['POINTSS'] ?? 0;
+
+                                            if ($pembagi != 0 && $point != 0) {
+                                                echo number_format(($point * 100) / $pembagi, 2);
+                                            } else {
+                                                echo '0.00';
                                             }
                                             ?>
                                         </td>
@@ -602,14 +629,56 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                                                 echo number_format($rowqty_b['QTY_B'], 2);
                                             }
                                             ?></td>
-                                        <td align="center"> <?php
-                                            if ($Digit == '11') {
-                                                echo number_format($rowqty_c['QTY_C'], 2);
-                                            } elseif ($Digit == '13') {
-                                                echo number_format($rowqty_c['QTY_C'], 2);
-                                            }
-                                            ?></td>
-                                        <td align="center"><?php echo rtrim(rtrim(number_format($row['POINTSS'], 2), '0'), '.'); ?></td>
+                                        <td align="center"> 
+                                            <?php
+                                                if ($Digit == '11') {
+                                                    echo number_format($rowqty_c['QTY_C'], 2);
+                                                } elseif ($Digit == '13') {
+                                                    echo number_format($rowqty_c['QTY_C'], 2);
+                                                }
+                                            ?>
+                                        </td>
+                                        <td align="center"> 
+                                            <?php
+                                                if ($Digit == '11') {
+                                                    echo number_format($total, 2);
+                                                } elseif ($Digit == '13') {
+                                                    echo number_format($total, 2);
+                                                }
+                                            ?>
+                                        </td>
+                                        <td align="center"> 
+                                            <?php
+                                                if ($Digit == '11') {
+                                                    echo number_format($gradeA, 2);
+                                                } elseif ($Digit == '13') {
+                                                    echo number_format($gradeA, 2);
+                                                }
+                                            ?>
+                                        </td>
+                                        <td align="center">
+                                            <?php
+                                                if ($Digit == '11') {
+                                                    echo number_format($gradeB, 2);
+                                                } elseif ($Digit == '13') {
+                                                    echo number_format($gradeB, 2);
+                                                }
+                                            ?>
+                                        </td>
+                                        <td align="center">
+                                            <?php
+                                                if ($Digit == '11') {
+                                                    echo number_format($gradeC, 2);
+                                                } elseif ($Digit == '13') {
+                                                    echo number_format($gradeC, 2);
+                                                }
+                                            ?>
+                                        </td>
+                                        <td align="center">
+                                            <?php 
+                                                echo rtrim(rtrim(number_format($row['POINTSS'], 2), '0'), '.'); 
+                                            ?>
+                                        </td>
                                     </tr>
                                     <?php
                                     $no++;
@@ -638,6 +707,18 @@ $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
                                     </td>
                                     <td align="center">
                                         <div align="center">GRADE C</div>
+                                    </td>
+                                    <td align="center">
+                                        <div align="center">TOTAL</div>
+                                    </td>
+                                    <td align="center">
+                                        <div align="center">Grade A %</div>
+                                    </td>
+                                    <td align="center">
+                                        <div align="center">Grade B %</div>
+                                    </td>
+                                    <td align="center">
+                                        <div align="center">Grade C %</div>
                                     </td>
                                     <td align="center">
                                         <div align="center">Total Point</div>
