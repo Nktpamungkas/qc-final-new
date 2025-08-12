@@ -1661,6 +1661,19 @@ $page = strtolower($page);
                             </ul>
                         </li>
                     <?php } ?>
+                    
+                     <?php if ($_SESSION['lvl_id'] == "SUPERADMINTQ") { ?>
+                        <li class="<?php if ($_GET['p'] == "user-information" or $_GET['p'] == "") {
+                            echo "active";
+                            } ?>">
+                            <a href="userInformation"><i class="fa fa-user text-gray"></i><span>User Information</span></a>
+                        </li>
+                        <li class="<?php if ($_GET['p'] == "pembagian-testing-tq" or $_GET['p'] == "") {
+                            echo "active";
+                            } ?>">
+                            <a href="pembagianTestingTQ"><i class="fa fa-user text-gray"></i><span>Pembagian Testing tq</span></a>
+                        </li>
+                    <?php } ?>
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>
