@@ -137,7 +137,12 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    $users = mysqli_query($con, "SELECT * FROM user_login WHERE status = 'Aktif' and dept ='qc' and akses ='admin'");
+                                    $users = mysqli_query($con, "SELECT *
+                                            FROM user_login
+                                            WHERE status = 'Aktif'
+                                            AND dept = 'QC'
+                                            AND (akses = 'admin' OR akses = 'biasa');
+                                    ");
                                     $no = 1;
                                     while($user = mysqli_fetch_array($users)) {
                                 ?>
@@ -210,7 +215,7 @@
                                 <select name="dept" class="form-control" required>
                                     <option value="" disabled selected>-- Pilih Departemen --</option>
                                     <?php while ($dept = mysqli_fetch_assoc($departments)) { ?>
-                                        <option value="<?php echo htmlspecialchars($dept['nama']); ?>">
+                                        <option value="<?php echo ($dept['nama'] == 'QCF') ? 'QC' : htmlspecialchars($dept['nama']); ?>">
                                             <?php echo htmlspecialchars($dept['nama']); ?>
                                         </option>
                                     <?php } ?>

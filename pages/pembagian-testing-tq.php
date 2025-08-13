@@ -271,7 +271,9 @@
 
                 $sqlUsers = "SELECT DISTINCT * 
                             FROM user_login 
-                            WHERE akses = 'admin' and dept = 'QC' {$whereSelected}
+                            WHERE status = 'Aktif'
+                            AND dept = 'QC'
+                            AND (akses = 'admin' OR akses = 'biasa'){$whereSelected}
                             ORDER BY user ASC";
                 $users = mysqli_query($con, $sqlUsers);
 
@@ -357,7 +359,7 @@
                                     ?>
                                         <option value="<?php echo intval($user['id']); ?>"
                                             <?php if (in_array(intval($user['id']), $selected_users_int)) echo 'selected'; ?>>
-                                            <?php echo htmlspecialchars($user['id']) . ' - ' . htmlspecialchars($user['user']); ?>
+                                            <?php echo strtoupper(htmlspecialchars($user['user'])) . ' - ' . strtoupper(htmlspecialchars($user['level'])); ?>
                                         </option>
                                     <?php endwhile; ?>
                                 </select>
