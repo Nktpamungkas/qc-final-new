@@ -1774,6 +1774,9 @@ include "koneksi.php";
                 <th colspan="2">
                   <div align="center">BF</div>
                 </th>
+                <th rowspan="2">
+                  <div align="center">Tanggal</div>
+                </th>
               </tr>
 
               <tr>
@@ -1886,6 +1889,7 @@ include "koneksi.php";
                   <td><?= $row1['note_kf']; ?></td>
                   <td><?= $row1['qty_bf']; ?></td>
                   <td><?= $row1['note_bf']; ?></td>
+                  <td><?= $row1['tgl_update'] . ' ' . $row1['jam_update']; ?></td>
                 </tr>
               <?php $no++;
               } ?>

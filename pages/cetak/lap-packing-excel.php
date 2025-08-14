@@ -148,6 +148,9 @@ No MC :
         <font color="#FFFFFF">BF</font>
       </strong>
     </th>
+    <th rowspan="2" valign="middle" bgcolor="#006699"><strong>
+        <font color="#FFFFFF">Tanggal</font>
+      </strong></th>
   </tr>
 
   <tr>
@@ -200,7 +203,7 @@ No MC :
     $grp = " ";
   }
   $no = 1;
-  $sql = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE `tgl_update` BETWEEN '$tgl' and '$tgl1' " . $shft . " " . $nomc . " " . $grp . " AND `dept`='PACKING' ORDER BY id ASC");
+$sql = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE `tgl_update` BETWEEN '$tgl' and '$tgl1' " . $shft . " " . $nomc . " " . $grp . " AND `dept`='PACKING' ORDER BY id ASC");
   while ($row = mysqli_fetch_array($sql)) {
     $bgcolor = ($c++ & 1) ? '#33CCFF' : '#FFCC99';
     ?>
@@ -308,6 +311,7 @@ No MC :
       <td><?= $row['note_kf']; ?></td>
       <td><?= $row['qty_bf']; ?></td>
       <td><?= $row['note_bf']; ?></td>
+      <td><?= $row['tgl_update'] . ' ' . $row['jam_update']; ?></td>
     </tr>
     <?php $no++;
   }
@@ -315,6 +319,8 @@ No MC :
   for ($ri = 0; $ri < 5; $ri++) {
     ?>
     <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
