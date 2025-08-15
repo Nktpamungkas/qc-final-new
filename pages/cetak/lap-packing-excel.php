@@ -24,6 +24,25 @@ if ($_GET['awal'] != "" and $_GET['akhir'] != "") {
   $tgl1 = $_GET['akhir'];
   $shift = $_GET['shift'];
 }
+$jamA = isset($_GET['jam1']) ? $_GET['jam1'] : '';
+$jamAr = isset($_GET['jam2']) ? $_GET['jam2'] : '';
+if (strlen($jamA) == 5) {
+  $start_date = $tgl . " " . $jamA;
+} else {
+  $start_date = $tgl . " 0" . $jamA;
+}
+if (strlen($jamAr) == 5) {
+  $stop_date = $tgl1 . " " . $jamAr;
+} else {
+  $stop_date = $tgl1 . " 0" . $jamAr;
+}
+if ($jamA != "" or $jamAr != "") {
+  $Where = " DATE_FORMAT( CONCAT(tgl_update,' ',jam_update), '%Y-%m-%d %H:%i') between '$start_date' and '$stop_date' and ";
+} else {
+  $start_date = $tgl;
+  $stop_date = $tgl1;
+  $Where = " DATE_FORMAT( tgl_update , '%Y-%m-%d') between '$start_date' and '$stop_date' and ";
+}
 ?>
 Tanggal :
 <?php echo $tgl; ?> s/d
@@ -203,7 +222,7 @@ No MC :
     $grp = " ";
   }
   $no = 1;
-$sql = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE `tgl_update` BETWEEN '$tgl' and '$tgl1' " . $shft . " " . $nomc . " " . $grp . " AND `dept`='PACKING' ORDER BY id ASC");
+  $sql = mysqli_query($con, "SELECT * FROM tbl_lap_inspeksi WHERE $Where `dept`='PACKING' $shft $nomc $grp ORDER BY id ASC");
   while ($row = mysqli_fetch_array($sql)) {
     $bgcolor = ($c++ & 1) ? '#33CCFF' : '#FFCC99';
     ?>
