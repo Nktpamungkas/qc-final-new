@@ -108,7 +108,7 @@ textarea {
             <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
         </tr>
         <tr>
-            <td align="right" style="font-size: 12px;">Page 1 of 8</td> 
+            <td align="right" style="font-size: 12px;">Page 1 of 9</td> 
         </tr>
         <tr>
             <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
@@ -567,7 +567,7 @@ textarea {
             <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
         </tr>
         <tr>
-            <td align="right" style="font-size: 12px;">Page 3 of 8</td> 
+            <td align="right" style="font-size: 12px;">Page 3 of 9</td> 
         </tr>
         <tr>
             <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
@@ -851,7 +851,7 @@ textarea {
             <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
         </tr>
         <tr>
-            <td align="right" style="font-size: 12px;">Page 4 of 8</td> 
+            <td align="right" style="font-size: 12px;">Page 4 of 9</td> 
         </tr>
         <tr>
             <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
@@ -925,21 +925,27 @@ textarea {
             <td align="right" style="font-size: 11px;" width="33%">-5 TO + 5 %</td>
         </tr>
         <tr>
-            <td align="right" style="font-size: 11px;" colspan="3">AS CLAIM :</td>
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 11px;" colspan="3"><?php echo $rd2['gramasi']." G/M2";?></td>
-        </tr>
-        <tr>
             <td  style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
             <td align="center"  style="font-size: 12px;" Width="33%"><?php echo $rcek1['stat_fwss2']; ?></td>
-            <td  style="font-size: 12px;" Width="33%"></td>
+            <td align="right" style="font-size: 11px;" colspan="3">AS CLAIM :</td>
         </tr>
         <tr>
             <td  style="font-size: 12px;" Width="33%" ><strong> Remarks : g/m2 = gram per square meter</strong></td>
             <td align="center"  style="font-size: 12px;" Width="33%"></td>
-            <td  style="font-size: 12px;" Width="33%"></td>
+            <td align="right" style="font-size: 11px;" colspan="3"><?php echo $rd2['gramasi']." G/M2";?></td>
         </tr>
+        <!-- <tr>
+            <td  style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+            <td align="center"  style="font-size: 12px;" Width="33%"><?php echo $rcek1['stat_fwss2']; ?></td>
+            <td  style="font-size: 12px;" Width="33%"></td>
+        </tr> -->
+        <!-- <tr>
+            <td  style="font-size: 12px;" Width="33%" ><strong> Remarks : g/m2 = gram per square meter</strong></td>
+            <td align="center"  style="font-size: 12px;" Width="33%"></td>
+            <td  style="font-size: 12px;" Width="33%"></td>
+        </tr> -->
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         <!-- FABRIC WEIGHT END -->
         <!-- FABRIC WIDTH BEGIN -->
         <tr>
@@ -1131,7 +1137,7 @@ textarea {
             <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
         </tr>
         <tr>
-            <td align="right" style="font-size: 12px;">Page 5 of 8</td> 
+            <td align="right" style="font-size: 12px;">Page 5 of 9</td> 
         </tr>
         <tr>
             <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
@@ -1431,6 +1437,65 @@ textarea {
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+    <table width="100%">
+        <tr>
+            <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 12px;">Page 6 of 9</td> 
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 12px;">&nbsp;</td> 
+        </tr>
+    </table>
+        <table width="100%">
         <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC 8)</td> -->
             <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC TM 8-2022E)</td>
@@ -1542,6 +1607,72 @@ textarea {
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
+         <!-- LIGHT FASTNESS BEGIN -->
+        <tr>
+            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td> -->
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3-2020, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td>
+        </tr>
+        <!-- <tr>
+            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+            <td align="center" style="font-size: 11px;" width="33%"><strong>T4 (5A) GREEN / T6 (5B) LIGHT GREEN</strong></td>
+            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+        </tr> -->
+        <!-- <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr> -->
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">AFTER 20 HOURS</td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['stat_lg']=="MARGINAL PASS" AND $rcekM['mlight_rating1']!="" AND $rcekM['mlight_rating1'] < 4){echo "color:red;";}else if($rcek1['light_rating1']!="" AND $rcek1['light_rating1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mlight_rating1']=="" AND $rcek1['light_rating1']==""){echo "N/A";}else if($rcek1['stat_lg']=="MARGINAL PASS"){echo $rcekM['mlight_rating1'];}else if($rcek1['stat_lg']=="MARGINAL PASS" AND $rcekM['mlight_rating1']==""){echo "N/A";}else{echo $rcek1['light_rating1'];}?></td>
+            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">CHANGE IN SHADE</td>
+        </tr>
+        <tr>
+            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_lg'] !=""){echo $rcek1['stat_lg'];}else{echo "N/A";}?></td>
+            <td style="font-size: 12px;" Width="33%"></td>
+        </tr>
+        <tr>
+            <td style="font-size: 12px;" Width="33%" ><strong> Remaks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best</strong></td>
+            <td align="center"  style="font-size: 12px;" Width="33%"></td>
+            <td style="font-size: 12px;" Width="33%"></td>
+        </tr>
+        <!-- LIGHT PERSPIRATION END -->
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        <!-- PHENOLIC YELLOWING BEGIN -->
+        <tr>
+            <td align="left" style="font-size: 11px;" colspan="3"><strong><u>PHENOLIC YELLOWING TEST</u></strong> (ISO 105-X18)</td>
+        </tr>
+        <!-- <tr>
+            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+            <td align="center" style="font-size: 11px;" width="33%"><strong>T1 / T2 WHITE STRIPE</strong></td>
+            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+        </tr> -->
+        <!-- <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr> -->
+        <tr>
+            <td align="left" style="font-size: 11px;" width="33%">COLOR STAINING</td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['phenolic_colorchange']!="" AND $rcek1['phenolic_colorchange'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['phenolic_colorchange']!=""){echo $rcek1['phenolic_colorchange'];}else{echo "N/A";}?></td>
+            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+        </tr>
+        <tr>
+            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_py'] !=""){echo $rcek1['stat_py'];}else{echo "N/A";}?></td>
+            <td style="font-size: 12px;" Width="33%"></td>
+        </tr>
+        <tr>
+            <td style="font-size: 12px;" Width="33%" ><strong> Remaks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best</strong></td>
+            <td align="center"  style="font-size: 12px;" Width="33%"></td>
+            <td style="font-size: 12px;" Width="33%"></td>
+        </tr>
+        <!-- PHENOLIC YELLOWING END -->
+          <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
         <!-- PILLING TUMBLE BEGIN -->
         <tr>
             <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE : TUMBLE PILLING METHOD</u></strong> (ASTM D3512)</td>
@@ -1596,7 +1727,7 @@ textarea {
             <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
         </tr>
         <tr>
-            <td align="right" style="font-size: 12px;">Page 6 of 8</td> 
+            <td align="right" style="font-size: 12px;">Page 7 of 9</td> 
         </tr>
         <tr>
             <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
@@ -1884,7 +2015,7 @@ textarea {
             <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
         </tr>
         <tr>
-            <td align="right" style="font-size: 12px;">Page 7 of 8</td> 
+            <td align="right" style="font-size: 12px;">Page 8 of 9</td> 
         </tr>
         <tr>
             <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
@@ -1907,69 +2038,7 @@ textarea {
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
-        <!-- LIGHT FASTNESS BEGIN -->
-        <tr>
-            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3-2020, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td>
-        </tr>
-        <!-- <tr>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 11px;" width="33%"><strong>T4 (5A) GREEN / T6 (5B) LIGHT GREEN</strong></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr> -->
-        <!-- <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr> -->
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">AFTER 20 HOURS</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['stat_lg']=="MARGINAL PASS" AND $rcekM['mlight_rating1']!="" AND $rcekM['mlight_rating1'] < 4){echo "color:red;";}else if($rcek1['light_rating1']!="" AND $rcek1['light_rating1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mlight_rating1']=="" AND $rcek1['light_rating1']==""){echo "N/A";}else if($rcek1['stat_lg']=="MARGINAL PASS"){echo $rcekM['mlight_rating1'];}else if($rcek1['stat_lg']=="MARGINAL PASS" AND $rcekM['mlight_rating1']==""){echo "N/A";}else{echo $rcek1['light_rating1'];}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">CHANGE IN SHADE</td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_lg'] !=""){echo $rcek1['stat_lg'];}else{echo "N/A";}?></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Remaks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best</strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <!-- LIGHT PERSPIRATION END -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <!-- PHENOLIC YELLOWING BEGIN -->
-        <tr>
-            <td align="left" style="font-size: 11px;" colspan="3"><strong><u>PHENOLIC YELLOWING TEST</u></strong> (ISO 105-X18)</td>
-        </tr>
-        <!-- <tr>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 11px;" width="33%"><strong>T1 / T2 WHITE STRIPE</strong></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr> -->
-        <!-- <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr> -->
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">COLOR STAINING</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['phenolic_colorchange']!="" AND $rcek1['phenolic_colorchange'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['phenolic_colorchange']!=""){echo $rcek1['phenolic_colorchange'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_py'] !=""){echo $rcek1['stat_py'];}else{echo "N/A";}?></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Remaks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best</strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <!-- PHENOLIC YELLOWING END -->
+       
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
@@ -2245,7 +2314,7 @@ textarea {
             <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
         </tr>
         <tr>
-            <td align="right" style="font-size: 12px;">Page 8 of 8</td> 
+            <td align="right" style="font-size: 12px;">Page 9 of 9</td> 
         </tr>
         <tr>
             <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
@@ -2383,10 +2452,15 @@ textarea {
             <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_sr']!=""){echo $rcek1['stat_sr'];}else{echo "N/A";}?></td>
             <td style="font-size: 12px;" Width="33%"></td>
         </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" colspan="3"></td>
+        <tr>
         <!-- WICKING BEGIN -->
         <tr>
             <td align="left" style="font-size: 12px;" colspan="3"><strong><u>VERTICAL WICKING (LLL-10197)</u></strong></td>
         </tr>
+        <tr>
+            <td align="left" style="font-size: 11px;" colspan="3"></td>
         <tr>
             <td align="left" style="font-size: 11px;" colspan="3">AFTER 15 MINS</td> 
         </tr>
