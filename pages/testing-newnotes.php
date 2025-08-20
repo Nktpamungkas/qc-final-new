@@ -3899,6 +3899,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_fla'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_fla'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -4098,6 +4100,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_fib'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_fib'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -4437,6 +4441,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_fc'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_fc'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 
 										</select>
 									</div>
@@ -4513,6 +4519,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_fwss2'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_fwss2'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -4592,6 +4600,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_fwss3'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_fwss3'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -4681,6 +4691,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_bsk'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_bsk'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -4850,7 +4862,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											rows="3"><?php echo $rcek1['sns_note']; ?></textarea>
 										<!--spirality_status_view-->
 										<?php
-										$spirality_status = ['DISPOSISI', 'A', 'R', 'PASS', 'FAIL', 'RANDOM']; ?>
+										$spirality_status = ['DISPOSISI', 'A', 'R', 'PASS', 'FAIL', 'RANDOM', 'ESS PASS']; ?>
 										<select name="spirality_status" class="form-control select2" id="stat_sparility"
 											onChange="tampil();">
 											<option value="0">Pilih</option>
@@ -4984,6 +4996,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_fwss'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_fwss'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -5637,6 +5651,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_pm'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_pm'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -5817,6 +5833,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_pl'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_pl'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -5958,6 +5976,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_pb'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_pb'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -6119,6 +6139,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_prt'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_prt'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -6235,6 +6257,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_abr'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_abr'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -6323,6 +6347,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											FAIL</option>
 										<option <?php if ($rcek1['stat_sm'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_sm'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -6474,6 +6500,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											FAIL</option>
 										<option <?php if ($rcek1['stat_sp'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_sp'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -6648,6 +6676,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											FAIL</option>
 										<option <?php if ($rcek1['stat_sb'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_sb'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -6745,6 +6775,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_bs2'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_bs2'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -6825,6 +6857,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											; ?>value="FAIL">FAIL</option>
 											<option <?php if ($rcek1['stat_bs3'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_bs3'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -6893,6 +6927,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 												FAIL</option>
 											<option <?php if ($rcek1['stat_bs'] == "RANDOM") { ?> selected=selected <?php }
 											; ?>value="RANDOM">RANDOM</option>
+											<option <?php if ($rcek1['stat_bs'] == "ESS PASS") { ?> selected=selected <?php }
+											; ?>value="ESS PASS">ESS PASS</option>
 										</select>
 									</div>
 									<div class="col-sm-2">
@@ -6984,6 +7020,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											FAIL</option>
 										<option <?php if ($rcek1['stat_th'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_th'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -7179,6 +7217,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											FAIL</option>
 										<option <?php if ($rcek1['stat_sr'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_sr'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -7573,6 +7613,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											FAIL</option>
 										<option <?php if ($rcek1['stat_gr'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_gr'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -7736,6 +7778,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											FAIL</option>
 										<option <?php if ($rcek1['stat_ap'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_ap'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -7978,6 +8022,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											FAIL</option>
 										<option <?php if ($rcek1['stat_hs'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_hs'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -8105,6 +8151,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											FAIL</option>
 										<option <?php if ($rcek1['stat_ff'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_ff'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -8179,6 +8227,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_odour'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_odour'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -8244,6 +8294,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_curling'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_curling'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -8317,6 +8369,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_nedle'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_nedle'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -8523,6 +8577,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_wf'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_wf'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -8734,6 +8790,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_wtr'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_wtr'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -8900,6 +8958,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_pac'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_pac'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -9065,6 +9125,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_pal'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_pal'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -9225,6 +9287,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_cr'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_cr'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -9343,6 +9407,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_py'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_py'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -9426,6 +9492,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_cmo'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_cmo'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -9668,6 +9736,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_cm'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_cm'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -9798,6 +9868,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_lg'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_lg'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -9900,6 +9972,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_lp'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_lp'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -9986,6 +10060,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_slv'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_slv'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -10059,6 +10135,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_bld'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_bld'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -10130,6 +10208,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_chl'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_chl'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -10194,6 +10274,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_nchl'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_nchl'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -10279,6 +10361,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_dye'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_dye'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -10507,6 +10591,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_wic'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_wic'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -10622,6 +10708,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_wic2'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_wic2'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -10724,6 +10812,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_wic1'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_wic1'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -10822,6 +10912,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_wic3'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_wic3'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -11074,6 +11166,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_dry'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_dry'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -11179,6 +11273,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_dry1'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_dry1'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -11441,6 +11537,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_ph'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_ph'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -11518,6 +11616,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_sor'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_sor'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">
@@ -11585,6 +11685,8 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										; ?>value="FAIL">FAIL</option>
 										<option <?php if ($rcek1['stat_hum'] == "RANDOM") { ?> selected=selected <?php }
 										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_hum'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
 									</select>
 								</div>
 								<div class="col-sm-2">

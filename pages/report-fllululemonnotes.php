@@ -1487,7 +1487,8 @@ include"koneksi.php";
 $notes=$_GET['notest'];
 $notes_post=$_POST['notest'];
 $Nokkold		= isset($_POST['no_kkold']) ? $_POST['no_kkold'] : '';
-$DateIn		= isset($_POST['date_in']) ? $_POST['date_in'] : '';
+$DateIn			= isset($_POST['date_in']) ? $_POST['date_in'] : '';
+$Date_out 		= isset($_POST['date_out1']) ? $_POST['date_out1'] : '';
 $Style		    = isset($_POST['style']) ? $_POST['style'] : '';
 $Season		    = isset($_POST['season']) ? $_POST['season'] : '';
 $TglKirim       = isset($_POST['tgl_kirim']) ? $_POST['tgl_kirim'] : '';
@@ -1740,12 +1741,31 @@ $rowdb2 = db2_fetch_assoc($stmt);
 					</label>
 				</div>			   
             </div>
+
+			<!-- trf -->
+			<div class="form-group">
+				<label for="no_trf" class="col-sm-3 control-label">No TRF </label>
+				<div class="col-sm-4">
+					<input name="no_trf" type="text" class="form-control" id="no_trf" 
+					value="<?php echo $rcek['no_trf']; ?>" required>
+				</div>
+			</div>
+			<!-- trf -->
             <div class="form-group">
                 <label for="date_in" class="col-sm-3 control-label">Date In</label>
                 <div class="col-sm-4">					  
 					<div class="input-group date">
 						<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
 							<input name="date_in" type="text" class="form-control pull-right" id="datepicker" placeholder="0000-00-00" value="<?php if($rcek['date_in']!="" OR $rcek['date_in']!=NULL){echo $rcek['date_in'];}else{echo $DateIn;} ?>" required autocomplete="off"/>
+					</div>
+				</div>
+            </div>
+            <div class="form-group">
+                <label for="date_in" class="col-sm-3 control-label">Date Out</label>
+                <div class="col-sm-4">					  
+					<div class="input-group date">
+						<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+							<input name="date_out1" type="text" class="form-control pull-right" id="datepicker2" placeholder="0000-00-00" value="<?php if($rcek['date_out1']!="" OR $rcek['date_out1']!=NULL){echo $rcek['date_out1'];}else{echo $Date_out;} ?>" required autocomplete="off" />
 					</div>
 				</div>
             </div>
@@ -1780,7 +1800,7 @@ $rowdb2 = db2_fetch_assoc($stmt);
 		 	 		</div>			   
             </div>
             <div class="form-group">
-                <label for="tgl_kirim" class="col-sm-3 control-label">Delivery Date</label>
+                <label for="tgl_kirim" class="col-sm-3 control-label">Exmill Date</label>
                 <div class="col-sm-4">					  
 					<div class="input-group date">
 						<div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
@@ -1861,8 +1881,8 @@ $rowdb2 = db2_fetch_assoc($stmt);
                     <div class="input-group">  
                         <select name="protocol" id="protocol" class="form-control select2" required>
                             <option selected="selected" value="">Pilih</option>
-                            <option value="Predominanly Synthetic" <?php if($rcek['protocol']=="Predominanly Synthetic" OR $Protocol=="Predominanly Synthetic"){echo "SELECTED";}?>>Predominanly Synthetic</option>
-                            <option value="Predominanly Natural" <?php if($rcek['protocol']=="Predominanly Natural" OR $Protocol=="Predominanly Natural"){echo "SELECTED";}?>>Predominanly Natural</option>
+                            <option value="Predominanly Synthetic" <?php if($rcek['protocol']=="Predominanly Synthetic" OR $Protocol=="Knit Predominanly Synthetic"){echo "SELECTED";}?>>Knit Predominanly Synthetic</option>
+                            <option value="Predominanly Natural" <?php if($rcek['protocol']=="Predominanly Natural" OR $Protocol=="Knit Predominanly Natural"){echo "SELECTED";}?>>Knit Predominanly Natural</option>
                         </select>
                     </div>
                 </div>				   
@@ -1955,6 +1975,36 @@ $rowdb2 = db2_fetch_assoc($stmt);
                     <span class="help-block with-errors"></span>
                 </div>	  
             </div> 
+			<div class="form-group">
+                <label for="sensitif_color" class="col-md-3 control-label">Is this Sensitif Color</label>
+                <div class="col-sm-5">	  
+					<select name="sensitif_color"  class="form-control" required>
+						<option></option>
+						<option ="YES" <?php if ($rcek['sensitif_color'] == 'YES') echo 'selected'; ?>>YES</option>
+						<option ="NO" <?php if ($rcek['sensitif_color'] == 'NO') echo 'selected'; ?>>NO</option>
+					</select>
+                    <span class="help-block with-errors"></span>
+                </div>	  
+            </div> 
+			<div class="form-group">
+				<label for="restricted_substance" class="col-md-3 control-label">Restricted Substance</label>
+				<div class="col-sm-5">
+					<select name="restricted_substance" class="form-control" required>
+						<option></option>
+						<option ="Natural" <?php if ($rcek['restricted_substance'] == 'Natural Fiber') echo 'selected'; ?>>Natural Fiber </option>
+						<option "Syntetic" <?php if ($rcek['restricted_substance'] == 'Syntetic Fiber') echo 'selected'; ?>>Syntetic Fiber</option>
+						<option "Blend Fiber" <?php if ($rcek['restricted_substance'] == 'Blend Fiber') echo 'selected'; ?>>Blend Fiber</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="qty" class="col-sm-3 control-label">Qty</label>
+				<div class="col-sm-4">
+					<div class="input-group">
+						<input name="qty" type="text" class="form-control" id="qty" value="<?= ($rcek['qty'] ?? '') ?>" required>
+					</div>
+				</div>
+			</div>
 			
 			
 	 	</div>
@@ -3055,6 +3105,7 @@ $rowdb2 = db2_fetch_assoc($stmt);
 									<option <?php if($rcek1['stat_pb']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
 									<option <?php if($rcek1['stat_pb']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
 									<option <?php if($rcek1['stat_pb']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+									<option <?php if($rcek1['stat_pb']=="ESS PASS"){?> selected=selected <?php };?>value="ESS PASS">ESS PASS</option>
 								</select>
 							</div>
 						</div>
@@ -9603,6 +9654,10 @@ if($_POST['save1']=="save"){
 	$terupload_wet_crocking = move_uploaded_file($namaSementara_wet_crocking, $dirUpload.$namaFile_wet_crocking);
 	
 	$test_package = $_POST['test_package'];
+	$sensitif_color = $_POST['sensitif_color'];
+	$restricted_substance = $_POST['restricted_substance'];
+	$no_trf = $_POST['no_trf'];
+	$date_out1 = $Date_out;
 	$sqlKK=mysqli_query($con,"UPDATE tbl_tq_nokk SET
 	`no_rptlulu`='$ReportLulu',
 	`revisi`='$Revisi',
@@ -9626,7 +9681,13 @@ if($_POST['save1']=="save"){
 	`lf_reject`='$file_lf_reject',
 	`wet_crocking`='$file_wet_crocking',
 	`tgl_update`=now(),
-	test_package = '$test_package'
+	`qty`='$_POST[qty]',
+	test_package = '$test_package',
+	sensitif_color = '$sensitif_color',
+	restricted_substance = '$restricted_substance',
+	no_trf = '$no_trf',
+	date_out1 = '$date_out1'
+	
 	WHERE `id`='$rcek[id]'");
 
 	if($sqlKK){
