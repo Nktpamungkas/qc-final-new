@@ -26,7 +26,7 @@ $rd=mysqli_fetch_array($data1);
 $data2=mysqli_query($con,"SELECT * FROM tbl_tq_nokk WHERE id='$idkk'");
 $rd2=mysqli_fetch_array($data2);
 
-$id_tq_test_2 = $rcek1['id'];
+$id_tq_test_2 = $rcek1['id_nokk'];
 
 $tq_test_2_sql = mysqli_query($con, "select id_nokk, spirality_status, bleeding_root, wrinkle, wrinkle1, wrinkle2, stat_wrinkle, stat_wrinkle1, wrinkle_note from tbl_tq_test_2 where id_nokk = '$id_tq_test_2'");
 $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
@@ -1494,8 +1494,23 @@ textarea {
         <tr>
             <td align="right" style="font-size: 12px;">&nbsp;</td> 
         </tr>
+     
     </table>
+ 
         <table width="100%">
+        <tr>
+            <td align="left" style="font-size: 12px;" width="33%">&nbsp;</td>
+            <td align="center" style="font-size: 12px;" width="33%"><u>TEST RESULT</u></td>
+            <td align="right" style="font-size: 12px;" width="33%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size: 12px;" width="33%"><u>TEST PROPERTY</u></td>
+            <td align="center" style="font-size: 12px;" width="33%">&nbsp;</td>
+            <td align="right" style="font-size: 12px;" width="33%"><u>REQUIREMENT</u></td>
+        </tr>
+        <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
         <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC 8)</td> -->
             <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC TM 8-2022E)</td>
