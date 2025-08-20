@@ -128,6 +128,7 @@ if (strlen($jamA) == 5) {
               <th><div align="center">Grouping</div></th>
               <th><div align="center">Hue</div></th>
               <th><div align="center">Disposisi</div></th>
+              <th><div align="center">Pemberi Instruksi</div></th>
               <th><div align="center">Colorist Qcf</div></th>
               <th><div align="center">Review</div></th>
               <th><div align="center">Remark</div></th>
@@ -138,12 +139,24 @@ if (strlen($jamA) == 5) {
           <tbody>
           <?php
             $no=1;
-            if($GShift!="ALL"){ $shft=" AND `shift`='$GShift' ";}else{$shft=" ";}
-			      if($Awal!="" and $Akhir!=""){ $where=" AND DATE_FORMAT( tgl_celup, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' ";}else{ $where=" ";}  
+            if($GShift!="ALL"){ $shft=" AND t.shift ='$GShift' ";}else{$shft=" ";}
+			      if($Awal!="" and $Akhir!=""){ $where=" AND DATE_FORMAT( t.tgl_celup, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' ";}else{ $where=" ";}  
             if($Awal!="" and $Akhir!=""){
-              $qry1=mysqli_query($con,"SELECT * FROM tbl_cocok_warna_dye WHERE `dept`='QCF' $where $shft ORDER BY id ASC");
+              $qry1=mysqli_query($con,"SELECT 
+                                              t.*,
+                                              p.pemberi_instruksi
+                                          FROM 
+                                              tbl_cocok_warna_dye t 
+                                          LEFT JOIN penyelesaian_tolakbasah p on p.id_cocok_warna = t.id
+                                          WHERE t.dept='QCF' $where $shft ORDER BY t.id ASC");
             }else{
-              $qry1=mysqli_query($con,"SELECT * FROM tbl_cocok_warna_dye WHERE `dept`='QCF' $where $shft ORDER BY id ASC");
+              $qry1=mysqli_query($con,"SELECT 
+                                              t.*,
+                                              p.pemberi_instruksi
+                                          FROM 
+                                              tbl_cocok_warna_dye t 
+                                          LEFT JOIN penyelesaian_tolakbasah p on p.id_cocok_warna = t.id
+                                          WHERE t.dept='QCF' $where $shft ORDER BY t.id ASC");
             }
             // echo "SELECT * FROM tbl_cocok_warna_dye WHERE `dept`='QCF' $where $shft ORDER BY id ASC";
                 while($row1=mysqli_fetch_array($qry1)){
@@ -155,6 +168,8 @@ if (strlen($jamA) == 5) {
                 $lgg1=$row1['pelanggan'];
                 $byr1=substr($row1['pelanggan'],$pos,100);
               }
+              $q_user = mysqli_query($cona,"SELECT * FROM tbl_user_tindaklanjut WHERE id = '$row1[pemberi_instruksi]'");
+              $row_user = mysqli_fetch_array($q_user);
               ?>
           <tr bgcolor="<?php echo $bgcolor; ?>">
             <td align="center"><?php echo $no; ?></td>
@@ -184,6 +199,7 @@ if (strlen($jamA) == 5) {
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['grouping'] ?>" class="grouping_dye" href="javascipt:void(0)"><?php echo $row1['grouping'] ?></a></td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['hue'] ?>" class="hue_dye" href="javascipt:void(0)"><?php echo $row1['hue'] ?></a></td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['disposisi'] ?>" class="disposisi_cdye" href="javascipt:void(0)"><?php echo $row1['disposisi'] ?></a></td>
+            <td align="center"><?= $row_user['nama']; ?></td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['colorist_qcf'] ?>" class="colorist_qcf" href="javascipt:void(0)"><?php echo $row1['colorist_qcf'] ?></a></td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['review_qcf'] ?>" class="review_qcf_dye" href="javascipt:void(0)"><?php echo $row1['review_qcf'] ?></a></td>
             <td align="center"><a data-pk="<?php echo $row1['id'] ?>" data-value="<?php echo $row1['remark_qcf'] ?>" class="remark_qcf_dye" href="javascipt:void(0)"><?php echo $row1['remark_qcf'] ?></a></td>
