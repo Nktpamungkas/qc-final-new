@@ -1940,13 +1940,17 @@ textarea {
             <td align="center" style="font-size: 11px; <?php if($rcek1['dye_tf_wool']!="" AND $rcek1['dye_tf_wool'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['dye_tf_wool']==""){echo "N/A";}else{echo $rcek1['dye_tf_wool'];}?></td>
             <td align="right" style="font-size: 11px;" width="33%" colspan="2">MIN GRADE 4.0</td>
         </tr>
+    </table>
+        <table width="100%">
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="2">COLORFASTNESS RATING</td>
-            <td align="left" style="font-size: 11px;" colspan="2">COLORFASTNESS RATING</td>
+            <td align="left" style="font-size: 11px;" width="33%">COLORFASTNESS RATING</td>
+            <td align="left" style="font-size: 11px;"  >COLORFASTNESS RATING</td>
+       
+
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" colspan="2">COLOR CHANGE</td>
-            <td align="left" style="font-size: 11px;" colspan="2">COLOR STAIN AND SELF-STAINING</td>
+            <td align="left" style="font-size: 11px;"width="33%" >COLOR CHANGE</td>
+            <td align="left" style="font-size: 11px;"width="33%" >COLOR STAIN AND SELF-STAINING</td>
         </tr>
     </table>
     <table width="100%">
@@ -2059,30 +2063,30 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_cc1']!="" AND $rcek1['apper_cc1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_cc1']!=""){echo $rcek1['apper_cc1'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_cc1']!="" AND $rcek1['apper_cc1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_cc1']!=""){echo $rcek1['apper_cc1'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <!-- HERE -->
         <tr>
             <!-- <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td> -->
             <td align="left" style="font-size: 11px;" width="33%">CROSS - STAINING</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_st']!="" AND $rcek1['apper_st'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st']!=""){echo $rcek1['apper_st'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_st']!="" AND $rcek1['apper_st'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st']!=""){echo $rcek1['apper_st'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.5</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">FABRIC WRINKLING</td>
-            <td align="left" style="font-size: 11px;" width="33%">SLIGHT</td>
+            <td align="center" style="font-size: 11px;" width="33%">SLIGHT</td>
             <td align="right" style="font-size: 11px;" width="33%">SLIGHT</td>
         </tr>
         <tr>
             <!-- <td align="left" style="font-size: 11px;" width="33%">PILLING AND FUZZING HAIR</td> -->
             <td align="left" style="font-size: 11px;" width="33%">PILLING/FUZZING</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pf1']!="" AND $rcek1['apper_pf1'] < 4){echo "color:red;";}?>" width="33%">FACE: <?php if($rcek1['apper_pf1']!=""){echo $rcek1['apper_pf1'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_pf1']!="" AND $rcek1['apper_pf1'] < 4){echo "color:red;";}?>" width="33%">FACE: <?php if($rcek1['apper_pf1']!=""){echo $rcek1['apper_pf1'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pb1']!="" AND $rcek1['apper_pb1'] < 4){echo "color:red;";}?>" width="33%">BACK: <?php if($rcek1['apper_pb1']!=""){echo $rcek1['apper_pb1'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_pb1']!="" AND $rcek1['apper_pb1'] < 4){echo "color:red;";}?>" width="33%">BACK: <?php if($rcek1['apper_pb1']!=""){echo $rcek1['apper_pb1'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
@@ -2090,19 +2094,19 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">SHAPE</td>
-            <td align="left" style="font-size: 11px;" width="33%">SLIGHT DISTORTION</td>
+            <td align="center" style="font-size: 11px;" width="33%">SLIGHT DISTORTION</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">FIBRILLATION</td>
-            <td align="left" style="font-size: 11px;" width="33%">NEGLIGIBLE CHANGE</td>
+            <td align="center" style="font-size: 11px;" width="33%">NEGLIGIBLE CHANGE</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">OTHER</td>
-            <td align="left" style="font-size: 11px;" width="33%">NO HOLE OR OTHER</td>
+            <td align="center" style="font-size: 11px;" width="33%">NO HOLE OR OTHER</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="left" style="font-size: 11px;" width="33%">SIGNS OF ABRASION</td>
+            <td align="center" style="font-size: 11px;" width="33%">SIGNS OF ABRASION</td>
         </tr>
         <tr>
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
@@ -2112,7 +2116,7 @@ textarea {
             <td align="left" style="font-size: 11px;" width="33%">
                 <table width="100%" style="border-collapse: collapse;">
                     <tr>
-                        <td align="left" width="50%">SATISFACTORY</td>
+                        <td align="center" width="50%">SATISFACTORY</td>
                         <!-- <td align="left" width="50%">N/A</td> -->
                     </tr>
                 </table>
@@ -2179,29 +2183,29 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_cc2']!="" AND $rcek1['apper_cc2'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_cc2']!=""){echo $rcek1['apper_cc2'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_cc2']!="" AND $rcek1['apper_cc2'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_cc2']!=""){echo $rcek1['apper_cc2'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <!-- HERE -->
         <tr>
             <!-- <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td> -->
             <td align="left" style="font-size: 11px;" width="33%">CROSS - STAINING</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_st2']!="" AND $rcek1['apper_st2'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st2']!=""){echo $rcek1['apper_st2'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_st2']!="" AND $rcek1['apper_st2'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st2']!=""){echo $rcek1['apper_st2'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.5</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">FABRIC WRINKLING</td>
-            <td align="left" style="font-size: 11px;" width="33%">SLIGHT</td>
+            <td align="center" style="font-size: 11px;" width="33%">SLIGHT</td>
             <td align="right" style="font-size: 11px;" width="33%">SLIGHT</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">PILLING/FUZZING</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pf2']!="" AND $rcek1['apper_pf2'] < 4){echo "color:red;";}?>" width="33%">FACE: <?php if($rcek1['apper_pf2']!=""){echo $rcek1['apper_pf2'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_pf2']!="" AND $rcek1['apper_pf2'] < 4){echo "color:red;";}?>" width="33%">FACE: <?php if($rcek1['apper_pf2']!=""){echo $rcek1['apper_pf2'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pb2']!="" AND $rcek1['apper_pb2'] < 4){echo "color:red;";}?>" width="33%">BACK: <?php if($rcek1['apper_pb2']!=""){echo $rcek1['apper_pb2'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_pb2']!="" AND $rcek1['apper_pb2'] < 4){echo "color:red;";}?>" width="33%">BACK: <?php if($rcek1['apper_pb2']!=""){echo $rcek1['apper_pb2'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
@@ -2209,26 +2213,26 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">SHAPE</td>
-            <td align="left" style="font-size: 11px;" width="33%">SLIGHT DISTORTION</td>
+            <td align="center" style="font-size: 11px;" width="33%">SLIGHT DISTORTION</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">FIBRILLATION</td>
-            <td align="left" style="font-size: 11px;" width="33%">NEGLIGIBLE CHANGE</td>
+            <td align="center" style="font-size: 11px;" width="33%">NEGLIGIBLE CHANGE</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">OTHER</td>
-            <td align="left" style="font-size: 11px;" width="33%">NO HOLE OR OTHER</td>
+            <td align="center" style="font-size: 11px;" width="33%">NO HOLE OR OTHER</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="left" style="font-size: 11px;" width="33%">SIGNS OF ABRASION</td>
+            <td align="center" style="font-size: 11px;" width="33%">SIGNS OF ABRASION</td>
         </tr>
         <tr>
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
-            <td align="left" style="font-size: 11px;" width="33%">SATISFACTORY</td>
+            <td align="center" style="font-size: 11px;" width="33%">SATISFACTORY</td>
             <td align="right" style="font-size: 11px;" width="33%">SATISFACTORY</td>
         </tr>
         <tr>
@@ -2239,32 +2243,32 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">OBSERVATION ON WASHED SAMPLE</td>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+            <td align="center" style="font-size: 11px;" width="33%">&nbsp;</td>
             <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_cc3']!="" AND $rcek1['apper_cc3'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_cc3']!=""){echo $rcek1['apper_cc3'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_cc3']!="" AND $rcek1['apper_cc3'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_cc3']!=""){echo $rcek1['apper_cc3'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">CROSS - STAINING</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_st3']!="" AND $rcek1['apper_st3'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st3']!=""){echo $rcek1['apper_st3'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_st3']!="" AND $rcek1['apper_st3'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st3']!=""){echo $rcek1['apper_st3'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.5</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">FABRIC WRINKLING</td>
-            <td align="left" style="font-size: 11px;" width="33%">SLIGHT</td>
+            <td align="center" style="font-size: 11px;" width="33%">SLIGHT</td>
             <td align="right" style="font-size: 11px;" width="33%">SLIGHT</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">PILLING/FUZZING</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pf3']!="" AND $rcek1['apper_pf3'] < 4){echo "color:red;";}?>" width="33%">FACE: <?php if($rcek1['apper_pf3']!=""){echo $rcek1['apper_pf3'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_pf3']!="" AND $rcek1['apper_pf3'] < 4){echo "color:red;";}?>" width="33%">FACE: <?php if($rcek1['apper_pf3']!=""){echo $rcek1['apper_pf3'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="left" style="font-size: 11px; <?php if($rcek1['apper_pb3']!="" AND $rcek1['apper_pb3'] < 4){echo "color:red;";}?>" width="33%">BACK: <?php if($rcek1['apper_pb3']!=""){echo $rcek1['apper_pb3'];}else{echo "N/A";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_pb3']!="" AND $rcek1['apper_pb3'] < 4){echo "color:red;";}?>" width="33%">BACK: <?php if($rcek1['apper_pb3']!=""){echo $rcek1['apper_pb3'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.0</td>
         </tr>
         <tr>
@@ -2272,26 +2276,26 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">SHAPE</td>
-            <td align="left" style="font-size: 11px;" width="33%">SLIGHT DISTORTION</td>
+            <td align="center" style="font-size: 11px;" width="33%">SLIGHT DISTORTION</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">FIBRILLATION</td>
-            <td align="left" style="font-size: 11px;" width="33%">NEGLIGIBLE CHANGE</td>
+            <td align="center" style="font-size: 11px;" width="33%">NEGLIGIBLE CHANGE</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">OTHER</td>
-            <td align="left" style="font-size: 11px;" width="33%">NO HOLE OR OTHER</td>
+            <td align="center" style="font-size: 11px;" width="33%">NO HOLE OR OTHER</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="left" style="font-size: 11px;" width="33%">SIGNS OF ABRASION</td>
+            <td align="center" style="font-size: 11px;" width="33%">SIGNS OF ABRASION</td>
         </tr>
         <tr>
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
-            <td align="left" style="font-size: 11px;" width="33%">SATISFACTORY</td>
+            <td align="center" style="font-size: 11px;" width="33%">SATISFACTORY</td>
             <td align="right" style="font-size: 11px;" width="33%">SATISFACTORY</td>
         </tr>
         <tr>
@@ -2525,7 +2529,7 @@ textarea {
         <tr>
             <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
             <?php
-            // Cek jika semua stat_wic, stat_wic1, stat_wic2, stat_wic3 adalah 'ESS PASS'
+            // Cek jika semua stat_wic, stat_wic1, stat_wic2, stat_wic3 adalah 'PASS'
             $wic_statuses = [
                 $rcek1['stat_wic'],
                 $rcek1['stat_wic1'],
@@ -2533,8 +2537,10 @@ textarea {
                 $rcek1['stat_wic3']
             ];
 
-            if (
-                !empty(array_filter($wic_statuses)) && // ada minimal 1 data
+            // Jika semua data kosong, hasilnya N/A
+            if (empty(array_filter($wic_statuses))) {
+                $result = 'N/A';
+            } elseif (
                 count(array_filter($wic_statuses, function($v){ return $v === 'PASS'; })) === count(array_filter($wic_statuses))
             ) {
                 $result = 'PASS';
