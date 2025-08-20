@@ -143,14 +143,16 @@ if (strlen($jamA) == 5) {
 			      if($Awal!="" and $Akhir!=""){ $where=" AND DATE_FORMAT( t.tgl_celup, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' ";}else{ $where=" ";}  
             if($Awal!="" and $Akhir!=""){
               $qry1=mysqli_query($con,"SELECT 
-                                              * 
+                                              t.*,
+                                              p.pemberi_instruksi
                                           FROM 
                                               tbl_cocok_warna_dye t 
                                           LEFT JOIN penyelesaian_tolakbasah p on p.id_cocok_warna = t.id
                                           WHERE t.dept='QCF' $where $shft ORDER BY t.id ASC");
             }else{
               $qry1=mysqli_query($con,"SELECT 
-                                              * 
+                                              t.*,
+                                              p.pemberi_instruksi
                                           FROM 
                                               tbl_cocok_warna_dye t 
                                           LEFT JOIN penyelesaian_tolakbasah p on p.id_cocok_warna = t.id
