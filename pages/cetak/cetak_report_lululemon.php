@@ -1429,6 +1429,9 @@ textarea {
            <td style="font-size: 12px;" Width="33%"></td>
        </tr>
         <tr>
+            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+        </tr>
+        <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC 8)</td> -->
             <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC TM 8-2022E)</td>
         </tr>
@@ -1901,9 +1904,9 @@ textarea {
             <td align="center" style="font-size: 12px;" width="33%">&nbsp;</td>
             <td align="right" style="font-size: 12px;" width="33%"><u>REQUIREMENT</u></td>
         </tr>
-        <!-- <tr>
+        <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr> -->
+        </tr>
         <!-- LIGHT FASTNESS BEGIN -->
         <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td> -->
