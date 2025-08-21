@@ -1884,7 +1884,7 @@ textarea {
         </tr>
            <tr>
             <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%">PASS</td>
+            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_pal'] !=""){echo $rcek1['stat_pal'];}else{echo "N/A";}?></td>stat_pal</td>
             <td style="font-size: 12px;" Width="33%"></td>
         </tr>
          <tr>
@@ -2696,8 +2696,8 @@ textarea {
             <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject3" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
         </tr>
         <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject2'];?>" height="300" alt=""/></td>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject3'];?>" height="300" alt=""/></td>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject2'];?>" style="height: 100px; width: 50px; object-fit: cover; display: block; margin: 0 auto;"  alt=""/></td>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject3'];?>" style="height: 100px; width: 50px; object-fit: cover; display: block; margin: 0 auto;"  alt=""/></td>
         </tr>
         <tr>
             <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject5" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
