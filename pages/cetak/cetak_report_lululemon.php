@@ -1434,7 +1434,7 @@ textarea {
            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_wf']!=""){echo $rcek1['stat_wf'];}else{echo "N/A";}?></td>
            <td style="font-size: 12px;" Width="33%"></td>
        </tr>
-        <tr>
+        <!-- <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
         
@@ -1456,7 +1456,7 @@ textarea {
         
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
+        </tr> -->
         
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
@@ -2638,16 +2638,10 @@ textarea {
         <tr>
             <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject2" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
             <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject3" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-            <!-- <td align="center"><input style="font-size: 12px;" name="notereject2" type="text" placeholder="Ketik" size="80" /></td>
-            <td align="center"><input style="font-size: 12px;" name="notereject3" type="text" placeholder="Ketik" size="80" /></td> -->
         </tr>
         <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject2'];?>" height="300" alt=""/></td>
-  <td align="center" style="font-size: 12px; padding: 5px;">
-    <img src="../../dist/img-rptlulu/<?php echo htmlspecialchars($rd2['reject3']); ?>" 
-         alt="Reject 3" 
-         style="max-width: 500px; height: auto; display: block;"/>
-</td>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject2'];?>" height="170" alt=""/></td>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject3'];?>" height="170" alt=""/></td>
         </tr>
         <tr>
             <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject5" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
@@ -2700,8 +2694,8 @@ textarea {
             <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject3" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
         </tr>
         <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject2'];?>" height="300" alt=""/></td>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject3'];?>" height="300" alt=""/></td>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject2'];?>" height="170" alt=""/></td>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject3'];?>" height="170" alt=""/></td>
         </tr>
         <tr>
             <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject5" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
