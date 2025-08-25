@@ -1927,9 +1927,16 @@ $rowdb2 = db2_fetch_assoc($stmt);
                 </div>	  
             </div>
 			<div class="form-group">
-                <label for="reject1" class="col-md-3 control-label">Upload Appearance</label>
+                <label for="reject1" class="col-md-3 control-label">Upload Appearance 1</label>
                 <div class="col-sm-5">	  
                     <input type="file" id="reject1" name="reject1"><span style="color:red;"><?php if($cek>0){echo $rcek['reject1'];} ?></span>
+                    <span class="help-block with-errors"></span>
+                </div>	  
+            </div>  
+			<div class="form-group">
+                <label for="reject4" class="col-md-3 control-label">Upload Appearance 2</label>
+                <div class="col-sm-5">	  
+                    <input type="file" id="reject4" name="reject4"><span style="color:red;"><?php if($cek>0){echo $rcek['reject4'];} ?></span>
                     <span class="help-block with-errors"></span>
                 </div>	  
             </div>  
@@ -1963,7 +1970,7 @@ $rowdb2 = db2_fetch_assoc($stmt);
             </div> 
 			 
 			<div class="form-group">
-                <label for="wet_crocking" class="col-md-3 control-label">Test Package</label>
+                <label for="test_package" class="col-md-3 control-label">Test Package</label>
                 <div class="col-sm-5">	  
              
 					<select name="test_package"  class="form-control" >
@@ -9626,6 +9633,7 @@ if($_POST['save1']=="save"){
     $date_out = date('Y-m-d', mktime(0, 0, 0, $date_in_m, $date_in_d + 3, $date_in_y));
     $file_cover = $_FILES['cover']['name'];
 	$file_reject1 = $_FILES['reject1']['name'];
+	$file_reject4 = $_FILES['reject4']['name'];
 	$file_reject2 = $_FILES['reject2']['name'];
 	$file_reject3 = $_FILES['reject3']['name'];
 	$file_lf_reject = $_FILES['lf_reject']['name'];
@@ -9635,6 +9643,8 @@ if($_POST['save1']=="save"){
 	$namaSementara_cover = $_FILES['cover']['tmp_name'];
 	$namaFile_reject1 = $_FILES['reject1']['name'];
 	$namaSementara_reject1 = $_FILES['reject1']['tmp_name'];
+	$namaFile_reject4 = $_FILES['reject4']['name'];
+	$namaSementara_reject4 = $_FILES['reject4']['tmp_name'];
 	$namaFile_reject2 = $_FILES['reject2']['name'];
 	$namaSementara_reject2 = $_FILES['reject2']['tmp_name'];
 	$namaFile_reject3 = $_FILES['reject3']['name'];
@@ -9648,6 +9658,7 @@ if($_POST['save1']=="save"){
 	// pindahkan file
 	$terupload_cover = move_uploaded_file($namaSementara_cover, $dirUpload.$namaFile_cover);
 	$terupload_reject1 = move_uploaded_file($namaSementara_reject1, $dirUpload.$namaFile_reject1);
+	$terupload_reject4 = move_uploaded_file($namaSementara_reject4, $dirUpload.$namaFile_reject4);
 	$terupload_reject2 = move_uploaded_file($namaSementara_reject2, $dirUpload.$namaFile_reject2);
 	$terupload_reject3 = move_uploaded_file($namaSementara_reject3, $dirUpload.$namaFile_reject3);
 	$terupload_lf_reject = move_uploaded_file($namaSementara_lf_reject, $dirUpload.$namaFile_lf_reject);
@@ -9676,6 +9687,7 @@ if($_POST['save1']=="save"){
 	`enduse`='$Enduse',
     `cover`='$file_cover',
 	`reject1`='$file_reject1',
+	`reject4`='$file_reject4',
 	`reject2`='$file_reject2',
 	`reject3`='$file_reject3',
 	`lf_reject`='$file_lf_reject',

@@ -53,6 +53,7 @@ input{
 text-align:center;
 border:hidden;
 }
+
 @media print {
   ::-webkit-input-placeholder { /* WebKit browsers */
       color: transparent;
@@ -76,7 +77,26 @@ border:hidden;
         -webkit-print-color-adjust: exact !important; /* Chrome, Safari */
         color-adjust: exact !important; /*Firefox*/
         }
+ select {
+    display: none; /* sembunyikan select saat print */
+  }
+  .print-value {
+    display: inline; /* tampilkan span pengganti */
+    color: black;
+    font-size: 11px;
+  }
 }
+  
+  select {
+      border: none;
+      background: none;
+      appearance: none;
+  }
+  select:after {
+      content: attr(value); /* tampilkan value terpilih */
+      color: black;
+      font-size: 11px;
+  }
 
 textarea { 
     border-style: none; 
@@ -887,11 +907,13 @@ textarea {
             <td align="left" style="font-size: 11px;" width="33%">pH VALUE</td>
             <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['ph']!=""){echo $rcek1['ph'];}else{echo "N/A";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">
-            <select name="ph" style="border:none;font-size: 11px;-webkit-appearance: none;">
-                <option value="4.0 TO 6.0">4.0 TO 6.0</option>
-                <option value="4.5 TO 8.0">4.5 TO 8.0</option>
-                <option value="4.5 TO 7.0">4.5 TO 7.0</option>
-            </select></td>
+                <select name="ph" 
+                        style="border:none;font-size: 11px; -webkit-appearance: none;">
+                    <option value="4.0 TO 6.0">4.0 TO 6.0</option>
+                    <option value="4.5 TO 8.0">4.5 TO 8.0</option>
+                    <option value="4.5 TO 7.0">4.5 TO 7.0</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td  style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
@@ -1001,13 +1023,13 @@ textarea {
             <td align="left" style="font-size: 11px;" width="33%">LENGTHWISE</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l1']!='' AND $rcekM['mshrinkage_l1'] < -7){echo "color:red;";}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l1']!='' AND $rcekM['mshrinkage_l1'] > 5){echo "color:red;";}else if($rcek1['shrinkage_l1']!='' AND $rcek1['shrinkage_l1'] < -7){echo "color:red;";}else if($rcek1['shrinkage_l1']!='' AND $rcek1['shrinkage_l1'] > 5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mshrinkage_l1']=="" AND $rcek1['shrinkage_l1']==""){echo "N/A";}else if($rcek1['stat_fwss']=="MARGINAL PASS"){echo $rcekM['mshrinkage_l1'];}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l1']==""){echo "N/A";}else{echo $rcek1['shrinkage_l1'];}?></td>
             <!-- <td align="right" style="font-size: 11px;" width="33%">-5 TO + 5 %</td> -->
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="15" /></td>
+            <td align="right" style="font-size: 11px;" width="44%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="50" /></td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">WIDTHWISE</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w1']!='' AND $rcekM['mshrinkage_w1'] < -7){echo "color:red;";}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w1']!='' AND $rcekM['mshrinkage_w1'] > 5){echo "color:red;";}else if($rcek1['shrinkage_w1']!='' AND $rcek1['shrinkage_w1'] < -7){echo "color:red;";}else if($rcek1['shrinkage_w1']!='' AND $rcek1['shrinkage_w1'] > 5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mshrinkage_w1']=="" AND $rcek1['shrinkage_w1']==""){echo "N/A";}else if($rcek1['stat_fwss']=="MARGINAL PASS"){echo $rcekM['mshrinkage_w1'];}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w1']==""){echo "N/A";}else{echo $rcek1['shrinkage_w1'];}?></td>
             <!-- <td align="right" style="font-size: 11px;" width="33%">-5 TO + 5 %</td> -->
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="15" /></td>
+            <td align="right" style="font-size: 11px;" width="44%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="50" /></td>
         </tr>
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
@@ -1132,235 +1154,235 @@ textarea {
     <div class="pagebreak"></div>
     <!-- Page 4 End -->
     <!-- Page 5 Begin -->
-    <table width="100%">
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">Page 5 of 9</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-    </table>
-    <table width="100%">
-        <tr>
-            <td align="left" style="font-size: 12px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 12px;" width="33%"><u>TEST RESULT</u></td>
-            <td align="right" style="font-size: 12px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 12px;" width="33%"><u>TEST PROPERTY</u></td>
-            <td align="center" style="font-size: 12px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 12px;" width="33%"><u>REQUIREMENT</u></td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <!-- PILLING MARTINDALE BEGIN -->
-        <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE: MARTINDALE PRESSURE TESTER METHOD</u></strong> (ASTM D4970)</td>
-        </tr>
-        <!-- <tr>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 11px;" width="33%"><strong>T2 / T6 WHITE OPAL</strong></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr> -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%"><strong>ORIGINAL @100 CYCLES</strong></td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f1']!='' AND $rcekM['mpm_f1'] < 4){echo "color:red;";}else if($rcek1['pm_f1']!='' AND $rcek1['pm_f1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f1']=="" AND $rcek1['pm_f1']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f1'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f1']==""){echo "N/A";}else{echo $rcek1['pm_f1'];}?></td>
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">AFTER 1 WASH @2500 CYCLES</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f2']!='' AND $rcekM['mpm_f2'] < 4){echo "color:black;";}else if($rcek1['pm_f2']!='' AND $rcek1['pm_f2'] < 4){echo "color:back;";}?>" width="33%"><?php if($rcekM['mpm_f2']=="" AND $rcek1['pm_f2']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f2'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f2']==""){echo "N/A";}else{echo $rcek1['pm_f2'];}?></td>
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">AFTER 2 WASH @5000 CYCLES</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f3']!='' AND $rcekM['mpm_f3'] < 4){echo "color:red;";}else if($rcek1['pm_f3']!='' AND $rcek1['pm_f3'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f3']=="" AND $rcek1['pm_f3']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f3'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f3']==""){echo "N/A";}else{echo $rcek1['pm_f3'];}?></td>
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">AFTER 3 WASH @7500 CYCLES</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f4']!='' AND $rcekM['mpm_f4'] < 4){echo "color:red;";}else if($rcek1['pm_f4']!='' AND $rcek1['pm_f4'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f4']=="" AND $rcek1['pm_f4']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f4'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f4']==""){echo "N/A";}else{echo $rcek1['pm_f4'];}?></td>
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">AFTER 4 WASH @10000 CYCLES</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f5']!='' AND $rcekM['mpm_f5'] < 4){echo "color:red;";}else if($rcek1['pm_f5']!='' AND $rcek1['pm_f5'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f5']=="" AND $rcek1['pm_f5']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f5'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f5']==""){echo "N/A";}else{echo $rcek1['pm_f5'];}?></td>
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php echo $rcek1['stat_pm']; ?></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <tr>
-        <td colspan="3" style="font-size: 12px;">
-            <strong>Remarks :</strong><br />
-                <table style="font-size: 11px;">
-                    <tr>
-                        <td><strong>For Pilling</strong></td>
-                        <td><strong>For Fuzzing</strong></td>
-                    </tr>
-                    <tr>
-                        <td>5 No pilling</td>
-                        <td>5 No fuzzing</td>
-                    </tr>
-                    <tr>
-                        <td>4 Slight pilling</td>
-                        <td>4 Slight fuzzing</td>
-                    </tr>
-                    <tr>
-                        <td>3 Moderate pilling</td>
-                        <td>3 Moderate fuzzing</td>
-                    </tr>
-                    <tr>
-                        <td>2 Severe pilling</td>
-                        <td>2 Severe fuzzing</td>
-                    </tr>
-                    <tr>
-                        <td>1 Very severe pilling</td>
-                        <td>1 Very severe fuzzing</td>
-                    </tr>
-                </table>
-        </td>
-        </tr>
-        <!-- PILLING MARTINDALE END -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <!-- ICI PILLING BEGIN -->
-        <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE: ICI PILLING METHOD</u></strong> (BS EN ISO 12945-1) 4 HOURS</td>
-        </tr>
-        <!-- <tr>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 11px;" width="33%"><strong>T2 / T6 CREAM</strong></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr> -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" colspan="3"><strong>ORIGINAL</strong></td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">PILLING</td>
-            <td align="center" style="font-size: 11px;" width="33%">N/A</td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">FUZZING</td>
-            <td align="center" style="font-size: 11px;" width="33%">N/A</td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">MATTING</td>
-            <td align="center" style="font-size: 11px;" width="33%">N/A</td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_pb']!=""){echo $rcek1['stat_pb'];}else{echo "N/A";}?></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <!-- ICI PILLING END -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <!-- BURSTING STRENGTH BEGIN -->
-        <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>BURSTING STRENGTH OF FABRIC
-                <!--: BALL BURST METHOD-->
-            <!-- </u></strong> (ASTM D6797)</td> -->
-            </u></strong> (ASTM D6797-24)</td>
-        </tr>
-        <!-- <tr>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 11px;" width="33%"><strong>T2 / T3 SILVER BLUE</strong></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr> -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">BURSTING STRENGTH (<?php echo $kode_LBF = 'Lbs'; ?>.)</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['bs_instron']!="" AND $rd2['gramasi'] >= 200 AND $rcek1['bs_instron'] < 50){echo "color:red;";}else if($rcek1['bs_instron']!="" AND $rd2['gramasi'] < 200 AND $rcek1['bs_instron'] < 35){echo "color:red;";}?>" width="33%"><?php if($rcek1['bs_instron']!=""){echo $rcek1['bs_instron'];}else{echo "N/A";}?></td>
-            <!-- <td align="right" style="font-size: 11px;" width="33%">
-            <select name="burs" style="border:none;font-size: 11px;-webkit-appearance: none;">
-                <option value="MIN 50.0 LBS">MIN 50.0 LBS</option>
-                <option value="MIN 35.0 LBS">MIN 35.0 LBS</option>
-            </select></td> -->
-            <td align="right" style="font-size: 11px;" width="33%"><?php if($rd2['gramasi'] >= 200){echo "MIN 50.0 $kode_LBF";}else if($rd2['gramasi'] < 200){echo "MIN 35.0 $kode_LBF";}?></td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_bs2']!=""){echo $rcek1['stat_bs2'];}else{echo "N/A";}?></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong>Remarks : Lbs = Pounds D5362-13</strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SNAGGING</u></strong> (ASTM D5362-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST)</td>
-        </tr>
-        <!-- BURSTING STRENGTH END -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">AS RECEIVED RATING</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">AFTER 50 CYCLES</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['sb_l1']!="" AND $rcek1['sb_l1'] < 3){echo "color:red;";}?>" width="33%"><?php if($rcek1['sb_l1']!=""){echo $rcek1['sb_l1'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">AFTER 75 CYCLES</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['sb_w1']!="" AND $rcek1['sb_w1'] < 3){echo "color:red;";}?>" width="33%"><?php if($rcek1['sb_w1']!=""){echo $rcek1['sb_w1'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 3.5</td>
-        </tr>
-         <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_sb']!=""){echo $rcek1['stat_sb'];}else{echo "N/A";}?></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
+        <table width="100%">
+            <tr>
+                <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
+            </tr>
+            <tr>
+                <td align="right" style="font-size: 12px;">Page 5 of 9</td> 
+            </tr>
+            <tr>
+                <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
+            </tr>
+            <tr>
+                <td align="right" style="font-size: 12px;">&nbsp;</td> 
+            </tr>
+        </table>
+        <table width="100%">
+                <tr>
+                    <td align="left" style="font-size: 12px;" width="33%">&nbsp;</td>
+                    <td align="center" style="font-size: 12px;" width="33%"><u>TEST RESULT</u></td>
+                    <td align="right" style="font-size: 12px;" width="33%">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 12px;" width="33%"><u>TEST PROPERTY</u></td>
+                    <td align="center" style="font-size: 12px;" width="33%">&nbsp;</td>
+                    <td align="right" style="font-size: 12px;" width="33%"><u>REQUIREMENT</u></td>
+                </tr>
+                <tr>
+                    <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+                </tr>
+            <!-- PILLING MARTINDALE BEGIN -->
+                <tr>
+                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE: MARTINDALE PRESSURE TESTER METHOD</u></strong> (ASTM D4970)</td>
+                </tr>
+            <!-- <tr>
+                <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+                <td align="center" style="font-size: 11px;" width="33%"><strong>T2 / T6 WHITE OPAL</strong></td>
+                <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            </tr> -->
+                <tr>
+                    <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%"><strong>ORIGINAL @100 CYCLES</strong></td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f1']!='' AND $rcekM['mpm_f1'] < 4){echo "color:red;";}else if($rcek1['pm_f1']!='' AND $rcek1['pm_f1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f1']=="" AND $rcek1['pm_f1']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f1'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f1']==""){echo "N/A";}else{echo $rcek1['pm_f1'];}?></td>
+                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">AFTER 1 WASH @2500 CYCLES</td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f2']!='' AND $rcekM['mpm_f2'] < 4){echo "color:black;";}else if($rcek1['pm_f2']!='' AND $rcek1['pm_f2'] < 4){echo "color:back;";}?>" width="33%"><?php if($rcekM['mpm_f2']=="" AND $rcek1['pm_f2']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f2'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f2']==""){echo "N/A";}else{echo $rcek1['pm_f2'];}?></td>
+                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">AFTER 2 WASH @5000 CYCLES</td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f3']!='' AND $rcekM['mpm_f3'] < 4){echo "color:red;";}else if($rcek1['pm_f3']!='' AND $rcek1['pm_f3'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f3']=="" AND $rcek1['pm_f3']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f3'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f3']==""){echo "N/A";}else{echo $rcek1['pm_f3'];}?></td>
+                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">AFTER 3 WASH @7500 CYCLES</td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f4']!='' AND $rcekM['mpm_f4'] < 4){echo "color:red;";}else if($rcek1['pm_f4']!='' AND $rcek1['pm_f4'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f4']=="" AND $rcek1['pm_f4']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f4'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f4']==""){echo "N/A";}else{echo $rcek1['pm_f4'];}?></td>
+                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">AFTER 4 WASH @10000 CYCLES</td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f5']!='' AND $rcekM['mpm_f5'] < 4){echo "color:red;";}else if($rcek1['pm_f5']!='' AND $rcek1['pm_f5'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f5']=="" AND $rcek1['pm_f5']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f5'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f5']==""){echo "N/A";}else{echo $rcek1['pm_f5'];}?></td>
+                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+                    <td align="center"  style="font-size: 12px;" Width="33%"><?php echo $rcek1['stat_pm']; ?></td>
+                    <td style="font-size: 12px;" Width="33%"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="font-size: 12px;">
+                        <strong>Remarks :</strong><br />
+                            <table style="font-size: 11px;">
+                                <tr>
+                                    <td><strong>For Pilling</strong></td>
+                                    <td><strong>For Fuzzing</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>5 No pilling</td>
+                                    <td>5 No fuzzing</td>
+                                </tr>
+                                <tr>
+                                    <td>4 Slight pilling</td>
+                                    <td>4 Slight fuzzing</td>
+                                </tr>
+                                <tr>
+                                    <td>3 Moderate pilling</td>
+                                    <td>3 Moderate fuzzing</td>
+                                </tr>
+                                <tr>
+                                    <td>2 Severe pilling</td>
+                                    <td>2 Severe fuzzing</td>
+                                </tr>
+                                <tr>
+                                    <td>1 Very severe pilling</td>
+                                    <td>1 Very severe fuzzing</td>
+                                </tr>
+                            </table>
+                    </td>
+                </tr>
+            <!-- PILLING MARTINDALE END -->
+                <tr>
+                    <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+                </tr>
+            <!-- ICI PILLING BEGIN -->
+                <tr>
+                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE: ICI PILLING METHOD</u></strong> (BS EN ISO 12945-1) 4 HOURS</td>
+                </tr>
+            <!-- <tr>
+                <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+                <td align="center" style="font-size: 11px;" width="33%"><strong>T2 / T6 CREAM</strong></td>
+                <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            </tr> -->
+                <tr>
+                    <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" colspan="3"><strong>ORIGINAL</strong></td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">PILLING</td>
+                    <td align="center" style="font-size: 11px;" width="33%">N/A</td>
+                    <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">FUZZING</td>
+                    <td align="center" style="font-size: 11px;" width="33%">N/A</td>
+                    <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">MATTING</td>
+                    <td align="center" style="font-size: 11px;" width="33%">N/A</td>
+                    <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+                    <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_pb']!=""){echo $rcek1['stat_pb'];}else{echo "N/A";}?></td>
+                    <td style="font-size: 12px;" Width="33%"></td>
+                </tr>
+            <!-- ICI PILLING END -->
+                <tr>
+                    <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+                </tr>
+            <!-- BURSTING STRENGTH BEGIN -->
+                <tr>
+                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>BURSTING STRENGTH OF FABRIC
+                        <!--: BALL BURST METHOD-->
+                    <!-- </u></strong> (ASTM D6797)</td> -->
+                    </u></strong> (ASTM D6797-24)</td>
+                </tr>
+                <!-- <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+                    <td align="center" style="font-size: 11px;" width="33%"><strong>T2 / T3 SILVER BLUE</strong></td>
+                    <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+                </tr> -->
+                <tr>
+                    <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">BURSTING STRENGTH (<?php echo $kode_LBF = 'Lbs'; ?>.)</td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['bs_instron']!="" AND $rd2['gramasi'] >= 200 AND $rcek1['bs_instron'] < 50){echo "color:red;";}else if($rcek1['bs_instron']!="" AND $rd2['gramasi'] < 200 AND $rcek1['bs_instron'] < 35){echo "color:red;";}?>" width="33%"><?php if($rcek1['bs_instron']!=""){echo $rcek1['bs_instron'];}else{echo "N/A";}?></td>
+                    <!-- <td align="right" style="font-size: 11px;" width="33%">
+                    <select name="burs" style="border:none;font-size: 11px;-webkit-appearance: none;">
+                        <option value="MIN 50.0 LBS">MIN 50.0 LBS</option>
+                        <option value="MIN 35.0 LBS">MIN 35.0 LBS</option>
+                    </select></td> -->
+                    <td align="right" style="font-size: 11px;" width="33%"><?php if($rd2['gramasi'] >= 200){echo "MIN 50.0 $kode_LBF";}else if($rd2['gramasi'] < 200){echo "MIN 35.0 $kode_LBF";}?></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+                    <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_bs2']!=""){echo $rcek1['stat_bs2'];}else{echo "N/A";}?></td>
+                    <td style="font-size: 12px;" Width="33%"></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 12px;" Width="33%" ><strong>Remarks : Lbs = Pounds D5362-13</strong></td>
+                    <td align="center"  style="font-size: 12px;" Width="33%"></td>
+                    <td style="font-size: 12px;" Width="33%"></td>
+                </tr>
+                <tr>
+                    <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SNAGGING</u></strong> (ASTM D5362-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST)</td>
+                </tr>
+            <!-- BURSTING STRENGTH END -->
+                <tr>
+                    <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">AS RECEIVED RATING</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">AFTER 50 CYCLES</td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['sb_l1']!="" AND $rcek1['sb_l1'] < 3){echo "color:red;";}?>" width="33%"><?php if($rcek1['sb_l1']!=""){echo $rcek1['sb_l1'];}else{echo "N/A";}?></td>
+                    <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+                </tr>
+                <tr>
+                    <td align="left" style="font-size: 11px;" width="33%">AFTER 75 CYCLES</td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['sb_w1']!="" AND $rcek1['sb_w1'] < 3){echo "color:red;";}?>" width="33%"><?php if($rcek1['sb_w1']!=""){echo $rcek1['sb_w1'];}else{echo "N/A";}?></td>
+                    <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 3.5</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+                    <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_sb']!=""){echo $rcek1['stat_sb'];}else{echo "N/A";}?></td>
+                    <td style="font-size: 12px;" Width="33%"></td>
+                </tr>
 
-        <td colspan="3" style="font-size: 12px;">
-            <strong>Remarks :</strong> (for Option A, Photographic Standards)<br />
-            <table style="font-size: 11px;">
-                <tr>
-                    <td><strong>Rating 5</strong>: No or insignificant snagging</td>
-                </tr>
-                <tr>
-                    <td><strong>Rating 4</strong>: Slight snagging</td>
-                </tr>
-                <tr>
-                    <td><strong>Rating 3</strong>: Moderate snagging</td>
-                </tr>
-                <tr>
-                    <td><strong>Rating 2</strong>: Severe snagging</td>
-                </tr>
-                <tr>
-                    <td><strong>Rating 1</strong>: Very severe snagging</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
+                <td colspan="3" style="font-size: 12px;">
+                    <strong>Remarks :</strong> (for Option A, Photographic Standards)<br />
+                    <table style="font-size: 11px;">
+                        <tr>
+                            <td><strong>Rating 5</strong>: No or insignificant snagging</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rating 4</strong>: Slight snagging</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rating 3</strong>: Moderate snagging</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rating 2</strong>: Severe snagging</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rating 1</strong>: Very severe snagging</td>
+                        </tr>
+                    </table>
+                </td>
+        </tr>
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
@@ -1456,10 +1478,6 @@ textarea {
         
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr> -->
-        
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
         
         <tr>
@@ -1481,262 +1499,270 @@ textarea {
         <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr>
-    <table width="100%">
+        
         <tr>
-            <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">Page 6 of 9</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-     
-    </table>
- 
-        <table width="100%">
-        <tr>
-            <td align="left" style="font-size: 12px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 12px;" width="33%"><u>TEST RESULT</u></td>
-            <td align="right" style="font-size: 12px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 12px;" width="33%"><u>TEST PROPERTY</u></td>
-            <td align="center" style="font-size: 12px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 12px;" width="33%"><u>REQUIREMENT</u></td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC 8)</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC TM 8-2022E)</td>
-        </tr>
-        <!-- <tr>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 11px;" width="33%"><strong>T1 (4A) DARK GREEN / T5 (4B) RED</strong></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr> -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <!-- <td align="left" style="font-size: 11px;" width="33%">DRY (COLOR STAIN)</td> -->
-            <td align="left" style="font-size: 11px;" width="33%">DRY STAINING</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len1']!="" AND $rcekM['mcrock_len1'] < 4){echo "color:red;";}else if($rcek1['crock_len1']!="" AND $rcek1['crock_len1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mcrock_len1']=="" AND $rcek1['crock_len1']==""){echo "N/A";}else if($rcek1['stat_cr']=="MARGINAL PASS"){echo $rcekM['mcrock_len1'];}else if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len1']==""){echo "N/A";}else{echo $rcek1['crock_len1'];}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <!-- <td align="left" style="font-size: 11px;" width="33%">WET (COLOR STAIN)</td> -->
-            <td align="left" style="font-size: 11px;" width="33%">WET STAINING</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len2']!="" AND $rcekM['mcrock_len2'] < 3.5){echo "color:red;";}else if($rcek1['crock_len2']!="" AND $rcek1['crock_len2'] < 3.5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mcrock_len2']=="" AND $rcek1['crock_len2']==""){echo "N/A";}else if($rcek1['stat_cr']=="MARGINAL PASS"){echo $rcekM['mcrock_len2'];}else if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len2']==""){echo "N/A";}else{echo $rcek1['crock_len2'];}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 3.5</td>
-        </tr>
-         <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if ($rcek1['stat_cr']!=""){echo $rcek1['stat_cr'];}else{echo "N/A";}?></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-         <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Remarks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <!-- CROCKING END -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <!-- WATER BEGIN -->
-        <tr>
-            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WATER</u></strong> (AATCC 107, MULTIFIBER NO.10)</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WATER</u></strong> (AATCC TM 107-2022E)</td>
-        </tr>
-        <!-- <tr>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 11px;" width="33%"><strong>T1 (7A) NAVY / T5 (7B) BLACK</strong></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr> -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['water_colorchange']!="" AND $rcek1['water_colorchange'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_colorchange']!=""){echo $rcek1['water_colorchange'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['water_staining']!="" AND $rcek1['water_staining'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_staining']!=""){echo $rcek1['water_staining'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.5</td>
-        </tr>
-        <!-- <tr>
-            <td align="left" style="font-size: 11px;" colspan="3"><u>COLOR STAINING ON</u></td>
-        </tr> -->
-        <tr>
-            <td align="left" style="font-size: 11px;" colspan="3"><u> STAINING ON MULT-FIBER STRIPE</u></td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">ACETATE</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['water_acetate']!="" AND $rcek1['water_acetate'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_acetate']!=""){echo $rcek1['water_acetate'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">COTTON</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['water_cotton']!="" AND $rcek1['water_cotton'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_cotton']!=""){echo $rcek1['water_cotton'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">NYLON</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['water_nylon']!="" AND $rcek1['water_nylon'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_nylon']!=""){echo $rcek1['water_nylon'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">POLYESTER</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['water_poly']!="" AND $rcek1['water_poly'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_poly']!=""){echo $rcek1['water_poly'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">ACRYLIC</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['water_acrylic']!="" AND $rcek1['water_acrylic'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_acrylic']!=""){echo $rcek1['water_acrylic'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">WOOL</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['water_wool']!="" AND $rcek1['water_wool'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_wool']!=""){echo $rcek1['water_wool'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-           <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1 !=""){echo $rcek1['stat_wtr'];}else{echo "N/A";}?></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-         <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Remarks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <!-- WATER END -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-         <!-- LIGHT FASTNESS BEGIN -->
-        <tr>
-            <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3-2020, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td>
-        </tr>
-        <!-- <tr>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 11px;" width="33%"><strong>T4 (5A) GREEN / T6 (5B) LIGHT GREEN</strong></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr> -->
-        <!-- <tr>
             <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
         </tr> -->
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">AFTER 20 HOURS</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['stat_lg']=="MARGINAL PASS" AND $rcekM['mlight_rating1']!="" AND $rcekM['mlight_rating1'] < 4){echo "color:red;";}else if($rcek1['light_rating1']!="" AND $rcek1['light_rating1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mlight_rating1']=="" AND $rcek1['light_rating1']==""){echo "N/A";}else if($rcek1['stat_lg']=="MARGINAL PASS"){echo $rcekM['mlight_rating1'];}else if($rcek1['stat_lg']=="MARGINAL PASS" AND $rcekM['mlight_rating1']==""){echo "N/A";}else{echo $rcek1['light_rating1'];}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">CHANGE IN SHADE</td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_lg'] !=""){echo $rcek1['stat_lg'];}else{echo "N/A";}?></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Remaks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best</strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <!-- LIGHT PERSPIRATION END -->
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <!-- PHENOLIC YELLOWING BEGIN -->
-        <tr>
-            <td align="left" style="font-size: 11px;" colspan="3"><strong><u>PHENOLIC YELLOWING TEST</u></strong> (ISO 105-X18)</td>
-        </tr>
-        <!-- <tr>
-            <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="center" style="font-size: 11px;" width="33%"><strong>T1 / T2 WHITE STRIPE</strong></td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr> -->
-        <!-- <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr> -->
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">COLOR STAINING</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['phenolic_colorchange']!="" AND $rcek1['phenolic_colorchange'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['phenolic_colorchange']!=""){echo $rcek1['phenolic_colorchange'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_py'] !=""){echo $rcek1['stat_py'];}else{echo "N/A";}?></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;" Width="33%" ><strong> Remaks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best</strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"></td>
-            <td style="font-size: 12px;" Width="33%"></td>
-        </tr>
-        <!-- PHENOLIC YELLOWING END -->
-          <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <!-- PILLING TUMBLE BEGIN -->
-        <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE : TUMBLE PILLING METHOD</u></strong> (ASTM D3512)</td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">30 MIN</td>
-            <td align="center" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">FACE</td>
-            <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['prt_f1']!=""){echo $rcek1['prt_f1'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
-        </tr>
-		<!--
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">BACK</td>
-            <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['prt_b1']!=""){echo $rcek1['prt_b1'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
-        </tr>-->
-        <tr>
-            <td align="left" style="font-size: 11px;" colspan="3">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">60 MIN</td>
-            <td align="center" style="font-size: 11px;" width="33%">&nbsp;</td>
-            <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
-        </tr>
-	
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">FACE</td>
-            <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['prt_f2']!=""){echo $rcek1['prt_f2'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
-        </tr>
-		<!--
-        <tr>
-            <td align="left" style="font-size: 11px;" width="33%">BACK</td>
-            <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['prt_b2']!=""){echo $rcek1['prt_b2'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
-        </tr>
-		-->
-        <!-- WATER END -->
-    </table>
-    <div class="pagebreak"></div>
+                </table>
+                <div class="pagebreak"></div>
     <!-- Page 5 End -->
-    <!-- Page 6 Begin -->
+    <!-- Page 6 Start --> 
+        <table width="100%">
+            <tr>
+                <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
+            </tr>
+            <tr>
+                <td align="right" style="font-size: 12px;">Page 6 of 9</td> 
+            </tr>
+            <tr>
+                <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
+            </tr>
+            <tr>
+                <td align="right" style="font-size: 12px;">&nbsp;</td> 
+            </tr>
+        
+        </table>
+    
+            <table width="100%">
+            <tr>
+                <td align="left" style="font-size: 12px;" width="33%">&nbsp;</td>
+                <td align="center" style="font-size: 12px;" width="33%"><u>TEST RESULT</u></td>
+                <td align="right" style="font-size: 12px;" width="33%">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 12px;" width="33%"><u>TEST PROPERTY</u></td>
+                <td align="center" style="font-size: 12px;" width="33%">&nbsp;</td>
+                <td align="right" style="font-size: 12px;" width="33%"><u>REQUIREMENT</u></td>
+            </tr>
+            <tr>
+                <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC 8)</td> -->
+                <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC TM 8-2022E)</td>
+            </tr>
+            <!-- <tr>
+                <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+                <td align="center" style="font-size: 11px;" width="33%"><strong>T1 (4A) DARK GREEN / T5 (4B) RED</strong></td>
+                <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            </tr> -->
+            <tr>
+                <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <!-- <td align="left" style="font-size: 11px;" width="33%">DRY (COLOR STAIN)</td> -->
+                <td align="left" style="font-size: 11px;" width="33%">DRY STAINING</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len1']!="" AND $rcekM['mcrock_len1'] < 4){echo "color:red;";}else if($rcek1['crock_len1']!="" AND $rcek1['crock_len1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mcrock_len1']=="" AND $rcek1['crock_len1']==""){echo "N/A";}else if($rcek1['stat_cr']=="MARGINAL PASS"){echo $rcekM['mcrock_len1'];}else if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len1']==""){echo "N/A";}else{echo $rcek1['crock_len1'];}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+            </tr>
+            <tr>
+                <!-- <td align="left" style="font-size: 11px;" width="33%">WET (COLOR STAIN)</td> -->
+                <td align="left" style="font-size: 11px;" width="33%">WET STAINING</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len2']!="" AND $rcekM['mcrock_len2'] < 3.5){echo "color:red;";}else if($rcek1['crock_len2']!="" AND $rcek1['crock_len2'] < 3.5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mcrock_len2']=="" AND $rcek1['crock_len2']==""){echo "N/A";}else if($rcek1['stat_cr']=="MARGINAL PASS"){echo $rcekM['mcrock_len2'];}else if($rcek1['stat_cr']=="MARGINAL PASS" AND $rcekM['mcrock_len2']==""){echo "N/A";}else{echo $rcek1['crock_len2'];}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 3.5</td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+                <td align="center"  style="font-size: 12px;" Width="33%"><?php if ($rcek1['stat_cr']!=""){echo $rcek1['stat_cr'];}else{echo "N/A";}?></td>
+                <td style="font-size: 12px;" Width="33%"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;" Width="33%" ><strong> Remarks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best </strong></td>
+                <td align="center"  style="font-size: 12px;" Width="33%"></td>
+                <td style="font-size: 12px;" Width="33%"></td>
+            </tr>
+            <!-- CROCKING END -->
+            <tr>
+                <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+            </tr>
+            <!-- WATER BEGIN -->
+            <tr>
+                <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WATER</u></strong> (AATCC 107, MULTIFIBER NO.10)</td> -->
+                <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WATER</u></strong> (AATCC TM 107-2022E)</td>
+            </tr>
+            <!-- <tr>
+                <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+                <td align="center" style="font-size: 11px;" width="33%"><strong>T1 (7A) NAVY / T5 (7B) BLACK</strong></td>
+                <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            </tr> -->
+            <tr>
+                <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">COLOR CHANGE</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['water_colorchange']!="" AND $rcek1['water_colorchange'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_colorchange']!=""){echo $rcek1['water_colorchange'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['water_staining']!="" AND $rcek1['water_staining'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_staining']!=""){echo $rcek1['water_staining'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.5</td>
+            </tr>
+            <!-- <tr>
+                <td align="left" style="font-size: 11px;" colspan="3"><u>COLOR STAINING ON</u></td>
+            </tr> -->
+            <tr>
+                <td align="left" style="font-size: 11px;" colspan="3"><u> STAINING ON MULT-FIBER STRIPE</u></td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">ACETATE</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['water_acetate']!="" AND $rcek1['water_acetate'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_acetate']!=""){echo $rcek1['water_acetate'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">COTTON</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['water_cotton']!="" AND $rcek1['water_cotton'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_cotton']!=""){echo $rcek1['water_cotton'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">NYLON</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['water_nylon']!="" AND $rcek1['water_nylon'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_nylon']!=""){echo $rcek1['water_nylon'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">POLYESTER</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['water_poly']!="" AND $rcek1['water_poly'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_poly']!=""){echo $rcek1['water_poly'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">ACRYLIC</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['water_acrylic']!="" AND $rcek1['water_acrylic'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_acrylic']!=""){echo $rcek1['water_acrylic'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">WOOL</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['water_wool']!="" AND $rcek1['water_wool'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['water_wool']!=""){echo $rcek1['water_wool'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+                <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1 !=""){echo $rcek1['stat_wtr'];}else{echo "N/A";}?></td>
+                <td style="font-size: 12px;" Width="33%"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;" Width="33%" ><strong> Remarks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best </strong></td>
+                <td align="center"  style="font-size: 12px;" Width="33%"></td>
+                <td style="font-size: 12px;" Width="33%"></td>
+            </tr>
+            <!-- WATER END -->
+            <tr>
+                <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+            </tr>
+            <!-- LIGHT FASTNESS BEGIN -->
+            <tr>
+                <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td> -->
+                <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LIGHT</u></strong> (AATCC 16.3-2020, OPTION 3, WATER COOLED XENON-ARC LAMP, 20 AFU)</td>
+            </tr>
+            <!-- <tr>
+                <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+                <td align="center" style="font-size: 11px;" width="33%"><strong>T4 (5A) GREEN / T6 (5B) LIGHT GREEN</strong></td>
+                <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            </tr> -->
+            <!-- <tr>
+                <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+            </tr> -->
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">AFTER 20 HOURS</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['stat_lg']=="MARGINAL PASS" AND $rcekM['mlight_rating1']!="" AND $rcekM['mlight_rating1'] < 4){echo "color:red;";}else if($rcek1['light_rating1']!="" AND $rcek1['light_rating1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mlight_rating1']=="" AND $rcek1['light_rating1']==""){echo "N/A";}else if($rcek1['stat_lg']=="MARGINAL PASS"){echo $rcekM['mlight_rating1'];}else if($rcek1['stat_lg']=="MARGINAL PASS" AND $rcekM['mlight_rating1']==""){echo "N/A";}else{echo $rcek1['light_rating1'];}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">CHANGE IN SHADE</td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+                <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_lg'] !=""){echo $rcek1['stat_lg'];}else{echo "N/A";}?></td>
+                <td style="font-size: 12px;" Width="33%"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;" Width="33%" ><strong> Remaks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best</strong></td>
+                <td align="center"  style="font-size: 12px;" Width="33%"></td>
+                <td style="font-size: 12px;" Width="33%"></td>
+            </tr>
+            <!-- LIGHT PERSPIRATION END -->
+            <tr>
+                <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+            </tr>
+            <!-- PHENOLIC YELLOWING BEGIN -->
+            <tr>
+                <td align="left" style="font-size: 11px;" colspan="3"><strong><u>PHENOLIC YELLOWING TEST</u></strong> (ISO 105-X18)</td>
+            </tr>
+            <!-- <tr>
+                <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
+                <td align="center" style="font-size: 11px;" width="33%"><strong>T1 / T2 WHITE STRIPE</strong></td>
+                <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            </tr> -->
+            <!-- <tr>
+                <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+            </tr> -->
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">COLOR STAINING</td>
+                <td align="center" style="font-size: 11px; <?php if($rcek1['phenolic_colorchange']!="" AND $rcek1['phenolic_colorchange'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcek1['phenolic_colorchange']!=""){echo $rcek1['phenolic_colorchange'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%">MIN GRADE 4.0</td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
+                <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_py'] !=""){echo $rcek1['stat_py'];}else{echo "N/A";}?></td>
+                <td style="font-size: 12px;" Width="33%"></td>
+            </tr>
+            <tr>
+                <td style="font-size: 12px;" Width="33%" ><strong> Remaks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best</strong></td>
+                <td align="center"  style="font-size: 12px;" Width="33%"></td>
+                <td style="font-size: 12px;" Width="33%"></td>
+            </tr>
+            <!-- PHENOLIC YELLOWING END -->
+            <tr>
+                <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+            </tr>
+            <!-- PILLING TUMBLE BEGIN -->
+            <tr>
+                <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE : TUMBLE PILLING METHOD</u></strong> (ASTM D3512)</td>
+            </tr>
+            <tr>
+                <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">30 MIN</td>
+                <td align="center" style="font-size: 11px;" width="33%">&nbsp;</td>
+                <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">FACE</td>
+                <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['prt_f1']!=""){echo $rcek1['prt_f1'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+            </tr>
+            <!--
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">BACK</td>
+                <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['prt_b1']!=""){echo $rcek1['prt_b1'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+            </tr>-->
+            <tr>
+                <td align="left" style="font-size: 11px;" colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">60 MIN</td>
+                <td align="center" style="font-size: 11px;" width="33%">&nbsp;</td>
+                <td align="right" style="font-size: 11px;" width="33%">&nbsp;</td>
+            </tr>
+        
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">FACE</td>
+                <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['prt_f2']!=""){echo $rcek1['prt_f2'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+            </tr>
+            <!--
+            <tr>
+                <td align="left" style="font-size: 11px;" width="33%">BACK</td>
+                <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['prt_b2']!=""){echo $rcek1['prt_b2'];}else{echo "N/A";}?></td>
+                <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+            </tr>
+            -->
+            <!-- WATER END -->
+        </table>
+        <div class="pagebreak"></div>
+    <!-- Page 6 End -->
+    <!-- Page 7 Begin -->
     <table width="100%">
         <tr>
             <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
@@ -1884,7 +1910,7 @@ textarea {
         </tr>
            <tr>
             <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_pal'] !=""){echo $rcek1['stat_pal'];}else{echo "N/A";}?></td>stat_pal</td>
+            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_pal'] !=""){echo $rcek1['stat_pal'];}else{echo "N/A";}?></td></td>
             <td style="font-size: 12px;" Width="33%"></td>
         </tr>
          <tr>
@@ -2085,7 +2111,8 @@ textarea {
         <tr>
             <!-- <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td> -->
             <td align="left" style="font-size: 11px;" width="33%">CROSS - STAINING</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_st']!="" AND $rcek1['apper_st'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st']!=""){echo $rcek1['apper_st'];}else{echo "N/A";}?></td>
+            <!-- <td align="center" style="font-size: 11px; <?php if($rcek1['apper_st']!="" AND $rcek1['apper_st'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st']!=""){echo $rcek1['apper_st'];}else{echo "N/A";}?></td> -->
+            <td align="center" style="font-size: 11px;" width="33%"><?php echo "N/A";?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.5</td>
         </tr>
         <tr>
@@ -2127,11 +2154,11 @@ textarea {
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
+            <td align="left" style="font-size: 11px;" width="33%">OVERALL APPEARANCE WAS FOUND</td>
             <td align="left" style="font-size: 11px;" width="33%">
                 <table width="100%" style="border-collapse: collapse;">
                     <tr>
-                        <td align="center" width="50%">SATISFACTORY</td>
+                        <td align="center" style="<?php if($rcek1['apper_pf1'] < 4 || $rcek1['apper_pb1'] < 4 || $rcek1['apper_cc1'] < 4 ){echo "color:red;";}else{echo "";}?>" width="50%"><?php if($rcek1['apper_pf1'] < 4 || $rcek1['apper_pb1'] < 4 || $rcek1['apper_cc1'] < 4 ){echo "UNSATISFACTORY";}else{echo "SATISFACTORY";}?></td>
                         <!-- <td align="left" width="50%">N/A</td> -->
                     </tr>
                 </table>
@@ -2205,7 +2232,8 @@ textarea {
         <tr>
             <!-- <td align="left" style="font-size: 11px;" width="33%">SELF - STAINING</td> -->
             <td align="left" style="font-size: 11px;" width="33%">CROSS - STAINING</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_st2']!="" AND $rcek1['apper_st2'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st2']!=""){echo $rcek1['apper_st2'];}else{echo "N/A";}?></td>
+            <!-- <td align="center" style="font-size: 11px; <?php if($rcek1['apper_st2']!="" AND $rcek1['apper_st2'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st2']!=""){echo $rcek1['apper_st2'];}else{echo "N/A";}?></td> -->
+            <td align="center" style="font-size: 11px;" width="33%"><?php echo "N/A";?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.5</td>
         </tr>
         <tr>
@@ -2246,8 +2274,8 @@ textarea {
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
-            <td align="center" style="font-size: 11px;" width="33%">SATISFACTORY</td>
+            <td align="left" style="font-size: 11px;" width="33%">OVERALL APPEARANCE WAS FOUND</td>
+            <td align="center" style="font-size: 11px;" width="33%"><?php if(($rcek1['apper_pb2']!="" AND $rcek1['apper_pb2'] < 4)||($rcek1['apper_pf2']!="" AND $rcek1['apper_pf2'] < 4)||($rcek1['apper_cc2']!="" AND $rcek1['apper_cc2'] < 4)){echo"UNSATISFACTORY";}else{echo"SATISFACTORY";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">SATISFACTORY</td>
         </tr>
         <tr>
@@ -2268,7 +2296,8 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">CROSS - STAINING</td>
-            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_st3']!="" AND $rcek1['apper_st3'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st3']!=""){echo $rcek1['apper_st3'];}else{echo "N/A";}?></td>
+            <!-- <td align="center" style="font-size: 11px; <?php if($rcek1['apper_st3']!="" AND $rcek1['apper_st3'] < 4.5){echo "color:red;";}?>" width="33%"><?php if($rcek1['apper_st3']!=""){echo $rcek1['apper_st3'];}else{echo "N/A";}?></td> -->
+            <td align="center" style="font-size: 11px;" width="33%"><?php echo "N/A";?></td>
             <td align="right" style="font-size: 11px;" width="33%">MIN. GRADE 4.5</td>
         </tr>
         <tr>
@@ -2309,8 +2338,8 @@ textarea {
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">APPEARANCE EVALUATION</td>
-            <td align="center" style="font-size: 11px;" width="33%">SATISFACTORY</td>
+            <td align="left" style="font-size: 11px;" width="33%">OVERALL APPEARANCE WAS FOUND</td>
+            <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['apper_cc3'] < 4||$rcek1['apper_pf3'] < 4 || $rcek1['apper_pb3'] < 4){ echo "UNSATISFACTORY"; }else{echo "SATISFACTORY";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">SATISFACTORY</td>
         </tr>
         <tr>
@@ -2319,7 +2348,7 @@ textarea {
             <td style="font-size: 12px;" Width="33%"></td>
         </tr>
         <tr>
-            <td style="font-size: 12px;" Width="35%" ><strong> Remaks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best</strong></td>
+            <td style="font-size: 12px;" Width="35%" ><strong> Remaks : Grey Scale Rating is based on the 5-step scale of 1 to 5, where 1 is worst and 5 is best <br> Note: Washing procedure: Same as shrinkage</strong></td>
             <td align="center"  style="font-size: 12px;" Width="33%"></td>
             <td style="font-size: 12px;" Width="33%"></td>
         </tr>
@@ -2620,21 +2649,36 @@ textarea {
     </table>
     <table width="100%">
         <?php 
-        if($rd2['reject1']!=""){
+        if(!empty($rd2['reject1']) && empty($rd2['reject4'])){
         ?>
         <tr>
             <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
             <td align="center">&nbsp;</td>
         </tr>
         <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject1'];?>" height="400" alt=""/></td>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject1'];?>" height="350" alt=""/></td>
             <td align="center" style="font-size: 12px;">&nbsp;</td>  
         </tr>
         <tr>
             <td align="center"><input style="font-size: 12px;" name="notereject4" type="text" placeholder="Ketik" size="70" /></td>
             <td align="center">&nbsp;</td>
         </tr>
-        <?php }else if($rd2['reject2']!=""){?>
+        <?php }else if(!empty($rd2['reject1']) && !empty($rd2['reject4'])){?>
+        <tr>
+            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject2" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
+            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject3" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
+        </tr>
+        <tr>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject1'];?>" height="170" alt=""/></td>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject4'];?>" height="170" alt=""/></td>
+        </tr>
+        <tr>
+            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject5" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
+            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject6" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
+            <!-- <td align="center"><input style="font-size: 12px;" name="notereject5" type="text" placeholder="Ketik" size="70" /></td>
+            <td align="center"><input style="font-size: 12px;" name="notereject6" type="text" placeholder="Ketik" size="70" /></td> -->
+        </tr>
+        <?php }else if(empty($rd2['reject1']) && empty($rd2['reject4']) && !empty($rd2['reject2'])){?>
         <tr>
             <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject2" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
             <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject3" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
@@ -2649,10 +2693,31 @@ textarea {
             <!-- <td align="center"><input style="font-size: 12px;" name="notereject5" type="text" placeholder="Ketik" size="70" /></td>
             <td align="center"><input style="font-size: 12px;" name="notereject6" type="text" placeholder="Ketik" size="70" /></td> -->
         </tr>
-        <?php }else{ ?> 
+        <?php }else if(empty($rd2['reject1']) && empty($rd2['reject2']) && !empty($rd2['lf_reject'])){ ?>
         <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['lf_reject'];?>" height="400" alt=""/></td> 
+            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
+            <td align="center">&nbsp;</td>
+        </tr> 
+        <tr>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['lf_reject'];?>" height="350" alt=""/></td> 
             <td align="center" style="font-size: 12px;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center"><input style="font-size: 12px;" name="notereject4" type="text" placeholder="Ketik" size="70" /></td>
+            <td align="center">&nbsp;</td>
+        </tr>
+        <?php }else if(empty($rd2['reject1']) && empty($rd2['reject2']) && empty($rd2['lf_reject']) && empty($rd2['lf_reject']) && !empty($rd2['wet_crocking']) ){ ?> 
+        <tr>
+            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
+            <td align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['wet_crocking'];?>" height="350" alt=""/></td> 
+            <td align="center" style="font-size: 12px;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
+            <td align="center">&nbsp;</td>
         </tr>
         <?php }?>
     </table>
@@ -2706,8 +2771,16 @@ textarea {
         <?php }else if($rd2['reject1']=="" AND $rd2['reject2']==""){?>
         <?php }else{?>
         <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['lf_reject'];?>" height="400" alt=""/></td>
+            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
+            <td align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['lf_reject'];?>" height="350" alt=""/></td>
             <td align="center" style="font-size: 12px;">&nbsp;</td>  
+        </tr>
+        <tr>
+            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
+            <td align="center">&nbsp;</td>
         </tr>
         <?php } ?> 
     </table>
@@ -2745,11 +2818,79 @@ textarea {
         if($rd2['reject1']!=""){
         ?>
         <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['lf_reject'];?>" height="400" alt=""/></td> 
+            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
+            <td align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['lf_reject'];?>" height="350" alt=""/></td> 
+        </tr>
+        <tr>
+            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
+            <td align="center">&nbsp;</td>
         </tr>
         <?php } ?>
     </table>
-    <!-- Page 9 End -->
-    <!-- Page 10 Begin -->
+    <div class="pagebreak"></div>
+    <!-- Page 10 End -->
+    <!-- Page 11 Begin -->
+    <table width="100%">
+        <tr>
+            <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 12px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 12px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 12px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 12px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 12px;">&nbsp;</td> 
+        </tr>
+        <tr>
+            <td align="right" style="font-size: 12px;">&nbsp;</td> 
+        </tr>
+    </table>
+    <table width="100%">
+        <?php 
+        if($rd2['reject1']!=""){
+        ?>
+        <tr>
+            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
+            <td align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['wet_crocking'];?>" height="350" alt=""/></td> 
+        </tr>
+        <tr>
+            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
+            <td align="center">&nbsp;</td>
+        </tr>
+        <?php } ?>
+    </table>
+    <!-- Page 11 End -->
 </body>
 </html>
+<script>
+window.onbeforeprint = function() {
+  document.querySelectorAll("select").forEach(sel => {
+    let span = document.createElement("span");
+    span.classList.add("print-value");
+    span.textContent = sel.value;
+    sel.parentNode.insertBefore(span, sel);
+  });
+};
+
+window.onafterprint = function() {
+  // hapus semua span setelah selesai print
+  document.querySelectorAll(".print-value").forEach(span => span.remove());
+};
+</script>
