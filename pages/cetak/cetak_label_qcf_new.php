@@ -1,15 +1,45 @@
 <?php
-ini_set("error_reporting", 1);
-session_start();
-include "../../koneksi.php";
-//--
-$idkk=$_REQUEST['idkk'];
-$act=$_GET['g'];
-$data=mysqli_query($con,"SELECT * FROM tbl_qcf WHERE nodemand='$idkk' ORDER BY id DESC LIMIT 1");
-$cekr=mysqli_num_rows($data);
-$r=mysqli_fetch_array($data);
-$data1=mysqli_query($con,"SELECT * FROM tbl_lbl_availability WHERE nodemand='$idkk' ORDER BY id DESC LIMIT 1");
-$r1=mysqli_fetch_array($data1);
+  ini_set("error_reporting", 1);
+  session_start();
+  include "../../koneksi.php";
+  //--
+  $idkk=$_REQUEST['idkk'];
+  $act=$_GET['g'];
+  $data=mysqli_query($con,"SELECT * FROM tbl_qcf WHERE nodemand='$idkk' ORDER BY id DESC LIMIT 1");
+  $cekr=mysqli_num_rows($data);
+  $r=mysqli_fetch_array($data);
+  $data1=mysqli_query($con,"SELECT * FROM tbl_lbl_availability WHERE nodemand='$idkk' ORDER BY id DESC LIMIT 1");
+  $r1=mysqli_fetch_array($data1);
+
+  $sqlcetaklabel = "SELECT 
+                          i.DEAMAND AS DEMAND,
+                          LISTAGG(TRIM(i.PRODUCTIONORDERCODE), ', ') AS ORDER,
+                          ip.LANGGANAN AS PELANGGAN,
+                          i.PROJECTCODE AS NOMOR_ORDER,
+                          (trim( i.SUBCODE02 ) || trim( i.SUBCODE03 )) AS HANGER,
+                          trim( i.ITEMDESCRIPTION ) AS JENISKAIN,
+                          trim( i.WARNA ) AS WARNA,
+                          trim (i.SUBCODE05) AS NO_WARNA,
+                          trim(ik.EXTERNALREFERENCE) AS NO_PO,
+                          i.LOT
+                      FROM 
+                          ITXVIEWKK i
+                      LEFT JOIN ITXVIEW_PELANGGAN ip ON ip.ORDPRNCUSTOMERSUPPLIERCODE  = i.ORDPRNCUSTOMERSUPPLIERCODE AND ip.CODE = i.PROJECTCODE
+                      LEFT JOIN ITXVIEW_KGBRUTO ik ON ik.PROJECTCODE = i.PROJECTCODE AND ik.ORIGDLVSALORDERLINEORDERLINE = i.ORIGDLVSALORDERLINEORDERLINE AND ik.CODE = i.DEAMAND
+                      WHERE i.DEAMAND LIKE '%$idkk%'
+                      GROUP BY 
+                          i.DEAMAND,
+                          ip.LANGGANAN,
+                          i.PROJECTCODE,
+                          i.SUBCODE02,
+                          i.SUBCODE03,
+                          i.ITEMDESCRIPTION,
+                          i.WARNA,
+                          i.SUBCODE05,
+                          ik.EXTERNALREFERENCE,
+                          i.LOT";
+  $stmt_cetaklabel = db2_exec($conn1,$sqlcetaklabel, array('cursor'=>DB2_SCROLLABLE));
+  $rowdb2_cetaklabel = db2_fetch_assoc($stmt_cetaklabel);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,7 +73,7 @@ $r1=mysqli_fetch_array($data1);
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php if($cekr>0){echo substr($r['no_po'],0,31);}else{echo substr($r1['no_po'],0,31);}?></div></td>
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?= $rowdb2_cetaklabel['NO_PO']; ?></div></td>
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
@@ -85,7 +115,7 @@ $r1=mysqli_fetch_array($data1);
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php if($cekr>0){echo substr($r['no_po'],0,31);}else{echo substr($r1['no_po'],0,31);}?></div></td>
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?= $rowdb2_cetaklabel['NO_PO']; ?></div></td>
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
@@ -127,7 +157,7 @@ $r1=mysqli_fetch_array($data1);
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
-	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?php if($cekr>0){echo substr($r['no_po'],0,31);}else{echo substr($r1['no_po'],0,31);}?></div></td>
+	border-left:0px #000000 solid; border-right:0px #000000 solid;"><div style="font-size:9px;"><?= $rowdb2_cetaklabel['NO_PO']; ?></div></td>
         </tr>
         <tr>
           <td colspan="3" style="border-top:0px #000000 solid; border-bottom:0px #000000 solid;
