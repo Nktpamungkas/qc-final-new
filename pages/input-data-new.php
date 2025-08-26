@@ -783,7 +783,7 @@ $rcekd=mysqli_fetch_array($sqlD);
         <div class="col-sm-4">
           <div class="input-group date">
             <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-            <input name="tglmsk" type="text" class="form-control pull-right" id="datepicker3" placeholder="0000-00-00" value="<?php if($cek>0){echo $rcek['tgl_masuk'];}?>" required/>
+            <input name="tglmsk" type="text" class="form-control pull-right" id="datepicker3" placeholder="0000-00-00" value="<?php if($cek>0){echo $rcek['tgl_masuk'];}?>" required>
           </div>
         </div>
 	  </div>
@@ -1695,6 +1695,8 @@ if($_POST['save']=="save"){
 		$uploadOk = 0;
 	}
 
+	$tglmsk = $_POST['tglmsk'] ? $_POST['tglmsk'] : date('Y-m-d');
+
 	if ($uploadOk && move_uploaded_file($_FILES["upload_file"]["tmp_name"], $targetFile)) {
   	  	$sqlData	=	mysqli_query($con,"INSERT INTO tbl_qcf SET 
 														nokk='$_POST[nokk]',
@@ -1736,7 +1738,7 @@ if($_POST['save']=="save"){
 														satuan='$_POST[satuan2]',
 														lot_legacy='$_POST[lot_legacy]',
 														sisa='$_POST[sisa]',
-														tgl_masuk='$_POST[tglmsk]',
+														tgl_masuk='$tglmsk',
 														tgl_pack='$_POST[tglpk]',
 														jam_pack='$_POST[jam_pack]',
 														tglcwarna='$_POST[tglcwarna]',
@@ -1794,7 +1796,7 @@ if($_POST['save']=="save"){
 					window.location.href='InputDataNew'; 
 				}
 				});</script>";
-		}		
+		}
 	}else{
 		$sqlData	=	mysqli_query($con,"INSERT INTO tbl_qcf SET 
 														nokk='$_POST[nokk]',
@@ -1836,7 +1838,7 @@ if($_POST['save']=="save"){
 														satuan='$_POST[satuan2]',
 														lot_legacy='$_POST[lot_legacy]',
 														sisa='$_POST[sisa]',
-														tgl_masuk='$_POST[tglmsk]',
+														tgl_masuk='$tglmsk',
 														tgl_pack='$_POST[tglpk]',
 														jam_pack='$_POST[jam_pack]',
 														tglcwarna='$_POST[tglcwarna]',
@@ -1893,7 +1895,18 @@ if($_POST['save']=="save"){
 					window.location.href='InputDataNew'; 
 				}
 				});</script>";
-		}	
+		}else{
+			$errorMsg = mysqli_error($con);
+			echo "<script>swal({
+				title: 'Gagal Menyimpan Data',   
+				text: 'Terjadi kesalahan saat menyimpan data ke database.\\nError: " . addslashes($errorMsg) . "',
+				type: 'error',
+			}).then((result) => {
+				if (result.value) {
+					window.location.href='InputDataNew'; 
+				}
+			});</script>";
+		}
 	}
 }
 if($_POST['update']=="update"){
@@ -2111,7 +2124,7 @@ if($_POST['update']=="update"){
 				panjang='$_POST[panjang]',
 				satuan='$_POST[satuan2]',
 				sisa='$_POST[sisa]',
-				tgl_masuk='$_POST[tglmsk]',
+				tgl_masuk='$tglmsk',
 				tgl_pack='$_POST[tglpk]',
 				jam_pack='$_POST[jam_pack]',
 				tglcwarna='$_POST[tglcwarna]',
@@ -2231,7 +2244,7 @@ if($_POST['update']=="update"){
 				panjang='$_POST[panjang]',
 				satuan='$_POST[satuan2]',
 				sisa='$_POST[sisa]',
-				tgl_masuk='$_POST[tglmsk]',
+				tgl_masuk='$tglmsk',
 				tgl_pack='$_POST[tglpk]',
 				jam_pack='$_POST[jam_pack]',
 				tglcwarna='$_POST[tglcwarna]',
