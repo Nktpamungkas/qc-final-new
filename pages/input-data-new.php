@@ -1439,8 +1439,7 @@ function nobon(){
 		include"koneksi.php";
 		date_default_timezone_set("Asia/Jakarta");
 		$format = date("y");
-		$sql=mysqli_query($con,"SELECT bpp FROM tbl_qcf WHERE DATE_FORMAT(tgl_masuk,'%Y')=DATE_FORMAT(now(),'%Y')
-		ORDER BY bpp DESC LIMIT 1") or die (mysqli_error());
+		$sql=mysqli_query($con,"SELECT bpp FROM tbl_qcf ORDER BY id DESC LIMIT 1") or die (mysqli_error());
 		$d=mysqli_num_rows($sql);
 		if($d>0){
 			$r=mysqli_fetch_array($sql);
