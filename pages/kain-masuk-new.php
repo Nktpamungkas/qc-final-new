@@ -531,6 +531,7 @@ $area= isset($_POST['area']) ? $_POST['area'] : '';
 						<option value="Labdip">Labdip</option>
 						<option value="Mini Bulk">Mini Bulk</option>
 						<option value="Request">Request</option>
+						<option value="Full Test SGS">Full Test SGS</option>
 					</select>
 				</div>
 			</div>				   
