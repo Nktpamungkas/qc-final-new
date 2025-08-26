@@ -783,7 +783,7 @@ $rcekd=mysqli_fetch_array($sqlD);
         <div class="col-sm-4">
           <div class="input-group date">
             <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-            <input name="tglmsk" type="text" class="form-control pull-right" id="datepicker3" placeholder="0000-00-00" value="<?php if($cek>0){echo $rcek['tgl_masuk'];}?>" required>
+            <input name="tglmsk" type="date" class="form-control pull-right" value="<?php if($cek>0){echo $rcek['tgl_masuk'];}?>" required>
           </div>
         </div>
 	  </div>
