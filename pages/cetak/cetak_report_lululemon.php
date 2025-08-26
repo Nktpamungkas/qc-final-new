@@ -2620,263 +2620,131 @@ textarea {
     </table>
     <div class="pagebreak"></div>
     <!-- Page 7 End -->
-    <!-- Page 8 Begin -->
-    <table width="100%">
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-    </table>
-    <table width="100%">
+<!-- Page 8 - End -->
+  <?php
+    $pages_to_render = [];
+    // KONDISI 1: Cek untuk data halaman reject1 dan reject4
+    if (!empty($rd2['reject1'])) {
+        if (!empty($rd2['reject4'])) {
+            // Jika ada reject1 dan reject4 -> layout 2 gambar
+            $pages_to_render[] = [
+                'type'   => 'reject1_double',
+                'image1' => $rd2['reject1'],
+                'image2' => $rd2['reject4']
+            ];
+        } else {
+            // Jika hanya ada reject1 -> layout 1 gambar
+            $pages_to_render[] = [
+                'type'   => 'reject1_single',
+                'image1' => $rd2['reject1']
+            ];
+        }
+    }
+
+    // KONDISI 2: Cek untuk data halaman reject2 dan reject3
+    if (!empty($rd2['reject2'])) { // Asumsi reject2 dan reject3 selalu berpasangan
+        $pages_to_render[] = [
+            'type'   => 'reject2_double',
+            'image1' => $rd2['reject2'],
+            'image2' => $rd2['reject3']
+        ];
+    }
+
+    // KONDISI 3: Cek untuk data halaman lf_reject
+    if (!empty($rd2['lf_reject'])) {
+        $pages_to_render[] = [
+            'type'   => 'lf_reject_single',
+            'image1' => $rd2['lf_reject']
+        ];
+    }
+
+    // KONDISI 4: Cek untuk data halaman wet_crocking
+    if (!empty($rd2['wet_crocking'])) {
+        $pages_to_render[] = [
+            'type'   => 'wet_crocking_single',
+            'image1' => $rd2['wet_crocking']
+        ];
+    }
+    if (!empty($pages_to_render)) {
+        $total_pages = count($pages_to_render);
+        
+    foreach ($pages_to_render as $index => $page_data) {
+    ?>
+
+        <table width="100%">
+            <tr>
+                <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu']; ?><?php if ($rd2['sts_rev'] == "1" and $rd2['revisi'] != "") { echo "-" . $rd2['revisi']; } ?></td>
+            </tr>
+            <tr>
+                <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1'])); ?></td>
+            </tr>
+            <tr> <td align="right" style="font-size: 12px;">&nbsp;</td> </tr>
+            <tr> <td align="right" style="font-size: 12px;">&nbsp;</td> </tr>
+            <tr> <td align="right" style="font-size: 12px;">&nbsp;</td> </tr>
+            <tr> <td align="right" style="font-size: 12px;">&nbsp;</td> </tr>
+            <tr> <td align="right" style="font-size: 12px;">&nbsp;</td> </tr>
+            <tr> <td align="right" style="font-size: 12px;">&nbsp;</td> </tr>
+        </table>
+        
+        <table width="100%">
         <?php 
-        if(!empty($rd2['reject1']) && empty($rd2['reject4'])){
+            if ($page_data['type'] === 'reject1_single'): 
         ?>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject1'];?>" height="350" alt=""/></td>
-            <td align="center" style="font-size: 12px;">&nbsp;</td>  
-        </tr>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject4" type="text" placeholder="Ketik" size="70" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <?php }else if(!empty($rd2['reject1']) && !empty($rd2['reject4'])){?>
-        <tr>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject2" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject3" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject1'];?>" height="170" alt=""/></td>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject4'];?>" height="170" alt=""/></td>
-        </tr>
-        <tr>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject5" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject6" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-            <!-- <td align="center"><input style="font-size: 12px;" name="notereject5" type="text" placeholder="Ketik" size="70" /></td>
-            <td align="center"><input style="font-size: 12px;" name="notereject6" type="text" placeholder="Ketik" size="70" /></td> -->
-        </tr>
-        <?php }else if(empty($rd2['reject1']) && empty($rd2['reject4']) && !empty($rd2['reject2'])){?>
-        <tr>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject2" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject3" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject2'];?>" height="170" alt=""/></td>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject3'];?>" height="170" alt=""/></td>
-        </tr>
-        <tr>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject5" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject6" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-            <!-- <td align="center"><input style="font-size: 12px;" name="notereject5" type="text" placeholder="Ketik" size="70" /></td>
-            <td align="center"><input style="font-size: 12px;" name="notereject6" type="text" placeholder="Ketik" size="70" /></td> -->
-        </tr>
-        <?php }else if(empty($rd2['reject1']) && empty($rd2['reject2']) && !empty($rd2['lf_reject'])){ ?>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
-            <td align="center">&nbsp;</td>
-        </tr> 
-        <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['lf_reject'];?>" height="350" alt=""/></td> 
-            <td align="center" style="font-size: 12px;">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject4" type="text" placeholder="Ketik" size="70" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <?php }else if(empty($rd2['reject1']) && empty($rd2['reject2']) && empty($rd2['lf_reject']) && empty($rd2['lf_reject']) && !empty($rd2['wet_crocking']) ){ ?> 
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['wet_crocking'];?>" height="350" alt=""/></td> 
-            <td align="center" style="font-size: 12px;">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <?php }?>
-    </table>
-    <div class="pagebreak"></div>
-    <!-- Page 8 End -->
-    <!-- Page 9 Begin -->
-    <table width="100%">
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-    </table>
-    <table width="100%">
+            <tr>
+                <td align="center"><input style="font-size: 12px;" name="notereject_<?php echo $index; ?>_1" type="text" placeholder="Ketik" size="100" /></td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $page_data['image1']; ?>" height="350" alt=""/></td>
+                <td align="center" style="font-size: 12px;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center"><input style="font-size: 12px;" name="notereject_<?php echo $index; ?>_2" type="text" placeholder="Ketik" size="70" /></td>
+                <td align="center">&nbsp;</td>
+            </tr>
+
+        <?php elseif ($page_data['type'] === 'reject1_double' || $page_data['type'] === 'reject2_double'): ?>
+            <tr>
+                <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject_<?php echo $index; ?>_1" type="text" placeholder="Ketik" rows="4" cols="40"></textarea></td>
+                <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject_<?php echo $index; ?>_2" type="text" placeholder="Ketik" rows="4" cols="40"></textarea></td>
+            </tr>
+            <tr>
+                <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $page_data['image1']; ?>" height="170" alt=""/></td>
+                <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $page_data['image2']; ?>" height="170" alt=""/></td>
+            </tr>
+            <tr>
+                <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject_<?php echo $index; ?>_3" type="text" placeholder="Ketik" rows="4" cols="40"></textarea></td>
+                <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject_<?php echo $index; ?>_4" type="text" placeholder="Ketik" rows="4" cols="40"></textarea></td>
+            </tr>
+        
+        <?php elseif ($page_data['type'] === 'lf_reject_single' || $page_data['type'] === 'wet_crocking_single'): ?>
+            <tr>
+                <td align="center"><input style="font-size: 12px;" name="notereject_<?php echo $index; ?>_1" type="text" placeholder="Ketik" size="100" /></td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $page_data['image1']; ?>" height="350" alt=""/></td>
+                <td align="center" style="font-size: 12px;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center"><input style="font-size: 12px;" name="notereject_<?php echo $index; ?>_2" type="text" placeholder="Ketik" size="70" /></td>
+                <td align="center">&nbsp;</td>
+            </tr>
         <?php 
-        if($rd2['reject1']!="" AND $rd2['reject2']!=""){
+            endif; 
         ?>
-        <tr>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject2" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject3" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject2'];?>" height="170" alt=""/></td>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['reject3'];?>" height="170" alt=""/></td>
-        </tr>
-        <tr>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject5" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-            <td align="center"><textarea style="font-size: 12px; text-align:center;" name="notereject6" type="text" placeholder="Ketik" size="250" rows="4" cols="40"></textarea></td>
-            <!-- <td align="center"><input style="font-size: 12px;" name="notereject5" type="text" placeholder="Ketik" size="70" /></td>
-            <td align="center"><input style="font-size: 12px;" name="notereject6" type="text" placeholder="Ketik" size="70" /></td> -->
-        </tr>
-        <?php }else if($rd2['reject1']=="" AND $rd2['reject2']==""){?>
-        <?php }else{?>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['lf_reject'];?>" height="350" alt=""/></td>
-            <td align="center" style="font-size: 12px;">&nbsp;</td>  
-        </tr>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <?php } ?> 
-    </table>
-    <div class="pagebreak"></div>
-    <!-- Page 9 End -->
-    <!-- Page 10 Begin -->
-    <table width="100%">
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-    </table>
-    <table width="100%">
+        </table>
+        
         <?php 
-        if($rd2['reject1']!=""){
+            if ($index < $total_pages - 1) {
+                echo '<div class="pagebreak"></div>';
+            }
         ?>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['lf_reject'];?>" height="350" alt=""/></td> 
-        </tr>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <?php } ?>
-    </table>
-    <div class="pagebreak"></div>
-    <!-- Page 10 End -->
-    <!-- Page 11 Begin -->
-    <table width="100%">
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo $rd2['no_rptlulu'];?><?php if($rd2['sts_rev']=="1" AND $rd2['revisi']!=""){echo "-".$rd2['revisi'];}?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;"><?php echo date("F j, Y", strtotime($rd2['date_out1']));?></td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-        <tr>
-            <td align="right" style="font-size: 12px;">&nbsp;</td> 
-        </tr>
-    </table>
-    <table width="100%">
-        <?php 
-        if($rd2['reject1']!=""){
-        ?>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" style="font-size: 12px;"><img src="../../dist/img-rptlulu/<?php echo $rd2['wet_crocking'];?>" height="350" alt=""/></td> 
-        </tr>
-        <tr>
-            <td align="center"><input style="font-size: 12px;" name="notereject1" type="text" placeholder="Ketik" size="100" /></td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <?php } ?>
-    </table>
-    <!-- Page 11 End -->
+        <?php
+        }
+    }
+    ?>
+<!-- End Page -->
 </body>
 </html>
 <script>
