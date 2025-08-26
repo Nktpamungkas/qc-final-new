@@ -65,7 +65,7 @@ $page = strtolower($page);
     <section class="content">
         <!-- Info boxes -->
         <div class="row">
-            <?php if ($_SESSION['lvl_id'] != "SPVQC" and $_SESSION['lvl_id'] != "AFTERSALES") { ?>
+            <?php if ($_SESSION['lvl_id'] != "SPVQC" and $_SESSION['lvl_id'] != "AFTERSALES" and $_SESSION['lvl_id'] != "SUPERADMINTQ") { ?>
 
 
                 <!-- jika username marketing hidden -->
@@ -89,6 +89,53 @@ $page = strtolower($page);
 
                 <!-- /.col -->
             <?php } ?>
+
+             <?php if ($_SESSION['lvl_id'] == "SUPERADMINTQ") { ?>
+                <!-- jika username marketing hidden -->
+                <?php if ($_SESSION['usrid'] != "marketing") { ?>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <a href="userInformation">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-red"><i class="fa fa-pencil-square-o"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">USER INFORMATION</span>
+                                    <span class="info-box-number">&nbsp;</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                        </a>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- end jika username marketing hidden -->
+                <?php } ?>
+
+                <!-- /.col -->
+            <?php } ?>
+
+            <?php if ($_SESSION['lvl_id'] == "SUPERADMINTQ") { ?>
+                <!-- jika username marketing hidden -->
+                <?php if ($_SESSION['usrid'] != "marketing") { ?>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <a href="pembagianTestingTQ">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-red"><i class="fa fa-pencil-square-o"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Pembagian Testing TQ</span>
+                                    <span class="info-box-number">&nbsp;</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                        </a>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- end jika username marketing hidden -->
+                <?php } ?>
+
+                <!-- /.col -->
+            <?php } ?>
+
             <?php if ($_SESSION['lvl_id'] == "AFTERSALES") { ?>
                 <?php if (@strtoupper($_SESSION['usrid']) != "KPE") { ?>
                     <div class="col-md-3 col-sm-6 col-xs-12">
@@ -386,7 +433,7 @@ $page = strtolower($page);
 
 
                 <!-- jika username marketing hidden -->
-                <?php if ($_SESSION['dept'] != "MKT" && $_SESSION['usrid'] != "ppc") { ?>
+                <?php if ($_SESSION['dept'] != "MKT" && $_SESSION['usrid'] != "ppc" and $_SESSION['lvl_id'] != "SUPERADMINTQ") { ?>
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <a href="SummaryOrder">
                             <div class="info-box">

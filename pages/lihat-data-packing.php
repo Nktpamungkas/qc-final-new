@@ -28,6 +28,7 @@ include "koneksi.php";
 
 <body>
   <?php
+  $AktifJam = isset($_POST['tampiltgl']) && $_POST['tampiltgl']=="on"? "checked" : '';
   $Awal = isset($_POST['awal']) ? $_POST['awal'] : '';
   $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
   $jamA = isset($_POST['jam_awal']) ? $_POST['jam_awal'] : '';
@@ -73,7 +74,7 @@ include "koneksi.php";
             <div class="form-group">
               <label for="awal" class="col-sm-3 control-label"></label>
               <div class="col-sm-4">
-                <label><input type="checkbox" name="tampiltgl" id="tampiltgl" onClick="aktif();"> Aktifkan Jam</label>
+                <label><input type="checkbox" name="tampiltgl" id="tampiltgl" onClick="aktif();" <?=$AktifJam;?> > Aktifkan Jam</label>
               </div>
 
               <!-- /.input group -->
@@ -97,7 +98,7 @@ include "koneksi.php";
                                                 this.value = time + ':';
                                                 } else if (time.match(/^\d{2}\:\d{2}$/) !== null) {
                                                 this.value = time + '';
-                                                }" value="<?php echo $jamA; ?>" size="5" maxlength="5" autocomplete="off" disabled>
+                                                }" value="<?php echo $jamA; ?>" size="5" maxlength="5" autocomplete="off" <?=$AktifJam==""?"disabled":"";?> >
                 <!-- <input type="text" class="form-control timepicker" name="jam_awal" id="jam_awal" placeholder="00:00" value="<?php echo $jamA; ?>" disabled> -->
               </div>
               <!-- /.input group -->
@@ -122,7 +123,7 @@ include "koneksi.php";
                                                 this.value = time + ':';
                                                 } else if (time.match(/^\d{2}\:\d{2}$/) !== null) {
                                                 this.value = time + '';
-                                                }" value="<?php echo $jamAr; ?>" size="5" maxlength="5" autocomplete="off" disabled>
+                                                }" value="<?php echo $jamAr; ?>" size="5" maxlength="5" autocomplete="off" <?=$AktifJam==""?"disabled":"";?>>
                 <!-- <input type="text" class="form-control timepicker" name="jam_akhir" id="jam_akhir" placeholder="00:00" value="<?php echo $jamAr; ?>" autocomplete="off" disabled> -->
               </div>
 
@@ -1774,6 +1775,9 @@ include "koneksi.php";
                 <th colspan="2">
                   <div align="center">BF</div>
                 </th>
+                <th rowspan="2">
+                  <div align="center">Tanggal</div>
+                </th>
               </tr>
 
               <tr>
@@ -1886,6 +1890,7 @@ include "koneksi.php";
                   <td><?= $row1['note_kf']; ?></td>
                   <td><?= $row1['qty_bf']; ?></td>
                   <td><?= $row1['note_bf']; ?></td>
+                  <td><?= $row1['tgl_update'] . ' ' . $row1['jam_update']; ?></td>
                 </tr>
               <?php $no++;
               } ?>
