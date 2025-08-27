@@ -13681,6 +13681,15 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 				<table class="table">
 					<?php if ($rcek1['wick_l1'] != "" or $rcek1['wick_l2'] != "" or $rcek1['wick_l3'] != "" or $rcek1['wick_w1'] != "" or $rcek1['wick_w2'] != "" or $rcek1['wick_w3'] != "") { ?>
 						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th>15"</th>
+							<th></th>
+							<th></th>
+							<th>30"</th>
+						</tr>
+						<tr>
 							<th rowspan="4" style="width:50%">Wicking</th>
 							<th>Length</th>
 							<th>Beforewash</th>
@@ -13697,6 +13706,13 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
+							<td>
+								<?php if ($rcek1['wick_l3'] != "") {
+									echo $rcek1['wick_l3'];
+								} else {
+									echo $rcekR['rwick_l3'];
+								} ?>
+							</td>
 						</tr>
 						<tr>
 							<th>&nbsp;</th>
@@ -13714,6 +13730,13 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
+							<td>
+								<?php if ($rcek1['wick_l4'] != "") {
+									echo $rcek1['wick_l4'];
+								} else {
+									echo $rcekR['rwick_l4'];
+								} ?>
+							</td>
 						</tr>
 						<tr>
 							<th>Width</th>
@@ -13731,6 +13754,13 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
+							<td>
+								<?php if ($rcek1['wick_w3'] != "") {
+									echo $rcek1['wick_w3'];
+								} else {
+									echo $rcekR['rwick_w3'];
+								} ?>
+							</td>
 						</tr>
 						<tr>
 							<th>&nbsp;</th>
@@ -13748,6 +13778,13 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 							</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
+							<td>
+								<?php if ($rcek1['wick_w4'] != "") {
+									echo $rcek1['wick_w4'];
+								} else {
+									echo $rcekR['rwick_w4'];
+								} ?>
+							</td>
 						</tr>
 					<?php } ?>
 					<?php if ($rcek1['absor_f1'] != "" or $rcek1['absor_f2'] != "" or $rcek1['absor_f3'] != "" or $rcek1['absor_b1'] != "" or $rcek1['absor_b2'] != "" or $rcek1['absor_b3'] != "") { ?>

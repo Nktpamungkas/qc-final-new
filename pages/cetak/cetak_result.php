@@ -167,15 +167,15 @@ $rd = mysqli_fetch_array($data1);
                 <td colspan="6" style="font-size: 7px; <?= ($rcek1['stat_fwss2'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss2'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_fwss2'] == "RANDOM") {
                     echo $rcekR['rf_weight']; ?> gr/m<sup>2</sup> =
-                    <?php echo round($rcekR['rf_weight'] / 33.906, 1); ?> oz/yd<sup>2</sup>
+                    <?php echo number_format((float)$rcekR['rf_weight'] / 33.906, 2); ?> oz/yd<sup>2</sup>
                   <?php } ?>
                   <!-- <?php if ($rcek1['stat_fwss2'] == "DISPOSISI") {
-                    echo $rcekD['df_weight']; ?> gr/m<sup>2</sup> = <?php echo round($rcekD['df_weight'] / 33.906, 1); ?> oz/yd<sup>2</sup> <?php } ?> -->
+                    echo $rcekD['df_weight']; ?> gr/m<sup>2</sup> = <?php echo round($rcekD['df_weight'] / 33.906, 2); ?> oz/yd<sup>2</sup> <?php } ?> -->
                   <?php if ($rcek1['stat_fwss2'] != "DISPOSISI" or $rcek1['stat_fwss2'] != "RANDOM") {
                     echo $rcek1['f_weight']; ?> gr/m<sup>2</sup> =
-                    <?php echo round($rcek1['f_weight'] / 33.906, 1); ?> oz/yd<sup>2</sup>
+                    <?php echo number_format((float)$rcek1['f_weight'] / 33.906, 2); ?> oz/yd<sup>2</sup>
                   <?php } ?>
-                  <!--<?php echo $rcek1['f_weight']; ?> gr/m<sup>2</sup> = <?php echo round($rcek1['f_weight'] / 33.906, 1); ?> oz/yd<sup>2</sup>-->
+                  <!--<?php echo $rcek1['f_weight']; ?> gr/m<sup>2</sup> = <?php echo round($rcek1['f_weight'] / 33.906, 2); ?> oz/yd<sup>2</sup>-->
                 </td>
               </tr>
             <?php } ?>
@@ -1627,6 +1627,15 @@ $rd = mysqli_fetch_array($data1);
           <table class="table">
             <?php if ($rcek1['wick_l1'] != "" or $rcek1['wick_l2'] != "" or $rcek1['wick_l3'] != "" or $rcek1['wick_w1'] != "" or $rcek1['wick_w2'] != "" or $rcek1['wick_w3'] != "") { ?>
               <tr>
+                <th style="width:45%; font-size: 7px;"></th>
+                <th style="width:45%; font-size: 7px;"></th>
+                <th style="width:45%; font-size: 7px;"></th>
+                <th style="width:45%; font-size: 7px;">15"</th>
+                <th style="width:45%; font-size: 7px;"></th>
+                <th style="width:45%; font-size: 7px;"></th>
+                <th style="width:45%; font-size: 7px;">30"</th>
+              </tr>
+              <tr>
                 <th rowspan="4" align="left" style="width:45%; font-size: 7px;">Wicking(cm)</th>
                 <th align="left" style="font-size: 7px;">Len</th>
                 <th align="left" style="font-size: 7px;">Beforewash</th>
@@ -1649,6 +1658,13 @@ $rd = mysqli_fetch_array($data1);
             } ?></td>-->
                 <td style="font-size: 7px;">&nbsp;</td>
                 <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_wic'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wic'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_wic'] == "RANDOM") {
+                    echo $rcekR['rwick_l3'];
+                  } else {
+                    echo $rcek1['wick_l3'];
+                  } ?>
+                </td>
               </tr>
               <tr>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
@@ -1672,6 +1688,13 @@ $rd = mysqli_fetch_array($data1);
             } ?></td>-->
                 <td style="font-size: 7px;">&nbsp;</td>
                 <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_wic2'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wic2'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_wic2'] == "RANDOM") {
+                    echo $rcekR['wick_l4'];
+                  } else {
+                    echo $rcek1['wick_l4'];
+                  } ?>
+                </td>
               </tr>
               <tr>
                 <th align="left" style="font-size: 7px;">Wid</th>
@@ -1695,6 +1718,13 @@ $rd = mysqli_fetch_array($data1);
             } ?></td>-->
                 <td style="font-size: 7px;">&nbsp;</td>
                 <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_wic1'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wic1'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_wic1'] == "RANDOM") {
+                    echo $rcekR['wick_w3'];
+                  } else {
+                    echo $rcek1['wick_w3'];
+                  } ?>
+                </td>
               </tr>
               <tr>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
@@ -1718,6 +1748,13 @@ $rd = mysqli_fetch_array($data1);
             } ?></td>-->
                 <td style="font-size: 7px;">&nbsp;</td>
                 <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_wic3'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wic3'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_wic3'] == "RANDOM") {
+                    echo $rcekR['wick_w4'];
+                  } else {
+                    echo $rcek1['wick_w4'];
+                  } ?>
+                </td>
               </tr>
             <?php } ?>
             <?php if ($rcek1['absor_f1'] != "" or $rcek1['absor_f2'] != "" or $rcek1['absor_f3'] != "" or $rcek1['absor_b1'] != "" or $rcek1['absor_b2'] != "" or $rcek1['absor_b3'] != "") { ?>
