@@ -467,6 +467,11 @@ RewriteRule ^EditTQNewFL-$ ./index1.php?p=EditTQ-New-FL [L]
 RewriteRule ^EditTQNewFL-([a-zA-Z0-9]+)$ ./index1.php?p=EditTQ-New-FL&no_test=$1 [L]
 RewriteRule ^StatusTQNewFL$ ./index1.php?p=StatusTQ-New-FL [L]
 
+RewriteRule ^MasterLLL$ ./index1.php?p=Master-Data-New-LLL [L]
+RewriteRule ^HapusDataLLL-([a-zA-Z0-9_-]+)$ ./index1.php?p=HapusDataLLL&id=$1 [L]
+RewriteRule ^LLL_Tambah$ ./index1.php?p=lll_Tambah [L]
+RewriteRule ^LLL_Edit$ ./index1.php?p=LLL_Edit [L]
+
 RewriteRule ^MasterDataNewFL$ ./index1.php?p=Master-Data-New-FL [L]
 RewriteRule ^SummaryTQNewFL$ ./index1.php?p=SummaryTQ-New-FL [L]
 RewriteRule ^SummaryTQNewFL-$ ./index1.php?p=SummaryTQ-New-FL [L]

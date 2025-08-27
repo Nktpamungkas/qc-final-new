@@ -627,6 +627,11 @@ $page = strtolower($page);
                                     echo "active";
                                 } ?>"><a href="MasterDataNew"><i class="fa fa-database text-aqua"></i>
                                         <span>Master Data</span></a></li>
+                                <!--  -->
+                                <li class="<?php if ($_GET['p'] == "Master-Data-New-LLL") {
+                                    echo "active";
+                                } ?>"><a href="MasterLLL"><i class="fa fa-database text-aqua"></i>
+                                        <span>Master Hanger LLL</span></a></li>
                             </ul>
                         </li>
                         <li class="treeview <?php if ($_GET['p'] == "Kain-Masuk-Lab" or $_GET['p'] == "Testing-Lab" or $_GET['p'] == "Result-Lab" or $_GET['p'] == "EditTQ-Lab" or $_GET['p'] == "Master-Data-Lab" or $_GET['p'] == "Master-Test-Lab") {
@@ -3704,6 +3709,54 @@ $page = strtolower($page);
                 success: function (ajaxData) {
                     $("#DetailPersediaanKain").html(ajaxData);
                     $("#DetailPersediaanKain").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+        $(document).on('click', '.tambah_lll', function (e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/tambah_lll.php",
+                type: "POST",
+                data: {
+                    id: m,
+                },
+                success: function (ajaxData) {
+                    $("#TambahHangtag").html(ajaxData);
+                    $("#TambahHangtag").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+        $(document).on('click', '.edit_lll', function (e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/edit_lll.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function (ajaxData) {
+                    $("#EditHangtag").html(ajaxData);
+                    $("#EditHangtag").modal('show', {
+                        backdrop: 'true'
+                    });
+                }
+            });
+        });
+        $(document).on('click', '.edit_hangtag', function (e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "pages/edit_hangtag.php",
+                type: "GET",
+                data: {
+                    id: m,
+                },
+                success: function (ajaxData) {
+                    $("#EditHangtag").html(ajaxData);
+                    $("#EditHangtag").modal('show', {
                         backdrop: 'true'
                     });
                 }
