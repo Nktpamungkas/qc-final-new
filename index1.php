@@ -4480,6 +4480,28 @@ $page = strtolower($page);
                 }
             });
         });
+        $(document).on('click', '.detail_bonpenghubung', function(e) {
+            var m = $(this).attr("id");
+            var no_po = $(this).attr("no_po");
+            var no_hanger = $(this).attr("no_hanger");
+            var no_warna = $(this).attr("no_warna");
+            $.ajax({
+            url: "pages/detail_bonpenghubung.php",
+            type: "GET",
+            data: {
+                id: m,
+                no_po: no_po,
+                no_hanger: no_hanger,
+                no_warna: no_warna,
+            },
+            success: function(ajaxData) {
+                $("#DetailBonPenghubung").html(ajaxData);
+                $("#DetailBonPenghubung").modal('show', {
+                backdrop: 'true'
+                });
+            }
+            });
+        });
     </script>
     <script src="bower_components/ckeditor/ckeditor.js"></script>
     <!-- Bootstrap WYSIHTML5 -->

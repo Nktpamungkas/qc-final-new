@@ -86,6 +86,23 @@ $page = strtolower($page);
                     </div>
                     <!-- end jika username marketing hidden -->
                 <?php } ?>
+                <?php if ($_SESSION['usrid'] != "marketing") { ?>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <a href="SummaryBonpenghubung">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-red"><i class="fa fa-pencil-square-o"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Summary-Bonpenghubung</span>
+                                    <span class="info-box-number">&nbsp;</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                        </a>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- end jika username marketing hidden -->
+                <?php } ?>
 
                 <!-- /.col -->
             <?php } ?>
@@ -433,7 +450,7 @@ $page = strtolower($page);
 
 
                 <!-- jika username marketing hidden -->
-                <?php if ($_SESSION['dept'] != "MKT" && $_SESSION['usrid'] != "ppc" and $_SESSION['lvl_id'] != "SUPERADMINTQ") { ?>
+                <?php if ($_SESSION['dept'] != "MKT" && $_SESSION['usrid'] != "ppc" and $_SESSION['lvl_id'] != "SUPERADMINTQ" ) { ?>
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <a href="SummaryOrder">
                             <div class="info-box">

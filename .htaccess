@@ -560,5 +560,6 @@ RewriteRule ^HapusDataConform-([a-zA-Z0-9_-]+)$ ./index1.php?p=hapusdataconform&
 RewriteRule ^Editconform-([a-zA-Z0-9_-]+)$ ./index1.php?p=edit-conform&id=$1 [L]
 
 RewriteRule ^SummaryReplacementItem$ ./index1.php?p=Summary-Replacement-Item [L]
+RewriteRule ^SummaryBonpenghubung$ ./index1.php?p=Summary-Bonpenghubung [L]
 
 Options All -Indexes
