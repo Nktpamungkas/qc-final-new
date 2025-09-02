@@ -1041,13 +1041,13 @@ textarea {
             <td align="left" style="font-size: 11px;" width="33%">LENGTHWISE</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l2']!='' AND $rcekM['mshrinkage_l2'] < -7){echo "color:red;";}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l2']!='' AND $rcekM['mshrinkage_l2'] > 5){echo "color:red;";}else if($rcek1['shrinkage_l2']!='' AND $rcek1['shrinkage_l2'] < -7){echo "color:red;";}else if($rcek1['shrinkage_l2']!='' AND $rcek1['shrinkage_l2'] > 5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mshrinkage_l2']=="" AND $rcek1['shrinkage_l2']==""){echo "N/A";}else if($rcek1['stat_fwss']=="MARGINAL PASS"){echo $rcekM['mshrinkage_l2'];}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l2']==""){echo "N/A";}else{echo $rcek1['shrinkage_l2'];}?></td>
             <!-- <td align="right" style="font-size: 11px;" width="33%">-5 TO + 5 %</td> -->
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="15" /></td>
+            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="50" /></td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">WIDTHWISE</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w2']!='' AND $rcekM['mshrinkage_w2'] < -7){echo "color:red;";}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w2']!='' AND $rcekM['mshrinkage_w2'] > 5){echo "color:red;";}else if($rcek1['shrinkage_w2']!='' AND $rcek1['shrinkage_w2'] < -7){echo "color:red;";}else if($rcek1['shrinkage_w2']!='' AND $rcek1['shrinkage_w2'] > 5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mshrinkage_w2']=="" AND $rcek1['shrinkage_w2']==""){echo "N/A";}else if($rcek1['stat_fwss']=="MARGINAL PASS"){echo $rcekM['mshrinkage_w2'];}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w2']==""){echo "N/A";}else{echo $rcek1['shrinkage_w2'];}?></td>
             <!-- <td align="right" style="font-size: 11px;" width="33%">-5 TO + 5 %</td> -->
-            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="15" /></td>
+            <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="50" /></td>
         </tr>
         <!-- data belum tau di tarik di mana -->
         <tr> 
@@ -1197,27 +1197,27 @@ textarea {
                 <tr>
                     <td align="left" style="font-size: 11px;" width="33%"><strong>ORIGINAL @100 CYCLES</strong></td>
                     <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f1']!='' AND $rcekM['mpm_f1'] < 4){echo "color:red;";}else if($rcek1['pm_f1']!='' AND $rcek1['pm_f1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f1']=="" AND $rcek1['pm_f1']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f1'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f1']==""){echo "N/A";}else{echo $rcek1['pm_f1'];}?></td>
-                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
                 </tr>
                 <tr>
                     <td align="left" style="font-size: 11px;" width="33%">AFTER 1 WASH @2500 CYCLES</td>
                     <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f2']!='' AND $rcekM['mpm_f2'] < 4){echo "color:black;";}else if($rcek1['pm_f2']!='' AND $rcek1['pm_f2'] < 4){echo "color:back;";}?>" width="33%"><?php if($rcekM['mpm_f2']=="" AND $rcek1['pm_f2']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f2'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f2']==""){echo "N/A";}else{echo $rcek1['pm_f2'];}?></td>
-                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
                 </tr>
                 <tr>
                     <td align="left" style="font-size: 11px;" width="33%">AFTER 2 WASH @5000 CYCLES</td>
                     <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f3']!='' AND $rcekM['mpm_f3'] < 4){echo "color:red;";}else if($rcek1['pm_f3']!='' AND $rcek1['pm_f3'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f3']=="" AND $rcek1['pm_f3']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f3'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f3']==""){echo "N/A";}else{echo $rcek1['pm_f3'];}?></td>
-                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
                 </tr>
                 <tr>
                     <td align="left" style="font-size: 11px;" width="33%">AFTER 3 WASH @7500 CYCLES</td>
                     <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f4']!='' AND $rcekM['mpm_f4'] < 4){echo "color:red;";}else if($rcek1['pm_f4']!='' AND $rcek1['pm_f4'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f4']=="" AND $rcek1['pm_f4']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f4'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f4']==""){echo "N/A";}else{echo $rcek1['pm_f4'];}?></td>
-                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
                 </tr>
                 <tr>
                     <td align="left" style="font-size: 11px;" width="33%">AFTER 4 WASH @10000 CYCLES</td>
                     <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f5']!='' AND $rcekM['mpm_f5'] < 4){echo "color:red;";}else if($rcek1['pm_f5']!='' AND $rcek1['pm_f5'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f5']=="" AND $rcek1['pm_f5']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f5'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f5']==""){echo "N/A";}else{echo $rcek1['pm_f5'];}?></td>
-                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                    <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
                 </tr>
                 <tr>
                     <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
@@ -1729,7 +1729,7 @@ textarea {
             <tr>
                 <td align="left" style="font-size: 11px;" width="33%">FACE</td>
                 <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['prt_f1']!=""){echo $rcek1['prt_f1'];}else{echo "N/A";}?></td>
-                <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
             </tr>
             <!--
             <tr>
@@ -1749,7 +1749,7 @@ textarea {
             <tr>
                 <td align="left" style="font-size: 11px;" width="33%">FACE</td>
                 <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['prt_f2']!=""){echo $rcek1['prt_f2'];}else{echo "N/A";}?></td>
-                <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="15" /></td>
+                <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
             </tr>
             <!--
             <tr>

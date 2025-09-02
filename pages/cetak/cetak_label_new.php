@@ -207,7 +207,7 @@ QRcode::png($codeContents1, $tempdir1 . $namaFile1, $level1, $UkuranPixel1, $Uku
             } else if ($r['development'] == 'Request') {
               $color = 'purple';
             } else if ($r['development'] == 'Full Test SGS') {
-            $color = 'pink';
+            $color = 'black';
             } else {
               $color = '';
             }
@@ -382,7 +382,7 @@ QRcode::png($codeContents1, $tempdir1 . $namaFile1, $level1, $UkuranPixel1, $Uku
             } else if ($r['development'] == 'Request') {
               $color = 'purple';
             } else if ($r['development'] == 'Full Test SGS') {
-              $color = 'pink';
+              $color = 'black';
             } else {
               $color = '';
             }
@@ -557,7 +557,7 @@ QRcode::png($codeContents1, $tempdir1 . $namaFile1, $level1, $UkuranPixel1, $Uku
             } else if ($r['development'] == 'Request') {
               $color = 'purple';
             } else if ($r['development'] == 'Full Test SGS') {
-              $color = 'pink';
+              $color = 'black';
             } else {
               $color = '';
             }
