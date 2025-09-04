@@ -207,7 +207,7 @@ QRcode::png($codeContents1, $tempdir1 . $namaFile1, $level1, $UkuranPixel1, $Uku
             } else if ($r['development'] == 'Request') {
               $color = 'purple';
             } else if ($r['development'] == 'Full Test SGS') {
-            $color = 'black';
+            $color = 'cyan';
             } else {
               $color = '';
             }
@@ -245,7 +245,7 @@ QRcode::png($codeContents1, $tempdir1 . $namaFile1, $level1, $UkuranPixel1, $Uku
             <?php } ?>
 
             <tr>
-              <td colspan="4" style="background-color:<?= $color ?>">
+              <td colspan="2" style="background-color:<?= $color ?>">
                 &nbsp;
               </td>
             </tr>
@@ -382,7 +382,7 @@ QRcode::png($codeContents1, $tempdir1 . $namaFile1, $level1, $UkuranPixel1, $Uku
             } else if ($r['development'] == 'Request') {
               $color = 'purple';
             } else if ($r['development'] == 'Full Test SGS') {
-              $color = 'black';
+              $color = 'cyan';
             } else {
               $color = '';
             }
@@ -420,7 +420,7 @@ QRcode::png($codeContents1, $tempdir1 . $namaFile1, $level1, $UkuranPixel1, $Uku
             <?php } ?>
 
             <tr>
-              <td colspan="4" style="background-color:<?= $color ?>">
+              <td colspan="2" style="background-color:<?= $color ?>">
                 &nbsp;
               </td>
             </tr>
@@ -557,7 +557,7 @@ QRcode::png($codeContents1, $tempdir1 . $namaFile1, $level1, $UkuranPixel1, $Uku
             } else if ($r['development'] == 'Request') {
               $color = 'purple';
             } else if ($r['development'] == 'Full Test SGS') {
-              $color = 'black';
+              $color = 'cyan';
             } else {
               $color = '';
             }
@@ -595,7 +595,7 @@ QRcode::png($codeContents1, $tempdir1 . $namaFile1, $level1, $UkuranPixel1, $Uku
             <?php } ?>
 
             <tr>
-              <td colspan="4" style="background-color:<?= $color ?>">
+              <td colspan="2" style="background-color:<?= $color ?>">
                 &nbsp;
               </td>
             </tr>
