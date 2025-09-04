@@ -2,6 +2,7 @@
 ini_set("error_reporting", 1);
 session_start();
 include "koneksi.php";
+$today = date('Y-m-d');
 ?>
 
 <!DOCTYPE html
@@ -258,6 +259,13 @@ ORDER BY
                       // Cek jika lebih dari 2 hari (48 jam)
                       if ($rowd['diff'] > 48) {
                         echo '<br> <span class="badge bg-red blink_me">Harus Segera packing</span>';
+                      }
+                      if($rowd['tgl_delivery']<$today){
+                        $date_delivery = new DateTime($rowd['tgl_delivery']);
+                        $date_today    = new DateTime($today);
+                        $interval = $date_today->diff($date_delivery);
+                        $selisih  = $interval->days;
+                        echo "<br> <span class='badge bg-orange blink_me'><i class='fa fa-exclamation-triangle'> </i> Delay $selisih Hari Dari Delivery!</span>";
                       }
                       ?>
                     </td>

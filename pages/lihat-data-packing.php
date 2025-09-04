@@ -473,17 +473,121 @@ include "koneksi.php";
                 <td align="center">&nbsp;</td>
               </tr>
               <?php
-              $qrysisa = mysqli_query($con, "SELECT * FROM tbl_sisa_packing WHERE tgl_sisa='$Awal'");
-              $rowsisa = mysqli_fetch_array($qrysisa);
+              // Old
+              // $qrysisa = mysqli_query($con, "SELECT * FROM tbl_sisa_packing WHERE tgl_sisa='$Awal'");
+              // $rowsisa = mysqli_fetch_array($qrysisa);
+              $qrysisa = "SELECT
+                                      CONCAT(
+                                SUM(CASE WHEN jenis_packing IN ('Normal','QtyBesar') THEN rol ELSE 0 END), 
+                                ' Roll X ', 
+                                SUM(CASE WHEN jenis_packing IN ('Normal','QtyBesar') THEN bruto ELSE 0 END), 
+                                ' Kg'
+                            ) AS QtyBesar,
+                            CONCAT(
+                                SUM(CASE WHEN jenis_packing = 'QtyKecil' THEN rol ELSE 0 END), 
+                                ' Roll X ', 
+                                SUM(CASE WHEN jenis_packing = 'QtyKecil' THEN bruto ELSE 0 END), 
+                                ' Kg'
+                            ) AS QtyKecil,
+                            CONCAT(
+                                SUM(CASE WHEN jenis_packing = 'InspectMeja' THEN rol ELSE 0 END), 
+                                ' Roll X ', 
+                                SUM(CASE WHEN jenis_packing = 'InspectMeja' THEN bruto ELSE 0 END), 
+                                ' Kg'
+                            ) AS InspectMeja,
+                            CONCAT(
+                                SUM(CASE WHEN jenis_packing = 'KainDragon' THEN rol ELSE 0 END), 
+                                ' Roll X ', 
+                                SUM(CASE WHEN jenis_packing = 'KainDragon' THEN bruto ELSE 0 END), 
+                                ' Kg'
+                            ) AS KainDragon,
+                            CONCAT(
+                                SUM(CASE WHEN jenis_packing = 'KKPreset' THEN rol ELSE 0 END), 
+                                ' Roll X ', 
+                                SUM(CASE WHEN jenis_packing = 'KKPreset' THEN bruto ELSE 0 END), 
+                                ' Kg'
+                            ) AS KKPreset,
+                            CONCAT(
+                                SUM(CASE WHEN jenis_packing = 'BS' THEN rol ELSE 0 END), 
+                                ' Roll X ', 
+                                SUM(CASE WHEN jenis_packing = 'BS' THEN bruto ELSE 0 END), 
+                                ' Kg'
+                            ) AS BS,
+                            CONCAT(
+                                SUM(CASE WHEN jenis_packing = 'Development' THEN rol ELSE 0 END), 
+                                ' Roll X ', 
+                                SUM(CASE WHEN jenis_packing = 'Development' THEN bruto ELSE 0 END), 
+                                ' Kg'
+                            ) AS Development,
+                            CONCAT(SUM(CASE WHEN jenis_packing IN ('Normal','Development','BS','KKPreset','KainDragon','InspectMeja','QtyKecil','QtyBesar') THEN rol ELSE 0 END), 
+                                ' Roll X ', 
+                                SUM(CASE WHEN jenis_packing IN ('Normal','Development','BS','KKPreset','KainDragon','InspectMeja','QtyKecil','QtyBesar') THEN bruto ELSE 0 END), 
+                                ' Kg') as Total
+                        FROM
+                            tbl_schedule_packing
+                        WHERE
+                            -- tgl_masuk = '$Awal' AND
+                            NOT `STATUS` = 'selesai'";
+                        $qrysisa =  mysqli_query($con,$qrysisa);
+                        $rowsisa =  mysqli_fetch_array($qrysisa);
               ?>
               <tr>
-                <td colspan="2" align="center" valign="middle">SISA SIAP PACKING</td>
-                <td colspan="4" align="left"><?php if ($rowsisa['sisa_packing'] != "") {
-                                                echo $rowsisa['sisa_packing'];
+                <td colspan="2" align="center" valign="middle">TOTAL SISA PACKING</td>
+                <td colspan="2" align="left"><?php if ($rowsisa['Total'] != "") {
+                                                echo $rowsisa['Total'];
                                               } else {
                                                 echo "0";
                                               } ?></td>
-                <td colspan="7" align="center">&nbsp;</td>
+                <td align="left">Qty Besar</td>
+                <td colspan="2" align="left"><?php if ($rowsisa['QtyBesar'] != "") {
+                                                echo $rowsisa['QtyBesar'];
+                                              } else {
+                                                echo "0";
+                                              } ?></td>
+                <td align="left">Kain Dragon</td>
+                <td colspan="2" align="left"><?php if ($rowsisa['KainDragon'] != "") {
+                                                echo $rowsisa['KainDragon'];
+                                              } else {
+                                                echo "0";
+                                              } ?></td>
+                <td align="left">Inspek Meja</td>
+                <td colspan="2" align="left"><?php if ($rowsisa['InspectMeja'] != "") {
+                                                echo $rowsisa['InspectMeja'];
+                                              } else {
+                                                echo "0";
+                                              } ?></td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center" valign="middle"></td>
+                <td colspan="2" align="left"></td>
+                <td align="left">Qty Kecil</td>
+                <td colspan="2" align="left"><?php if ($rowsisa['QtyKecil'] != "") {
+                                                echo $rowsisa['QtyKecil'];
+                                              } else {
+                                                echo "0";
+                                              } ?></td>
+                <td align="left">BS</td>
+                <td colspan="2" align="left"><?php if ($rowsisa['BS'] != "") {
+                                                echo $rowsisa['BS'];
+                                              } else {
+                                                echo "0";
+                                              } ?></td>
+                <td align="left">KK Preset</td>
+                <td colspan="2" align="left"><?php if ($rowsisa['KKPreset'] != "") {
+                                                echo $rowsisa['KKPreset'];
+                                              } else {
+                                                echo "0";
+                                              } ?></td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center" valign="middle"></td>
+                <td colspan="2" align="left"></td>
+                <td align="left">Development</td>
+                <td colspan="2" align="left"><?php if ($rowsisa['Development'] != "") {
+                                                echo $rowsisa['Development'];
+                                              } else {
+                                                echo "0";
+                                              } ?></td>
               </tr>
             </tbody>
           </table>
