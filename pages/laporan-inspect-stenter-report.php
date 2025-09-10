@@ -112,7 +112,7 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                 <?php
                     $bgcolor="#4b95d6";
                 ?>
-                <table class="table table-bordered table-striped table-ringkasan" style="width: 100%">
+                <table class="table table-bordered table-striped" style="width: 100%">
                     <thead >
                         <tr  bgcolor="<?php echo $bgcolor; ?>">
                             <th class="text-middle text-center" rowspan="2">
@@ -145,8 +145,8 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                         $data_stenter_total=array();
                         $query_lap="SELECT
                                 l.shift,
-                                SUM(IF(l.status = 'OK' ,l.bruto,0)) AS `sts_total_ok`,
-                                SUM(IF(l.status = 'Reject' ,l.bruto,0)) AS `sts_total_reject`,
+                                SUM(IF(l.proses = 'Fin Jadi' AND l.status = 'OK' ,l.bruto,0)) AS `sts_total_ok`,
+                                SUM(IF(l.proses = 'Fin Jadi' AND l.status = 'Reject' ,l.bruto,0)) AS `sts_total_reject`,
                                 SUM(IF(l.proses <> 'Fin Jadi' ,l.bruto,0)) AS `dalam_proses`
                             FROM
                                 tbl_lap_stenter l
