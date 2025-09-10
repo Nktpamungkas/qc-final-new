@@ -113,8 +113,8 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                     $bgcolor="#4b95d6";
                 ?>
                 <table class="table table-bordered table-striped" style="width: 100%">
-                    <thead >
-                        <tr  bgcolor="<?php echo $bgcolor; ?>">
+                    <thead class="bg-blue">
+                        <tr >
                             <th class="text-middle text-center" rowspan="2">
                                 Shift
                             </th>
@@ -125,7 +125,7 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                                 Dalam Proses (Oven,<br> Fin1x, Preset, FIN + CP)
                             </th>
                         </tr>
-                        <tr valign="center" bgcolor="<?php echo $bgcolor; ?>">
+                        <tr valign="center" >
                             <th class="text-middle text-center" >
                                 OK
                             </th>
@@ -193,8 +193,8 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                         }
                         ?>
                     </tbody>
-                    <tfoot>
-                        <tr valign="center" bgcolor="<?php echo $bgcolor; ?>">
+                    <tfoot class="bg-blue">
+                        <tr valign="center">
                             <td align="center">Total</td>
                             <td align="center">
                                 <?php echo number_format($data_stenter_total['sts_total_ok'], 2); ?>
@@ -206,7 +206,7 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                                 <?php echo number_format($data_stenter_total['dalam_proses'], 2); ?>
                             </td>
                         </tr>
-                        <tr valign="top" bgcolor="<?php echo $bgcolor; ?>">
+                        <tr valign="top" >
                             <td align="center">Persentase</td>
                             <td align="center">
                                 <?php echo number_format($percent_ok, 2); ?>
