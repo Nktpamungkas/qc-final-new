@@ -312,11 +312,13 @@
             }
             $jenis_testing_dipakai_lain = array_unique($jenis_testing_dipakai_lain);
 
-            $jenisTestingMaster = mysqli_query($con, "
-                SELECT DISTINCT TRIM(SUBSTRING_INDEX(physical, ',', 1)) AS physical
-                FROM tbl_master_test
-                ORDER BY physical ASC
-            ");
+            $jenisTestingMaster = mysqli_query($con, "SELECT
+                                                            UPPER(value) AS physical
+                                                        FROM
+                                                            tbl_tq_mastertest t
+                                                        WHERE 
+                                                            is_active = 1
+                                                ");
         ?>
 
         <!-- Modal Edit -->
