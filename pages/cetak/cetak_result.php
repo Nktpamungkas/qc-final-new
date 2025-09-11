@@ -32,10 +32,17 @@ $sqlCekD = mysqli_query($con, "SELECT *,
 $rcekD = mysqli_fetch_array($sqlCekD);
 $data1 = mysqli_query($con, "SELECT nodemand,
                                     nokk,
-                                    substring_index(pelanggan, '/', -1) as buyer,
+                                    pelanggan as buyer,
                                     no_item,
                                     no_hanger,
-                                    warna 
+                                    warna, 
+                                    lebar,
+                                    gramasi,
+                                    lot_legacy,
+                                    lot,
+                                    no_warna,
+                                    rol,
+                                    berat  
                                   FROM tbl_tq_nokk WHERE id='$idkk'");
 $rd = mysqli_fetch_array($data1);
 ?>
@@ -65,8 +72,8 @@ $rd = mysqli_fetch_array($data1);
         <td colspan="1" align="left" valign="top">
           Buyer : <?php echo $rd['buyer']; ?>
         </td>
-        <td>&nbsp;</td>
-        <td colspan="1" align="right" valign="top">
+        <td>No Lot Legacy : <?php echo $rd['lot_legacy']; ?></td>
+        <td colspan="1" align="left" valign="top">
           No Prod Order : <?php echo $rd['nokk']; ?>
         </td>
       </tr>
@@ -74,8 +81,10 @@ $rd = mysqli_fetch_array($data1);
         <td colspan="1" align="left" valign="top">
           Item / Hanger : <?php echo trim($rd['no_item']); ?> / <?= $rd['no_hanger'] ?>
         </td>
-        <td>&nbsp;</td>
-        <td colspan="1" align="right" valign="top">
+        <td>
+          Lebar x Gramasi : <?php echo $rd['lebar'] . ' x '.$rd['gramasi'] ; ?>
+        </td>
+        <td colspan="1" align="left" valign="top">
           Demand : <?php echo trim($rd['nodemand']); ?>
         </td>
       </tr>
@@ -83,10 +92,20 @@ $rd = mysqli_fetch_array($data1);
         <td colspan="1" align="left">
           Warna : <?= $rd['warna'] ?>
         </td>
-        <td>&nbsp;</td>
-        <td colspan="1" align="right">
+        <td>No Warna : <?= $rd['no_warna'];?></td>
+        <td colspan="1" align="left">
           <?= $rcek1['tgl_buat'] ?>
         </td>
+      </tr>
+      <tr>
+        <td colspan="1" align="left">Roll x Bruto : <?php echo $rd['rol'] . ' x '.$rd['berat'] ; ?></td>
+        <td>&nbsp;</td>
+        <td colspan="1" align="left">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="18" colspan="1" align="left">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="1" align="left">&nbsp;</td>
       </tr>
       <tr>
         <td width="187" align="left" valign="top" style="height: 1.6in;">PHYSICAL
