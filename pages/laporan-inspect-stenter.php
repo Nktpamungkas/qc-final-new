@@ -511,6 +511,7 @@
 							<option value="Fin Jadi">Fin Jadi</option>
 							<option value="Fin 1x">Fin 1x</option>
 							<option value="Fin Ulang">Fin Ulang</option>
+							<option value="Fin Jadi + Compact">Fin Jadi + Compact</option>
 						</select>
 					</div>
 				</div>
@@ -522,6 +523,12 @@
 							<option value="OK">OK</option>
 							<option value="Reject">Reject</option>
 						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="gerobak" class="col-sm-3 control-label">Gerobak</label>
+					<div class="col-sm-8">
+						<input name="gerobak" type="text" class="form-control" id="gerobak" placeholder="Gerobak">
 					</div>
 				</div>
 				<div class="form-group">
@@ -618,6 +625,7 @@ if (isset($_POST['save'])) {
     $no_warna = mysqli_real_escape_string($con, $_POST['no_warna']);
     $shift = mysqli_real_escape_string($con, $_POST['shift']);
     $proses = mysqli_real_escape_string($con, $_POST['proses']);
+    $gerobak = mysqli_real_escape_string($con, $_POST['gerobak']);
 
     // Insert data into tbl_lap_stenter
     $sqlData = mysqli_query($con, "INSERT INTO tbl_lap_stenter SET
@@ -642,6 +650,7 @@ if (isset($_POST['save'])) {
         no_warna='$no_warna',
         shift='$shift',
         proses='$proses',
+		gerobak='$gerobak',
         tanggal_buat=NOW()
     ");
 

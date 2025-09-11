@@ -21,61 +21,206 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
+    <style>
+        .table-ringkasan {
+            border-color: black !important; 
+        }
 
+        .table-ringkasan th,
+        .table-ringkasan td {
+            border-color: black !important;
+        }
+
+        .text-middle{
+            vertical-align:middle !important;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="box box-info">
-        <div class="box-header with-border">
-            <h3 class="box-title">Cari Data Laporan Stenter </h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            </div>
+<div>
+    <div class="row">
+        <div class="col-xs-4">		
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Cari Data Laporan Stenter </h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
 
-        </div>
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form method="post" enctype="multipart/form-data" name="form1" class="form-horizontal" id="form1">
-            <div class="box-body">
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <div class="input-group date">
-                            <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                            <input name="awal" type="text" class="form-control pull-right" id="datepicker" placeholder="Tanggal Awal"
-                                value="<?php echo $Awal; ?>" autocomplete="off" />
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form method="post" enctype="multipart/form-data" name="form1" class="form-horizontal" id="form1">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <div class="input-group date">
+                                    <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+                                    <input name="awal" type="text" class="form-control pull-right" id="datepicker" placeholder="Tanggal Awal"
+                                        value="<?php echo $Awal; ?>" autocomplete="off" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <div class="input-group date">
-                            <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
-                            <input name="akhir" type="text" class="form-control pull-right" id="datepicker1"
-                                placeholder="Tanggal Akhir" value="<?php echo $Akhir; ?>" autocomplete="off" />
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <div class="input-group date">
+                                    <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
+                                    <input name="akhir" type="text" class="form-control pull-right" id="datepicker1"
+                                        placeholder="Tanggal Akhir" value="<?php echo $Akhir; ?>" autocomplete="off" />
+                                </div>
+                            </div>
+                            <!-- /.input group -->
                         </div>
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <select name="shift" id="shift" class="form-control" placeholder="Shift">
+                                    <option value="">Pilih Shift</option>
+                                    <option value="ALL" <?=$shift=="ALL"?"selected":"" ;?>>ALL</option>
+                                    <option value="A" <?=$shift=="A"?"selected":"" ;?>>A</option>
+                                    <option value="B" <?=$shift=="B"?"selected":"" ;?>>B</option>
+                                    <option value="C" <?=$shift=="C"?"selected":"" ;?>>C</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-success" name="cari"><i class="fa fa-search"></i> Cari Data</button>
+                            </div>
+                        </div>
+                        <!-- /.box-footer -->
                     </div>
-                    <!-- /.input group -->
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <select name="shift" id="shift" class="form-control" placeholder="Shift">
-                            <option value="">Pilih Shift</option>
-                            <option value="ALL">ALL</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    <div class="pull-right">
-                        <button type="submit" class="btn btn-success" name="cari"><i class="fa fa-search"></i> Cari Data</button>
-                    </div>
-                </div>
-                <!-- /.box-footer -->
+                </form>
             </div>
-        </form>
+        </div>
+        <div class="col-xs-8">
+            <div class="box box-primary">
+                <div class="box-header with-border text-center">
+                    <h3 class="box-title "> Laporan Inspect Stenter</h3>
+                    <?php if ($Awal != "") { ?>
+                        <!-- <div class="pull-right">
+                            <a href="pages/cetak/excel-rangkuman-inspeksi-stenter.php?awal=<?php echo $_POST['awal']; ?>&akhir=<?php echo $_POST['akhir']; ?>&dept=<?php echo $_POST['dept']; ?>&shift=<?php echo $_POST['shift']; ?>&gshift=<?php echo $_POST['gshift']; ?>&proses=<?php echo $_POST['proses']; ?>&buyer=<?php echo $_POST['buyer']; ?>&jam_awal=<?php echo $_POST['jam_awal']; ?>&jam_akhir=<?php echo $_POST['jam_akhir']; ?>"
+                                class="btn btn-primary <?php if ($_POST['awal'] == "") {
+                                    echo "disabled";
+                                } ?>" target="_blank">Rangkuman Excel</a>
+                        </div> -->
+                    <?php } ?>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <?php
+                    $bgcolor="#4b95d6";
+                ?>
+                <table class="table table-bordered table-striped" style="width: 100%">
+                    <thead class="bg-blue">
+                        <tr >
+                            <th class="text-middle text-center" rowspan="2">
+                                Shift
+                            </th>
+                            <th class="text-middle text-center" colspan="2">
+                                FINAL
+                            </th>
+                            <th class="text-middle text-center" rowspan="2">
+                                Dalam Proses (Oven,<br> Fin1x, Preset, FIN + CP)
+                            </th>
+                        </tr>
+                        <tr valign="center" >
+                            <th class="text-middle text-center" >
+                                OK
+                            </th>
+                            <th class="text-middle text-center" >
+                                Reject
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($shift == "ALL" || $shift == "") {
+                            $stanter_shift = " ";
+                        } else {
+                            $stanter_shift = " l.shift='$shift' AND ";
+                        }
+                        $data_stenter=array();
+                        $data_stenter_total=array();
+                        $query_lap="SELECT
+                                l.shift,
+                                SUM(IF(l.proses = 'Fin Jadi' AND l.status = 'OK' ,l.bruto,0)) AS `sts_total_ok`,
+                                SUM(IF(l.proses = 'Fin Jadi' AND l.status = 'Reject' ,l.bruto,0)) AS `sts_total_reject`,
+                                SUM(IF(l.proses <> 'Fin Jadi' ,l.bruto,0)) AS `dalam_proses`
+                            FROM
+                                tbl_lap_stenter l
+                            WHERE 
+                                $stanter_shift
+                                DATE(l.tanggal_buat) BETWEEN '$Awal' AND '$Akhir'
+                            GROUP BY l.shift
+                            ORDER BY l.shift";
+                        $q_lap_stenter = mysqli_query($con, $query_lap);
+                        while ($rowSt = mysqli_fetch_array($q_lap_stenter)) {
+                            $data_stenter[$rowSt['shift']]['sts_total_ok']=$rowSt['sts_total_ok'];
+                            $data_stenter[$rowSt['shift']]['sts_total_reject']=$rowSt['sts_total_reject'];
+                            $data_stenter[$rowSt['shift']]['dalam_proses']=$rowSt['dalam_proses'];
+                            $data_stenter_total['sts_total_ok']=floatval($rowSt['sts_total_ok']) +floatval($data_stenter_total['sts_total_ok']);
+                            $data_stenter_total['sts_total_reject']=floatval($rowSt['sts_total_reject']) +floatval($data_stenter_total['sts_total_reject']);
+                            $data_stenter_total['dalam_proses']=floatval($rowSt['dalam_proses']) +floatval($data_stenter_total['dalam_proses']);
+                        }
+                        foreach($data_stenter as $is => $vs){
+                            ?>
+                            <tr valign="center" >
+                                <td align="center">
+                                    <?php echo ucfirst($is); ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo number_format($data_stenter[$is]['sts_total_ok'],2); ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo number_format($data_stenter[$is]['sts_total_reject'],2); ?>
+                                </td>
+                                <td align="center">
+                                    <?php echo number_format($data_stenter[$is]['dalam_proses'],2); ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        $percent_ok=0;
+                        $percent_reject=0;
+                        if ($Awal != "") {
+                            $tot_sts_stanter=floatval($data_stenter_total['sts_total_ok'])+floatval($data_stenter_total['sts_total_reject']);
+                            if($tot_sts_stanter != 0){
+                                $percent_ok=((floatval($data_stenter_total['sts_total_ok']) / $tot_sts_stanter) * 100);
+                                $percent_reject=((floatval($data_stenter_total['sts_total_reject']) / $tot_sts_stanter) * 100);
+                            }
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot class="bg-blue">
+                        <tr valign="center">
+                            <td align="center">Total</td>
+                            <td align="center">
+                                <?php echo number_format($data_stenter_total['sts_total_ok'], 2); ?>
+                            </td>
+                            <td align="center">
+                                <?php echo number_format($data_stenter_total['sts_total_reject'], 2); ?>
+                            </td>
+                            <td align="center">
+                                <?php echo number_format($data_stenter_total['dalam_proses'], 2); ?>
+                            </td>
+                        </tr>
+                        <tr valign="top" >
+                            <td align="center">Persentase</td>
+                            <td align="center">
+                                <?php echo number_format($percent_ok, 2); ?>
+                            </td>
+                            <td align="center">
+                                <?php echo number_format($percent_reject, 2); ?>
+                            </td>
+                            <td align="center">&nbsp;</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
@@ -133,6 +278,7 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                                     <th>Operator</th>
                                     <th>No Warna</th>
                                     <th>Proses</th>
+                                    <th>Gerobak</th>
                                     <th>Shift</th>
                                     <th>Tanggal Buat</th>
                                 </tr>
@@ -179,6 +325,7 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                                         <td><?php echo $row['operator']; ?></td>
                                         <td><?php echo $row['no_warna']; ?></td>
                                         <td><?php echo $row['proses']; ?></td>
+                                        <td><?php echo $row['gerobak']; ?></td>
                                         <td><?php echo $row['shift']; ?></td>
                                         <td><?php echo $row['tanggal_buat']; ?></td>
                                     </tr>
@@ -198,6 +345,7 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
             </div>
         </div>
     </div>
+</div>
 </body>
 
 </html>
