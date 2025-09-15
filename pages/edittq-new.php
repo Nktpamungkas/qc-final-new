@@ -240,6 +240,7 @@ echo '</pre>';
 							<option value="Labdip" <?php if($rcek['development']=="Labdip"){echo "SELECTED";}?>>Labdip</option>
 							<option value="Mini Bulk" <?php if($rcek['development']=="Mini Bulk"){echo "SELECTED";}?>>Mini Bulk</option>
 							<option value="Request" <?php if($rcek['development']=="Request"){echo "SELECTED";}?>>Request</option>
+							<option value="Full Test SGS" <?php if($rcek['development']=="Full Test SGS"){echo "SELECTED";}?>>Full Test SGS</option>
 						</select>
 					</div>
 				</div>				   
