@@ -85,6 +85,10 @@ if ($Awal != "") {
             float: left;
         }
 
+        .text-middle{
+            vertical-align:middle !important;
+        }
+
         input {
             text-align: center;
             border: hidden;
@@ -141,7 +145,7 @@ if ($Awal != "") {
                         name="operator" type="text" placeholder="Ketik Disini" size="20" /></th>
                 <th colspan="10" align="center">SNAG POD (FACE)</th>
                 <th colspan="2" align="center">SNAG POD (BACK)</th>
-                <th rowspan="4" align="center">SNAG MACE</th>
+                <th rowspan="2" colspan="6" align="center">SNAG MACE</th>
                 <th colspan="3" align="center">BS</th>
                 <th colspan="2" align="center">PILLING MARTINDALE</th>
                 <th colspan="2" align="center">ELONGATION</th>
@@ -176,6 +180,9 @@ if ($Awal != "") {
                 <th rowspan="2" align="center">PILL R. TUMBLER</th>
                 <th rowspan="2" align="center">PILL BOX</th>
                 <th colspan="12" align="center">SNAGPOD</th>
+                <th colspan="2" align="center">100</th>
+                <th colspan="2" align="center">300</th>
+                <th colspan="2" align="center">600</th>
                 <th colspan="3" align="center">BS</th>
                 <th colspan="2" align="center">PILL MARTINDALE</th>
                 <th colspan="2" align="center">ELONGATION</th>
@@ -198,6 +205,12 @@ if ($Awal != "") {
                 <th align="center">Snag > 5mm</th>
                 <th align="center">Grade</th>
                 <th align="center">Grade</th>
+                <th align="center">&nbsp;&nbsp;V&nbsp;&nbsp;</th>
+                <th align="center">&nbsp;&nbsp;H&nbsp;&nbsp;</th>
+                <th align="center">&nbsp;&nbsp;V&nbsp;&nbsp;</th>
+                <th align="center">&nbsp;&nbsp;H&nbsp;&nbsp;</th>
+                <th align="center">&nbsp;&nbsp;V&nbsp;&nbsp;</th>
+                <th align="center">&nbsp;&nbsp;H&nbsp;&nbsp;</th>
                 <th align="center">NEWTON</th>
                 <th align="center">KPA</th>
                 <th align="center">PSI</th>
@@ -390,16 +403,50 @@ if ($Awal != "") {
                     } ?>>
                         <?php echo $r['rsp_grdw2']; ?>
                     </td>
-                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rsmw'] != "" and ($r['rsm_l1'] != "" or $r['rsm_w1'] != "")) { ?> bgcolor="<?php echo $rwarna['rsmw']; ?>" <?php } else {
-                        if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and ($rtemp['sts'] == "1" and $r['rsm_l1'] != "" or $r['rsm_w1'] != "")) { ?> bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_l1'] != $rtemp['temp_rsm_l1'] or $r['rsm_w1'] != $rtemp['temp_rsm_w1'])) { ?> bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_l1'] != "" or $r['rsm_w1'] != "")) { ?> bgcolor="" <?php }
+                    <!--Begin Snag Mace -->
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rsmw'] != "" and ($r['rsm_l1'] != "")) { ?> bgcolor="<?php echo $rwarna['rsmw']; ?>" <?php } else {
+                        if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and ($rtemp['sts'] == "1" and $r['rsm_l1'] != "")) { ?> bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_l1'] != $rtemp['temp_rsm_l1'] )) { ?> bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_l1'] != "" )) { ?> bgcolor="" <?php }
                     } ?>>
                         <?php if ($r['rsm_l1'] != "") {
-                            echo "L= " . $r['rsm_l1'];
-                        } ?> &nbsp;
-                        <?php if ($r['rsm_w1'] != "") {
-                            echo "W= " . $r['rsm_w1'];
+                            echo $r['rsm_l1'];
                         } ?>
                     </td>
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rsmw'] != "" and ($r['rsm_w1'] != "")) { ?> bgcolor="<?php echo $rwarna['rsmw']; ?>" <?php } else {
+                        if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and ($rtemp['sts'] == "1" and $r['rsm_w1'] != "")) { ?> bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_w1'] != $rtemp['temp_rsm_w1'] )) { ?> bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_w1'] != "" )) { ?> bgcolor="" <?php }
+                    } ?>>
+                        <?php if ($r['rsm_w1'] != "") {
+                            echo $r['rsm_w1'];
+                        } ?>
+                    </td>
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rsmw'] != "" and ($r['rsm_l2'] != "")) { ?> bgcolor="<?php echo $rwarna['rsmw']; ?>" <?php } else {
+                        if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and ($rtemp['sts'] == "1" and $r['rsm_l2'] != "")) { ?> bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_l2'] != $rtemp['temp_rsm_l2'] )) { ?> bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_l2'] != "" )) { ?> bgcolor="" <?php }
+                    } ?>>
+                        <?php if ($r['rsm_l2'] != "") {
+                            echo $r['rsm_l2'];
+                        } ?>
+                    </td>
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rsmw'] != "" and ($r['rsm_w2'] != "")) { ?> bgcolor="<?php echo $rwarna['rsmw']; ?>" <?php } else {
+                        if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and ($rtemp['sts'] == "1" and $r['rsm_w2'] != "")) { ?> bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_w2'] != $rtemp['temp_rsm_w2'] )) { ?> bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_w2'] != "" )) { ?> bgcolor="" <?php }
+                    } ?>>
+                        <?php if ($r['rsm_w2'] != "") {
+                            echo $r['rsm_w2'];
+                        } ?>
+                    </td>
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rsmw'] != "" and ($r['rsm_l3'] != "")) { ?> bgcolor="<?php echo $rwarna['rsmw']; ?>" <?php } else {
+                        if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and ($rtemp['sts'] == "1" and $r['rsm_l3'] != "")) { ?> bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_l3'] != $rtemp['temp_rsm_l3'] )) { ?> bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_l3'] != "" )) { ?> bgcolor="" <?php }
+                    } ?>>
+                        <?php if ($r['rsm_l3'] != "") {
+                            echo $r['rsm_l3'];
+                        } ?>
+                    </td>
+                    <td align="center" style="font-size: 7px;" <?php if ($rwarna['rsmw'] != "" and ($r['rsm_w3'] != "")) { ?> bgcolor="<?php echo $rwarna['rsmw']; ?>" <?php } else {
+                        if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and ($rtemp['sts'] == "1" and $r['rsm_w3'] != "")) { ?> bgcolor="#FFE54E" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_w3'] != $rtemp['temp_rsm_w3'] )) { ?> bgcolor="#FF6F30" <?php } else if (($selisih->m >= 1 or $selisih_temp->m >= 1) and $rtemp['sts'] == "1" and $r['tgl_update'] != $rtemp['tgl_update'] and ($r['rsm_w3'] != "" )) { ?> bgcolor="" <?php }
+                    } ?>>
+                        <?php if ($r['rsm_w3'] != "") {
+                            echo $r['rsm_w3'];
+                        } ?>
+                    </td>
+                    <!--End Snag Mace -->
                     <td align="center" style="font-size: 7px;" <?php if ($rwarna['rbswinstron'] != "" and $r['rbs_instron'] != "") { ?>
                             bgcolor="<?php echo $rwarna['rbswinstron']; ?>" <?php } else {
                         if (($selisih->m == 0 or $selisih_temp->m == 0) and $rtemp['sts'] == "1" and $r['tgl_update'] == $rtemp['tgl_update'] and $r['rbs_instron'] != "") { ?>

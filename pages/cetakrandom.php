@@ -12,6 +12,10 @@
             max-width: 500px;
             margin: 0 auto;
         }
+        .text-middle{
+            vertical-align:middle !important;
+        }
+    </style>
     </style>
 </head>
 
@@ -82,6 +86,7 @@
                                         <li><a href="pages/cetak/cetak_bs.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">Bursting Strength</a></li>
                                         <li><a href="pages/cetak/cetak_sr.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">Stretch And Recovery</a></li>
                                         <li><a href="pages/cetak/cetak_bas.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">Bow & Skew</a></li>
+                                        <li><a href="pages/cetak/cetak_sm.php?awal=<?=$Awal?>&akhir=<?=$Akhir?>" target="_blank">SNAGGING MACE</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -125,7 +130,7 @@
                                 <th rowspan="2" colspan="8" align="center">&nbsp;</th>
                                 <th colspan="10" align="center">SNAG POD (FACE)</th>
                                 <th colspan="2" align="center">SNAG POD (BACK)</th>
-                                <th rowspan="4" align="center">SNAG MACE</th>
+                                <th rowspan="2" colspan="6" class="text-middle text-center">SNAG MACE</th>
                                 <th colspan="3" align="center">BS</th>
                                 <th colspan="2" align="center">PILLING MARTINDALE</th>
                                 <th colspan="2" align="center">ELONGATION</th>
@@ -160,6 +165,9 @@
                                 <th rowspan="2" align="center">PILL R. TUMBLER</th>
                                 <th rowspan="2" align="center">PILL BOX</th>
                                 <th colspan="12" align="center">SNAGPOD</th>
+                                <th colspan="2" class="text-middle text-center">100</th>
+                                <th colspan="2" class="text-middle text-center">300</th>
+                                <th colspan="2" class="text-middle text-center">600</th>
                                 <th colspan="3" align="center">BS</th>
                                 <th colspan="2" align="center">PILL MARTINDALE</th>
                                 <th colspan="2" align="center">ELONGATION</th>
@@ -182,6 +190,12 @@
                                 <th align="center">Snag > 5mm</th>
                                 <th align="center">Grade</th>
                                 <th align="center">Grade</th>
+                                <th class="text-middle text-center">V</th>
+                                <th class="text-middle text-center">H</th>
+                                <th class="text-middle text-center">V</th>
+                                <th class="text-middle text-center">H</th>
+                                <th class="text-middle text-center">V</th>
+                                <th class="text-middle text-center">H</th>
                                 <th align="center">NEWTON</th>
                                 <th align="center">KPA</th>
                                 <th align="center">PSI</th>
@@ -361,21 +375,56 @@
                                             </a>
                                         <?php } ?>
                                     </td>
+                                    <!--Begin Snag Mace -->
                                     <td align="center">
                                         <?php if ($r['rsm_l1'] != "") { ?>
-                                            L= <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rsm_l1'] ?>"
+                                            <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rsm_l1'] ?>"
                                                 class="rsm_l1" href="javascript:void(0)">
                                                 <?php echo $r['rsm_l1'] ?>
                                             </a>
                                         <?php } ?>
-                                        &nbsp;
+                                    </td>
+                                    <td align="center">
                                         <?php if ($r['rsm_w1'] != "") { ?>
-                                            W= <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rsm_w1'] ?>"
+                                            <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rsm_w1'] ?>"
                                                 class="rsm_w1" href="javascript:void(0)">
                                                 <?php echo $r['rsm_w1'] ?>
                                             </a>
                                         <?php } ?>
                                     </td>
+                                    <td align="center">
+                                        <?php if ($r['rsm_l2'] != "") { ?>
+                                            <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rsm_l2'] ?>"
+                                                class="rsm_l2" href="javascript:void(0)">
+                                                <?php echo $r['rsm_l2'] ?>
+                                            </a>
+                                        <?php } ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php if ($r['rsm_w2'] != "") { ?>
+                                            <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rsm_w2'] ?>"
+                                                class="rsm_w2" href="javascript:void(0)">
+                                                <?php echo $r['rsm_w2'] ?>
+                                            </a>
+                                        <?php } ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php if ($r['rsm_l3'] != "") { ?>
+                                            <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rsm_l3'] ?>"
+                                                class="rsm_l3" href="javascript:void(0)">
+                                                <?php echo $r['rsm_l3'] ?>
+                                            </a>
+                                        <?php } ?>
+                                    </td>
+                                    <td align="center">
+                                        <?php if ($r['rsm_w3'] != "") { ?>
+                                            <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rsm_w3'] ?>"
+                                                class="rsm_w3" href="javascript:void(0)">
+                                                <?php echo $r['rsm_w3'] ?>
+                                            </a>
+                                        <?php } ?>
+                                    </td>
+                                    <!--End Snag Mace -->
                                     <td align="center">
                                         <?php if ($r['rbs_instron'] != "") { ?>
                                             <a data-pk="<?php echo $r['id'] ?>" data-value="<?php echo $r['rbs_instron'] ?>"
