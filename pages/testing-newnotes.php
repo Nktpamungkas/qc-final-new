@@ -24,6 +24,83 @@
 		padding: 2px
 	}
 </style>
+
+<style>
+  .checkbox-wrapper-28 {
+    --size: 20px;
+    position: relative;
+  }
+
+  .checkbox-wrapper-28 *,
+  .checkbox-wrapper-28 *:before,
+  .checkbox-wrapper-28 *:after {
+    box-sizing: border-box;
+  }
+
+  .checkbox-wrapper-28 .promoted-input-checkbox {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .checkbox-wrapper-28 input:checked ~ svg {
+    height: calc(var(--size) * 0.6);
+    -webkit-animation: draw-checkbox-28 ease-in-out 0.2s forwards;
+            animation: draw-checkbox-28 ease-in-out 0.2s forwards;
+  }
+  .checkbox-wrapper-28 label:active::after {
+    background-color: #e6e6e6;
+  }
+  .checkbox-wrapper-28 label {
+    color: #0080d3;
+    line-height: var(--size);
+    cursor: pointer;
+    position: relative;
+  }
+  .checkbox-wrapper-28 label:after {
+    content: "";
+    height: var(--size);
+    width: var(--size);
+    margin-right: 8px;
+    float: left;
+    border: 2px solid #0080d3;
+    border-radius: 3px;
+    transition: 0.15s all ease-out;
+  }
+  .checkbox-wrapper-28 svg {
+    stroke: #0080d3;
+    stroke-width: 3px;
+    height: 0;
+    width: calc(var(--size) * 0.6);
+    position: absolute;
+    left: calc(var(--size) * 0.21);
+    top: calc(var(--size) * 0.2);
+    stroke-dasharray: 33;
+  }
+
+  @-webkit-keyframes draw-checkbox-28 {
+    0% {
+      stroke-dashoffset: 33;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes draw-checkbox-28 {
+    0% {
+      stroke-dashoffset: 33;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>
 <script>
 
 	function roundToTwo(num) {
@@ -55,6 +132,151 @@
 	}
 
 </script>
+<!-- SCRIPT AutoCheck -->
+<script>
+	var loading=false;
+	document.addEventListener('DOMContentLoaded', function() {
+		$('#autocheck4to5').on('change', function (e) {
+			if ($(this).is(':checked')) {	
+				let val='4-5';
+				if(document.forms['form2']['jns_test2'].value == "WASHING"){
+					$("[name=wash_colorchange]").val(val);
+					$("[name=wash_cotton]").val(val);
+					$("[name=wash_poly]").val(val);
+					$("[name=wash_wool]").val(val);
+					$("[name=wash_acetate]").val(val);
+					$("[name=wash_nylon]").val(val);
+					$("[name=wash_acrylic]").val(val);
+					// $("[name=wash_staining]").val(val);
+				}else if(document.forms['form2']['jns_test2'].value == "PERSPIRATION ACID"){
+					$("[name=acid_colorchange]").val(val);
+					$("[name=acid_cotton]").val(val);
+					$("[name=acid_poly]").val(val);
+					$("[name=acid_wool]").val(val);
+					$("[name=acid_acetate]").val(val);
+					$("[name=acid_nylon]").val(val);
+					$("[name=acid_acrylic]").val(val);
+					// $("[name=acid_staining]").val(val);
+				}else if(document.forms['form2']['jns_test2'].value == "PERSPIRATION ALKALINE"){
+					$("[name=alkaline_colorchange]").val(val);
+					$("[name=alkaline_cotton]").val(val);
+					$("[name=alkaline_poly]").val(val);
+					$("[name=alkaline_wool]").val(val);
+					$("[name=alkaline_acetate]").val(val);
+					$("[name=alkaline_nylon]").val(val);
+					$("[name=alkaline_acrylic]").val(val);
+					// $("[name=alkaline_staining]").val(val);
+				}else if(document.forms['form2']['jns_test2'].value == "WATER"){
+					$("[name=water_colorchange]").val(val);
+					$("[name=water_cotton]").val(val);
+					$("[name=water_poly]").val(val);
+					$("[name=water_wool]").val(val);
+					$("[name=water_acetate]").val(val);
+					$("[name=water_nylon]").val(val);
+					$("[name=water_acrylic]").val(val);
+					// $("[name=water_staining]").val(val);
+				}else if(document.forms['form2']['jns_test2'].value == "DYE TRANSFER"){
+					$("[name=dye_tf_acetate]").val(val);
+					$("[name=dye_tf_nylon]").val(val);
+					$("[name=dye_tf_acrylic]").val(val);
+					$("[name=dye_tf_sstaining]").val(val);
+					$("[name=dye_tf_cotton]").val(val);
+					$("[name=dye_tf_poly]").val(val);
+					$("[name=dye_tf_wool]").val(val);
+					// $("[name=dye_tf_cstaining]").val(val);
+				}
+				
+				if(!loading){
+					if ($('#autocheck4point5').is(':checked')){
+						loading=true
+						$('#autocheck4point5').attr("checked",false).trigger("click");
+					}
+				}
+				loading=false;
+			}else{
+
+			}
+		});
+		$('#autocheck4point5').on('change', function (e) {
+			if ($(this).is(':checked')) {
+				let val='4.5';
+				if(document.forms['form2']['jns_test2'].value == "WASHING"){
+					$("[name=wash_colorchange]").val(val);
+					$("[name=wash_cotton]").val(val);
+					$("[name=wash_poly]").val(val);
+					$("[name=wash_wool]").val(val);
+					$("[name=wash_acetate]").val(val);
+					$("[name=wash_nylon]").val(val);
+					$("[name=wash_acrylic]").val(val);
+					// $("[name=wash_staining]").val(val);
+				}else if(document.forms['form2']['jns_test2'].value == "PERSPIRATION ACID"){
+					$("[name=acid_colorchange]").val(val);
+					$("[name=acid_cotton]").val(val);
+					$("[name=acid_poly]").val(val);
+					$("[name=acid_wool]").val(val);
+					$("[name=acid_acetate]").val(val);
+					$("[name=acid_nylon]").val(val);
+					$("[name=acid_acrylic]").val(val);
+					// $("[name=acid_staining]").val(val);
+				}else if(document.forms['form2']['jns_test2'].value == "PERSPIRATION ALKALINE"){
+					$("[name=alkaline_colorchange]").val(val);
+					$("[name=alkaline_cotton]").val(val);
+					$("[name=alkaline_poly]").val(val);
+					$("[name=alkaline_wool]").val(val);
+					$("[name=alkaline_acetate]").val(val);
+					$("[name=alkaline_nylon]").val(val);
+					$("[name=alkaline_acrylic]").val(val);
+					// $("[name=alkaline_staining]").val(val);
+				}else if(document.forms['form2']['jns_test2'].value == "WATER"){
+					$("[name=water_colorchange]").val(val);
+					$("[name=water_cotton]").val(val);
+					$("[name=water_poly]").val(val);
+					$("[name=water_wool]").val(val);
+					$("[name=water_acetate]").val(val);
+					$("[name=water_nylon]").val(val);
+					$("[name=water_acrylic]").val(val);
+					// $("[name=water_staining]").val(val);
+				}else if(document.forms['form2']['jns_test2'].value == "DYE TRANSFER"){
+					$("[name=dye_tf_acetate]").val(val);
+					$("[name=dye_tf_nylon]").val(val);
+					$("[name=dye_tf_acrylic]").val(val);
+					$("[name=dye_tf_sstaining]").val(val);
+					$("[name=dye_tf_cotton]").val(val);
+					$("[name=dye_tf_poly]").val(val);
+					$("[name=dye_tf_wool]").val(val);
+					// $("[name=dye_tf_cstaining]").val(val);
+				}
+
+				if(!loading){
+					if ($('#autocheck4to5').is(':checked')){
+						loading=true	
+						$('#autocheck4to5').attr("checked",false).trigger("click");			
+					}
+				}
+				loading=false;
+			}else{
+
+			}
+		});	
+	});
+	function resetAutocheck(){
+		if(!loading){
+			if ($('#autocheck4point5').is(':checked')){
+				loading=true
+				$('#autocheck4point5').attr("checked",false).trigger("click");
+			}
+		}
+		loading=false;
+		if(!loading){
+			if ($('#autocheck4to5').is(':checked')){
+				loading=true	
+				$('#autocheck4to5').attr("checked",false).trigger("click");			
+			}
+		}
+		loading=false;
+	}	
+</script>
+<!-- End Auto Check -->
 <script>
 	function tampil() {
 		if (document.forms['form1']['jns_test'].value == "FLAMMABILITY") {
@@ -1207,6 +1429,8 @@
 		}
 	}
 	function tampil2() {
+		$(".div-autocheck").css("display", "none");
+		resetAutocheck();
 		if (document.forms['form2']['jns_test2'].value == "WASHING") {
 			if (document.forms['form2']['stat_wf'].value == "RANDOM") {
 				$("#ranwf").css("display", "");  // To unhide
@@ -1225,6 +1449,7 @@
 			}
 			$("#c1").css("display", "");  // To unhide
 			$("#stat_wf").css("display", "");  // To unhide
+			$(".div-autocheck").css("display", ""); // To unhide
 		} else {
 			$("#c1").css("display", "none");  // To hide
 			$("#stat_wf").css("display", "none");  // To hide
@@ -1250,6 +1475,7 @@
 			}
 			$("#c2").css("display", "");  // To unhide
 			$("#stat_wtr").css("display", "");  // To unhide
+			$(".div-autocheck").css("display", ""); // To unhide
 		} else {
 			$("#c2").css("display", "none");  // To hide
 			$("#stat_wtr").css("display", "none");  // To hide
@@ -1275,6 +1501,7 @@
 			}
 			$("#c3").css("display", "");  // To unhide
 			$("#stat_pac").css("display", "");  // To unhide
+			$(".div-autocheck").css("display", ""); // To unhide
 		} else {
 			$("#c3").css("display", "none");  // To hide
 			$("#stat_pac").css("display", "none");  // To hide
@@ -1300,6 +1527,7 @@
 			}
 			$("#c4").css("display", "");  // To unhide
 			$("#stat_pal").css("display", "");  // To unhide
+			$(".div-autocheck").css("display", ""); // To unhide
 		} else {
 			$("#c4").css("display", "none");  // To hide
 			$("#stat_pal").css("display", "none");  // To hide
@@ -1609,6 +1837,7 @@
 			}
 			$("#c15").css("display", "");  // To unhide
 			$("#stat_dye").css("display", "");  // To unhide
+			$(".div-autocheck").css("display", ""); // To unhide
 		} else {
 			$("#c15").css("display", "none");  // To hide
 			$("#stat_dye").css("display", "none");  // To hide
@@ -8497,6 +8726,38 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											?>
 										<?php } ?>
 									</select>
+								</div>
+								<div class="col-sm-1">
+								</div>
+								<div class="col-sm-2 div-autocheck" style="display:none;" >
+									<div class="checkbox-wrapper-28">
+										<input id="autocheck4to5" type="checkbox" class="promoted-input-checkbox"/>
+										<svg><use xlink:href="#checkmark-28" /></svg>
+										<label for="autocheck4to5">
+											4-5   
+										</label>
+										<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+											<symbol id="checkmark-28" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-miterlimit="10" fill="none"  d="M22.9 3.7l-15.2 16.6-6.6-7.1">
+											</path>
+											</symbol>
+										</svg>
+									</div>
+								</div>
+								<div class="col-sm-2 div-autocheck" style="display:none;">
+									<div class="checkbox-wrapper-28">
+										<input id="autocheck4point5" type="checkbox" class="promoted-input-checkbox"/>
+										<svg><use xlink:href="#checkmark-28" /></svg>
+										<label for="autocheck4point5">
+											4.5   
+										</label>
+										<svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+											<symbol id="checkmark-28" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-miterlimit="10" fill="none"  d="M22.9 3.7l-15.2 16.6-6.6-7.1">
+											</path>
+											</symbol>
+										</svg>
+									</div>
 								</div>
 							</div>
 						<!-- WASHING BEGIN-->
@@ -21403,4 +21664,3 @@ if ($notes != "" and $cek == 0) {
 
 </script>
 <!-- End -->
- 
