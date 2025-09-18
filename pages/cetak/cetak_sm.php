@@ -159,12 +159,12 @@ border:hidden;
                 <td class="center" style="font-size: 7px;"><?php echo $buyer;?></td>
                 <td class="center" style="font-size: 7px;"><?php echo $r1['lebar'];?></td>
                 <td class="center" style="font-size: 7px;"><?php echo $r1['gramasi'];?></td>
-                <td class="center" style="font-size: 7px;"><?php echo $r['rsm_l1'];?></td>
-                <td class="center" style="font-size: 7px;"><?php echo $r['rsm_w1'];?></td>
-                <td class="center" style="font-size: 7px;"><?php echo $r['rsm_l2'];?></td>
-                <td class="center" style="font-size: 7px;"><?php echo $r['rsm_w2'];?></td>
-                <td class="center" style="font-size: 7px;"><?php echo $r['rsm_l3'];?></td>
-                <td class="center" style="font-size: 7px;"><?php echo $r['rsm_w3'];?></td>
+                <td class="center" style="font-size: 7px;">&nbsp;</td>
+                <td class="center" style="font-size: 7px;">&nbsp;</td>
+                <td class="center" style="font-size: 7px;">&nbsp;</td>
+                <td class="center" style="font-size: 7px;">&nbsp;</td>
+                <td class="center" style="font-size: 7px;">&nbsp;</td>
+                <td class="center" style="font-size: 7px;">&nbsp;</td>
             </tr>
             <?php } ?>
         </tbody>
