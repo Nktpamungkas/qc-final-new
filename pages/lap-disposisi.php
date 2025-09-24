@@ -10,10 +10,36 @@ include"koneksi.php";
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Laporan Disposisi</title>
-
+<style>
+  .allow_edit:hover{
+    cursor: pointer;
+  }
+  .allow_edit{
+    width: 100%;
+    height: 100%;
+    display:block;
+  }
+  .select2 {
+    width: 100% !important;
+  }
+  .redirect:hover{
+    cursor: pointer;
+  }
+  .redirect{
+    width: 100%;
+    height: 100%;
+    display:block;
+  }
+</style>
 </head>
 <body>
 <?php
+//batasi akses edit hanya qc
+if($_SESSION['dept']=='QC'){
+  $edit="allow_edit";
+}else{
+  $edit="";
+}
 $Awal	= isset($_POST['awal']) ? $_POST['awal'] : '';
 $Akhir	= isset($_POST['akhir']) ? $_POST['akhir'] : '';
 $Subdept = isset($_POST['subdept']) ? $_POST['subdept'] : '';
@@ -200,6 +226,8 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
             <th><div align="center">Personil</div></th>
             <th><div align="center">Pejabat</div></th>
             <th><div align="center">Shift</div></th>
+            <th><div align="center">Hitung</div></th>
+            <th><div align="center">Status</div></th>
             <th><div align="center">Nama Nego</div></th>
             <th><div align="center">Hasil Nego</div></th>
             <th><div align="center">Ket</div></th>
@@ -208,6 +236,16 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
         <tbody>
           <?php
 	    $no=1;
+      $arr_hitung=[
+        ""=>"",
+        "terima"=>"&#10004;",
+        "tolak"=>"X"
+      ];
+      $arr_sts=[
+        ""=>"",
+        "disposisi"=>"Disposisi",
+        "lolos"=>"Lolos"
+      ];
 	    if($Awal!=""){ $Where =" AND DATE_FORMAT( tgl_buat, '%Y-%m-%d' ) BETWEEN '$Awal' AND '$Akhir' AND sts_revdis='0' "; }
         if($GShift=="ALL" or $GShift==""){$shft=" ";}else{$shft=" AND (shift LIKE '$GShift' OR shift2 LIKE '$GShift') ";}
         //if($GShift1=="ALL"){ $shft1=" ";}else{$shft1=" AND shift2 LIKE '$GShift1' ";}
@@ -223,11 +261,30 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
       }
       //$qry1=mysqli_query($con,$sql1) or die(mysqli_error($con));
 			while($row1=mysqli_fetch_array($sql1)){
+      $arr_all_personil=array();
+      if($row1['personil']!=""){
+        $arr_all_personil[]=$row1['personil'];
+      }
+      if($row1['personil2']!=""){
+        $arr_all_personil[]=$row1['personil2'];
+      }
+      if($row1['personil3']!=""){
+        $arr_all_personil[]=$row1['personil3'];
+      }
+      if($row1['personil4']!=""){
+        $arr_all_personil[]=$row1['personil4'];
+      }
+      if($row1['personil5']!=""){
+        $arr_all_personil[]=$row1['personil5'];
+      }
+      if($row1['personil6']!=""){
+        $arr_all_personil[]=$row1['personil6'];
+      }
 		 ?>
-          <tr bgcolor="<?php echo $bgcolor; ?>">
+          <tr bgcolor="<?php echo $bgcolor; ?>" data-id_data="<?= $row1['id']; ?>"  data-personil="<?= $row1['personil']; ?>" data-personil2="<?= $row1['personil2']; ?>" data-personil3="<?= $row1['personil3']; ?>" data-personil4="<?= $row1['personil4']; ?>" data-personil5="<?= $row1['personil5']; ?>" data-personil6="<?= $row1['personil6']; ?>" data-shift="<?= $row1['shift']; ?>" data-shift2="<?= $row1['shift2']; ?>" data-pejabat="<?= $row1['pejabat']; ?>" data-hitung="<?= $row1['status_penghubung']; ?>" data-stsc="<?= $row1['sts_qc']; ?>">
             <td align="center"><?php echo $no; ?></td>
             <td align="center"><?php echo $row1['tgl_buat'];?></td>
-            <td align="center"><?php echo $row1['nokk'];?></td>
+            <td align="center"><div data-nokk="<?= $row1['nokk']; ?>" class="redirect"><?php echo $row1['nokk'];?> </div></td>
             <td><?php echo $row1['langganan'];?></td>
             <td align="center"><?php echo $row1['po'];?></td>
             <td align="center"><?php echo $row1['no_order'];?></td>
@@ -243,9 +300,11 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
             <td><?php echo $row1['masalah_dominan'];?></td>
             <td><?php echo $row1['masalah'];?></td>
             <td><?php echo $row1['penyebab'];?></td>
-            <td><?php if($row1['personil2']!=""){echo $row1['personil'].",".$row1['personil2'];}else{echo $row1['personil'];}?></td>
-            <td><?php echo $row1['pejabat'];?></td>
-            <td><?php if($row1['shift2']!=""){echo $row1['shift'].",".$row1['shift2'];}else{echo $row1['shift'];}?></td>
+            <td><div class="<?=$edit;?>" id="<?="td_personil_".$row1['id']."" ;?>">&nbsp;<?=join(',',$arr_all_personil)?></div></td>
+            <td><div class="<?=$edit;?>" id="<?="td_pejabat_".$row1['id']."" ;?>">&nbsp;<?php echo $row1['pejabat'];?></div></td>
+            <td><div class="<?=$edit;?>" id="<?="td_shift_".$row1['id']."" ;?>">&nbsp;<?php if($row1['shift2']!=""){echo $row1['shift'].",".$row1['shift2'];}else{echo $row1['shift'];}?></div></td>
+            <td><div class="<?=$edit;?>" id="<?="td_hitung_".$row1['id']."" ;?>">&nbsp;<?php echo $arr_hitung[$row1['status_penghubung']];?></div></td>
+            <td><div class="<?=$edit;?>" id="<?="td_stsc_".$row1['id']."" ;?>">&nbsp;<?php echo $arr_sts[$row1['sts_qc']];?></div></td>
             <td><?php echo $row1['nama_nego'];?></td>
             <td><?php echo $row1['hasil_nego'];?></td>
             <td><?php echo $row1['ket'];?></td>
@@ -273,18 +332,253 @@ $Langganan = isset($_POST['langganan']) ? $_POST['langganan'] : '';
     </div>
   </div>
 </div>	
+<div class="modal fade" id="modal_personil_shift" >
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content" style="margin-top:100px;">
+      <div class="modal-header">
+        <button type="button" class="close"  data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" style="text-align:center;">Edit Personil Dan Shift</h4>
+      </div>
+      
+      <div class="modal-body">
+        <input type="hidden" id="id_data" val="0">
+        <div class="row">
+          <div class="form-group">
+            <?php
+              $personil_option="";
+              $qryp = mysqli_query($con, "SELECT UPPER(nama) AS nama FROM user_login WHERE dept ='QC' ORDER BY nama ASC");
+              while ($rp = mysqli_fetch_array($qryp)) {
+              $personil_option .= "<option value='".$rp['nama']."'>". $rp['nama']."</option>
+                  ";
+              } 
+            ?>
+            <label for="personil" class="col-sm-3 control-label">Personil 1,2 & 3</label>
+            <div class="col-sm-3">
+                <select class="form-control select2" name="personil_update" id="personil_update">
+                  <option value="">Pilih Personil 1</option>
+                  <?=$personil_option?>
+                </select>
+            </div>
+            <div class="col-sm-3">
+              <select class="form-control select2" name="personil2_update" id="personil2_update">
+                <option value="">Pilih Personil 2</option>
+                <?=$personil_option?>
+              </select>	
+            </div>
+            <div class="col-sm-3">
+              <select class="form-control select2" name="personil3_update" id="personil3_update">
+                <option value="">Pilih Personil 3</option>
+                <?=$personil_option?>
+              </select>	
+            </div>
+          </div> 
+				</div>
+        </br>
+        <div class="row">
+          <div class="form-group">
+            <label for="personil" class="col-sm-3 control-label">Personil 4,5 & 6</label>
+            <div class="col-sm-3">
+                <select class="form-control select2" name="personil4_update" id="personil4_update">
+                  <option value="">Pilih Personil 4</option>
+                  <?=$personil_option?>
+                </select>
+            </div>
+            <div class="col-sm-3">
+              <select class="form-control select2" name="personil5_update" id="personil5_update">
+                <option value="">Pilih Personil 5</option>
+                <?=$personil_option?>
+              </select>	
+            </div>
+            <div class="col-sm-3">
+              <select class="form-control select2" name="personil6_update" id="personil6_update">
+                <option value="">Pilih Personil 6</option>
+                <?=$personil_option?>
+              </select>	
+            </div>
+          </div> 
+				</div>
+        </br> 
+        <div class="row">
+          <div class="form-group">
+            <label for="shift_update" class="col-sm-3 control-label">Shift / Shift2</label>
+            <div class="col-sm-3">
+              <select class="form-control select2" name="shift_update" id="shift_update">
+                <option value="">Pilih</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="Non-Shift">Non-Shift</option>
+                <option value="QC2">QC2</option>
+                <option value="Test Quality">Test Quality</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <select class="form-control select2" name="shift2_update" id="shift2_update">
+                <option value="">Pilih</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="Non-Shift">Non-Shift</option>
+                <option value="QC2">QC2</option>
+                <option value="Test Quality">Test Quality</option>
+              </select>
+            </div>
+          </div> 
+				</div> 
+        </br>
+        <div class="row">
+          <div class="form-group">
+            <?php
+              $qryp = mysqli_query($con, "SELECT nama FROM tbl_personil_aftersales WHERE jenis='pejabat' ORDER BY nama ASC");
+              while ($rp = mysqli_fetch_array($qryp)) {
+                $pejabat_option .= "<option value='".$rp['nama']."'>". $rp['nama']."</option>
+                    ";
+              } 
+            ?>
+            <label for="pejabat_update" class="col-sm-3 control-label">Pejabat</label>
+            <div class="col-sm-3">
+              <select class="form-control select2" name="pejabat_update" id="pejabat_update">
+                <option value="">Pilih</option>
+                <?=$pejabat_option?>
+              </select>
+            </div>
+          </div>
+        </div>
+        </br>
+        <div class="row">
+          <div class="form-group">
+            <label for="hitung_update" class="col-sm-3 control-label">Hitung</label>
+            <div class="col-sm-3">
+              <select class="form-control select2" name="hitung_update" id="hitung_update">
+                <option value="">Pilih</option>
+                <option value="terima">&#10004;</option>
+                <option value="tolak">X</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        </br>
+        <div class="row">
+          <div class="form-group">
+            <label for="stsc_update" class="col-sm-3 control-label">Status</label>
+            <div class="col-sm-3">
+              <select class="form-control select2" name="stsc_update" id="stsc_update">
+                <option value="">Pilih</option>
+                <option value="disposisi">Disposisi </option>
+                <option value="lolos">Lolos</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
+        <button type="button" class="btn btn-primary" id="update_personil">Update</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>	
+<form action="RekapData" method="POST" target="_blank" id="redirect_by_nokk" style="display:none">
+  <input type="hidden" name="prodorder" id="prodorder"/>
+  <input type="submit" value="Submit">
+</form>
 <script type="text/javascript">
     function confirm_delete(delete_url)
     {
       $('#modal_del').modal('show', {backdrop: 'static'});
-      document.getElementById('delete_link').setAttribute('href' , delete_url);
+      // document.getElementById('delete_link').setAttribute('href' , delete_url);
     }
 </script>	
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var parent=false;
+    var arr_hitung={}
+    arr_hitung[""]="";
+    arr_hitung["terima"]="&#10004;";
+    arr_hitung["tolak"]="X";
+    var arr_sts={}
+    arr_sts[""]="";
+    arr_sts["disposisi"]="Disposisi";
+    arr_sts["lolos"]="Lolos";
+    $('.allow_edit').click(function(e) {  
+      parent=$(this).parent().parent();
+      $('#personil_update').val(parent.data('personil')).trigger('change');
+      $('#personil2_update').val(parent.data('personil2')).trigger('change');
+      $('#personil3_update').val(parent.data('personil3')).trigger('change');
+      $('#personil4_update').val(parent.data('personil4')).trigger('change');
+      $('#personil5_update').val(parent.data('personil5')).trigger('change');
+      $('#personil6_update').val(parent.data('personil6')).trigger('change');
+      $('#shift_update').val(parent.data('shift')).trigger('change');
+      $('#shift2_update').val(parent.data('shift2')).trigger('change');
+      $('#pejabat_update').val(parent.data('pejabat')).trigger('change');
+      $('#hitung_update').val(parent.data('hitung')).trigger('change');
+      $('#stsc_update').val(parent.data('stsc')).trigger('change');
+      $('#id_data').val(parent.data('id_data'));  
+      $('#modal_personil_shift').modal('show', {backdrop: 'static'});       
+    });
+    $('#update_personil').click(function(e) {  
+      $.ajax({
+            url: 'pages/ajax/ajax_update_personil_kpe_disposisi.php',
+            type: 'POST',
+            data: {
+              status:"update_personil", 
+              id_dt:$('#id_data').val(), 
+              personil:$('#personil_update').val(),  
+              personil2:$('#personil2_update').val(), 
+              personil3:$('#personil3_update').val(), 
+              personil4:$('#personil4_update').val(), 
+              personil5:$('#personil5_update').val(), 
+              personil6:$('#personil6_update').val(), 
+              shift:$('#shift_update').val(), 
+              shift2:$('#shift2_update').val(), 
+              pejabat:$('#pejabat_update').val(), 
+              hitung:$('#hitung_update').val(),  
+              sts_qc:$('#stsc_update').val(),  
+            },
+            success: function(response) {
+                if(response.success){
+                  $('#td_personil_'+response.messages[1]).html("&nbsp;"+response.messages[2]);
+                  $('#td_shift_'+response.messages[1]).html("&nbsp;"+response.messages[3]);
+                  $('#td_pejabat_'+response.messages[1]).html("&nbsp;"+response.messages[4]);
+                  $('#td_hitung_'+response.messages[1]).html("&nbsp;"+arr_hitung[response.messages[5]]);
+                  $('#td_stsc_'+response.messages[1]).html("&nbsp;"+arr_sts[response.messages[6]]);
+                  $('#modal_personil_shift').modal('hide'); 
+                  $('#example3').DataTable().columns.adjust().draw();
+                  parent.data("personil",$('#personil_update').val());
+                  parent.data("personil2",$('#personil2_update').val());
+                  parent.data("personil3",$('#personil3_update').val());
+                  parent.data("personil4",$('#personil4_update').val());
+                  parent.data("personil5",$('#personil5_update').val());
+                  parent.data("personil6",$('#personil6_update').val());
+                  parent.data("shift",$('#shift_update').val());
+                  parent.data("shift2",$('#shift2_update').val());
+                  parent.data("pejabat",$('#pejabat_update').val());
+                  parent.data("hitung",$('#hitung_update').val());
+                  parent.data("stsc",$('#stsc_update').val());
+                }else{
+                    Swal.fire({
+                      title: 'Error',
+                      text: response.messages[0],
+                      icon: 'error',
+                      timer: 1000,
+                      position : 'top-end',
+                      showConfirmButton: false
+                  });
+                }
+            },
+            error: function() {
+            }
+      });
+    });
+    $('.redirect').click(function(e) {
+      $('#prodorder').val($(this).data("nokk"));
+      $('#redirect_by_nokk').submit()
+    });
 		$(document).ready(function() {
 			$('[data-toggle="tooltip"]').tooltip();
 		});
-
+  })
 	</script>
 </body>
 </html>
