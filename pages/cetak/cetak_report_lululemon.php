@@ -6,11 +6,19 @@ $idkk=$_GET['idkk'];
 $noitem=$_GET['noitem'];
 $nohanger=$_GET['nohanger'];
 $now=date("Y-m-d");
-$data=mysqli_query($con,"SELECT *,
-	CONCAT_WS(' ',fc_note,ph_note, abr_note, bas_note, fla_note, fwe_note, fwi_note, burs_note,repp_note,apper_note,fiber_note,pillb_note,pillm_note,pillr_note,thick_note,growth_note,recover_note,stretch_note,sns_note,snab_note,snam_note,snap_note,wash_note,water_note,acid_note,alkaline_note,crock_note,phenolic_note,cm_printing_note,cm_dye_note,light_note,light_pers_note,saliva_note,h_shrinkage_note,fibre_note,pilll_note,soil_note,apperss_note,bleeding_note,chlorin_note,dye_tf_note) AS note_g FROM tbl_tq_test WHERE id_nokk='$idkk' ORDER BY id DESC LIMIT 1");
+$data=mysqli_query($con,"SELECT 
+                                *,
+	                            CONCAT_WS(' ',fc_note,ph_note, abr_note, bas_note, fla_note, fwe_note, fwi_note, burs_note,repp_note,apper_note,fiber_note,pillb_note,pillm_note,pillr_note,thick_note,growth_note,recover_note,stretch_note,sns_note,snab_note,snam_note,snap_note,wash_note,water_note,acid_note,alkaline_note,crock_note,phenolic_note,cm_printing_note,cm_dye_note,light_note,light_pers_note,saliva_note,h_shrinkage_note,fibre_note,pilll_note,soil_note,apperss_note,bleeding_note,chlorin_note,dye_tf_note) AS note_g 
+                            FROM tbl_tq_test 
+                                WHERE id_nokk='$idkk' 
+                            ORDER BY id DESC LIMIT 1");
 $rcek1=mysqli_fetch_array($data);
-$databs=mysqli_query($con,"SELECT *,
-	CONCAT_WS(' ',bas_note) AS note_bs FROM tbl_tq_test WHERE id_nokk='$idkk' ORDER BY id DESC LIMIT 1");
+$databs=mysqli_query($con,"SELECT 
+                                *,
+                                CONCAT_WS(' ',bas_note) AS note_bs 
+                            FROM tbl_tq_test 
+                                WHERE id_nokk='$idkk' 
+                            ORDER BY id DESC LIMIT 1");
 $rcekbs=mysqli_fetch_array($databs);
 $sqlCekR=mysqli_query($con,"SELECT *,
 	CONCAT_WS(' ',rfc_note,rph_note, rabr_note, rbas_note, rfla_note, rfwe_note, rfwi_note, rburs_note,rrepp_note,rapper_note,rfiber_note,rpillb_note,rpillm_note,rpillr_note,rthick_note,rgrowth_note,rrecover_note,rstretch_note,rsns_note,rsnab_note,rsnam_note,rsnap_note,rwash_note,rwater_note,racid_note,ralkaline_note,rcrock_note,rphenolic_note,rcm_printing_note,rcm_dye_note,rlight_note,rlight_pers_note,rsaliva_note,rh_shrinkage_note,rfibre_note,rpilll_note,rsoil_note,rapperss_note,rbleeding_note,rchlorin_note,rdye_tf_note) AS rnote_g FROM tbl_tq_randomtest WHERE no_item='$noitem' OR no_hanger='$nohanger'");
@@ -23,7 +31,13 @@ $sqlCekM=mysqli_query($con,"SELECT *,
 $rcekM=mysqli_fetch_array($sqlCekM);
 $data1=mysqli_query($con,"SELECT nokk FROM tbl_tq_nokk WHERE id='$idkk'");
 $rd=mysqli_fetch_array($data1);
-$data2=mysqli_query($con,"SELECT * FROM tbl_tq_nokk WHERE id='$idkk'");
+$data2=mysqli_query($con,"SELECT 
+                                n.*,
+                                t.running_color,
+                                t.running_quality
+                            FROM tbl_tq_nokk n
+                                LEFT JOIN tbl_tq_nokk2 t on t.id_tq2 = n.id
+                            WHERE id='$idkk'");
 $rd2=mysqli_fetch_array($data2);
 
 $id_tq_test_2 = $rcek1['id_nokk'];
@@ -544,11 +558,11 @@ textarea {
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">New/Running Quality:</td>
-            <td>RUNNING QUALITY </td>
+            <td><?= $rd2['running_quality']?></td>
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">New/Running Color:</td>
-            <td>RUNNING COLOR </td>
+            <td><?= $rd2['running_color']?></td>
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Root Cause (for retest order):</td>
@@ -1196,7 +1210,7 @@ textarea {
                 </tr>
                 <tr>
                     <td align="left" style="font-size: 11px;" width="33%"><strong>ORIGINAL @100 CYCLES</strong></td>
-                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f1']!='' AND $rcekM['mpm_f1'] < 4){echo "color:red;";}else if($rcek1['pm_f1']!='' AND $rcek1['pm_f1'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f1']=="" AND $rcek1['pm_f1']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f1'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f1']==""){echo "N/A";}else{echo $rcek1['pm_f1'];}?></td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f1']!='' AND $rcekM['mpm_f1'] < 4){echo "color:black;";}else if($rcek1['pm_f1']!='' AND $rcek1['pm_f1'] < 4){echo "color:black;";}?>" width="33%"><?php if($rcekM['mpm_f1']=="" AND $rcek1['pm_f1']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f1'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f1']==""){echo "N/A";}else{echo $rcek1['pm_f1'];}?></td>
                     <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
                 </tr>
                 <tr>
@@ -1206,17 +1220,17 @@ textarea {
                 </tr>
                 <tr>
                     <td align="left" style="font-size: 11px;" width="33%">AFTER 2 WASH @5000 CYCLES</td>
-                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f3']!='' AND $rcekM['mpm_f3'] < 4){echo "color:red;";}else if($rcek1['pm_f3']!='' AND $rcek1['pm_f3'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f3']=="" AND $rcek1['pm_f3']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f3'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f3']==""){echo "N/A";}else{echo $rcek1['pm_f3'];}?></td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f3']!='' AND $rcekM['mpm_f3'] < 4){echo "color:black;";}else if($rcek1['pm_f3']!='' AND $rcek1['pm_f3'] < 4){echo "color:black;";}?>" width="33%"><?php if($rcekM['mpm_f3']=="" AND $rcek1['pm_f3']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f3'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f3']==""){echo "N/A";}else{echo $rcek1['pm_f3'];}?></td>
                     <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
                 </tr>
                 <tr>
                     <td align="left" style="font-size: 11px;" width="33%">AFTER 3 WASH @7500 CYCLES</td>
-                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f4']!='' AND $rcekM['mpm_f4'] < 4){echo "color:red;";}else if($rcek1['pm_f4']!='' AND $rcek1['pm_f4'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f4']=="" AND $rcek1['pm_f4']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f4'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f4']==""){echo "N/A";}else{echo $rcek1['pm_f4'];}?></td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f4']!='' AND $rcekM['mpm_f4'] < 4){echo "color:black;";}else if($rcek1['pm_f4']!='' AND $rcek1['pm_f4'] < 4){echo "color:black;";}?>" width="33%"><?php if($rcekM['mpm_f4']=="" AND $rcek1['pm_f4']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f4'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f4']==""){echo "N/A";}else{echo $rcek1['pm_f4'];}?></td>
                     <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
                 </tr>
                 <tr>
                     <td align="left" style="font-size: 11px;" width="33%">AFTER 4 WASH @10000 CYCLES</td>
-                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f5']!='' AND $rcekM['mpm_f5'] < 4){echo "color:red;";}else if($rcek1['pm_f5']!='' AND $rcek1['pm_f5'] < 4){echo "color:red;";}?>" width="33%"><?php if($rcekM['mpm_f5']=="" AND $rcek1['pm_f5']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f5'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f5']==""){echo "N/A";}else{echo $rcek1['pm_f5'];}?></td>
+                    <td align="center" style="font-size: 11px; <?php if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f5']!='' AND $rcekM['mpm_f5'] < 4){echo "color:black;";}else if($rcek1['pm_f5']!='' AND $rcek1['pm_f5'] < 4){echo "color:black;";}?>" width="33%"><?php if($rcekM['mpm_f5']=="" AND $rcek1['pm_f5']==""){echo "N/A";}else if($rcek1['stat_pm']=="MARGINAL PASS"){echo $rcekM['mpm_f5'];}else if($rcek1['stat_pm']=="MARGINAL PASS" AND $rcekM['mpm_f5']==""){echo "N/A";}else{echo $rcek1['pm_f5'];}?></td>
                     <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notepm" type="text" placeholder="Ketik" size="50" /></td>
                 </tr>
                 <tr>
@@ -2158,7 +2172,7 @@ textarea {
             <td align="left" style="font-size: 11px;" width="33%">
                 <table width="100%" style="border-collapse: collapse;">
                     <tr>
-                        <td align="center" style="<?php if($rcek1['apper_pf1'] < 4 || $rcek1['apper_pb1'] < 4 || $rcek1['apper_cc1'] < 4 ){echo "color:red;";}else{echo "";}?>" width="50%"><?php if($rcek1['apper_pf1'] < 4 || $rcek1['apper_pb1'] < 4 || $rcek1['apper_cc1'] < 4 ){echo "UNSATISFACTORY";}else{echo "SATISFACTORY";}?></td>
+                        <td align="center" style="<?php if($rcek1['apper_pf1'] < 4 || $rcek1['apper_pb1'] < 4 || $rcek1['apper_cc1'] < 4){echo "color:red;";}else{echo "";}?>" width="50%"><?php if($rcek1['apper_pf1'] < 4 || $rcek1['apper_pb1'] < 4 || $rcek1['apper_cc1'] < 4 ){echo "UNSATISFACTORY asdf";}else{echo "SATISFACTORY";}?></td>
                         <!-- <td align="left" width="50%">N/A</td> -->
                     </tr>
                 </table>
@@ -2275,7 +2289,7 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">OVERALL APPEARANCE WAS FOUND</td>
-            <td align="center" style="font-size: 11px;" width="33%"><?php if(($rcek1['apper_pb2']!="" AND $rcek1['apper_pb2'] < 4)||($rcek1['apper_pf2']!="" AND $rcek1['apper_pf2'] < 4)||($rcek1['apper_cc2']!="" AND $rcek1['apper_cc2'] < 4)){echo"UNSATISFACTORY";}else{echo"SATISFACTORY";}?></td>
+            <td align="center" style="font-size: 11px; <?php if(($rcek1['apper_pb2']!="" AND $rcek1['apper_pb2'] < 4)||($rcek1['apper_pf2']!="" AND $rcek1['apper_pf2'] < 4)||($rcek1['apper_cc2']!="" AND $rcek1['apper_cc2'] < 4)){echo "color:red;";}else{echo "";}?>" width="33%"><?php if(($rcek1['apper_pb2']!="" AND $rcek1['apper_pb2'] < 4)||($rcek1['apper_pf2']!="" AND $rcek1['apper_pf2'] < 4)||($rcek1['apper_cc2']!="" AND $rcek1['apper_cc2'] < 4)){echo"UNSATISFACTORY";}else{echo"SATISFACTORY";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">SATISFACTORY</td>
         </tr>
         <tr>
@@ -2339,7 +2353,7 @@ textarea {
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">OVERALL APPEARANCE WAS FOUND</td>
-            <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['apper_cc3'] < 4||$rcek1['apper_pf3'] < 4 || $rcek1['apper_pb3'] < 4){ echo "UNSATISFACTORY"; }else{echo "SATISFACTORY";}?></td>
+            <td align="center" style="font-size: 11px; <?php if($rcek1['apper_cc3'] < 4||$rcek1['apper_pf3'] < 4 || $rcek1['apper_pb3'] < 4){echo "color:red;";}else{echo "";}?>" width="33%"><?php if($rcek1['apper_cc3'] < 4||$rcek1['apper_pf3'] < 4 || $rcek1['apper_pb3'] < 4){ echo "UNSATISFACTORY"; }else{echo "SATISFACTORY";}?></td>
             <td align="right" style="font-size: 11px;" width="33%">SATISFACTORY</td>
         </tr>
         <tr>

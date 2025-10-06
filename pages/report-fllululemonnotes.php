@@ -1484,8 +1484,8 @@ function tampil2(){
 ini_set("error_reporting", 1);
 session_start();
 include"koneksi.php";
-$notes=$_GET['notest'];
-$notes_post=$_POST['notest'];
+$notes			= $_GET['notest'];
+$notes_post		= $_POST['notest'];
 $Nokkold		= isset($_POST['no_kkold']) ? $_POST['no_kkold'] : '';
 $DateIn			= isset($_POST['date_in']) ? $_POST['date_in'] : '';
 $Date_out 		= isset($_POST['date_out1']) ? $_POST['date_out1'] : '';
@@ -1496,13 +1496,20 @@ $Prev_Rpt       = isset($_POST['prev_rpt']) ? $_POST['prev_rpt'] : '';
 $Color_Abbrev   = isset($_POST['color_abbrev']) ? $_POST['color_abbrev'] : '';
 $Fabric_Finish  = isset($_POST['fabric_finish']) ? $_POST['fabric_finish'] : '';
 $Extension      = isset($_POST['extension']) ? $_POST['extension'] : '';
-$Protocol      = isset($_POST['protocol']) ? $_POST['protocol'] : '';
-$Enduse      = isset($_POST['enduse']) ? $_POST['enduse'] : '';
+$Protocol      	= isset($_POST['protocol']) ? $_POST['protocol'] : '';
+$Enduse      	= isset($_POST['enduse']) ? $_POST['enduse'] : '';
 $Jns_Kain       = isset($_POST['jns_kain']) ? $_POST['jns_kain'] : '';
 $ReportLulu     = isset($_POST['no_rptlulu']) ? $_POST['no_rptlulu'] : '';
-$Revisi     = isset($_POST['revisi']) ? $_POST['revisi'] : '';
-$Sts_rev     = isset($_POST['sts_rev']) ? $_POST['sts_rev'] : '';
-$sqlCek=mysqli_query($con,"SELECT * FROM tbl_tq_nokk WHERE (no_test='$notes' OR no_test='$notes_post') ORDER BY id DESC LIMIT 1");
+$Revisi     	= isset($_POST['revisi']) ? $_POST['revisi'] : '';
+$Sts_rev     	= isset($_POST['sts_rev']) ? $_POST['sts_rev'] : '';
+$ip				= $_SERVER['REMOTE_ADDR'];
+$sqlCek=mysqli_query($con,"SELECT 
+								n.*,
+								t.running_color,
+								t.running_quality
+							FROM tbl_tq_nokk n
+								LEFT JOIN tbl_tq_nokk2 t on t.id_tq2 = n.id
+							WHERE (no_test='$notes' OR no_test='$notes_post') ORDER BY id DESC LIMIT 1");
 $cek=mysqli_num_rows($sqlCek);
 $rcek=mysqli_fetch_array($sqlCek);
 
@@ -1819,6 +1826,30 @@ $rowdb2 = db2_fetch_assoc($stmt);
                 <div class="col-sm-8">
                     <textarea name="no_warna" readonly="readonly" class="form-control" id="no_warna" placeholder="No Warna"><?php if($cek>0){echo $rcek['no_warna'];}else{echo $r['ColorNo'];}?></textarea>
                 </div>				   
+            </div> 		
+		 	<div class="form-group">
+                <label for="running_quality" class="col-sm-3 control-label">New / Running Quality </label>
+				<div class="col-sm-9">
+					<div class="input-group">  
+						<select name="running_quality" id="running_quality" class="form-control select2" required>
+							<option selected="selected" value="">Pilih</option>
+							<option value="RUNNING QUALITY" <?php if($rcek['running_quality']=="RUNNING QUALITY"){echo "SELECTED";}?>>RUNNING QUALITY</option>
+							<option value="NEW QUALITY" <?php if($rcek['running_quality']=="NEW QUALITY"){echo "SELECTED";}?>>NEW QUALITY</option>
+						</select>
+					</div>
+				</div>			   
+            </div> 		
+		 	<div class="form-group">
+                <label for="running_color" class="col-sm-3 control-label">New / Running Color </label>
+				<div class="col-sm-9">
+					<div class="input-group">  
+						<select name="running_color" id="running_color" class="form-control select2" required>
+							<option selected="selected" value="">Pilih</option>
+							<option value="RUNNING COLOR" <?php if($rcek['running_color']=="RUNNING COLOR"){echo "SELECTED";}?>>RUNNING COLOR</option>
+							<option value="NEW COLOR" <?php if($rcek['running_color']=="NEW COLOR"){echo "SELECTED";}?>>NEW COLOR</option>
+						</select>
+					</div>
+				</div>			   
             </div> 		
 	  	</div>
 	  		<!-- col --> 
@@ -9668,6 +9699,10 @@ if($_POST['save1']=="save"){
 	$sensitif_color = $_POST['sensitif_color'];
 	$restricted_substance = $_POST['restricted_substance'];
 	$no_trf = $_POST['no_trf'];
+
+	$running_color = $_POST['running_color'];
+	$running_quality = $_POST['running_quality'];
+
 	$date_out1 = $Date_out;
 	$sqlKK=mysqli_query($con,"UPDATE tbl_tq_nokk SET
 	`no_rptlulu`='$ReportLulu',
@@ -9701,6 +9736,21 @@ if($_POST['save1']=="save"){
 	date_out1 = '$date_out1'
 	
 	WHERE `id`='$rcek[id]'");
+
+	$cek2 = "SELECT * FROM tbl_tq_nokk2 WHERE id_tq2='$rcek[id]'";
+	$stmt_cek2 = mysqli_query($con,$cek2);
+	$row_cek2 = mysqli_num_rows($stmt_cek2);
+	$sql = "INSERT INTO tbl_tq_nokk2 (id_tq2, id_tq_nokk, running_color, running_quality, notest, ip_updated) 
+        VALUES (?, ?, ?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE 
+            running_color = VALUES(running_color), 
+            running_quality = VALUES(running_quality),
+            notest = VALUES(notest),
+            ip_updated = VALUES(ip_updated)";
+		$stmt = mysqli_prepare($con, $sql);
+		mysqli_stmt_bind_param($stmt, 'ssssss', $rcek['id'], $rcek['id'], $running_color, $running_quality, $notes, $ip);
+		$eksekusi = mysqli_stmt_execute($stmt);
+	
 
 	if($sqlKK){
 			echo "<script>swal({
