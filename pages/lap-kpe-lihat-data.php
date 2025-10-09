@@ -10,7 +10,16 @@ include"koneksi.php";
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Laporan Harian Produksi</title>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+  .select2 {
+    width: 100% !important;
+  }
+  /* .select2-container {
+    z-index: 9999 !important;
+} */
+</style>
 </head>
 <body>
 <?php
@@ -228,6 +237,12 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               <th colspan= '4'class="text-center">NCP</th>
               <!-- <th><div align="center">Analisa Kerusakan</div></th> -->
               <th rowspan='2'><div align="center">Ket</div></th>
+              <th rowspan='2'><div align="center">Personil Additional</div></th>
+              <th rowspan='2'><div align="center">Pejabat Additional</div></th>
+              <th rowspan='2'><div align="center">Hitung</div></th>
+              <th rowspan='2'><div align="center">Status</div></th>
+              <th rowspan='2'><div align="center">Analisis</div></th>
+              <th rowspan='2'><div align="center">Hasil Analisa</div></th>
             </tr>
             <tr>
             <th class="text-center">No NCP</th>
@@ -245,7 +260,6 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             if ($MasalahDominan != "") {
               $Where .= " AND a.masalah_dominan = '$MasalahDominan' ";
             }
-
             if($Kategori != "") {
               $query4Kategori = mysqli_query($con, "SELECT
                                                       a.*,
@@ -322,12 +336,34 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             // if($Awal!="" or $sts_red=="1" or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
             if($Awal!=""  or $sts_claim=="1" or $Order!="" or $Hanger!="" or $PO!="" or $Langganan!="" or $Demand!="" or $Prodorder!="" or $Pejabat!="" or $Solusi!=""){
               $qry1=mysqli_query($con,"SELECT a.*,
+                          c.personil1 as personil1_additional,
+                          c.personil2 as personil2_additional,
+                          c.personil3 as personil3_additional,
+                          c.personil4 as personil4_additional,
+                          c.personil5 as personil5_additional,
+                          c.personil6 as personil6_additional,
+                          CONCAT_WS(', ',
+                              NULLIF(c.personil1, ''),
+                              NULLIF(c.personil2, ''),
+                              NULLIF(c.personil3, ''),
+                              NULLIF(c.personil4, ''),
+                              NULLIF(c.personil5, ''),
+                              NULLIF(c.personil6, '')
+                          ) AS personil_additional,
+                          c.pejabat as pejabat_additional,
+                          c.shift1 as shift1_additional,
+                          c.shift2 as shift2_additional,
+                          c.hitung as hitung_additional,
+                          c.status as status_additional,
+                          c.analisis as analisis_additional,
+                          c.hasil_analisa as hasil_analisa_additional,
                           GROUP_CONCAT( distinct b.no_ncp_gabungan separator ', ' ) as no_ncp,
                           GROUP_CONCAT( distinct b.masalah_dominan separator ', ' ) as masalah_utama,
                           GROUP_CONCAT( distinct b.akar_masalah separator ', ' ) as akar_masalah,
                           GROUP_CONCAT( distinct b.solusi_panjang separator ', ' ) as solusi_panjang 
               FROM tbl_aftersales_now a 
               LEFT JOIN tbl_ncp_qcf_now b ON a.nodemand=b.nodemand 
+              LEFT JOIN tbl_add_kpe_qcf c ON c.no_demand = a.nodemand
               WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $WhereKategori $stsclaim 
               -- WHERE a.no_order LIKE '%$Order%' AND a.po LIKE '%$PO%' AND a.no_hanger LIKE '%$Hanger%' AND a.langganan LIKE '%$Langganan%' AND a.nodemand LIKE '%$Demand%' AND a.nokk LIKE '%$Prodorder%' AND a.pejabat LIKE '%$Pejabat%' AND a.solusi LIKE '%$Solusi%' $Where $WhereKategori $stsred $stsclaim 
               GROUP BY a.nodemand, a.masalah_dominan
@@ -351,7 +387,22 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
                   $tjawab="";	
                   }
               ?>
-          <tr bgcolor="<?php echo $bgcolor; ?>">
+          <tr bgcolor="<?php echo $bgcolor; ?>"
+              data-nokk="<?= htmlspecialchars($row1['nokk']) ?>"
+              data-nodemand="<?= htmlspecialchars($row1['nodemand']) ?>" 
+              data-personil1-additional="<?= htmlspecialchars($row1['personil1_additional']) ?>"
+              data-personil2-additional="<?= htmlspecialchars($row1['personil2_additional']) ?>"
+              data-personil3-additional="<?= htmlspecialchars($row1['personil3_additional']) ?>"
+              data-personil4-additional="<?= htmlspecialchars($row1['personil4_additional']) ?>"
+              data-personil5-additional="<?= htmlspecialchars($row1['personil5_additional']) ?>"
+              data-personil6-additional="<?= htmlspecialchars($row1['personil6_additional']) ?>"
+              data-pejabat-additional="<?= htmlspecialchars($row1['pejabat_additional']) ?>" 
+              data-shift1-additional="<?= htmlspecialchars($row1['shift1_additional']) ?>"
+              data-shift2-additional="<?= htmlspecialchars($row1['shift2_additional']) ?>"
+              data-hitung-additional="<?= htmlspecialchars($row1['hitung_additional']) ?>" 
+              data-status-additional="<?= htmlspecialchars($row1['status_additional']) ?>" 
+              data-analisis-additional="<?= htmlspecialchars($row1['analisis_additional']) ?>" 
+              data-hasil-analisa-additional="<?= htmlspecialchars($row1['hasil_analisa_additional']) ?>">
             <td align="center"><?php echo $no; ?></td>
             <!-- <td align="center"><div class="btn-group">
             <a href="TambahBon-<?php echo $row1['id']; ?>-<?php echo $noorder; ?>" class="btn btn-warning btn-xs <?php if($_SESSION['akses']=='biasa' OR $_SESSION['lvl_id']!='AFTERSALES'){ echo "disabled"; } ?>" target="_blank"><i class="fa fa-plus" data-toggle="tooltip" data-placement="top" title="Ganti Kain"></i> </a>
@@ -369,8 +420,8 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td><?php echo $pelanggan; ?></td>
             <td><?php echo $buyer; ?></td>
 
-            <td align="center"><?php echo $row1['nodemand'];?></td>
-            <td align="center"><?php echo $row1['nokk'];?></td>
+            <td align="center" class="rekap-link" style="cursor: pointer; color: blue; text-decoration: underline;"><?php echo $row1['nodemand']; ?></td>
+            <td align="center" class="rekap-link-nokk" style="cursor: pointer; color: blue; text-decoration: underline;"><?php echo $row1['nokk']; ?></td>
             <td align="center"><?php echo $row1['po'];?></td>
             <!-- <td align="center"><?php echo $row1['no_item'];?></td> -->
             <td align="center"><?php echo $row1['no_order'];?></td>
@@ -409,7 +460,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <!-- </td> -->
             <td><?php echo $row1['solusi']; ?></td>
                   <!-- <td><?php //echo $row1['solusi'];?></td> -->
-                  <td><?php echo $row1['klasifikasi'];?></td>
+            <td><?php echo $row1['klasifikasi'];?></td>
             <td><?php if($row1['personil2']!=""){echo $row1['personil'].",".$row1['personil2'];}else{echo $row1['personil'];}?></td>
             <td><?php echo $row1['pejabat'];?></td>
             <td><?php if($row1['sts']=="1"){echo "Lolos QC";}else if($row1['sts_disposisiqc']=="1"){echo "Disposisi QC";}else if($row1['sts_disposisipro']=="1"){echo "Disposisi Produksi";}?><?php if($row1['sts_nego']=="1"){echo ", Negosiasi Aftersales";}?></td>
@@ -425,6 +476,18 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td><?php echo $row1['akar_masalah'];?></td>
             <td><?php echo $row1['solusi_panjang'];?></td>
             <td><?php echo $row1['ket'];?></td>
+            <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['personil_additional']; ?></td>
+            <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['pejabat_additional']; ?></td>
+            <td class="edit-cell" style="cursor: pointer;"><?php if($row1['hitung_additional']=="terima"){
+                                                                  echo "&#10004"; }
+                                                                  else if($row1['hitung_additional']=="tolak"){
+                                                                  echo "X"; }
+                                                                  else{
+                                                                  echo "";}?>
+            </td>
+            <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['status_additional']; ?></td>
+            <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['analisis_additional']; ?></td>
+            <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['hasil_analisa_additional']; ?></td>
             </tr>
           <?php	$no++;  }} ?>
         </tbody>
@@ -451,6 +514,73 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
   </div>
 </div>	
 
+<div class="modal fade" id="editKpeModal" tabindex="-1" role="dialog" aria-labelledby="editKpeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form id="editKpeForm">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="editKpeModalLabel">Edit Data Tambahan KPE QCF</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="modal_no_demand" name="no_demand">
+                    <input type="hidden" id="modal_no_kk" name="no_kk">
+
+                    <?php 
+                        // Menyiapkan opsi untuk Personil QC
+                        $personil_options_html = '<option value="">-- Pilih Personil --</option>';
+                        $qryp = mysqli_query($con, "SELECT UPPER(nama) AS nama FROM user_login WHERE dept ='QC' ORDER BY nama ASC");
+                        while ($row_personil = mysqli_fetch_assoc($qryp)) {
+                            $nama_personil = htmlspecialchars($row_personil['nama']);
+                            $personil_options_html .= "<option value='{$nama_personil}'>{$nama_personil}</option>";
+                        }
+
+                        // Menyiapkan opsi untuk Pejabat
+                        $personil_pejabat = '<option value="">-- Pilih Pejabat --</option>';
+                        $qrypjbt = mysqli_query($con, "SELECT nama FROM tbl_personil_aftersales WHERE jenis='pejabat' ORDER BY nama ASC");
+                        while ($row_personil_pejabat = mysqli_fetch_assoc($qrypjbt)) {
+                            $nama_personil_pejabat = htmlspecialchars($row_personil_pejabat['nama']);
+                            $personil_pejabat .= "<option value='{$nama_personil_pejabat}'>{$nama_personil_pejabat}</option>";
+                        }
+                    ?>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group"><label>Personil 1</label><select class="form-control select2"  id="modal_personil1_additional" name="personil1" style="width: 100%;"><?php echo $personil_options_html; ?></select></div>
+                            <div class="form-group"><label>Personil 2</label><select class="form-control select2"  id="modal_personil2_additional" name="personil2" style="width: 100%;"><?php echo $personil_options_html; ?></select></div>
+                            <div class="form-group"><label>Personil 3</label><select class="form-control select2"  id="modal_personil3_additional" name="personil3" style="width: 100%;"><?php echo $personil_options_html; ?></select></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"><label>Personil 4</label><select class="form-control select2"  id="modal_personil4_additional" name="personil4" style="width: 100%;"><?php echo $personil_options_html; ?></select></div>
+                            <div class="form-group"><label>Personil 5</label><select class="form-control select2"  id="modal_personil5_additional" name="personil5" style="width: 100%;"><?php echo $personil_options_html; ?></select></div>
+                            <div class="form-group"><label>Personil 6</label><select class="form-control select2"  id="modal_personil6_additional" name="personil6" style="width: 100%;"><?php echo $personil_options_html; ?></select></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"><label>Pejabat</label><select class="form-control select2" id="modal_pejabat" name="pejabat" style="width: 100%;"><?php echo $personil_pejabat; ?></select></div>
+                            <div class="form-group"><label>Analisis</label><select class="form-control select2" id="modal_analisis" name="analisis" style="width: 100%;"><?php echo $personil_options_html; ?></select></div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group"><label>Hitung</label><select class="form-control select2" id="modal_hitung" name="hitung" style="width: 100%;"><option value="">Pilih</option><option value="terima">&#10004;</option><option value="tolak">X</option></select></div>
+                            <div class="form-group"><label>Status</label><select class="form-control select2" id="modal_status" name="status" style="width: 100%;"><option value="">Pilih</option><option value="disposisi">Disposisi</option><option value="lolos">Lolos</option></select></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                 <div class="form-group"><label>Hasil Analisa</label><textarea class="form-control" id="modal_hasil_analisa" name="hasil_analisa" rows="3"></textarea></div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </form> </div>
+    </div>
+</div>
 <!-- Create -->
 <div id="DataSolusiPerbaikanGarment" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>	
 <div id="DataSolusiDebitNote" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>	
@@ -459,6 +589,120 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
 <div id="EditDataSolusiPerbaikanGarment" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>	
 <div id="EditDataSolusiDebitNote" class="modal fade modal-3d-slit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>	
 
+
+<script>
+$(document).ready(function () {
+      $('.rekap-link').on('click', function() {
+        var row = $(this).closest('tr');
+        var nodemandValue = row.data('nodemand');
+
+        var form = $('<form>', {
+            'method': 'POST',
+            'action': 'RekapData', 
+            'target': '_blank'
+        });
+
+        form.append($('<input>', {
+                    type: 'hidden', 
+                    name: 'demand', 
+                    value: nodemandValue
+                  }));
+
+        $('body').append(form);
+        form.submit();
+        form.remove();
+    });
+     $('.rekap-link-nokk').on('click', function() {
+        var nokkValue = $(this).closest('tr').data('nokk');
+
+        var form = $('<form>', {
+            'method': 'POST',
+            'action': 'RekapData', 
+            'target': '_blank'
+        });
+
+        if (nokkValue) {
+            var inputKK = $('<input>', {
+                'type': 'hidden',
+                'name': 'prodorder',
+                'value': nokkValue
+            });
+            form.append(inputKK);
+        }
+
+        $('body').append(form);
+        form.submit();
+        form.remove();
+    });
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+    // Tombol edit
+    $('.edit-cell').on('click', function() {
+        var row = $(this).closest('tr');
+        var data = {
+            nodemand: row.data('nodemand'),
+            kk: row.data('nokk'),
+            personil1: row.data('personil1-additional'),
+            personil2: row.data('personil2-additional'),
+            personil3: row.data('personil3-additional'),
+            personil4: row.data('personil4-additional'),
+            personil5: row.data('personil5-additional'),
+            personil6: row.data('personil6-additional'),
+            pejabat: row.data('pejabat-additional'),
+            shift1: row.data('shift1-additional'),
+            shift2: row.data('shift2-additional'),
+            hitung: row.data('hitung-additional'),
+            status: row.data('status-additional'),
+            analisis: row.data('analisis-additional'),
+            hasil_analisa: row.data('hasil-analisa-additional')
+        };
+
+        // isi form modal
+        $('#modal_no_demand').val(data.nodemand);
+        $('#modal_no_kk').val(data.kk);
+        $('#modal_personil1_additional').val(data.personil1).trigger('change');
+        $('#modal_personil2_additional').val(data.personil2).trigger('change');
+        $('#modal_personil3_additional').val(data.personil3).trigger('change');
+        $('#modal_personil4_additional').val(data.personil4).trigger('change');
+        $('#modal_personil5_additional').val(data.personil5).trigger('change');
+        $('#modal_personil6_additional').val(data.personil6).trigger('change');
+        $('#modal_pejabat').val(data.pejabat).trigger('change');
+        $('#modal_shift1').val(data.shift1).trigger('change');
+        $('#modal_shift2').val(data.shift2).trigger('change');
+        $('#modal_hitung').val(data.hitung).trigger('change');
+        $('#modal_status').val(data.status).trigger('change');
+        $('#modal_analisis').val(data.analisis).trigger('change');
+        $('#modal_hasil_analisa').val(data.hasil_analisa);
+
+        // tampilkan modal
+        $('#editKpeModal').modal('show');
+    });
+
+    // Submit form
+    $('#editKpeForm').on('submit', function(e) {
+        e.preventDefault();
+        // console.log("Data yang akan dikirim:");
+        // var formData = $(this).serialize(); 
+        // console.log(formData);
+        // alert("Data yang akan dikirim:\n\n" + formData);
+        
+        $.ajax({
+            url: 'pages/ajax/update_personil_kpe.php',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                alert(response);
+                $('#editKpeModal').modal('hide');
+                location.reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Terjadi kesalahan saat menyimpan data: ' + textStatus);
+                console.error(errorThrown);
+            }
+        });
+        
+    });
+});
+</script>
 
 
 
@@ -469,12 +713,6 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
       document.getElementById('delete_link').setAttribute('href' , delete_url);
     }
 </script>	
-<script>
-		$(document).ready(function() {
-			$('[data-toggle="tooltip"]').tooltip();
-		});
-
-	</script>
 
 <script>
 function formatRupiah(input) {
@@ -494,4 +732,5 @@ function formatRupiah(input) {
 }
 </script>
 </body>
+
 </html>
