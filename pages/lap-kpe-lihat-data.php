@@ -10,8 +10,10 @@ include"koneksi.php";
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Laporan Harian Produksi</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<script src="dist/js/jquery-3.5.1.min.js"></script>
+<script src="dist/js/pages/bootstrap.min.js"></script>
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js "></script> -->
 <style>
   .select2 {
     width: 100% !important;
