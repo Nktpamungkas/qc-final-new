@@ -21,8 +21,21 @@ $rcekR = mysqli_fetch_array($sqlCekR);
 $sqlCekD = mysqli_query($conlab, "SELECT *,
     CONCAT_WS(' ',dfc_note,dph_note, dabr_note, dbas_note, ddry_note, dfla_note, dfwe_note, dfwi_note, dburs_note,drepp_note,dwick_note,dabsor_note,dapper_note,dfiber_note,dpillb_note,dpillm_note,dpillr_note,dthick_note,dgrowth_note,drecover_note,dstretch_note,dsns_note,dsnab_note,dsnam_note,dsnap_note,dwash_note,dwater_note,dacid_note,dalkaline_note,dcrock_note,dphenolic_note,dcm_printing_note,dcm_dye_note,dlight_note,dlight_pers_note,dsaliva_note,dh_shrinkage_note,dfibre_note,dpilll_note,dsoil_note,dapperss_note,dbleeding_note,dchlorin_note,ddye_tf_note,dhumidity_note,dodour_note) AS dnote_g FROM tbl_tq_disptest WHERE id_nokk='$idkk' ORDER BY id DESC LIMIT 1");
 $rcekD = mysqli_fetch_array($sqlCekD);
-// $data1 = mysqli_query($conlab, "SELECT nodemand,nokk FROM tbl_tq_nokk WHERE id='$idkk'");
-// $rd = mysqli_fetch_array($data1);
+$data1 = mysqli_query($con, "SELECT nodemand,
+                                    nokk,
+                                    pelanggan as buyer,
+                                    no_item,
+                                    no_hanger,
+                                    warna, 
+                                    lebar,
+                                    gramasi,
+                                    lot_legacy,
+                                    lot,
+                                    no_warna,
+                                    rol,
+                                    berat  
+                                  FROM tbl_tq_nokk WHERE id='$idkk'");
+$rd = mysqli_fetch_array($data1);
 ?>
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -47,15 +60,1589 @@ $rcekD = mysqli_fetch_array($sqlCekD);
   <table width="100%" border="0" style="width: 5.5in;">
     <tbody>
       <tr>
-        <td align="left" valign="top" style="height: 1.6in;">
-        COLORFASTNESS
+        <td colspan="1" align="left" valign="top">
+          Buyer : <?php echo $rd['buyer']; ?>
+        </td>
+        <td>No Lot Legacy : <?php echo $rd['lot_legacy']; ?></td>
+        <td colspan="1" align="left" valign="top">
+          No Prod Order : <?php echo $rd['nokk']; ?>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" align="left" valign="top">
+          Item / Hanger : <?php echo trim($rd['no_item']); ?> / <?= $rd['no_hanger'] ?>
+        </td>
+        <td>
+          Lebar x Gramasi : <?php echo $rd['lebar'] . ' x '.$rd['gramasi'] ; ?>
+        </td>
+        <td colspan="1" align="left" valign="top">
+          Demand : <?php echo trim($rd['nodemand']); ?>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" align="left">
+          Warna : <?= $rd['warna'] ?>
+        </td>
+        <td>No Warna : <?= $rd['no_warna'];?></td>
+        <td colspan="1" align="left">
+          <?= $rcek1['tgl_buat'] ?>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" align="left">Roll x Bruto : <?php echo $rd['rol'] . ' x '.$rd['berat'] ; ?></td>
+        <td>&nbsp;</td>
+        <td colspan="1" align="left">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="18" colspan="1" align="left">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td colspan="1" align="left">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="187" align="left" valign="top" style="height: 1.6in;">PHYSICAL
           <hr>
-          <table class="table" width="100%">
+          <table class="table">
+            <?php if ($rcek1['flamability'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="width:45%; font-size: 7px;">Flamability</th>
+                <td colspan="6" style="font-size: 7px; <?= ($rcek1['stat_fla'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fla'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fla'] == "RANDOM") {
+                    echo $rcekR['rflamability'];
+                  } else {
+                    echo $rcek1['flamability'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['fc_cott'] != "" or $rcek1['fc_poly'] != "" or $rcek1['fc_elastane'] != "") {
+              if ($rcek1['fc_cott'] != "") {
+                $cott = $rcek1['fc_cott'] . "% Cott";
+              } else {
+                $cott = "";
+              }
+              if ($rcek1['fc_poly'] != "") {
+                $poly = $rcek1['fc_poly'] . "% Poly";
+              } else {
+                $poly = "";
+              }
+              if ($rcek1['fc_elastane'] != "") {
+                $ela = $rcek1['fc_elastane'] . "% Ela";
+              } else {
+                $ela = "";
+              }
+              ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Fiber Content</th>
+                <td colspan="6" style="font-size: 6px; <?= ($rcek1['stat_fib'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fib'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php echo $cott; ?>
+                  <?php echo $poly; ?>
+                  <?php echo $ela; ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <!--<?php if ($rcek1['fibercontent'] != "" or $rcekR['rfibercontent'] != "" or $rcekD['dfibercontent'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Fiber Content</th>
+                <td colspan="6" style="font-size: 6px;">
+                <?php if ($rcek1['stat_fib'] == "RANDOM") {
+                  echo $rcekR['rfibercontent'];
+                } else {
+                  echo $rcek1['fibercontent'];
+                } ?>
+              </td>
+          </tr>
+            <?php } ?>-->
+            <?php if ($rcek1['fc_wpi'] != "" or $rcek1['fc_cpi'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Fabric Count</th>
+                <td colspan="6" style="font-size: 7px; <?= ($rcek1['stat_fc'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fc'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  W:
+                  <?php if ($rcek1['stat_fc'] == "RANDOM") {
+                    echo $rcekR['rfc_wpi'];
+                  } else {
+                    echo $rcek1['fc_wpi'];
+                  } ?>
+                  C:
+                  <?php if ($rcek1['stat_fc'] == "RANDOM") {
+                    echo $rcekR['rfc_cpi'];
+                  } else {
+                    echo $rcek1['fc_cpi'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['f_weight'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Fabric Weight</th>
+                <td colspan="6" style="font-size: 7px; <?= ($rcek1['stat_fwss2'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss2'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss2'] == "RANDOM") {
+                    echo $rcekR['rf_weight']; ?> gr/m<sup>2</sup> =
+                    <?php echo number_format((float)$rcekR['rf_weight'] / 33.906, 2); ?> oz/yd<sup>2</sup>
+                  <?php } ?>
+                  <!-- <?php if ($rcek1['stat_fwss2'] == "DISPOSISI") {
+                    echo $rcekD['df_weight']; ?> gr/m<sup>2</sup> = <?php echo round($rcekD['df_weight'] / 33.906, 2); ?> oz/yd<sup>2</sup> <?php } ?> -->
+                  <?php if ($rcek1['stat_fwss2'] != "DISPOSISI" or $rcek1['stat_fwss2'] != "RANDOM") {
+                    echo $rcek1['f_weight']; ?> gr/m<sup>2</sup> =
+                    <?php echo number_format((float)$rcek1['f_weight'] / 33.906, 2); ?> oz/yd<sup>2</sup>
+                  <?php } ?>
+                  <!--<?php echo $rcek1['f_weight']; ?> gr/m<sup>2</sup> = <?php echo round($rcek1['f_weight'] / 33.906, 2); ?> oz/yd<sup>2</sup>-->
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['f_width'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Fabric Width</th>
+                <td colspan="6" style=" <?= ($rcek1['stat_fwss3'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss3'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss3'] == "RANDOM") {
+                    echo $rcekR['rf_width'];
+                  } else {
+                    echo $rcek1['f_width'];
+                  } ?>''
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['bow'] != "" and $rcek1['skew'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Bow &amp; Skew(%)</th>
+                <td colspan="6" style="font-size: 7px; <?= ($stat_bsk['stat_curling'] == "FAIL") ? 'color: red;' : (($stat_bsk['stat_curling'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_bsk'] == "RANDOM") {
+                    echo $rcekR['rbow'];
+                  } else {
+                    echo $rcek1['bow'];
+                  } ?> &amp;
+                  <?php if ($rcek1['stat_bsk'] == "RANDOM") {
+                    echo $rcekR['rskew'];
+                  } else {
+                    echo $rcek1['skew'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['shrinkage_l1'] != "" or $rcek1['shrinkage_l2'] != "" or $rcek1['shrinkage_l3'] != "" or $rcek1['shrinkage_l4'] != "" or $rcek1['shrinkage_l5'] != "" or $rcek1['shrinkage_l6'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Shrinkage Length(%)</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_l1'];
+                  } else {
+                    echo $rcek1['shrinkage_l1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_l2'];
+                  } else {
+                    echo $rcek1['shrinkage_l2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_l3'];
+                  } else {
+                    echo $rcek1['shrinkage_l3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_l4'];
+                  } else {
+                    echo $rcek1['shrinkage_l4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_l5'];
+                  } else {
+                    echo $rcek1['shrinkage_l5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_l6'];
+                  } else {
+                    echo $rcek1['shrinkage_l6'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['shrinkage_w1'] != "" or $rcek1['shrinkage_w2'] != "" or $rcek1['shrinkage_w3'] != "" or $rcek1['shrinkage_w4'] != "" or $rcek1['shrinkage_w5'] != "" or $rcek1['shrinkage_w6'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Shrinkage Width(%)</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_w1'];
+                  } else {
+                    echo $rcek1['shrinkage_w1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_w2'];
+                  } else {
+                    echo $rcek1['shrinkage_w2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_w3'];
+                  } else {
+                    echo $rcek1['shrinkage_w3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_w4'];
+                  } else {
+                    echo $rcek1['shrinkage_w4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_w5'];
+                  } else {
+                    echo $rcek1['shrinkage_w5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rshrinkage_w6'];
+                  } else {
+                    echo $rcek1['shrinkage_w6'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['spirality1'] != "" or $rcek1['spirality2'] != "" or $rcek1['spirality3'] != "" or $rcek1['spirality4'] != "" or $rcek1['spirality5'] != "" or $rcek1['spirality6'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Spirality(%)</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rspirality1'];
+                  } else {
+                    echo $rcek1['spirality1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rspirality2'];
+                  } else {
+                    echo $rcek1['spirality2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rspirality3'];
+                  } else {
+                    echo $rcek1['spirality3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rspirality4'];
+                  } else {
+                    echo $rcek1['spirality4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rspirality5'];
+                  } else {
+                    echo $rcek1['spirality5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rspirality6'];
+                  } else {
+                    echo $rcek1['spirality6'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['apperss_ch1'] != "" or $rcek1['apperss_ch2'] != "" or $rcek1['apperss_ch3'] != "") { ?>
+              <tr>
+                <th style="font-size: 7px;" align="left">Apperance</th>
+                <th style="font-size: 7px;">&nbsp;</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rapperss_ch1'];
+                  } else {
+                    echo $rcek1['apperss_ch1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rapperss_ch2'];
+                  } else {
+                    echo $rcek1['apperss_ch2'];
+                  } ?>
+                </td>
+                <td colspan="4" style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rapperss_ch3'];
+                  } else {
+                    echo $rcek1['apperss_ch3'];
+                  } ?>
+                </td>
+              </tr>
+              <tr>
+                <th style="font-size: 7px;" align="left">Colorchange</th>
+                <th style="font-size: 7px;">&nbsp;</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rapperss_cc1'];
+                  } else {
+                    echo $rcek1['apperss_cc1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rapperss_cc2'];
+                  } else {
+                    echo $rcek1['apperss_cc2'];
+                  } ?>
+                </td>
+                <td colspan="4" style="font-size: 7px; <?= ($rcek1['stat_fwss'] == "FAIL") ? 'color: red;' : (($rcek1['stat_fwss'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_fwss'] == "RANDOM") {
+                    echo $rcekR['rapperss_cc3'];
+                  } else {
+                    echo $rcek1['apperss_cc3'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['pm_f1'] != "" or $rcek1['pm_f2'] != "" or $rcek1['pm_f3'] != "" or $rcek1['pm_f4'] != "" or $rcek1['pm_f5'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Pilling Martindle</th>
+                <th style="font-size: 7px;">Face</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pm'] == "RANDOM") {
+                    echo $rcekR['rpm_f1'];
+                  } else {
+                    echo $rcek1['pm_f1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pm'] == "RANDOM") {
+                    echo $rcekR['rpm_f2'];
+                  } else {
+                    echo $rcek1['pm_f2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pm'] == "RANDOM") {
+                    echo $rcekR['rpm_f3'];
+                  } else {
+                    echo $rcek1['pm_f3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pm'] == "RANDOM") {
+                    echo $rcekR['rpm_f4'];
+                  } else {
+                    echo $rcek1['pm_f4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pm'] == "RANDOM") {
+                    echo $rcekR['rpm_f5'];
+                  } else {
+                    echo $rcek1['pm_f5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['pm_b1'] != "" or $rcek1['pm_b2'] != "" or $rcek1['pm_b3'] != "" or $rcek1['pm_b4'] != "" or $rcek1['pm_b5'] != "" or $rcek1['pm_f1'] != "") { ?>
+              <tr>
+                <th style="font-size: 7px;">Back</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pm'] == "RANDOM") {
+                    echo $rcekR['rpm_b1'];
+                  } else {
+                    echo $rcek1['pm_b1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pm'] == "RANDOM") {
+                    echo $rcekR['rpm_b2'];
+                  } else {
+                    echo $rcek1['pm_b2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pm'] == "RANDOM") {
+                    echo $rcekR['rpm_b3'];
+                  } else {
+                    echo $rcek1['pm_b3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pm'] == "RANDOM") {
+                    echo $rcekR['rpm_b4'];
+                  } else {
+                    echo $rcek1['pm_b4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pm'] == "RANDOM") {
+                    echo $rcekR['rpm_b5'];
+                  } else {
+                    echo $rcek1['pm_b5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['pl_f1'] != "" or $rcek1['pl_f2'] != "" or $rcek1['pl_f3'] != "" or $rcek1['pl_f4'] != "" or $rcek1['pl_f5'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Pilling Locus</th>
+                <th style="font-size: 7px;">Face</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pl'] == "RANDOM") {
+                    echo $rcekR['rpl_f1'];
+                  } else {
+                    echo $rcek1['pl_f1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pl'] == "RANDOM") {
+                    echo $rcekR['rpl_f2'];
+                  } else {
+                    echo $rcek1['pl_f2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pl'] == "RANDOM") {
+                    echo $rcekR['rpl_f3'];
+                  } else {
+                    echo $rcek1['pl_f3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pl'] == "RANDOM") {
+                    echo $rcekR['rpl_f4'];
+                  } else {
+                    echo $rcek1['pl_f4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pl'] == "RANDOM") {
+                    echo $rcekR['rpl_f5'];
+                  } else {
+                    echo $rcek1['pl_f5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['pl_b1'] != "" or $rcek1['pl_b2'] != "" or $rcek1['pl_b3'] != "" or $rcek1['pl_b4'] != "" or $rcek1['pl_b5'] != "" or $rcek1['pl_f1'] != "") { ?>
+              <tr>
+                <th style="font-size: 7px;">Back</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pl'] == "RANDOM") {
+                    echo $rcekR['rpl_b1'];
+                  } else {
+                    echo $rcek1['pl_b1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pl'] == "RANDOM") {
+                    echo $rcekR['rpl_b2'];
+                  } else {
+                    echo $rcek1['pl_b2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pl'] == "RANDOM") {
+                    echo $rcekR['rpl_b3'];
+                  } else {
+                    echo $rcek1['pl_b3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pl'] == "RANDOM") {
+                    echo $rcekR['rpl_b4'];
+                  } else {
+                    echo $rcek1['pl_b4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pl'] == "RANDOM") {
+                    echo $rcekR['rpl_b5'];
+                  } else {
+                    echo $rcek1['pl_b5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['pb_f1'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Pilling Box</th>
+                <th style="font-size: 7px;">Face</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pb'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pb'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pb'] == "RANDOM") {
+                    echo $rcekR['rpb_f1'];
+                  } else {
+                    echo $rcek1['pb_f1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['pb_b1'] != "") { ?>
+              <tr>
+                <th style="font-size: 7px;">Back</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_pb'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pb'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_pb'] == "RANDOM") {
+                    echo $rcekR['rpb_b1'];
+                  } else {
+                    echo $rcek1['pb_b1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['prt_f1'] != "" or $rcek1['prt_f2'] != "" or $rcek1['prt_f3'] != "" or $rcek1['prt_f4'] != "" or $rcek1['prt_f5'] != "" or $rcek1['prt_b1'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Pilling Random Tumbler</th>
+                <th style="font-size: 7px;">Face</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_prt'] == "FAIL") ? 'color: red;' : (($rcek1['stat_prt'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_prt'] == "RANDOM") {
+                    echo $rcekR['rprt_f1'];
+                  } else {
+                    echo $rcek1['prt_f1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_prt'] == "FAIL") ? 'color: red;' : (($rcek1['stat_prt'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_prt'] == "RANDOM") {
+                    echo $rcekR['rprt_f2'];
+                  } else {
+                    echo $rcek1['prt_f2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_prt'] == "FAIL") ? 'color: red;' : (($rcek1['stat_prt'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_prt'] == "RANDOM") {
+                    echo $rcekR['rprt_f3'];
+                  } else {
+                    echo $rcek1['prt_f3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_prt'] == "FAIL") ? 'color: red;' : (($rcek1['stat_prt'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_prt'] == "RANDOM") {
+                    echo $rcekR['rprt_f4'];
+                  } else {
+                    echo $rcek1['prt_f4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_prt'] == "FAIL") ? 'color: red;' : (($rcek1['stat_prt'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_prt'] == "RANDOM") {
+                    echo $rcekR['rprt_f5'];
+                  } else {
+                    echo $rcek1['prt_f5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['prt_b1'] != "" or $rcek1['prt_b2'] != "" or $rcek1['prt_b3'] != "" or $rcek1['prt_b4'] != "" or $rcek1['prt_b5'] != "") { ?>
+              <tr>
+
+                <th style="font-size: 7px;">Back</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_prt'] == "FAIL") ? 'color: red;' : (($rcek1['stat_prt'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_prt'] == "RANDOM") {
+                    echo $rcekR['rprt_b1'];
+                  } else {
+                    echo $rcek1['prt_b1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_prt'] == "FAIL") ? 'color: red;' : (($rcek1['stat_prt'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_prt'] == "RANDOM") {
+                    echo $rcekR['rprt_b2'];
+                  } else {
+                    echo $rcek1['prt_b2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_prt'] == "FAIL") ? 'color: red;' : (($rcek1['stat_prt'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_prt'] == "RANDOM") {
+                    echo $rcekR['rprt_b3'];
+                  } else {
+                    echo $rcek1['prt_b3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_prt'] == "FAIL") ? 'color: red;' : (($rcek1['stat_prt'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_prt'] == "RANDOM") {
+                    echo $rcekR['rprt_b4'];
+                  } else {
+                    echo $rcek1['prt_b4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_prt'] == "FAIL") ? 'color: red;' : (($rcek1['stat_prt'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_prt'] == "RANDOM") {
+                    echo $rcekR['rprt_b5'];
+                  } else {
+                    echo $rcek1['prt_b5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['abration'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Abration</th>
+                <td colspan="6" style="font-size: 7px; <?= ($rcek1['stat_abr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_abr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_abr'] == "RANDOM") {
+                    echo $rcekR['rabration'];
+                  } else {
+                    echo $rcek1['abration'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['sm_l1'] != "" or $rcek1['sm_l2'] != "" or $rcek1['sm_l3'] != "" or $rcek1['sm_l4'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Snagging Mace</th>
+                <th style="font-size: 7px;">Len</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sm'] == "RANDOM") {
+                    echo $rcekR['rsm_l1'];
+                  } else {
+                    echo $rcek1['sm_l1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sm'] == "RANDOM") {
+                    echo $rcekR['rsm_l2'];
+                  } else {
+                    echo $rcek1['sm_l2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sm'] == "RANDOM") {
+                    echo $rcekR['rsm_l3'];
+                  } else {
+                    echo $rcek1['sm_l3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sm'] == "RANDOM") {
+                    echo $rcekR['rsm_l4'];
+                  } else {
+                    echo $rcek1['sm_l4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['sm_w1'] != "" or $rcek1['sm_w2'] != "" or $rcek1['sm_w3'] != "" or $rcek1['sm_w4'] != "") { ?>
+              <tr>
+                <th style="font-size: 7px;">Wid</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sm'] == "RANDOM") {
+                    echo $rcekR['rsm_w1'];
+                  } else {
+                    echo $rcek1['sm_w1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sm'] == "RANDOM") {
+                    echo $rcekR['rsm_w2'];
+                  } else {
+                    echo $rcek1['sm_w2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sm'] == "RANDOM") {
+                    echo $rcekR['rsm_w3'];
+                  } else {
+                    echo $rcek1['sm_w3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sm'] == "RANDOM") {
+                    echo $rcekR['rsm_w4'];
+                  } else {
+                    echo $rcek1['sm_w4'];
+                  } ?>
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['sp_grdl1'] != "" or $rcek1['sp_clsl1'] != "" or $rcek1['sp_shol1'] != "" or $rcek1['sp_medl1'] != "" or $rcek1['sp_lonl1'] != "" or $rcek1['sp_grdl2'] != "" or $rcek1['sp_clsl2'] != "" or $rcek1['sp_shol2'] != "" or $rcek1['sp_medl2'] != "" or $rcek1['sp_lonl2'] != "" or $rcek1['sp_grdw1'] != "" or $rcek1['sp_clsw1'] != "" or $rcek1['sp_show1'] != "" or $rcek1['sp_medw1'] != "" or $rcek1['sp_lonw1'] != "" or $rcek1['sp_grdw2'] != "" or $rcek1['sp_clsw2'] != "" or $rcek1['sp_show2'] != "" or $rcek1['sp_medw2'] != "" or $rcek1['sp_lonw2'] != "") {
+              if ($rcek1['sp_grdl1'] != "" or $rcek1['sp_clsl1'] != "" or $rcek1['sp_shol1'] != "" or $rcek1['sp_medl1'] != "" or $rcek1['sp_lonl1'] != "") {
+                $rp1 = "1";
+              } else {
+                $rp1 = "0";
+              }
+              if ($rcek1['sp_grdl2'] != "" or $rcek1['sp_clsl2'] != "" or $rcek1['sp_shol2'] != "" or $rcek1['sp_medl2'] != "" or $rcek1['sp_lonl2'] != "") {
+                $rp2 = "1";
+              } else {
+                $rp2 = "0";
+              }
+              if ($rcek1['sp_grdw1'] != "" or $rcek1['sp_clsw1'] != "" or $rcek1['sp_show1'] != "" or $rcek1['sp_medw1'] != "" or $rcek1['sp_lonw1'] != "") {
+                $rp3 = "1";
+              } else {
+                $rp3 = "0";
+              }
+              if ($rcek1['sp_grdw2'] != "" or $rcek1['sp_clsw2'] != "" or $rcek1['sp_show2'] != "" or $rcek1['sp_medw2'] != "" or $rcek1['sp_lonw2'] != "") {
+                $rp4 = "1";
+              } else {
+                $rp4 = "0";
+              }
+              $rowspan = $rp1 + $rp2 + $rp3 + $rp4 + 1; ?>
+              <tr>
+                <th rowspan="5" align="left" style="font-size: 7px;">Snagging POD</th>
+                <th style="font-size: 7px;">SRT</th>
+                <td style="font-size: 7px;"><strong>Grd</strong></td>
+                <td style="font-size: 7px;"><strong>Cls</strong></td>
+                <td style="font-size: 7px;"><strong>Sho</strong></td>
+                <td style="font-size: 7px;"><strong>Med</strong></td>
+                <td style="font-size: 7px;"><strong>Long</strong></td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['sp_grdl1'] != "" or $rcek1['sp_clsl1'] != "" or $rcek1['sp_shol1'] != "" or $rcek1['sp_medl1'] != "" or $rcek1['sp_lonl1'] != "") { ?>
+              <tr>
+                <th style="font-size: 7px;">L1</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_grdl1'];
+                  } else {
+                    echo $rcek1['sp_grdl1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_clsl1'];
+                  } else {
+                    echo $rcek1['sp_clsl1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_shol1'];
+                  } else {
+                    echo $rcek1['sp_shol1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_medl1'];
+                  } else {
+                    echo $rcek1['sp_medl1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_lonl1'];
+                  } else {
+                    echo $rcek1['sp_lonl1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['sp_grdl2'] != "" or $rcek1['sp_clsl2'] != "" or $rcek1['sp_shol2'] != "" or $rcek1['sp_medl2'] != "" or $rcek1['sp_lonl2'] != "") { ?>
+              <tr>
+                <th style="font-size: 7px;">L2</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_grdl2'];
+                  } else {
+                    echo $rcek1['sp_grdl2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_clsl2'];
+                  } else {
+                    echo $rcek1['sp_clsl2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_shol2'];
+                  } else {
+                    echo $rcek1['sp_shol2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_medl2'];
+                  } else {
+                    echo $rcek1['sp_medl2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_lonl2'];
+                  } else {
+                    echo $rcek1['sp_lonl2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['sp_grdw1'] != "" or $rcek1['sp_clsw1'] != "" or $rcek1['sp_show1'] != "" or $rcek1['sp_medw1'] != "" or $rcek1['sp_lonw1'] != "") { ?>
+              <tr>
+                <th style="font-size: 7px;">W1</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_grdw1'];
+                  } else {
+                    echo $rcek1['sp_grdw1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_clsw1'];
+                  } else {
+                    echo $rcek1['sp_clsw1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_show1'];
+                  } else {
+                    echo $rcek1['sp_show1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_medw1'];
+                  } else {
+                    echo $rcek1['sp_medw1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_lonw1'];
+                  } else {
+                    echo $rcek1['sp_lonw1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['sp_grdw2'] != "" or $rcek1['sp_clsw2'] != "" or $rcek1['sp_show2'] != "" or $rcek1['sp_medw2'] != "" or $rcek1['sp_lonw2'] != "") { ?>
+              <tr>
+                <th style="font-size: 7px;">W2</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_grdw2'];
+                  } else {
+                    echo $rcek1['sp_grdw2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_clsw2'];
+                  } else {
+                    echo $rcek1['sp_clsw2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_show2'];
+                  } else {
+                    echo $rcek1['sp_show2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_medw2'];
+                  } else {
+                    echo $rcek1['sp_medw2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sp'] == "RANDOM") {
+                    echo $rcekR['rsp_lonw2'];
+                  } else {
+                    echo $rcek1['sp_lonw2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['sb_l1'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Bean Bag</th>
+                <th style="font-size: 7px;">Len</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sb'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sb'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sb'] == "RANDOM") {
+                    echo $rcekR['rsb_l1'];
+                  } else {
+                    echo $rcek1['sb_l1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['sb_w1'] != "") { ?>
+              <tr>
+                <th style="font-size: 7px;">Wid</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sb'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sb'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sb'] == "RANDOM") {
+                    echo $rcekR['rsb_w1'];
+                  } else {
+                    echo $rcek1['sb_w1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['bs_instron'] != "" or $rcek1['bs_mullen'] != "" or $rcek1['bs_tru'] != "") { ?>
+              <tr>
+                <th align="left" style="font-size: 7px;">Bursting Strength</th>
+                <th align="left" style="font-size: 7px;">&nbsp;</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_bs'] == "FAIL") ? 'color: red;' : (($rcek1['stat_bs'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_bs'] == "RANDOM") {
+                    echo $rcekR['rbs_instron'];
+                  } else {
+                    echo $rcek1['bs_instron'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_bs'] == "FAIL") ? 'color: red;' : (($rcek1['stat_bs'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_bs'] == "RANDOM") {
+                    echo $rcekR['rbs_mullen'];
+                  } else {
+                    echo $rcek1['bs_mullen'];
+                  } ?>
+                </td>
+                <td colspan="4" style="font-size: 7px; <?= ($rcek1['stat_bs'] == "FAIL") ? 'color: red;' : (($rcek1['stat_bs'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_bs'] == "RANDOM") {
+                    echo $rcekR['rbs_tru'];
+                  } else {
+                    echo $rcek1['bs_tru'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['thick1'] != "" or $rcek1['thick1'] != "" or $rcek1['thick1'] != "" or $rcek1['thickav'] != "") { ?>
+              <tr>
+                <th align="left" style="font-size: 7px;">Thickness(mm)</th>
+                <th align="left" style="font-size: 7px;">&nbsp;</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_th'] == "FAIL") ? 'color: red;' : (($rcek1['stat_th'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_th'] == "RANDOM") {
+                    echo $rcekR['rthick1'];
+                  } else {
+                    echo $rcek1['thick1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_th'] == "FAIL") ? 'color: red;' : (($rcek1['stat_th'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_th'] == "RANDOM") {
+                    echo $rcekR['rthick2'];
+                  } else {
+                    echo $rcek1['thick2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_th'] == "FAIL") ? 'color: red;' : (($rcek1['stat_th'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_th'] == "RANDOM") {
+                    echo $rcekR['rthick3'];
+                  } else {
+                    echo $rcek1['thick3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_th'] == "FAIL") ? 'color: red;' : (($rcek1['stat_th'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_th'] == "RANDOM") {
+                    echo $rcekR['rthickav'];
+                  } else {
+                    echo $rcek1['thickav'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['stretch_l1'] != "" or $rcek1['stretch_l2'] != "" or $rcek1['stretch_l3'] != "" or $rcek1['stretch_l4'] != "" or $rcek1['stretch_l5'] != "" or $rcek1['stretch_w1'] != "" or $rcek1['stretch_w2'] != "" or $rcek1['stretch_w3'] != "" or $rcek1['stretch_w4'] != "" or $rcek1['stretch_w5'] != "") { ?>
+              <tr>
+                <th rowspan="3" align="left" style="font-size: 7px;">Stretch(%)</th>
+                <th align="left" style="font-size: 7px;">Load</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rload_stretch'];
+                  } else {
+                    echo $rcek1['load_stretch'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">Len</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rstretch_l1'];
+                  } else {
+                    echo $rcek1['stretch_l1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rstretch_l2'];
+                  } else {
+                    echo $rcek1['stretch_l2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rstretch_l3'];
+                  } else {
+                    echo $rcek1['stretch_l3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rstretch_l4'];
+                  } else {
+                    echo $rcek1['stretch_l4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rstretch_l5'];
+                  } else {
+                    echo $rcek1['stretch_l5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">Wid</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rstretch_w1'];
+                  } else {
+                    echo $rcek1['stretch_w1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rstretch_w2'];
+                  } else {
+                    echo $rcek1['stretch_w2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rstretch_w3'];
+                  } else {
+                    echo $rcek1['stretch_w3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rstretch_w4'];
+                  } else {
+                    echo $rcek1['stretch_w4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rstretch_w5'];
+                  } else {
+                    echo $rcek1['stretch_w5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['recover_l1'] != "" or $rcek1['recover_l2'] != "" or $rcek1['recover_l3'] != "" or $rcek1['recover_l4'] != "" or $rcek1['recover_l5'] != "" or $rcek1['recover_w1'] != "" or $rcek1['recover_w2'] != "" or $rcek1['recover_w3'] != "" or $rcek1['recover_w4'] != "" or $rcek1['recover_w5'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Recovery(%)</th>
+                <th align="left" style="font-size: 7px;">Len</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rrecover_l1'];
+                  } else {
+                    echo $rcek1['recover_l1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rrecover_l2'];
+                  } else {
+                    echo $rcek1['recover_l2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rrecover_l3'];
+                  } else {
+                    echo $rcek1['recover_l3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rrecover_l4'];
+                  } else {
+                    echo $rcek1['recover_l4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rrecover_l5'];
+                  } else {
+                    echo $rcek1['recover_l5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">Wid</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rrecover_w1'];
+                  } else {
+                    echo $rcek1['recover_w1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rrecover_w2'];
+                  } else {
+                    echo $rcek1['recover_w2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rrecover_w3'];
+                  } else {
+                    echo $rcek1['recover_w3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rrecover_w4'];
+                  } else {
+                    echo $rcek1['recover_w4'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_sr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_sr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_sr'] == "RANDOM") {
+                    echo $rcekR['rrecover_w5'];
+                  } else {
+                    echo $rcek1['recover_w5'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['growth_l1'] != "" or $rcek1['growth_l2'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Growth(%)</th>
+                <th align="left" style="font-size: 7px;">Len</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rgrowth_l1'];
+                  } else {
+                    echo $rcek1['growth_l1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rgrowth_l2'];
+                  } else {
+                    echo $rcek1['growth_l2'];
+                  } ?>
+                </td>
+                <td colspan="4" style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['growth_w1'] != "" or $rcek1['growth_w2'] != "") { ?>
+              <tr>
+                <th align="left" style="font-size: 7px;">Wid</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rgrowth_w1'];
+                  } else {
+                    echo $rcek1['growth_w1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rgrowth_w2'];
+                  } else {
+                    echo $rcek1['growth_w2'];
+                  } ?>
+                </td>
+                <td colspan="4" style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['rec_growth_l1'] != "" or $rcek1['rec_growth_l2'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Recovery Growth</th>
+                <th align="left" style="font-size: 7px;">Len</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_growth_l1'];
+                  } else {
+                    echo $rcek1['rec_growth_l1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_growth_l2'];
+                  } else {
+                    echo $rcek1['rec_growth_l2'];
+                  } ?>
+                </td>
+                <td colspan="4" style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">Wid</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_growth_w1'];
+                  } else {
+                    echo $rcek1['rec_growth_w1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_growth_w2'];
+                  } else {
+                    echo $rcek1['rec_growth_w2'];
+                  } ?>
+                </td>
+                <td colspan="4" style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['apper_ch1'] != "" or $rcek1['apper_ch2'] != "" or $rcek1['apper_ch3'] != "" or $rcek1['apper_pf1'] != "" or $rcek1['apper_pf2'] != "" or $rcek1['apper_pf3'] != "" or $rcek1['apper_pb1'] != "" or $rcek1['apper_pb2'] != "" or $rcek1['apper_pb2'] != "" or $rcek1['apper_st'] != "" or $rcek1['apper_cc1'] != "" or $rcek1['apper_cc2'] != "" or $rcek1['apper_cc3'] != "") { ?>
+              <tr>
+                <th rowspan="7" align="left" style="font-size: 7px;">Appearance</th>
+                <th align="left" style="font-size: 7px;">&nbsp;</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_ch1'];
+                  } else {
+                    echo $rcek1['apper_ch1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_ch2'];
+                  } else {
+                    echo $rcek1['apper_ch2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_ch3'];
+                  } else {
+                    echo $rcek1['apper_ch3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">&nbsp;</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_cc1'];
+                  } else {
+                    echo $rcek1['apper_cc1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['rapper_cc2'] == "FAIL") ? 'color: red;' : (($rcek1['rapper_cc2'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_cc2'];
+                  } else {
+                    echo $rcek1['apper_cc2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_cc3'];
+                  } else {
+                    echo $rcek1['apper_cc3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">&nbsp;</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_st'];
+                  } else {
+                    echo $rcek1['apper_st'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_st2'];
+                  } else {
+                    echo $rcek1['apper_st2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_st3'];
+                  } else {
+                    echo $rcek1['apper_st3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">Face</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_pf1'];
+                  } else {
+                    echo $rcek1['apper_pf1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_pf2'];
+                  } else {
+                    echo $rcek1['apper_pf2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_pf3'];
+                  } else {
+                    echo $rcek1['apper_pf3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">Back</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_pb1'];
+                  } else {
+                    echo $rcek1['apper_pb1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_pb2'];
+                  } else {
+                    echo $rcek1['apper_pb2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_pb3'];
+                  } else {
+                    echo $rcek1['apper_pb3'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th>&nbsp;</th>
+                <td><strong>Ace</strong></td>
+                <td><strong>Cot</strong></td>
+                <td><strong>Nyl</strong></td>
+                <td><strong>Poly</strong></td>
+                <td><strong>Acr</strong></td>
+                <td><strong>Wool</strong></td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">&nbsp;</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_acetate'];
+                  } else {
+                    echo $rcek1['apper_acetate'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_cotton'];
+                  } else {
+                    echo $rcek1['apper_cotton'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_nylon'];
+                  } else {
+                    echo $rcek1['apper_nylon'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_poly'];
+                  } else {
+                    echo $rcek1['apper_poly'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_acrylic'];
+                  } else {
+                    echo $rcek1['apper_acrylic'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ap'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ap'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ap'] == "RANDOM") {
+                    echo $rcekR['rapper_wool'];
+                  } else {
+                    echo $rcek1['apper_wool'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['h_shrinkage_l1'] != "" or $rcek1['h_shrinkage_w1'] != "" or $rcek1['h_shrinkage_grd'] != "") { ?>
+              <tr>
+                <th rowspan="3" align="left" style="font-size: 7px;">Heat Shrinkage</th>
+                <th align="left" style="font-size: 7px;">Len</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_hs'] == "FAIL") ? 'color: red;' : (($rcek1['stat_hs'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_hs'] == "RANDOM") {
+                    echo $rcekR['rh_shrinkage_l1'];
+                  } else {
+                    echo $rcek1['h_shrinkage_l1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">Wid</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_hs'] == "FAIL") ? 'color: red;' : (($rcek1['stat_hs'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_hs'] == "RANDOM") {
+                    echo $rcekR['rh_shrinkage_w1'];
+                  } else {
+                    echo $rcek1['h_shrinkage_w1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">Grade</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_hs'] == "FAIL") ? 'color: red;' : (($rcek1['stat_hs'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_hs'] == "RANDOM") {
+                    echo $rcekR['rh_shrinkage_grd'];
+                  } else {
+                    echo $rcek1['h_shrinkage_grd'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['fibre_transfer'] != "" or $rcek1['fibre_grade'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Fibre/Fuzz</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ff'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ff'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ff'] == "RANDOM") {
+                    echo $rcekR['rfibre_transfer'];
+                  } else {
+                    echo $rcek1['fibre_transfer'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_ff'] == "FAIL") ? 'color: red;' : (($rcek1['stat_ff'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_ff'] == "RANDOM") {
+                    echo $rcekR['rfibre_grade'];
+                  } else {
+                    echo $rcek1['fibre_grade'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['odour'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Odour</th>
+                <td colspan="6" style="font-size: 7px; <?= ($rcek1['stat_odour'] == "FAIL") ? 'color: red;' : (($rcek1['stat_odour'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_odour'] == "RANDOM") {
+                    echo $rcekR['rodour'];
+                  } else {
+                    echo $rcek1['odour'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['curling'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Curling</th>
+                <td colspan="6" style="font-size: 7px; <?= ($rcek1['stat_curling'] == "FAIL") ? 'color: red;' : (($rcek1['stat_curling'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_curling'] == "RANDOM") {
+                    echo $rcekR['rcurling'];
+                  } else {
+                    echo $rcek1['curling'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['nedle'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Nedle</th>
+                <td colspan="6" style="font-size: 7px; <?= ($rcek1['stat_nedle'] == "FAIL") ? 'color: red;' : (($rcek1['stat_nedle'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_nedle'] == "RANDOM") {
+                    echo $rcekR['rnedle'];
+                  } else {
+                    echo $rcek1['nedle'];
+                  } ?>
+                </td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['wrinkle'] != "" || $rcek1['wrinkle1'] != "" || $rcek1['wrinkle2'] != "") { ?>
+              <tr>
+                <th colspan="2" align="left" style="font-size: 7px;">Wrinkle</th>
+                <td colspan="6" style="font-size: 7px; <?= ($rcek1['stat_wrinkle'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wrinkle'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?= $rcek1['wrinkle']; ?>
+                </td>
+                <td colspan="6" style="font-size: 7px; <?= ($rcek1['stat_wrinkle1'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wrinkle1'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?= $rcek1['wrinkle2'] ?? $rcek1['wrinkle1'] ?>
+                </td>
+              </tr>
+            <?php } ?>
+          </table>
+        </td>
+        <td width="187" align="left" valign="top" style="height: 1.6in;"> 
+          <!-- <hr> -->
+        </td>
+        <td width="187" align="left" valign="top" style="height: 1.6in;">COLORFASTNESS
+          <hr>
+          <table class="table">
             <?php if ($rcek1['wash_temp'] != "" or $rcek1['wash_colorchange'] != "" or $rcek1['wash_acetate'] != "" or $rcek1['wash_cotton'] != "" or $rcek1['wash_nylon'] != "" or $rcek1['wash_poly'] != "" or $rcek1['wash_acrylic'] != "" or $rcek1['wash_wool'] != "" or $rcek1['wash_staining'] != "") { ?>
               <tr>
                 <th rowspan="5" align="left" style="font-size: 7px;">Washing</th>
                 <th align="left" style="font-size: 7px;">Suhu</th>
-                <td colspan="4" style="font-size: 7px; <?= $rcek1['stat_wf'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="4" style="font-size: 7px; <?= ($rcek1['stat_wf'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wf'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wf'] == "RANDOM") {
                     echo $rcekR['rwash_temp'];
                   } else {
@@ -72,28 +1659,28 @@ $rcekD = mysqli_fetch_array($sqlCekD);
                 <td style="font-size: 7px;">&nbsp;</td>
               </tr>
               <tr>
-                <td style="font-size: 7px; <?= $rcek1['stat_wf'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wf'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wf'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wf'] == "RANDOM") {
                     echo $rcekR['rwash_colorchange'];
                   } else {
                     echo $rcek1['wash_colorchange'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_wf'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wf'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wf'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wf'] == "RANDOM") {
                     echo $rcekR['rwash_acetate'];
                   } else {
                     echo $rcek1['wash_acetate'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_wf'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wf'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wf'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wf'] == "RANDOM") {
                     echo $rcekR['rwash_cotton'];
                   } else {
                     echo $rcek1['wash_cotton'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_wf'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_wf'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wf'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wf'] == "RANDOM") {
                     echo $rcekR['rwash_nylon'];
                   } else {
@@ -110,28 +1697,28 @@ $rcekD = mysqli_fetch_array($sqlCekD);
                 <td style="font-size: 7px;">&nbsp;</td>
               </tr>
               <tr>
-                <td style="font-size: 7px; <?= $rcek1['stat_wf'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wf'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wf'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wf'] == "RANDOM") {
                     echo $rcekR['rwash_poly'];
                   } else {
                     echo $rcek1['wash_poly'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_wf'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wf'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wf'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wf'] == "RANDOM") {
                     echo $rcekR['rwash_acrylic'];
                   } else {
                     echo $rcek1['wash_acrylic'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_wf'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wf'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wf'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wf'] == "RANDOM") {
                     echo $rcekR['rwash_wool'];
                   } else {
                     echo $rcek1['wash_wool'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_wf'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_wf'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wf'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wf'] == "RANDOM") {
                     echo $rcekR['rwash_staining'];
                   } else {
@@ -151,28 +1738,28 @@ $rcekD = mysqli_fetch_array($sqlCekD);
                 <td style="font-size: 7px;">&nbsp;</td>
               </tr>
               <tr>
-                <td style="font-size: 7px; <?= $rcek1['stat_pac'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pac'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pac'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pac'] == "RANDOM") {
                     echo $rcekR['racid_colorchange'];
                   } else {
                     echo $rcek1['acid_colorchange'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_pac'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pac'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pac'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pac'] == "RANDOM") {
                     echo $rcekR['racid_acetate'];
                   } else {
                     echo $rcek1['acid_acetate'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_pac'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pac'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pac'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pac'] == "RANDOM") {
                     echo $rcekR['racid_cotton'];
                   } else {
                     echo $rcek1['acid_cotton'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_pac'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_pac'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pac'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pac'] == "RANDOM") {
                     echo $rcekR['racid_nylon'];
                   } else {
@@ -189,28 +1776,28 @@ $rcekD = mysqli_fetch_array($sqlCekD);
                 <td style="font-size: 7px;">&nbsp;</td>
               </tr>
               <tr>
-                <td style="font-size: 7px; <?= $rcek1['stat_pac'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pac'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pac'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pac'] == "RANDOM") {
                     echo $rcekR['racid_poly'];
                   } else {
                     echo $rcek1['acid_poly'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_pac'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pac'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pac'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pac'] == "RANDOM") {
                     echo $rcekR['racid_acrylic'];
                   } else {
                     echo $rcek1['acid_acrylic'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_pac'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pac'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pac'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pac'] == "RANDOM") {
                     echo $rcekR['racid_wool'];
                   } else {
                     echo $rcek1['acid_wool'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_pac'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_pac'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pac'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pac'] == "RANDOM") {
                     echo $rcekR['racid_staining'];
                   } else {
@@ -231,28 +1818,28 @@ $rcekD = mysqli_fetch_array($sqlCekD);
                 <td style="font-size: 7px;">&nbsp;</td>
               </tr>
               <tr>
-                <td style="font-size: 7px; <?= $rcek1['stat_pal'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pal'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pal'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pal'] == "RANDOM") {
                     echo $rcekR['ralkaline_colorchange'];
                   } else {
                     echo $rcek1['alkaline_colorchange'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_pal'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pal'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pal'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pal'] == "RANDOM") {
                     echo $rcekR['ralkaline_acetate'];
                   } else {
                     echo $rcek1['alkaline_acetate'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_pal'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pal'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pal'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pal'] == "RANDOM") {
                     echo $rcekR['ralkaline_cotton'];
                   } else {
                     echo $rcek1['alkaline_cotton'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_pal'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_pal'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pal'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pal'] == "RANDOM") {
                     echo $rcekR['ralkaline_nylon'];
                   } else {
@@ -269,28 +1856,28 @@ $rcekD = mysqli_fetch_array($sqlCekD);
                 <td style="font-size: 7px;">&nbsp;</td>
               </tr>
               <tr>
-                <td style="font-size: 7px; <?= $rcek1['stat_pal'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pal'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pal'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pal'] == "RANDOM") {
                     echo $rcekR['ralkaline_poly'];
                   } else {
                     echo $rcek1['alkaline_poly'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_pal'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pal'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pal'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pal'] == "RANDOM") {
                     echo $rcekR['ralkaline_acrylic'];
                   } else {
                     echo $rcek1['alkaline_acrylic'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_pal'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_pal'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pal'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pal'] == "RANDOM") {
                     echo $rcekR['ralkaline_wool'];
                   } else {
                     echo $rcek1['alkaline_wool'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_pal'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_pal'] == "FAIL") ? 'color: red;' : (($rcek1['stat_pal'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_pal'] == "RANDOM") {
                     echo $rcekR['ralkaline_staining'];
                   } else {
@@ -311,28 +1898,28 @@ $rcekD = mysqli_fetch_array($sqlCekD);
                 <td style="font-size: 7px;">&nbsp;</td>
               </tr>
               <tr>
-                <td style="font-size: 7px; <?= $rcek1['stat_wtr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wtr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wtr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wtr'] == "RANDOM") {
                     echo $rcekR['rwater_colorchange'];
                   } else {
                     echo $rcek1['water_colorchange'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_wtr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wtr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wtr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wtr'] == "RANDOM") {
                     echo $rcekR['rwater_acetate'];
                   } else {
                     echo $rcek1['water_acetate'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_wtr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wtr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wtr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wtr'] == "RANDOM") {
                     echo $rcekR['rwater_cotton'];
                   } else {
                     echo $rcek1['water_cotton'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_wtr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_wtr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wtr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wtr'] == "RANDOM") {
                     echo $rcekR['rwater_nylon'];
                   } else {
@@ -349,28 +1936,28 @@ $rcekD = mysqli_fetch_array($sqlCekD);
                 <td style="font-size: 7px;">&nbsp;</td>
               </tr>
               <tr>
-                <td style="font-size: 7px; <?= $rcek1['stat_wtr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wtr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wtr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wtr'] == "RANDOM") {
                     echo $rcekR['rwater_poly'];
                   } else {
                     echo $rcek1['water_poly'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_wtr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wtr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wtr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wtr'] == "RANDOM") {
                     echo $rcekR['rwater_acrylic'];
                   } else {
                     echo $rcek1['water_acrylic'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_wtr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_wtr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wtr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wtr'] == "RANDOM") {
                     echo $rcekR['rwater_wool'];
                   } else {
                     echo $rcek1['water_wool'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_wtr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_wtr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_wtr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_wtr'] == "RANDOM") {
                     echo $rcekR['rwater_staining'];
                   } else {
@@ -390,14 +1977,14 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               </tr>
               <tr>
                 <th align="left" style="font-size: 7px;">Len</th>
-                <td style="font-size: 7px; <?= $rcek1['stat_cr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_cr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_cr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_cr'] == "RANDOM") {
                     echo $rcekR['rcrock_len1'];
                   } else {
                     echo $rcek1['crock_len1'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_cr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_cr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_cr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_cr'] == "RANDOM") {
                     echo $rcekR['rcrock_len2'];
                   } else {
@@ -407,14 +1994,14 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               </tr>
               <tr>
                 <th align="left" style="font-size: 7px;">Wid</th>
-                <td style="font-size: 7px; <?= $rcek1['stat_cr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_cr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_cr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_cr'] == "RANDOM") {
                     echo $rcekR['rcrock_wid1'];
                   } else {
                     echo $rcek1['crock_wid1'];
                   } ?>
                 </td>
-                <td colspan="3" style="font-size: 7px; <?= $rcek1['stat_cr'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="3" style="font-size: 7px; <?= ($rcek1['stat_cr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_cr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_cr'] == "RANDOM") {
                     echo $rcekR['rcrock_wid2'];
                   } else {
@@ -427,7 +2014,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               <tr>
                 <th align="left" style="font-size: 7px;">Phenolic Yellowing</th>
                 <th align="left" style="font-size: 7px;">CC</th>
-                <td colspan="4" style="font-size: 7px; <?= $rcek1['stat_py'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="4" style="font-size: 7px; <?= ($rcek1['stat_py'] == "FAIL") ? 'color: red;' : (($rcek1['stat_py'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_py'] == "RANDOM") {
                     echo $rcekR['rphenolic_colorchange'];
                   } else {
@@ -440,14 +2027,14 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               <tr>
                 <th align="left" style="font-size: 7px;">Light</th>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
-                <td style="font-size: 7px; <?= $rcek1['stat_lg'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_lg'] == "FAIL") ? 'color: red;' : (($rcek1['stat_lg'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_lg'] == "RANDOM") {
                     echo $rcekR['rlight_rating1'];
                   } else {
                     echo $rcek1['light_rating1'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_lg'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_lg'] == "FAIL") ? 'color: red;' : (($rcek1['stat_lg'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_lg'] == "RANDOM") {
                     echo $rcekR['rlight_rating2'];
                   } else {
@@ -460,14 +2047,14 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               <tr>
                 <th align="left" style="font-size: 7px;">Color Migration Oven</th>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
-                <td colspan="3" style="font-size: 7px; <?= $rcek1['stat_cmo'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="3" style="font-size: 7px; <?= ($rcek1['stat_cmo'] == "FAIL") ? 'color: red;' : (($rcek1['stat_cmo'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_cmo'] == "RANDOM") {
                     echo $rcekR['rcm_printing_colorchange'];
                   } else {
                     echo $rcek1['cm_printing_colorchange'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_cmo'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_cmo'] == "FAIL") ? 'color: red;' : (($rcek1['stat_cmo'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_cmo'] == "RANDOM") {
                     echo $rcekR['rcm_printing_staining'];
                   } else {
@@ -480,7 +2067,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               <tr>
                 <th rowspan="3" align="left" style="font-size: 7px;">Color Migration</th>
                 <th align="left" style="font-size: 7px;">Suhu</th>
-                <td colspan="4" style="font-size: 7px; <?= $rcek1['stat_cm'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="4" style="font-size: 7px; <?= ($rcek1['stat_cm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_cm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_cm'] == "RANDOM") {
                     echo $rcekR['rcm_dye_temp'];
                   } else {
@@ -495,14 +2082,14 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               </tr>
               <tr>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
-                <td style="font-size: 7px; <?= $rcek1['stat_cm'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_cm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_cm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_cm'] == "RANDOM") {
                     echo $rcekR['rcm_dye_colorchange'];
                   } else {
                     echo $rcek1['cm_dye_colorchange'];
                   } ?>
                 </td>
-                <td colspan="4" style="font-size: 7px; <?= $rcek1['stat_cm'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="4" style="font-size: 7px; <?= ($rcek1['stat_cm'] == "FAIL") ? 'color: red;' : (($rcek1['stat_cm'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_cm'] == "RANDOM") {
                     echo $rcekR['rcm_dye_stainingface'];
                   } else {
@@ -516,7 +2103,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               <tr>
                 <th align="left" style="font-size: 7px;">Light Perspiration</th>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
-                <td colspan="4" style="font-size: 7px; <?= $rcek1['stat_lp'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="4" style="font-size: 7px; <?= ($rcek1['stat_lp'] == "FAIL") ? 'color: red;' : (($rcek1['stat_lp'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_lp'] == "RANDOM") {
                     echo $rcekR['rlight_pers_colorchange'];
                   } else {
@@ -529,7 +2116,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               <tr>
                 <th align="left" style="font-size: 7px;">Saliva</th>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_slv'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_slv'] == "FAIL") ? 'color: red;' : (($rcek1['stat_slv'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_slv'] == "RANDOM") {
                     echo $rcekR['rsaliva_staining'];
                   } else {
@@ -542,7 +2129,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               <tr>
                 <th align="left" style="font-size: 7px;">Bleeding</th>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_bld'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_bld'] == "FAIL") ? 'color: red;' : (($rcek1['stat_bld'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_bld'] == "RANDOM") {
                     echo $rcekR['rbleeding'];
                   } else {
@@ -555,7 +2142,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               <tr>
                 <th align="left" style="font-size: 7px;">Chlorin</th>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_chl'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_chl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_chl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_chl'] == "RANDOM") {
                     echo $rcekR['rchlorin'];
                   } else {
@@ -567,14 +2154,14 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               <tr>
                 <th align="left" style="font-size: 7px;">Non-Chlorin</th>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_nchl'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_nchl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_nchl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_nchl'] == "RANDOM") {
                     echo $rcekR['rnchlorin1'];
                   } else {
                     echo $rcek1['nchlorin1'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_nchl'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_nchl'] == "FAIL") ? 'color: red;' : (($rcek1['stat_nchl'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_nchl'] == "RANDOM") {
                     echo $rcekR['rnchlorin2'];
                   } else {
@@ -593,7 +2180,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
                 <td style="font-size: 7px;">&nbsp;</td>
               </tr>
               <tr>
-                <th align="left" style="font-size: 7px; <?= $rcek1['stat_dye'] == "FAIL" ? 'color: red;' : '' ?>">&nbsp;</th>
+                <th align="left" style="font-size: 7px; <?= ($rcek1['stat_dye'] == "FAIL") ? 'color: red;' : (($rcek1['stat_dye'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">&nbsp;</th>
                 <td style="font-size: 7px;">
                   <?php if ($rcek1['stat_dye'] == "RANDOM") {
                     echo $rcekR['rdye_tf_acetate'];
@@ -601,21 +2188,21 @@ $rcekD = mysqli_fetch_array($sqlCekD);
                     echo $rcek1['dye_tf_acetate'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_dye'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_dye'] == "FAIL") ? 'color: red;' : (($rcek1['stat_dye'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_dye'] == "RANDOM") {
                     echo $rcekR['rdye_tf_cotton'];
                   } else {
                     echo $rcek1['dye_tf_cotton'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_dye'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_dye'] == "FAIL") ? 'color: red;' : (($rcek1['stat_dye'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_dye'] == "RANDOM") {
                     echo $rcekR['rdye_tf_nylon'];
                   } else {
                     echo $rcek1['dye_tf_nylon'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_dye'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_dye'] == "FAIL") ? 'color: red;' : (($rcek1['stat_dye'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_dye'] == "RANDOM") {
                     echo $rcekR['rdye_tf_poly'];
                   } else {
@@ -634,28 +2221,28 @@ $rcekD = mysqli_fetch_array($sqlCekD);
               </tr>
               <tr>
                 <th align="left" style="font-size: 7px;">&nbsp;</th>
-                <td style="font-size: 7px; <?= $rcek1['stat_dye'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_dye'] == "FAIL") ? 'color: red;' : (($rcek1['stat_dye'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_dye'] == "RANDOM") {
                     echo $rcekR['rdye_tf_acrylic'];
                   } else {
                     echo $rcek1['dye_tf_acrylic'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_dye'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_dye'] == "FAIL") ? 'color: red;' : (($rcek1['stat_dye'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_dye'] == "RANDOM") {
                     echo $rcekR['rdye_tf_wool'];
                   } else {
                     echo $rcek1['dye_tf_wool'];
                   } ?>
                 </td>
-                <td style="font-size: 7px; <?= $rcek1['stat_dye'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td style="font-size: 7px; <?= ($rcek1['stat_dye'] == "FAIL") ? 'color: red;' : (($rcek1['stat_dye'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_dye'] == "RANDOM") {
                     echo $rcekR['rdye_tf_cstaining'];
                   } else {
                     echo $rcek1['dye_tf_cstaining'];
                   } ?>
                 </td>
-                <td colspan="2" style="font-size: 7px; <?= $rcek1['stat_dye'] == "FAIL" ? 'color: red;' : '' ?>">
+                <td colspan="2" style="font-size: 7px; <?= ($rcek1['stat_dye'] == "FAIL") ? 'color: red;' : (($rcek1['stat_dye'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_dye'] == "RANDOM") {
                     echo $rcekR['rdye_tf_sstaining'];
                   } else {
@@ -669,7 +2256,7 @@ $rcekD = mysqli_fetch_array($sqlCekD);
         </td>
       </tr>
       <tr>
-        <td align="left" valign="top" bgcolor="#ECE8E8">Note:
+        <td colspan="3" align="left" valign="top" bgcolor="#ECE8E8">Note:
           <?php
           if ($rcek1['ss_cmt'] == '1') {
             echo trim($rcek1['note_g']);
@@ -678,16 +2265,6 @@ $rcekD = mysqli_fetch_array($sqlCekD);
             echo str_replace($rcek1['apperss_note'], "", $rcek1['note_g']);
           }
           ?>
-        </td>
-      </tr>
-      <tr>
-        <td align="right" valign="top">
-          <div style="">
-          <!-- No Prod Order : -->
-            <?php //echo $rd['nokk']; ?> 
-            <!-- | Demand : -->
-            <?php //echo trim($rd['nodemand']); ?>
-          </div>
         </td>
       </tr>
     </tbody>

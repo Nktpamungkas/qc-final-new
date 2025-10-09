@@ -682,18 +682,18 @@ function hitungdis(){
 		$("#margr").css("display", "none");  // To hide
 		$("#margr1").css("display", "none");  // To hide
 	}
-	if(document.forms['form1']['jns_test'].value=="APPEARANCE"){
-		if(document.forms['form1']['stat_ap'].value=="RANDOM"){
+	if(document.forms['form3']['jns_test1'].value=="APPEARANCE AFTER WASH"){
+		if(document.forms['form3']['stat_ap'].value=="RANDOM"){
 		$("#ranap").css("display", "");  // To unhide
 		}else{
 			$("#ranap").css("display", "none");  // To hide
 		}
-		if(document.forms['form1']['stat_ap'].value=="DISPOSISI"){
+		if(document.forms['form3']['stat_ap'].value=="DISPOSISI"){
 		$("#disap").css("display", "");  // To unhide
 		}else{
 			$("#disap").css("display", "none");  // To hide
 		}
-		if(document.forms['form1']['stat_ap'].value=="MARGINAL PASS"){
+		if(document.forms['form3']['stat_ap'].value=="MARGINAL PASS"){
 		$("#marap").css("display", "");  // To unhide
 		}else{
 			$("#marap").css("display", "none");  // To hide
@@ -1566,6 +1566,31 @@ function tampil2(){
 		$("#randye").css("display", "none");  // To hide
 		$("#mardye").css("display", "none");  // To hide
 	}
+	if(document.forms['form2']['jns_test2'].value=="APPEARANCE AFTER WASH"){
+		if(document.forms['form2']['stat_ap'].value=="RANDOM"){
+		$("#ranap").css("display", "");  // To unhide
+		}else{
+			$("#ranap").css("display", "none");  // To hide
+		}
+		if(document.forms['form2']['stat_ap'].value=="DISPOSISI"){
+		$("#disap").css("display", "");  // To unhide
+		}else{
+			$("#disap").css("display", "none");  // To hide
+		}
+		if(document.forms['form2']['stat_ap'].value=="MARGINAL PASS"){
+		$("#marap").css("display", "");  // To unhide
+		}else{
+			$("#marap").css("display", "none");  // To hide
+		}
+		$("#fc20").css("display", "");  // To unhide
+		$("#stat_ap").css("display", "");  // To unhide
+	}else{
+		$("#fc20").css("display", "none");  // To hide
+		$("#stat_ap").css("display", "none");  // To hide
+		$("#disap").css("display", "none");  // To hide
+		$("#ranap").css("display", "none");  // To hide
+		$("#marap").css("display", "none");  // To hide
+	}
 }
 </script>
 <?php
@@ -1828,1242 +1853,1501 @@ $rcekcmt=mysqli_fetch_array($sqlCmt);
 								</div>
 						</div>
 						<!-- WASHING BEGIN-->
-						<div class="form-group" id="c1" style="display:none;">
-							<label for="washing" class="col-sm-2 control-label">WASHING FASTNESS</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="wash_temp" id="wash_temp" class="minimal" value="30" <?php if($rcek1['wash_temp']=='30'){echo "checked";}?>> 30&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="wash_temp" id="wash_temp" class="minimal" value="40" <?php if($rcek1['wash_temp']=='40'){echo "checked";}?>> 40&deg;C
-								</label>
-								<label><input type="checkbox" name="wash_temp" id="wash_temp" class="minimal" value="60" <?php if($rcek1['wash_temp']=='60'){echo "checked";}?>> 60&deg;C
-								</label>
+							<div class="form-group" id="c1" style="display:none;">
+								<label for="washing" class="col-sm-2 control-label">WASHING FASTNESS</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="wash_temp" id="wash_temp" class="minimal" value="30" <?php if($rcek1['wash_temp']=='30'){echo "checked";}?>> 30&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="wash_temp" id="wash_temp" class="minimal" value="40" <?php if($rcek1['wash_temp']=='40'){echo "checked";}?>> 40&deg;C
+									</label>
+									<label><input type="checkbox" name="wash_temp" id="wash_temp" class="minimal" value="60" <?php if($rcek1['wash_temp']=='60'){echo "checked";}?>> 60&deg;C
+									</label>
+								</div>
+								<div class="col-sm-2">
+									<input name="wash_colorchange" type="text" class="form-control" id="wash_colorchange" value="<?php echo $rcek1['wash_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="wash_acetate" type="text" class="form-control" id="wash_acetate" value="<?php echo $rcek1['wash_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="wash_cotton" type="text" class="form-control" id="wash_cotton" value="<?php echo $rcek1['wash_cotton'];?>" placeholder="4 Cotton">
+									<input name="wash_nylon" type="text" class="form-control" id="wash_nylon" value="<?php echo $rcek1['wash_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="wash_poly" type="text" class="form-control" id="wash_poly" value="<?php echo $rcek1['wash_poly'];?>" placeholder="4 Polyester">
+									<input name="wash_acrylic" type="text" class="form-control" id="wash_acrylic" value="<?php echo $rcek1['wash_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="wash_wool" type="text" class="form-control" id="wash_wool" value="<?php echo $rcek1['wash_wool'];?>" placeholder="4 Wool">
+									<input name="wash_staining" type="text" class="form-control" id="wash_staining" value="<?php echo $rcek1['wash_staining'];?>" placeholder="4-5 Cross Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="wash_note" maxlength="50" rows="1"><?php echo $rcek1['wash_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="wash_colorchange" type="text" class="form-control" id="wash_colorchange" value="<?php echo $rcek1['wash_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="wash_acetate" type="text" class="form-control" id="wash_acetate" value="<?php echo $rcek1['wash_acetate'];?>" placeholder="4 Acetate">
+							<div class="form-group" id="stat_wf" style="display:none;">
+								<label for="stat_wf" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_wf" class="form-control select2" id="stat_wf" onChange="tampil2();" style="width: 100%;">
+										<option <?php if($rcek1['stat_wf']==""){?> selected=selected <?php };?>value="">Pilih</option>
+										<option <?php if($rcek1['stat_wf']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if($rcek1['stat_wf']=="A"){?> selected=selected <?php };?>value="A">A</option>
+										<option <?php if($rcek1['stat_wf']=="R"){?> selected=selected <?php };?>value="R">R</option>
+										<option <?php if($rcek1['stat_wf']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+										<option <?php if($rcek1['stat_wf']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
+										<option <?php if($rcek1['stat_wf']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
+										<option <?php if($rcek1['stat_wf']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+										<option <?php if($rcek1['stat_wf']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="wash_cotton" type="text" class="form-control" id="wash_cotton" value="<?php echo $rcek1['wash_cotton'];?>" placeholder="4 Cotton">
-								<input name="wash_nylon" type="text" class="form-control" id="wash_nylon" value="<?php echo $rcek1['wash_nylon'];?>" placeholder="4 Nylon">
+							<div class="form-group" id="diswf" style="display:none;">
+								<label for="diswf" class="col-sm-2 control-label">WASHING FASTNESS (DIS)</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="dwash_temp" id="dwash_temp" class="minimal" value="30" <?php if($rcekD['dwash_temp']=='30'){echo "checked";}?>> 30&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="dwash_temp" id="dwash_temp" class="minimal" value="40" <?php if($rcekD['dwash_temp']=='40'){echo "checked";}?>> 40&deg;C
+									</label>
+								</div>
+								<div class="col-sm-2">
+									<input name="dwash_colorchange" type="text" class="form-control" id="dwash_colorchange" value="<?php echo $rcekD['dwash_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="dwash_acetate" type="text" class="form-control" id="dwash_acetate" value="<?php echo $rcekD['dwash_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="dwash_cotton" type="text" class="form-control" id="dwash_cotton" value="<?php echo $rcekD['dwash_cotton'];?>" placeholder="4 Cotton">
+									<input name="dwash_nylon" type="text" class="form-control" id="dwash_nylon" value="<?php echo $rcekD['dwash_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="dwash_poly" type="text" class="form-control" id="dwash_poly" value="<?php echo $rcekD['dwash_poly'];?>" placeholder="4 Polyester">
+									<input name="dwash_acrylic" type="text" class="form-control" id="dwash_acrylic" value="<?php echo $rcekD['dwash_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="dwash_wool" type="text" class="form-control" id="dwash_wool" value="<?php echo $rcekD['dwash_wool'];?>" placeholder="4 Wool">
+									<input name="dwash_staining" type="text" class="form-control" id="dwash_staining" value="<?php echo $rcekD['dwash_staining'];?>" placeholder="4-5 Cross Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dwash_note" maxlength="50" rows="1"><?php echo $rcekD['dwash_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="wash_poly" type="text" class="form-control" id="wash_poly" value="<?php echo $rcek1['wash_poly'];?>" placeholder="4 Polyester">
-								<input name="wash_acrylic" type="text" class="form-control" id="wash_acrylic" value="<?php echo $rcek1['wash_acrylic'];?>" placeholder="4 Acrylic">
+							<div class="form-group" id="marwf" style="display:none;">
+								<label for="marwf" class="col-sm-2 control-label">WASHING FASTNESS (MARGINAL)</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="mwash_temp" id="mwash_temp" class="minimal" value="30" <?php if($rcekM['mwash_temp']=='30'){echo "checked";}?>> 30&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="mwash_temp" id="mwash_temp" class="minimal" value="40" <?php if($rcekM['mwash_temp']=='40'){echo "checked";}?>> 40&deg;C
+									</label>
+								</div>
+								<div class="col-sm-2">
+									<input name="mwash_colorchange" type="text" class="form-control" id="mwash_colorchange" value="<?php echo $rcekM['mwash_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="mwash_acetate" type="text" class="form-control" id="mwash_acetate" value="<?php echo $rcekM['mwash_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="mwash_cotton" type="text" class="form-control" id="mwash_cotton" value="<?php echo $rcekM['mwash_cotton'];?>" placeholder="4 Cotton">
+									<input name="mwash_nylon" type="text" class="form-control" id="mwash_nylon" value="<?php echo $rcekM['mwash_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="mwash_poly" type="text" class="form-control" id="mwash_poly" value="<?php echo $rcekM['mwash_poly'];?>" placeholder="4 Polyester">
+									<input name="mwash_acrylic" type="text" class="form-control" id="mwash_acrylic" value="<?php echo $rcekM['mwash_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="mwash_wool" type="text" class="form-control" id="mwash_wool" value="<?php echo $rcekM['mwash_wool'];?>" placeholder="4 Wool">
+									<input name="mwash_staining" type="text" class="form-control" id="mwash_staining" value="<?php echo $rcekM['mwash_staining'];?>" placeholder="4-5 Cross Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mwash_note" maxlength="50" rows="1"><?php echo $rcekM['mwash_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="wash_wool" type="text" class="form-control" id="wash_wool" value="<?php echo $rcek1['wash_wool'];?>" placeholder="4 Wool">
-								<input name="wash_staining" type="text" class="form-control" id="wash_staining" value="<?php echo $rcek1['wash_staining'];?>" placeholder="4-5 Cross Staining">
+							<div class="form-group" id="ranwf" style="display:none;">
+								<label for="ranwf" class="col-sm-2 control-label">WASHING FASTNESS (RAN)</label>
+								<div class="col-sm-1">
+									<label><input type="checkbox" name="rwash_temp" id="rwash_temp" class="minimal" value="30" <?php if($rcekR['rwash_temp']=='30'){echo "checked";}?> readonly> 30&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="rwash_temp" id="rwash_temp" class="minimal" value="40" <?php if($rcekR['rwash_temp']=='40'){echo "checked";}?> readonly> 40&deg;C
+									</label>
+								</div>
+								<div class="col-sm-2">
+									<input name="rwash_colorchange" type="text" class="form-control" id="rwash_colorchange" value="<?php echo $rcekR['rwash_colorchange'];?>" placeholder="4-5 Color Change" readonly>
+									<input name="rwash_acetate" type="text" class="form-control" id="rwash_acetate" value="<?php echo $rcekR['rwash_acetate'];?>" placeholder="4 Acetate" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rwash_cotton" type="text" class="form-control" id="rwash_cotton" value="<?php echo $rcekR['rwash_cotton'];?>" placeholder="4 Cotton" readonly>
+									<input name="rwash_nylon" type="text" class="form-control" id="rwash_nylon" value="<?php echo $rcekR['rwash_nylon'];?>" placeholder="4 Nylon" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rwash_poly" type="text" class="form-control" id="rwash_poly" value="<?php echo $rcekR['rwash_poly'];?>" placeholder="4 Polyester" readonly>
+									<input name="rwash_acrylic" type="text" class="form-control" id="rwash_acrylic" value="<?php echo $rcekR['rwash_acrylic'];?>" placeholder="4 Acrylic" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rwash_wool" type="text" class="form-control" id="rwash_wool" value="<?php echo $rcekR['rwash_wool'];?>" placeholder="4 Wool" readonly>
+									<input name="rwash_staining" type="text" class="form-control" id="rwash_staining" value="<?php echo $rcekR['rwash_staining'];?>" placeholder="4-5 Cross Staining" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rwash_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rwash_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="wash_note" maxlength="50" rows="1"><?php echo $rcek1['wash_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_wf" style="display:none;">
-							<label for="stat_wf" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_wf" class="form-control select2" id="stat_wf" onChange="tampil2();" style="width: 100%;">
-									<option <?php if($rcek1['stat_wf']==""){?> selected=selected <?php };?>value="">Pilih</option>
-									<option <?php if($rcek1['stat_wf']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if($rcek1['stat_wf']=="A"){?> selected=selected <?php };?>value="A">A</option>
-									<option <?php if($rcek1['stat_wf']=="R"){?> selected=selected <?php };?>value="R">R</option>
-									<option <?php if($rcek1['stat_wf']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-									<option <?php if($rcek1['stat_wf']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
-									<option <?php if($rcek1['stat_wf']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
-									<option <?php if($rcek1['stat_wf']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-									<option <?php if($rcek1['stat_wf']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="diswf" style="display:none;">
-							<label for="diswf" class="col-sm-2 control-label">WASHING FASTNESS (DIS)</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="dwash_temp" id="dwash_temp" class="minimal" value="30" <?php if($rcekD['dwash_temp']=='30'){echo "checked";}?>> 30&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="dwash_temp" id="dwash_temp" class="minimal" value="40" <?php if($rcekD['dwash_temp']=='40'){echo "checked";}?>> 40&deg;C
-								</label>
-							</div>
-							<div class="col-sm-2">
-								<input name="dwash_colorchange" type="text" class="form-control" id="dwash_colorchange" value="<?php echo $rcekD['dwash_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="dwash_acetate" type="text" class="form-control" id="dwash_acetate" value="<?php echo $rcekD['dwash_acetate'];?>" placeholder="4 Acetate">
-							</div>
-							<div class="col-sm-2">
-								<input name="dwash_cotton" type="text" class="form-control" id="dwash_cotton" value="<?php echo $rcekD['dwash_cotton'];?>" placeholder="4 Cotton">
-								<input name="dwash_nylon" type="text" class="form-control" id="dwash_nylon" value="<?php echo $rcekD['dwash_nylon'];?>" placeholder="4 Nylon">
-							</div>
-							<div class="col-sm-2">
-								<input name="dwash_poly" type="text" class="form-control" id="dwash_poly" value="<?php echo $rcekD['dwash_poly'];?>" placeholder="4 Polyester">
-								<input name="dwash_acrylic" type="text" class="form-control" id="dwash_acrylic" value="<?php echo $rcekD['dwash_acrylic'];?>" placeholder="4 Acrylic">
-							</div>
-							<div class="col-sm-2">
-								<input name="dwash_wool" type="text" class="form-control" id="dwash_wool" value="<?php echo $rcekD['dwash_wool'];?>" placeholder="4 Wool">
-								<input name="dwash_staining" type="text" class="form-control" id="dwash_staining" value="<?php echo $rcekD['dwash_staining'];?>" placeholder="4-5 Cross Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dwash_note" maxlength="50" rows="1"><?php echo $rcekD['dwash_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="marwf" style="display:none;">
-							<label for="marwf" class="col-sm-2 control-label">WASHING FASTNESS (MARGINAL)</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="mwash_temp" id="mwash_temp" class="minimal" value="30" <?php if($rcekM['mwash_temp']=='30'){echo "checked";}?>> 30&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="mwash_temp" id="mwash_temp" class="minimal" value="40" <?php if($rcekM['mwash_temp']=='40'){echo "checked";}?>> 40&deg;C
-								</label>
-							</div>
-							<div class="col-sm-2">
-								<input name="mwash_colorchange" type="text" class="form-control" id="mwash_colorchange" value="<?php echo $rcekM['mwash_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="mwash_acetate" type="text" class="form-control" id="mwash_acetate" value="<?php echo $rcekM['mwash_acetate'];?>" placeholder="4 Acetate">
-							</div>
-							<div class="col-sm-2">
-								<input name="mwash_cotton" type="text" class="form-control" id="mwash_cotton" value="<?php echo $rcekM['mwash_cotton'];?>" placeholder="4 Cotton">
-								<input name="mwash_nylon" type="text" class="form-control" id="mwash_nylon" value="<?php echo $rcekM['mwash_nylon'];?>" placeholder="4 Nylon">
-							</div>
-							<div class="col-sm-2">
-								<input name="mwash_poly" type="text" class="form-control" id="mwash_poly" value="<?php echo $rcekM['mwash_poly'];?>" placeholder="4 Polyester">
-								<input name="mwash_acrylic" type="text" class="form-control" id="mwash_acrylic" value="<?php echo $rcekM['mwash_acrylic'];?>" placeholder="4 Acrylic">
-							</div>
-							<div class="col-sm-2">
-								<input name="mwash_wool" type="text" class="form-control" id="mwash_wool" value="<?php echo $rcekM['mwash_wool'];?>" placeholder="4 Wool">
-								<input name="mwash_staining" type="text" class="form-control" id="mwash_staining" value="<?php echo $rcekM['mwash_staining'];?>" placeholder="4-5 Cross Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mwash_note" maxlength="50" rows="1"><?php echo $rcekM['mwash_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranwf" style="display:none;">
-							<label for="ranwf" class="col-sm-2 control-label">WASHING FASTNESS (RAN)</label>
-							<div class="col-sm-1">
-								<label><input type="checkbox" name="rwash_temp" id="rwash_temp" class="minimal" value="30" <?php if($rcekR['rwash_temp']=='30'){echo "checked";}?> readonly> 30&deg;C &nbsp; &nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="rwash_temp" id="rwash_temp" class="minimal" value="40" <?php if($rcekR['rwash_temp']=='40'){echo "checked";}?> readonly> 40&deg;C
-								</label>
-							</div>
-							<div class="col-sm-2">
-								<input name="rwash_colorchange" type="text" class="form-control" id="rwash_colorchange" value="<?php echo $rcekR['rwash_colorchange'];?>" placeholder="4-5 Color Change" readonly>
-								<input name="rwash_acetate" type="text" class="form-control" id="rwash_acetate" value="<?php echo $rcekR['rwash_acetate'];?>" placeholder="4 Acetate" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rwash_cotton" type="text" class="form-control" id="rwash_cotton" value="<?php echo $rcekR['rwash_cotton'];?>" placeholder="4 Cotton" readonly>
-								<input name="rwash_nylon" type="text" class="form-control" id="rwash_nylon" value="<?php echo $rcekR['rwash_nylon'];?>" placeholder="4 Nylon" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rwash_poly" type="text" class="form-control" id="rwash_poly" value="<?php echo $rcekR['rwash_poly'];?>" placeholder="4 Polyester" readonly>
-								<input name="rwash_acrylic" type="text" class="form-control" id="rwash_acrylic" value="<?php echo $rcekR['rwash_acrylic'];?>" placeholder="4 Acrylic" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rwash_wool" type="text" class="form-control" id="rwash_wool" value="<?php echo $rcekR['rwash_wool'];?>" placeholder="4 Wool" readonly>
-								<input name="rwash_staining" type="text" class="form-control" id="rwash_staining" value="<?php echo $rcekR['rwash_staining'];?>" placeholder="4-5 Cross Staining" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rwash_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rwash_note'];?></textarea>
-							</div>
-						</div>
 						<!-- WASHING END-->
 						<!-- WATER BEGIN-->
-						<div class="form-group" id="c2" style="display:none;">
-							<label for="water" class="col-sm-2 control-label">WATER</label>
-							<div class="col-sm-2">
-								<input name="water_colorchange" type="text" class="form-control" id="water_colorchange" value="<?php echo $rcek1['water_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="water_acetate" type="text" class="form-control" id="water_acetate" value="<?php echo $rcek1['water_acetate'];?>" placeholder="4 Acetate">
+							<div class="form-group" id="c2" style="display:none;">
+								<label for="water" class="col-sm-2 control-label">WATER</label>
+								<div class="col-sm-2">
+									<input name="water_colorchange" type="text" class="form-control" id="water_colorchange" value="<?php echo $rcek1['water_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="water_acetate" type="text" class="form-control" id="water_acetate" value="<?php echo $rcek1['water_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="water_cotton" type="text" class="form-control" id="water_cotton" value="<?php echo $rcek1['water_cotton'];?>" placeholder="4 Cotton">
+									<input name="water_nylon" type="text" class="form-control" id="water_nylon" value="<?php echo $rcek1['water_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="water_poly" type="text" class="form-control" id="water_poly" value="<?php echo $rcek1['water_poly'];?>" placeholder="4 Polyester">
+									<input name="water_acrylic" type="text" class="form-control" id="water_acrylic" value="<?php echo $rcek1['water_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="water_wool" type="text" class="form-control" id="water_wool" value="<?php echo $rcek1['water_wool'];?>" placeholder="4 Wool">
+									<input name="water_staining" type="text" class="form-control" id="water_staining" value="<?php echo $rcek1['water_staining'];?>" placeholder="S.Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="water_note" maxlength="50" rows="1"><?php echo $rcek1['water_note'];?></textarea>
+								</div>
 							</div>
+							<div class="form-group" id="stat_wtr" style="display:none;">
+							<label for="stat_wtr" class="col-sm-2 control-label">STATUS</label>
 							<div class="col-sm-2">
-								<input name="water_cotton" type="text" class="form-control" id="water_cotton" value="<?php echo $rcek1['water_cotton'];?>" placeholder="4 Cotton">
-								<input name="water_nylon" type="text" class="form-control" id="water_nylon" value="<?php echo $rcek1['water_nylon'];?>" placeholder="4 Nylon">
+								<select name="stat_wtr" class="form-control select2" id="stat_wtr" onChange="tampil2();" style="width: 100%;">
+									<option <?php if($rcek1['stat_wtr']==""){?> selected=selected <?php };?>value="">Pilih</option>
+									<option <?php if($rcek1['stat_wtr']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+									<option <?php if($rcek1['stat_wtr']=="A"){?> selected=selected <?php };?>value="A">A</option>
+									<option <?php if($rcek1['stat_wtr']=="R"){?> selected=selected <?php };?>value="R">R</option>
+									<option <?php if($rcek1['stat_wtr']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+									<option <?php if($rcek1['stat_wtr']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
+									<option <?php if($rcek1['stat_wtr']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
+									<option <?php if($rcek1['stat_wtr']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+									<option <?php if($rcek1['stat_wtr']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+								</select>
 							</div>
-							<div class="col-sm-2">
-								<input name="water_poly" type="text" class="form-control" id="water_poly" value="<?php echo $rcek1['water_poly'];?>" placeholder="4 Polyester">
-								<input name="water_acrylic" type="text" class="form-control" id="water_acrylic" value="<?php echo $rcek1['water_acrylic'];?>" placeholder="4 Acrylic">
 							</div>
-							<div class="col-sm-2">
-								<input name="water_wool" type="text" class="form-control" id="water_wool" value="<?php echo $rcek1['water_wool'];?>" placeholder="4 Wool">
-								<input name="water_staining" type="text" class="form-control" id="water_staining" value="<?php echo $rcek1['water_staining'];?>" placeholder="S.Staining">
+							<div class="form-group" id="diswtr" style="display:none;">
+								<label for="diswtr" class="col-sm-2 control-label">WATER (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dwater_colorchange" type="text" class="form-control" id="dwater_colorchange" value="<?php echo $rcekD['dwater_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="dwater_acetate" type="text" class="form-control" id="dwater_acetate" value="<?php echo $rcekD['dwater_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="dwater_cotton" type="text" class="form-control" id="dwater_cotton" value="<?php echo $rcekD['dwater_cotton'];?>" placeholder="4 Cotton">
+									<input name="dwater_nylon" type="text" class="form-control" id="dwater_nylon" value="<?php echo $rcekD['dwater_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="dwater_poly" type="text" class="form-control" id="dwater_poly" value="<?php echo $rcekD['dwater_poly'];?>" placeholder="4 Polyester">
+									<input name="dwater_acrylic" type="text" class="form-control" id="dwater_acrylic" value="<?php echo $rcekD['dwater_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="dwater_wool" type="text" class="form-control" id="dwater_wool" value="<?php echo $rcekD['dwater_wool'];?>" placeholder="4 Wool">
+									<input name="dwater_staining" type="text" class="form-control" id="dwater_staining" value="<?php echo $rcekD['dwater_staining'];?>" placeholder="S.Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dwater_note" maxlength="50" rows="1"><?php echo $rcekD['dwater_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="water_note" maxlength="50" rows="1"><?php echo $rcek1['water_note'];?></textarea>
+							<div class="form-group" id="marwtr" style="display:none;">
+								<label for="marwtr" class="col-sm-2 control-label">WATER (MARGINAL)</label>
+								<div class="col-sm-2">
+									<input name="mwater_colorchange" type="text" class="form-control" id="mwater_colorchange" value="<?php echo $rcekM['mwater_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="mwater_acetate" type="text" class="form-control" id="mwater_acetate" value="<?php echo $rcekM['mwater_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="mwater_cotton" type="text" class="form-control" id="mwater_cotton" value="<?php echo $rcekM['mwater_cotton'];?>" placeholder="4 Cotton">
+									<input name="mwater_nylon" type="text" class="form-control" id="mwater_nylon" value="<?php echo $rcekM['mwater_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="mwater_poly" type="text" class="form-control" id="mwater_poly" value="<?php echo $rcekM['mwater_poly'];?>" placeholder="4 Polyester">
+									<input name="mwater_acrylic" type="text" class="form-control" id="mwater_acrylic" value="<?php echo $rcekM['mwater_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="mwater_wool" type="text" class="form-control" id="mwater_wool" value="<?php echo $rcekM['mwater_wool'];?>" placeholder="4 Wool">
+									<input name="mwater_staining" type="text" class="form-control" id="mwater_staining" value="<?php echo $rcekM['mwater_staining'];?>" placeholder="S.Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mwater_note" maxlength="50" rows="1"><?php echo $rcekM['mwater_note'];?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="stat_wtr" style="display:none;">
-						<label for="stat_wtr" class="col-sm-2 control-label">STATUS</label>
-						<div class="col-sm-2">
-							<select name="stat_wtr" class="form-control select2" id="stat_wtr" onChange="tampil2();" style="width: 100%;">
-								<option <?php if($rcek1['stat_wtr']==""){?> selected=selected <?php };?>value="">Pilih</option>
-								<option <?php if($rcek1['stat_wtr']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-								<option <?php if($rcek1['stat_wtr']=="A"){?> selected=selected <?php };?>value="A">A</option>
-								<option <?php if($rcek1['stat_wtr']=="R"){?> selected=selected <?php };?>value="R">R</option>
-								<option <?php if($rcek1['stat_wtr']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-								<option <?php if($rcek1['stat_wtr']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
-								<option <?php if($rcek1['stat_wtr']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
-								<option <?php if($rcek1['stat_wtr']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-								<option <?php if($rcek1['stat_wtr']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-							</select>
-						</div>
-						</div>
-						<div class="form-group" id="diswtr" style="display:none;">
-							<label for="diswtr" class="col-sm-2 control-label">WATER (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dwater_colorchange" type="text" class="form-control" id="dwater_colorchange" value="<?php echo $rcekD['dwater_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="dwater_acetate" type="text" class="form-control" id="dwater_acetate" value="<?php echo $rcekD['dwater_acetate'];?>" placeholder="4 Acetate">
+							<div class="form-group" id="ranwtr" style="display:none;">
+								<label for="ranwtr" class="col-sm-2 control-label">WATER (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rwater_colorchange" type="text" class="form-control" id="rwater_colorchange" value="<?php echo $rcekR['rwater_colorchange'];?>" placeholder="4-5 Color Change" readonly>
+									<input name="rwater_acetate" type="text" class="form-control" id="rwater_acetate" value="<?php echo $rcekR['rwater_acetate'];?>" placeholder="4 Acetate" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rwater_cotton" type="text" class="form-control" id="rwater_cotton" value="<?php echo $rcekR['rwater_cotton'];?>" placeholder="4 Cotton" readonly>
+									<input name="rwater_nylon" type="text" class="form-control" id="rwater_nylon" value="<?php echo $rcekR['rwater_nylon'];?>" placeholder="4 Nylon" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rwater_poly" type="text" class="form-control" id="rwater_poly" value="<?php echo $rcekR['rwater_poly'];?>" placeholder="4 Polyester" readonly>
+									<input name="rwater_acrylic" type="text" class="form-control" id="rwater_acrylic" value="<?php echo $rcekR['rwater_acrylic'];?>" placeholder="4 Acrylic" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rwater_wool" type="text" class="form-control" id="rwater_wool" value="<?php echo $rcekR['rwater_wool'];?>" placeholder="4 Wool" readonly>
+									<input name="rwater_staining" type="text" class="form-control" id="rwater_staining" value="<?php echo $rcekR['rwater_staining'];?>" placeholder="S.Staining" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rwater_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rwater_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="dwater_cotton" type="text" class="form-control" id="dwater_cotton" value="<?php echo $rcekD['dwater_cotton'];?>" placeholder="4 Cotton">
-								<input name="dwater_nylon" type="text" class="form-control" id="dwater_nylon" value="<?php echo $rcekD['dwater_nylon'];?>" placeholder="4 Nylon">
-							</div>
-							<div class="col-sm-2">
-								<input name="dwater_poly" type="text" class="form-control" id="dwater_poly" value="<?php echo $rcekD['dwater_poly'];?>" placeholder="4 Polyester">
-								<input name="dwater_acrylic" type="text" class="form-control" id="dwater_acrylic" value="<?php echo $rcekD['dwater_acrylic'];?>" placeholder="4 Acrylic">
-							</div>
-							<div class="col-sm-2">
-								<input name="dwater_wool" type="text" class="form-control" id="dwater_wool" value="<?php echo $rcekD['dwater_wool'];?>" placeholder="4 Wool">
-								<input name="dwater_staining" type="text" class="form-control" id="dwater_staining" value="<?php echo $rcekD['dwater_staining'];?>" placeholder="S.Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dwater_note" maxlength="50" rows="1"><?php echo $rcekD['dwater_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="marwtr" style="display:none;">
-							<label for="marwtr" class="col-sm-2 control-label">WATER (MARGINAL)</label>
-							<div class="col-sm-2">
-								<input name="mwater_colorchange" type="text" class="form-control" id="mwater_colorchange" value="<?php echo $rcekM['mwater_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="mwater_acetate" type="text" class="form-control" id="mwater_acetate" value="<?php echo $rcekM['mwater_acetate'];?>" placeholder="4 Acetate">
-							</div>
-							<div class="col-sm-2">
-								<input name="mwater_cotton" type="text" class="form-control" id="mwater_cotton" value="<?php echo $rcekM['mwater_cotton'];?>" placeholder="4 Cotton">
-								<input name="mwater_nylon" type="text" class="form-control" id="mwater_nylon" value="<?php echo $rcekM['mwater_nylon'];?>" placeholder="4 Nylon">
-							</div>
-							<div class="col-sm-2">
-								<input name="mwater_poly" type="text" class="form-control" id="mwater_poly" value="<?php echo $rcekM['mwater_poly'];?>" placeholder="4 Polyester">
-								<input name="mwater_acrylic" type="text" class="form-control" id="mwater_acrylic" value="<?php echo $rcekM['mwater_acrylic'];?>" placeholder="4 Acrylic">
-							</div>
-							<div class="col-sm-2">
-								<input name="mwater_wool" type="text" class="form-control" id="mwater_wool" value="<?php echo $rcekM['mwater_wool'];?>" placeholder="4 Wool">
-								<input name="mwater_staining" type="text" class="form-control" id="mwater_staining" value="<?php echo $rcekM['mwater_staining'];?>" placeholder="S.Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mwater_note" maxlength="50" rows="1"><?php echo $rcekM['mwater_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranwtr" style="display:none;">
-							<label for="ranwtr" class="col-sm-2 control-label">WATER (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rwater_colorchange" type="text" class="form-control" id="rwater_colorchange" value="<?php echo $rcekR['rwater_colorchange'];?>" placeholder="4-5 Color Change" readonly>
-								<input name="rwater_acetate" type="text" class="form-control" id="rwater_acetate" value="<?php echo $rcekR['rwater_acetate'];?>" placeholder="4 Acetate" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rwater_cotton" type="text" class="form-control" id="rwater_cotton" value="<?php echo $rcekR['rwater_cotton'];?>" placeholder="4 Cotton" readonly>
-								<input name="rwater_nylon" type="text" class="form-control" id="rwater_nylon" value="<?php echo $rcekR['rwater_nylon'];?>" placeholder="4 Nylon" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rwater_poly" type="text" class="form-control" id="rwater_poly" value="<?php echo $rcekR['rwater_poly'];?>" placeholder="4 Polyester" readonly>
-								<input name="rwater_acrylic" type="text" class="form-control" id="rwater_acrylic" value="<?php echo $rcekR['rwater_acrylic'];?>" placeholder="4 Acrylic" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rwater_wool" type="text" class="form-control" id="rwater_wool" value="<?php echo $rcekR['rwater_wool'];?>" placeholder="4 Wool" readonly>
-								<input name="rwater_staining" type="text" class="form-control" id="rwater_staining" value="<?php echo $rcekR['rwater_staining'];?>" placeholder="S.Staining" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rwater_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rwater_note'];?></textarea>
-							</div>
-						</div>
 						<!-- WATER END-->
 						<!-- PERSPIRATION ACID BEGIN-->
-						<div class="form-group" id="c3" style="display:none;">
-							<label for="acid" class="col-sm-2 control-label">PERSPIRATION ACID</label>
-							<div class="col-sm-2">
-								<input name="acid_colorchange" type="text" class="form-control" id="acid_colorchange" value="<?php echo $rcek1['acid_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="acid_acetate" type="text" class="form-control" id="acid_acetate" value="<?php echo $rcek1['acid_acetate'];?>" placeholder="4 Acetate">
+							<div class="form-group" id="c3" style="display:none;">
+								<label for="acid" class="col-sm-2 control-label">PERSPIRATION ACID</label>
+								<div class="col-sm-2">
+									<input name="acid_colorchange" type="text" class="form-control" id="acid_colorchange" value="<?php echo $rcek1['acid_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="acid_acetate" type="text" class="form-control" id="acid_acetate" value="<?php echo $rcek1['acid_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="acid_cotton" type="text" class="form-control" id="acid_cotton" value="<?php echo $rcek1['acid_cotton'];?>" placeholder="4 Cotton">
+									<input name="acid_nylon" type="text" class="form-control" id="acid_nylon" value="<?php echo $rcek1['acid_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="acid_poly" type="text" class="form-control" id="acid_poly" value="<?php echo $rcek1['acid_poly'];?>" placeholder="4 Polyester">
+									<input name="acid_acrylic" type="text" class="form-control" id="acid_acrylic" value="<?php echo $rcek1['acid_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="acid_wool" type="text" class="form-control" id="acid_wool" value="<?php echo $rcek1['acid_wool'];?>" placeholder="4 Wool">
+									<input name="acid_staining" type="text" class="form-control" id="acid_staining" value="<?php echo $rcek1['acid_staining'];?>" placeholder="S.Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="acid_note" maxlength="50" rows="1"><?php echo $rcek1['acid_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="acid_cotton" type="text" class="form-control" id="acid_cotton" value="<?php echo $rcek1['acid_cotton'];?>" placeholder="4 Cotton">
-								<input name="acid_nylon" type="text" class="form-control" id="acid_nylon" value="<?php echo $rcek1['acid_nylon'];?>" placeholder="4 Nylon">
+							<div class="form-group" id="stat_pac" style="display:none;">
+								<label for="stat_pac" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_pac" class="form-control select2" id="stat_pac" onChange="tampil2();" style="width: 100%;">
+										<option <?php if($rcek1['stat_pac']==""){?> selected=selected <?php };?>value="">Pilih</option>
+										<option <?php if($rcek1['stat_pac']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if($rcek1['stat_pac']=="A"){?> selected=selected <?php };?>value="A">A</option>
+										<option <?php if($rcek1['stat_pac']=="R"){?> selected=selected <?php };?>value="R">R</option>
+										<option <?php if($rcek1['stat_pac']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+										<option <?php if($rcek1['stat_pac']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
+										<option <?php if($rcek1['stat_pac']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
+										<option <?php if($rcek1['stat_pac']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+										<option <?php if($rcek1['stat_pac']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="acid_poly" type="text" class="form-control" id="acid_poly" value="<?php echo $rcek1['acid_poly'];?>" placeholder="4 Polyester">
-								<input name="acid_acrylic" type="text" class="form-control" id="acid_acrylic" value="<?php echo $rcek1['acid_acrylic'];?>" placeholder="4 Acrylic">
+							<div class="form-group" id="dispac" style="display:none;">
+								<label for="dispac" class="col-sm-2 control-label">PERSPIRATION ACID (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dacid_colorchange" type="text" class="form-control" id="dacid_colorchange" value="<?php echo $rcekD['dacid_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="dacid_acetate" type="text" class="form-control" id="dacid_acetate" value="<?php echo $rcekD['dacid_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="dacid_cotton" type="text" class="form-control" id="dacid_cotton" value="<?php echo $rcekD['dacid_cotton'];?>" placeholder="4 Cotton">
+									<input name="dacid_nylon" type="text" class="form-control" id="dacid_nylon" value="<?php echo $rcekD['dacid_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="dacid_poly" type="text" class="form-control" id="dacid_poly" value="<?php echo $rcekD['dacid_poly'];?>" placeholder="4 Polyester">
+									<input name="dacid_acrylic" type="text" class="form-control" id="dacid_acrylic" value="<?php echo $rcekD['dacid_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="dacid_wool" type="text" class="form-control" id="dacid_wool" value="<?php echo $rcekD['dacid_wool'];?>" placeholder="4 Wool">
+									<input name="dacid_staining" type="text" class="form-control" id="dacid_staining" value="<?php echo $rcekD['dacid_staining'];?>" placeholder="S.Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dacid_note" maxlength="50" rows="1"><?php echo $rcekD['dacid_note'];?></textarea>
+								</div>
+							</div>	
+							<div class="form-group" id="marpac" style="display:none;">
+								<label for="marpac" class="col-sm-2 control-label">PERSPIRATION ACID (MARGINAL)</label>
+								<div class="col-sm-2">
+									<input name="macid_colorchange" type="text" class="form-control" id="macid_colorchange" value="<?php echo $rcekM['macid_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="macid_acetate" type="text" class="form-control" id="macid_acetate" value="<?php echo $rcekM['macid_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="macid_cotton" type="text" class="form-control" id="macid_cotton" value="<?php echo $rcekM['macid_cotton'];?>" placeholder="4 Cotton">
+									<input name="macid_nylon" type="text" class="form-control" id="macid_nylon" value="<?php echo $rcekM['macid_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="macid_poly" type="text" class="form-control" id="macid_poly" value="<?php echo $rcekM['macid_poly'];?>" placeholder="4 Polyester">
+									<input name="macid_acrylic" type="text" class="form-control" id="macid_acrylic" value="<?php echo $rcekM['macid_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="macid_wool" type="text" class="form-control" id="macid_wool" value="<?php echo $rcekM['macid_wool'];?>" placeholder="4 Wool">
+									<input name="macid_staining" type="text" class="form-control" id="macid_staining" value="<?php echo $rcekM['macid_staining'];?>" placeholder="S.Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="macid_note" maxlength="50" rows="1"><?php echo $rcekM['macid_note'];?></textarea>
+								</div>
+							</div>	
+							<div class="form-group" id="ranpac" style="display:none;">
+								<label for="ranpac" class="col-sm-2 control-label">PERSPIRATION ACID (RAN)</label>
+								<div class="col-sm-2">
+									<input name="racid_colorchange" type="text" class="form-control" id="racid_colorchange" value="<?php echo $rcekR['racid_colorchange'];?>" placeholder="4-5 Color Change" readonly>
+									<input name="racid_acetate" type="text" class="form-control" id="racid_acetate" value="<?php echo $rcekR['racid_acetate'];?>" placeholder="4 Acetate" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="racid_cotton" type="text" class="form-control" id="racid_cotton" value="<?php echo $rcekR['racid_cotton'];?>" placeholder="4 Cotton" readonly>
+									<input name="racid_nylon" type="text" class="form-control" id="racid_nylon" value="<?php echo $rcekR['racid_nylon'];?>" placeholder="4 Nylon" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="racid_poly" type="text" class="form-control" id="racid_poly" value="<?php echo $rcekR['racid_poly'];?>" placeholder="4 Polyester" readonly>
+									<input name="racid_acrylic" type="text" class="form-control" id="racid_acrylic" value="<?php echo $rcekR['racid_acrylic'];?>" placeholder="4 Acrylic" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="racid_wool" type="text" class="form-control" id="racid_wool" value="<?php echo $rcekR['racid_wool'];?>" placeholder="4 Wool" readonly>
+									<input name="racid_staining" type="text" class="form-control" id="racid_staining" value="<?php echo $rcekR['racid_staining'];?>" placeholder="S.Staining" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="racid_note" maxlength="50" rows="1" readonly><?php echo $rcekR['racid_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="acid_wool" type="text" class="form-control" id="acid_wool" value="<?php echo $rcek1['acid_wool'];?>" placeholder="4 Wool">
-								<input name="acid_staining" type="text" class="form-control" id="acid_staining" value="<?php echo $rcek1['acid_staining'];?>" placeholder="S.Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="acid_note" maxlength="50" rows="1"><?php echo $rcek1['acid_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_pac" style="display:none;">
-							<label for="stat_pac" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_pac" class="form-control select2" id="stat_pac" onChange="tampil2();" style="width: 100%;">
-									<option <?php if($rcek1['stat_pac']==""){?> selected=selected <?php };?>value="">Pilih</option>
-									<option <?php if($rcek1['stat_pac']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if($rcek1['stat_pac']=="A"){?> selected=selected <?php };?>value="A">A</option>
-									<option <?php if($rcek1['stat_pac']=="R"){?> selected=selected <?php };?>value="R">R</option>
-									<option <?php if($rcek1['stat_pac']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-									<option <?php if($rcek1['stat_pac']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
-									<option <?php if($rcek1['stat_pac']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
-									<option <?php if($rcek1['stat_pac']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-									<option <?php if($rcek1['stat_pac']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="dispac" style="display:none;">
-							<label for="dispac" class="col-sm-2 control-label">PERSPIRATION ACID (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dacid_colorchange" type="text" class="form-control" id="dacid_colorchange" value="<?php echo $rcekD['dacid_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="dacid_acetate" type="text" class="form-control" id="dacid_acetate" value="<?php echo $rcekD['dacid_acetate'];?>" placeholder="4 Acetate">
-							</div>
-							<div class="col-sm-2">
-								<input name="dacid_cotton" type="text" class="form-control" id="dacid_cotton" value="<?php echo $rcekD['dacid_cotton'];?>" placeholder="4 Cotton">
-								<input name="dacid_nylon" type="text" class="form-control" id="dacid_nylon" value="<?php echo $rcekD['dacid_nylon'];?>" placeholder="4 Nylon">
-							</div>
-							<div class="col-sm-2">
-								<input name="dacid_poly" type="text" class="form-control" id="dacid_poly" value="<?php echo $rcekD['dacid_poly'];?>" placeholder="4 Polyester">
-								<input name="dacid_acrylic" type="text" class="form-control" id="dacid_acrylic" value="<?php echo $rcekD['dacid_acrylic'];?>" placeholder="4 Acrylic">
-							</div>
-							<div class="col-sm-2">
-								<input name="dacid_wool" type="text" class="form-control" id="dacid_wool" value="<?php echo $rcekD['dacid_wool'];?>" placeholder="4 Wool">
-								<input name="dacid_staining" type="text" class="form-control" id="dacid_staining" value="<?php echo $rcekD['dacid_staining'];?>" placeholder="S.Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dacid_note" maxlength="50" rows="1"><?php echo $rcekD['dacid_note'];?></textarea>
-							</div>
-						</div>	
-						<div class="form-group" id="marpac" style="display:none;">
-							<label for="marpac" class="col-sm-2 control-label">PERSPIRATION ACID (MARGINAL)</label>
-							<div class="col-sm-2">
-								<input name="macid_colorchange" type="text" class="form-control" id="macid_colorchange" value="<?php echo $rcekM['macid_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="macid_acetate" type="text" class="form-control" id="macid_acetate" value="<?php echo $rcekM['macid_acetate'];?>" placeholder="4 Acetate">
-							</div>
-							<div class="col-sm-2">
-								<input name="macid_cotton" type="text" class="form-control" id="macid_cotton" value="<?php echo $rcekM['macid_cotton'];?>" placeholder="4 Cotton">
-								<input name="macid_nylon" type="text" class="form-control" id="macid_nylon" value="<?php echo $rcekM['macid_nylon'];?>" placeholder="4 Nylon">
-							</div>
-							<div class="col-sm-2">
-								<input name="macid_poly" type="text" class="form-control" id="macid_poly" value="<?php echo $rcekM['macid_poly'];?>" placeholder="4 Polyester">
-								<input name="macid_acrylic" type="text" class="form-control" id="macid_acrylic" value="<?php echo $rcekM['macid_acrylic'];?>" placeholder="4 Acrylic">
-							</div>
-							<div class="col-sm-2">
-								<input name="macid_wool" type="text" class="form-control" id="macid_wool" value="<?php echo $rcekM['macid_wool'];?>" placeholder="4 Wool">
-								<input name="macid_staining" type="text" class="form-control" id="macid_staining" value="<?php echo $rcekM['macid_staining'];?>" placeholder="S.Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="macid_note" maxlength="50" rows="1"><?php echo $rcekM['macid_note'];?></textarea>
-							</div>
-						</div>	
-						<div class="form-group" id="ranpac" style="display:none;">
-							<label for="ranpac" class="col-sm-2 control-label">PERSPIRATION ACID (RAN)</label>
-							<div class="col-sm-2">
-								<input name="racid_colorchange" type="text" class="form-control" id="racid_colorchange" value="<?php echo $rcekR['racid_colorchange'];?>" placeholder="4-5 Color Change" readonly>
-								<input name="racid_acetate" type="text" class="form-control" id="racid_acetate" value="<?php echo $rcekR['racid_acetate'];?>" placeholder="4 Acetate" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="racid_cotton" type="text" class="form-control" id="racid_cotton" value="<?php echo $rcekR['racid_cotton'];?>" placeholder="4 Cotton" readonly>
-								<input name="racid_nylon" type="text" class="form-control" id="racid_nylon" value="<?php echo $rcekR['racid_nylon'];?>" placeholder="4 Nylon" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="racid_poly" type="text" class="form-control" id="racid_poly" value="<?php echo $rcekR['racid_poly'];?>" placeholder="4 Polyester" readonly>
-								<input name="racid_acrylic" type="text" class="form-control" id="racid_acrylic" value="<?php echo $rcekR['racid_acrylic'];?>" placeholder="4 Acrylic" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="racid_wool" type="text" class="form-control" id="racid_wool" value="<?php echo $rcekR['racid_wool'];?>" placeholder="4 Wool" readonly>
-								<input name="racid_staining" type="text" class="form-control" id="racid_staining" value="<?php echo $rcekR['racid_staining'];?>" placeholder="S.Staining" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="racid_note" maxlength="50" rows="1" readonly><?php echo $rcekR['racid_note'];?></textarea>
-							</div>
-						</div>
 						<!-- PERSPIRATION ACID END-->
 						<!-- PERSPIRATION ALKALINE BEGIN-->	
-						<div class="form-group" id="c4" style="display:none;">
-							<label for="alkaline" class="col-sm-2 control-label">PERSPIRATION ALKALINE</label>
-							<div class="col-sm-2">
-								<input name="alkaline_colorchange" type="text" class="form-control" id="alkaline_colorchange" value="<?php echo $rcek1['alkaline_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="alkaline_acetate" type="text" class="form-control" id="alkaline_acetate" value="<?php echo $rcek1['alkaline_acetate'];?>" placeholder="4 Acetate">
+							<div class="form-group" id="c4" style="display:none;">
+								<label for="alkaline" class="col-sm-2 control-label">PERSPIRATION ALKALINE</label>
+								<div class="col-sm-2">
+									<input name="alkaline_colorchange" type="text" class="form-control" id="alkaline_colorchange" value="<?php echo $rcek1['alkaline_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="alkaline_acetate" type="text" class="form-control" id="alkaline_acetate" value="<?php echo $rcek1['alkaline_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="alkaline_cotton" type="text" class="form-control" id="alkaline_cotton" value="<?php echo $rcek1['alkaline_cotton'];?>" placeholder="4 Cotton">
+									<input name="alkaline_nylon" type="text" class="form-control" id="alkaline_nylon" value="<?php echo $rcek1['alkaline_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="alkaline_poly" type="text" class="form-control" id="alkaline_poly" value="<?php echo $rcek1['alkaline_poly'];?>" placeholder="4 Polyester">
+									<input name="alkaline_acrylic" type="text" class="form-control" id="alkaline_acrylic" value="<?php echo $rcek1['alkaline_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="alkaline_wool" type="text" class="form-control" id="alkaline_wool" value="<?php echo $rcek1['alkaline_wool'];?>" placeholder="4 Wool">
+									<input name="alkaline_staining" type="text" class="form-control" id="alkaline_staining" value="<?php echo $rcek1['alkaline_staining'];?>" placeholder="S.Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="alkaline_note" maxlength="50" rows="1"><?php echo $rcek1['alkaline_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="alkaline_cotton" type="text" class="form-control" id="alkaline_cotton" value="<?php echo $rcek1['alkaline_cotton'];?>" placeholder="4 Cotton">
-								<input name="alkaline_nylon" type="text" class="form-control" id="alkaline_nylon" value="<?php echo $rcek1['alkaline_nylon'];?>" placeholder="4 Nylon">
+							<div class="form-group" id="stat_pal" style="display:none;">
+								<label for="stat_pal" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_pal" class="form-control select2" id="stat_pal" onChange="tampil2();" style="width: 100%;">
+										<option <?php if($rcek1['stat_pal']==""){?> selected=selected <?php };?>value="">Pilih</option>
+										<option <?php if($rcek1['stat_pal']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if($rcek1['stat_pal']=="A"){?> selected=selected <?php };?>value="A">A</option>
+										<option <?php if($rcek1['stat_pal']=="R"){?> selected=selected <?php };?>value="R">R</option>
+										<option <?php if($rcek1['stat_pal']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+										<option <?php if($rcek1['stat_pal']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
+										<option <?php if($rcek1['stat_pal']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
+										<option <?php if($rcek1['stat_pal']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+										<option <?php if($rcek1['stat_pal']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="alkaline_poly" type="text" class="form-control" id="alkaline_poly" value="<?php echo $rcek1['alkaline_poly'];?>" placeholder="4 Polyester">
-								<input name="alkaline_acrylic" type="text" class="form-control" id="alkaline_acrylic" value="<?php echo $rcek1['alkaline_acrylic'];?>" placeholder="4 Acrylic">
+							<div class="form-group" id="dispal" style="display:none;">
+								<label for="dispal" class="col-sm-2 control-label">PERSPIRATION ALKALINE (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dalkaline_colorchange" type="text" class="form-control" id="dalkaline_colorchange" value="<?php echo $rcekD['dalkaline_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="dalkaline_acetate" type="text" class="form-control" id="dalkaline_acetate" value="<?php echo $rcekD['dalkaline_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="dalkaline_cotton" type="text" class="form-control" id="dalkaline_cotton" value="<?php echo $rcekD['dalkaline_cotton'];?>" placeholder="4 Cotton">
+									<input name="dalkaline_nylon" type="text" class="form-control" id="dalkaline_nylon" value="<?php echo $rcekD['dalkaline_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="dalkaline_poly" type="text" class="form-control" id="dalkaline_poly" value="<?php echo $rcekD['dalkaline_poly'];?>" placeholder="4 Polyester">
+									<input name="dalkaline_acrylic" type="text" class="form-control" id="dalkaline_acrylic" value="<?php echo $rcekD['dalkaline_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="dalkaline_wool" type="text" class="form-control" id="dalkaline_wool" value="<?php echo $rcekD['dalkaline_wool'];?>" placeholder="4 Wool">
+									<input name="dalkaline_staining" type="text" class="form-control" id="dalkaline_staining" value="<?php echo $rcekD['dalkaline_staining'];?>" placeholder="S.Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dalkaline_note" maxlength="50" rows="1"><?php echo $rcekD['dalkaline_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="alkaline_wool" type="text" class="form-control" id="alkaline_wool" value="<?php echo $rcek1['alkaline_wool'];?>" placeholder="4 Wool">
-								<input name="alkaline_staining" type="text" class="form-control" id="alkaline_staining" value="<?php echo $rcek1['alkaline_staining'];?>" placeholder="S.Staining">
+							<div class="form-group" id="marpal" style="display:none;">
+								<label for="marpal" class="col-sm-2 control-label">PERSPIRATION ALKALINE (MARGINAL)</label>
+								<div class="col-sm-2">
+									<input name="malkaline_colorchange" type="text" class="form-control" id="malkaline_colorchange" value="<?php echo $rcekM['malkaline_colorchange'];?>" placeholder="4-5 Color Change">
+									<input name="malkaline_acetate" type="text" class="form-control" id="malkaline_acetate" value="<?php echo $rcekM['malkaline_acetate'];?>" placeholder="4 Acetate">
+								</div>
+								<div class="col-sm-2">
+									<input name="malkaline_cotton" type="text" class="form-control" id="malkaline_cotton" value="<?php echo $rcekM['malkaline_cotton'];?>" placeholder="4 Cotton">
+									<input name="malkaline_nylon" type="text" class="form-control" id="malkaline_nylon" value="<?php echo $rcekM['malkaline_nylon'];?>" placeholder="4 Nylon">
+								</div>
+								<div class="col-sm-2">
+									<input name="malkaline_poly" type="text" class="form-control" id="malkaline_poly" value="<?php echo $rcekM['malkaline_poly'];?>" placeholder="4 Polyester">
+									<input name="malkaline_acrylic" type="text" class="form-control" id="malkaline_acrylic" value="<?php echo $rcekM['malkaline_acrylic'];?>" placeholder="4 Acrylic">
+								</div>
+								<div class="col-sm-2">
+									<input name="malkaline_wool" type="text" class="form-control" id="malkaline_wool" value="<?php echo $rcekM['malkaline_wool'];?>" placeholder="4 Wool">
+									<input name="malkaline_staining" type="text" class="form-control" id="malkaline_staining" value="<?php echo $rcekM['malkaline_staining'];?>" placeholder="S.Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="malkaline_note" maxlength="50" rows="1"><?php echo $rcekM['malkaline_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="alkaline_note" maxlength="50" rows="1"><?php echo $rcek1['alkaline_note'];?></textarea>
+							<div class="form-group" id="ranpal" style="display:none;">
+								<label for="ranpal" class="col-sm-2 control-label">PERSPIRATION ALKALINE (RAN)</label>
+								<div class="col-sm-2">
+									<input name="ralkaline_colorchange" type="text" class="form-control" id="ralkaline_colorchange" value="<?php echo $rcekR['ralkaline_colorchange'];?>" placeholder="4-5 Color Change" readonly>
+									<input name="ralkaline_acetate" type="text" class="form-control" id="ralkaline_acetate" value="<?php echo $rcekR['ralkaline_acetate'];?>" placeholder="4 Acetate" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="ralkaline_cotton" type="text" class="form-control" id="ralkaline_cotton" value="<?php echo $rcekR['ralkaline_cotton'];?>" placeholder="4 Cotton" readonly>
+									<input name="ralkaline_nylon" type="text" class="form-control" id="ralkaline_nylon" value="<?php echo $rcekR['ralkaline_nylon'];?>" placeholder="4 Nylon" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="ralkaline_poly" type="text" class="form-control" id="ralkaline_poly" value="<?php echo $rcekR['ralkaline_poly'];?>" placeholder="4 Polyester" readonly>
+									<input name="ralkaline_acrylic" type="text" class="form-control" id="ralkaline_acrylic" value="<?php echo $rcekR['ralkaline_acrylic'];?>" placeholder="4 Acrylic" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="ralkaline_wool" type="text" class="form-control" id="ralkaline_wool" value="<?php echo $rcekR['ralkaline_wool'];?>" placeholder="4 Wool" readonly>
+									<input name="ralkaline_staining" type="text" class="form-control" id="ralkaline_staining" value="<?php echo $rcekR['ralkaline_staining'];?>" placeholder="S.Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="ralkaline_note" maxlength="50" rows="1" readonly><?php echo $rcekR['ralkaline_note'];?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="stat_pal" style="display:none;">
-							<label for="stat_pal" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_pal" class="form-control select2" id="stat_pal" onChange="tampil2();" style="width: 100%;">
-									<option <?php if($rcek1['stat_pal']==""){?> selected=selected <?php };?>value="">Pilih</option>
-									<option <?php if($rcek1['stat_pal']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if($rcek1['stat_pal']=="A"){?> selected=selected <?php };?>value="A">A</option>
-									<option <?php if($rcek1['stat_pal']=="R"){?> selected=selected <?php };?>value="R">R</option>
-									<option <?php if($rcek1['stat_pal']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-									<option <?php if($rcek1['stat_pal']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
-									<option <?php if($rcek1['stat_pal']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
-									<option <?php if($rcek1['stat_pal']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-									<option <?php if($rcek1['stat_pal']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="dispal" style="display:none;">
-							<label for="dispal" class="col-sm-2 control-label">PERSPIRATION ALKALINE (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dalkaline_colorchange" type="text" class="form-control" id="dalkaline_colorchange" value="<?php echo $rcekD['dalkaline_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="dalkaline_acetate" type="text" class="form-control" id="dalkaline_acetate" value="<?php echo $rcekD['dalkaline_acetate'];?>" placeholder="4 Acetate">
-							</div>
-							<div class="col-sm-2">
-								<input name="dalkaline_cotton" type="text" class="form-control" id="dalkaline_cotton" value="<?php echo $rcekD['dalkaline_cotton'];?>" placeholder="4 Cotton">
-								<input name="dalkaline_nylon" type="text" class="form-control" id="dalkaline_nylon" value="<?php echo $rcekD['dalkaline_nylon'];?>" placeholder="4 Nylon">
-							</div>
-							<div class="col-sm-2">
-								<input name="dalkaline_poly" type="text" class="form-control" id="dalkaline_poly" value="<?php echo $rcekD['dalkaline_poly'];?>" placeholder="4 Polyester">
-								<input name="dalkaline_acrylic" type="text" class="form-control" id="dalkaline_acrylic" value="<?php echo $rcekD['dalkaline_acrylic'];?>" placeholder="4 Acrylic">
-							</div>
-							<div class="col-sm-2">
-								<input name="dalkaline_wool" type="text" class="form-control" id="dalkaline_wool" value="<?php echo $rcekD['dalkaline_wool'];?>" placeholder="4 Wool">
-								<input name="dalkaline_staining" type="text" class="form-control" id="dalkaline_staining" value="<?php echo $rcekD['dalkaline_staining'];?>" placeholder="S.Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dalkaline_note" maxlength="50" rows="1"><?php echo $rcekD['dalkaline_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="marpal" style="display:none;">
-							<label for="marpal" class="col-sm-2 control-label">PERSPIRATION ALKALINE (MARGINAL)</label>
-							<div class="col-sm-2">
-								<input name="malkaline_colorchange" type="text" class="form-control" id="malkaline_colorchange" value="<?php echo $rcekM['malkaline_colorchange'];?>" placeholder="4-5 Color Change">
-								<input name="malkaline_acetate" type="text" class="form-control" id="malkaline_acetate" value="<?php echo $rcekM['malkaline_acetate'];?>" placeholder="4 Acetate">
-							</div>
-							<div class="col-sm-2">
-								<input name="malkaline_cotton" type="text" class="form-control" id="malkaline_cotton" value="<?php echo $rcekM['malkaline_cotton'];?>" placeholder="4 Cotton">
-								<input name="malkaline_nylon" type="text" class="form-control" id="malkaline_nylon" value="<?php echo $rcekM['malkaline_nylon'];?>" placeholder="4 Nylon">
-							</div>
-							<div class="col-sm-2">
-								<input name="malkaline_poly" type="text" class="form-control" id="malkaline_poly" value="<?php echo $rcekM['malkaline_poly'];?>" placeholder="4 Polyester">
-								<input name="malkaline_acrylic" type="text" class="form-control" id="malkaline_acrylic" value="<?php echo $rcekM['malkaline_acrylic'];?>" placeholder="4 Acrylic">
-							</div>
-							<div class="col-sm-2">
-								<input name="malkaline_wool" type="text" class="form-control" id="malkaline_wool" value="<?php echo $rcekM['malkaline_wool'];?>" placeholder="4 Wool">
-								<input name="malkaline_staining" type="text" class="form-control" id="malkaline_staining" value="<?php echo $rcekM['malkaline_staining'];?>" placeholder="S.Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="malkaline_note" maxlength="50" rows="1"><?php echo $rcekM['malkaline_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranpal" style="display:none;">
-							<label for="ranpal" class="col-sm-2 control-label">PERSPIRATION ALKALINE (RAN)</label>
-							<div class="col-sm-2">
-								<input name="ralkaline_colorchange" type="text" class="form-control" id="ralkaline_colorchange" value="<?php echo $rcekR['ralkaline_colorchange'];?>" placeholder="4-5 Color Change" readonly>
-								<input name="ralkaline_acetate" type="text" class="form-control" id="ralkaline_acetate" value="<?php echo $rcekR['ralkaline_acetate'];?>" placeholder="4 Acetate" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="ralkaline_cotton" type="text" class="form-control" id="ralkaline_cotton" value="<?php echo $rcekR['ralkaline_cotton'];?>" placeholder="4 Cotton" readonly>
-								<input name="ralkaline_nylon" type="text" class="form-control" id="ralkaline_nylon" value="<?php echo $rcekR['ralkaline_nylon'];?>" placeholder="4 Nylon" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="ralkaline_poly" type="text" class="form-control" id="ralkaline_poly" value="<?php echo $rcekR['ralkaline_poly'];?>" placeholder="4 Polyester" readonly>
-								<input name="ralkaline_acrylic" type="text" class="form-control" id="ralkaline_acrylic" value="<?php echo $rcekR['ralkaline_acrylic'];?>" placeholder="4 Acrylic" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="ralkaline_wool" type="text" class="form-control" id="ralkaline_wool" value="<?php echo $rcekR['ralkaline_wool'];?>" placeholder="4 Wool" readonly>
-								<input name="ralkaline_staining" type="text" class="form-control" id="ralkaline_staining" value="<?php echo $rcekR['ralkaline_staining'];?>" placeholder="S.Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="ralkaline_note" maxlength="50" rows="1" readonly><?php echo $rcekR['ralkaline_note'];?></textarea>
-							</div>
-						</div>
 						<!-- PERSPIRATION ALKALINE END-->	
 						<!-- CROCKING BEGIN-->	
-						<div class="form-group" id="c5" style="display:none;">
-							<label for="crocking" class="col-sm-2 control-label">CROCKING</label>
-							<div class="col-sm-1">LEN 1
-								<input name="crock_len1" type="text" class="form-control" id="crock_len1" value="<?php echo $rcek1['crock_len1'];?>" placeholder="4 Dry">
+							<div class="form-group" id="c5" style="display:none;">
+								<label for="crocking" class="col-sm-2 control-label">CROCKING</label>
+								<div class="col-sm-1">LEN 1
+									<input name="crock_len1" type="text" class="form-control" id="crock_len1" value="<?php echo $rcek1['crock_len1'];?>" placeholder="4 Dry">
+								</div>
+								<div class="col-sm-1">WID 1
+									<input name="crock_wid1" type="text" class="form-control" id="crock_wid1" value="<?php echo $rcek1['crock_wid1'];?>" placeholder="4 Dry">
+								</div>
+								<div class="col-sm-1">LEN 2
+									<input name="crock_len2" type="text" class="form-control" id="crock_len2" value="<?php echo $rcek1['crock_len2'];?>" placeholder="3 Wet">
+								</div>
+								<div class="col-sm-1">WID 2
+									<input name="crock_wid2" type="text" class="form-control" id="crock_wid2" value="<?php echo $rcek1['crock_wid2'];?>" placeholder="3 Wet">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="crock_note" maxlength="50"><?php echo $rcek1['crock_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">WID 1
-								<input name="crock_wid1" type="text" class="form-control" id="crock_wid1" value="<?php echo $rcek1['crock_wid1'];?>" placeholder="4 Dry">
-							</div>
-							<div class="col-sm-1">LEN 2
-								<input name="crock_len2" type="text" class="form-control" id="crock_len2" value="<?php echo $rcek1['crock_len2'];?>" placeholder="3 Wet">
-							</div>
-							<div class="col-sm-1">WID 2
-								<input name="crock_wid2" type="text" class="form-control" id="crock_wid2" value="<?php echo $rcek1['crock_wid2'];?>" placeholder="3 Wet">
-							</div>
+							<div class="form-group" id="stat_cr" style="display:none;">
+							<label for="stat_cr" class="col-sm-2 control-label">STATUS</label>
 							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="crock_note" maxlength="50"><?php echo $rcek1['crock_note'];?></textarea>
+								<select name="stat_cr" class="form-control select2" id="stat_cr" onChange="tampil2();" style="width: 100%;">
+									<option <?php if($rcek1['stat_cr']==""){?> selected=selected <?php };?>value="">Pilih</option>
+									<option <?php if($rcek1['stat_cr']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+									<option <?php if($rcek1['stat_cr']=="A"){?> selected=selected <?php };?>value="A">A</option>
+									<option <?php if($rcek1['stat_cr']=="R"){?> selected=selected <?php };?>value="R">R</option>
+									<option <?php if($rcek1['stat_cr']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+									<option <?php if($rcek1['stat_cr']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
+									<option <?php if($rcek1['stat_cr']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
+									<option <?php if($rcek1['stat_cr']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+									<option <?php if($rcek1['stat_cr']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+								</select>
 							</div>
-						</div>
-						<div class="form-group" id="stat_cr" style="display:none;">
-						<label for="stat_cr" class="col-sm-2 control-label">STATUS</label>
-						<div class="col-sm-2">
-							<select name="stat_cr" class="form-control select2" id="stat_cr" onChange="tampil2();" style="width: 100%;">
-								<option <?php if($rcek1['stat_cr']==""){?> selected=selected <?php };?>value="">Pilih</option>
-								<option <?php if($rcek1['stat_cr']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-								<option <?php if($rcek1['stat_cr']=="A"){?> selected=selected <?php };?>value="A">A</option>
-								<option <?php if($rcek1['stat_cr']=="R"){?> selected=selected <?php };?>value="R">R</option>
-								<option <?php if($rcek1['stat_cr']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-								<option <?php if($rcek1['stat_cr']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
-								<option <?php if($rcek1['stat_cr']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
-								<option <?php if($rcek1['stat_cr']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-								<option <?php if($rcek1['stat_cr']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-							</select>
-						</div>
-						</div>
-						<div class="form-group" id="discr" style="display:none;">
-							<label for="discr" class="col-sm-2 control-label">CROCKING (DIS)</label>
-							<div class="col-sm-1">LEN 1
-								<input name="dcrock_len1" type="text" class="form-control" id="dcrock_len1" value="<?php echo $rcekD['dcrock_len1'];?>" placeholder="4 Dry">
 							</div>
-							<div class="col-sm-1">WID 1
-								<input name="dcrock_wid1" type="text" class="form-control" id="dcrock_wid1" value="<?php echo $rcekD['dcrock_wid1'];?>" placeholder="4 Dry">
+							<div class="form-group" id="discr" style="display:none;">
+								<label for="discr" class="col-sm-2 control-label">CROCKING (DIS)</label>
+								<div class="col-sm-1">LEN 1
+									<input name="dcrock_len1" type="text" class="form-control" id="dcrock_len1" value="<?php echo $rcekD['dcrock_len1'];?>" placeholder="4 Dry">
+								</div>
+								<div class="col-sm-1">WID 1
+									<input name="dcrock_wid1" type="text" class="form-control" id="dcrock_wid1" value="<?php echo $rcekD['dcrock_wid1'];?>" placeholder="4 Dry">
+								</div>
+								<div class="col-sm-1">LEN 2
+									<input name="dcrock_len2" type="text" class="form-control" id="dcrock_len2" value="<?php echo $rcekD['dcrock_len2'];?>" placeholder="3 Wet">
+								</div>
+								<div class="col-sm-1">WID 2
+									<input name="dcrock_wid2" type="text" class="form-control" id="dcrock_wid2" value="<?php echo $rcekD['dcrock_wid2'];?>" placeholder="3 Wet">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dcrock_note" maxlength="50"><?php echo $rcekD['dcrock_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">LEN 2
-								<input name="dcrock_len2" type="text" class="form-control" id="dcrock_len2" value="<?php echo $rcekD['dcrock_len2'];?>" placeholder="3 Wet">
+							<div class="form-group" id="marcr" style="display:none;">
+								<label for="marcr" class="col-sm-2 control-label">CROCKING (MARGINAL)</label>
+								<div class="col-sm-1">LEN 1
+									<input name="mcrock_len1" type="text" class="form-control" id="mcrock_len1" value="<?php echo $rcekM['mcrock_len1'];?>" placeholder="4 Dry">
+								</div>
+								<div class="col-sm-1">WID 1
+									<input name="mcrock_wid1" type="text" class="form-control" id="mcrock_wid1" value="<?php echo $rcekM['mcrock_wid1'];?>" placeholder="4 Dry">
+								</div>
+								<div class="col-sm-1">LEN 2
+									<input name="mcrock_len2" type="text" class="form-control" id="mcrock_len2" value="<?php echo $rcekM['mcrock_len2'];?>" placeholder="3 Wet">
+								</div>
+								<div class="col-sm-1">WID 2
+									<input name="mcrock_wid2" type="text" class="form-control" id="mcrock_wid2" value="<?php echo $rcekM['mcrock_wid2'];?>" placeholder="3 Wet">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mcrock_note" maxlength="50"><?php echo $rcekM['mcrock_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-1">WID 2
-								<input name="dcrock_wid2" type="text" class="form-control" id="dcrock_wid2" value="<?php echo $rcekD['dcrock_wid2'];?>" placeholder="3 Wet">
+							<div class="form-group" id="rancr" style="display:none;">
+								<label for="rancr" class="col-sm-2 control-label">CROCKING (RAN)</label>
+								<div class="col-sm-1">LEN 1
+									<input name="rcrock_len1" type="text" class="form-control" id="rcrock_len1" value="<?php echo $rcekR['rcrock_len1'];?>" placeholder="4 Dry" readonly>
+								</div>
+								<div class="col-sm-1">WID 1
+									<input name="rcrock_wid1" type="text" class="form-control" id="rcrock_wid1" value="<?php echo $rcekR['rcrock_wid1'];?>" placeholder="4 Dry" readonly>
+								</div>
+								<div class="col-sm-1">LEN 2
+									<input name="rcrock_len2" type="text" class="form-control" id="rcrock_len2" value="<?php echo $rcekR['rcrock_len2'];?>" placeholder="3 Wet" readonly>
+								</div>
+								<div class="col-sm-1">WID 2
+									<input name="rcrock_wid2" type="text" class="form-control" id="rcrock_wid2" value="<?php echo $rcekR['rcrock_wid2'];?>" placeholder="3 Wet" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rcrock_note" maxlength="50" readonly><?php echo $rcekR['rcrock_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dcrock_note" maxlength="50"><?php echo $rcekD['dcrock_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="marcr" style="display:none;">
-							<label for="marcr" class="col-sm-2 control-label">CROCKING (MARGINAL)</label>
-							<div class="col-sm-1">LEN 1
-								<input name="mcrock_len1" type="text" class="form-control" id="mcrock_len1" value="<?php echo $rcekM['mcrock_len1'];?>" placeholder="4 Dry">
-							</div>
-							<div class="col-sm-1">WID 1
-								<input name="mcrock_wid1" type="text" class="form-control" id="mcrock_wid1" value="<?php echo $rcekM['mcrock_wid1'];?>" placeholder="4 Dry">
-							</div>
-							<div class="col-sm-1">LEN 2
-								<input name="mcrock_len2" type="text" class="form-control" id="mcrock_len2" value="<?php echo $rcekM['mcrock_len2'];?>" placeholder="3 Wet">
-							</div>
-							<div class="col-sm-1">WID 2
-								<input name="mcrock_wid2" type="text" class="form-control" id="mcrock_wid2" value="<?php echo $rcekM['mcrock_wid2'];?>" placeholder="3 Wet">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mcrock_note" maxlength="50"><?php echo $rcekM['mcrock_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="rancr" style="display:none;">
-							<label for="rancr" class="col-sm-2 control-label">CROCKING (RAN)</label>
-							<div class="col-sm-1">LEN 1
-								<input name="rcrock_len1" type="text" class="form-control" id="rcrock_len1" value="<?php echo $rcekR['rcrock_len1'];?>" placeholder="4 Dry" readonly>
-							</div>
-							<div class="col-sm-1">WID 1
-								<input name="rcrock_wid1" type="text" class="form-control" id="rcrock_wid1" value="<?php echo $rcekR['rcrock_wid1'];?>" placeholder="4 Dry" readonly>
-							</div>
-							<div class="col-sm-1">LEN 2
-								<input name="rcrock_len2" type="text" class="form-control" id="rcrock_len2" value="<?php echo $rcekR['rcrock_len2'];?>" placeholder="3 Wet" readonly>
-							</div>
-							<div class="col-sm-1">WID 2
-								<input name="rcrock_wid2" type="text" class="form-control" id="rcrock_wid2" value="<?php echo $rcekR['rcrock_wid2'];?>" placeholder="3 Wet" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rcrock_note" maxlength="50" readonly><?php echo $rcekR['rcrock_note'];?></textarea>
-							</div>
-						</div>
 						<!-- CROCKING END-->
 						<!-- PHENOLIC YELLOWING BEGIN-->
-						<div class="form-group" id="c6" style="display:none;">
-							<label for="phenolic" class="col-sm-2 control-label">PHENOLIC YELLOWING</label>
-							<div class="col-sm-2">
-								<input name="phenolic_colorchange" type="text" class="form-control" id="phenolic_colorchange" value="<?php echo $rcek1['phenolic_colorchange'];?>" placeholder="4-5 Color Change">
+							<div class="form-group" id="c6" style="display:none;">
+								<label for="phenolic" class="col-sm-2 control-label">PHENOLIC YELLOWING</label>
+								<div class="col-sm-2">
+									<input name="phenolic_colorchange" type="text" class="form-control" id="phenolic_colorchange" value="<?php echo $rcek1['phenolic_colorchange'];?>" placeholder="4-5 Color Change">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="phenolic_note" maxlength="50" rows="1"><?php echo $rcek1['phenolic_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="phenolic_note" maxlength="50" rows="1"><?php echo $rcek1['phenolic_note'];?></textarea>
+							<div class="form-group" id="stat_py" style="display:none;">
+								<label for="stat_py" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_py" class="form-control select2" id="stat_py" onChange="tampil2();" style="width: 100%;">
+										<option <?php if($rcek1['stat_py']==""){?> selected=selected <?php };?>value="">Pilih</option>
+										<option <?php if($rcek1['stat_py']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if($rcek1['stat_py']=="A"){?> selected=selected <?php };?>value="A">A</option>
+										<option <?php if($rcek1['stat_py']=="R"){?> selected=selected <?php };?>value="R">R</option>
+										<option <?php if($rcek1['stat_py']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+										<option <?php if($rcek1['stat_py']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
+										<option <?php if($rcek1['stat_py']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
+										<option <?php if($rcek1['stat_py']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+										<option <?php if($rcek1['stat_py']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="stat_py" style="display:none;">
-							<label for="stat_py" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_py" class="form-control select2" id="stat_py" onChange="tampil2();" style="width: 100%;">
-									<option <?php if($rcek1['stat_py']==""){?> selected=selected <?php };?>value="">Pilih</option>
-									<option <?php if($rcek1['stat_py']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if($rcek1['stat_py']=="A"){?> selected=selected <?php };?>value="A">A</option>
-									<option <?php if($rcek1['stat_py']=="R"){?> selected=selected <?php };?>value="R">R</option>
-									<option <?php if($rcek1['stat_py']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-									<option <?php if($rcek1['stat_py']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
-									<option <?php if($rcek1['stat_py']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
-									<option <?php if($rcek1['stat_py']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-									<option <?php if($rcek1['stat_py']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-								</select>
+							<div class="form-group" id="dispy" style="display:none;">
+								<label for="dispy" class="col-sm-2 control-label">PHENOLIC YELLOWING (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dphenolic_colorchange" type="text" class="form-control" id="dphenolic_colorchange" value="<?php echo $rcekD['dphenolic_colorchange'];?>" placeholder="4-5 Color Change">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dphenolic_note" maxlength="50" rows="1"><?php echo $rcekD['dphenolic_note'];?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="dispy" style="display:none;">
-							<label for="dispy" class="col-sm-2 control-label">PHENOLIC YELLOWING (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dphenolic_colorchange" type="text" class="form-control" id="dphenolic_colorchange" value="<?php echo $rcekD['dphenolic_colorchange'];?>" placeholder="4-5 Color Change">
+							<div class="form-group" id="marpy" style="display:none;">
+								<label for="marpy" class="col-sm-2 control-label">PHENOLIC YELLOWING (MARGINAL)</label>
+								<div class="col-sm-2">
+									<input name="mphenolic_colorchange" type="text" class="form-control" id="mphenolic_colorchange" value="<?php echo $rcekM['mphenolic_colorchange'];?>" placeholder="4-5 Color Change">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mphenolic_note" maxlength="50" rows="1"><?php echo $rcekM['mphenolic_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dphenolic_note" maxlength="50" rows="1"><?php echo $rcekD['dphenolic_note'];?></textarea>
+							<div class="form-group" id="ranpy" style="display:none;">
+								<label for="ranpy" class="col-sm-2 control-label">PHENOLIC YELLOWING (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rphenolic_colorchange" type="text" class="form-control" id="rphenolic_colorchange" value="<?php echo $rcekR['rphenolic_colorchange'];?>" placeholder="4-5 Color Change" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rphenolic_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rphenolic_note'];?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="marpy" style="display:none;">
-							<label for="marpy" class="col-sm-2 control-label">PHENOLIC YELLOWING (MARGINAL)</label>
-							<div class="col-sm-2">
-								<input name="mphenolic_colorchange" type="text" class="form-control" id="mphenolic_colorchange" value="<?php echo $rcekM['mphenolic_colorchange'];?>" placeholder="4-5 Color Change">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mphenolic_note" maxlength="50" rows="1"><?php echo $rcekM['mphenolic_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranpy" style="display:none;">
-							<label for="ranpy" class="col-sm-2 control-label">PHENOLIC YELLOWING (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rphenolic_colorchange" type="text" class="form-control" id="rphenolic_colorchange" value="<?php echo $rcekR['rphenolic_colorchange'];?>" placeholder="4-5 Color Change" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rphenolic_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rphenolic_note'];?></textarea>
-							</div>
-						</div>
 						<!-- PHENOLIC YELLOWING END-->
 						<!-- COLOR MIGRATION - OVEN TEST BEGIN-->
-						<div class="form-group" id="c7" style="display:none;">
-							<label for="cm_printing" class="col-sm-2 control-label">COLOR MIGRATION - OVEN TEST</label>
-							<div class="col-sm-2">
-								<input name="cm_printing_colorchange" type="text" class="form-control" id="cm_printing_colorchange" value="<?php echo $rcek1['cm_printing_colorchange'];?>" placeholder="Grade">
+							<div class="form-group" id="c7" style="display:none;">
+								<label for="cm_printing" class="col-sm-2 control-label">COLOR MIGRATION - OVEN TEST</label>
+								<div class="col-sm-2">
+									<input name="cm_printing_colorchange" type="text" class="form-control" id="cm_printing_colorchange" value="<?php echo $rcek1['cm_printing_colorchange'];?>" placeholder="Grade">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="cm_printing_note" maxlength="50" rows="1"><?php echo $rcek1['cm_printing_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="cm_printing_note" maxlength="50" rows="1"><?php echo $rcek1['cm_printing_note'];?></textarea>
+							<div class="form-group" id="stat_cmo" style="display:none;">
+								<label for="stat_cmo" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_cmo" class="form-control select2" id="stat_cmo" onChange="tampil2();" style="width: 100%;">
+										<option <?php if($rcek1['stat_cmo']==""){?> selected=selected <?php };?>value="">Pilih</option>
+										<option <?php if($rcek1['stat_cmo']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if($rcek1['stat_cmo']=="A"){?> selected=selected <?php };?>value="A">A</option>
+										<option <?php if($rcek1['stat_cmo']=="R"){?> selected=selected <?php };?>value="R">R</option>
+										<option <?php if($rcek1['stat_cmo']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+										<option <?php if($rcek1['stat_cmo']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+										<option <?php if($rcek1['stat_cmo']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="stat_cmo" style="display:none;">
-							<label for="stat_cmo" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_cmo" class="form-control select2" id="stat_cmo" onChange="tampil2();" style="width: 100%;">
-									<option <?php if($rcek1['stat_cmo']==""){?> selected=selected <?php };?>value="">Pilih</option>
-									<option <?php if($rcek1['stat_cmo']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if($rcek1['stat_cmo']=="A"){?> selected=selected <?php };?>value="A">A</option>
-									<option <?php if($rcek1['stat_cmo']=="R"){?> selected=selected <?php };?>value="R">R</option>
-									<option <?php if($rcek1['stat_cmo']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-									<option <?php if($rcek1['stat_cmo']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-									<option <?php if($rcek1['stat_cmo']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-								</select>
+							<div class="form-group" id="discmo" style="display:none;">
+								<label for="discmo" class="col-sm-2 control-label">COLOR MIGRATION - OVEN TEST (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dcm_printing_colorchange" type="text" class="form-control" id="dcm_printing_colorchange" value="<?php echo $rcekD['dcm_printing_colorchange'];?>" placeholder="Grade">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dcm_printing_note" maxlength="50" rows="1"><?php echo $rcekD['dcm_printing_note'];?></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="discmo" style="display:none;">
-							<label for="discmo" class="col-sm-2 control-label">COLOR MIGRATION - OVEN TEST (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dcm_printing_colorchange" type="text" class="form-control" id="dcm_printing_colorchange" value="<?php echo $rcekD['dcm_printing_colorchange'];?>" placeholder="Grade">
+							<div class="form-group" id="rancmo" style="display:none;">
+								<label for="rancmo" class="col-sm-2 control-label">COLOR MIGRATION - OVEN TEST (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rcm_printing_colorchange" type="text" class="form-control" id="rcm_printing_colorchange" value="<?php echo $rcekR['rcm_printing_colorchange'];?>" placeholder="Grade" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rcm_printing_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rcm_printing_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dcm_printing_note" maxlength="50" rows="1"><?php echo $rcekD['dcm_printing_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="rancmo" style="display:none;">
-							<label for="rancmo" class="col-sm-2 control-label">COLOR MIGRATION - OVEN TEST (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rcm_printing_colorchange" type="text" class="form-control" id="rcm_printing_colorchange" value="<?php echo $rcekR['rcm_printing_colorchange'];?>" placeholder="Grade" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rcm_printing_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rcm_printing_note'];?></textarea>
-							</div>
-						</div>
 						<!-- COLOR MIGRATION - OVEN TEST END-->
-
-						<div class="form-group" id="conceal" style="display:none;">
-
-					
-						<label for="cm_dye" class="col-sm-2 control-label"></label>
-							<div class="col-sm-10">
-							<?php 
-									$sco_acid_original =  explode("/", $rcek1['sco_acid_original']);
-									$sca_acid_original =  explode("/", $rcek1['sca_acid_original']);
-									$sco_alkaline_afterwash =  explode("/", $rcek1['sco_alkaline_afterwash']);
-									$sca_alkaline_afterwash =  explode("/", $rcek1['sca_alkaline_afterwash']);									
-									?>															
-									
-								
-										
+							<div class="form-group" id="conceal" style="display:none;">			
+								<label for="cm_dye" class="col-sm-2 control-label"></label>
+									<div class="col-sm-10">
 									<?php 
-										$status_scs = ['DISPOSISI','A','R','PASS','FAIL','RANDOM'];
-									?>
-
-									<table width=100%  class="sc">
-										<tr>
-											<td width=210px><b>Jenis Test</b></td>
-											<td><b>Sweat Conceal</b></td>
-											<td colspan=4></td>
-										</tr>
-										<tr>
-											<td>Sweat Conceal Original Acid</td>
-											<td><input class="form-control" type="text" name="sco_acid_original1" value="<?=$sco_acid_original[0];?>" placeholder = "Original 1 Min" ></td>
-											<td><input class="form-control" type="text" name="sco_acid_original2" value="<?=$sco_acid_original[1];?>" placeholder = "Original 2 Min"></td>
-											<td><input class="form-control"  type="text" name="sco_acid_original3" value="<?=$sco_acid_original[2];?>" placeholder = "Original 3 Min" ></td>
-
-											<td width=110px>													
-												<select name="sco_acid_status"  class="form-control">
-													<option value="">Pilih</option>
-													
-													<?php  foreach ($status_scs as $status_sc) {
-														if ($status_sc == $rcek1['sco_acid_status'] ) {
-															echo '<option selected value="'.$status_sc.'">'.$status_sc.'</option>';
-														} else {
-															echo '<option value="'.$status_sc.'">'.$status_sc.'</option>';
-														}
-													}
-													?>																								
-												</select>
-
-											</td>
-											<td rowspan=4 valign="top">
-											<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="sc_note" maxlength="50" rows="7"><?php echo $rcek1['sc_note'];?></textarea>
-							
+											$sco_acid_original =  explode("/", $rcek1['sco_acid_original']);
+											$sca_acid_original =  explode("/", $rcek1['sca_acid_original']);
+											$sco_alkaline_afterwash =  explode("/", $rcek1['sco_alkaline_afterwash']);
+											$sca_alkaline_afterwash =  explode("/", $rcek1['sca_alkaline_afterwash']);									
+											?>															
 											
-							
-											</td>
-										</tr>
-										<tr><td>Sweat Conceal Afterwash Acid</td>
-											<td><input class="form-control" type="text" name="sca_acid_original1" value="<?=$sca_acid_original[0]?>"  placeholder = "Original 1 min" ></td>
-											<td><input class="form-control"  type="text" name="sca_acid_original2" value="<?=$sca_acid_original[1]?>" placeholder = "Original 2 min" ></td>
-											<td><input class="form-control"  type="text" name="sca_acid_original3" value="<?=$sca_acid_original[2]?>"  placeholder = "Original 3 min"></td>
-											<td>
-											<select name="sca_acid_status"  class="form-control">
-													<option value="">Pilih</option>
-													
-													<?php  foreach ($status_scs as $status_sc) {
-														if ($status_sc == $rcek1['sca_acid_status'] ) {
-															echo '<option selected value="'.$status_sc.'">'.$status_sc.'</option>';
-														} else {
-															echo '<option value="'.$status_sc.'">'.$status_sc.'</option>';
-														}
-													}
-													?>																								
-												</select>
-											</td>
 										
-										</tr>
-										<tr><td>Sweat Conceal Original Alkaline</td>
-											<td><input  class="form-control" type="text" name="sco_alkaline_afterwash1" value="<?=$sco_alkaline_afterwash[0]?>" placeholder = "Afterwash 1 min"  ></td>
-											<td><input class="form-control"  type="text" name="sco_alkaline_afterwash2" value="<?=$sco_alkaline_afterwash[1]?>" placeholder = "Afterwash 2 min" ></td>
-											<td><input class="form-control" type="text" name="sco_alkaline_afterwash3" value="<?=$sco_alkaline_afterwash[2]?>" placeholder = "Afterwash 3 min" ></td>
-											<td>
 												
-												<select name="sco_alkaline_status"  class="form-control">
-													<option value="">Pilih</option>
+											<?php 
+												$status_scs = ['DISPOSISI','A','R','PASS','FAIL','RANDOM'];
+											?>
+
+											<table width=100%  class="sc">
+												<tr>
+													<td width=210px><b>Jenis Test</b></td>
+													<td><b>Sweat Conceal</b></td>
+													<td colspan=4></td>
+												</tr>
+												<tr>
+													<td>Sweat Conceal Original Acid</td>
+													<td><input class="form-control" type="text" name="sco_acid_original1" value="<?=$sco_acid_original[0];?>" placeholder = "Original 1 Min" ></td>
+													<td><input class="form-control" type="text" name="sco_acid_original2" value="<?=$sco_acid_original[1];?>" placeholder = "Original 2 Min"></td>
+													<td><input class="form-control"  type="text" name="sco_acid_original3" value="<?=$sco_acid_original[2];?>" placeholder = "Original 3 Min" ></td>
+
+													<td width=110px>													
+														<select name="sco_acid_status"  class="form-control">
+															<option value="">Pilih</option>
+															
+															<?php  foreach ($status_scs as $status_sc) {
+																if ($status_sc == $rcek1['sco_acid_status'] ) {
+																	echo '<option selected value="'.$status_sc.'">'.$status_sc.'</option>';
+																} else {
+																	echo '<option value="'.$status_sc.'">'.$status_sc.'</option>';
+																}
+															}
+															?>																								
+														</select>
+
+													</td>
+													<td rowspan=4 valign="top">
+													<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="sc_note" maxlength="50" rows="7"><?php echo $rcek1['sc_note'];?></textarea>
+									
 													
-													<?php  foreach ($status_scs as $status_sc) {
-														if ($status_sc == $rcek1['sco_alkaline_status'] ) {
-															echo '<option selected value="'.$status_sc.'">'.$status_sc.'</option>';
-														} else {
-															echo '<option value="'.$status_sc.'">'.$status_sc.'</option>';
-														}
-													}
-													?>																								
-												</select>
-											</td>
+									
+													</td>
+												</tr>
+												<tr><td>Sweat Conceal Afterwash Acid</td>
+													<td><input class="form-control" type="text" name="sca_acid_original1" value="<?=$sca_acid_original[0]?>"  placeholder = "Original 1 min" ></td>
+													<td><input class="form-control"  type="text" name="sca_acid_original2" value="<?=$sca_acid_original[1]?>" placeholder = "Original 2 min" ></td>
+													<td><input class="form-control"  type="text" name="sca_acid_original3" value="<?=$sca_acid_original[2]?>"  placeholder = "Original 3 min"></td>
+													<td>
+													<select name="sca_acid_status"  class="form-control">
+															<option value="">Pilih</option>
+															
+															<?php  foreach ($status_scs as $status_sc) {
+																if ($status_sc == $rcek1['sca_acid_status'] ) {
+																	echo '<option selected value="'.$status_sc.'">'.$status_sc.'</option>';
+																} else {
+																	echo '<option value="'.$status_sc.'">'.$status_sc.'</option>';
+																}
+															}
+															?>																								
+														</select>
+													</td>
+												
+												</tr>
+												<tr><td>Sweat Conceal Original Alkaline</td>
+													<td><input  class="form-control" type="text" name="sco_alkaline_afterwash1" value="<?=$sco_alkaline_afterwash[0]?>" placeholder = "Afterwash 1 min"  ></td>
+													<td><input class="form-control"  type="text" name="sco_alkaline_afterwash2" value="<?=$sco_alkaline_afterwash[1]?>" placeholder = "Afterwash 2 min" ></td>
+													<td><input class="form-control" type="text" name="sco_alkaline_afterwash3" value="<?=$sco_alkaline_afterwash[2]?>" placeholder = "Afterwash 3 min" ></td>
+													<td>
+														
+														<select name="sco_alkaline_status"  class="form-control">
+															<option value="">Pilih</option>
+															
+															<?php  foreach ($status_scs as $status_sc) {
+																if ($status_sc == $rcek1['sco_alkaline_status'] ) {
+																	echo '<option selected value="'.$status_sc.'">'.$status_sc.'</option>';
+																} else {
+																	echo '<option value="'.$status_sc.'">'.$status_sc.'</option>';
+																}
+															}
+															?>																								
+														</select>
+													</td>
+													
+												</tr>
+												<tr><td>Sweat Conceal Afterwash Alkaline</td>
+													<td><input class="form-control"  type="text" name="sca_alkaline_afterwash1" value="<?=$sca_alkaline_afterwash[0]?>" placeholder = "Afterwash 1 min"  ></td>
+													<td><input class="form-control"  type="text" name="sca_alkaline_afterwash2" value="<?=$sca_alkaline_afterwash[1]?>"  placeholder = "Afterwash 2 min" ></td>
+													<td><input class="form-control"  type="text" name="sca_alkaline_afterwash3" value="<?=$sca_alkaline_afterwash[2]?>" placeholder = "Afterwash 3 min"  ></td>
+													<td>
+														
+												
+													<select name="sca_alkaline_status"  class="form-control">
+															<option value="">Pilih</option>
+															
+															<?php  foreach ($status_scs as $status_sc) {
+																if ($status_sc == $rcek1['sca_alkaline_status'] ) {
+																	echo '<option selected value="'.$status_sc.'">'.$status_sc.'</option>';
+																} else {
+																	echo '<option value="'.$status_sc.'">'.$status_sc.'</option>';
+																}
+															}
+															?>																								
+														</select>
+												</td>
+												</tr>
+
+											</table>
+
 											
-										</tr>
-										<tr><td>Sweat Conceal Afterwash Alkaline</td>
-											<td><input class="form-control"  type="text" name="sca_alkaline_afterwash1" value="<?=$sca_alkaline_afterwash[0]?>" placeholder = "Afterwash 1 min"  ></td>
-											<td><input class="form-control"  type="text" name="sca_alkaline_afterwash2" value="<?=$sca_alkaline_afterwash[1]?>"  placeholder = "Afterwash 2 min" ></td>
-											<td><input class="form-control"  type="text" name="sca_alkaline_afterwash3" value="<?=$sca_alkaline_afterwash[2]?>" placeholder = "Afterwash 3 min"  ></td>
-											<td>
-												
-										
-											<select name="sca_alkaline_status"  class="form-control">
-													<option value="">Pilih</option>
-													
-													<?php  foreach ($status_scs as $status_sc) {
-														if ($status_sc == $rcek1['sca_alkaline_status'] ) {
-															echo '<option selected value="'.$status_sc.'">'.$status_sc.'</option>';
-														} else {
-															echo '<option value="'.$status_sc.'">'.$status_sc.'</option>';
-														}
-													}
-													?>																								
-												</select>
-										</td>
-										</tr>
-
-									</table>
-
+									</div>
+																																															
 									
 							</div>
-																																													
-							
-						</div>
 						<!-- COLOR MIGRATION BEGIN-->
-						<div class="form-group" id="c8" style="display:none;">
-							<label for="cm_dye" class="col-sm-2 control-label">COLOR MIGRATION FASTNESS</label>
-							<div class="col-sm-2">
-								<label><input type="checkbox" name="cm_dye_temp" id="cm_dye_temp" class="minimal" value="90" <?php if($rcek1['cm_dye_temp']=='90'){echo "checked";}?>> 90&deg;C x 24h &nbsp; &nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="cm_dye_temp" id="cm_dye_temp" class="minimal" value="70" <?php if($rcek1['cm_dye_temp']=='70'){echo "checked";}?>> 70&deg;C x 48h 
-								</label>
+							<div class="form-group" id="c8" style="display:none;">
+								<label for="cm_dye" class="col-sm-2 control-label">COLOR MIGRATION FASTNESS</label>
+								<div class="col-sm-2">
+									<label><input type="checkbox" name="cm_dye_temp" id="cm_dye_temp" class="minimal" value="90" <?php if($rcek1['cm_dye_temp']=='90'){echo "checked";}?>> 90&deg;C x 24h &nbsp; &nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="cm_dye_temp" id="cm_dye_temp" class="minimal" value="70" <?php if($rcek1['cm_dye_temp']=='70'){echo "checked";}?>> 70&deg;C x 48h 
+									</label>
+								</div>
+								<div class="col-sm-2">
+									<input name="cm_dye_colorchange" type="text" class="form-control" id="cm_dye_colorchange" value="<?php echo $rcek1['cm_dye_colorchange'];?>" placeholder="4-5 Color Change">
+								</div>
+								<div class="col-sm-2">
+									<input name="cm_dye_stainingface" type="text" class="form-control" id="cm_dye_stainingface" value="<?php echo $rcek1['cm_dye_stainingface'];?>" placeholder="4 Color Staining">
+								</div>
+								<div class="col-sm-2">
+									<input name="cm_dye_stainingback" type="text" class="form-control" id="cm_dye_stainingback" value="<?php echo $rcek1['cm_dye_stainingback'];?>" placeholder="4 Color Staining With Paper">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="cm_dye_note" maxlength="50"><?php echo $rcek1['cm_dye_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="cm_dye_colorchange" type="text" class="form-control" id="cm_dye_colorchange" value="<?php echo $rcek1['cm_dye_colorchange'];?>" placeholder="4-5 Color Change">
+							<div class="form-group" id="stat_cm" style="display:none;">
+								<label for="stat_cm" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_cm" class="form-control select2" id="stat_cm" onChange="tampil2();" style="width: 100%;">
+										<option <?php if($rcek1['stat_cm']==""){?> selected=selected <?php };?>value="">Pilih</option>
+										<option <?php if($rcek1['stat_cm']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if($rcek1['stat_cm']=="A"){?> selected=selected <?php };?>value="A">A</option>
+										<option <?php if($rcek1['stat_cm']=="R"){?> selected=selected <?php };?>value="R">R</option>
+										<option <?php if($rcek1['stat_cm']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+										<option <?php if($rcek1['stat_cm']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+										<option <?php if($rcek1['stat_cm']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="cm_dye_stainingface" type="text" class="form-control" id="cm_dye_stainingface" value="<?php echo $rcek1['cm_dye_stainingface'];?>" placeholder="4 Color Staining">
+							<div class="form-group" id="discm" style="display:none;">
+								<label for="discm" class="col-sm-2 control-label">COLOR MIGRATION FASTNESS (DIS)</label>
+								<div class="col-sm-2">
+									<label><input type="checkbox" name="dcm_dye_temp" id="dcm_dye_temp" class="minimal" value="90" <?php if($rcekD['dcm_dye_temp']=='90'){echo "checked";}?>> 90&deg;C x 24h &nbsp; &nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="dcm_dye_temp" id="dcm_dye_temp" class="minimal" value="70" <?php if($rcekD['dcm_dye_temp']=='70'){echo "checked";}?>> 70&deg;C x 48h 
+									</label>
+								</div>
+								<div class="col-sm-2">
+									<input name="dcm_dye_colorchange" type="text" class="form-control" id="dcm_dye_colorchange" value="<?php echo $rcekD['dcm_dye_colorchange'];?>" placeholder="4-5 Color Change">
+								</div>
+								<div class="col-sm-2">
+									<input name="dcm_dye_stainingface" type="text" class="form-control" id="dcm_dye_stainingface" value="<?php echo $rcekD['dcm_dye_stainingface'];?>" placeholder="4 Color Staining">
+								</div>
+								<div class="col-sm-2">
+									<input name="dcm_dye_stainingback" type="text" class="form-control" id="dcm_dye_stainingback" value="<?php echo $rcekD['dcm_dye_stainingback'];?>" placeholder="4 Color Staining With Paper">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dcm_dye_note" maxlength="50"><?php echo $rcekD['dcm_dye_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="cm_dye_stainingback" type="text" class="form-control" id="cm_dye_stainingback" value="<?php echo $rcek1['cm_dye_stainingback'];?>" placeholder="4 Color Staining With Paper">
+							<div class="form-group" id="rancm" style="display:none;">
+								<label for="rancm" class="col-sm-2 control-label">COLOR MIGRATION FASTNESS (RAN)</label>
+								<div class="col-sm-2">
+									<label><input type="checkbox" name="rcm_dye_temp" id="rcm_dye_temp" class="minimal" value="90" <?php if($rcekR['rcm_dye_temp']=='90'){echo "checked";}?> readonly> 90&deg;C x 24h &nbsp; &nbsp; &nbsp; &nbsp;
+									</label>
+									<label><input type="checkbox" name="rcm_dye_temp" id="rcm_dye_temp" class="minimal" value="70" <?php if($rcekR['rcm_dye_temp']=='70'){echo "checked";}?> readonly> 70&deg;C x 48h 
+									</label>
+								</div>
+								<div class="col-sm-2">
+									<input name="rcm_dye_colorchange" type="text" class="form-control" id="rcm_dye_colorchange" value="<?php echo $rcekR['rcm_dye_colorchange'];?>" placeholder="4-5 Color Change" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rcm_dye_stainingface" type="text" class="form-control" id="rcm_dye_stainingface" value="<?php echo $rcekR['rcm_dye_stainingface'];?>" placeholder="4 Color Staining" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rcm_dye_stainingback" type="text" class="form-control" id="rcm_dye_stainingback" value="<?php echo $rcekR['rcm_dye_stainingback'];?>" placeholder="4 Color Staining With Paper" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rcm_dye_note" maxlength="50" readonly><?php echo $rcekR['rcm_dye_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="cm_dye_note" maxlength="50"><?php echo $rcek1['cm_dye_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_cm" style="display:none;">
-							<label for="stat_cm" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_cm" class="form-control select2" id="stat_cm" onChange="tampil2();" style="width: 100%;">
-									<option <?php if($rcek1['stat_cm']==""){?> selected=selected <?php };?>value="">Pilih</option>
-									<option <?php if($rcek1['stat_cm']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if($rcek1['stat_cm']=="A"){?> selected=selected <?php };?>value="A">A</option>
-									<option <?php if($rcek1['stat_cm']=="R"){?> selected=selected <?php };?>value="R">R</option>
-									<option <?php if($rcek1['stat_cm']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-									<option <?php if($rcek1['stat_cm']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-									<option <?php if($rcek1['stat_cm']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group" id="discm" style="display:none;">
-							<label for="discm" class="col-sm-2 control-label">COLOR MIGRATION FASTNESS (DIS)</label>
-							<div class="col-sm-2">
-								<label><input type="checkbox" name="dcm_dye_temp" id="dcm_dye_temp" class="minimal" value="90" <?php if($rcekD['dcm_dye_temp']=='90'){echo "checked";}?>> 90&deg;C x 24h &nbsp; &nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="dcm_dye_temp" id="dcm_dye_temp" class="minimal" value="70" <?php if($rcekD['dcm_dye_temp']=='70'){echo "checked";}?>> 70&deg;C x 48h 
-								</label>
-							</div>
-							<div class="col-sm-2">
-								<input name="dcm_dye_colorchange" type="text" class="form-control" id="dcm_dye_colorchange" value="<?php echo $rcekD['dcm_dye_colorchange'];?>" placeholder="4-5 Color Change">
-							</div>
-							<div class="col-sm-2">
-								<input name="dcm_dye_stainingface" type="text" class="form-control" id="dcm_dye_stainingface" value="<?php echo $rcekD['dcm_dye_stainingface'];?>" placeholder="4 Color Staining">
-							</div>
-							<div class="col-sm-2">
-								<input name="dcm_dye_stainingback" type="text" class="form-control" id="dcm_dye_stainingback" value="<?php echo $rcekD['dcm_dye_stainingback'];?>" placeholder="4 Color Staining With Paper">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dcm_dye_note" maxlength="50"><?php echo $rcekD['dcm_dye_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="rancm" style="display:none;">
-							<label for="rancm" class="col-sm-2 control-label">COLOR MIGRATION FASTNESS (RAN)</label>
-							<div class="col-sm-2">
-								<label><input type="checkbox" name="rcm_dye_temp" id="rcm_dye_temp" class="minimal" value="90" <?php if($rcekR['rcm_dye_temp']=='90'){echo "checked";}?> readonly> 90&deg;C x 24h &nbsp; &nbsp; &nbsp; &nbsp;
-								</label>
-								<label><input type="checkbox" name="rcm_dye_temp" id="rcm_dye_temp" class="minimal" value="70" <?php if($rcekR['rcm_dye_temp']=='70'){echo "checked";}?> readonly> 70&deg;C x 48h 
-								</label>
-							</div>
-							<div class="col-sm-2">
-								<input name="rcm_dye_colorchange" type="text" class="form-control" id="rcm_dye_colorchange" value="<?php echo $rcekR['rcm_dye_colorchange'];?>" placeholder="4-5 Color Change" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rcm_dye_stainingface" type="text" class="form-control" id="rcm_dye_stainingface" value="<?php echo $rcekR['rcm_dye_stainingface'];?>" placeholder="4 Color Staining" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rcm_dye_stainingback" type="text" class="form-control" id="rcm_dye_stainingback" value="<?php echo $rcekR['rcm_dye_stainingback'];?>" placeholder="4 Color Staining With Paper" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rcm_dye_note" maxlength="50" readonly><?php echo $rcekR['rcm_dye_note'];?></textarea>
-							</div>
-						</div>
 						<!-- COLOR MIGRATION END-->
 						<!-- LIGHT FASTNESS BEGIN-->
-						<div class="form-group" id="c9" style="display:none;">
-							<label for="light" class="col-sm-2 control-label">LIGHT FASTNESS</label>
-							<div class="col-sm-2">
-								<input name="light_rating1" type="text" class="form-control" id="light_rating1" value="<?php echo $rcek1['light_rating1'];?>" placeholder="3 Color Change (rating1)">
-							</div>
-							<div class="col-sm-2">
-								<input name="light_rating2" type="text" class="form-control" id="light_rating2" value="<?php echo $rcek1['light_rating2'];?>" placeholder="4 Color Change (rating2)">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="light_note" maxlength="50" rows="1"><?php echo $rcek1['light_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_lg" style="display:none;">
-						<label for="stat_lg" class="col-sm-2 control-label">STATUS</label>
-						<div class="col-sm-2">
-							<select name="stat_lg" class="form-control select2" id="stat_lg" onChange="tampil2();" style="width: 100%;">
-								<option <?php if($rcek1['stat_lg']==""){?> selected=selected <?php };?>value="">Pilih</option>
-								<option <?php if($rcek1['stat_lg']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-								<option <?php if($rcek1['stat_lg']=="A"){?> selected=selected <?php };?>value="A">A</option>
-								<option <?php if($rcek1['stat_lg']=="R"){?> selected=selected <?php };?>value="R">R</option>
-								<option <?php if($rcek1['stat_lg']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-								<option <?php if($rcek1['stat_lg']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
-								<option <?php if($rcek1['stat_lg']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
-								<option <?php if($rcek1['stat_lg']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-								<option <?php if($rcek1['stat_lg']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-							</select>
-						</div>
-						</div>
-						<div class="form-group" id="dislg" style="display:none;">
-							<label for="dislg" class="col-sm-2 control-label">LIGHT FASTNESS (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dlight_rating1" type="text" class="form-control" id="rlight_rating1" value="<?php echo $rcekD['dlight_rating1'];?>" placeholder="3 Color Change (rating1)">
-							</div>
-							<div class="col-sm-2">
-								<input name="dlight_rating2" type="text" class="form-control" id="rlight_rating2" value="<?php echo $rcekD['dlight_rating2'];?>" placeholder="4 Color Change (rating2)">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dlight_note" maxlength="50" rows="1"><?php echo $rcekD['dlight_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="marlg" style="display:none;">
-							<label for="marlg" class="col-sm-2 control-label">LIGHT FASTNESS (MARGINAL)</label>
-							<div class="col-sm-2">
-								<input name="mlight_rating1" type="text" class="form-control" id="mlight_rating1" value="<?php echo $rcekM['mlight_rating1'];?>" placeholder="3 Color Change (rating1)">
-							</div>
-							<div class="col-sm-2">
-								<input name="mlight_rating2" type="text" class="form-control" id="mlight_rating2" value="<?php echo $rcekM['mlight_rating2'];?>" placeholder="4 Color Change (rating2)">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mlight_note" maxlength="50" rows="1"><?php echo $rcekM['mlight_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranlg" style="display:none;">
-							<label for="ranlg" class="col-sm-2 control-label">LIGHT FASTNESS (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rlight_rating1" type="text" class="form-control" id="rlight_rating1" value="<?php echo $rcekR['rlight_rating1'];?>" placeholder="3 Color Change (rating1)" readonly>
-							</div>
-							<div class="col-sm-2">
-								<input name="rlight_rating2" type="text" class="form-control" id="rlight_rating2" value="<?php echo $rcekR['rlight_rating2'];?>" placeholder="4 Color Change (rating2)" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rlight_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rlight_note'];?></textarea>
-							</div>
-						</div>
-						<!-- LIGHT FASTNESS END-->
-						<!-- LIGHT PERSPIRATION BEGIN-->
-						<div class="form-group" id="c10" style="display:none;">
-							<label for="light_pers" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS</label>
-							<div class="col-sm-2">
-								<input name="light_pers_colorchange" type="text" class="form-control" id="light_pers_colorchange" value="<?php echo $rcek1['light_pers_colorchange'];?>" placeholder="3-4 Color Change">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="light_pers_note" maxlength="50" rows="1"><?php echo $rcek1['light_pers_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_lp" style="display:none;">
-						<label for="stat_lp" class="col-sm-2 control-label">STATUS</label>
-						<div class="col-sm-2">
-							<select name="stat_lp" class="form-control select2" id="stat_lp" onChange="tampil2();" style="width: 100%;">
-								<option <?php if($rcek1['stat_lp']==""){?> selected=selected <?php };?>value="">Pilih</option>
-								<option <?php if($rcek1['stat_lp']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-								<option <?php if($rcek1['stat_lp']=="A"){?> selected=selected <?php };?>value="A">A</option>
-								<option <?php if($rcek1['stat_lp']=="R"){?> selected=selected <?php };?>value="R">R</option>
-								<option <?php if($rcek1['stat_lp']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-								<option <?php if($rcek1['stat_lp']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
-								<option <?php if($rcek1['stat_lp']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
-								<option <?php if($rcek1['stat_lp']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-								<option <?php if($rcek1['stat_lp']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-							</select>
-						</div>
-						</div>
-						<div class="form-group" id="dislp" style="display:none;">
-							<label for="dislp" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dlight_pers_colorchange" type="text" class="form-control" id="dlight_pers_colorchange" value="<?php echo $rcekD['dlight_pers_colorchange'];?>" placeholder="3-4 Color Change">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dlight_pers_note" maxlength="50" rows="1"><?php echo $rcekD['dlight_pers_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="marlp" style="display:none;">
-							<label for="marlp" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS (MARGINAL)</label>
-							<div class="col-sm-2">
-								<input name="mlight_pers_colorchange" type="text" class="form-control" id="mlight_pers_colorchange" value="<?php echo $rcekM['mlight_pers_colorchange'];?>" placeholder="3-4 Color Change">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mlight_pers_note" maxlength="50" rows="1"><?php echo $rcekM['mlight_pers_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="ranlp" style="display:none;">
-							<label for="ranlp" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rlight_pers_colorchange" type="text" class="form-control" id="rlight_pers_colorchange" value="<?php echo $rcekR['rlight_pers_colorchange'];?>" placeholder="3-4 Color Change" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rlight_pers_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rlight_pers_note'];?></textarea>
-							</div>
-						</div>
-						<!-- LIGHT PERSPIRATION END-->
-						<!-- SALIVA BEGIN-->
-						<div class="form-group" id="c11" style="display:none;">
-							<label for="saliva" class="col-sm-2 control-label">SALIVA FASTNESS</label>
-							<div class="col-sm-2">
-								<input name="saliva_staining" type="text" class="form-control" id="saliva_staining" value="<?php echo $rcek1['saliva_staining'];?>" placeholder="4-5 Color Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="saliva_note" maxlength="50" rows="1"><?php echo $rcek1['saliva_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_slv" style="display:none;">
-						<label for="stat_slv" class="col-sm-2 control-label">STATUS</label>
-						<div class="col-sm-2">
-							<select name="stat_slv" class="form-control select2" id="stat_slv" onChange="tampil2();" style="width: 100%;">
-								<option <?php if($rcek1['stat_slv']==""){?> selected=selected <?php };?>value="">Pilih</option>
-								<option <?php if($rcek1['stat_slv']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-								<option <?php if($rcek1['stat_slv']=="A"){?> selected=selected <?php };?>value="A">A</option>
-								<option <?php if($rcek1['stat_slv']=="R"){?> selected=selected <?php };?>value="R">R</option>
-								<option <?php if($rcek1['stat_slv']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-								<option <?php if($rcek1['stat_slv']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-								<option <?php if($rcek1['stat_slv']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-							</select>
-						</div>
-						</div>
-						<div class="form-group" id="disslv" style="display:none;">
-							<label for="disslv" class="col-sm-2 control-label">SALIVA FASTNESS (DIS)</label>
-							<div class="col-sm-2">
-								<input name="dsaliva_staining" type="text" class="form-control" id="dsaliva_staining" value="<?php echo $rcekD['dsaliva_staining'];?>" placeholder="4-5 Color Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dsaliva_note" maxlength="50" rows="1"><?php echo $rcekD['dsaliva_note'];?></textarea>
-							</div>
-						</div>	
-						<div class="form-group" id="ranslv" style="display:none;">
-							<label for="ranslv" class="col-sm-2 control-label">SALIVA FASTNESS (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rsaliva_staining" type="text" class="form-control" id="rsaliva_staining" value="<?php echo $rcekR['rsaliva_staining'];?>" placeholder="4-5 Color Staining" readonly>
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rsaliva_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rsaliva_note'];?></textarea>
-							</div>
-						</div>
-						<!-- SALIVA END-->
-						<!-- BLEEDING BEGIN-->
-						<div class="form-group" id="c12" style="display:none;">
-							<label for="bleeding" class="col-sm-2 control-label">BLEEDING</label>
-							<div class="col-sm-2">
-								<input name="bleeding" type="text" class="form-control" id="bleeding" value="<?php echo $rcek1['bleeding'];?>" placeholder="Watermark">
-							</div>
-							<div class="col-sm-2">
-								<input name="bleeding_root" type="text" class="form-control"  value="<?php echo $tq_test_2_array['bleeding_root'];?>" placeholder="Root">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="bleeding_note" maxlength="50" rows="1"><?php echo $rcek1['bleeding_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_bld" style="display:none;">
-						<label for="stat_bld" class="col-sm-2 control-label">STATUS</label>
-						<div class="col-sm-2">
-							<select name="stat_bld" class="form-control select2" id="stat_bld" onChange="tampil2();" style="width: 100%;">
-								<option <?php if($rcek1['stat_bld']==""){?> selected=selected <?php };?>value="">Pilih</option>
-								<option <?php if($rcek1['stat_bld']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-								<option <?php if($rcek1['stat_bld']=="A"){?> selected=selected <?php };?>value="A">A</option>
-								<option <?php if($rcek1['stat_bld']=="R"){?> selected=selected <?php };?>value="R">R</option>
-								<option <?php if($rcek1['stat_bld']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-								<option <?php if($rcek1['stat_bld']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-								<option <?php if($rcek1['stat_bld']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-							</select>
-						</div>
-						</div>
-						<div class="form-group" id="disbld" style="display:none;">
-						<label for="disbld" class="col-sm-2 control-label">BLEEDING (DIS)</label>
-						<div class="col-sm-2">
-							<input name="dbleeding" type="text" class="form-control" id="dbleeding" value="<?php echo $rcekD['dbleeding'];?>" placeholder="Watermark">
-						</div>
-						<div class="col-sm-2">
-									<input name="dbleeding_root" type="text" class="form-control"  value="<?php echo $rcekD['dbleeding_root'];?>" placeholder="Root">
+							<div class="form-group" id="c9" style="display:none;">
+								<label for="light" class="col-sm-2 control-label">LIGHT FASTNESS</label>
+								<div class="col-sm-2">
+									<input name="light_rating1" type="text" class="form-control" id="light_rating1" value="<?php echo $rcek1['light_rating1'];?>" placeholder="3 Color Change (rating1)">
 								</div>
-						<div class="col-sm-2">
-							<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dbleeding_note" maxlength="50" rows="1"><?php echo $rcekD['dbleeding_note'];?></textarea>
-						</div>
-						</div>	
-						<div class="form-group" id="ranbld" style="display:none;">
-						<label for="ranbld" class="col-sm-2 control-label">BLEEDING (RAN)</label>
-						<div class="col-sm-2">
-							<input name="rbleeding" type="text" class="form-control" id="rbleeding" value="<?php echo $rcekR['rbleeding'];?>" placeholder="Color Staining" readonly>
-						</div>
-						<div class="col-sm-2">
-							<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rbleeding_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rbleeding_note'];?></textarea>
-						</div>
-						</div>	
-						<!-- BLEEDING END-->
-						<!-- CHLORIN BEGIN-->
-						<div class="form-group" id="c13" style="display:none;">
-							<label for="chlorin" class="col-sm-2 control-label">CHLORIN</label>
-							<div class="col-sm-2">
-								<input name="chlorin" type="text" class="form-control" id="chlorin" value="<?php echo $rcek1['chlorin'];?>" placeholder="">
+								<div class="col-sm-2">
+									<input name="light_rating2" type="text" class="form-control" id="light_rating2" value="<?php echo $rcek1['light_rating2'];?>" placeholder="4 Color Change (rating2)">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="light_note" maxlength="50" rows="1"><?php echo $rcek1['light_note'];?></textarea>
+								</div>
 							</div>
+							<div class="form-group" id="stat_lg" style="display:none;">
+							<label for="stat_lg" class="col-sm-2 control-label">STATUS</label>
 							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="chlorin_note" maxlength="50" rows="1"><?php echo $rcek1['chlorin_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_chl" style="display:none;">
-						<label for="stat_chl" class="col-sm-2 control-label">STATUS</label>
-						<div class="col-sm-2">
-							<select name="stat_chl" class="form-control select2" id="stat_chl" onChange="tampil2();" style="width: 100%;">
-								<option <?php if($rcek1['stat_chl']==""){?> selected=selected <?php };?>value="">Pilih</option>
-								<option <?php if($rcek1['stat_chl']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-								<option <?php if($rcek1['stat_chl']=="A"){?> selected=selected <?php };?>value="A">A</option>
-								<option <?php if($rcek1['stat_chl']=="R"){?> selected=selected <?php };?>value="R">R</option>
-								<option <?php if($rcek1['stat_chl']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-								<option <?php if($rcek1['stat_chl']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-								<option <?php if($rcek1['stat_chl']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-							</select>
-						</div>
-						</div>
-						<div class="form-group" id="dischl" style="display:none;">
-						<label for="dischl" class="col-sm-2 control-label">CHLORIN (DIS)</label>
-						<div class="col-sm-2">
-							<input name="dchlorin" type="text" class="form-control" id="dchlorin" value="<?php echo $rcekD['dchlorin'];?>" placeholder="">
-						</div>
-						<div class="col-sm-2">
-							<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dchlorin_note" maxlength="50" rows="1"><?php echo $rcekD['dchlorin_note'];?></textarea>
-						</div>
-						</div>	
-						<div class="form-group" id="ranchl" style="display:none;">
-						<label for="ranchl" class="col-sm-2 control-label">CHLORIN (RAN)</label>
-						<div class="col-sm-2">
-							<input name="rchlorin" type="text" class="form-control" id="rchlorin" value="<?php echo $rcekR['rchlorin'];?>" placeholder="" readonly>
-						</div>
-						<div class="col-sm-2">
-							<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rchlorin_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rchlorin_note'];?></textarea>
-						</div>
-						</div>
-						<!-- CHLORIN END-->	
-						<!-- NON CHLORIN BEGIN-->
-						<div class="form-group" id="c14" style="display:none;">
-							<label for="nchlorin" class="col-sm-2 control-label">NON-CHLORIN</label>
-							<div class="col-sm-2">
-								<input name="nchlorin1" type="text" class="form-control" id="nchlorin1" value="<?php echo $rcek1['nchlorin1'];?>" placeholder="">
-								<input name="nchlorin2" type="text" class="form-control" id="nchlorin2" value="<?php echo $rcek1['nchlorin2'];?>" placeholder="">
-							</div>
-						</div>
-						<div class="form-group" id="stat_nchl" style="display:none;">
-						<label for="stat_nchl" class="col-sm-2 control-label">STATUS</label>
-						<div class="col-sm-2">
-							<select name="stat_nchl" class="form-control select2" id="stat_nchl" onChange="tampil2();" style="width: 100%;">
-								<option <?php if($rcek1['stat_nchl']==""){?> selected=selected <?php };?>value="">Pilih</option>
-								<option <?php if($rcek1['stat_nchl']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-								<option <?php if($rcek1['stat_nchl']=="A"){?> selected=selected <?php };?>value="A">A</option>
-								<option <?php if($rcek1['stat_nchl']=="R"){?> selected=selected <?php };?>value="R">R</option>
-								<option <?php if($rcek1['stat_nchl']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-								<option <?php if($rcek1['stat_nchl']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-								<option <?php if($rcek1['stat_nchl']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
-							</select>
-						</div>
-						</div>
-						<div class="form-group" id="disnchl" style="display:none;">
-						<label for="disnchl" class="col-sm-2 control-label">NON CHLORIN (DIS)</label>
-						<div class="col-sm-2">
-							<input name="dnchlorin1" type="text" class="form-control" id="dnchlorin1" value="<?php echo $rcekD['dnchlorin1'];?>" placeholder="">
-							<input name="dnchlorin2" type="text" class="form-control" id="dnchlorin2" value="<?php echo $rcekD['dnchlorin2'];?>" placeholder="">
-						</div>
-						</div>	
-						<div class="form-group" id="rannchl" style="display:none;">
-						<label for="rannchl" class="col-sm-2 control-label">NON CHLORIN (RAN)</label>
-						<div class="col-sm-2">
-							<input name="rnchlorin1" type="text" class="form-control" id="rnchlorin1" value="<?php echo $rcekR['rnchlorin1'];?>" placeholder="" readonly>
-							<input name="rnchlorin2" type="text" class="form-control" id="rnchlorin2" value="<?php echo $rcekR['rnchlorin2'];?>" placeholder="" readonly>
-						</div>
-						</div>		
-						<!-- NON CHLORIN END-->
-						<!-- DYE TRANSFER BEGIN-->
-						<div class="form-group" id="c15" style="display:none;">
-							<label for="dye_tf" class="col-sm-2 control-label">DYE TRANSFER</label>
-							<div class="col-sm-2">
-								<input name="dye_tf_acetate" type="text" class="form-control" id="dye_tf_acetate" value="<?php echo $rcek1['dye_tf_acetate'];?>" placeholder="Acetate">
-								<input name="dye_tf_cotton" type="text" class="form-control" id="dye_tf_cotton" value="<?php echo $rcek1['dye_tf_cotton'];?>" placeholder="Cotton">
-							</div>
-							<div class="col-sm-2">
-								<input name="dye_tf_nylon" type="text" class="form-control" id="dye_tf_nylon" value="<?php echo $rcek1['dye_tf_nylon'];?>" placeholder="Nylon">
-								<input name="dye_tf_poly" type="text" class="form-control" id="dye_tf_poly" value="<?php echo $rcek1['dye_tf_poly'];?>" placeholder="Polyester">
-							</div>
-							<div class="col-sm-2">
-								<input name="dye_tf_acrylic" type="text" class="form-control" id="dye_tf_acrylic" value="<?php echo $rcek1['dye_tf_acrylic'];?>" placeholder="Acrylic">
-								<input name="dye_tf_wool" type="text" class="form-control" id="dye_tf_wool" value="<?php echo $rcek1['dye_tf_wool'];?>" placeholder="Wool">
-							</div>
-							<div class="col-sm-2">
-								<input name="dye_tf_sstaining" type="text" class="form-control" id="dye_tf_sstaining" value="<?php echo $rcek1['dye_tf_sstaining'];?>" placeholder="Self Staining">
-								<input name="dye_tf_cstaining" type="text" class="form-control" id="dye_tf_cstaining" value="<?php echo $rcek1['dye_tf_cstaining'];?>" placeholder="Color Staining">
-							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dye_tf_note" maxlength="50" rows="1"><?php echo $rcek1['dye_tf_note'];?></textarea>
-							</div>
-						</div>
-						<div class="form-group" id="stat_dye" style="display:none;">
-							<label for="stat_dye" class="col-sm-2 control-label">STATUS</label>
-							<div class="col-sm-2">
-								<select name="stat_dye" class="form-control select2" id="stat_dye" onChange="tampil2();" style="width: 100%;">
-									<option <?php if($rcek1['stat_dye']==""){?> selected=selected <?php };?>value="">Pilih</option>
-									<option <?php if($rcek1['stat_dye']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
-									<option <?php if($rcek1['stat_dye']=="A"){?> selected=selected <?php };?>value="A">A</option>
-									<option <?php if($rcek1['stat_dye']=="R"){?> selected=selected <?php };?>value="R">R</option>
-									<option <?php if($rcek1['stat_dye']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
-									<option <?php if($rcek1['stat_dye']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
-									<option <?php if($rcek1['stat_dye']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
-									<option <?php if($rcek1['stat_dye']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
-									<option <?php if($rcek1['stat_dye']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+								<select name="stat_lg" class="form-control select2" id="stat_lg" onChange="tampil2();" style="width: 100%;">
+									<option <?php if($rcek1['stat_lg']==""){?> selected=selected <?php };?>value="">Pilih</option>
+									<option <?php if($rcek1['stat_lg']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+									<option <?php if($rcek1['stat_lg']=="A"){?> selected=selected <?php };?>value="A">A</option>
+									<option <?php if($rcek1['stat_lg']=="R"){?> selected=selected <?php };?>value="R">R</option>
+									<option <?php if($rcek1['stat_lg']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+									<option <?php if($rcek1['stat_lg']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
+									<option <?php if($rcek1['stat_lg']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
+									<option <?php if($rcek1['stat_lg']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+									<option <?php if($rcek1['stat_lg']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
 								</select>
 							</div>
-						</div>
-						<div class="form-group" id="disdye" style="display:none;">
-							<label for="disdye" class="col-sm-2 control-label">DYE TRANSFER (DIS)</label>
+							</div>
+							<div class="form-group" id="dislg" style="display:none;">
+								<label for="dislg" class="col-sm-2 control-label">LIGHT FASTNESS (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dlight_rating1" type="text" class="form-control" id="rlight_rating1" value="<?php echo $rcekD['dlight_rating1'];?>" placeholder="3 Color Change (rating1)">
+								</div>
+								<div class="col-sm-2">
+									<input name="dlight_rating2" type="text" class="form-control" id="rlight_rating2" value="<?php echo $rcekD['dlight_rating2'];?>" placeholder="4 Color Change (rating2)">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dlight_note" maxlength="50" rows="1"><?php echo $rcekD['dlight_note'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="marlg" style="display:none;">
+								<label for="marlg" class="col-sm-2 control-label">LIGHT FASTNESS (MARGINAL)</label>
+								<div class="col-sm-2">
+									<input name="mlight_rating1" type="text" class="form-control" id="mlight_rating1" value="<?php echo $rcekM['mlight_rating1'];?>" placeholder="3 Color Change (rating1)">
+								</div>
+								<div class="col-sm-2">
+									<input name="mlight_rating2" type="text" class="form-control" id="mlight_rating2" value="<?php echo $rcekM['mlight_rating2'];?>" placeholder="4 Color Change (rating2)">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mlight_note" maxlength="50" rows="1"><?php echo $rcekM['mlight_note'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="ranlg" style="display:none;">
+								<label for="ranlg" class="col-sm-2 control-label">LIGHT FASTNESS (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rlight_rating1" type="text" class="form-control" id="rlight_rating1" value="<?php echo $rcekR['rlight_rating1'];?>" placeholder="3 Color Change (rating1)" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rlight_rating2" type="text" class="form-control" id="rlight_rating2" value="<?php echo $rcekR['rlight_rating2'];?>" placeholder="4 Color Change (rating2)" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rlight_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rlight_note'];?></textarea>
+								</div>
+							</div>
+						<!-- LIGHT FASTNESS END-->
+						<!-- LIGHT PERSPIRATION BEGIN-->
+							<div class="form-group" id="c10" style="display:none;">
+								<label for="light_pers" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS</label>
+								<div class="col-sm-2">
+									<input name="light_pers_colorchange" type="text" class="form-control" id="light_pers_colorchange" value="<?php echo $rcek1['light_pers_colorchange'];?>" placeholder="3-4 Color Change">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="light_pers_note" maxlength="50" rows="1"><?php echo $rcek1['light_pers_note'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="stat_lp" style="display:none;">
+							<label for="stat_lp" class="col-sm-2 control-label">STATUS</label>
 							<div class="col-sm-2">
-								<input name="ddye_tf_acetate" type="text" class="form-control" id="ddye_tf_acetate" value="<?php echo $rcekD['ddye_tf_acetate'];?>" placeholder="Acetate">
-								<input name="ddye_tf_cotton" type="text" class="form-control" id="ddye_tf_cotton" value="<?php echo $rcekD['ddye_tf_cotton'];?>" placeholder="Cotton">
+								<select name="stat_lp" class="form-control select2" id="stat_lp" onChange="tampil2();" style="width: 100%;">
+									<option <?php if($rcek1['stat_lp']==""){?> selected=selected <?php };?>value="">Pilih</option>
+									<option <?php if($rcek1['stat_lp']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+									<option <?php if($rcek1['stat_lp']=="A"){?> selected=selected <?php };?>value="A">A</option>
+									<option <?php if($rcek1['stat_lp']=="R"){?> selected=selected <?php };?>value="R">R</option>
+									<option <?php if($rcek1['stat_lp']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+									<option <?php if($rcek1['stat_lp']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
+									<option <?php if($rcek1['stat_lp']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
+									<option <?php if($rcek1['stat_lp']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+									<option <?php if($rcek1['stat_lp']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+								</select>
+							</div>
+							</div>
+							<div class="form-group" id="dislp" style="display:none;">
+								<label for="dislp" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dlight_pers_colorchange" type="text" class="form-control" id="dlight_pers_colorchange" value="<?php echo $rcekD['dlight_pers_colorchange'];?>" placeholder="3-4 Color Change">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dlight_pers_note" maxlength="50" rows="1"><?php echo $rcekD['dlight_pers_note'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="marlp" style="display:none;">
+								<label for="marlp" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS (MARGINAL)</label>
+								<div class="col-sm-2">
+									<input name="mlight_pers_colorchange" type="text" class="form-control" id="mlight_pers_colorchange" value="<?php echo $rcekM['mlight_pers_colorchange'];?>" placeholder="3-4 Color Change">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mlight_pers_note" maxlength="50" rows="1"><?php echo $rcekM['mlight_pers_note'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="ranlp" style="display:none;">
+								<label for="ranlp" class="col-sm-2 control-label">LIGHT PERSPIRATION FASTNESS (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rlight_pers_colorchange" type="text" class="form-control" id="rlight_pers_colorchange" value="<?php echo $rcekR['rlight_pers_colorchange'];?>" placeholder="3-4 Color Change" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rlight_pers_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rlight_pers_note'];?></textarea>
+								</div>
+							</div>
+						<!-- LIGHT PERSPIRATION END-->
+						<!-- SALIVA BEGIN-->
+							<div class="form-group" id="c11" style="display:none;">
+								<label for="saliva" class="col-sm-2 control-label">SALIVA FASTNESS</label>
+								<div class="col-sm-2">
+									<input name="saliva_staining" type="text" class="form-control" id="saliva_staining" value="<?php echo $rcek1['saliva_staining'];?>" placeholder="4-5 Color Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="saliva_note" maxlength="50" rows="1"><?php echo $rcek1['saliva_note'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="stat_slv" style="display:none;">
+							<label for="stat_slv" class="col-sm-2 control-label">STATUS</label>
+							<div class="col-sm-2">
+								<select name="stat_slv" class="form-control select2" id="stat_slv" onChange="tampil2();" style="width: 100%;">
+									<option <?php if($rcek1['stat_slv']==""){?> selected=selected <?php };?>value="">Pilih</option>
+									<option <?php if($rcek1['stat_slv']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+									<option <?php if($rcek1['stat_slv']=="A"){?> selected=selected <?php };?>value="A">A</option>
+									<option <?php if($rcek1['stat_slv']=="R"){?> selected=selected <?php };?>value="R">R</option>
+									<option <?php if($rcek1['stat_slv']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+									<option <?php if($rcek1['stat_slv']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+									<option <?php if($rcek1['stat_slv']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+								</select>
+							</div>
+							</div>
+							<div class="form-group" id="disslv" style="display:none;">
+								<label for="disslv" class="col-sm-2 control-label">SALIVA FASTNESS (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dsaliva_staining" type="text" class="form-control" id="dsaliva_staining" value="<?php echo $rcekD['dsaliva_staining'];?>" placeholder="4-5 Color Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dsaliva_note" maxlength="50" rows="1"><?php echo $rcekD['dsaliva_note'];?></textarea>
+								</div>
+							</div>	
+							<div class="form-group" id="ranslv" style="display:none;">
+								<label for="ranslv" class="col-sm-2 control-label">SALIVA FASTNESS (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rsaliva_staining" type="text" class="form-control" id="rsaliva_staining" value="<?php echo $rcekR['rsaliva_staining'];?>" placeholder="4-5 Color Staining" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rsaliva_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rsaliva_note'];?></textarea>
+								</div>
+							</div>
+						<!-- SALIVA END-->
+						<!-- BLEEDING BEGIN-->
+							<div class="form-group" id="c12" style="display:none;">
+								<label for="bleeding" class="col-sm-2 control-label">BLEEDING</label>
+								<div class="col-sm-2">
+									<input name="bleeding" type="text" class="form-control" id="bleeding" value="<?php echo $rcek1['bleeding'];?>" placeholder="Watermark">
+								</div>
+								<div class="col-sm-2">
+									<input name="bleeding_root" type="text" class="form-control"  value="<?php echo $tq_test_2_array['bleeding_root'];?>" placeholder="Root">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="bleeding_note" maxlength="50" rows="1"><?php echo $rcek1['bleeding_note'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="stat_bld" style="display:none;">
+							<label for="stat_bld" class="col-sm-2 control-label">STATUS</label>
+							<div class="col-sm-2">
+								<select name="stat_bld" class="form-control select2" id="stat_bld" onChange="tampil2();" style="width: 100%;">
+									<option <?php if($rcek1['stat_bld']==""){?> selected=selected <?php };?>value="">Pilih</option>
+									<option <?php if($rcek1['stat_bld']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+									<option <?php if($rcek1['stat_bld']=="A"){?> selected=selected <?php };?>value="A">A</option>
+									<option <?php if($rcek1['stat_bld']=="R"){?> selected=selected <?php };?>value="R">R</option>
+									<option <?php if($rcek1['stat_bld']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+									<option <?php if($rcek1['stat_bld']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+									<option <?php if($rcek1['stat_bld']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+								</select>
+							</div>
+							</div>
+							<div class="form-group" id="disbld" style="display:none;">
+							<label for="disbld" class="col-sm-2 control-label">BLEEDING (DIS)</label>
+							<div class="col-sm-2">
+								<input name="dbleeding" type="text" class="form-control" id="dbleeding" value="<?php echo $rcekD['dbleeding'];?>" placeholder="Watermark">
 							</div>
 							<div class="col-sm-2">
-								<input name="ddye_tf_nylon" type="text" class="form-control" id="ddye_tf_nylon" value="<?php echo $rcekD['ddye_tf_nylon'];?>" placeholder="Nylon">
-								<input name="ddye_tf_poly" type="text" class="form-control" id="ddye_tf_poly" value="<?php echo $rcekD['ddye_tf_poly'];?>" placeholder="Polyester">
+										<input name="dbleeding_root" type="text" class="form-control"  value="<?php echo $rcekD['dbleeding_root'];?>" placeholder="Root">
+									</div>
+							<div class="col-sm-2">
+								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dbleeding_note" maxlength="50" rows="1"><?php echo $rcekD['dbleeding_note'];?></textarea>
+							</div>
+							</div>	
+							<div class="form-group" id="ranbld" style="display:none;">
+							<label for="ranbld" class="col-sm-2 control-label">BLEEDING (RAN)</label>
+							<div class="col-sm-2">
+								<input name="rbleeding" type="text" class="form-control" id="rbleeding" value="<?php echo $rcekR['rbleeding'];?>" placeholder="Color Staining" readonly>
 							</div>
 							<div class="col-sm-2">
-								<input name="ddye_tf_acrylic" type="text" class="form-control" id="ddye_tf_acrylic" value="<?php echo $rcekD['ddye_tf_acrylic'];?>" placeholder="Acrylic">
-								<input name="ddye_tf_wool" type="text" class="form-control" id="ddye_tf_wool" value="<?php echo $rcekD['ddye_tf_wool'];?>" placeholder="Wool">
+								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rbleeding_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rbleeding_note'];?></textarea>
+							</div>
+							</div>	
+						<!-- BLEEDING END-->
+						<!-- CHLORIN BEGIN-->
+							<div class="form-group" id="c13" style="display:none;">
+								<label for="chlorin" class="col-sm-2 control-label">CHLORIN</label>
+								<div class="col-sm-2">
+									<input name="chlorin" type="text" class="form-control" id="chlorin" value="<?php echo $rcek1['chlorin'];?>" placeholder="">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="chlorin_note" maxlength="50" rows="1"><?php echo $rcek1['chlorin_note'];?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="stat_chl" style="display:none;">
+							<label for="stat_chl" class="col-sm-2 control-label">STATUS</label>
+							<div class="col-sm-2">
+								<select name="stat_chl" class="form-control select2" id="stat_chl" onChange="tampil2();" style="width: 100%;">
+									<option <?php if($rcek1['stat_chl']==""){?> selected=selected <?php };?>value="">Pilih</option>
+									<option <?php if($rcek1['stat_chl']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+									<option <?php if($rcek1['stat_chl']=="A"){?> selected=selected <?php };?>value="A">A</option>
+									<option <?php if($rcek1['stat_chl']=="R"){?> selected=selected <?php };?>value="R">R</option>
+									<option <?php if($rcek1['stat_chl']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+									<option <?php if($rcek1['stat_chl']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+									<option <?php if($rcek1['stat_chl']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+								</select>
+							</div>
+							</div>
+							<div class="form-group" id="dischl" style="display:none;">
+							<label for="dischl" class="col-sm-2 control-label">CHLORIN (DIS)</label>
+							<div class="col-sm-2">
+								<input name="dchlorin" type="text" class="form-control" id="dchlorin" value="<?php echo $rcekD['dchlorin'];?>" placeholder="">
 							</div>
 							<div class="col-sm-2">
-								<input name="ddye_tf_cstaining" type="text" class="form-control" id="ddye_tf_cstaining" value="<?php echo $rcekD['ddye_tf_cstaining'];?>" placeholder="Color Staining">
-								<input name="ddye_tf_sstaining" type="text" class="form-control" id="ddye_tf_sstaining" value="<?php echo $rcekD['ddye_tf_sstaining'];?>" placeholder="Self Staining">
+								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dchlorin_note" maxlength="50" rows="1"><?php echo $rcekD['dchlorin_note'];?></textarea>
+							</div>
+							</div>	
+							<div class="form-group" id="ranchl" style="display:none;">
+							<label for="ranchl" class="col-sm-2 control-label">CHLORIN (RAN)</label>
+							<div class="col-sm-2">
+								<input name="rchlorin" type="text" class="form-control" id="rchlorin" value="<?php echo $rcekR['rchlorin'];?>" placeholder="" readonly>
 							</div>
 							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="ddye_tf_note" maxlength="50" rows="1"><?php echo $rcekD['ddye_tf_note'];?></textarea>
+								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rchlorin_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rchlorin_note'];?></textarea>
 							</div>
-						</div>
-						<div class="form-group" id="mardye" style="display:none;">
-							<label for="mardye" class="col-sm-2 control-label">DYE TRANSFER (MARGINAL)</label>
+							</div>
+						<!-- CHLORIN END-->	
+						<!-- NON CHLORIN BEGIN-->
+							<div class="form-group" id="c14" style="display:none;">
+								<label for="nchlorin" class="col-sm-2 control-label">NON-CHLORIN</label>
+								<div class="col-sm-2">
+									<input name="nchlorin1" type="text" class="form-control" id="nchlorin1" value="<?php echo $rcek1['nchlorin1'];?>" placeholder="">
+									<input name="nchlorin2" type="text" class="form-control" id="nchlorin2" value="<?php echo $rcek1['nchlorin2'];?>" placeholder="">
+								</div>
+							</div>
+							<div class="form-group" id="stat_nchl" style="display:none;">
+							<label for="stat_nchl" class="col-sm-2 control-label">STATUS</label>
 							<div class="col-sm-2">
-								<input name="mdye_tf_acetate" type="text" class="form-control" id="mdye_tf_acetate" value="<?php echo $rcekM['mdye_tf_acetate'];?>" placeholder="Acetate">
-								<input name="mdye_tf_cotton" type="text" class="form-control" id="mdye_tf_cotton" value="<?php echo $rcekM['mdye_tf_cotton'];?>" placeholder="Cotton">
+								<select name="stat_nchl" class="form-control select2" id="stat_nchl" onChange="tampil2();" style="width: 100%;">
+									<option <?php if($rcek1['stat_nchl']==""){?> selected=selected <?php };?>value="">Pilih</option>
+									<option <?php if($rcek1['stat_nchl']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+									<option <?php if($rcek1['stat_nchl']=="A"){?> selected=selected <?php };?>value="A">A</option>
+									<option <?php if($rcek1['stat_nchl']=="R"){?> selected=selected <?php };?>value="R">R</option>
+									<option <?php if($rcek1['stat_nchl']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+									<option <?php if($rcek1['stat_nchl']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+									<option <?php if($rcek1['stat_nchl']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+								</select>
 							</div>
+							</div>
+							<div class="form-group" id="disnchl" style="display:none;">
+							<label for="disnchl" class="col-sm-2 control-label">NON CHLORIN (DIS)</label>
 							<div class="col-sm-2">
-								<input name="mdye_tf_nylon" type="text" class="form-control" id="mdye_tf_nylon" value="<?php echo $rcekM['mdye_tf_nylon'];?>" placeholder="Nylon">
-								<input name="mdye_tf_poly" type="text" class="form-control" id="mdye_tf_poly" value="<?php echo $rcekM['mdye_tf_poly'];?>" placeholder="Polyester">
+								<input name="dnchlorin1" type="text" class="form-control" id="dnchlorin1" value="<?php echo $rcekD['dnchlorin1'];?>" placeholder="">
+								<input name="dnchlorin2" type="text" class="form-control" id="dnchlorin2" value="<?php echo $rcekD['dnchlorin2'];?>" placeholder="">
 							</div>
+							</div>	
+							<div class="form-group" id="rannchl" style="display:none;">
+							<label for="rannchl" class="col-sm-2 control-label">NON CHLORIN (RAN)</label>
 							<div class="col-sm-2">
-								<input name="mdye_tf_acrylic" type="text" class="form-control" id="mdye_tf_acrylic" value="<?php echo $rcekM['mdye_tf_acrylic'];?>" placeholder="Acrylic">
-								<input name="mdye_tf_wool" type="text" class="form-control" id="mdye_tf_wool" value="<?php echo $rcekM['mdye_tf_wool'];?>" placeholder="Wool">
+								<input name="rnchlorin1" type="text" class="form-control" id="rnchlorin1" value="<?php echo $rcekR['rnchlorin1'];?>" placeholder="" readonly>
+								<input name="rnchlorin2" type="text" class="form-control" id="rnchlorin2" value="<?php echo $rcekR['rnchlorin2'];?>" placeholder="" readonly>
 							</div>
-							<div class="col-sm-2">
-								<input name="mdye_tf_cstaining" type="text" class="form-control" id="mdye_tf_cstaining" value="<?php echo $rcekM['mdye_tf_cstaining'];?>" placeholder="Color Staining">
-								<input name="mdye_tf_sstaining" type="text" class="form-control" id="mdye_tf_sstaining" value="<?php echo $rcekM['mdye_tf_sstaining'];?>" placeholder="Self Staining">
+							</div>		
+						<!-- NON CHLORIN END-->
+						<!-- DYE TRANSFER BEGIN-->
+							<div class="form-group" id="c15" style="display:none;">
+								<label for="dye_tf" class="col-sm-2 control-label">DYE TRANSFER</label>
+								<div class="col-sm-2">
+									<input name="dye_tf_acetate" type="text" class="form-control" id="dye_tf_acetate" value="<?php echo $rcek1['dye_tf_acetate'];?>" placeholder="Acetate">
+									<input name="dye_tf_cotton" type="text" class="form-control" id="dye_tf_cotton" value="<?php echo $rcek1['dye_tf_cotton'];?>" placeholder="Cotton">
+								</div>
+								<div class="col-sm-2">
+									<input name="dye_tf_nylon" type="text" class="form-control" id="dye_tf_nylon" value="<?php echo $rcek1['dye_tf_nylon'];?>" placeholder="Nylon">
+									<input name="dye_tf_poly" type="text" class="form-control" id="dye_tf_poly" value="<?php echo $rcek1['dye_tf_poly'];?>" placeholder="Polyester">
+								</div>
+								<div class="col-sm-2">
+									<input name="dye_tf_acrylic" type="text" class="form-control" id="dye_tf_acrylic" value="<?php echo $rcek1['dye_tf_acrylic'];?>" placeholder="Acrylic">
+									<input name="dye_tf_wool" type="text" class="form-control" id="dye_tf_wool" value="<?php echo $rcek1['dye_tf_wool'];?>" placeholder="Wool">
+								</div>
+								<div class="col-sm-2">
+									<input name="dye_tf_sstaining" type="text" class="form-control" id="dye_tf_sstaining" value="<?php echo $rcek1['dye_tf_sstaining'];?>" placeholder="Self Staining">
+									<input name="dye_tf_cstaining" type="text" class="form-control" id="dye_tf_cstaining" value="<?php echo $rcek1['dye_tf_cstaining'];?>" placeholder="Color Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dye_tf_note" maxlength="50" rows="1"><?php echo $rcek1['dye_tf_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mdye_tf_note" maxlength="50" rows="1"><?php echo $rcekM['mdye_tf_note'];?></textarea>
+							<div class="form-group" id="stat_dye" style="display:none;">
+								<label for="stat_dye" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_dye" class="form-control select2" id="stat_dye" onChange="tampil2();" style="width: 100%;">
+										<option <?php if($rcek1['stat_dye']==""){?> selected=selected <?php };?>value="">Pilih</option>
+										<option <?php if($rcek1['stat_dye']=="DISPOSISI"){?> selected=selected <?php };?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if($rcek1['stat_dye']=="A"){?> selected=selected <?php };?>value="A">A</option>
+										<option <?php if($rcek1['stat_dye']=="R"){?> selected=selected <?php };?>value="R">R</option>
+										<option <?php if($rcek1['stat_dye']=="PASS"){?> selected=selected <?php };?>value="PASS">PASS</option>
+										<option <?php if($rcek1['stat_dye']=="MARGINAL PASS"){?> selected=selected <?php };?>value="MARGINAL PASS">MARGINAL PASS</option>
+										<option <?php if($rcek1['stat_dye']=="DATA"){?> selected=selected <?php };?>value="DATA">DATA</option>
+										<option <?php if($rcek1['stat_dye']=="FAIL"){?> selected=selected <?php };?>value="FAIL">FAIL</option>
+										<option <?php if($rcek1['stat_dye']=="RANDOM"){?> selected=selected <?php };?>value="RANDOM">RANDOM</option>
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="randye" style="display:none;">
-							<label for="randye" class="col-sm-2 control-label">DYE TRANSFER (RAN)</label>
-							<div class="col-sm-2">
-								<input name="rdye_tf_acetate" type="text" class="form-control" id="rdye_tf_acetate" value="<?php echo $rcekR['rdye_tf_acetate'];?>" placeholder="Acetate" readonly>  
-								<input name="rdye_tf_cotton" type="text" class="form-control" id="rdye_tf_cotton" value="<?php echo $rcekR['rdye_tf_cotton'];?>" placeholder="Cotton" readonly>
+							<div class="form-group" id="disdye" style="display:none;">
+								<label for="disdye" class="col-sm-2 control-label">DYE TRANSFER (DIS)</label>
+								<div class="col-sm-2">
+									<input name="ddye_tf_acetate" type="text" class="form-control" id="ddye_tf_acetate" value="<?php echo $rcekD['ddye_tf_acetate'];?>" placeholder="Acetate">
+									<input name="ddye_tf_cotton" type="text" class="form-control" id="ddye_tf_cotton" value="<?php echo $rcekD['ddye_tf_cotton'];?>" placeholder="Cotton">
+								</div>
+								<div class="col-sm-2">
+									<input name="ddye_tf_nylon" type="text" class="form-control" id="ddye_tf_nylon" value="<?php echo $rcekD['ddye_tf_nylon'];?>" placeholder="Nylon">
+									<input name="ddye_tf_poly" type="text" class="form-control" id="ddye_tf_poly" value="<?php echo $rcekD['ddye_tf_poly'];?>" placeholder="Polyester">
+								</div>
+								<div class="col-sm-2">
+									<input name="ddye_tf_acrylic" type="text" class="form-control" id="ddye_tf_acrylic" value="<?php echo $rcekD['ddye_tf_acrylic'];?>" placeholder="Acrylic">
+									<input name="ddye_tf_wool" type="text" class="form-control" id="ddye_tf_wool" value="<?php echo $rcekD['ddye_tf_wool'];?>" placeholder="Wool">
+								</div>
+								<div class="col-sm-2">
+									<input name="ddye_tf_cstaining" type="text" class="form-control" id="ddye_tf_cstaining" value="<?php echo $rcekD['ddye_tf_cstaining'];?>" placeholder="Color Staining">
+									<input name="ddye_tf_sstaining" type="text" class="form-control" id="ddye_tf_sstaining" value="<?php echo $rcekD['ddye_tf_sstaining'];?>" placeholder="Self Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="ddye_tf_note" maxlength="50" rows="1"><?php echo $rcekD['ddye_tf_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="rdye_tf_nylon" type="text" class="form-control" id="rdye_tf_nylon" value="<?php echo $rcekR['rdye_tf_nylon'];?>" placeholder="Nylon" readonly>
-								<input name="rdye_tf_poly" type="text" class="form-control" id="rdye_tf_poly" value="<?php echo $rcekR['rdye_tf_poly'];?>" placeholder="Polyester" readonly>
+							<div class="form-group" id="mardye" style="display:none;">
+								<label for="mardye" class="col-sm-2 control-label">DYE TRANSFER (MARGINAL)</label>
+								<div class="col-sm-2">
+									<input name="mdye_tf_acetate" type="text" class="form-control" id="mdye_tf_acetate" value="<?php echo $rcekM['mdye_tf_acetate'];?>" placeholder="Acetate">
+									<input name="mdye_tf_cotton" type="text" class="form-control" id="mdye_tf_cotton" value="<?php echo $rcekM['mdye_tf_cotton'];?>" placeholder="Cotton">
+								</div>
+								<div class="col-sm-2">
+									<input name="mdye_tf_nylon" type="text" class="form-control" id="mdye_tf_nylon" value="<?php echo $rcekM['mdye_tf_nylon'];?>" placeholder="Nylon">
+									<input name="mdye_tf_poly" type="text" class="form-control" id="mdye_tf_poly" value="<?php echo $rcekM['mdye_tf_poly'];?>" placeholder="Polyester">
+								</div>
+								<div class="col-sm-2">
+									<input name="mdye_tf_acrylic" type="text" class="form-control" id="mdye_tf_acrylic" value="<?php echo $rcekM['mdye_tf_acrylic'];?>" placeholder="Acrylic">
+									<input name="mdye_tf_wool" type="text" class="form-control" id="mdye_tf_wool" value="<?php echo $rcekM['mdye_tf_wool'];?>" placeholder="Wool">
+								</div>
+								<div class="col-sm-2">
+									<input name="mdye_tf_cstaining" type="text" class="form-control" id="mdye_tf_cstaining" value="<?php echo $rcekM['mdye_tf_cstaining'];?>" placeholder="Color Staining">
+									<input name="mdye_tf_sstaining" type="text" class="form-control" id="mdye_tf_sstaining" value="<?php echo $rcekM['mdye_tf_sstaining'];?>" placeholder="Self Staining">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="mdye_tf_note" maxlength="50" rows="1"><?php echo $rcekM['mdye_tf_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="rdye_tf_acrylic" type="text" class="form-control" id="rdye_tf_acrylic" value="<?php echo $rcekR['rdye_tf_acrylic'];?>" placeholder="Acrylic" readonly>
-								<input name="rdye_tf_wool" type="text" class="form-control" id="rdye_tf_wool" value="<?php echo $rcekR['rdye_tf_wool'];?>" placeholder="Wool" readonly>
+							<div class="form-group" id="randye" style="display:none;">
+								<label for="randye" class="col-sm-2 control-label">DYE TRANSFER (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rdye_tf_acetate" type="text" class="form-control" id="rdye_tf_acetate" value="<?php echo $rcekR['rdye_tf_acetate'];?>" placeholder="Acetate" readonly>  
+									<input name="rdye_tf_cotton" type="text" class="form-control" id="rdye_tf_cotton" value="<?php echo $rcekR['rdye_tf_cotton'];?>" placeholder="Cotton" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rdye_tf_nylon" type="text" class="form-control" id="rdye_tf_nylon" value="<?php echo $rcekR['rdye_tf_nylon'];?>" placeholder="Nylon" readonly>
+									<input name="rdye_tf_poly" type="text" class="form-control" id="rdye_tf_poly" value="<?php echo $rcekR['rdye_tf_poly'];?>" placeholder="Polyester" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rdye_tf_acrylic" type="text" class="form-control" id="rdye_tf_acrylic" value="<?php echo $rcekR['rdye_tf_acrylic'];?>" placeholder="Acrylic" readonly>
+									<input name="rdye_tf_wool" type="text" class="form-control" id="rdye_tf_wool" value="<?php echo $rcekR['rdye_tf_wool'];?>" placeholder="Wool" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rdye_tf_cstaining" type="text" class="form-control" id="rdye_tf_cstaining" value="<?php echo $rcekR['rdye_tf_cstaining'];?>" placeholder="Color Staining" readonly>
+									<input name="rdye_tf_sstaining" type="text" class="form-control" id="rdye_tf_sstaining" value="<?php echo $rcekR['rdye_tf_sstaining'];?>" placeholder="Self Staining" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rdye_tf_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rdye_tf_note'];?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<input name="rdye_tf_cstaining" type="text" class="form-control" id="rdye_tf_cstaining" value="<?php echo $rcekR['rdye_tf_cstaining'];?>" placeholder="Color Staining" readonly>
-								<input name="rdye_tf_sstaining" type="text" class="form-control" id="rdye_tf_sstaining" value="<?php echo $rcekR['rdye_tf_sstaining'];?>" placeholder="Self Staining" readonly>
+						<!-- DYE TRANSFER END-->
+						<!-- APPERANCE BEGIN -->
+							<div class="form-group" id="fc20" style="display:none;">
+								<label for="apper" class="col-sm-2 control-label">APPEARANCE</label>
+								<div class="col-sm-2">
+									<input name="apper_pf1" type="text" class="form-control" id="apper_pf1"
+										value="<?php echo $rcek1['apper_pf1']; ?>" placeholder="PILLING FACE 1">
+									<input name="apper_pb1" type="text" class="form-control" id="apper_pb1"
+										value="<?php echo $rcek1['apper_pb1']; ?>" placeholder="PILLING BACK 1">
+									<input name="apper_ch1" type="text" class="form-control" id="apper_ch1"
+										value="<?php echo $rcek1['apper_ch1']; ?>" placeholder="PASS/FAIL 1">
+									<input name="apper_cc1" type="text" class="form-control" id="apper_cc1"
+										value="<?php echo $rcek1['apper_cc1']; ?>" placeholder="C.CHANGE 1">
+									<input name="apper_st" type="text" class="form-control" id="apper_st"
+										value="<?php echo $rcek1['apper_st']; ?>" placeholder="S.STAINING 1">
+									<input name="apper_acetate" type="text" class="form-control" id="apper_acetate"
+										value="<?php echo $rcek1['apper_acetate']; ?>" placeholder="ACETATE">
+									<input name="apper_cotton" type="text" class="form-control" id="apper_cotton"
+										value="<?php echo $rcek1['apper_cotton']; ?>" placeholder="COTTON">
+									<input name="apper_nylon" type="text" class="form-control" id="apper_nylon"
+										value="<?php echo $rcek1['apper_nylon']; ?>" placeholder="NYLON">
+									<input name="apper_poly" type="text" class="form-control" id="apper_poly"
+										value="<?php echo $rcek1['apper_poly']; ?>" placeholder="POLYESTER">
+									<input name="apper_acrylic" type="text" class="form-control" id="apper_acrylic"
+										value="<?php echo $rcek1['apper_acrylic']; ?>" placeholder="ACRYLIC">
+									<input name="apper_wool" type="text" class="form-control" id="apper_wool"
+										value="<?php echo $rcek1['apper_wool']; ?>" placeholder="WOOL">
+								</div>
+								<div class="col-sm-2">
+									<input name="apper_pf2" type="text" class="form-control" id="apper_pf2"
+										value="<?php echo $rcek1['apper_pf2']; ?>" placeholder="PILLING FACE 2">
+									<input name="apper_pb2" type="text" class="form-control" id="apper_pb2"
+										value="<?php echo $rcek1['apper_pb2']; ?>" placeholder="PILLING BACK 2">
+									<input name="apper_ch2" type="text" class="form-control" id="apper_ch2"
+										value="<?php echo $rcek1['apper_ch2']; ?>" placeholder="PASS/FAIL 2">
+									<input name="apper_cc2" type="text" class="form-control" id="apper_cc2"
+										value="<?php echo $rcek1['apper_cc2']; ?>" placeholder="C.CHANGE 2">
+									<input name="apper_st2" type="text" class="form-control" id="apper_st2"
+										value="<?php echo $rcek1['apper_st2']; ?>" placeholder="S.STAINING 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="apper_pf3" type="text" class="form-control" id="apper_pf3"
+										value="<?php echo $rcek1['apper_pf3']; ?>" placeholder="PILLING FACE 3">
+									<input name="apper_pb3" type="text" class="form-control" id="apper_pb3"
+										value="<?php echo $rcek1['apper_pb3']; ?>" placeholder="PILLING BACK 3">
+									<input name="apper_ch3" type="text" class="form-control" id="apper_ch3"
+										value="<?php echo $rcek1['apper_ch3']; ?>" placeholder="PASS/FAIL 3">
+									<input name="apper_cc3" type="text" class="form-control" id="apper_cc3"
+										value="<?php echo $rcek1['apper_cc3']; ?>" placeholder="C.CHANGE 3">
+									<input name="apper_st3" type="text" class="form-control" id="apper_st3"
+										value="<?php echo $rcek1['apper_st3']; ?>" placeholder="S.STAINING 3">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="apper_note" maxlength="50"><?php echo $rcek1['apper_note']; ?></textarea>
+								</div>
 							</div>
-							<div class="col-sm-2">
-								<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="rdye_tf_note" maxlength="50" rows="1" readonly><?php echo $rcekR['rdye_tf_note'];?></textarea>
+							<div class="form-group" id="stat_ap" style="display:none;">
+								<label for="stat_ap" class="col-sm-2 control-label">STATUS</label>
+								<div class="col-sm-2">
+									<select name="stat_ap" class="form-control select2" id="stat_ap" onChange="tampil2();"
+										style="width: 100%;">
+										<option <?php if ($rcek1['stat_ap'] == "") { ?> selected=selected <?php }
+										; ?>value="">
+											Pilih
+										</option>
+										<option <?php if ($rcek1['stat_ap'] == "DISPOSISI") { ?> selected=selected <?php }
+										; ?>value="DISPOSISI">DISPOSISI</option>
+										<option <?php if ($rcek1['stat_ap'] == "A") { ?> selected=selected <?php }
+										; ?>value="A">A
+										</option>
+										<option <?php if ($rcek1['stat_ap'] == "R") { ?> selected=selected <?php }
+										; ?>value="R">R
+										</option>
+										<option <?php if ($rcek1['stat_ap'] == "PASS") { ?> selected=selected <?php }
+										; ?>value="PASS">
+											PASS</option>
+										<option <?php if ($rcek1['stat_ap'] == "MARGINAL PASS") { ?> selected=selected <?php }
+										; ?>value="MARGINAL PASS">MARGINAL PASS</option>
+										<option <?php if ($rcek1['stat_ap'] == "DATA") { ?> selected=selected <?php }
+										; ?>value="DATA">
+											DATA</option>
+										<option <?php if ($rcek1['stat_ap'] == "FAIL") { ?> selected=selected <?php }
+										; ?>value="FAIL">
+											FAIL</option>
+										<option <?php if ($rcek1['stat_ap'] == "RANDOM") { ?> selected=selected <?php }
+										; ?>value="RANDOM">RANDOM</option>
+										<option <?php if ($rcek1['stat_ap'] == "ESS PASS") { ?> selected=selected <?php }
+										; ?>value="ESS PASS">ESS PASS</option>
+									</select>
+								</div>
+								<!-- <div class="col-sm-2">
+									<input name="user_apper" type="text" class="form-control" id="user_apper" placeholder="NAMA" readonly> *Apabila terdapat perubahan, nama pengedit akan berubah
+									<input name="nama_apper" type="hidden" class="form-control" id="nama_apper" value="<?php echo $rcek1['nama_apper']; ?>" placeholder="Nama BOW">
+								</div> -->
 							</div>
-						</div>
-						<!-- DYE TRANSFER END-->		
+							<div class="form-group" id="disap" style="display:none;">
+								<label for="disap" class="col-sm-2 control-label">APPEARANCE (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dapper_pf1" type="text" class="form-control" id="dapper_pf1"
+										value="<?php echo $rcekD['dapper_pf1']; ?>" placeholder="PILLING FACE 1">
+									<input name="dapper_pb1" type="text" class="form-control" id="dapper_pb1"
+										value="<?php echo $rcekD['dapper_pb1']; ?>" placeholder="PILLING BACK 1">
+									<input name="dapper_ch1" type="text" class="form-control" id="dapper_ch1"
+										value="<?php echo $rcekD['dapper_ch1']; ?>" placeholder="PASS/FAIL 1">
+									<input name="dapper_cc1" type="text" class="form-control" id="dapper_cc1"
+										value="<?php echo $rcekD['dapper_cc1']; ?>" placeholder="C.CHANGE 1">
+									<input name="dapper_st" type="text" class="form-control" id="dapper_st"
+										value="<?php echo $rcekD['dapper_st']; ?>" placeholder="S.STAINING 1">
+									<input name="dapper_acetate" type="text" class="form-control" id="dapper_acetate"
+										value="<?php echo $rcekD['dapper_acetate']; ?>" placeholder="ACETATE">
+									<input name="dapper_cotton" type="text" class="form-control" id="dapper_cotton"
+										value="<?php echo $rcekD['dapper_cotton']; ?>" placeholder="COTTON">
+									<input name="dapper_nylon" type="text" class="form-control" id="dapper_nylon"
+										value="<?php echo $rcekD['dapper_nylon']; ?>" placeholder="NYLON">
+									<input name="dapper_poly" type="text" class="form-control" id="dapper_poly"
+										value="<?php echo $rcekD['dapper_poly']; ?>" placeholder="POLYESTER">
+									<input name="dapper_acrylic" type="text" class="form-control" id="dapper_acrylic"
+										value="<?php echo $rcekD['dapper_acrylic']; ?>" placeholder="ACRYLIC">
+									<input name="dapper_wool" type="text" class="form-control" id="dapper_wool"
+										value="<?php echo $rcekD['dapper_wool']; ?>" placeholder="WOOL">
+								</div>
+								<div class="col-sm-2">
+									<input name="dapper_pf2" type="text" class="form-control" id="dapper_pf2"
+										value="<?php echo $rcekD['dapper_pf2']; ?>" placeholder="PILLING FACE 2">
+									<input name="dapper_pb2" type="text" class="form-control" id="dapper_pb2"
+										value="<?php echo $rcekD['dapper_pb2']; ?>" placeholder="PILLING BACK 2">
+									<input name="dapper_ch2" type="text" class="form-control" id="dapper_ch2"
+										value="<?php echo $rcekD['dapper_ch2']; ?>" placeholder="PASS/FAIL 2">
+									<input name="dapper_cc2" type="text" class="form-control" id="dapper_cc2"
+										value="<?php echo $rcekD['dapper_cc2']; ?>" placeholder="C.CHANGE 2">
+									<input name="dapper_st2" type="text" class="form-control" id="dapper_st2"
+										value="<?php echo $rcekD['dapper_st2']; ?>" placeholder="S.STAINING 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="dapper_pf3" type="text" class="form-control" id="dapper_pf3"
+										value="<?php echo $rcekD['dapper_pf3']; ?>" placeholder="PILLING FACE 3">
+									<input name="dapper_pb3" type="text" class="form-control" id="dapper_pb3"
+										value="<?php echo $rcekD['dapper_pb3']; ?>" placeholder="PILLING BACK 3">
+									<input name="dapper_ch3" type="text" class="form-control" id="dapper_ch3"
+										value="<?php echo $rcekD['dapper_ch3']; ?>" placeholder="PASS/FAIL 3">
+									<input name="dapper_cc3" type="text" class="form-control" id="dapper_cc3"
+										value="<?php echo $rcekD['dapper_cc3']; ?>" placeholder="C.CHANGE 3">
+									<input name="dapper_st3" type="text" class="form-control" id="dapper_st3"
+										value="<?php echo $rcekD['dapper_st3']; ?>" placeholder="S.STAINING 3">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="dapper_note" maxlength="50"><?php echo $rcekD['dapper_note']; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="marap" style="display:none;">
+								<label for="marap" class="col-sm-2 control-label">APPEARANCE (MARGINAL)</label>
+								<div class="col-sm-2">
+									<input name="mapper_pf1" type="text" class="form-control" id="mapper_pf1"
+										value="<?php echo $rcekM['mapper_pf1']; ?>" placeholder="PILLING FACE 1">
+									<input name="mapper_pb1" type="text" class="form-control" id="mapper_pb1"
+										value="<?php echo $rcekM['mapper_pb1']; ?>" placeholder="PILLING BACK 1">
+									<input name="mapper_ch1" type="text" class="form-control" id="mapper_ch1"
+										value="<?php echo $rcekM['mapper_ch1']; ?>" placeholder="PASS/FAIL 1">
+									<input name="mapper_cc1" type="text" class="form-control" id="mapper_cc1"
+										value="<?php echo $rcekM['mapper_cc1']; ?>" placeholder="C.CHANGE 1">
+									<input name="mapper_st" type="text" class="form-control" id="mapper_st"
+										value="<?php echo $rcekM['mapper_st']; ?>" placeholder="S.STAINING 1">
+									<input name="mapper_acetate" type="text" class="form-control" id="mapper_acetate"
+										value="<?php echo $rcekM['mapper_acetate']; ?>" placeholder="ACETATE">
+									<input name="mapper_cotton" type="text" class="form-control" id="mapper_cotton"
+										value="<?php echo $rcekM['mapper_cotton']; ?>" placeholder="COTTON">
+									<input name="mapper_nylon" type="text" class="form-control" id="mapper_nylon"
+										value="<?php echo $rcekM['mapper_nylon']; ?>" placeholder="NYLON">
+									<input name="mapper_poly" type="text" class="form-control" id="mapper_poly"
+										value="<?php echo $rcekM['mapper_poly']; ?>" placeholder="POLYESTER">
+									<input name="mapper_acrylic" type="text" class="form-control" id="mapper_acrylic"
+										value="<?php echo $rcekM['mapper_acrylic']; ?>" placeholder="ACRYLIC">
+									<input name="mapper_wool" type="text" class="form-control" id="mapper_wool"
+										value="<?php echo $rcekM['mapper_wool']; ?>" placeholder="WOOL">
+								</div>
+								<div class="col-sm-2">
+									<input name="mapper_pf2" type="text" class="form-control" id="mapper_pf2"
+										value="<?php echo $rcekM['mapper_pf2']; ?>" placeholder="PILLING FACE 2">
+									<input name="mapper_pb2" type="text" class="form-control" id="mapper_pb2"
+										value="<?php echo $rcekM['mapper_pb2']; ?>" placeholder="PILLING BACK 2">
+									<input name="mapper_ch2" type="text" class="form-control" id="mapper_ch2"
+										value="<?php echo $rcekM['mapper_ch2']; ?>" placeholder="PASS/FAIL 2">
+									<input name="mapper_cc2" type="text" class="form-control" id="mapper_cc2"
+										value="<?php echo $rcekM['mapper_cc2']; ?>" placeholder="C.CHANGE 2">
+									<input name="mapper_st2" type="text" class="form-control" id="mapper_st2"
+										value="<?php echo $rcekM['mapper_st2']; ?>" placeholder="S.STAINING 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="mapper_pf3" type="text" class="form-control" id="mapper_pf3"
+										value="<?php echo $rcekM['mapper_pf3']; ?>" placeholder="PILLING FACE 3">
+									<input name="mapper_pb3" type="text" class="form-control" id="mapper_pb3"
+										value="<?php echo $rcekM['mapper_pb3']; ?>" placeholder="PILLING BACK 3">
+									<input name="mapper_ch3" type="text" class="form-control" id="mapper_ch3"
+										value="<?php echo $rcekM['mapper_ch3']; ?>" placeholder="PASS/FAIL 3">
+									<input name="mapper_cc3" type="text" class="form-control" id="mapper_cc3"
+										value="<?php echo $rcekM['mapper_cc3']; ?>" placeholder="C.CHANGE 3">
+									<input name="mapper_st3" type="text" class="form-control" id="mapper_st3"
+										value="<?php echo $rcekM['mapper_st3']; ?>" placeholder="S.STAINING 3">
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="mapper_note" maxlength="50"><?php echo $rcekM['mapper_note']; ?></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="ranap" style="display:none;">
+								<label for="ranap" class="col-sm-2 control-label">APPEARANCE (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rapper_pf1" type="text" class="form-control" id="rapper_pf1"
+										value="<?php echo $rcekR['rapper_pf1']; ?>" placeholder="PILLING FACE 1" readonly>
+									<input name="rapper_pb1" type="text" class="form-control" id="rapper_pb1"
+										value="<?php echo $rcekR['rapper_pb1']; ?>" placeholder="PILLING BACK 1" readonly>
+									<input name="rapper_ch1" type="text" class="form-control" id="rapper_ch1"
+										value="<?php echo $rcekR['rapper_ch1']; ?>" placeholder="PASS/FAIL 1" readonly>
+									<input name="rapper_cc1" type="text" class="form-control" id="rapper_cc1"
+										value="<?php echo $rcekR['rapper_cc1']; ?>" placeholder="C.CHANGE 1" readonly>
+									<input name="rapper_st" type="text" class="form-control" id="rapper_st"
+										value="<?php echo $rcekR['rapper_st']; ?>" placeholder="S.STAINING 1" readonly>
+									<input name="rapper_acetate" type="text" class="form-control" id="rapper_acetate"
+										value="<?php echo $rcekR['rapper_acetate']; ?>" placeholder="ACETATE" readonly>
+									<input name="rapper_cotton" type="text" class="form-control" id="rapper_cotton"
+										value="<?php echo $rcekR['rapper_cotton']; ?>" placeholder="COTTON" readonly>
+									<input name="rapper_nylon" type="text" class="form-control" id="rapper_nylon"
+										value="<?php echo $rcekR['rapper_nylon']; ?>" placeholder="NYLON" readonly>
+									<input name="rapper_poly" type="text" class="form-control" id="rapper_poly"
+										value="<?php echo $rcekR['rapper_poly']; ?>" placeholder="POLYESTER" readonly>
+									<input name="rapper_acrylic" type="text" class="form-control" id="rapper_acrylic"
+										value="<?php echo $rcekR['rapper_acrylic']; ?>" placeholder="ACRYLIC" readonly>
+									<input name="rapper_wool" type="text" class="form-control" id="rapper_wool"
+										value="<?php echo $rcekR['rapper_wool']; ?>" placeholder="WOOL" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rapper_pf2" type="text" class="form-control" id="rapper_pf2"
+										value="<?php echo $rcekR['rapper_pf2']; ?>" placeholder="PILLING FACE 2" readonly>
+									<input name="rapper_pb2" type="text" class="form-control" id="rapper_pb2"
+										value="<?php echo $rcekR['rapper_pb2']; ?>" placeholder="PILLING BACK 2" readonly>
+									<input name="rapper_ch2" type="text" class="form-control" id="rapper_ch2"
+										value="<?php echo $rcekR['rapper_ch2']; ?>" placeholder="PASS/FAIL 2" readonly>
+									<input name="rapper_cc2" type="text" class="form-control" id="rapper_cc2"
+										value="<?php echo $rcekR['rapper_cc2']; ?>" placeholder="C.CHANGE 2" readonly>
+									<input name="rapper_st2" type="text" class="form-control" id="rapper_st2"
+										value="<?php echo $rcekR['rapper_st2']; ?>" placeholder="S.STAINING 2" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rapper_pf3" type="text" class="form-control" id="rapper_pf3"
+										value="<?php echo $rcekR['rapper_pf3']; ?>" placeholder="PILLING FACE 3" readonly>
+									<input name="rapper_pb3" type="text" class="form-control" id="rapper_pb3"
+										value="<?php echo $rcekR['rapper_pb3']; ?>" placeholder="PILLING BACK 3" readonly>
+									<input name="rapper_ch3" type="text" class="form-control" id="rapper_ch3"
+										value="<?php echo $rcekR['rapper_ch3']; ?>" placeholder="PASS/FAIL 3" readonly>
+									<input name="rapper_cc3" type="text" class="form-control" id="rapper_cc3"
+										value="<?php echo $rcekR['rapper_cc3']; ?>" placeholder="C.CHANGE 3" readonly>
+									<input name="rapper_st3" type="text" class="form-control" id="rapper_st3"
+										value="<?php echo $rcekR['rapper_st3']; ?>" placeholder="S.STAINING 3" readonly>
+								</div>
+								<div class="col-sm-2">
+									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
+										name="rapper_note" maxlength="50"
+										readonly><?php echo $rcekR['rapper_note']; ?></textarea>
+								</div>
+							</div>
+						<!-- APPEARANCE END-->
 						<div class="form-group">					
 							<?php if($nocounter!=""){ ?>
 						<button type="submit" class="btn btn-primary pull-right" name="colorfastness_save" value="save"><i class="fa fa-save"></i> Simpan</button>
@@ -3100,282 +3384,466 @@ $rcekcmt=mysqli_fetch_array($sqlCmt);
       </div>
       <!-- info row -->
       <div class="row invoice-info">
+		<div class="col-sm-6 invoice-col">
+				<strong>PHYSICAL</strong>
+				<hr>
+				<div class="table-responsive">
+					<table class="table">
+						<?php if ($rcek1['apper_ch1'] != "" or $rcek1['apper_ch2'] != "" or $rcek1['apper_ch3'] != "") { ?>
+							<tr>
+								<th rowspan="7">Apperance</th>
+								<th>&nbsp;</th>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_ch1'];
+									} else {
+										echo $rcek1['apper_ch1'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_ch2'];
+									} else {
+										echo $rcek1['apper_ch2'];
+									} ?>
+								</td>
+								<td colspan="4">
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_ch3'];
+									} else {
+										echo $rcek1['apper_ch3'];
+									} ?>
+								</td>
+							</tr>
+							<tr>
+								<th>&nbsp;</th>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_cc1'];
+									} else {
+										echo $rcek1['apper_cc1'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_cc2'];
+									} else {
+										echo $rcek1['apper_cc2'];
+									} ?>
+								</td>
+								<td colspan="4">
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_cc3'];
+									} else {
+										echo $rcek1['apper_cc3'];
+									} ?>
+								</td>
+							</tr>
+							<tr>
+								<th>&nbsp;</th>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_st'];
+									} else {
+										echo $rcek1['apper_st'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_st2'];
+									} else {
+										echo $rcek1['apper_st2'];
+									} ?>
+								</td>
+								<td colspan="4">
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_st3'];
+									} else {
+										echo $rcek1['apper_st3'];
+									} ?>
+								</td>
+							</tr>
+							<tr>
+								<th>Face</th>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_pf1'];
+									} else {
+										echo $rcek1['apper_pf1'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_pf2'];
+									} else {
+										echo $rcek1['apper_pf2'];
+									} ?>
+								</td>
+								<td colspan="4">
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_pf3'];
+									} else {
+										echo $rcek1['apper_pf3'];
+									} ?>
+								</td>
+							</tr>
+							<tr>
+								<th>Back</th>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_pb1'];
+									} else {
+										echo $rcek1['apper_pb1'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_pb2'];
+									} else {
+										echo $rcek1['apper_pb2'];
+									} ?>
+								</td>
+								<td colspan="4">
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_pb3'];
+									} else {
+										echo $rcek1['apper_pb3'];
+									} ?>
+								</td>
+							</tr>
+							<tr>
+								<th>&nbsp;</th>
+								<td><strong>Ace</strong></td>
+								<td><strong>Cot</strong></td>
+								<td><strong>Nyl</strong></td>
+								<td><strong>Poly</strong></td>
+								<td><strong>Acr</strong></td>
+								<td><strong>Wool</strong></td>
+							</tr>
+							<tr>
+								<th>&nbsp;</th>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_acetate'];
+									} else {
+										echo $rcek1['apper_acetate'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_cotton'];
+									} else {
+										echo $rcek1['apper_cotton'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_nylon'];
+									} else {
+										echo $rcek1['apper_nylon'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_poly'];
+									} else {
+										echo $rcek1['apper_poly'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_acrylic'];
+									} else {
+										echo $rcek1['apper_acrylic'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['stat_ap'] == "RANDOM") {
+										echo $rcekR['rapper_wool'];
+									} else {
+										echo $rcek1['apper_wool'];
+									} ?>
+								</td>
+							</tr>
+						<?php } ?>
+					</table>
+				</div>
+			</div>
         <!-- /.col -->
-        <div class="col-sm-12 invoice-col">
-		  <strong>COLORFASTNESS</strong>
-		  <hr>
-		  <table class="table">
-		  	<?php if($rcek1['wash_temp']!="" or $rcek1['wash_colorchange']!="" or $rcek1['wash_acetate']!="" or $rcek1['wash_cotton']!="" or $rcek1['wash_nylon']!="" or $rcek1['wash_poly']!="" or $rcek1['wash_acrylic']!="" or $rcek1['wash_wool']!="" or $rcek1['wash_staining']!=""){
-      		?>	
-      	<tr>
-		    <th rowspan="5">Washing</th>
-			<th>Suhu</th>
-		    <td colspan="4"><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_temp'];}else{echo $rcek1['wash_temp'];}?>&deg;</td>
-          	<td>&nbsp;</td>
-      	</tr>
-      	<tr>
-			<th>&nbsp;</th>
-			<td><strong>CC</strong></td>
-		    <td colspan="2"><strong>Ace</strong></td>
-			<td><strong>Cot</strong></td>
-		    <td colspan="2"><strong>Nyl</strong></td>
-          	<td>&nbsp;</td>
-      	</tr>
-		<tr>
-			<th>&nbsp;</th>
-			<td><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_colorchange'];}else{echo $rcek1['wash_colorchange'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_acetate'];}else{echo $rcek1['wash_acetate'];}?></td>
-			<td><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_cotton'];}else{echo $rcek1['wash_cotton'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_nylon'];}else{echo $rcek1['wash_nylon'];}?></td>
-          	<td>&nbsp;</td>
-      	</tr>
-      	<tr>
-			<th>&nbsp;</th>
-			<td><strong>Poly</strong></td>
-		    <td colspan="2"><strong>Acr</strong></td>
-			<td><strong>Wool</strong></td>
-		    <td colspan="2"><strong>Sta</strong></td>
-          	<td>&nbsp;</td>
-      	</tr>
-		<tr>
-			<th>&nbsp;</th>
-		    <td><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_poly'];}else{echo $rcek1['wash_poly'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_acrylic'];}else{echo $rcek1['wash_acrylic'];}?></td>
-			<td><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_wool'];}else{echo $rcek1['wash_wool'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_staining'];}else{echo $rcek1['wash_staining'];}?></td>
-          	<td>&nbsp;</td>
-        </tr>
-		<?php } ?>
-		<?php if($rcek1['acid_colorchange']!="" or $rcek1['acid_acetate']!="" or $rcek1['acid_cotton']!="" or $rcek1['acid_nylon']!="" or $rcek1['acid_poly']!="" or $rcek1['acid_acrylic']!="" or $rcek1['acid_wool']!="" or $rcek1['acid_staining']!=""){?>
-		<tr>
-			<th rowspan="4" colspan="2">Perspiration Acid</th>
-			<td><strong>CC</strong></td>
-		    <td colspan="2"><strong>Ace</strong></td>
-			<td><strong>Cot</strong></td>
-		    <td colspan="2"><strong>Nyl</strong></td>
-          	<td>&nbsp;</td>
-      	</tr>
-      	<tr>
-		    <td ><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_colorchange'];}else{echo $rcek1['acid_colorchange'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_acetate'];}else{echo $rcek1['acid_acetate'];}?></td>
-			<td><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_cotton'];}else{echo $rcek1['acid_cotton'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_nylon'];}else{echo $rcek1['acid_nylon'];}?></td>
-          	<td>&nbsp;</td>
-     	</tr>
-    	<tr>
-			<td><strong>Poly</strong></td>
-		    <td colspan="2"><strong>Acr</strong></td>
-			<td><strong>Wool</strong></td>
-			<td colspan="2"><strong>Sta</strong></td>
-          	<td>&nbsp;</td>
-      	</tr>
-		<tr>
-		    <td><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_poly'];}else{echo $rcek1['acid_poly'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_acrylic'];}else{echo $rcek1['acid_acrylic'];}?></td>
-			<td><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_wool'];}else{echo $rcek1['acid_wool'];}?></td>
-			<td colspan="2"><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_staining'];}else{echo $rcek1['acid_staining'];}?></td>
-          	<td>&nbsp;</td>
-		    <!--<td colspan="2"><?php echo $rcek1['acid_staining'];?></td>-->
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['alkaline_colorchange']!="" or $rcek1['alkaline_acetate']!="" or $rcek1['alkaline_cotton']!="" or $rcek1['alkaline_nylon']!="" or $rcek1['alkaline_poly']!="" or $rcek1['alkaline_acrylic']!="" or $rcek1['alkaline_wool']!="" or $rcek1['alkaline_staining']!=""){?>
-		<tr>
-		    <th rowspan="4" colspan="2">Perspiration Alkaline</th>
-          	<td><strong>CC</strong></td>
-		    <td colspan="2"><strong>Ace</strong></td>
-			<td><strong>Cot</strong></td>
-		    <td colspan="2"><strong>Nyl</strong></td>
-			<td>&nbsp;</td>
-      	</tr>
-      	<tr>
-		    <td><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_colorchange'];}else{echo $rcek1['alkaline_colorchange'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_acetate'];}else{echo $rcek1['alkaline_acetate'];}?></td>
-			<td><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_cotton'];}else{echo $rcek1['alkaline_cotton'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_nylon'];}else{echo $rcek1['alkaline_nylon'];}?></td>
-          	<td>&nbsp;</td>
-      	</tr>
-      	<tr>
-			<td><strong>Poly</strong></td>
-		    <td colspan="2"><strong>Acr</strong></td>
-			<td><strong>Wool</strong></td>
-			<td colspan="2"><strong>Sta</strong></td>
-          	<td>&nbsp;</td>
-      	</tr>
-		<tr>
-		    <td><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_poly'];}else{echo $rcek1['alkaline_poly'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_acrylic'];}else{echo $rcek1['alkaline_acrylic'];}?></td>
-			<td><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_wool'];}else{echo $rcek1['alkaline_wool'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_staining'];}else{echo $rcek1['alkaline_staining'];}?></td>
-          	<td>&nbsp;</td>
-			<!--<td colspan="2"><?php echo $rcek1['alkaline_staining'];?></td>-->
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['water_colorchange']!="" or $rcek1['water_acetate']!="" or $rcek1['water_cotton']!="" or $rcek1['water_nylon']!="" or $rcek1['water_poly']!="" or $rcek1['water_acrylic']!="" or $rcek1['water_wool']!="" or $rcek1['water_staining']!=""){?>
-		<tr>
-		    <th rowspan="4" colspan="2">Water</th>
-          	<td><strong>CC</strong></td>
-		    <td colspan="2"><strong>Ace</strong></td>
-			<td><strong>Cot</strong></td>
-		    <td colspan="2"><strong>Nyl</strong></td>
-			<td>&nbsp;</td>
-      	</tr>
-      	<tr>
-		    <td><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_colorchange'];}else{echo $rcek1['water_colorchange'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_acetate'];}else{echo $rcek1['water_acetate'];}?></td>
-			<td><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_cotton'];}else{echo $rcek1['water_cotton'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_nylon'];}else{echo $rcek1['water_nylon'];}?></td>
-          	<td>&nbsp;</td>
-      	</tr>
-      	<tr>
-			<td><strong>Poly</strong></td>
-		    <td colspan="2"><strong>Acr</strong></td>
-			<td><strong>Wool</strong></td>
-			<td colspan="2"><strong>Sta</strong></td>
-          	<td>&nbsp;</td>
-      	</tr>
-		<tr>
-		    <td><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_poly'];}else{echo $rcek1['water_poly'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_acrylic'];}else{echo $rcek1['water_acrylic'];}?></td>
-			<td><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_wool'];}else{echo $rcek1['water_wool'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_staining'];}else{echo $rcek1['water_staining'];}?></td>
-          	<td>&nbsp;</td>
-			<!--<td><?php echo $rcek1['water_staining'];?></td>-->
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['crock_len1']!="" or $rcek1['crock_wid1']!="" or $rcek1['crock_len2']!="" or $rcek1['crock_wid2']!=""){?>
-		<tr>
-		    <th rowspan="3">Crocking</th>
-			<th>Srt</th>
-			<th>Dry</th>
-			<th>Wet</th>
-        </tr>
-        <tr>
-		    <th>Len</th>
-		    <td><?php if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_len1'];}else{echo $rcek1['crock_len1'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_len2'];}else{echo $rcek1['crock_len2'];}?></td>
-	    </tr>
-		<tr>
-		    <th >Wid</th>
-		    <td><?php if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_wid1'];}else{echo $rcek1['crock_wid1'];}?></td>
-		    <td colspan="3"><?php if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_wid2'];}else{echo $rcek1['crock_wid2'];}?></td>
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['phenolic_colorchange']!=""){?>
-		<tr>
-		    <th>Phenolic Yellowing</th>
-			<th><strong>CC</strong></th>
-		    <td colspan="4"><?php if($rcek1['stat_py']=="RANDOM"){echo $rcekR['rphenolic_colorchange'];}else{echo $rcek1['phenolic_colorchange'];}?></td>
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['light_rating1']!="" or $rcek1['light_rating2']!=""){?>
-		<tr>
-		    <th>Light</th>
-			<th>&nbsp;</th>
-			<td><?php if($rcek1['stat_lg']=="RANDOM"){echo $rcekR['rlight_rating1'];}else{echo $rcek1['light_rating1'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_lg']=="RANDOM"){echo $rcekR['rlight_rating2'];}else{echo $rcek1['light_rating2'];}?></td>
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['cm_printing_colorchange']!="" or $rcek1['cm_printing_staining']!=""){?>
-		<tr>
-		    <th>Color Migration Oven</th>
-			<th>&nbsp;</th>
-			<td colspan="3"><?php if($rcek1['stat_cmo']=="RANDOM"){echo $rcekR['rcm_printing_colorchange'];}else{echo $rcek1['cm_printing_colorchange'];}?></td>
-		    <td><?php if($rcek1['stat_cmo']=="RANDOM"){echo $rcekR['rcm_printing_staining'];}else{echo $rcek1['cm_printing_staining'];}?></td>
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['cm_dye_temp']!="" or $rcek1['cm_dye_colorchange']!="" or $rcek1['cm_dye_stainingface']!="" or $rcek1['cm_dye_stainingback']!=""){?>
-		<tr>
-		    <th rowspan="3">Color Migration</th>
-			<th>Suhu</th>
-		    <td colspan="4"><?php if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_temp'];}else{echo $rcek1['cm_dye_temp'];}?>&deg;</td>
-	    </tr>
-		<tr>
-			<th>&nbsp;</th>
-			<td><strong>CC</strong></td>
-			<td><strong>Sta</strong></td>
-		</tr>
-		<tr>
-        	<th>&nbsp;</th>
-			<td><?php if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_colorchange'];}else{echo $rcek1['cm_dye_colorchange'];}?></td>
-		    <td colspan="4"><?php if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_stainingface'];}else{echo $rcek1['cm_dye_stainingface'];}?></td>
-			<!--<td><?php echo $rcek1['cm_dye_stainingback'];?></td>-->
-		</tr>
-		<?php } ?>
-		<?php if($rcek1['light_pers_colorchange']!=""){?>
-		<tr>
-		    <th>Light Perspiration</th>
-			<th><strong>CC</strong></th>
-		    <td colspan="4"><?php if($rcek1['stat_lp']=="RANDOM"){echo $rcekR['rlight_pers_colorchange'];}else{echo $rcek1['light_pers_colorchange'];}?></td>
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['saliva_staining']!=""){?>
-		<tr>
-		    <th>Saliva</th>
-			<th>&nbsp;</th>
-		    <td colspan="2"><?php if($rcek1['stat_slv']=="RANDOM"){echo $rcekR['rsaliva_staining'];}else{echo $rcek1['saliva_staining'];}?></td>
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['bleeding']!=""){?>
-		<tr>
-		    <th>Bleeding</th>
-			<th>&nbsp;</th>
-		    <td colspan="2"><?php if($rcek1['stat_bld']=="RANDOM"){echo $rcekR['rbleeding'];}else{echo $rcek1['bleeding'];}?></td>
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['chlorin']!="" or $rcek1['nchlorin1']!="" or $rcek1['nchlorin2']!=""){?>
-		<tr>
-		    <th>Chlorin</th>
-			<th>&nbsp;</th>
-		    <td colspan="2"><?php if($rcek1['stat_chl']=="RANDOM"){echo $rcekR['rchlorin'];}else{echo $rcek1['chlorin'];}?></td>
-			<td>&nbsp;</td>
-	    </tr>
-		<tr>
-		    <th>Non-Chlorin</th>
-			<th>&nbsp;</th>
-		    <td colspan="2"><?php if($rcek1['stat_nchl']=="RANDOM"){echo $rcekR['rnchlorin1'];}else{echo $rcek1['nchlorin1'];}?></td>
-			<td colspan="2"><?php if($rcek1['stat_nchl']=="RANDOM"){echo $rcekR['rnchlorin2'];}else{echo $rcek1['nchlorin2'];}?></td>
-	    </tr>
-		<?php } ?>
-		<?php if($rcek1['dye_tf_cstaining']!="" or $rcek1['dye_tf_acetate']!="" or $rcek1['dye_tf_cotton']!="" or $rcek1['dye_tf_nylon']!="" or $rcek1['dye_tf_poly']!="" or $rcek1['dye_tf_acrylic']!="" or $rcek1['dye_tf_wool']!="" or $rcek1['dye_tf_sstaining']!=""){
-      		?>	
-      	<tr>
-		    <th rowspan="4" colspan="2">Dye Transfer</th>
-			<td><strong>Ace</strong></td>
-		    <td colspan="2"><strong>Cot</strong></td>
-			<td><strong>Nyl</strong></td>
-		    <td colspan="2"><strong>Poly</strong></td>
-			<td>&nbsp;</td>
-      	</tr>
-		<tr>
-			<th>&nbsp;</th>
-			<td><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acetate'];}else{echo $rcek1['dye_tf_acetate'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cotton'];}else{echo $rcek1['dye_tf_cotton'];}?></td>
-			<td><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_nylon'];}else{echo $rcek1['dye_tf_nylon'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_poly'];}else{echo $rcek1['dye_tf_poly'];}?></td>
-          	<td>&nbsp;</td>
-      	</tr>
-      	<tr>
-			<th>&nbsp;</th>
-			<td><strong>Acr</strong></td>
-		    <td colspan="2"><strong>Wool</strong></td>
-			<td><strong>C.Sta</strong></td>
-		    <td colspan="2"><strong>S.Sta</strong></td>
-          	<td>&nbsp;</td>
-      	</tr>
-		<tr>
-			<th>&nbsp;</th>
-		    <td><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acrylic'];}else{echo $rcek1['dye_tf_acrylic'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_wool'];}else{echo $rcek1['dye_tf_wool'];}?></td>
-			<td><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cstaining'];}else{echo $rcek1['dye_tf_cstaining'];}?></td>
-		    <td colspan="2"><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_sstaining'];}else{echo $rcek1['dye_tf_sstaining'];}?></td>
-          	<td>&nbsp;</td>
-        </tr>
-		<?php } ?>
-		
-		  </table>
-		  <address>
-            
-          </address> 
+        <div class="col-sm-6 invoice-col">
+				<strong>COLORFASTNESS</strong>
+				<hr>
+				<table class="table">
+					<?php if($rcek1['wash_temp']!="" or $rcek1['wash_colorchange']!="" or $rcek1['wash_acetate']!="" or $rcek1['wash_cotton']!="" or $rcek1['wash_nylon']!="" or $rcek1['wash_poly']!="" or $rcek1['wash_acrylic']!="" or $rcek1['wash_wool']!="" or $rcek1['wash_staining']!=""){
+					?>	
+				<tr>
+					<th rowspan="5">Washing</th>
+					<th>Suhu</th>
+					<td colspan="4"><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_temp'];}else{echo $rcek1['wash_temp'];}?>&deg;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><strong>CC</strong></td>
+					<td colspan="2"><strong>Ace</strong></td>
+					<td><strong>Cot</strong></td>
+					<td colspan="2"><strong>Nyl</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_colorchange'];}else{echo $rcek1['wash_colorchange'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_acetate'];}else{echo $rcek1['wash_acetate'];}?></td>
+					<td><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_cotton'];}else{echo $rcek1['wash_cotton'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_nylon'];}else{echo $rcek1['wash_nylon'];}?></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><strong>Poly</strong></td>
+					<td colspan="2"><strong>Acr</strong></td>
+					<td><strong>Wool</strong></td>
+					<td colspan="2"><strong>Sta</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_poly'];}else{echo $rcek1['wash_poly'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_acrylic'];}else{echo $rcek1['wash_acrylic'];}?></td>
+					<td><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_wool'];}else{echo $rcek1['wash_wool'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_wf']=="RANDOM"){echo $rcekR['rwash_staining'];}else{echo $rcek1['wash_staining'];}?></td>
+					<td>&nbsp;</td>
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['acid_colorchange']!="" or $rcek1['acid_acetate']!="" or $rcek1['acid_cotton']!="" or $rcek1['acid_nylon']!="" or $rcek1['acid_poly']!="" or $rcek1['acid_acrylic']!="" or $rcek1['acid_wool']!="" or $rcek1['acid_staining']!=""){?>
+				<tr>
+					<th rowspan="4" colspan="2">Perspiration Acid</th>
+					<td><strong>CC</strong></td>
+					<td colspan="2"><strong>Ace</strong></td>
+					<td><strong>Cot</strong></td>
+					<td colspan="2"><strong>Nyl</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td ><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_colorchange'];}else{echo $rcek1['acid_colorchange'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_acetate'];}else{echo $rcek1['acid_acetate'];}?></td>
+					<td><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_cotton'];}else{echo $rcek1['acid_cotton'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_nylon'];}else{echo $rcek1['acid_nylon'];}?></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td><strong>Poly</strong></td>
+					<td colspan="2"><strong>Acr</strong></td>
+					<td><strong>Wool</strong></td>
+					<td colspan="2"><strong>Sta</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_poly'];}else{echo $rcek1['acid_poly'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_acrylic'];}else{echo $rcek1['acid_acrylic'];}?></td>
+					<td><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_wool'];}else{echo $rcek1['acid_wool'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_pac']=="RANDOM"){echo $rcekR['racid_staining'];}else{echo $rcek1['acid_staining'];}?></td>
+					<td>&nbsp;</td>
+					<!--<td colspan="2"><?php echo $rcek1['acid_staining'];?></td>-->
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['alkaline_colorchange']!="" or $rcek1['alkaline_acetate']!="" or $rcek1['alkaline_cotton']!="" or $rcek1['alkaline_nylon']!="" or $rcek1['alkaline_poly']!="" or $rcek1['alkaline_acrylic']!="" or $rcek1['alkaline_wool']!="" or $rcek1['alkaline_staining']!=""){?>
+				<tr>
+					<th rowspan="4" colspan="2">Perspiration Alkaline</th>
+					<td><strong>CC</strong></td>
+					<td colspan="2"><strong>Ace</strong></td>
+					<td><strong>Cot</strong></td>
+					<td colspan="2"><strong>Nyl</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_colorchange'];}else{echo $rcek1['alkaline_colorchange'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_acetate'];}else{echo $rcek1['alkaline_acetate'];}?></td>
+					<td><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_cotton'];}else{echo $rcek1['alkaline_cotton'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_nylon'];}else{echo $rcek1['alkaline_nylon'];}?></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td><strong>Poly</strong></td>
+					<td colspan="2"><strong>Acr</strong></td>
+					<td><strong>Wool</strong></td>
+					<td colspan="2"><strong>Sta</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_poly'];}else{echo $rcek1['alkaline_poly'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_acrylic'];}else{echo $rcek1['alkaline_acrylic'];}?></td>
+					<td><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_wool'];}else{echo $rcek1['alkaline_wool'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_pal']=="RANDOM"){echo $rcekR['ralkaline_staining'];}else{echo $rcek1['alkaline_staining'];}?></td>
+					<td>&nbsp;</td>
+					<!--<td colspan="2"><?php echo $rcek1['alkaline_staining'];?></td>-->
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['water_colorchange']!="" or $rcek1['water_acetate']!="" or $rcek1['water_cotton']!="" or $rcek1['water_nylon']!="" or $rcek1['water_poly']!="" or $rcek1['water_acrylic']!="" or $rcek1['water_wool']!="" or $rcek1['water_staining']!=""){?>
+				<tr>
+					<th rowspan="4" colspan="2">Water</th>
+					<td><strong>CC</strong></td>
+					<td colspan="2"><strong>Ace</strong></td>
+					<td><strong>Cot</strong></td>
+					<td colspan="2"><strong>Nyl</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_colorchange'];}else{echo $rcek1['water_colorchange'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_acetate'];}else{echo $rcek1['water_acetate'];}?></td>
+					<td><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_cotton'];}else{echo $rcek1['water_cotton'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_nylon'];}else{echo $rcek1['water_nylon'];}?></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td><strong>Poly</strong></td>
+					<td colspan="2"><strong>Acr</strong></td>
+					<td><strong>Wool</strong></td>
+					<td colspan="2"><strong>Sta</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_poly'];}else{echo $rcek1['water_poly'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_acrylic'];}else{echo $rcek1['water_acrylic'];}?></td>
+					<td><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_wool'];}else{echo $rcek1['water_wool'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_wtr']=="RANDOM"){echo $rcekR['rwater_staining'];}else{echo $rcek1['water_staining'];}?></td>
+					<td>&nbsp;</td>
+					<!--<td><?php echo $rcek1['water_staining'];?></td>-->
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['crock_len1']!="" or $rcek1['crock_wid1']!="" or $rcek1['crock_len2']!="" or $rcek1['crock_wid2']!=""){?>
+				<tr>
+					<th rowspan="3">Crocking</th>
+					<th>Srt</th>
+					<th>Dry</th>
+					<th>Wet</th>
+				</tr>
+				<tr>
+					<th>Len</th>
+					<td><?php if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_len1'];}else{echo $rcek1['crock_len1'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_len2'];}else{echo $rcek1['crock_len2'];}?></td>
+				</tr>
+				<tr>
+					<th >Wid</th>
+					<td><?php if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_wid1'];}else{echo $rcek1['crock_wid1'];}?></td>
+					<td colspan="3"><?php if($rcek1['stat_cr']=="RANDOM"){echo $rcekR['rcrock_wid2'];}else{echo $rcek1['crock_wid2'];}?></td>
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['phenolic_colorchange']!=""){?>
+				<tr>
+					<th>Phenolic Yellowing</th>
+					<th><strong>CC</strong></th>
+					<td colspan="4"><?php if($rcek1['stat_py']=="RANDOM"){echo $rcekR['rphenolic_colorchange'];}else{echo $rcek1['phenolic_colorchange'];}?></td>
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['light_rating1']!="" or $rcek1['light_rating2']!=""){?>
+				<tr>
+					<th>Light</th>
+					<th>&nbsp;</th>
+					<td><?php if($rcek1['stat_lg']=="RANDOM"){echo $rcekR['rlight_rating1'];}else{echo $rcek1['light_rating1'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_lg']=="RANDOM"){echo $rcekR['rlight_rating2'];}else{echo $rcek1['light_rating2'];}?></td>
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['cm_printing_colorchange']!="" or $rcek1['cm_printing_staining']!=""){?>
+				<tr>
+					<th>Color Migration Oven</th>
+					<th>&nbsp;</th>
+					<td colspan="3"><?php if($rcek1['stat_cmo']=="RANDOM"){echo $rcekR['rcm_printing_colorchange'];}else{echo $rcek1['cm_printing_colorchange'];}?></td>
+					<td><?php if($rcek1['stat_cmo']=="RANDOM"){echo $rcekR['rcm_printing_staining'];}else{echo $rcek1['cm_printing_staining'];}?></td>
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['cm_dye_temp']!="" or $rcek1['cm_dye_colorchange']!="" or $rcek1['cm_dye_stainingface']!="" or $rcek1['cm_dye_stainingback']!=""){?>
+				<tr>
+					<th rowspan="3">Color Migration</th>
+					<th>Suhu</th>
+					<td colspan="4"><?php if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_temp'];}else{echo $rcek1['cm_dye_temp'];}?>&deg;</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><strong>CC</strong></td>
+					<td><strong>Sta</strong></td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><?php if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_colorchange'];}else{echo $rcek1['cm_dye_colorchange'];}?></td>
+					<td colspan="4"><?php if($rcek1['stat_cm']=="RANDOM"){echo $rcekR['rcm_dye_stainingface'];}else{echo $rcek1['cm_dye_stainingface'];}?></td>
+					<!--<td><?php echo $rcek1['cm_dye_stainingback'];?></td>-->
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['light_pers_colorchange']!=""){?>
+				<tr>
+					<th>Light Perspiration</th>
+					<th><strong>CC</strong></th>
+					<td colspan="4"><?php if($rcek1['stat_lp']=="RANDOM"){echo $rcekR['rlight_pers_colorchange'];}else{echo $rcek1['light_pers_colorchange'];}?></td>
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['saliva_staining']!=""){?>
+				<tr>
+					<th>Saliva</th>
+					<th>&nbsp;</th>
+					<td colspan="2"><?php if($rcek1['stat_slv']=="RANDOM"){echo $rcekR['rsaliva_staining'];}else{echo $rcek1['saliva_staining'];}?></td>
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['bleeding']!=""){?>
+				<tr>
+					<th>Bleeding</th>
+					<th>&nbsp;</th>
+					<td colspan="2"><?php if($rcek1['stat_bld']=="RANDOM"){echo $rcekR['rbleeding'];}else{echo $rcek1['bleeding'];}?></td>
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['chlorin']!="" or $rcek1['nchlorin1']!="" or $rcek1['nchlorin2']!=""){?>
+				<tr>
+					<th>Chlorin</th>
+					<th>&nbsp;</th>
+					<td colspan="2"><?php if($rcek1['stat_chl']=="RANDOM"){echo $rcekR['rchlorin'];}else{echo $rcek1['chlorin'];}?></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>Non-Chlorin</th>
+					<th>&nbsp;</th>
+					<td colspan="2"><?php if($rcek1['stat_nchl']=="RANDOM"){echo $rcekR['rnchlorin1'];}else{echo $rcek1['nchlorin1'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_nchl']=="RANDOM"){echo $rcekR['rnchlorin2'];}else{echo $rcek1['nchlorin2'];}?></td>
+				</tr>
+				<?php } ?>
+				<?php if($rcek1['dye_tf_cstaining']!="" or $rcek1['dye_tf_acetate']!="" or $rcek1['dye_tf_cotton']!="" or $rcek1['dye_tf_nylon']!="" or $rcek1['dye_tf_poly']!="" or $rcek1['dye_tf_acrylic']!="" or $rcek1['dye_tf_wool']!="" or $rcek1['dye_tf_sstaining']!=""){
+					?>	
+				<tr>
+					<th rowspan="4" colspan="2">Dye Transfer</th>
+					<td><strong>Ace</strong></td>
+					<td colspan="2"><strong>Cot</strong></td>
+					<td><strong>Nyl</strong></td>
+					<td colspan="2"><strong>Poly</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acetate'];}else{echo $rcek1['dye_tf_acetate'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cotton'];}else{echo $rcek1['dye_tf_cotton'];}?></td>
+					<td><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_nylon'];}else{echo $rcek1['dye_tf_nylon'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_poly'];}else{echo $rcek1['dye_tf_poly'];}?></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><strong>Acr</strong></td>
+					<td colspan="2"><strong>Wool</strong></td>
+					<td><strong>C.Sta</strong></td>
+					<td colspan="2"><strong>S.Sta</strong></td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th>&nbsp;</th>
+					<td><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_acrylic'];}else{echo $rcek1['dye_tf_acrylic'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_wool'];}else{echo $rcek1['dye_tf_wool'];}?></td>
+					<td><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_cstaining'];}else{echo $rcek1['dye_tf_cstaining'];}?></td>
+					<td colspan="2"><?php if($rcek1['stat_dye']=="RANDOM"){echo $rcekR['rdye_tf_sstaining'];}else{echo $rcek1['dye_tf_sstaining'];}?></td>
+					<td>&nbsp;</td>
+				</tr>
+				<?php } ?>
+				</table>
+				<address>
+					
+				</address> 
         </div>
         <!-- /.col -->
       </div>
@@ -3484,6 +3952,28 @@ if($_POST['colorfastness_save']=="save" and $cek1>0){
 	`crock_len2`='$_POST[crock_len2]',
 	`crock_wid2`='$_POST[crock_wid2]',
 	`crock_note`='$_POST[crock_note]',
+	`apper_ch1`='$_POST[apper_ch1]',
+	`apper_ch2`='$_POST[apper_ch2]',
+	`apper_ch3`='$_POST[apper_ch3]',
+	`apper_cc1`='$_POST[apper_cc1]',
+	`apper_cc2`='$_POST[apper_cc2]',
+	`apper_cc3`='$_POST[apper_cc3]',
+	`apper_st`='$_POST[apper_st]',
+	`apper_st2`='$_POST[apper_st2]',
+	`apper_st3`='$_POST[apper_st3]',
+	`apper_pf1`='$_POST[apper_pf1]',
+	`apper_pf2`='$_POST[apper_pf2]',
+	`apper_pf3`='$_POST[apper_pf3]',
+	`apper_pb1`='$_POST[apper_pb1]',
+	`apper_pb2`='$_POST[apper_pb2]',
+	`apper_pb3`='$_POST[apper_pb3]',
+	`apper_acetate`='$_POST[apper_acetate]',
+	`apper_cotton`='$_POST[apper_cotton]',
+	`apper_nylon`='$_POST[apper_nylon]',
+	`apper_poly`='$_POST[apper_poly]',
+	`apper_acrylic`='$_POST[apper_acrylic]',
+	`apper_wool`='$_POST[apper_wool]',
+	`apper_note`='$_POST[apper_note]',
 	`phenolic_colorchange`='$_POST[phenolic_colorchange]',
 	`phenolic_note`='$_POST[phenolic_note]',
 	`cm_printing_colorchange`='$_POST[cm_printing_colorchange]',
@@ -3531,6 +4021,7 @@ if($_POST['colorfastness_save']=="save" and $cek1>0){
 	`stat_chl`='$_POST[stat_chl]',
 	`stat_nchl`='$_POST[stat_nchl]',
 	`stat_dye`='$_POST[stat_dye]',
+	`stat_ap`='$_POST[stat_ap]',
 	`tgl_update`=now(),
 	`sco_acid_original`= '$sco_original',
 	`sco_acid_status`= '$_POST[sco_acid_status]',
@@ -3564,6 +4055,28 @@ if($_POST['colorfastness_save']=="save" and $cek1>0){
 	`dwater_wool`='$_POST[dwater_wool]',
 	`dwater_staining`='$_POST[dwater_staining]',
 	`dwater_note`='$_POST[dwater_note]',
+	`dapper_ch1`='$_POST[dapper_ch1]',
+	`dapper_ch2`='$_POST[dapper_ch2]',
+	`dapper_ch3`='$_POST[dapper_ch3]',
+	`dapper_cc1`='$_POST[dapper_cc1]',
+	`dapper_cc2`='$_POST[dapper_cc2]',
+	`dapper_cc3`='$_POST[dapper_cc3]',
+	`dapper_st`='$_POST[dapper_st]',
+	`dapper_st2`='$_POST[dapper_st2]',
+	`dapper_st3`='$_POST[dapper_st3]',
+	`dapper_pf1`='$_POST[dapper_pf1]',
+	`dapper_pf2`='$_POST[dapper_pf2]',
+	`dapper_pf3`='$_POST[dapper_pf3]',
+	`dapper_pb1`='$_POST[dapper_pb1]',
+	`dapper_pb2`='$_POST[dapper_pb2]',
+	`dapper_pb3`='$_POST[dapper_pb3]',
+	`dapper_acetate`='$_POST[dapper_acetate]',
+	`dapper_cotton`='$_POST[dapper_cotton]',
+	`dapper_nylon`='$_POST[dapper_nylon]',
+	`dapper_poly`='$_POST[dapper_poly]',
+	`dapper_acrylic`='$_POST[dapper_acrylic]',
+	`dapper_wool`='$_POST[dapper_wool]',
+	`dapper_note`='$_POST[dapper_note]',
 	`dacid_colorchange`='$_POST[dacid_colorchange]',
 	`dacid_acetate`='$_POST[dacid_acetate]',
 	`dacid_cotton`='$_POST[dacid_cotton]',
@@ -3644,6 +4157,28 @@ $sqlCLRDI=mysqli_query($conlab,"INSERT INTO tbl_tq_disptest SET
 `dwater_wool`='$_POST[dwater_wool]',
 `dwater_staining`='$_POST[dwater_staining]',
 `dwater_note`='$_POST[dwater_note]',
+`dapper_ch1`='$_POST[dapper_ch1]',
+`dapper_ch2`='$_POST[dapper_ch2]',
+`dapper_ch3`='$_POST[dapper_ch3]',
+`dapper_cc1`='$_POST[dapper_cc1]',
+`dapper_cc2`='$_POST[dapper_cc2]',
+`dapper_cc3`='$_POST[dapper_cc3]',
+`dapper_st`='$_POST[dapper_st]',
+`dapper_st2`='$_POST[dapper_st2]',
+`dapper_st3`='$_POST[dapper_st3]',
+`dapper_pf1`='$_POST[dapper_pf1]',
+`dapper_pf2`='$_POST[dapper_pf2]',
+`dapper_pf3`='$_POST[dapper_pf3]',
+`dapper_pb1`='$_POST[dapper_pb1]',
+`dapper_pb2`='$_POST[dapper_pb2]',
+`dapper_pb3`='$_POST[dapper_pb3]',
+`dapper_acetate`='$_POST[dapper_acetate]',
+`dapper_cotton`='$_POST[dapper_cotton]',
+`dapper_nylon`='$_POST[dapper_nylon]',
+`dapper_poly`='$_POST[dapper_poly]',
+`dapper_acrylic`='$_POST[dapper_acrylic]',
+`dapper_wool`='$_POST[dapper_wool]',
+`dapper_note`='$_POST[dapper_note]',
 `dacid_colorchange`='$_POST[dacid_colorchange]',
 `dacid_acetate`='$_POST[dacid_acetate]',
 `dacid_cotton`='$_POST[dacid_cotton]',
@@ -3769,6 +4304,28 @@ $sqlCLRM=mysqli_query($conlab,"UPDATE tbl_tq_marginal SET
 	`mnchlorin1`='$_POST[mnchlorin1]',
 	`mnchlorin2`='$_POST[mnchlorin2]',
 	`mchlorin_note`='$_POST[mchlorin_note]',
+	`mapper_ch1`='$_POST[mapper_ch1]',
+	`mapper_ch2`='$_POST[mapper_ch2]',
+	`mapper_ch3`='$_POST[mapper_ch3]',
+	`mapper_cc1`='$_POST[mapper_cc1]',
+	`mapper_cc2`='$_POST[mapper_cc2]',
+	`mapper_cc3`='$_POST[mapper_cc3]',
+	`mapper_st`='$_POST[mapper_st]',
+	`mapper_st2`='$_POST[mapper_st2]',
+	`mapper_st3`='$_POST[mapper_st3]',
+	`mapper_pf1`='$_POST[mapper_pf1]',
+	`mapper_pf2`='$_POST[mapper_pf2]',
+	`mapper_pf3`='$_POST[mapper_pf3]',
+	`mapper_pb1`='$_POST[mapper_pb1]',
+	`mapper_pb2`='$_POST[mapper_pb2]',
+	`mapper_pb3`='$_POST[mapper_pb3]',
+	`mapper_acetate`='$_POST[mapper_acetate]',
+	`mapper_cotton`='$_POST[mapper_cotton]',
+	`mapper_nylon`='$_POST[mapper_nylon]',
+	`mapper_poly`='$_POST[mapper_poly]',
+	`mapper_acrylic`='$_POST[mapper_acrylic]',
+	`mapper_wool`='$_POST[mapper_wool]',
+	`mapper_note`='$_POST[mapper_note]',
 	`mdye_tf_sstaining`='$_POST[mdye_tf_sstaining]',
 	`mdye_tf_cstaining`='$_POST[mdye_tf_cstaining]',
 	`mdye_tf_acetate`='$_POST[mdye_tf_acetate]',
@@ -3812,6 +4369,28 @@ $sqlCLRMI=mysqli_query($conlab,"INSERT INTO tbl_tq_marginal SET
 `macid_wool`='$_POST[macid_wool]',
 `macid_staining`='$_POST[macid_staining]',
 `macid_note`='$_POST[macid_note]',
+`mapper_ch1`='$_POST[mapper_ch1]',
+`mapper_ch2`='$_POST[mapper_ch2]',
+`mapper_ch3`='$_POST[mapper_ch3]',
+`mapper_cc1`='$_POST[mapper_cc1]',
+`mapper_cc2`='$_POST[mapper_cc2]',
+`mapper_cc3`='$_POST[mapper_cc3]',
+`mapper_st`='$_POST[mapper_st]',
+`mapper_st2`='$_POST[mapper_st2]',
+`mapper_st3`='$_POST[mapper_st3]',
+`mapper_pf1`='$_POST[mapper_pf1]',
+`mapper_pf2`='$_POST[mapper_pf2]',
+`mapper_pf3`='$_POST[mapper_pf3]',
+`mapper_pb1`='$_POST[mapper_pb1]',
+`mapper_pb2`='$_POST[mapper_pb2]',
+`mapper_pb3`='$_POST[mapper_pb3]',
+`mapper_acetate`='$_POST[mapper_acetate]',
+`mapper_cotton`='$_POST[mapper_cotton]',
+`mapper_nylon`='$_POST[mapper_nylon]',
+`mapper_poly`='$_POST[mapper_poly]',
+`mapper_acrylic`='$_POST[mapper_acrylic]',
+`mapper_wool`='$_POST[mapper_wool]',
+`mapper_note`='$_POST[mapper_note]',
 `malkaline_colorchange`='$_POST[malkaline_colorchange]',
 `malkaline_acetate`='$_POST[malkaline_acetate]',
 `malkaline_cotton`='$_POST[malkaline_cotton]',
@@ -3950,6 +4529,28 @@ $sqlCLRMI=mysqli_query($conlab,"INSERT INTO tbl_tq_marginal SET
 	`dye_tf_acrylic`='$_POST[dye_tf_acrylic]',
 	`dye_tf_wool`='$_POST[dye_tf_wool]',
 	`dye_tf_note`='$_POST[dye_tf_note]',
+	`apper_ch1`='$_POST[apper_ch1]',
+	`apper_ch2`='$_POST[apper_ch2]',
+	`apper_ch3`='$_POST[apper_ch3]',
+	`apper_cc1`='$_POST[apper_cc1]',
+	`apper_cc2`='$_POST[apper_cc2]',
+	`apper_cc3`='$_POST[apper_cc3]',
+	`apper_st`='$_POST[apper_st]',
+	`apper_st2`='$_POST[apper_st2]',
+	`apper_st3`='$_POST[apper_st3]',
+	`apper_pf1`='$_POST[apper_pf1]',
+	`apper_pf2`='$_POST[apper_pf2]',
+	`apper_pf3`='$_POST[apper_pf3]',
+	`apper_pb1`='$_POST[apper_pb1]',
+	`apper_pb2`='$_POST[apper_pb2]',
+	`apper_pb3`='$_POST[apper_pb3]',
+	`apper_acetate`='$_POST[apper_acetate]',
+	`apper_cotton`='$_POST[apper_cotton]',
+	`apper_nylon`='$_POST[apper_nylon]',
+	`apper_poly`='$_POST[apper_poly]',
+	`apper_acrylic`='$_POST[apper_acrylic]',
+	`apper_wool`='$_POST[apper_wool]',
+	`apper_note`='$_POST[apper_note]',
 	`stat_wf`='$_POST[stat_wf]',
 	`stat_wtr`='$_POST[stat_wtr]',
 	`stat_pac`='$_POST[stat_pac]',
@@ -3965,6 +4566,7 @@ $sqlCLRMI=mysqli_query($conlab,"INSERT INTO tbl_tq_marginal SET
 	`stat_chl`='$_POST[stat_chl]',
 	`stat_nchl`='$_POST[stat_nchl]',
 	`stat_dye`='$_POST[stat_dye]',
+	`stat_ap`='$_POST[stat_ap]',
 	`tgl_buat`=now(),
 	`tgl_update`=now(),
 	`sco_acid_original`= '$sco_original',

@@ -84,7 +84,7 @@ if ($exists) {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $con->prepare($sql);
     $stmt->bind_param(
-        "ssssssssssssssss",
+        "sssssssssssssssss",
         $nodemand, $personil1, $personil2, $personil3, $personil4, $personil5, $personil6,
         $shift1, $shift2, $pejabat, $hitung, $status, $analisa, $hasil_analisa, $user, $today, $nokk
     );
