@@ -476,7 +476,7 @@ GROUP BY b.g_shift	");
 						</tr>
 						<?php
 						//						$qrySI = mysqli_query($con, "SELECT SUM(bruto) AS kg, COUNT(*) AS sisa_kk FROM tbl_schedule WHERE NOT STATUS = 'selesai' AND `status`='antri mesin' AND NOT proses='Perbaikan'");
-						$qrySI = mysqli_query($con, "SELECT SUM(bruto) AS kg, COUNT(*) AS sisa_kk FROM tbl_schedule WHERE NOT STATUS = 'selesai'");
+						$qrySI = mysqli_query($con, "SELECT SUM(bruto) AS kg, COUNT(*) AS sisa_kk FROM tbl_schedule WHERE NOT STATUS = 'selesai' AND NOT proses='Perbaikan' ");
 						$rSI = mysqli_fetch_array($qrySI);
 						$qrySPR = mysqli_query($con, "SELECT COUNT(*) AS kk_pr, SUM(a.bruto-b.qty) AS qty_pr
 			FROM tbl_schedule a 
