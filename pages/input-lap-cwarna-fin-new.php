@@ -505,6 +505,9 @@ $d_netto		= db2_fetch_assoc($sql_netto);
                             <option value="PB" <?php if ($row['proses'] == "PB") {
                                                     echo "SELECTED";
                                                 } ?>>PB</option>
+                            <option value="LSR" <?php if ($row['proses'] == "LSR") {
+                                                    echo "SELECTED";
+                                                } ?>>LSR</option>
                         </select>
                     </div>
                 </div>
