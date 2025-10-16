@@ -42,7 +42,8 @@ $data1 = mysqli_query($con, "SELECT nodemand,
                                     lot,
                                     no_warna,
                                     rol,
-                                    berat  
+                                    berat,
+                                    proses_fin  
                                   FROM tbl_tq_nokk WHERE id='$idkk'");
 $rd = mysqli_fetch_array($data1);
 ?>
@@ -99,7 +100,7 @@ $rd = mysqli_fetch_array($data1);
       </tr>
       <tr>
         <td colspan="1" align="left">Roll x Bruto : <?php echo $rd['rol'] . ' x '.$rd['berat'] ; ?></td>
-        <td>&nbsp;</td>
+        <td>Proses : <?php echo $rd['proses_fin']; ?></td>
         <td colspan="1" align="left">&nbsp;</td>
       </tr>
       <tr>
