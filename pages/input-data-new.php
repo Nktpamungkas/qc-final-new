@@ -950,11 +950,15 @@ $rcekd=mysqli_fetch_array($sqlD);
 			<?php if($cek > 0) { ?>
 				<div class="form-group">
 					<label for="upload_file" class="col-sm-3 control-label">Upload File</label>
+					<?php if($rcek['file_upload'] != '') { ?>
 					<div class="col-sm-7">
-						<?php if($rcek['file_upload'] != '') { ?>
 							<a href="upload_files/<?php echo $rcek['file_upload']; ?>" target="_blank">Lihat File</a>
-						<?php } ?>
-					</div>
+						</div>
+					<?php } else { ?>
+						<div class="col-sm-7">
+							<input type="file" name="upload_file" class="form-control" id="upload_file">
+						</div>
+					<?php } ?>
 				</div>
 			<?php } else { ?>
 				<div class="form-group">
