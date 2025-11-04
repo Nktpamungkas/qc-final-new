@@ -3,6 +3,27 @@ ini_set("error_reporting", 1);
 session_start();
 include "koneksi.php";
 $today = date('Y-m-d');
+$pg_status = '';
+
+// Handle update for proses_gerobak from modal form
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['simpan_proses_gerobak'])) {
+  $id_update = isset($_POST['id_schedule']) ? (int) $_POST['id_schedule'] : 0;
+  $proses_gerobak = isset($_POST['proses_gerobak']) ? trim($_POST['proses_gerobak']) : '';
+  $keterangan_pg = isset($_POST['keterangan_pg']) ? trim($_POST['keterangan_pg']) : '';
+
+  if ($id_update > 0 && $proses_gerobak !== '') {
+    $proses_val = mysqli_real_escape_string($con, $proses_gerobak);
+    $ket_val = mysqli_real_escape_string($con, $keterangan_pg);
+
+    // Simpan terpisah: proses_gerobak (pilihan), ket_gerobak (keterangan)
+    $q = mysqli_query($con, "UPDATE tbl_schedule_packing SET proses_gerobak='$proses_val', ket_gerobak='$ket_val' WHERE id='$id_update'");
+    if ($q) {
+      $pg_status = 'OK';
+    } else {
+      $pg_status = 'ERR: ' . mysqli_error($con);
+    }
+  }
+}
 ?>
 
 <!DOCTYPE html
@@ -29,6 +50,8 @@ $today = date('Y-m-d');
 	warna,
 	no_warna,
 	lot,
+  proses_gerobak,
+  ket_gerobak,
 	sum(rol) as rol,
 	sum(bruto) as bruto,
 	proses,
@@ -76,6 +99,12 @@ ORDER BY
             <a href="pages/cetak/cetak_summary_buyer.php" class="btn btn-success" target="_blank"><i
                 class="fa fa-print"></i> Summary Buyer</a> -->
           </div>
+
+          <?php if ($pg_status !== '') { ?>
+            <div class="alert <?php echo ($pg_status === 'OK') ? 'alert-success' : 'alert-danger'; ?>" role="alert" style="margin-top:10px;">
+              <?php echo ($pg_status === 'OK') ? 'Proses gerobak berhasil disimpan.' : 'Gagal menyimpan: ' . $pg_status; ?>
+            </div>
+          <?php } ?>
 
           <div class="box-body">
             <table id="example1" class="table table-bordered table-hover table-striped" width="100%">
@@ -178,6 +207,48 @@ ORDER BY
                     <!-- /.modal-dialog -->
                   </div>
 
+                  <!-- Modal: Update Proses Gerobak -->
+                  <div class="modal fade modal-super-scaled" id="ProsesGerobak<?php echo $rowd['id']; ?>">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Update Proses Gerobak</h4>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label class="control-label col-sm-4">Keterangan</label>
+                              <div class="col-sm-8">
+                                <textarea name="keterangan_pg" class="form-control" placeholder="Catatan (opsional)" rows="5"><?php echo htmlspecialchars($rowd['ket_gerobak']); ?></textarea>
+                              </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                              <label class="control-label col-sm-4">Proses Gerobak</label>
+                              <div class="col-sm-8">
+                                <select name="proses_gerobak" class="form-control" required>
+                                  <option value="">-- Pilih --</option>
+                                  <option value="Cari Gerobak" <?php echo ($rowd['proses_gerobak'] === 'Cari Gerobak') ? 'selected' : ''; ?>>Cari Gerobak</option>
+                                  <option value="Complete" <?php echo ($rowd['proses_gerobak'] === 'Complete') ? 'selected' : ''; ?>>Complete</option>
+                                </select>
+                              </div>
+                            </div>
+                            <input type="hidden" name="id_schedule" value="<?php echo $rowd['id']; ?>">
+                          </div>
+                          <br/>
+                          <br/>
+                          <br/>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>
+                            <button type="submit" name="simpan_proses_gerobak" value="1" class="btn btn-primary">Simpan</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
                   <tr bgcolor="<?php echo $bgcolor; ?>">
                     <td align="center">
                       <div class="btn-group">
@@ -252,6 +323,42 @@ ORDER BY
                     </td>
                     <td>
                       <?php echo $rowd['proses']; ?>
+                      <br />
+                      <?php
+                      $btnClassPG = 'btn-info';
+                      $pgVal = isset($rowd['proses_gerobak']) ? trim($rowd['proses_gerobak']) : '';
+                      if ($pgVal !== '' && (strcasecmp($pgVal, 'Complete') === 0)) {
+                        $btnClassPG = 'btn-success';
+                      }
+                      ?>
+                      <button type="button" class="btn btn-xs <?php echo $btnClassPG; ?>" data-toggle="modal" data-target="#ProsesGerobak<?php echo $rowd['id']; ?>">
+                        <?php echo ($pgVal !== '') ? $pgVal : 'Cari Gerobak'; ?>
+                      </button>
+                      <?php if (!empty($rowd['ket_gerobak'])) { ?>
+                        <br><span class="label label-default">Ket: <?php echo htmlspecialchars($rowd['ket_gerobak']); ?></span>
+                      <?php } ?>
+                      <br>
+                      <?php
+                        // Cek posisi di DB2: tampilkan hanya jika OPERATIONCODE = 'CNP1' posisi di ambil dari ELEMENTSINSPECTION NOW
+                        $sql_posisi = "SELECT DISTINCT INSPECTIONSTATION FROM ELEMENTSINSPECTION WHERE DEMANDCODE ='$rowd[nodemand]' AND INSPECTIONSTATION LIKE '%CNP%'";
+                        $exec_posisi = @db2_exec($conn1, $sql_posisi);
+                        while ($row_posisi = db2_fetch_assoc($exec_posisi)) {
+                          echo "<span class='label label-default'>" . $row_posisi['INSPECTIONSTATION'] . "</span>" . "<br>";
+                        }
+                      ?>
+                      <?php 
+                        // kondisi jika hasil query mulai ada datanya makan akan muncul inprogres jika tidak ada maka kosong
+                        $query_mulai = "SELECT MULAI FROM ITXVIEW_POSISIKK_TGL_IN_PRODORDER_CNP1 WHERE PRODUCTIONORDERCODE ='$rowd[nokk]' FETCH FIRST 1 ROWS ONLY";
+                        $stmt_mulai = @db2_prepare($conn1, $query_mulai);
+                        if ($stmt_mulai && @db2_execute($stmt_mulai)) {
+                          $rowd_mulai = db2_fetch_assoc($stmt_mulai);
+                          if (isset($rowd_mulai['MULAI'])) {
+                            echo "<br><span class='badge bg-orange'>Inprogres</span>";
+                          } else {
+                            echo "";
+                          }
+                        }
+                      ?>
                     </td>
                     <td align="center">
                       <?php
