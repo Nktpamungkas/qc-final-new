@@ -1261,9 +1261,19 @@ $rd = mysqli_fetch_array($data1);
                 <td style="font-size: 7px;">&nbsp;</td>
               </tr>
             <?php } ?>
-            <?php if ($rcek1['growth_l1'] != "" or $rcek1['growth_l2'] != "") { ?>
+            <?php if ($rcek1['growth_l1'] != "" || $rcek1['growth_l2'] != "" || $rcek1['growth_l3'] != "") { ?>
               <tr>
-                <th rowspan="2" align="left" style="font-size: 7px;">Growth(%)</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th> 1 Min</th>
+                <th> 30 Min</th>
+                <th> 60 Min</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+              </tr>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Growth Loose Fit</th>
                 <th align="left" style="font-size: 7px;">Len</th>
                 <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_gr'] == "RANDOM") {
@@ -1279,10 +1289,17 @@ $rd = mysqli_fetch_array($data1);
                     echo $rcek1['growth_l2'];
                   } ?>
                 </td>
-                <td colspan="4" style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rgrowth_l3'];
+                  } else {
+                    echo $rcek1['growth_l3'];
+                  } ?>
+                </td>
+                <td colspan="3" style="font-size: 7px;">&nbsp;</td>
               </tr>
             <?php } ?>
-            <?php if ($rcek1['growth_w1'] != "" or $rcek1['growth_w2'] != "") { ?>
+            <?php if ($rcek1['growth_w1'] != "" || $rcek1['growth_w2'] != "" || $rcek1['growth_w3'] != "") { ?>
               <tr>
                 <th align="left" style="font-size: 7px;">Wid</th>
                 <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
@@ -1299,12 +1316,74 @@ $rd = mysqli_fetch_array($data1);
                     echo $rcek1['growth_w2'];
                   } ?>
                 </td>
-                <td colspan="4" style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rgrowth_w3'];
+                  } else {
+                    echo $rcek1['growth_w3'];
+                  } ?>
+                </td>
+                <td colspan="3" style="font-size: 7px;">&nbsp;</td>
               </tr>
             <?php } ?>
-            <?php if ($rcek1['rec_growth_l1'] != "" or $rcek1['rec_growth_l2'] != "") { ?>
+            <?php if ($rcek1['tight_growth_l1'] != "" || $rcek1['tight_growth_l2'] != "" || $rcek1['tight_growth_l3'] != "") { ?>
               <tr>
-                <th rowspan="2" align="left" style="font-size: 7px;">Recovery Growth</th>
+                <th rowspan="2" align="left" style="font-size: 7px;">Growth Tight Fit</th>
+                <th align="left" style="font-size: 7px;">Len</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rtight_growth_l1'];
+                  } else {
+                    echo $rcek1['tight_growth_l1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rtight_growth_l2'];
+                  } else {
+                    echo $rcek1['tight_growth_l2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rtight_growth_l3'];
+                  } else {
+                    echo $rcek1['tight_growth_l3'];
+                  } ?>
+                </td>
+                <td colspan="3" style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['tight_growth_w1'] != "" || $rcek1['tight_growth_w2'] != "" || $rcek1['tight_growth_w3'] != "") { ?>
+              <tr>
+                <th align="left" style="font-size: 7px;">Wid</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rtight_growth_w1'];
+                  } else {
+                    echo $rcek1['tight_growth_w1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rtight_growth_w2'];
+                  } else {
+                    echo $rcek1['tight_growth_w2'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rtight_growth_w3'];
+                  } else {
+                    echo $rcek1['tight_growth_w3'];
+                  } ?>
+                </td>
+                <td colspan="3" style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+            <?php if ($rcek1['rec_growth_l1'] != "" || $rcek1['rec_growth_l2'] != "" || $rcek1['rec_growth_l3'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Recovery Growth Loose Fit</th>
                 <th align="left" style="font-size: 7px;">Len</th>
                 <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
                   <?php if ($rcek1['stat_gr'] == "RANDOM") {
@@ -1320,7 +1399,14 @@ $rd = mysqli_fetch_array($data1);
                     echo $rcek1['rec_growth_l2'];
                   } ?>
                 </td>
-                <td colspan="4" style="font-size: 7px;">&nbsp;</td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_growth_l3'];
+                  } else {
+                    echo $rcek1['rec_growth_l3'];
+                  } ?>
+                </td>
+                <td colspan="3" style="font-size: 7px;">&nbsp;</td>
               </tr>
               <tr>
                 <th align="left" style="font-size: 7px;">Wid</th>
@@ -1338,7 +1424,67 @@ $rd = mysqli_fetch_array($data1);
                     echo $rcek1['rec_growth_w2'];
                   } ?>
                 </td>
-                <td colspan="4" style="font-size: 7px;">&nbsp;</td>
+				        <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_growth_w3'];
+                  } else {
+                    echo $rcek1['rec_growth_w3'];
+                  } ?>
+                </td>
+                <td colspan="3" style="font-size: 7px;">&nbsp;</td>
+              </tr>
+            <?php } ?>
+			<?php if ($rcek1['rec_tight_growth_l1'] != "" || $rcek1['rec_tight_growth_l2'] != "" || $rcek1['rec_tight_growth_l3'] != "") { ?>
+              <tr>
+                <th rowspan="2" align="left" style="font-size: 7px;">Recovery Growth Tight Fit</th>
+                <th align="left" style="font-size: 7px;">Len</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_tight_growth_l1'];
+                  } else {
+                    echo $rcek1['rec_tight_growth_l1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_tight_growth_l2'];
+                  } else {
+                    echo $rcek1['rec_tight_growth_l2'];
+                  } ?>
+                </td>
+				<td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_tight_growth_l3'];
+                  } else {
+                    echo $rcek1['rec_tight_growth_l3'];
+                  } ?>
+                </td>
+                <td colspan="3" style="font-size: 7px;">&nbsp;</td>
+              </tr>
+              <tr>
+                <th align="left" style="font-size: 7px;">Wid</th>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_tight_growth_w1'];
+                  } else {
+                    echo $rcek1['rec_tight_growth_w1'];
+                  } ?>
+                </td>
+                <td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_tight_growth_w2'];
+                  } else {
+                    echo $rcek1['rec_tight_growth_w2'];
+                  } ?>
+                </td>
+				<td style="font-size: 7px; <?= ($rcek1['stat_gr'] == "FAIL") ? 'color: red;' : (($rcek1['stat_gr'] == "DISPOSISI") ? 'color: darkorange;' : '') ?>">
+                  <?php if ($rcek1['stat_gr'] == "RANDOM") {
+                    echo $rcekR['rrec_tight_growth_w3'];
+                  } else {
+                    echo $rcek1['rec_tight_growth_w3'];
+                  } ?>
+                </td>
+                <td colspan="3" style="font-size: 7px;">&nbsp;</td>
               </tr>
             <?php } ?>
             <?php if ($rcek1['apper_ch1'] != "" or $rcek1['apper_ch2'] != "" or $rcek1['apper_ch3'] != "" or $rcek1['apper_pf1'] != "" or $rcek1['apper_pf2'] != "" or $rcek1['apper_pf3'] != "" or $rcek1['apper_pb1'] != "" or $rcek1['apper_pb2'] != "" or $rcek1['apper_pb2'] != "" or $rcek1['apper_st'] != "" or $rcek1['apper_cc1'] != "" or $rcek1['apper_cc2'] != "" or $rcek1['apper_cc3'] != "") { ?>

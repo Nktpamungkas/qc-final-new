@@ -110,8 +110,8 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
       <th rowspan="4" bgcolor="#99FF99">Load Stretch</th>
       <th colspan="30" bgcolor="#99FF99">Stretch Recovery</th>
       <th rowspan="4" bgcolor="#99FF99">Note Stretch Recovery</th>
-      <th colspan="4" rowspan="2" bgcolor="#99FF99">Growth</th>
-      <th colspan="4" rowspan="2" bgcolor="#99FF99">Recovery Growth</th>
+      <th colspan="12" rowspan="2" bgcolor="#99FF99">Growth</th>
+      <th colspan="12" rowspan="2" bgcolor="#99FF99">Recovery Growth</th>
       <th rowspan="4" bgcolor="#99FF99">Note Growth</th>
       <th colspan="18" rowspan="2" bgcolor="#99FF99">Appearance</th>
       <th rowspan="4" bgcolor="#99FF99">Note Appearance</th>
@@ -253,10 +253,14 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
       <th colspan="2" bgcolor="#99FF99">&nbsp;</th>
       <th colspan="2" bgcolor="#99FF99">Length</th>
       <th colspan="2" bgcolor="#99FF99">Width</th>
-      <th colspan="2" bgcolor="#99FF99">V</th>
-      <th colspan="2" bgcolor="#99FF99">H</th>
-      <th colspan="2" bgcolor="#99FF99">V</th>
-      <th colspan="2" bgcolor="#99FF99">H</th>
+      <th colspan="3" bgcolor="#99FF99">Length Loose Fit</th>
+      <th colspan="3" bgcolor="#99FF99">Width Loose Fit</th>
+      <th colspan="3" bgcolor="#99FF99">Length Tight Fit</th>
+      <th colspan="3" bgcolor="#99FF99">Width Tight Fit</th>
+	  <th colspan="3" bgcolor="#99FF99">Length Loose Fit</th>
+      <th colspan="3" bgcolor="#99FF99">Width Loose Fit</th>
+      <th colspan="3" bgcolor="#99FF99">Length Tight Fit</th>
+      <th colspan="3" bgcolor="#99FF99">Width Tight Fit</th>
       <th colspan="10" bgcolor="#99FF99">1</th>
       <th colspan="4" bgcolor="#99FF99">2</th>
       <th colspan="4" bgcolor="#99FF99">3</th>
@@ -495,12 +499,28 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
       <th bgcolor="#99FF99">30'</th>
       <th bgcolor="#99FF99">1'</th>
       <th bgcolor="#99FF99">30'</th>
+      <th bgcolor="#99FF99">60'</th>
       <th bgcolor="#99FF99">1'</th>
       <th bgcolor="#99FF99">30'</th>
+      <th bgcolor="#99FF99">60'</th>
       <th bgcolor="#99FF99">1'</th>
       <th bgcolor="#99FF99">30'</th>
+      <th bgcolor="#99FF99">60'</th>
       <th bgcolor="#99FF99">1'</th>
       <th bgcolor="#99FF99">30'</th>
+      <th bgcolor="#99FF99">60'</th>
+	  <th bgcolor="#99FF99">1'</th>
+      <th bgcolor="#99FF99">30'</th>
+      <th bgcolor="#99FF99">60'</th>
+      <th bgcolor="#99FF99">1'</th>
+      <th bgcolor="#99FF99">30'</th>
+      <th bgcolor="#99FF99">60'</th>
+      <th bgcolor="#99FF99">1'</th>
+      <th bgcolor="#99FF99">30'</th>
+      <th bgcolor="#99FF99">60'</th>
+      <th bgcolor="#99FF99">1'</th>
+      <th bgcolor="#99FF99">30'</th>
+      <th bgcolor="#99FF99">60'</th>
       <th bgcolor="#99FF99">C.Change</th>
       <th bgcolor="#99FF99">Staining</th>
       <th bgcolor="#99FF99">Pill 1</th>
@@ -549,6 +569,10 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
     </tr>
     <tr style="text-align: center; background-color: yellow;">
       <td colspan="16">Standar</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
@@ -1581,10 +1605,34 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
           <?php echo $r['growth_l2']; ?>
         </td>
         <td>
+          <?php echo $r['growth_l3']; ?>
+        </td>
+        <td>
           <?php echo $r['growth_w1']; ?>
         </td>
         <td>
           <?php echo $r['growth_w2']; ?>
+        </td>
+        <td>
+          <?php echo $r['growth_w3']; ?>
+        </td>
+		    <td>
+          <?php echo $r['tight_growth_l1']; ?>
+        </td>
+        <td>
+          <?php echo $r['tight_growth_l2']; ?>
+		    </td>
+        <td>
+          <?php echo $r['tight_growth_l3']; ?>
+        </td>
+        <td>
+          <?php echo $r['tight_growth_w1']; ?>
+        </td>
+        <td>
+          <?php echo $r['tight_growth_w2']; ?>
+        </td>
+        <td>
+          <?php echo $r['tight_growth_w3']; ?>
         </td>
         <td>
           <?php echo $r['rec_growth_l1']; ?>
@@ -1593,10 +1641,34 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
           <?php echo $r['rec_growth_l2']; ?>
         </td>
         <td>
-          <?php echo $r['rec_growth_w1']; ?>
+          <?php echo $r['rec_growth_l3']; ?>
         </td>
         <td>
+          <?php echo $r['rec_growth_w1']; ?>
+        </td>
+        <td> 
           <?php echo $r['rec_growth_w2']; ?>
+		    </td>
+        <td>
+          <?php echo $r['rec_growth_w3']; ?>
+        </td>
+		    <td>
+          <?php echo $r['rec_tight_growth_l1']; ?>
+        </td>
+        <td>
+          <?php echo $r['rec_tight_growth_l2']; ?>
+        </td>
+        <td>
+          <?php echo $r['rec_tight_growth_l3']; ?>
+        </td>
+        <td>
+          <?php echo $r['rec_tight_growth_w1']; ?>
+        </td>
+        <td> 
+          <?php echo $r['rec_tight_growth_w2']; ?>
+		    </td>
+        <td>
+          <?php echo $r['rec_tight_growth_w3']; ?>
         </td>
         <td>
           <?php echo $r['growth_note']; ?>
@@ -2618,10 +2690,34 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
               <?php echo $r['growth_l2']; ?>
             </td>
             <td>
+              <?php echo $r['growth_l3']; ?>
+            </td>
+            <td>
               <?php echo $r['growth_w1']; ?>
             </td>
             <td>
               <?php echo $r['growth_w2']; ?>
+            </td>
+            <td>
+              <?php echo $r['growth_w3']; ?>
+            </td>
+            <td>
+              <?php echo $r['tight_growth_l1']; ?>
+            </td>
+            <td>
+              <?php echo $r['tight_growth_l2']; ?>
+            </td>
+            <td>
+              <?php echo $r['tight_growth_l3']; ?>
+            </td>
+            <td>
+              <?php echo $r['tight_growth_w1']; ?>
+            </td>
+            <td>
+              <?php echo $r['tight_growth_w2']; ?>
+            </td>
+            <td>
+              <?php echo $r['tight_growth_w3']; ?>
             </td>
             <td>
               <?php echo $r['rec_growth_l1']; ?>
@@ -2630,10 +2726,34 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
               <?php echo $r['rec_growth_l2']; ?>
             </td>
             <td>
-              <?php echo $r['rec_growth_w1']; ?>
+              <?php echo $r['rec_growth_l3']; ?>
             </td>
             <td>
+              <?php echo $r['rec_growth_w1']; ?>
+            </td>
+            <td> 
               <?php echo $r['rec_growth_w2']; ?>
+            </td>
+            <td>
+              <?php echo $r['rec_growth_w3']; ?>
+            </td>
+            <td>
+              <?php echo $r['rec_tight_growth_l1']; ?>
+            </td>
+            <td>
+              <?php echo $r['rec_tight_growth_l2']; ?>
+            </td>
+            <td>
+              <?php echo $r['rec_tight_growth_l3']; ?>
+            </td>
+            <td>
+              <?php echo $r['rec_tight_growth_w1']; ?>
+            </td>
+            <td> 
+              <?php echo $r['rec_tight_growth_w2']; ?>
+            </td>
+            <td>
+              <?php echo $r['rec_tight_growth_w3']; ?>
             </td>
             <td>
               <?php echo $r['growth_note']; ?>

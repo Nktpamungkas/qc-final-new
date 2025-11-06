@@ -874,17 +874,25 @@
 		if (document.forms['form1']['jns_test'].value == "GROWTH") {
 			if (document.forms['form1']['stat_gr'].value == "RANDOM") {
 				$("#rangr").css("display", "");  // To unhide
-				$("#rangr1").css("display", "");  // To unhide
+				$("#rangr2").css("display", "");  // To unhide
+				$("#rangr3").css("display", "");  // To unhide
+				$("#rangr4").css("display", "");  // To unhide
 			} else {
 				$("#rangr").css("display", "none");  // To hide
-				$("#rangr1").css("display", "none");  // To hide
+				$("#rangr2").css("display", "none");  // To hide
+				$("#rangr3").css("display", "none");  // To hide
+				$("#rangr4").css("display", "none");  // To hide
 			}
 			if (document.forms['form1']['stat_gr'].value == "DISPOSISI") {
 				$("#disgr").css("display", "");  // To unhide
-				$("#disgr1").css("display", "");  // To unhide
+				$("#disgr2").css("display", "");  // To unhide
+				$("#disgr3").css("display", "");  // To unhide
+				$("#disgr4").css("display", "");  // To unhide
 			} else {
 				$("#disgr").css("display", "none");  // To hide
-				$("#disgr1").css("display", "none");  // To hide
+				$("#disgr2").css("display", "none");  // To hide
+				$("#disgr3").css("display", "none");  // To hide
+				$("#disgr4").css("display", "none");  // To hide
 			}
 			if (document.forms['form1']['stat_gr'].value == "MARGINAL PASS") {
 				$("#margr").css("display", "");  // To unhide
@@ -894,16 +902,24 @@
 				$("#margr1").css("display", "none");  // To hide
 			}
 			$("#fc19").css("display", "");  // To unhide
+			$("#fc191").css("display", "");  // To unhide
 			$("#fc27").css("display", "");  // To unhide
+			$("#fc271").css("display", "");  // To unhide
 			$("#stat_gr").css("display", "");  // To unhide
 		} else {
 			$("#fc19").css("display", "none");  // To hide
+			$("#fc191").css("display", "none");  // To hide
 			$("#fc27").css("display", "none");  // To hide
+			$("#fc271").css("display", "none");  // To hide
 			$("#stat_gr").css("display", "none");  // To hide
 			$("#disgr").css("display", "none");  // To hide
+			$("#disgr2").css("display", "none");  // To hide
+			$("#disgr3").css("display", "none");  // To hide
+			$("#disgr4").css("display", "none");  // To hide
 			$("#rangr").css("display", "none");  // To hide
-			$("#disgr1").css("display", "none");  // To hide
-			$("#rangr1").css("display", "none");  // To hide
+			$("#rangr2").css("display", "none");  // To hide
+			$("#rangr3").css("display", "none");  // To hide
+			$("#rangr4").css("display", "none");  // To hide
 			$("#margr").css("display", "none");  // To hide
 			$("#margr1").css("display", "none");  // To hide
 		}
@@ -2154,7 +2170,7 @@ $sqlCekR = mysqli_query($con, "SELECT *,
 	CONCAT_WS(' ',rfc_note,rph_note, rabr_note, rbas_note, rdry_note, rfla_note, rfwe_note, rfwi_note, rburs_note,rrepp_note,rwick_note,rabsor_note,rapper_note,rfiber_note,rpillb_note,rpillm_note,rpillr_note,rthick_note,rgrowth_note,rrecover_note,rstretch_note,rsns_note,rsnab_note,rsnam_note,rsnap_note,rwash_note,rwater_note,racid_note,ralkaline_note,rcrock_note,rphenolic_note,rcm_printing_note,rcm_dye_note,rlight_note,rlight_pers_note,rsaliva_note,rh_shrinkage_note,rfibre_note,rpilll_note,rsoil_note,rapperss_note,rbleeding_note,rchlorin_note,rdye_tf_note,rhumidity_note,rodour_note,rcurling_note,rnedle_note) AS rnote_g FROM tbl_tq_randomtest WHERE no_item='$rcek[no_item]' OR no_hanger='$rcek[no_hanger]'");
 $cekR = mysqli_num_rows($sqlCekR);
 $rcekR = mysqli_fetch_array($sqlCekR);
-$sqlCekD = mysqli_query($con, "SELECT b.dbleeding_root, a.*,
+$sqlCekD = mysqli_query($con, "SELECT b.dbleeding_root, a.*, b.drec_tight_growth_l3, b.drec_tight_growth_w3, b.drec_tight_growth_w2, b.drec_tight_growth_l2, b.drec_tight_growth_w1, b.drec_tight_growth_l1, b.drec_growth_w3, b.drec_growth_l3, b.dtight_growth_w3, b.dtight_growth_l3, b.dtight_growth_w2, b.dtight_growth_l2, b.dtight_growth_w1, b.dtight_growth_l1, b.dgrowth_w3, b.dgrowth_l3,
 	CONCAT_WS(' ',a.dfc_note,a.dph_note, a.dabr_note, a.dbas_note, a.ddry_note, a.dfla_note, a.dfwe_note, a.dfwi_note, a.dburs_note,a.drepp_note,a.dwick_note,a.dabsor_note,a.dapper_note,a.dfiber_note,a.dpillb_note,a.dpillm_note,a.dpillr_note,a.dthick_note,a.dgrowth_note,a.drecover_note,a.dstretch_note,a.dsns_note,a.dsnab_note,a.dsnam_note,a.dsnap_note,a.dwash_note,a.dwater_note,a.dacid_note,a.dalkaline_note,a.dcrock_note,a.dphenolic_note,a.dcm_printing_note,a.dcm_dye_note,a.dlight_note,a.dlight_pers_note,a.dsaliva_note,a.dh_shrinkage_note,a.dfibre_note,a.dpilll_note,a.dsoil_note,a.dapperss_note,a.dbleeding_note,a.dchlorin_note,a.ddye_tf_note,a.dhumidity_note,a.dodour_note,a.dcurling_note,a.dnedle_note) AS dnote_g 
 	FROM tbl_tq_disptest a 
 	LEFT JOIN tbl_tq_disptest_2 b on (a.id_nokk = b.id_nokk)
@@ -4089,7 +4105,12 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 											while ($row = mysqli_fetch_array($result)) {
 												$detail = explode(",", $row['physical']); ?>
 												<?php foreach ($detail as $key => $value):
-													echo '<option value="' . $value . '">' . $value . '</option>';
+													if($value == 'GROWTH'){
+														$value_1 = 'GROWTH & RECOVERY';
+														echo '<option value="' . $value . '">' . $value_1. '</option>';
+													} else{
+														echo '<option value="' . $value . '">' . $value. '</option>';
+													}
 												endforeach;
 												?>
 											<?php } ?>
@@ -7784,10 +7805,10 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 						<!-- STRECTH & RECOVERY END-->
 						<!-- GROWTH BEGIN-->
 							<div class="form-group" id="fc19" style="display:none;">
-								<label for="growth" class="col-sm-2 control-label">GROWTH</label>
+								<label for="growth" class="col-sm-2 control-label">GROWTH LOOSE FIT</label>
 								<div class="col-sm-2">
 									<input name="growth_l1" type="text" class="form-control" id="growth_l1"
-										value="<?php echo $rcek1['growth_l1']; ?>" placeholder="LENGTH 1">
+										value="<?php echo $rcek1['growth_l1']; ?>" placeholder="LENGTH 1"> 
 									<input name="growth_w1" type="text" class="form-control" id="growth_w1"
 										value="<?php echo $rcek1['growth_w1']; ?>" placeholder="WIDTH 1">
 								</div>
@@ -7798,12 +7819,39 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										value="<?php echo $rcek1['growth_w2']; ?>" placeholder="WIDTH 2">
 								</div>
 								<div class="col-sm-2">
+									<input name="growth_l3" type="text" class="form-control" id="growth_l3"
+										value="<?php echo $rcek1['growth_l3']; ?>" placeholder="LENGTH 3">
+									<input name="growth_w3" type="text" class="form-control" id="growth_w3"
+										value="<?php echo $rcek1['growth_w3']; ?>" placeholder="WIDTH 3">
+								</div>
+								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
 										name="growth_note" maxlength="50"><?php echo $rcek1['growth_note']; ?></textarea>
 								</div>
 							</div>
+							<div class="form-group" id="fc191" style="display:none;">
+								<label for="growth" class="col-sm-2 control-label">GROWTH TIGHT FIT</label>
+								<div class="col-sm-2">
+									<input name="tight_growth_l1" type="text" class="form-control" id="tight_growth_l1"
+										value="<?php echo $rcek1['tight_growth_l1']; ?>" placeholder="LENGTH 1"> 
+									<input name="tight_growth_w1" type="text" class="form-control" id="tight_growth_w1"
+										value="<?php echo $rcek1['tight_growth_w1']; ?>" placeholder="WIDTH 1">
+								</div>
+								<div class="col-sm-2">
+									<input name="tight_growth_l2" type="text" class="form-control" id="tight_growth_l2"
+										value="<?php echo $rcek1['tight_growth_l2']; ?>" placeholder="LENGTH 2">
+									<input name="tight_growth_w2" type="text" class="form-control" id="tight_growth_w2"
+										value="<?php echo $rcek1['tight_growth_w2']; ?>" placeholder="WIDTH 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="tight_growth_l3" type="text" class="form-control" id="tight_growth_l3"
+										value="<?php echo $rcek1['tight_growth_l3']; ?>" placeholder="LENGTH 3">
+									<input name="tight_growth_w3" type="text" class="form-control" id="tight_growth_w3"
+										value="<?php echo $rcek1['tight_growth_w3']; ?>" placeholder="WIDTH 3">
+								</div>
+							</div>
 							<div class="form-group" id="fc27" style="display:none;">
-								<label for="rec_growth" class="col-sm-2 control-label">RECOVERY</label>
+								<label for="rec_growth" class="col-sm-2 control-label">RECOVERY GROWTH LOOSE FIT</label>
 								<div class="col-sm-2">
 									<input name="rec_growth_l1" type="text" class="form-control" id="rec_growth_l1"
 										value="<?php echo $rcek1['rec_growth_l1']; ?>" placeholder="LENGTH 1">
@@ -7815,6 +7863,33 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										value="<?php echo $rcek1['rec_growth_l2']; ?>" placeholder="LENGTH 2">
 									<input name="rec_growth_w2" type="text" class="form-control" id="rec_growth_w2"
 										value="<?php echo $rcek1['rec_growth_w2']; ?>" placeholder="WIDTH 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="rec_growth_l3" type="text" class="form-control" id="rec_growth_l3"
+										value="<?php echo $rcek1['rec_growth_l3']; ?>" placeholder="LENGTH 3">
+									<input name="rec_growth_w3" type="text" class="form-control" id="rec_growth_w3"
+										value="<?php echo $rcek1['rec_growth_w3']; ?>" placeholder="WIDTH 3">
+								</div>
+							</div>
+							<div class="form-group" id="fc271" style="display:none;">
+								<label for="growth" class="col-sm-2 control-label">RECOVERY GROWTH TIGHT FIT</label>
+								<div class="col-sm-2">
+									<input name="rec_tight_growth_l1" type="text" class="form-control" id="rec_tight_growth_l1"
+										value="<?php echo $rcek1['rec_tight_growth_l1']; ?>" placeholder="LENGTH 1"> 
+									<input name="rec_tight_growth_w1" type="text" class="form-control" id="rec_tight_growth_w1"
+										value="<?php echo $rcek1['rec_tight_growth_w1']; ?>" placeholder="WIDTH 1">
+								</div>
+								<div class="col-sm-2">
+									<input name="rec_tight_growth_l2" type="text" class="form-control" id="rec_tight_growth_l2"
+										value="<?php echo $rcek1['rec_tight_growth_l2']; ?>" placeholder="LENGTH 2">
+									<input name="rec_tight_growth_w2" type="text" class="form-control" id="rec_tight_growth_w2"
+										value="<?php echo $rcek1['rec_tight_growth_w2']; ?>" placeholder="WIDTH 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="rec_tight_growth_l3" type="text" class="form-control" id="rec_tight_growth_l3"
+										value="<?php echo $rcek1['rec_tight_growth_l3']; ?>" placeholder="LENGTH 3">
+									<input name="rec_tight_growth_w3" type="text" class="form-control" id="rec_tight_growth_w3"
+										value="<?php echo $rcek1['rec_tight_growth_w3']; ?>" placeholder="WIDTH 3">
 								</div>
 							</div>
 							<div class="form-group" id="stat_gr" style="display:none;">
@@ -7852,7 +7927,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								</div>
 							</div>
 							<div class="form-group" id="disgr" style="display:none;">
-								<label for="disgr" class="col-sm-2 control-label">GROWTH (DIS)</label>
+								<label for="disgr" class="col-sm-2 control-label">GROWTH LOOSE FIT (DIS)</label>
 								<div class="col-sm-2">
 									<input name="dgrowth_l1" type="text" class="form-control" id="dgrowth_l1"
 										value="<?php echo $rcekD['dgrowth_l1']; ?>" placeholder="LENGTH 1">
@@ -7866,12 +7941,39 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										value="<?php echo $rcekD['dgrowth_w2']; ?>" placeholder="WIDTH 2">
 								</div>
 								<div class="col-sm-2">
+									<input name="dgrowth_l3" type="text" class="form-control" id="dgrowth_l3"
+										value="<?php echo $rcekD['dgrowth_l3']; ?>" placeholder="LENGTH 3">
+									<input name="dgrowth_w3" type="text" class="form-control" id="dgrowth_w3"
+										value="<?php echo $rcekD['dgrowth_w3']; ?>" placeholder="WIDTH 3">
+								</div>
+								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
 										name="dgrowth_note" maxlength="50"><?php echo $rcekD['dgrowth_note']; ?></textarea>
 								</div>
 							</div>
-							<div class="form-group" id="disgr1" style="display:none;">
-								<label for="disgr1" class="col-sm-2 control-label">RECOVERY (DIS)</label>
+							<div class="form-group" id="disgr2" style="display:none;">
+								<label for="disgr2" class="col-sm-2 control-label">GROWTH TIGHT FIT (DIS)</label>
+								<div class="col-sm-2">
+									<input name="dtight_growth_l1" type="text" class="form-control" id="dtight_growth_l1"
+										value="<?php echo $rcekD['dtight_growth_l1']; ?>" placeholder="LENGTH 1"> 
+									<input name="dtight_growth_w1" type="text" class="form-control" id="dtight_growth_w1"
+										value="<?php echo $rcekD['dtight_growth_w1']; ?>" placeholder="WIDTH 1">
+								</div>
+								<div class="col-sm-2">
+									<input name="dtight_growth_l2" type="text" class="form-control" id="dtight_growth_l2"
+										value="<?php echo $rcekD['dtight_growth_l2']; ?>" placeholder="LENGTH 2">
+									<input name="dtight_growth_w2" type="text" class="form-control" id="dtight_growth_w2"
+										value="<?php echo $rcekD['dtight_growth_w2']; ?>" placeholder="WIDTH 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="dtight_growth_l3" type="text" class="form-control" id="dtight_growth_l3"
+										value="<?php echo $rcekD['dtight_growth_l3']; ?>" placeholder="LENGTH 3">
+									<input name="dtight_growth_w3" type="text" class="form-control" id="dtight_growth_w3"
+										value="<?php echo $rcekD['dtight_growth_w3']; ?>" placeholder="WIDTH 3">
+								</div>
+							</div>
+							<div class="form-group" id="disgr3" style="display:none;">
+								<label for="disgr3" class="col-sm-2 control-label">RECOVERY GROWTH LOOSE FIT (DIS)</label>
 								<div class="col-sm-2">
 									<input name="drec_growth_l1" type="text" class="form-control" id="drec_growth_l1"
 										value="<?php echo $rcekD['drec_growth_l1']; ?>" placeholder="LENGTH 1">
@@ -7884,9 +7986,36 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									<input name="drec_growth_w2" type="text" class="form-control" id="drec_growth_w2"
 										value="<?php echo $rcekD['drec_growth_w2']; ?>" placeholder="WIDTH 2">
 								</div>
+								<div class="col-sm-2">
+									<input name="drec_growth_l3" type="text" class="form-control" id="drec_growth_l3"
+										value="<?php echo $rcekD['drec_growth_l3']; ?>" placeholder="LENGTH 3">
+									<input name="drec_growth_w3" type="text" class="form-control" id="drec_growth_w3"
+										value="<?php echo $rcekD['drec_growth_w3']; ?>" placeholder="WIDTH 3">
+								</div>
+							</div>
+							<div class="form-group" id="disgr4" style="display:none;">
+								<label for="disgr4" class="col-sm-2 control-label">RECOVERY GROWTH TIGHT FIT (DIS)</label>
+								<div class="col-sm-2">
+									<input name="drec_tight_growth_l1" type="text" class="form-control" id="drec_tight_growth_l1"
+										value="<?php echo $rcekD['drec_tight_growth_l1']; ?>" placeholder="LENGTH 1"> 
+									<input name="drec_tight_growth_w1" type="text" class="form-control" id="drec_tight_growth_w1"
+										value="<?php echo $rcekD['drec_tight_growth_w1']; ?>" placeholder="WIDTH 1">
+								</div>
+								<div class="col-sm-2">
+									<input name="drec_tight_growth_l2" type="text" class="form-control" id="drec_tight_growth_l2"
+										value="<?php echo $rcekD['drec_tight_growth_l2']; ?>" placeholder="LENGTH 2">
+									<input name="drec_tight_growth_w2" type="text" class="form-control" id="drec_tight_growth_w2"
+										value="<?php echo $rcekD['drec_tight_growth_w2']; ?>" placeholder="WIDTH 2">
+								</div>
+								<div class="col-sm-2">
+									<input name="drec_tight_growth_l3" type="text" class="form-control" id="drec_tight_growth_l3"
+										value="<?php echo $rcekD['drec_tight_growth_l3']; ?>" placeholder="LENGTH 3">
+									<input name="drec_tight_growth_w3" type="text" class="form-control" id="drec_tight_growth_w3"
+										value="<?php echo $rcekD['drec_tight_growth_w3']; ?>" placeholder="WIDTH 3">
+								</div>
 							</div>
 							<div class="form-group" id="rangr" style="display:none;">
-								<label for="rangr" class="col-sm-2 control-label">GROWTH (RAN)</label>
+								<label for="rangr" class="col-sm-2 control-label">GROWTH LOOSE FIT (RAN)</label>
 								<div class="col-sm-2">
 									<input name="rgrowth_l1" type="text" class="form-control" id="rgrowth_l1"
 										value="<?php echo $rcekR['rgrowth_l1']; ?>" placeholder="LENGTH 1" readonly>
@@ -7900,13 +8029,40 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										value="<?php echo $rcekR['rgrowth_w2']; ?>" placeholder="WIDTH 2" readonly>
 								</div>
 								<div class="col-sm-2">
+									<input name="rgrowth_l3" type="text" class="form-control" id="rgrowth_l3"
+										value="<?php echo $rcekR['rgrowth_l3']; ?>" placeholder="LENGTH 3" readonly>
+									<input name="rgrowth_w3" type="text" class="form-control" id="rgrowth_w3"
+										value="<?php echo $rcekR['rgrowth_w3']; ?>" placeholder="WIDTH 3" readonly>
+								</div>
+								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik"
 										name="rgrowth_note" maxlength="50"
 										readonly><?php echo $rcekR['rgrowth_note']; ?></textarea>
 								</div>
 							</div>
-							<div class="form-group" id="rangr1" style="display:none;">
-								<label for="rangr1" class="col-sm-2 control-label">RECOVERY (RAN)</label>
+							<div class="form-group" id="rangr2" style="display:none;">
+								<label for="rangr2" class="col-sm-2 control-label">GROWTH TIGHT FIT (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rtight_growth_l1" type="text" class="form-control" id="rtight_growth_l1"
+										value="<?php echo $rcek1['rtight_growth_l1']; ?>" placeholder="LENGTH 1" readonly> 
+									<input name="rtight_growth_w1" type="text" class="form-control" id="rtight_growth_w1"
+										value="<?php echo $rcek1['rtight_growth_w1']; ?>" placeholder="WIDTH 1" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rtight_growth_l2" type="text" class="form-control" id="rtight_growth_l2"
+										value="<?php echo $rcek1['rtight_growth_l2']; ?>" placeholder="LENGTH 2" readonly>
+									<input name="rtight_growth_w2" type="text" class="form-control" id="rtight_growth_w2"
+										value="<?php echo $rcek1['rtight_growth_w2']; ?>" placeholder="WIDTH 2" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rtight_growth_l3" type="text" class="form-control" id="rtight_growth_l3"
+										value="<?php echo $rcek1['rtight_growth_l3']; ?>" placeholder="LENGTH 3" readonly>
+									<input name="rtight_growth_w3" type="text" class="form-control" id="rtight_growth_w3"
+										value="<?php echo $rcek1['rtight_growth_w3']; ?>" placeholder="WIDTH 3" readonly>
+								</div>
+							</div>
+							<div class="form-group" id="rangr3" style="display:none;">
+								<label for="rangr3" class="col-sm-2 control-label">RECOVERY GROWTH LOOSE FIT (RAN)</label>
 								<div class="col-sm-2">
 									<input name="rrec_growth_l1" type="text" class="form-control" id="rrec_growth_l1"
 										value="<?php echo $rcekR['rrec_growth_l1']; ?>" placeholder="LENGTH 1" readonly>
@@ -7918,6 +8074,33 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										value="<?php echo $rcekR['rrec_growth_l2']; ?>" placeholder="LENGTH 2" readonly>
 									<input name="rrec_growth_w2" type="text" class="form-control" id="rrec_growth_w2"
 										value="<?php echo $rcekR['rrec_growth_w2']; ?>" placeholder="WIDTH 2" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rrec_growth_l3" type="text" class="form-control" id="rrec_growth_l3"
+										value="<?php echo $rcekR['rrec_growth_l3']; ?>" placeholder="LENGTH 3" readonly>
+									<input name="rrec_growth_w3" type="text" class="form-control" id="rrec_growth_w3"
+										value="<?php echo $rcekR['rrec_growth_w3']; ?>" placeholder="WIDTH 3" readonly>
+								</div>
+							</div>
+							<div class="form-group" id="rangr4" style="display:none;">
+								<label for="rangr4" class="col-sm-2 control-label">RECOVERY GROWTH TIGHT FIT (RAN)</label>
+								<div class="col-sm-2">
+									<input name="rrec_tight_growth_l1" type="text" class="form-control" id="rrec_tight_growth_l1"
+										value="<?php echo $rcek1['rrec_tight_growth_l1']; ?>" placeholder="LENGTH 1" readonly> 
+									<input name="rrec_tight_growth_w1" type="text" class="form-control" id="rrec_tight_growth_w1"
+										value="<?php echo $rcek1['rrec_tight_growth_w1']; ?>" placeholder="WIDTH 1" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rrec_tight_growth_l2" type="text" class="form-control" id="rrec_tight_growth_l2"
+										value="<?php echo $rcek1['rrec_tight_growth_l2']; ?>" placeholder="LENGTH 2" readonly>
+									<input name="rrec_tight_growth_w2" type="text" class="form-control" id="rrec_tight_growth_w2"
+										value="<?php echo $rcek1['rrec_tight_growth_w2']; ?>" placeholder="WIDTH 2" readonly>
+								</div>
+								<div class="col-sm-2">
+									<input name="rrec_tight_growth_l3" type="text" class="form-control" id="rrec_tight_growth_l3"
+										value="<?php echo $rcek1['rrec_tight_growth_l3']; ?>" placeholder="LENGTH 3" readonly>
+									<input name="rrec_tight_growth_w3" type="text" class="form-control" id="rrec_tight_growth_w3"
+										value="<?php echo $rcek1['rrec_tight_growth_w3']; ?>" placeholder="WIDTH 3" readonly>
 								</div>
 							</div>
 						<!-- GROWTH END-->
@@ -13471,13 +13654,20 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 								<td>&nbsp;</td>
 							</tr>
 						<?php } ?>
-						<?php if ($rcek1['growth_l1'] != "" or $rcek1['growth_l2'] != "") { ?>
+						<?php if ($rcek1['growth_l1'] != "" || $rcek1['growth_l2'] != "" || $rcek1['growth_l3'] != "") { ?>
+						<tr>
+							<th>&nbsp;</th>
+							<th>&nbsp;</th>
+							<th> 1 Min</th>
+							<th> 30 Min</th>
+							<th> 60 Min</th>
+							<th>&nbsp;</th>
+							<th>&nbsp;</th>
+							<th>&nbsp;</th>
+						</tr>
 							<tr>
-								<th rowspan="2">Growth</th>
+								<th rowspan="2">Growth Loose Fit</th>
 								<th>Len</th>
-								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_l1'];}else{echo $rcek1['growth_l1'];}  ?></td>
-				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_l2'];}else{echo $rcek1['growth_l2'];}  ?></td> -->
-
 								<td>
 									<?php if ($rcek1['growth_l1'] != "") {
 										echo $rcek1['growth_l1'];
@@ -13492,13 +13682,17 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										echo $rcekR['rgrowth_l2'];
 									} ?>
 								</td>
-								<td colspan="4">&nbsp;</td>
+								<td>
+									<?php if ($rcek1['growth_l3'] != "") {
+										echo $rcek1['growth_l3'];
+									} else {
+										echo $rcekR['rgrowth_l3'];
+									} ?>
+								</td>
+								<td colspan="3">&nbsp;</td>
 							</tr>
 							<tr>
 								<th>Wid</th>
-								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_w1'];}else{echo $rcek1['growth_w1'];}  ?></td>
-				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rgrowth_w2'];}else{echo $rcek1['growth_w2'];}  ?></td> -->
-
 								<td>
 									<?php if ($rcek1['growth_w1'] != "") {
 										echo $rcek1['growth_w1'];
@@ -13513,16 +13707,71 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										echo $rcekR['rgrowth_w2'];
 									} ?>
 								</td>
-								<td colspan="4">&nbsp;</td>
+								<td>
+									<?php if ($rcek1['growth_w3'] != "") {
+										echo $rcek1['growth_w3'];
+									} else {
+										echo $rcekR['rgrowth_w3'];
+									} ?>
+								</td>
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr>
+								<th rowspan="2">Growth Tight Fit</th>
+								<th>Len</th>
+								<td>
+									<?php if ($rcek1['tight_growth_l1'] != "") {
+										echo $rcek1['tight_growth_l1'];
+									} else {
+										echo $rcekR['rtight_growth_l1'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['tight_growth_l2'] != "") {
+										echo $rcek1['tight_growth_l2'];
+									} else {
+										echo $rcekR['rtight_growth_l2'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['tight_growth_l3'] != "") {
+										echo $rcek1['tight_growth_l3'];
+									} else {
+										echo $rcekR['rtight_growth_l3'];
+									} ?>
+								</td>
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr>
+								<th>Wid</th>
+								<td>
+									<?php if ($rcek1['tight_growth_w1'] != "") {
+										echo $rcek1['tight_growth_w1'];
+									} else {
+										echo $rcekR['rtight_growth_w1'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['tight_growth_w2'] != "") {
+										echo $rcek1['tight_growth_w2'];
+									} else {
+										echo $rcekR['rtight_growth_w2'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['tight_growth_w3'] != "") {
+										echo $rcek1['tight_growth_w3'];
+									} else {
+										echo $rcekR['rtight_growth_w3'];
+									} ?>
+								</td>
+								<td colspan="3">&nbsp;</td>
 							</tr>
 						<?php } ?>
 						<?php if ($rcek1['rec_growth_l1'] != "" or $rcek1['rec_growth_l2'] != "") { ?>
 							<tr>
-								<th rowspan="2">Recovery Growth</th>
+								<th rowspan="2">Recovery Growth Loose Fit</th>
 								<th>Len</th>
-								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_l1'];}else{echo $rcek1['rec_growth_l1'];}  ?></td>
-				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_l1'];}else{echo $rcek1['rec_growth_l1'];}  ?></td> -->
-
 								<td>
 									<?php if ($rcek1['rec_growth_l1'] != "") {
 										echo $rcek1['rec_growth_l1'];
@@ -13537,13 +13786,17 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										echo $rcekR['rrec_growth_l2'];
 									} ?>
 								</td>
-								<td colspan="4">&nbsp;</td>
+								<td>
+									<?php if ($rcek1['rec_growth_l3'] != "") {
+										echo $rcek1['rec_growth_l3'];
+									} else {
+										echo $rcekR['rrec_growth_l3'];
+									} ?>
+								</td>
+								<td colspan="3">&nbsp;</td>
 							</tr>
 							<tr>
 								<th>Wid</th>
-								<!-- <td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_w1'];}else{echo $rcek1['rec_growth_w1'];}  ?></td>
-				<td><?php //if($rcek1['stat_gr']=="RANDOM"){echo $rcekR['rrec_growth_w2'];}else{echo $rcek1['rec_growth_w2'];}  ?></td> -->
-
 								<td>
 									<?php if ($rcek1['rec_growth_w1'] != "") {
 										echo $rcek1['rec_growth_w1'];
@@ -13558,7 +13811,65 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 										echo $rcekR['rrec_growth_w2'];
 									} ?>
 								</td>
-								<td colspan="4">&nbsp;</td>
+								<td>
+									<?php if ($rcek1['rec_growth_w3'] != "") {
+										echo $rcek1['rec_growth_w3'];
+									} else {
+										echo $rcekR['rrec_growth_w3'];
+									} ?>
+								</td>
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr>
+								<th rowspan="2">Recovery Growth Tight Fit</th>
+								<th>Len</th>
+								<td>
+									<?php if ($rcek1['rec_tight_growth_l1'] != "") {
+										echo $rcek1['rec_tight_growth_l1'];
+									} else {
+										echo $rcekR['rrec_tight_growth_l1'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['rec_tight_growth_l2'] != "") {
+										echo $rcek1['rec_tight_growth_l2'];
+									} else {
+										echo $rcekR['rrec_tight_growth_l2'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['rec_tight_growth_l3'] != "") {
+										echo $rcek1['rec_tight_growth_l3'];
+									} else {
+										echo $rcekR['rrec_tight_growth_l3'];
+									} ?>
+								</td>
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr>
+								<th>Wid</th>
+								<td>
+									<?php if ($rcek1['rec_tight_growth_w1'] != "") {
+										echo $rcek1['rec_tight_growth_w1'];
+									} else {
+										echo $rcekR['rrec_tight_growth_w1'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['rec_tight_growth_w2'] != "") {
+										echo $rcek1['rec_tight_growth_w2'];
+									} else {
+										echo $rcekR['rrec_tight_growth_w2'];
+									} ?>
+								</td>
+								<td>
+									<?php if ($rcek1['rec_tight_growth_w3'] != "") {
+										echo $rcek1['rec_tight_growth_w3'];
+									} else {
+										echo $rcekR['rrec_tight_growth_w3'];
+									} ?>
+								</td>
+								<td colspan="3">&nbsp;</td>
 							</tr>
 						<?php } ?>
 						<?php if ($rcek1['apper_ch1'] != "" or $rcek1['apper_ch2'] != "" or $rcek1['apper_ch3'] != "") { ?>
@@ -15136,7 +15447,7 @@ if ($_POST['colorfastness_save'] == "save") {  // bleeding_root save
 
 // Save Untuk Physical Save
 if ($_POST['physical_save'] == "save") {
-    $fields = array('wrinkle', 'wrinkle1', 'wrinkle2', 'stat_wrinkle', 'stat_wrinkle1', 'wrinkle_note','cracking');
+    $fields = array('wrinkle', 'wrinkle1', 'wrinkle2', 'stat_wrinkle', 'stat_wrinkle1', 'wrinkle_note','cracking', 'rec_tight_growth_l3', 'rec_tight_growth_w3', 'rec_tight_growth_w2', 'rec_tight_growth_l2', 'rec_tight_growth_w1', 'rec_tight_growth_l1', 'rec_growth_w3', 'rec_growth_l3', 'tight_growth_w3', 'tight_growth_l3', 'tight_growth_w2', 'tight_growth_l2', 'tight_growth_w1', 'tight_growth_l1', 'growth_w3', 'growth_l3');
     foreach ($fields as $field) {
         $value = trim($_POST[$field]);
         
@@ -15145,16 +15456,36 @@ if ($_POST['physical_save'] == "save") {
             $result = mysqli_query($con, $selectSql);
 
             if (mysqli_num_rows($result) > 0) {
-                // Data sudah ada, lakukan UPDATE
                 $updateSql = "UPDATE tbl_tq_test_2 SET $field = '$value' WHERE id_nokk = '$id_tq_test_2'";
                 $sqlPHY = mysqli_query($con, $updateSql);
             } else {
-                // Data belum ada, lakukan INSERT
                 $insertSql = "INSERT INTO tbl_tq_test_2 (id_nokk, $field) VALUES ('$id_tq_test_2','$value')";
                 $sqlPHY = mysqli_query($con, $insertSql);
             }
         } else {
             $sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET $field = null WHERE id_nokk = '$id_tq_test_2'");
+        }
+    }
+
+	$fields_disp = array('drec_tight_growth_l3', 'drec_tight_growth_w3', 'drec_tight_growth_w2', 'drec_tight_growth_l2', 'drec_tight_growth_w1', 'drec_tight_growth_l1', 'drec_growth_w3', 'drec_growth_l3', 'dtight_growth_w3', 'dtight_growth_l3', 'dtight_growth_w2', 'dtight_growth_l2', 'dtight_growth_w1', 'dtight_growth_l1', 'dgrowth_w3', 'dgrowth_l3');
+    foreach ($fields_disp as $fieldDisp) {
+        $value_disp = trim($_POST[$fieldDisp]);
+        
+        if ($value_disp != "0" && $value_disp != "") {
+            $selectSql_disp = "SELECT * FROM tbl_tq_disptest_2 WHERE id_nokk = '$id_tq_test_2'";
+            $result_disp = mysqli_query($con, $selectSql_disp);
+
+            if (mysqli_num_rows($result_disp) > 0) {
+                // Data sudah ada, lakukan UPDATE
+                $updateSql_disp = "UPDATE tbl_tq_disptest_2 SET $fieldDisp = '$value_disp' WHERE id_nokk = '$id_tq_test_2'";
+                $sqlPHY_disp = mysqli_query($con, $updateSql_disp);
+            } else {
+                // Data belum ada, lakukan INSERT
+                $insertSql_disp = "INSERT INTO tbl_tq_disptest_2 (id_nokk, $fieldDisp) VALUES ('$id_tq_test_2','$value_disp')";
+                $sqlPHY_disp = mysqli_query($con, $insertSql_disp);
+            }
+        } else {
+            $sqlPHY_disp = mysqli_query($con, "UPDATE tbl_tq_disptest_2 SET $fieldDisp = null WHERE id_nokk = '$id_tq_test_2'");
         }
     }
 
