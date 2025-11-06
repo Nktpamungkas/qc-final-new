@@ -11,6 +11,18 @@ set_time_limit(0);
 $Awal = isset($_POST['awal']) ? $_POST['awal'] : '';
 $Akhir = isset($_POST['akhir']) ? $_POST['akhir'] : '';
 $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
+$jamA = isset($_POST['jam_awal']) ? $_POST['jam_awal'] : '';
+$jamAr = isset($_POST['jam_akhir']) ? $_POST['jam_akhir'] : '';
+if (strlen($jamA) == 5) {
+	$start_date = $Awal . ' ' . $jamA.':00';
+} else {
+	$start_date = $Awal . ' 0' . $jamA.':00';
+}
+if (strlen($jamAr) == 5) {
+	$stop_date = $Akhir . ' ' . $jamAr.':00';
+} else {
+	$stop_date = $Akhir . ' 0' . $jamAr.':00';
+}
 // $Digit = isset($_POST['DIGIT']) ? $_POST['DIGIT'] : '';
 
 ?>
@@ -54,23 +66,40 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                 <form method="post" enctype="multipart/form-data" name="form1" class="form-horizontal" id="form1">
                     <div class="box-body">
                         <div class="form-group">
-                            <div class="col-sm-10">
+                            <div class="col-sm-7">
                                 <div class="input-group date">
                                     <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
                                     <input name="awal" type="text" class="form-control pull-right" id="datepicker" placeholder="Tanggal Awal"
                                         value="<?php echo $Awal; ?>" autocomplete="off" />
                                 </div>
                             </div>
+                            <div class="col-sm-5 col-md-4">
+								<div class="input-group">
+									<input type="text" class="form-control timepicker" name="jam_awal"
+										placeholder="00:00" value="<?php echo $jamA; ?>" autocomplete="off">
+									<div class="input-group-addon">
+										<i class="fa fa-clock-o"></i>
+									</div>
+								</div>
+							</div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-10">
+                            <div class="col-sm-7">
                                 <div class="input-group date">
                                     <div class="input-group-addon"> <i class="fa fa-calendar"></i> </div>
                                     <input name="akhir" type="text" class="form-control pull-right" id="datepicker1"
                                         placeholder="Tanggal Akhir" value="<?php echo $Akhir; ?>" autocomplete="off" />
                                 </div>
                             </div>
-                            <!-- /.input group -->
+                            <div class="col-sm-5 col-md-4">
+								<div class="input-group">
+									<input type="text" class="form-control timepicker" name="jam_akhir"
+										placeholder="00:00" value="<?php echo $jamAr; ?>" autocomplete="off">
+									<div class="input-group-addon">
+										<i class="fa fa-clock-o"></i>
+									</div>
+								</div>
+							</div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8">
@@ -152,7 +181,7 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                                 tbl_lap_stenter l
                             WHERE 
                                 $stanter_shift
-                                DATE(l.tanggal_buat) BETWEEN '$Awal' AND '$Akhir'
+                                l.tanggal_buat BETWEEN '$start_date' AND '$stop_date'
                             GROUP BY l.shift
                             ORDER BY l.shift";
                         $q_lap_stenter = mysqli_query($con, $query_lap);
@@ -228,8 +257,8 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                 <div class="box-header with-border">
                     <h3 class="box-title">Report Inspect Stenter</h3><br>
                     <b>Tanggal Inspeksi :
-                        <?php echo $_POST['awal']; ?> s.d.
-                        <?php echo $_POST['akhir']; ?>
+                        <?php echo $start_date; ?> s.d.
+                        <?php echo $stop_date; ?>
                         <?php echo $_POST['shift']; ?>
                     </b> <br><br>
                 </div>
@@ -240,14 +269,14 @@ $shift = isset($_POST['shift']) ? $_POST['shift'] : '';
                         FROM
                             tbl_lap_stenter
                         WHERE
-                            DATE(tanggal_buat) BETWEEN '$Awal' AND '$Akhir'";
+                            tanggal_buat BETWEEN '$start_date' AND '$stop_date'";
                 } else {
                     $qryb = "SELECT
                             *
                         FROM
                             tbl_lap_stenter
                         WHERE
-                            DATE(tanggal_buat) BETWEEN '$Awal' AND '$Akhir' AND shift = '$shift'";
+                            tanggal_buat BETWEEN '$start_date' AND '$stop_date' AND shift = '$shift'";
                 }
                 $stmt1 = mysqli_query($con, $qryb);
                 if ($stmt1) {
