@@ -594,6 +594,10 @@ $page = strtolower($page);
                                             echo "active";
                                         } ?>"><a href="ReportMizuno"><i
                                                     class="fa fa-file-text-o text-aqua"></i> <span>Report Mizuno</span></a></li>
+                                        <li class="<?php if ($_GET['p'] == "report-kakenmizuno" or $_GET['p'] == "report-kakenmizunonotest") {
+                                            echo "active";
+                                        } ?>"><a href="ReportKakenMizuno"><i
+                                                    class="fa fa-file-text-o text-aqua"></i> <span>Report Kaken Mizuno</span></a></li>
                                         <li class="<?php if ($_GET['p'] == "MasterTest-New") {
                                             echo "active";
                                         } ?>"><a href="MasterTestNew"><i class="fa fa-cube text-aqua"></i>
