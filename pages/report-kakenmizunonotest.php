@@ -472,8 +472,13 @@ $sqlDB2 = "SELECT
 			<button type="submit" class="btn btn-primary pull-right" name="save1" value="save"><i class="fa fa-save"></i>Simpan</button>
 		<?php } ?>
 		<?php if($cek>0){ ?>
-			<a href="pages/cetak/cetak_report_mizunotq.php?id_nokk=<?php echo $rcek1['id_nokk'];?>&no_test=<?php echo $rcek1['no_test'];?>&nohanger=<?php echo $rcek['no_hanger'];?>" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print Report Kaken Mizuno</a>
+			<a href="pages/cetak/cetak_report_mizunotq.php?id_nokk=<?php echo $rcek1['id_nokk'];?>&no_test=<?php echo $rcek1['no_test'];?>&nohanger=<?php echo $rcek['no_hanger'];?>" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> Print Report Full Test</a>
 		<?php } ?>
+		<?php if($cek>0){ ?>
+			<a href="pages/cetak/cetak_report_mizunotq2.php?id_nokk=<?php echo $rcek1['id_nokk'];?>&no_test=<?php echo $rcek1['no_test'];?>&nohanger=<?php echo $rcek['no_hanger'];?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Print Report Add Collor</a>
+		<?php } ?>
+   	</div>
+   	<div class="box-footer"> 
    	</div>
     <!-- /.box-footer -->
 </div>

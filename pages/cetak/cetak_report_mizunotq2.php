@@ -293,7 +293,7 @@ textarea {
                         <td align="right">（　　　　　　　）method</td>
                       </tr>
                       <tr>
-                        <td height="21"><input type="checkbox" name="ISO-105-B" value="1" <?= (!empty($data4['dshrinkage_l1'])||!empty($data4['dshrinkage_w1'])||!empty($data2['shrinkage_l1'])||!empty($data2['shrinkage_w1']))? 'checked' : ''; ?>></td>
+                        <td height="21"><input type="checkbox" name="ISO-105-B" value="1"></td>
                         <td align="right">ISO 6330</td>
                       </tr>
                     </tbody>
@@ -313,7 +313,7 @@ textarea {
                   <tr>
                     <td colspan="7" rowspan="2" width="182" align="left" valign="top"><table cellpadding="0" cellspacing="0">
                       <tr>
-                          <td colspan="7" rowspan="2" width="182"><?php if(!empty($data4['dshrinkage_l1'])){echo $data4['dshrinkage_l1'];}else if(!empty($data2['shrinkage_l1'])){echo $data2['shrinkage_l1'];}else echo '-'; ?></td>
+                          <td colspan="7" rowspan="2" width="182"></td>
                       </tr>
                     </table></td>
                   </tr>
@@ -340,7 +340,7 @@ textarea {
                   <tr>
                     <td colspan="7" rowspan="3" width="182" align="left" valign="top"><table cellpadding="0" cellspacing="0">
                       <tr>
-                          <td colspan="7" rowspan="3" width="182"><?php if(!empty($data4['dshrinkage_w1'])){echo $data4['dshrinkage_w1'];}else if(!empty($data2['shrinkage_w1'])){echo $data2['shrinkage_w1'];}else echo '-'; ?></td>
+                          <td colspan="7" rowspan="3" width="182"></td>
                       </tr>
                     </table></td>
                   </tr>
@@ -571,12 +571,12 @@ textarea {
                         <td align="right">JISL1096 A method</td>
                       </tr>
                       <tr>
-                        <td><input type="checkbox" name="ISO-105-D" value="1" <?= (!empty($data4['dbs_mullen'])||!empty($data2['bs_mullen'])) ? 'checked': ''; ?>></td>
+                        <td><input type="checkbox" name="ISO-105-D" value="1"></td>
                         <td align="right">ISO 13938-1</td>
                       </tr>
                     </tbody>
                   </table></td>
-                <td colspan="3" align="center" style="border: 1px solid #000;"><?php if(!empty($data4['dbs_mullen'])){echo $data4['dbs_mullen'];}else if(!empty($data2['bs_mullen'])){echo $data2['bs_mullen'];}else echo '-'; ?></td>
+                <td colspan="3" align="center" style="border: 1px solid #000;"></td>
               </tr>
               <tr>
                 <td colspan="5" align="left" style="border: 1px solid #000;">MZP6 Seam slippage (mm)
@@ -627,7 +627,7 @@ textarea {
                   <table width="200" border="0">
                     <tbody>
                       <tr>
-                        <td><input type="checkbox" name="JISL-" value="1" <?= (!empty($data4['dsm_l1']) || !empty($data4['dsm_w1'])||!empty($data2['sm_l1']) || !empty($data2['sm_w1']))?'checked':'';?>></td>
+                        <td><input type="checkbox" name="JISL-" value="1"></td>
                         <td align="right">JISL1058A・A method</td>
                       </tr>
                       <tr>
@@ -639,20 +639,20 @@ textarea {
                 <td colspan="3" align="center" style="border: 1px solid #000;"><table width="79" border="0">
                   <tbody>
                     <tr>
-                      <td width="31"><input type="checkbox" name="JISL-" value="1" <?= (!empty($data4['dsm_l1']) || !empty($data4['dsm_w1'])||!empty($data2['sm_l1']) || !empty($data2['sm_w1']))?'checked':'';?>></td>
+                      <td width="31"><input type="checkbox" name="JISL-" value="1"></td>
                       <td width="16">A</td>
                       <td width="12"><input type="checkbox" name="JISL-" value="1" /></td>
                       <td width="10">D</td>
                     </tr>
                     <tr>
                       <td>Vertical: </td>
-                      <td><?php if(!empty($data4['dsm_l1'])){echo $data4['dsm_l1'];}else if(!empty($data2['sm_l1'])){echo $data2['sm_l1'];}else echo '-'; ?></td>
+                      <td>&nbsp;</td>
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
                     <tr>
                       <td>Horiz.    :  </td>
-                      <td><?php if(!empty($data4['dsm_w1'])){echo $data4['dsm_w1'];}else if(!empty($data2['sm_w1'])){echo $data2['sm_w1'];}else echo '-'; ?></td>
+                      <td>&nbsp;</td>
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
@@ -664,7 +664,7 @@ textarea {
                   <table width="200" border="0">
                     <tbody>
                       <tr>
-                        <td><input type="checkbox" name="JISL-" value="1" <?= (!empty($data2['pm_f1'])||!empty($data4['dpm_f1'])) ? 'checked' : '';?>></td>
+                        <td><input type="checkbox" name="JISL-" value="1"></td>
                         <td align="right">JISL1076ART/ISO 12945-2</td>
                       </tr>
                       <tr>
@@ -682,14 +682,14 @@ textarea {
                       <td width="10">ICI</td>
                     </tr>
                     <tr>
-                      <td><input type="checkbox" name="JISL-" value="1" <?= (!empty($data2['pm_f1'])||!empty($data4['dpm_f1'])) ? 'checked' : '';?>></td>
+                      <td><input type="checkbox" name="JISL-" value="1"></td>
                       <td>Martindale</td>
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
                     <tr>
                       <td>&nbsp;</td>
-                      <td align="right"><?php if(!empty($data4['dpm_f1'])){echo $data4['dpm_f1'];}else if(!empty($data2['pm_f1'])){echo $data2['pm_f1'];}else echo '-'; ?></td>
+                      <td align="right"></td>
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
