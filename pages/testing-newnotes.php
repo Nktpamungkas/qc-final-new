@@ -2188,7 +2188,7 @@ $rcekcmt = mysqli_fetch_array($sqlCmt);
 
 $id_tq_test_2 = $rcek['id'];
 
-$tq_test_2_sql = mysqli_query($con, "select id_nokk, spirality_status, bleeding_root, wrinkle, wrinkle1, wrinkle2, stat_wrinkle, stat_wrinkle1, wrinkle_note from tbl_tq_test_2 where id_nokk = '$id_tq_test_2'");
+$tq_test_2_sql = mysqli_query($con, "SELECT id_nokk, spirality_status, bleeding_root, wrinkle, wrinkle1, wrinkle2, stat_wrinkle, stat_wrinkle1, wrinkle_note from tbl_tq_test_2 where id_nokk = '$id_tq_test_2'");
 $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 ?>
 <?php if (($_SESSION['lvl_id'] == "TQ"|| $_SESSION['lvl_id'] == "OPERATORTQ") and $cek > 0) { ?>
@@ -7078,7 +7078,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									<label for="burs_str" class="col-sm-2 control-label">MULLEN</label>
 									<div class="col-sm-2">
 										<input name="mullen" type="text" class="form-control" id="mullen"
-											value="<?php echo $rcek1['bs_mullen']; ?>" placeholder="MULLEN">
+											value="<?php echo $rcek1['bs_mullen']; ?>" placeholder="MULLEN"> TEST
 									</div>
 									<div class="col-sm-2">
 										<select name="stat_bs3" class="form-control select2" id="stat_bs3" onChange="tampil();"
@@ -15430,6 +15430,7 @@ if ($_POST['colorfastness_save'] == "save") {  // bleeding_root save
 			$sql_no_demand = mysqli_query($con, "INSERT INTO tbl_tq_test_2 (id_nokk,bleeding_root) VALUES ('$id_tq_test_2','$bleeding_root')");
 		}
 	}
+	// $dbleeding_root 
 	if ($dbleeding_root != '') {
 		$sqlPHY = mysqli_query($con, "UPDATE tbl_tq_disptest_2 SET dbleeding_root = '$dbleeding_root'  WHERE id_nokk='$id_tq_test_2'");
 	} else {
@@ -15556,7 +15557,6 @@ if ($_POST['functional_save'] == "save") {
 // Save Colorfatness
 if ($_POST['colorfastness_save'] == "save") {
 	$fields = array('classification_shedding', 'syringe_shedding', 'observation_shedding', 'avg_gr_shedding', 'avg_per_shedding', 'nama_rub', 'status_rub', 'bleeding_root');
-    
     foreach ($fields as $field) {
         $value = trim($_POST[$field]);
         
@@ -15575,6 +15575,28 @@ if ($_POST['colorfastness_save'] == "save") {
             }
         } else {
             $sqlPHY = mysqli_query($con, "UPDATE tbl_tq_test_2 SET $field = null WHERE id_nokk = '$id_tq_test_2'");
+        }
+    }
+
+	$fields_disp = array('dbleeding_root');
+    foreach ($fields_disp as $fieldDisp) {
+        $value_disp = trim($_POST[$fieldDisp]);
+        
+        if ($value_disp != "0" && $value_disp != "") {
+            $selectSql_disp = "SELECT * FROM tbl_tq_disptest_2 WHERE id_nokk = '$id_tq_test_2'";
+            $result_disp = mysqli_query($con, $selectSql_disp);
+
+            if (mysqli_num_rows($result_disp) > 0) {
+                // Data sudah ada, lakukan UPDATE
+                $updateSql_disp = "UPDATE tbl_tq_disptest_2 SET $fieldDisp = '$value_disp' WHERE id_nokk = '$id_tq_test_2'";
+                $sqlPHY_disp = mysqli_query($con, $updateSql_disp);
+            } else {
+                // Data belum ada, lakukan INSERT
+                $insertSql_disp = "INSERT INTO tbl_tq_disptest_2 (id_nokk, $fieldDisp) VALUES ('$id_tq_test_2','$value_disp')";
+                $sqlPHY_disp = mysqli_query($con, $insertSql_disp);
+            }
+        } else {
+            $sqlPHY_disp = mysqli_query($con, "UPDATE tbl_tq_disptest_2 SET $fieldDisp = null WHERE id_nokk = '$id_tq_test_2'");
         }
     }
 
