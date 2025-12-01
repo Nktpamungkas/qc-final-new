@@ -317,6 +317,24 @@ $rcekP=mysqli_fetch_array($sqlCekP);
 <?php
 date_default_timezone_set('Asia/Jakarta');
 if($_POST['save']=="save"){
+        // Cek dulu apakah nodemand sudah ada,
+        // untuk mencegah data ter-input dobel.
+        $nodemand_post = mysqli_real_escape_string($con, $_POST['nodemand']);
+        $cekExist = mysqli_query($con,"SELECT id FROM tbl_firstlot WHERE nodemand='$nodemand_post' LIMIT 1");
+        if(mysqli_num_rows($cekExist) > 0){
+			echo "<script>
+					swal({
+					title: 'Data Sudah Ada',   
+					text: 'Data dengan No Demand yang sama sudah tersimpan',
+					type: 'info',
+					}).then((result) => {
+					if (result.value) {
+						window.location.href='FirstLotNew-$nodemand_post';
+						
+					}
+					});
+					</script>";
+		}else{
         $warna=str_replace("'","''",$_POST['warna']);
         $nowarna=str_replace("'","''",$_POST['no_warna']);	
 		$jns=mysqli_real_escape_string($con,$_POST['jenis_kain']);
@@ -415,7 +433,7 @@ if($_POST['save']=="save"){
 });</script>";
 		}
 				
-	}
+	}}
 
 
 //if($_POST[ubah]=="ubah" AND $_POST[tgl_approve]="0000-00-00"){
