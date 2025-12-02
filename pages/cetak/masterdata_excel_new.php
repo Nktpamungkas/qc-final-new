@@ -1674,7 +1674,7 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
           <?php echo $r['growth_note']; ?>
         </td><!--9-->
         <td>
-          <?php echo $r['apper_ch1']; ?>
+          <?php echo $r['apper_cc1']; ?>
         </td>
         <td>
           <?php echo $r['apper_st']; ?>
@@ -1704,7 +1704,7 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
           <?php echo $r['apper_wool']; ?>
         </td>
         <td>
-          <?php echo $r['apper_ch2']; ?>
+          <?php echo $r['apper_cc2']; ?>
         </td>
         <td>
           <?php echo $r['apper_pf2']; ?>
@@ -1716,7 +1716,7 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
           <?php echo $r['apper_st2']; ?>
         </td>
         <td>
-          <?php echo $r['apper_ch3']; ?>
+          <?php echo $r['apper_cc3']; ?>
         </td>
         <td>
           <?php echo $r['apper_pf3']; ?>
@@ -2759,7 +2759,7 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
               <?php echo $r['growth_note']; ?>
             </td><!--9-->
             <td>
-              <?php echo $r['apper_ch1']; ?>
+              <?php echo $r['apper_cc1']; ?>
             </td>
             <td>
               <?php echo $r['apper_st']; ?>
@@ -2789,7 +2789,7 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
               <?php echo $r['apper_wool']; ?>
             </td>
             <td>
-              <?php echo $r['apper_ch2']; ?>
+              <?php echo $r['apper_cc2']; ?>
             </td>
             <td>
               <?php echo $r['apper_pf2']; ?>
@@ -2801,7 +2801,7 @@ $prod_order = isset($_GET['prod_order']) ? $_GET['prod_order'] : null;
               <?php echo $r['apper_st2']; ?>
             </td>
             <td>
-              <?php echo $r['apper_ch3']; ?>
+              <?php echo $r['apper_cc3']; ?>
             </td>
             <td>
               <?php echo $r['apper_pf3']; ?>
