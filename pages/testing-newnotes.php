@@ -7078,7 +7078,7 @@ $tq_test_2_array = mysqli_fetch_array($tq_test_2_sql);
 									<label for="burs_str" class="col-sm-2 control-label">MULLEN</label>
 									<div class="col-sm-2">
 										<input name="mullen" type="text" class="form-control" id="mullen"
-											value="<?php echo $rcek1['bs_mullen']; ?>" placeholder="MULLEN"> TEST
+											value="<?php echo $rcek1['bs_mullen']; ?>" placeholder="MULLEN">
 									</div>
 									<div class="col-sm-2">
 										<select name="stat_bs3" class="form-control select2" id="stat_bs3" onChange="tampil();"
