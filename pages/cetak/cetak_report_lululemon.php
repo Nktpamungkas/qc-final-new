@@ -790,7 +790,7 @@ textarea {
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_py']==""){echo "N/A";}else if($rcek1['stat_py']!=""){echo $rcekM['mphenolic_note'];}else{echo "&nbsp;";}?></td>
             </tr>
             <tr>
-                <td align="left" style="font-size: 12px;">APPEARANCE AFTER <!--LAUNDERING-->CARE</td>
+                <td align="left" style="font-size: 12px;">APPEARANCE AFTER CARE</td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
@@ -806,12 +806,12 @@ textarea {
                 <td align="center" style="font-size: 12px;">N/A</td>
             </tr> -->
             <tr>
-                <td align="left" style="font-size: 12px;"><!--EXTENSION AND RECOVERY TEST FOR ELASTIC FABRICS-->ELONGATION, MODULUS & RECOVERY</td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;">N/A</td>
+                <td align="left" style="font-size: 12px;">ELONGATION, MODULUS & RECOVERY</td><!--EXTENSION AND RECOVERY TEST FOR ELASTIC FABRICS-->
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="PASS" OR $rcek1['stat_sr']=="DISPOSISI"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']==""){echo "N/A";}else if($rcek1['stat_sr']!=""){echo $rcekM['mapper_note'];}else{echo "&nbsp;";}?></td>
             </tr>
             <tr>
                 <td align="left" style="font-size: 12px;"><!--VERTICAL--> WICKING</td>
