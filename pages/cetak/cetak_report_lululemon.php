@@ -450,7 +450,15 @@ textarea {
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Sample Description:</td>
-            <td>SAMPLE FABRIC FOR ADDITIONAL COLOR</td>
+            <td><?php if($rd2['test_package']=='Full Package'){
+                echo 'SAMPLE FABRIC FOR FULLTEST';
+            }else if($rd2['test_package']=='Additional Color Package'){
+                echo 'SAMPLE FABRIC FOR ADDITIONAL COLOR';
+            }else if($rd2['test_package']=='Bulk Production'){
+                echo 'SAMPLE FABRIC FOR BULK PRODUCTION';
+            }
+            ?></td>
+            <!-- <td>SAMPLE FABRIC FOR ADDITIONAL COLOR</td> -->
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Brand:</td>
@@ -470,7 +478,8 @@ textarea {
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Test package:</td>
-            <td>ADDITIONAL COLOR PACKAGE</td>
+            <!-- <td>ADDITIONAL COLOR PACKAGE</td> -->
+             <td><?= strtoupper($rd2['test_package']);?></td>
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Product type:</td>

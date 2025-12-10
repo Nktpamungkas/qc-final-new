@@ -1693,7 +1693,7 @@ $rowdb2 = db2_fetch_assoc($stmt);
                 <label for="no_order" class="col-sm-3 control-label">No Order</label>
                 <div class="col-sm-4">
                 	<input name="no_order" type="text" class="form-control" id="no_order" placeholder="No Order" 
-                    value="<?php if($cek>0){echo $rcek['no_order'];}else{echo $r['NoOrder'];} ?>" readonly="readonly">
+                    value="<?php if($cek>0){echo $rcek['no_order'];}else{echo $r['NoOrder'];} ?>">
                 </div>				   
             </div>
 		 	<div class="form-group">

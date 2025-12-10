@@ -129,12 +129,10 @@ echo '</pre>';
                   <label for="no_order" class="col-sm-3 control-label">No Order</label>
                   <div class="col-sm-5">
                     <input  name="no_order" type="text" class="form-control" id="no_order" placeholder="No Order" 
-                    value="<?php if($cek>0){echo $rcek['no_order'];}else{echo $r['NoOrder'];} ?>" readonly="readonly">
-                  </div>
-<?php if (count($array_id_nodemand) > 0) {?>	
+                    value="<?php if($cek>0){echo $rcek['no_order'];}else{echo $r['NoOrder'];} ?>">
+                  		</div> <?php if (count($array_id_nodemand) > 0) {?>	
 						<div class="col-sm-2">
 						<input class="form-control" name="nodemand_mulptiple[<?=$array_demand_key[5]?>]" value="<?=$array_demand_value[5]?>" >
-				
 						</div>
 				<div class="col-sm-2">
 				<input class="form-control" name="nodemand_mulptiple[<?=$array_demand_key[6]?>]" value="<?=$array_demand_value[6]?>" >
@@ -660,6 +658,7 @@ if($_POST['save']=="save"){
 		$nohanger=strtoupper($_POST['no_hanger']);
 		$noitem=strtoupper($_POST['no_item']);
 		$nopo=str_replace("'","''",$_POST['no_po']);
+		$no_order=str_replace("'","''",$_POST['no_order']);
 		$notestmaster=$_POST['no_test'];
 		$lebar=$_POST['lebar'];
 		$gramasi=$_POST['grms'];
@@ -700,6 +699,7 @@ if($_POST['save']=="save"){
 	no_item='$noitem',
 	no_hanger='$nohanger',
 	no_po='$nopo',
+	no_order='$no_order',
 	lot='$_POST[lot]',
 	warna='$_POST[warna]',
 	development='$_POST[development]',
