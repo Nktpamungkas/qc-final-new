@@ -1136,18 +1136,26 @@ $rcekD=mysqli_fetch_array($sqlCekD);
 					<tbody>
 						<?php
             //Data ditampilkan ke tabel
-            $sql = mysqli_query($con,"SELECT a.* FROM tbl_tq_nokk a INNER JOIN tbl_tq_test b ON a.id=b.id_nokk WHERE DATE_FORMAT( a.tgl_masuk, '%Y' )!='2019' and DATE_FORMAT( a.tgl_masuk, '%Y' )!='2020' and DATE_FORMAT( a.tgl_masuk, '%Y' )!='2021' and a.nodemand!=''");
+            $sql = mysqli_query($con,"SELECT a.no_order,
+											a.no_test,
+											a.nodemand,
+											a.nokk,
+											a.jenis_kain,
+											a.lot,
+											a.no_hanger,
+											a.no_item,
+										a.warna FROM tbl_tq_nokk a INNER JOIN tbl_tq_test b ON a.id=b.id_nokk WHERE DATE_FORMAT( a.tgl_masuk, '%Y' )!='2019' and DATE_FORMAT( a.tgl_masuk, '%Y' )!='2020' and DATE_FORMAT( a.tgl_masuk, '%Y' )!='2021' and a.nodemand!=''");
             $no="1";
             while ($r = mysqli_fetch_array($sql)) {
             ?>
 						<tr class="pilih-kk" data-kk="<?php echo $r['nodemand']; ?>">
-            <td align="center">
+            				<td align="center">
 								<?php echo $no; ?>
 							</td>
 							<td align="center">
 								<?php echo $r['no_order']; ?>
 							</td>
-              <td align="center">
+              				<td align="center">
 								<?php echo $r['no_test']; ?>
 							</td>
 							<td align="center">
@@ -1168,7 +1176,7 @@ $rcekD=mysqli_fetch_array($sqlCekD);
 							<td align="center">
 								<?php echo $r['no_item']; ?>
 							</td>
-              <td align="center">
+              				<td align="center">
 								<?php echo $r['warna']; ?>
 							</td>
 						</tr>
