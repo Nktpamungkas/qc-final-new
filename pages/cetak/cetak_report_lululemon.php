@@ -450,7 +450,15 @@ textarea {
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Sample Description:</td>
-            <td>SAMPLE FABRIC FOR ADDITIONAL COLOR</td>
+            <td><?php if($rd2['test_package']=='Full Package'){
+                echo 'SAMPLE FABRIC FOR FULLTEST';
+            }else if($rd2['test_package']=='Additional Color Package'){
+                echo 'SAMPLE FABRIC FOR ADDITIONAL COLOR';
+            }else if($rd2['test_package']=='Bulk Production'){
+                echo 'SAMPLE FABRIC FOR BULK PRODUCTION';
+            }
+            ?></td>
+            <!-- <td>SAMPLE FABRIC FOR ADDITIONAL COLOR</td> -->
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Brand:</td>
@@ -470,7 +478,8 @@ textarea {
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Test package:</td>
-            <td>ADDITIONAL COLOR PACKAGE</td>
+            <!-- <td>ADDITIONAL COLOR PACKAGE</td> -->
+             <td><?= strtoupper($rd2['test_package']);?></td>
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Product type:</td>
@@ -781,7 +790,7 @@ textarea {
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_py']==""){echo "N/A";}else if($rcek1['stat_py']!=""){echo $rcekM['mphenolic_note'];}else{echo "&nbsp;";}?></td>
             </tr>
             <tr>
-                <td align="left" style="font-size: 12px;">APPEARANCE AFTER <!--LAUNDERING-->CARE</td>
+                <td align="left" style="font-size: 12px;">APPEARANCE AFTER CARE</td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
@@ -797,12 +806,12 @@ textarea {
                 <td align="center" style="font-size: 12px;">N/A</td>
             </tr> -->
             <tr>
-                <td align="left" style="font-size: 12px;"><!--EXTENSION AND RECOVERY TEST FOR ELASTIC FABRICS-->ELONGATION, MODULUS & RECOVERY</td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;">N/A</td>
+                <td align="left" style="font-size: 12px;">ELONGATION, MODULUS & RECOVERY</td><!--EXTENSION AND RECOVERY TEST FOR ELASTIC FABRICS-->
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="PASS" OR $rcek1['stat_sr']=="DISPOSISI"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
+                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']==""){echo "N/A";}else if($rcek1['stat_sr']!=""){echo $rcekM['mapper_note'];}else{echo "&nbsp;";}?></td>
             </tr>
             <tr>
                 <td align="left" style="font-size: 12px;"><!--VERTICAL--> WICKING</td>
