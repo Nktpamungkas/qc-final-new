@@ -1118,7 +1118,7 @@ $rcekD=mysqli_fetch_array($sqlCekD);
 
 			</div>
 			<div class="modal-body">
-				<table id="lookup" class="table table-bordered table-hover table-striped" width="100%">
+				<table id="lookup123" class="table table-bordered table-hover table-striped" width="100%">
 					<thead>
 						<tr>
               				<th width="5%">No</th>
@@ -1142,68 +1142,72 @@ $rcekD=mysqli_fetch_array($sqlCekD);
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-	if (typeof window.jQuery === 'undefined' || typeof $.fn.DataTable === 'undefined') {
-		return;
-	}
-	var lookupLoaded = false;
-	var lookupRequest = null;
-	var $modal = $('#myModal');
-	var $lookupBody = $modal.find('.modal-body');
-	var $loading = $('<div id="lookup-loading" style="display:none; text-align:center; padding:16px;"><i class="fa fa-spinner fa-spin"></i> Mohon menunggu, data sedang dimuat...</div>');
+    if (typeof window.jQuery === 'undefined' || typeof $.fn.DataTable === 'undefined') {
+        return;
+    }
+    var lookupLoaded = false;
+    var $modal = $('#myModal');
+    var $lookupTable = $('#lookup123');
 
-	if (!$modal.length) {
-		return;
-	}
-
-	if ($lookupBody.length) {
-		$lookupBody.prepend($loading);
-	}
-
-	$modal.on('shown.bs.modal', function () {
-		if (lookupLoaded || lookupRequest) {
-			return;
-		}
-
-		var lookupTable = $('#lookup').DataTable();
-		$loading.show();
-		lookupRequest = $.ajax({
-			url: 'pages/ajax/result-kk-new-data.php',
-			method: 'GET',
-			dataType: 'json'
-		}).done(function (response) {
-			if (!response || !response.success || !Array.isArray(response.data)) {
-				return;
-			}
-
-			var rows = [];
-			response.data.forEach(function (item, idx) {
-				rows.push([
-					idx + 1,
-					item.no_order || '',
-					item.no_test || '',
-					item.nodemand || '',
-					item.nokk || '',
-					item.jenis_kain || '',
-					item.lot || '',
-					item.no_hanger || '',
-					item.no_item || '',
-					item.warna || ''
-				]);
-			});
-
-			lookupTable.clear();
-			lookupTable.rows.add(rows).draw();
-
-			lookupTable.rows().every(function (index) {
-				var rowData = response.data[index];
-				$(this.node()).addClass('pilih-kk').attr('data-kk', rowData.nodemand || '');
-			});
-
-			lookupLoaded = true;
-		}).always(function () {
-			lookupRequest = null;
-			$loading.hide();
-		});
-	});
+    if (!$modal.length || !$lookupTable.length) {
+        return;
+    }
+    $modal.on('shown.bs.modal', function () {
+        if (lookupLoaded) {
+            $lookupTable.DataTable().ajax.reload();
+            return;
+        }
+        var lookupTable = $lookupTable.DataTable({
+            serverSide: true,
+            ajax: {
+                url: 'pages/ajax/result-kk-new-data.php',
+                type: 'POST'
+            },
+            columns: [
+                { 
+                    data: null, 
+                    orderable: false, 
+                    searchable: false,
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                { data: 'no_order' },
+                { data: 'no_test' },
+                { data: 'nodemand' },
+                { data: 'nokk' }, // sebelumnya no_prod_order, kini nokk
+                { data: 'jenis_kain' },
+                { data: 'lot' },
+                { data: 'no_hanger' },
+                { data: 'no_item' },
+                { data: 'warna' }
+            ],
+            processing: true,
+            responsive: true,
+            pageLength: 10, 
+            lengthMenu: [ [10, 25, 50, 100], [10, 25, 50, 100] ],
+            
+            initComplete: function(settings, json) {
+                lookupLoaded = true;
+                $('#lookup tbody').off('click', 'tr.pilih-kk').on('click', 'tr.pilih-kk', function() {
+                    var data = lookupTable.row(this).data();
+                    if (data) {
+                        var kkValue = data.nodemand;
+                        console.log('KK Value:', kkValue);
+                    }
+                });
+            },
+            
+            // Fungsi yang dipanggil setelah DataTables menggambar ulang (termasuk pagination)
+            drawCallback: function(settings) {
+                var api = this.api();
+                var data = api.rows({page: 'current'}).data(); api.rows().nodes().each(function (node, index) {
+                    var rowData = api.row(node).data();
+                    $(node).addClass('pilih-kk').attr('data-kk', rowData.nodemand || '');
+                });
+            }
+        });
+    }).on('hidden.bs.modal', function () {
+    });
 });
 </script>
