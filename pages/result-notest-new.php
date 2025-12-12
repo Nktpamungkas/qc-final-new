@@ -3304,48 +3304,6 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 						</tr>
 					</thead>
 					<tbody>
-						<?php
-						//Data ditampilkan ke tabel
-						$sql = mysqli_query($con, "SELECT a.* FROM tbl_tq_nokk a INNER JOIN tbl_tq_test b ON a.id=b.id_nokk WHERE DATE_FORMAT( a.tgl_masuk, '%Y' )!='2019' and DATE_FORMAT( a.tgl_masuk, '%Y' )!='2020' and DATE_FORMAT( a.tgl_masuk, '%Y' )!='2021' and a.nodemand!=''");
-						$no = "1";
-						while ($r = mysqli_fetch_array($sql)) {
-							?>
-							<tr class="pilih-no_test" data-no_test="<?php echo $r['no_test']; ?>">
-								<td align="center">
-									<?php echo $no; ?>
-								</td>
-								<td align="center">
-									<?php echo $r['no_order']; ?>
-								</td>
-								<td align="center">
-									<?php echo $r['no_test']; ?>
-								</td>
-								<td align="center">
-									<?php echo $r['nodemand']; ?>
-								</td>
-								<td align="center">
-									<?php echo $r['nokk']; ?>
-								</td>
-								<td>
-									<?php echo $r['jenis_kain']; ?>
-								</td>
-								<td align="center">
-									<?php echo $r['lot']; ?>
-								</td>
-								<td align="right">
-									<?php echo $r['no_hanger']; ?>
-								</td>
-								<td align="center">
-									<?php echo $r['no_item']; ?>
-								</td>
-								<td align="center">
-									<?php echo $r['warna']; ?>
-								</td>
-							</tr>
-							<?php
-							$no++;
-						}
-						?>
 					</tbody>
 				</table>
 
@@ -3353,3 +3311,70 @@ $rcekD = mysqli_fetch_array($sqlCekD);
 		</div>
 	</div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+	if (typeof window.jQuery === 'undefined' || typeof $.fn.DataTable === 'undefined') {
+		return;
+	}
+	var lookupLoaded = false;
+	var lookupRequest = null;
+	var $modal = $('#myModal1');
+	var $lookupBody = $modal.find('.modal-body');
+	var $loading = $('<div id="lookup-loading" style="display:none; text-align:center; padding:16px;"><i class="fa fa-spinner fa-spin"></i> Loading data...</div>');
+
+	if (!$modal.length) {
+		return;
+	}
+
+	if ($lookupBody.length) {
+		$lookupBody.prepend($loading);
+	}
+
+	$modal.on('shown.bs.modal', function () {
+		if (lookupLoaded || lookupRequest) {
+			return;
+		}
+
+		var lookupTable = $('#lookup').DataTable();
+		$loading.show();
+		lookupRequest = $.ajax({
+			url: 'pages/ajax/result-notest-new-data.php',
+			method: 'GET',
+			dataType: 'json'
+		}).done(function (response) {
+			if (!response || !response.success || !Array.isArray(response.data)) {
+				return;
+			}
+
+			var rows = [];
+			response.data.forEach(function (item, idx) {
+				rows.push([
+					idx + 1,
+					item.no_order || '',
+					item.no_test || '',
+					item.nodemand || '',
+					item.nokk || '',
+					item.jenis_kain || '',
+					item.lot || '',
+					item.no_hanger || '',
+					item.no_item || '',
+					item.warna || ''
+				]);
+			});
+
+			lookupTable.clear();
+			lookupTable.rows.add(rows).draw();
+
+			lookupTable.rows().every(function (index) {
+				var rowData = response.data[index];
+				$(this.node()).addClass('pilih-no_test').attr('data-no_test', rowData.no_test || '');
+			});
+
+			lookupLoaded = true;
+		}).always(function () {
+			lookupRequest = null;
+			$loading.hide();
+		});
+	});
+});
+</script>
