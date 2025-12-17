@@ -153,12 +153,12 @@ textarea {
                 <tr>
                   <td width="44" rowspan="2" align="center" style="border: 1px solid #000;"><?= $data1['tahun'];?></td>
                   <td width="37" align="center" style="border: 1px solid #000;"><label><input type="checkbox" name="S/S" value="1" <?php if($data1['season']=='S/S'){echo 'checked';}else{echo '';}?>>S/S</label></td>
-				  <td width="54" align="center" style="border: 1px solid #000;"><label><input type="checkbox" name="Sample" value="1" <?php if($data1['season']=='Sample'){echo 'checked';}else{echo '';}?>>Sample</label></td>
+				  <td width="54" align="center" style="border: 1px solid #000;"><label><input type="checkbox" name="Sample" value="1" <?php if($data1['jenis_report']=='Sample'){echo 'checked';}else{echo '';}?>>Sample</label></td>
                   <td width="62" rowspan="2" align="left" style="border: 1px solid #000;">Mz File </td>
                   <td width="237" rowspan="2" align="center" style="border: 1px solid #000;">&nbsp;</td>
                 </tr>
                 <tr>
-                  <td style="border: 1px solid #000;" align="center"><label><input type="checkbox" name="A/W" value="1" <?php if($data1['jenis_report']=='A/W'){echo 'checked';}else{echo '';}?>>A/W</label></td>
+                  <td style="border: 1px solid #000;" align="center"><label><input type="checkbox" name="A/W" value="1" <?php if($data1['season']=='A/W'){echo 'checked';}else{echo '';}?>>A/W</label></td>
 				  <td style="border: 1px solid #000;" align="center"><label><input type="checkbox" name="Bulk" value="1" <?php if($data1['jenis_report']=='Bulk'){echo 'checked';}else{echo '';}?>>Bulk</label></td>
                   </tr>
                 <tr>
