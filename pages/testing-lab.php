@@ -2622,10 +2622,10 @@ $rcekcmt=mysqli_fetch_array($sqlCmt);
 									<input name="cm_dye_colorchange" type="text" class="form-control" id="cm_dye_colorchange" value="<?php echo $rcek1['cm_dye_colorchange'];?>" placeholder="4-5 Color Change">
 								</div>
 								<div class="col-sm-2">
-									<input name="cm_dye_stainingface" type="text" class="form-control" id="cm_dye_stainingface" value="<?php echo $rcek1['cm_dye_stainingface'];?>" placeholder="4 Color Staining">
+									<input name="cm_dye_stainingface" type="text" class="form-control" id="cm_dye_stainingface" value="<?php echo $rcek1['cm_dye_stainingface'];?>" placeholder="4 Color Change">
 								</div>
 								<div class="col-sm-2">
-									<input name="cm_dye_stainingback" type="text" class="form-control" id="cm_dye_stainingback" value="<?php echo $rcek1['cm_dye_stainingback'];?>" placeholder="4 Color Staining With Paper">
+									<input name="cm_dye_stainingback" type="text" class="form-control" id="cm_dye_stainingback" value="<?php echo $rcek1['cm_dye_stainingback'];?>" placeholder="4 Color Change With Paper">
 								</div>
 								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="cm_dye_note" maxlength="50"><?php echo $rcek1['cm_dye_note'];?></textarea>
