@@ -72,6 +72,7 @@ if (isset($_POST['nodemand']) && isset($_POST['action'])) {
                 $mail->addAddress('qcf.adm@indotaichen.com', 'ADM QCF');
                 // $mail->addAddress('arif.efendi@indotaichen.com', 'Arif Efendi');
                 $mail->addAddress('tobias.sulistiyo@indotaichen.com', 'TOBIAS');
+                $mail->addAddress('septian.saputra@indotaichen.com', 'Septian Saputra');
                 $user_email = mysqli_query($con, "SELECT * FROM email_user_penghubung WHERE dept='PPC'");
                 $listmail   = [];
                 while ($data_email = mysqli_fetch_array($user_email)) {
