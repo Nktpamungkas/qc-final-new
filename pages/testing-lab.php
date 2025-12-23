@@ -2997,7 +2997,7 @@ $rcekcmt=mysqli_fetch_array($sqlCmt);
 								</div>
 								<div class="col-sm-2">
 									<input name="dye_tf_sstaining" type="text" class="form-control" id="dye_tf_sstaining" value="<?php echo $rcek1['dye_tf_sstaining'];?>" placeholder="Self Staining">
-									<input name="dye_tf_cstaining" type="text" class="form-control" id="dye_tf_cstaining" value="<?php echo $rcek1['dye_tf_cstaining'];?>" placeholder="Color Staining">
+									<input name="dye_tf_cstaining" type="text" class="form-control" id="dye_tf_cstaining" value="<?php echo $rcek1['dye_tf_cstaining'];?>" placeholder="Color Change">
 								</div>
 								<div class="col-sm-2">
 									<textarea class="form-control" placeholder="Note harus diakhir tanda titik" name="dye_tf_note" maxlength="50" rows="1"><?php echo $rcek1['dye_tf_note'];?></textarea>
@@ -3034,7 +3034,7 @@ $rcekcmt=mysqli_fetch_array($sqlCmt);
 									<input name="ddye_tf_wool" type="text" class="form-control" id="ddye_tf_wool" value="<?php echo $rcekD['ddye_tf_wool'];?>" placeholder="Wool">
 								</div>
 								<div class="col-sm-2">
-									<input name="ddye_tf_cstaining" type="text" class="form-control" id="ddye_tf_cstaining" value="<?php echo $rcekD['ddye_tf_cstaining'];?>" placeholder="Color Staining">
+									<input name="ddye_tf_cstaining" type="text" class="form-control" id="ddye_tf_cstaining" value="<?php echo $rcekD['ddye_tf_cstaining'];?>" placeholder="Color Change">
 									<input name="ddye_tf_sstaining" type="text" class="form-control" id="ddye_tf_sstaining" value="<?php echo $rcekD['ddye_tf_sstaining'];?>" placeholder="Self Staining">
 								</div>
 								<div class="col-sm-2">
@@ -3056,7 +3056,7 @@ $rcekcmt=mysqli_fetch_array($sqlCmt);
 									<input name="mdye_tf_wool" type="text" class="form-control" id="mdye_tf_wool" value="<?php echo $rcekM['mdye_tf_wool'];?>" placeholder="Wool">
 								</div>
 								<div class="col-sm-2">
-									<input name="mdye_tf_cstaining" type="text" class="form-control" id="mdye_tf_cstaining" value="<?php echo $rcekM['mdye_tf_cstaining'];?>" placeholder="Color Staining">
+									<input name="mdye_tf_cstaining" type="text" class="form-control" id="mdye_tf_cstaining" value="<?php echo $rcekM['mdye_tf_cstaining'];?>" placeholder="Color Change">
 									<input name="mdye_tf_sstaining" type="text" class="form-control" id="mdye_tf_sstaining" value="<?php echo $rcekM['mdye_tf_sstaining'];?>" placeholder="Self Staining">
 								</div>
 								<div class="col-sm-2">
@@ -3078,7 +3078,7 @@ $rcekcmt=mysqli_fetch_array($sqlCmt);
 									<input name="rdye_tf_wool" type="text" class="form-control" id="rdye_tf_wool" value="<?php echo $rcekR['rdye_tf_wool'];?>" placeholder="Wool" readonly>
 								</div>
 								<div class="col-sm-2">
-									<input name="rdye_tf_cstaining" type="text" class="form-control" id="rdye_tf_cstaining" value="<?php echo $rcekR['rdye_tf_cstaining'];?>" placeholder="Color Staining" readonly>
+									<input name="rdye_tf_cstaining" type="text" class="form-control" id="rdye_tf_cstaining" value="<?php echo $rcekR['rdye_tf_cstaining'];?>" placeholder="Color Change" readonly>
 									<input name="rdye_tf_sstaining" type="text" class="form-control" id="rdye_tf_sstaining" value="<?php echo $rcekR['rdye_tf_sstaining'];?>" placeholder="Self Staining" readonly>
 								</div>
 								<div class="col-sm-2">
