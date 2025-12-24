@@ -245,6 +245,7 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
               <th rowspan='2'><div align="center">Status</div></th>
               <th rowspan='2'><div align="center">Analisis</div></th>
               <th rowspan='2'><div align="center">Hasil Analisa</div></th>
+              <th rowspan='2'><div align="center">Pengurangan Poin</div></th>
             </tr>
             <tr>
             <th class="text-center">No NCP</th>
@@ -490,6 +491,10 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['status_additional']; ?></td>
             <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['analisis_additional']; ?></td>
             <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['hasil_analisa_additional']; ?></td>
+            <td class="edit-cell2" data-id="<?= $row1['id']; ?>" data-field="pengurangan_poin" data-value="<?= (int) $row['pengurangan_poin']; ?>"
+              style="cursor:pointer;">
+              <?= (int) $row['pengurangan_poin']; ?>
+            </td>
             </tr>
           <?php	$no++;  }} ?>
         </tbody>
@@ -732,6 +737,73 @@ function formatRupiah(input) {
     input.value = formattedValue;
   }
 }
+</script>
+
+<script>
+$(document).on('click', '.edit-cell2', function () {
+  const $td = $(this);
+
+  // kalau sedang edit, jangan bikin select lagi
+  if ($td.find('select').length) return;
+
+  const id = $td.data('id');
+  const field = $td.data('field');  // nama kolom
+  const current = String($td.data('value') ?? $td.text().trim());
+
+  const options = [5,10,15,20,25,30];
+
+  // buat select
+  let $select = $('<select class="edit-select form-control" style="width:100%;"></select>');
+  options.forEach(v => {
+    $select.append(`<option value="${v}">${v}</option>`);
+  });
+
+  $select.val(current);
+
+  const oldText = $td.text().trim();
+
+  $td.empty().append($select);
+  $select.focus();
+
+  function saveValue(newVal) {
+    $.ajax({
+      url: 'pages/ajax/update_aftersales_now.php',
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        id: id,
+        field: field,
+        value: newVal
+      },
+      success: function(res){
+        if(res && res.status === 'ok'){
+          $td.data('value', newVal);
+          $td.text(newVal);
+        } else {
+          alert(res?.message || 'Gagal update');
+          $td.text(oldText);
+        }
+      },
+      error: function(xhr, textStatus){
+        alert(
+          "AJAX error: " + textStatus +
+          "\nHTTP: " + xhr.status +
+          "\nResponse:\n" + (xhr.responseText ? xhr.responseText.substring(0, 400) : "-")
+        );
+      }
+    });
+  }
+
+  $select.on('change', function(){
+    const newVal = $(this).val();
+    saveValue(newVal);
+  });
+
+  $select.on('blur', function(){
+    const valNow = $td.data('value') ?? oldText;
+    $td.text(valNow);
+  });
+});
 </script>
 </body>
 
