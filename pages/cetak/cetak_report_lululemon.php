@@ -483,8 +483,19 @@ textarea {
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Product type:</td>
-            <td><?php echo $rd2['protocol']; ?> -  <?php echo $rd2['enduse']; ?></td>
-        </tr>
+            <td>
+                <?php
+                $protocolText = $rd2['protocol'] ?? '';
+
+                if ($protocolText == "Predominanly Synthetic" || $protocolText == "Predominanly Natural") {
+                    $protocolText = "Knit " . $protocolText;
+                }
+
+                echo $protocolText;
+                ?>
+                - <?php echo $rd2['enduse'] ?? ''; ?>
+            </td>
+            </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Season/Year:</td>
             <td><?php echo $rd2['season']; ?></td>
@@ -555,7 +566,18 @@ textarea {
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Test Protocol:</td>
-            <td><?php echo $rd2['protocol']; ?> -  <?php echo $rd2['enduse']; ?></td>
+             <td>
+                <?php
+                $protocolText = $rd2['protocol'] ?? '';
+
+                if ($protocolText == "Predominanly Synthetic" || $protocolText == "Predominanly Natural") {
+                    $protocolText = "Knit " . $protocolText;
+                }
+
+                echo $protocolText;
+                ?>
+                - <?php echo $rd2['enduse'] ?? ''; ?>
+            </td>
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">FGV :</td>
@@ -578,6 +600,10 @@ textarea {
             <td>N/A</td>
         </tr>
         <tr>
+            <td class="narrow-column" style="font-size: 12px;">Action Plan(for retest order):</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
             <td class="narrow-column" style="font-size: 12px;">Style:</td>
             <td><?php echo $rd2['style']; ?></td>
         </tr>
@@ -591,7 +617,7 @@ textarea {
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Suggested Care Instruction</td>
-            <td>MACHINE WASH COLD, TUMBLE DRY LOW</td>
+            <td>-</td>
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Test Result(S)</td>
@@ -599,7 +625,18 @@ textarea {
         </tr>
         <tr>
             <td class="narrow-column" style="font-size: 12px;">Report Expiration Date</td>
-            <td><?php echo date("m/d/Y", strtotime($rd2['date_out1']));?></td>
+            <td>
+                <?php
+                if (!empty($rd2['date_out1'])) {
+                    $dt = new DateTime($rd2['date_out1']);
+                    $dt->modify('+1 year');
+                    $dt->modify('-1 day');
+                    echo $dt->format('m/d/Y');
+                } else {
+                    echo '';
+                }
+                ?>
+            </td>
         </tr>
     </table>
     <div class="pagebreak"></div>
@@ -632,7 +669,7 @@ textarea {
         </tr>
     </table>
     <table width="100%" border="1" class="table-list1">
-        <thead>
+        <!-- <thead>
             <tr>
                 <td align="center" style="font-size: 12px;" width="30%"><strong>TEST PROPERTY</strong></td>
                 <td align="center" style="font-size: 12px;" width="10%"><strong>PASS</strong></td>
@@ -641,162 +678,397 @@ textarea {
                 <td align="center" style="font-size: 12px;" width="10%"><strong>DATA</strong></td>
                 <td align="center" style="font-size: 12px;" width="15%"><strong>COMMENTS</strong></td>
             </tr>
-        </thead>
+        </thead> -->
         <tbody>
             <tr>
-                <td align="left" style="font-size: 12px;">PH IN TEXTILE<!--PH Value in textile--></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ph']==""){echo "N/A";}else if($rcek1['stat_ph']!=""){echo $rcekM['mph_note'];}else{echo "&nbsp;";}?></td>
+                <td align="left" style="font-size: 12px;" colspan="1"><strong>TEST PROTOCOL</strong></td>
+                <td align="left" style="font-size: 12px;" colspan="3">
+                   <strong><?php
+                   $protocolText = $rd2['protocol'] ?? '';
+
+                   if ($protocolText == "Predominanly Synthetic" || $protocolText == "Predominanly Natural") {
+                       $protocolText = "Knit " . $protocolText;
+                   }
+
+                   echo $protocolText;
+                   ?></strong> 
+                </td>
+            </tr>           
+            <tr>
+                <td align="left" style="font-size: 12px;" colspan="1"><strong>TEST NAME</strong></td>
+                <td align="center" style="font-size: 12px;"colspan="2"><strong> OVERALL RATING</strong></td>    
             </tr>
             <tr>
-                <td align="left" style="font-size: 12px;">FABRIC WEIGHT</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss2']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss2']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss2']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss2']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss2']==""){echo "N/A";}else if($rcek1['stat_fwss2']!=""){echo $rcekM['mfwe_note'];}else{echo "&nbsp;";}?></td>
-            </tr>
+                <td align="left" style="font-size: 12px;">PH VALUE<!--PH Value in textile--></td>
+                <td align="left" style="font-size: 12px;" colspan="2">AATCC TM81-2022</td>
+                <td align="left" style="font-size: 12px;"><?php if ($rcek1['stat_ph'] == "PASS") {
+                    echo "PASS";
+                } else if ($rcek1['stat_ph'] == "ESS PASS") {
+                    echo "ESS PASS";
+                } else if ($rcek1['stat_ph'] == "FAIL") {
+                    echo "FAIL";
+                } elseif ($rcek1['stat_ph'] == "DATA") {
+                    echo "DATA";
+                } else if ($rcek1['stat_ph'] == "") {
+                    echo "N/A";
+                } else if ($rcek1['stat_ph'] != "") {
+                    echo $rcekM['mph_note'];
+                } else {
+                    echo "&nbsp;";
+                }?>                
+                </td>
+            </tr>            
             <tr>
+                <td align="left" style="font-size: 12px;">FABRIC WEIGHT PER UNIT AREA</td>
+                <td align="left" style="font-size: 12px;" colspan="2">ASTM D3776/D3776M OPTION C-20 (REAPPROVED 2025)</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php 
+                    if($rcek1['stat_fwss2']=="PASS"){echo "PASS";}
+                    else if($rcek1['stat_fwss2']=="ESS PASS"){echo "ESS PASS";}
+                    else if ($rcek1['stat_fwss2'] == "FAIL") {echo "FAIL";}
+                    else if ($rcek1['stat_fwss2'] == "DATA") {echo "DATA ONLY";} 
+                    elseif ($rcek1['stat_fwss2'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_fwss2'] != "") {
+                        echo $rcekM['mfwe_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }
+                    ?>
+                </td>
+            </tr>
+            <tr>`
                 <td align="left" style="font-size: 12px;">FABRIC WIDTH</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss3']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss3']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss3']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss3']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss3']==""){echo "N/A";}else if($rcek1['stat_fwss3']!=""){echo $rcekM['mfwi_note'];}else{echo "&nbsp;";}?></td>
+                <td align="left" style="font-size: 12px;" colspan="2">ASTM D3774 OPTION B-18 (REAPPROVED 2024)</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_fwss3']=="PASS"){echo "PASS";}                    
+                    else if ($rcek1['stat_fwss3'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_fwss3'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_fwss3'] == "DATA ONLY") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_fwss3'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_fwss3'] != "") {
+                        echo $rcekM['mfwi_note'] . ' ONLY';
+                    } else {
+                        echo "&nbsp;";
+                    } ?>                
+                </td>                
             </tr>
             <tr>
-                <td align="left" style="font-size: 12px;">DIMENSIONAL CHANGE OF FABRICS AFTER HOME LAUNDERING</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss']==""){echo "N/A";}else if($rcek1['stat_fwss']!=""){echo $rcekM['msns_note'];}else{echo "&nbsp;";}?></td>
-            </tr>
+                <td align="left" style="font-size: 12px;">DIMENSIONAL STABILITY TO WASHING</td>
+                <td align="left" style="font-size: 12px;" colspan="2">AATCC TM135-2018T</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_fwss']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_fwss'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    }else if($rcek1['stat_fwss']=="FAIL"){echo "FAIL";}
+                    else if ($rcek1['stat_fwss'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_fwss'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_fwss'] != "") {
+                        echo $rcekM['msns_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }?>                
+                </td>
+              </tr>
             <tr>
-                <td align="left" style="font-size: 12px;">SKEWING <!--FROM HOME LAUNDERING--></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss']!=""){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;">&nbsp;</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_fwss']==""){echo "N/A";} ?></td>
+                <td align="left" style="font-size: 12px;">SKEWNESS/TWIST AFTER WASHING <!--FROM HOME LAUNDERING--></td>
+                <td align="left" style="font-size: 12px;" colspan="2">AATCC TM179-2023</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_fwss']!=""){echo "PASS";}
+                    else if ($rcek1['stat_fwss'] == "") {
+                        echo "N/A";
+                    } else{echo "&nbsp;";}?></td>
             </tr>
             <tr>
                 <td align="left" style="font-size: 12px;">BOW &amp; SKEW</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_bsk']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_bsk']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_bsk']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_bsk']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_bsk']==""){echo "N/A";}else if($rcek1['stat_bsk']!=""){echo $rcekM['mbas_note'];}else{echo "&nbsp;";}?></td>
+                <td align="left" style="font-size: 12px;" colspan="2">ASTM D3882-08-2025</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_bsk']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_bsk'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_bsk'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_bsk'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_bsk'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_bsk'] != "") {
+                        echo $rcekM['mbas_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }                    
+                    ?>
+                </td>
             </tr>
             <tr>
-                <td align="left" style="font-size: 12px;">PILLING RESISTANCE: MARTINDALE PRESSURE TESTER METHOD</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pm']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pm']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pm']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pm']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <!-- <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pm']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td> -->
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pm']==""){echo "N/A";}else if($rcek1['stat_pm']!=""){echo $rcekM['mpillm_note'];}else{echo "&nbsp;";}?></td>
+                <td align="left" style="font-size: 12px;" rowspan="3">PILLING RESISTANCE</td>
+                <td align="left" style="font-size: 12px;" colspan="2">ASTM D4970/D4970M-2022</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_pm']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_pm'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_pm'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_pm'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_pm'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_pm'] != "") {
+                        echo $rcekM['mpillm_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }                    
+                    ?>
+                    
+                </td>
+                </tr>
+            <tr>
+                <!-- <td align="left" style="font-size: 12px;">PILLING RESISTANCE: TUMBLE PILLING METHOD</td> -->
+                 <td align="left" style="font-size: 12px;" colspan="2">BS EN ISO 12945-1-2020</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_prt']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_prt'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_prt'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_prt'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else {
+                        echo "&nbsp;";
+                    }?><input style="font-size: 11px; text-align:center" name="notepm" type="text" placeholder="Ketik" size="60" /></td>
+               </tr>
+            <tr>
+                <!-- <td align="left" style="font-size: 12px;">PILLING RESISTANCE: ICI PILLING METHOD</td> -->
+                <td align="left" style="font-size: 12px;" colspan="2">ASTM D3882-08-2025</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_pb']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_pb'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_pb'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_pb'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else {
+                        echo "N/A";
+                    }?></td>
+              </tr>
+            <tr>
+                <td align="left" style="font-size: 12px;">SNAGGING RESISTANCE</td>
+                <td align="left" style="font-size: 12px;" colspan="2">ASTM D5362-13 (REAPPROVED 2018)</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_sb']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_sb'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_sb'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_sb'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else {
+                        echo "N/A";
+                    }?></td>
+              </tr>
+            <tr>
+                <td align="left" style="font-size: 12px;">BURSTING STRENGTH</td>
+                <td align="left" style="font-size: 12px;" colspan="2">ASTM D6797-2024</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_bs2']=="PASS"){echo "PASS";}else if ($rcek1['stat_bs2'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_bs2'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_bs2'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_bs2'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_bs2'] != "") {
+                        echo $rcekM['mburs_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }?></td>
+             </tr>
+              <tr>
+                <td align="left" style="font-size: 12px;" rowspan="2">ELONGATION, MODULUS & RECOVERY</td>
+                <td align="left" style="font-size: 12px;" colspan="2">BS EN ISO 20932 1:2020+A1:2021(MODIFIED)</td>
+                <td align="left" style="font-size: 12px;"><?php if ($rcek1['stat_sr'] == "PASS" OR $rcek1['stat_sr'] == "DISPOSISI") {
+                        echo "PASS";
+                    } else  if ($rcek1['stat_sr'] == "ESS PASS") {
+                    echo "ESS PASS";
+                } else {
+                    echo "&nbsp;";
+                }if ($rcek1['stat_sr'] == "FAIL") {
+                    echo "FAIL";
+                } elseif ($rcek1['stat_sr'] == "DATA") {
+                    echo "DATA ONLY";
+                } else if ($rcek1['stat_sr'] == "") {
+                    echo "N/A";
+                } else if ($rcek1['stat_sr'] != "") {
+                    echo $rcekM['mapper_note'];
+                } else {
+                    echo "&nbsp;";
+                } ?></td>
+              </tr>
+              <tr>
+                <td align="left" style="font-size: 12px;" colspan="2">BS 4952-1992</td>
+                <td align="left" style="font-size: 12px;">N/A</td>
+            </tr>
+             <tr>
+                <td align="left" style="font-size: 12px;">APPEARANCE AFTER WASHING</td>
+                <td align="left" style="font-size: 12px;" colspan="2">AATCC TS-008(MODIFIED)</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if ($rcek1['stat_ap'] == "PASS") {
+                    echo "PASS";
+                } else if ($rcek1['stat_ap'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_ap'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_ap'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_ap'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_ap'] != "") {
+                        echo $rcekM['mapper_note'];
+                    } else {
+                        echo "&nbsp;";
+                    } ?>
+                </td>                
             </tr>
             <tr>
-                <td align="left" style="font-size: 12px;">PILLING RESISTANCE: TUMBLE PILLING METHOD</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_prt']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_prt']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_prt']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_prt']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <!-- <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_prt']==""){echo "N/A";}else if($rcek1['stat_prt']!=""){echo $rcekM['mpillr_note'];}else{echo "&nbsp;";}?></td> -->
-                 <td align="center" style="font-size: 11px;"><input style="font-size: 11px; text-align:center" name="notepm" type="text" placeholder="Ketik" size="60" /></td>
-            </tr>
-            <tr>
-                <td align="left" style="font-size: 12px;">PILLING RESISTANCE: ICI PILLING METHOD</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pb']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pb']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pb']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pb']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;">N/A</td>
-            </tr>
-            <tr>
-                <td align="left" style="font-size: 12px;">SNAGGING</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sb']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;">N/A</td>
-            </tr>
-            <tr>
-                <td align="left" style="font-size: 12px;">BURSTING STRENGTH OF FABRICS<!--: BALL BURST METHOD--></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_bs2']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_bs2']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_bs2']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_bs2']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_bs2']==""){echo "N/A";}else if($rcek1['stat_bs2']!=""){echo $rcekM['mburs_note'];}else{echo "&nbsp;";}?></td>
-            </tr>
-            <tr>
-                <td align="left" style="font-size: 12px;">COLORFASTNESS TO LAUNDERING<!--: ACCELERATED--></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wf']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wf']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wf']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wf']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wf']==""){echo "N/A";}else if($rcek1['stat_wf']!=""){echo $rcekM['mwash_note'];}else{echo "&nbsp;";}?></td>
+                <td align="left" style="font-size: 12px;">COLORFASTNESS TO WASHING</td>
+                <td align="left" style="font-size: 12px;" colspan="2">AATCC TM61-2013e2(2020)</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_wf']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_wf'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_wf'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_wf'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_wf'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_wf'] != "") {
+                        echo $rcekM['mwash_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }?></td>
             </tr>
             <tr>
                 <td align="left" style="font-size: 12px;">COLORFASTNESS TO CROCKING</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_cr']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_cr']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_cr']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_cr']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_cr']==""){echo "N/A";}else if($rcek1['stat_cr']!=""){echo $rcekM['mcrock_note'];}else{echo "&nbsp;";}?></td>
+                <td align="left" style="font-size: 12px;" colspan="2">AATCC TM8-2016e(2022)e</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_cr']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_cr'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_cr'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_cr'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_cr'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_cr'] != "") {
+                        echo $rcekM['mcrock_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }?></td>
             </tr>
             <tr>
                 <td align="left" style="font-size: 12px;">COLORFASTNESS TO WATER</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wtr']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wtr']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wtr']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wtr']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wtr']==""){echo "N/A";}else if($rcek1['stat_wtr']!=""){echo $rcekM['mwater_note'];}else{echo "&nbsp;";}?></td>
+                <td align="left" style="font-size: 12px;" colspan="2">AATCC TM107-2022</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_wtr']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_wtr'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_wtr'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_wtr'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_wtr'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_wtr'] != "") {
+                        echo $rcekM['mwater_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }?></td>
             </tr>
             <tr>
-                <td align="left" style="font-size: 12px;">COLORFASTNESS TO PERSPIRATION (ACIDIC & ALKALINE)</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pac']=="PASS" AND $rcek1['stat_pal']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if(($rcek1['stat_pac']=="ESS PASS" AND $rcek1['stat_pal']=="PASS") OR ($rcek1['stat_pal']=="ESS PASS" AND $rcek1['stat_pac']=="PASS")){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pac']=="FAIL" AND $rcek1['stat_pal']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pac']=="DATA" AND $rcek1['stat_pal']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_pac']==""){echo "N/A";}else if($rcek1['stat_pac']!="" AND $rcek1['stat_pal']!=""){echo $rcekM['macid_note']." ".$rcekM['malkaline_note'];}else{echo "&nbsp;";}?></td>
-            </tr>
+                <td align="left" style="font-size: 12px;">COLORFASTNESS TO PERSPIRATION</td>
+                <td align="left" style="font-size: 12px;" colspan="2">AATCC TM15-2021c</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_pac']=="PASS" AND $rcek1['stat_pal']=="PASS"){echo "PASS";}
+                    else if (($rcek1['stat_pac'] == "ESS PASS" AND $rcek1['stat_pal'] == "PASS") OR ($rcek1['stat_pal'] == "ESS PASS" AND $rcek1['stat_pac'] == "PASS")) {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_pac'] == "FAIL" AND $rcek1['stat_pal'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_pac'] == "DATA" AND $rcek1['stat_pal'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_pac'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_pac'] != "" AND $rcek1['stat_pal'] != "") {
+                        echo $rcekM['macid_note'] . " " . $rcekM['malkaline_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }?></td>
+        </tr>
             <tr>
-                <td align="left" style="font-size: 12px;">COLORFASTNESS TO DYE <!--STORAGE-->TRANSFER</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_dye']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_dye']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_dye']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_dye']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_dye']==""){echo "N/A";}else if($rcek1['stat_dye']!=""){echo $rcekM['mdye_tf_note'];}else{echo "&nbsp;";}?></td>
+                <td align="left" style="font-size: 12px;">COLORFASTNESS TO DYE TRANSFER IN STORAGE</td>
+                <td align="left" style="font-size: 12px;" colspan="2">AATCC TM163-2013(2020)e3(MODIFIED)</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_dye']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_dye'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_dye'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_dye'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_dye'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_dye'] != "") {
+                        echo $rcekM['mdye_tf_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }?></td>
             </tr>
             <tr>
                 <td align="left" style="font-size: 12px;">COLORFASTNESS TO LIGHT</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_lg']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_lg']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_lg']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_lg']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_lg']==""){echo "N/A";}else if($rcek1['stat_lg']!=""){echo $rcekM['mlight_note'];}else{echo "&nbsp;";}?></td>
-            </tr>
+                 <td align="left" style="font-size: 12px;" colspan="2">AATCC TM16.3-2020 OPTION 3</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_lg']=="PASS"){echo "PASS";}
+                    else if($rcek1['stat_lg']=="ESS PASS"){echo "ESS PASS";}
+                    elseif ($rcek1['stat_lg'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_lg'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_lg'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_lg'] != "") {
+                        echo $rcekM['mlight_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }?></td>
+             </tr>
             <tr>
-                <td align="left" style="font-size: 12px;">PHENOLIC YELLOWING</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_py']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_py']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_py']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_py']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_py']==""){echo "N/A";}else if($rcek1['stat_py']!=""){echo $rcekM['mphenolic_note'];}else{echo "&nbsp;";}?></td>
-            </tr>
-            <tr>
-                <td align="left" style="font-size: 12px;">APPEARANCE AFTER CARE</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_ap']==""){echo "N/A";}else if($rcek1['stat_ap']!=""){echo $rcekM['mapper_note'];}else{echo "&nbsp;";}?></td>
-            </tr>
+                <td align="left" style="font-size: 12px;">COLORFASTNESS TO PHENOLIC YELLOWING</td>
+                <td align="left" style="font-size: 12px;" colspan="2">ISO 105-X18:2017</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_py']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_py'] == "ESS PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_py'] == "FAIL") {
+                        echo "FAIL";
+                    } else if ($rcek1['stat_py'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_py'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_py'] != "") {
+                        echo $rcekM['mphenolic_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }?></td>
+                </tr>           
             <!-- <tr>
                 <td align="left" style="font-size: 12px;">EXTENSION AND RECOVERY TEST FOR ELASTIC FABRICS</td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="PASS" OR $rcek1['stat_sr']=="DISPOSISI"){echo "X";}else{echo "&nbsp;";}?></td>
@@ -804,23 +1076,24 @@ textarea {
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
                 <td align="center" style="font-size: 12px;">N/A</td>
-            </tr> -->
+            </tr> -->           
             <tr>
-                <td align="left" style="font-size: 12px;">ELONGATION, MODULUS & RECOVERY</td><!--EXTENSION AND RECOVERY TEST FOR ELASTIC FABRICS-->
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="PASS" OR $rcek1['stat_sr']=="DISPOSISI"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="ESS PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_sr']==""){echo "N/A";}else if($rcek1['stat_sr']!=""){echo $rcekM['mapper_note'];}else{echo "&nbsp;";}?></td>
-            </tr>
-            <tr>
-                <td align="left" style="font-size: 12px;"><!--VERTICAL--> WICKING</td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wic']=="PASS" OR $rcek1['stat_wic1']=="PASS" OR $rcek1['stat_wic2']=="PASS" OR $rcek1['stat_wic3']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wic']=="ESS PASS" OR $rcek1['stat_wic1']=="ESS PASS" OR $rcek1['stat_wic2']=="ESS PASS" OR $rcek1['stat_wic3']=="MARGINAL PASS"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wic']=="FAIL" OR $rcek1['stat_wic1']=="FAIL" OR $rcek1['stat_wic2']=="FAIL" OR $rcek1['stat_wic3']=="FAIL"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wic']=="DATA" OR $rcek1['stat_wic1']=="DATA" OR $rcek1['stat_wic2']=="DATA" OR $rcek1['stat_wic3']=="DATA"){echo "X";}else{echo "&nbsp;";}?></td>
-                <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_wic']==""){echo "N/A";}else if($rcek1['stat_wic']!="" OR $rcek1['stat_wic1']!="" OR $rcek1['stat_wic2']!="" OR $rcek1['stat_wic3']!=""){echo $rcekM['mwick_note'];}else{echo "&nbsp;";}?></td>
-            </tr>
+                <td align="left" style="font-size: 12px;">VERTICAL WICKING TEST</td>
+                <td align="left" style="font-size: 12px;" colspan="2">LLL-10197-2018</td>
+                <td align="left" style="font-size: 12px;">
+                    <?php if($rcek1['stat_wic']=="PASS" OR $rcek1['stat_wic1']=="PASS" OR $rcek1['stat_wic2']=="PASS" OR $rcek1['stat_wic3']=="PASS"){echo "PASS";}
+                    else if ($rcek1['stat_wic'] == "ESS PASS" OR $rcek1['stat_wic1'] == "ESS PASS" OR $rcek1['stat_wic2'] == "ESS PASS" OR $rcek1['stat_wic3'] == "MARGINAL PASS") {
+                        echo "ESS PASS";
+                    } else if ($rcek1['stat_wic'] == "DATA" OR $rcek1['stat_wic1'] == "DATA" OR $rcek1['stat_wic2'] == "DATA" OR $rcek1['stat_wic3'] == "DATA") {
+                        echo "DATA ONLY";
+                    } else if ($rcek1['stat_wic'] == "") {
+                        echo "N/A";
+                    } else if ($rcek1['stat_wic'] != "" OR $rcek1['stat_wic1'] != "" OR $rcek1['stat_wic2'] != "" OR $rcek1['stat_wic3'] != "") {
+                        echo $rcekM['mwick_note'];
+                    } else {
+                        echo "&nbsp;";
+                    }?></td>
+        </tr>
             <!--<tr>
                 <td align="left" style="font-size: 12px;">QUICK DRY</td>
                 <td align="center" style="font-size: 12px;"><?php if($rcek1['stat_dry']=="PASS" AND $rcek1['stat_dry1']=="PASS"){echo "X";}else{echo "&nbsp;";}?></td>
@@ -951,7 +1224,7 @@ textarea {
         <!-- FABRIC WEIGHT BEGIN -->
         <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WEIGHT</u></strong> (ASTM D3776, OPTION C)</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WEIGHT</u></strong> (ASTM D3776/D3776M-20, OPTION C)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WEIGHT PER UNIT AREA</u></strong> (ASTM D3776/D3776M-20, OPTION C)-2025</td>
             <!-- <td align="center" style="font-size: 12px;"><strong>T2 / T3 LIGHT GREEN</strong></td>
             <td align="left" style="font-size: 12px;">&nbsp; </td> -->
         </tr>
@@ -1002,16 +1275,16 @@ textarea {
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">CUTTABLE WIDTH (INCH)</td>
             <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['f_width']!=""){echo $rcek1['f_width'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">DATA</td>
+            <td align="right" style="font-size: 11px;" width="33%">DATA ONLY</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" width="33%">FULL WIDTH (INCH)</td>
             <td align="center" style="font-size: 11px;" width="33%"><?php if($rcek1['fwi_note']!=""){echo $rcek1['fwi_note'];}else{echo "N/A";}?></td>
-            <td align="right" style="font-size: 11px;" width="33%">DATA</td>
+            <td align="right" style="font-size: 11px;" width="33%">DATA ONLY</td>
         </tr>
            <tr>
             <td  style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php echo $rcek1['stat_fwss3']; ?></td>
+            <td align="center"  style="font-size: 12px;" Width="33%"><?php echo $rcek1['stat_fwss3'].' ONLY'; ?></td>
             <td  style="font-size: 12px;" Width="33%"></td>
         </tr>
         <!-- FABRIC WIDTH END -->
@@ -1020,11 +1293,11 @@ textarea {
         </tr>
         <!-- DIMENSIONAL CHANGE BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>DIMENSIONAL CHANGE OF FABRICS AFTER HOME LAUNDERING</u></strong> (AATCC 135)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>DIMENSIONAL CHANGE OF FABRICS AFTER HOME LAUNDERING</u></td>
         </tr>
         <tr>
             <!-- <td align="left" style="font-size: 11px;" colspan="3">AATCC 1993 WOB STANDARD REFERENCE DETERGENT, NORMAL CYCLE AT 27 &#177; 3 DEGREE CELCIUS</td> -->
-            <td align="left" style="font-size: 11px;" colspan="3">AATCC TM 135-2018; OPTION 1, MACHINE WASH AT 80&#177;5&deg;F WITH 1.8 KG TOTAL LOADING (TYPE 3 BALLAST + SPECIMEN) </td>
+            <td align="left" style="font-size: 11px;" colspan="3">AATCC TM 135-2018T; OPTION 1, MACHINE WASH AT 80&#177;5&deg;F WITH 1.8 KG TOTAL LOADING (TYPE 3 BALLAST + SPECIMEN) </td>
         </tr>
         <tr>
             <!-- <td align="left" style="font-size: 11px;" colspan="3">(80 FAHRENHEIT), TUMBLE DRY LOW, MEASURE AT 10 INCHES, (1 WASH) UNRESTORED</td> -->
@@ -1043,13 +1316,13 @@ textarea {
             <td align="left" style="font-size: 11px;" width="33%">AFTER 1 WASH</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">LENGTHWISE</td>
+            <td align="left" style="font-size: 11px;" width="33%">LENGTHWISE (%)</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l1']!='' AND $rcekM['mshrinkage_l1'] < -7){echo "color:red;";}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l1']!='' AND $rcekM['mshrinkage_l1'] > 5){echo "color:red;";}else if($rcek1['shrinkage_l1']!='' AND $rcek1['shrinkage_l1'] < -7){echo "color:red;";}else if($rcek1['shrinkage_l1']!='' AND $rcek1['shrinkage_l1'] > 5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mshrinkage_l1']=="" AND $rcek1['shrinkage_l1']==""){echo "N/A";}else if($rcek1['stat_fwss']=="MARGINAL PASS"){echo $rcekM['mshrinkage_l1'];}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l1']==""){echo "N/A";}else{echo $rcek1['shrinkage_l1'];}?></td>
             <!-- <td align="right" style="font-size: 11px;" width="33%">-5 TO + 5 %</td> -->
             <td align="right" style="font-size: 11px;" width="44%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="50" /></td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">WIDTHWISE</td>
+            <td align="left" style="font-size: 11px;" width="33%">WIDTHWISE (%)</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w1']!='' AND $rcekM['mshrinkage_w1'] < -7){echo "color:red;";}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w1']!='' AND $rcekM['mshrinkage_w1'] > 5){echo "color:red;";}else if($rcek1['shrinkage_w1']!='' AND $rcek1['shrinkage_w1'] < -7){echo "color:red;";}else if($rcek1['shrinkage_w1']!='' AND $rcek1['shrinkage_w1'] > 5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mshrinkage_w1']=="" AND $rcek1['shrinkage_w1']==""){echo "N/A";}else if($rcek1['stat_fwss']=="MARGINAL PASS"){echo $rcekM['mshrinkage_w1'];}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w1']==""){echo "N/A";}else{echo $rcek1['shrinkage_w1'];}?></td>
             <!-- <td align="right" style="font-size: 11px;" width="33%">-5 TO + 5 %</td> -->
             <td align="right" style="font-size: 11px;" width="44%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="50" /></td>
@@ -1061,13 +1334,13 @@ textarea {
             <td align="left" style="font-size: 11px;" width="33%">AFTER 5 WASH</td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">LENGTHWISE</td>
+            <td align="left" style="font-size: 11px;" width="33%">LENGTHWISE (%)</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l2']!='' AND $rcekM['mshrinkage_l2'] < -7){echo "color:red;";}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l2']!='' AND $rcekM['mshrinkage_l2'] > 5){echo "color:red;";}else if($rcek1['shrinkage_l2']!='' AND $rcek1['shrinkage_l2'] < -7){echo "color:red;";}else if($rcek1['shrinkage_l2']!='' AND $rcek1['shrinkage_l2'] > 5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mshrinkage_l2']=="" AND $rcek1['shrinkage_l2']==""){echo "N/A";}else if($rcek1['stat_fwss']=="MARGINAL PASS"){echo $rcekM['mshrinkage_l2'];}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_l2']==""){echo "N/A";}else{echo $rcek1['shrinkage_l2'];}?></td>
             <!-- <td align="right" style="font-size: 11px;" width="33%">-5 TO + 5 %</td> -->
             <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="50" /></td>
         </tr>
         <tr>
-            <td align="left" style="font-size: 11px;" width="33%">WIDTHWISE</td>
+            <td align="left" style="font-size: 11px;" width="33%">WIDTHWISE (%)</td>
             <td align="center" style="font-size: 11px; <?php if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w2']!='' AND $rcekM['mshrinkage_w2'] < -7){echo "color:red;";}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w2']!='' AND $rcekM['mshrinkage_w2'] > 5){echo "color:red;";}else if($rcek1['shrinkage_w2']!='' AND $rcek1['shrinkage_w2'] < -7){echo "color:red;";}else if($rcek1['shrinkage_w2']!='' AND $rcek1['shrinkage_w2'] > 5){echo "color:red;";}?>" width="33%"><?php if($rcekM['mshrinkage_w2']=="" AND $rcek1['shrinkage_w2']==""){echo "N/A";}else if($rcek1['stat_fwss']=="MARGINAL PASS"){echo $rcekM['mshrinkage_w2'];}else if($rcek1['stat_fwss']=="MARGINAL PASS" AND $rcekM['mshrinkage_w2']==""){echo "N/A";}else{echo $rcek1['shrinkage_w2'];}?></td>
             <!-- <td align="right" style="font-size: 11px;" width="33%">-5 TO + 5 %</td> -->
             <td align="right" style="font-size: 11px;" width="33%"><input style="font-size: 11px; text-align:right" name="notedc" type="text" placeholder="Ketik" size="50" /></td>
@@ -1084,9 +1357,9 @@ textarea {
         </tr> -->
         <tr>
             <!-- <td align="left" style="font-size: 11px;" width="33%" colspan="2">(+) DENOTES ELONGATION &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (-) SHRINKAGE</td> -->
-             <td  style="font-size: 12px;" Width="33%" ><strong> Remarks : </strong>(+) MEANS GROWTH  (-) MEANS SHRINKAGE</td>
+             <td  style="font-size: 12px;" colspan="3"><strong> Remarks : </strong>(+) MEANS GROWTH  (-) MEANS SHRINKAGE</td>
             <!-- <td align="left" style="font-size: 11px;" width="33%" colspan="2">(+) MEANS GROWTH &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (-) MEANS SHRINKAGE</td> -->
-            <td align="center" style="font-size: 12px;" width="33%">&nbsp;</td>
+            <td align="center" style="font-size: 12px;" width="23%">&nbsp;</td>
         </tr>
         <!-- DIMENSIONAL CHANGE END -->
         <tr>
@@ -1097,7 +1370,7 @@ textarea {
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SKEWING  -->
                 <!--FROM HOME LAUNDERING-->
             <!-- </u></strong> (AATCC 179)</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SKEWING <!--FROM HOME LAUNDERING--></u></strong> (AATCC TM 179-2023; METHOD 1; OPTION 2)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SKEWNESS/TWIST AFTER WASHING <!--FROM HOME LAUNDERING--></u></strong> (AATCC TM 179-2023; METHOD 1; OPTION 2)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;">&nbsp;</td>
@@ -1147,7 +1420,7 @@ textarea {
         </tr>
         <!-- BOW & SKEW BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>BOW & SKEW</u></strong> (ASTM D3882)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>BOW & SKEW</u></strong> (ASTM D3882)-08-2025</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 12px;">&nbsp;</td>
@@ -1207,7 +1480,7 @@ textarea {
                 </tr>
             <!-- PILLING MARTINDALE BEGIN -->
                 <tr>
-                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE: MARTINDALE PRESSURE TESTER METHOD</u></strong> (ASTM D4970)</td>
+                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE: MARTINDALE PRESSURE TESTER METHOD</u></strong> (ASTM D4970)/(D470 M-2022)</td>
                 </tr>
             <!-- <tr>
                 <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
@@ -1284,7 +1557,7 @@ textarea {
                 </tr>
             <!-- ICI PILLING BEGIN -->
                 <tr>
-                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE: ICI PILLING METHOD</u></strong> (BS EN ISO 12945-1) 4 HOURS</td>
+                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>PILLING RESISTANCE: ICI PILLING METHOD</u></strong> (BS EN ISO 12945-1 2020) 4 HOURS</td>
                 </tr>
             <!-- <tr>
                 <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
@@ -1323,7 +1596,7 @@ textarea {
                 </tr>
             <!-- BURSTING STRENGTH BEGIN -->
                 <tr>
-                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>BURSTING STRENGTH OF FABRIC
+                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>BURSTING STRENGTH
                         <!--: BALL BURST METHOD-->
                     <!-- </u></strong> (ASTM D6797)</td> -->
                     </u></strong> (ASTM D6797-24)</td>
@@ -1352,7 +1625,7 @@ textarea {
                     <td style="font-size: 12px;" Width="33%"></td>
                 </tr>
                 <tr>
-                    <td style="font-size: 12px;" Width="33%" ><strong>Remarks : Lbs = Pounds D5362-13</strong></td>
+                    <td style="font-size: 12px;" Width="33%" ><strong>Remarks : Lbs = Pounds</strong></td>
                     <td align="center"  style="font-size: 12px;" Width="33%"></td>
                     <td style="font-size: 12px;" Width="33%"></td>
                 </tr>
@@ -1360,7 +1633,7 @@ textarea {
                     <td align="center" style="font-size: 12px;" colspan="3">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SNAGGING</u></strong> (ASTM D5362-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST)</td>
+                    <td align="left" style="font-size: 12px;" colspan="3"><strong><u>SNAGGING RESISTANCE</u></strong> (ASTM D5362-13(REAPPROVED 2018); OPTION A, BEAN BAG SNAG TEST)</td>
                 </tr>
             <!-- BURSTING STRENGTH END -->
                 <tr>
@@ -1412,7 +1685,7 @@ textarea {
         <!-- WASHING BEGIN -->
         <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LAUNDERING: ACCELERATED</u></strong> (AATCC 61, MODIFIED, TEST NO.2A (40 DEGREE CELCIUS),</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LAUNDERING: ACCELERATED</u></strong> (AATCC TM 61-2013E(2020)E2; TEST NO 2A; MODIFIED</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WASHING: ACCELERATED</u></strong> (AATCC TM 61-2013E(2020)E2; TEST NO 2A; MODIFIED</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" colspan="3">AATCC DETERGENT WOB (POWDER), MULTIFIBER NO.10)</td>
@@ -1562,7 +1835,7 @@ textarea {
             </tr>
             <tr>
                 <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC 8)</td> -->
-                <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC TM 8-2022E)</td>
+                <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO CROCKING</u></strong> (AATCC TM 8-2016E(2022)E)</td>
             </tr>
             <!-- <tr>
                 <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
@@ -1949,7 +2222,7 @@ textarea {
     </table>
     <table width="100%">
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO DYE TRANSFER</u></strong> (AATCC 163 OPTION 2 (MODIFEID) MULTIFIBER NO.10, 4 HOURS, 70 DEGREE CELCIUS)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO DYE TRANSFER IN STORAGE</u></strong> (AATCC 163 -2013(2020) E3 (MODIFIED) MULTIFIBER NO.10, 4 HOURS, 70 DEGREE CELCIUS)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
@@ -2066,7 +2339,7 @@ textarea {
         </tr>
         <tr>
             <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_dye']!=""){echo $rcek1['stat_dye'];}else{echo 'N/A';}?></td>
+            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_dye']!=""){echo $rcek1['stat_dye'].' ONLY';}else{echo 'N/A';}?></td>
             <td style="font-size: 12px;" Width="33%"></td>
         </tr>
         <tr>
@@ -2410,7 +2683,7 @@ textarea {
         </tr>
         <!-- STRETCH AND RECOVERY BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>ELONGATION, MODULUS & RECOVERY</u></strong> (<?php echo "(".$rd2['extension']." METHOD A; TESTING SPEED AT 500MM/MIN; RETURNING SPEED AT 500MM/MIN; GAUGE LENGHT 100MM; TEST FOR 2 CYCLES)";?>)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>ELONGATION, MODULUS & RECOVERY</u></strong> (<?php echo "(".$protocolText."TESTING SPEED AT 500MM/MIN; RETURNING SPEED AT 20 INCH/MIN; GAUGE LENGHT 100MM; TEST FOR 2 CYCLES)";?>)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 11px;" colspan="3"><?php echo "(".$rd2['extension'].")";?></td> 
@@ -2461,13 +2734,37 @@ textarea {
             <td align="left" style="font-size: 11px;">LENGTH - RECOVERY AFTER 1 MINUTE</td> 
             <td align="center" style="font-size: 11px;"><?php if($rcek1['recover_l1']!=""){echo $rcek1['recover_l1'];}else{echo "N/A";}?></td> 
             <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
-            <td align="right" style="font-size: 11px;">MIN. 90%</td> 
+           <td align="right" style="font-size: 11px;">
+                <?php
+                    $protocolText = $rd2['protocol'] ?? '';
+
+                    if ($protocolText == "Predominanly Synthetic") {
+                    echo "MIN. 90%";
+                    } elseif ($protocolText == "Predominanly Natural") {
+                    echo "MIN. 80%";
+                    } else {
+                    echo "";
+                    }
+                ?>
+            </td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">LENGTH - RECOVERY AFTER 30 MINUTES</td> 
             <td align="center" style="font-size: 11px;"><?php if($rcek1['recover_l2']!=""){echo $rcek1['recover_l2'];}else{echo "N/A";}?></td> 
             <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
-            <td align="right" style="font-size: 11px;">MIN. 90%</td> 
+            <td align="right" style="font-size: 11px;">
+                <?php
+                $protocolText = $rd2['protocol'] ?? '';
+
+                if ($protocolText == "Predominanly Synthetic") {
+                    echo "MIN. 90%";
+                } elseif ($protocolText == "Predominanly Natural") {
+                    echo "MIN. 80%";
+                } else {
+                    echo "";
+                }
+                ?>
+            </td>
         </tr>
         <tr>
             <td align="right" style="font-size: 11px;">&nbsp;</td> 
@@ -2506,13 +2803,37 @@ textarea {
             <td align="left" style="font-size: 11px;">WIDTH - RECOVERY AFTER 1 MINUTE</td> 
             <td align="center" style="font-size: 11px;"><?php if($rcek1['recover_w1']!=""){echo $rcek1['recover_w1'];}else{echo "N/A";}?></td> 
             <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
-            <td align="right" style="font-size: 11px;">MIN. 90%</td>  <!-- ganti dengan kondisi sesuai kolom Protocol(s) Used jika natural MIN.80% selainitu 90% -->
+            <td align="right" style="font-size: 11px;">
+                <?php
+                $protocolText = $rd2['protocol'] ?? '';
+
+                if ($protocolText == "Predominanly Synthetic" or $protocolText == "Knit Predominanly Synthetic") {
+                    echo "MIN. 90%";
+                } elseif ($protocolText == "Predominanly Natural" or $protocolText == "Knit Predominanly Natural") {
+                    echo "MIN. 80%";
+                } else {
+                    echo "";
+                }
+                ?>
+            </td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">WIDTH - RECOVERY AFTER 30 MINUTES</td> 
             <td align="center" style="font-size: 11px;"><?php if($rcek1['recover_w2']!=""){echo $rcek1['recover_w2'];}else{echo "N/A";}?></td> 
             <!-- <td align="center" style="font-size: 11px;">N/A</td>  -->
-            <td align="right" style="font-size: 11px;">MIN. 90%</td>   <!-- ganti dengan kondisi sesuai kolom Protocol(s) Used jika natural MIN.80% selainitu 90% -->
+            <td align="right" style="font-size: 11px;">
+                <?php
+                $protocolText = $rd2['protocol'] ?? '';
+
+                if ($protocolText == "Predominanly Synthetic" or $protocolText == "Knit Predominanly Synthetic") {
+                    echo "MIN. 90%";
+                } elseif ($protocolText == "Predominanly Natural" or $protocolText == "Knit Predominanly Natural") {
+                    echo "MIN. 80%";
+                } else {
+                    echo "";
+                }
+                ?>
+            </td>
         </tr>
         <!-- STRETCH AND RECOVERY END -->
         <!-- <tr>
@@ -2520,7 +2841,7 @@ textarea {
         </tr> -->
         <tr>
             <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>
-            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_sr']!=""){echo $rcek1['stat_sr'];}else{echo "N/A";}?></td>
+            <td align="center"  style="font-size: 12px;" Width="33%"><?php if($rcek1['stat_sr']!=""){echo $rcek1['stat_sr'] . ' ONLY';}else{echo "N/A";}?></td>
             <td style="font-size: 12px;" Width="33%"></td>
         </tr>
         <tr>
@@ -2573,12 +2894,12 @@ textarea {
         <tr>
             <td align="left" style="font-size: 11px;">LENGTH</td> 
             <td align="center" style="font-size: 11px;"><?php if($rcek1['wick_l3']==""){echo "N/A";}else{echo $rcek1['wick_l3'];}?></td> 
-            <td align="right" style="font-size: 11px;">DATA</td> 
+            <td align="right" style="font-size: 11px;">DATA ONLY</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">WIDTH</td> 
             <td align="center" style="font-size: 11px;"><?php if($rcek1['wick_w3']==""){echo "N/A";}else{echo $rcek1['wick_w3'];}?></td> 
-            <td align="right" style="font-size: 11px;">DATA</td> 
+            <td align="right" style="font-size: 11px;">DATA ONLY</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" colspan="3">AFTER WASH 10 WASHES</td> 
@@ -2586,12 +2907,12 @@ textarea {
         <tr>
             <td align="left" style="font-size: 11px;">LENGTH</td> 
             <td align="center" style="font-size: 11px;"><?php if($rcek1['wick_l4']==""){echo "N/A";}else{echo $rcek1['wick_l4'];}?></td> 
-            <td align="right" style="font-size: 11px;">DATA</td> 
+            <td align="right" style="font-size: 11px;">DATA ONLY</td> 
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;">WIDTH</td> 
             <td align="center" style="font-size: 11px;"><?php if($rcek1['wick_w4']==""){echo "N/A";}else{echo $rcek1['wick_w4'];}?></td> 
-            <td align="right" style="font-size: 11px;">DATA</td> 
+            <td align="right" style="font-size: 11px;">DATA ONLY</td>
         </tr>
         <tr>
             <td style="font-size: 12px;" Width="33%" ><strong> Conclusion </strong></td>

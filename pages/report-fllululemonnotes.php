@@ -1900,7 +1900,7 @@ $rowdb2 = db2_fetch_assoc($stmt);
                     <div class="input-group">  
                         <select name="extension" id="extension" class="form-control select2" required>
                             <option selected="selected" value="">Pilih</option>
-                            <option value="BS EN ISO 20932-1 (MODIFIED)" <?php if($rcek['extension']=="BS EN ISO 20932-1 (MODIFIED)" OR $Extension=="BS EN ISO 20932-1 (MODIFIED)"){echo "SELECTED";}?>>BS EN ISO 20932-1 (MODIFIED)</option>
+                            <option value="BS EN ISO 20932-1 (MODIFIED)" <?php if($rcek['extension']=="BS EN ISO 20932-1 (MODIFIED)" OR $Extension=="BS EN ISO 20932-1 METHODE A"){echo "SELECTED";}?>>BS EN ISO 20932-1 METHODE A</option>
                             <option value="BS 4952" <?php if($rcek['extension']=="BS 4952" OR $Extension=="BS 4952"){echo "SELECTED";}?>>BS 4952</option>
                         </select>
                     </div>
