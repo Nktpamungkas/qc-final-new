@@ -2009,6 +2009,7 @@ $rowdb2 = db2_fetch_assoc($stmt);
 						<option ="Full Package" <?php if ($rcek['test_package'] == 'Full Package') echo 'selected'; ?> >Full Package</option>
 						<option ="Additional Color Package" <?php if ($rcek['test_package'] == 'Additional Color Package') echo 'selected'; ?>>Additional Color Package</option>
 						<option ="Bulk Production" <?php if ($rcek['test_package'] == 'Bulk Production') echo 'selected'; ?>>Bulk Production</option>
+						<option ="Partial Test" <?php if ($rcek['test_package'] == 'Partial Test') echo 'selected'; ?>>Onsite Audit</option>
 					</select>
                     <span class="help-block with-errors"></span>
                 </div>	  

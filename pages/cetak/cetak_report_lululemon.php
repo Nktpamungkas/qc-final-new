@@ -456,6 +456,8 @@ textarea {
                 echo 'SAMPLE FABRIC FOR ADDITIONAL COLOR';
             }else if($rd2['test_package']=='Bulk Production'){
                 echo 'SAMPLE FABRIC FOR BULK PRODUCTION';
+            } else if ($rd2['test_package'] == 'Partial Test') {
+                echo 'SAMPLE FABRIC FOR ONSITE AUDIT';
             }
             ?></td>
             <!-- <td>SAMPLE FABRIC FOR ADDITIONAL COLOR</td> -->
@@ -848,7 +850,7 @@ textarea {
                </tr>
             <tr>
                 <!-- <td align="left" style="font-size: 12px;">PILLING RESISTANCE: ICI PILLING METHOD</td> -->
-                <td align="left" style="font-size: 12px;">ASTM D3882-08-2025</td>
+                <td align="left" style="font-size: 12px;">ASTM D3512/D3512M-2022</td>
                 <td align="left" style="font-size: 12px;">
                     <?php if($rcek1['stat_pb']=="PASS"){echo "PASS";}
                     else if ($rcek1['stat_pb'] == "ESS PASS") {
@@ -1229,7 +1231,7 @@ textarea {
         <!-- FABRIC WEIGHT BEGIN -->
         <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WEIGHT</u></strong> (ASTM D3776, OPTION C)</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WEIGHT PER UNIT AREA</u></strong> ASTM D3776/D3776M OPTION C-20 (REAPPROVED 2025)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>FABRIC WEIGHT PER UNIT AREA</u></strong> (ASTM D3776/D3776M OPTION C-20 (REAPPROVED 2025))</td>
             <!-- <td align="center" style="font-size: 12px;"><strong>T2 / T3 LIGHT GREEN</strong></td>
             <td align="left" style="font-size: 12px;">&nbsp; </td> -->
         </tr>
@@ -1425,7 +1427,7 @@ textarea {
         </tr>
         <!-- BOW & SKEW BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>BOW & SKEW</u></strong> (ASTM D3882)-08-2025</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>BOW & SKEW</u></strong> (ASTM D3882-08-2025)</td>
         </tr>
         <!-- <tr>
             <td align="left" style="font-size: 12px;">&nbsp;</td>
@@ -1690,7 +1692,7 @@ textarea {
         <!-- WASHING BEGIN -->
         <tr>
             <!-- <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO LAUNDERING: ACCELERATED</u></strong> (AATCC 61, MODIFIED, TEST NO.2A (40 DEGREE CELCIUS),</td> -->
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WASHING: ACCELERATED</u></strong> (AATCC TM 61-2013E(2020)E2; TEST NO 2A; MODIFIED</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO WASHING</u></strong> (AATCC TM 61-2013E2(2020); TEST NO 2A; (MODIFIED)</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" colspan="3">AATCC DETERGENT WOB (POWDER), MULTIFIBER NO.10)</td>
@@ -1986,7 +1988,7 @@ textarea {
             </tr>
             <!-- PHENOLIC YELLOWING BEGIN -->
             <tr>
-                <td align="left" style="font-size: 11px;" colspan="3"><strong><u>COLORFASTNESS TO PHENOLIC YELLOWING </u></strong> (ISO 105-X18:2007)</td>
+                <td align="left" style="font-size: 12px;" colspan="3"><strong><u>COLORFASTNESS TO PHENOLIC YELLOWING </u></strong> (ISO 105-X18:2017)</td>
             </tr>
             <!-- <tr>
                 <td align="left" style="font-size: 11px;" width="33%">&nbsp;</td>
@@ -2390,7 +2392,7 @@ textarea {
         </tr>
         <!-- APPEARANCE BEGIN -->
         <tr>
-            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>APPEARANCE AFTER WASHING<!--LAUNDERING-->(TS-008)</u></strong> (MODIFIED WASHING PROCEDURE SAME AS WASHING SHRINKAGE)</td>
+            <td align="left" style="font-size: 12px;" colspan="3"><strong><u>APPEARANCE AFTER WASHING<!--LAUNDERING-->(TS-008)</u></strong> (MODIFIED)(WASHING PROCEDURE SAME AS WASHING SHRINKAGE)</td>
         </tr>
         <tr>
             <td align="left" style="font-size: 11px;" ><u>AFTER 1 WASH</u></td>
