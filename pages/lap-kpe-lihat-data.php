@@ -491,9 +491,9 @@ if($_POST['gshift']=="ALL"){$shft=" ";}else{$shft=" AND b.g_shift = '$GShift' ";
             <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['status_additional']; ?></td>
             <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['analisis_additional']; ?></td>
             <td class="edit-cell" style="cursor: pointer;"><?php echo $row1['hasil_analisa_additional']; ?></td>
-            <td class="edit-cell2" data-id="<?= $row1['id']; ?>" data-field="pengurangan_poin" data-value="<?= (int) $row['pengurangan_poin']; ?>"
+            <td class="edit-cell2" data-id="<?= $row1['id']; ?>" data-field="pengurangan_poin" data-value="<?= (int) $row1['pengurangan_poin']; ?>"
               style="cursor:pointer;">
-              <?= (int) $row['pengurangan_poin']; ?>
+              <?= (int) $row1['pengurangan_poin']; ?>
             </td>
             </tr>
           <?php	$no++;  }} ?>
