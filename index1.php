@@ -1296,8 +1296,31 @@ $page = strtolower($page);
                             </ul>
                         </li>
                     <?php } ?>
+                    <?php if ($_SESSION['lvl_id'] == "LEADERTQ" && $_SESSION['akses'] == "admin") { ?>
+                        <li class="treeview <?php if ($_GET['p'] == "Lap-testquality") {
+                            echo "active";
+                        } ?>">
+                            <a href="#"><i class="fa fa-archive text-warning"></i> <span>Reports TQ</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="<?php if ($_GET['p'] == "lap-testquality") {
+                                    echo "active";
+                                } ?>"><a href="LapTQ"><i class="fa fa-file text-success"></i>
+                                        <span>Report Kain In TQ</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php } ?>
                     <?php if ($_SESSION['lvl_id'] == "INSPEKSI") { ?>
-                        <li class="treeview <?php if ($_GET['p'] == "Schedule" or $_GET['p'] == "Status-Mesin" or $_GET['p'] == "Inspeksi-Kain" or $_GET['p'] == "Line-News" or $_GET['p'] == "Grafik-QCF" or $_GET['p'] == "Lap-Inspektor" or $_GET['p'] == "Lap-Inspeksi" or $_GET['p'] == "Status-Mesin-Gabung" or $_GET['p'] == "SummaryInspeksi" or $_GET['p'] == "Input-Lap-Shading" or $_GET['p'] == "Lihat-Data-Shading" or $_GET['p'] == "Summary-Inspeksi" or $_GET['p'] == "Summary-Inspect-Packing" or $_GET['p'] == "Inspect-Report-Now" or $_GET['p'] == "Lap-Stoppage-Inspeksi") {
+                        <li class="treeview <?php if ($_GET['p'] == "Schedule" or $_GET['p'] == "Status-Mesin" or $_GET['p'] == "Inspeksi-Kain" 
+                        or $_GET['p'] == "Line-News" or $_GET['p'] == "Grafik-QCF" 
+                        or $_GET['p'] == "Lap-Inspektor" or $_GET['p'] == "Lap-Inspeksi" or $_GET['p'] == "Status-Mesin-Gabung" 
+                        or $_GET['p'] == "SummaryInspeksi" or $_GET['p'] == "Input-Lap-Shading" or $_GET['p'] == "Lihat-Data-Shading" 
+                        or $_GET['p'] == "Summary-Inspeksi" or $_GET['p'] == "Summary-Inspect-Packing" or $_GET['p'] == "Inspect-Report-Now" 
+                        or $_GET['p'] == "Lap-Stoppage-Inspeksi") {
                             echo "active";
                         } ?>">
                             <a href="#"><i class="fa fa-archive text-warning"></i> <span>Inspeksi</span>
