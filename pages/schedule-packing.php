@@ -88,6 +88,11 @@ ORDER BY
             target="_blank">
             <i class="fa fa-print" aria-hidden="true"></i> Cetak
           </a>
+          <a href="Rekap_SchedulePacking"
+            class="btn btn-warning"
+            target="_blank">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i> Summary Schedule Packing
+          </a>
 
           <!--	
   <a href="?p=Form-Schedule-Manual" class="btn btn-warning"><i class="fa fa-plus-circle"></i> Tambah Manual</a>-->
