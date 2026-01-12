@@ -59,10 +59,10 @@ ORDER BY
           <!--	
   <a href="?p=Form-Schedule-Manual" class="btn btn-warning"><i class="fa fa-plus-circle"></i> Tambah Manual</a>-->
           <div class="btn-group pull-right">
+            <a href="RekapSchedule" class="btn btn-primary" target="_blank"><i class="fa fa-bar-chart"></i></a>
             <a href="pages/cetak/cetak_schedule_excel.php?tgl=<?php echo $tglNow; ?>" class="btn btn-info"
               target="_blank"><i class="fa fa-file-excel-o"></i> </a>
-            <a href="pages/cetak/cetak_schedule.php" class="btn btn-danger" target="_blank"><i class="fa fa-print"></i>
-            </a>
+            <a href="pages/cetak/cetak_schedule.php" class="btn btn-danger" target="_blank"><i class="fa fa-print"></i></a>
             <a href="pages/cetak/cetak_summary_buyer.php" class="btn btn-success" target="_blank"><i
                 class="fa fa-print"></i> Summary Buyer</a>
           </div>
