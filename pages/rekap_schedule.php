@@ -208,10 +208,10 @@ include "koneksi.php";
 </body>
 
 </html>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="dist/js/highchart/highcharts.js"></script>
+<script src="dist/js/highchart/exporting.js"></script>
+<script src="dist/js/highchart/export-data.js"></script>
+<script src="dist/js/highchart/accessibility.js"></script>
 <script>
   console.log(<?= json_encode($top5) ?>);
 Highcharts.chart('chartLeft2', {
