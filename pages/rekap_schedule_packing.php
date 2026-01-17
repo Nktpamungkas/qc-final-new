@@ -28,7 +28,7 @@ include "koneksi.php";
     tbl_schedule_packing
   WHERE
     NOT STATUS = 'selesai'
-    AND NOT proses ='Packing'";
+    AND proses ='Packing'";
   $prepare_mysql_kiri = mysqli_query($con, $query_mysql_kiri);
   while($data_mysql_kiri = mysqli_fetch_array($prepare_mysql_kiri)){
     $data_kiri[] = $data_mysql_kiri;
@@ -158,47 +158,14 @@ include "koneksi.php";
             </table>
           </div>
 
-          <!-- TABLE KANAN -->
-          <div class="col-md-6">
-            <h4>Summary Inspect Meja</h4>
-            <table class="table table-bordered table-striped table-condensed">
-              <thead>
-                <tr>
-                  <th width="40">No</th>
-                  <th>Item</th>
-                  <th class="text-right">Qty</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php 
-                $no = 1; 
-                $total = 0;
-                foreach ($top5_kanan as $item => $qty): ?>
-                <tr>
-                  <td><?= $no++ ?></td>
-                  <td><?= $item ?></td>
-                  <td class="text-right"><?= number_format($qty,2) ?></td>
-                </tr>
-                <?php $total += $qty; endforeach; ?>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th colspan="2">TOTAL</th>
-                  <th class="text-right"><?= number_format($total,2) ?></th>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-
         <!-- GRAFIK -->
         <div class="row">
           <div class="col-md-6">
             <div id="chartLeft2" style="height:400px"></div>
           </div>
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <div id="chartRight" style="height:400px"></div>
-          </div>
+          </div> -->
         </div>
 
       </div>
